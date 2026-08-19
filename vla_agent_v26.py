@@ -1,0 +1,4548 @@
+# ─────────────────────────────────────────────────────────────────
+#  vla_agent.py  —  interactive VLA agent  (UPDATED v3)
+#
+#  NEW IN THIS VERSION (on top of #1–#10 below):
+#    #11 CONVERSATION CONTEXT: the agent tells the brain what the last
+#        action/target was, so "find a chair" ... "now go to IT" works.
+#    #12 RGB–DEPTH SYNC (completes #8): the colour and depth frames are
+#        now PAIRED by timestamp with message_filters'
+#        ApproximateTimeSynchronizer, so YOLO and the depth projection
+#        look at the SAME instant. In sim both streams tick together so
+#        the old code got away with grabbing "latest of each"; on the
+#        real OAK-D they drift, and a box from frame t matched with depth
+#        from t±0.2 s while turning = a goal metres off target. If no
+#        synced pair ever arrives, it falls back to the old behaviour
+#        with a one-time warning (so nothing is worse than before).
+#    #13 TARGET CONFIRMATION: "navigate" now needs the target seen in
+#        SIGHT_CONFIRM (2) think-cycles before it commits and announces
+#        — a single-frame YOLO hallucination no longer sends the robot
+#        chasing a ghost. Set SIGHT_CONFIRM = 1 to disable.
+#    #14 MISSION LOG: every run writes a timestamped log to ~/vla_logs/
+#        (commands, brain decisions, goals, arrivals, timeouts, stucks,
+#        dock events). Free, honest evidence for the thesis/viva.
+#    #15 YOLO CLIENT HARDENING: one shared HTTP session (faster — reuses
+#        the TCP connection instead of reconnecting every second) and
+#        the "server down" error prints at most every 10 s instead of
+#        spamming once per think cycle.
+#    #17 SPATIAL MEMORY REUSE: 'find a chair' / 'count' now REMEMBER the
+#        map position of what they saw, and 'go to the chair' starts by
+#        driving to the remembered spot instead of searching from scratch.
+#        Sightings are re-confirmed live on the way (honest behaviour:
+#        if the object moved, the robot says it can't see it anymore).
+#    #18 NO MORE SILENT SPIN-TO-TIMEOUT: if the target's projected map
+#        point is in unmapped/occupied space (e.g. seen 14 m away, beyond
+#        the SLAM'd area), the robot now drives to the FARTHEST reachable
+#        point along the line to it (the edge of the known map) so SLAM
+#        can extend the map, instead of looping on a rejected goal with a
+#        stale spin command until the 60 s timeout. Repeated unreachable
+#        goals (GOAL_FAIL_LIMIT) drop the sighting and resume a real scan,
+#        and the timeout message now distinguishes "never saw it" from
+#        "saw it but couldn't reach it".
+#    #19 REACHING PAST OBSTACLES (three real causes, one symptom):
+#        (a) PROGRESS-BASED TIMEOUT. The old flat 60 s deadline killed
+#            Nav2 mid-journey: a 14 m drive at ~0.25 m/s needs ~60 s with
+#            NO obstacles, so any detour guaranteed a false "couldn't
+#            reach it". Now: a short deadline only while SEARCHING, and
+#            once we're committed the robot gets unlimited time AS LONG AS
+#            it keeps getting closer. It only quits after NO_PROGRESS_LIMIT
+#            seconds of no net progress (check_stuck still catches frozen).
+#        (b) FOOTPRINT-AWARE GOALS. is_goal_free() checked ONE cell, but
+#            the robot is ~0.35 m wide — a goal 5 cm from a wall passed our
+#            check and was then rejected by Nav2's inflation layer. Now we
+#            check a disc of ROBOT_CLEARANCE around the goal, so our idea
+#            of "free" matches Nav2's.
+#        (c) RING OF APPROACH GOALS. The stand-off goal used to be the ONE
+#            point on the robot->object line. A box near the chair blocked
+#            that single point and the task died, even though the chair's
+#            left/right/far side was wide open. Now we generate a RING of
+#            candidate goals around the object, keep the cheapest reachable
+#            one, and on a Nav2 rejection we try the NEXT candidate instead
+#            of dropping the sighting. Nav2 still does the actual path
+#            planning around obstacles — we just stop handing it illegal
+#            goals and stop cutting it off early.
+#    #20 ANNOTATED LIVE FEED: the live camera window now shows the YOLO
+#        bounding boxes, class names, confidences and the DEPTH distance to
+#        each object, plus a caption bar with the current mode/target and a
+#        timestamp — i.e. a single screenshot that evidences the whole
+#        perception pipeline (YOLO-World + OAK-D depth + agent state) for
+#        the thesis/slides. The agent republishes an annotated stream on
+#        /vla/annotated and points rqt_image_view at it. Detections are
+#        REUSED from the think-loop when they're for the same frame, so
+#        this does not double the GPU load. Small preview frames (the sim's
+#        250x250) are upscaled so the text is legible in a screenshot.
+#        Set ANNOTATED_FEED = False for the old raw feed.
+#    #21 OCCLUSION-PROOF DEPTH + TELEPORT GATE (fixes the false
+#        "Arrived at the person" while still metres away):
+#        (a) Depth was read from a single 9x9 patch at the BOUNDING-BOX
+#            CENTRE. When a target stands partly behind a shelf/rack, the
+#            box centre can land on the OCCLUDER, so the target's map
+#            position collapsed onto an object right next to the robot —
+#            and the pose-based arrival check then honestly (and wrongly)
+#            fired. Depth is now the median over a grid of samples across
+#            the whole box (robust_box_depth): the occluder must cover
+#            most of the box to steal the reading, instead of one pixel.
+#        (b) TELEPORT GATE: once committed, a new sighting that moves the
+#            target by > TELEPORT_JUMP metres is held as "suspicious"
+#            until a SECOND look agrees with it (objects don't teleport;
+#            depth noise does). One bad frame can no longer hijack the
+#            goal or fake an arrival.
+#        The annotated feed's distance labels use the same robust depth,
+#        so what you screenshot is what the robot acted on.
+#    #28 REPORT EVERY INSTANCE, WITH DISTANCE: "I can see 2 chairs" used
+#        to be followed by a single distance, because locate/count picked
+#        ONE instance (nearest, or the qualifier) and reported only that.
+#        Now locate_candidates() ranges EVERY visible instance and the
+#        answer lists them all ("one about 6.3 m away and another about
+#        12.4 m away"). 'count' includes the distances, so the follow-up
+#        question isn't needed, and 'describe' ("what do you see") gives a
+#        distance per object. Duplicate boxes stacked on one physical
+#        object are merged (REPORT_MERGE_RADIUS) so counts stay honest,
+#        and every reported number comes from the SAME robust depth the
+#        navigation goals use — a report that disagreed with the goal
+#        would be useless as thesis evidence.
+#    #29 CREATE 3 BACKUP-LIMIT RATCHET: the Create 3 has cliff sensors
+#        only at the FRONT, so with the factory safety setting the
+#        firmware refuses to reverse more than a few centimetres, and
+#        "move back 1 m" silently stalled. iRobot's documentation gives
+#        the reset condition: driving FORWARD re-enables reverse motion.
+#        So a reverse move is now a RATCHET — back up until the firmware
+#        cuts us off (detected as no net progress for BACKUP_STALL_TIME),
+#        creep BACKUP_NUDGE_DIST forward to clear the limit, reverse
+#        again, repeat until the NET displacement is what was asked for.
+#        Progress is measured as SIGNED distance along the starting
+#        heading, so the forward shuffles are accounted for correctly.
+#        If the robot is blocked front AND rear it says so instead of
+#        grinding, and MAX_BACKUP_NUDGES caps the loop. This keeps the
+#        rear cliff protection ARMED — the alternative (safety_override =
+#        backup_only) simply switches it off.
+#    #25 TYPO-TOLERANT CONTROL WORDS: "cancle" used to sail past the
+#        stop-word check (exact match only) and reach the LLM, which
+#        answered with a reject. Control words are the ONE place a typo
+#        is dangerous — every other command is handled by an LLM, and
+#        LLMs read through misspellings fine ("forget the last cahir
+#        postion" already worked). Now cancel/stop/halt/abort are matched
+#        with a similarity score, and the correction is printed so the
+#        operator sees what was understood. 'quit'/'exit' stay EXACT on
+#        purpose — auto-correcting into a program exit is destructive and
+#        unrecoverable, while an over-eager cancel just stops the robot.
+#    #26 BARE "yes"/"no" WITH NOTHING PENDING: a lone confirmation word
+#        is meaningless unless a question is open. It used to be sent to
+#        the brain, which had no question to attach it to and invented a
+#        task out of stale conversation context ("yes" -> "Checking if
+#        the shelf is still there"). Now it is intercepted and answered
+#        honestly. A "yes" that ANSWERS a real pending question still
+#        works exactly as before (and now tolerates typos too).
+#    #27 CONVERSATION CONTEXT EXPIRES: the previous action/target handed
+#        to the brain for pronoun resolution ("go to IT") is the raw
+#        material stale commands are built from — it is the reason a
+#        long-forgotten "shelf" resurfaced. Context older than
+#        CONTEXT_TTL seconds is no longer sent; "go to it" straight after
+#        a locate is unaffected.
+#    #22 DOCK NO-DETECT ZONE (kills the "dock = chair" cascade): the
+#        robot RECORDS the dock's map position (the moment dock_status
+#        says it's docked, or when a dock/undock action succeeds) and
+#        then IGNORES any detection whose projected position lands within
+#        DOCK_EXCLUDE_RADIUS of it — in live targeting, in locate, and in
+#        spatial memory. Existing memory entries sitting on the dock are
+#        purged the moment the dock position becomes known. One YOLO
+#        mislabel of the dock used to poison everything downstream:
+#        memory-seeded navigation to a "0.5 m chair", Nav2 goals inside
+#        the dock's costmap footprint ("the way looks blocked"), and a
+#        false "Arrived at the chair". The vocabulary fix (yolo_server
+#        #19) treats the cause; this geo-fence guarantees the symptom
+#        can't return. Asking about the dock itself still works (targets
+#        containing "dock" bypass the filter; plain "dock" remains a
+#        deterministic action anyway).
+#    #23 LIVE-FIRST MEMORY (ends the "I remember..." spam): "go to X" now
+#        checks the CAMERA first — if X is visible right now, it searches
+#        fresh and locks on within a couple of think-cycles, with no
+#        memory monologue and no risk of driving to a stale spot while
+#        the real object sits in plain view. Memory seeding only kicks in
+#        when the target is NOT currently visible (its actual job:
+#        returning to things seen earlier). Also: "find a chair" ...
+#        "go to it" now recalls the chair that was JUST located, not
+#        whichever remembered chair happens to be nearest (the log showed
+#        a locate at 13.3 m followed by a recall of 0.9 m).
+#    #24 "forget" ACTION: "forget the chair" erases every remembered
+#        chair position; "forget everything / clear your memory" wipes
+#        the whole spatial memory. Paired with llm_brain #17 so the
+#        command can never again be misrouted to navigate.
+#    #16 CORRECT DOCK QoS + RESULT CHECK: /dock_status is subscribed
+#        with sensor-data (best-effort) QoS — the Create 3 publishes
+#        best-effort, and a reliable subscription silently receives
+#        NOTHING. Dock/undock results are also checked for real success
+#        instead of assumed.
+#
+#  STILL HERE FROM BEFORE:
+#    #1  "cancel"/"stop" preempt everything, even with politeness.
+#    #3  Nearest instance by default (or farthest/leftmost/rightmost).
+#    #4  Patrol coverage memory + forward-bias frontier scoring.
+#    #5  Nav2 paths AROUND obstacles; goals validated against the map.
+#    #6  Give-up-and-report timeout for "go to X".
+#    #7  "find/look for X" locates and REPORTS only; "go to X" drives.
+#    #8  TF at the frame's capture time (now with truly paired frames).
+#    #9  Precise relative motion ("move forward 2 m", "turn right 30°").
+#    #10 Managed dock/undock + auto-undock before any motion.
+#
+#
+#  ── NEW IN v9 (hardware-implementation phase) ────────────────────
+#    #31 INCREMENTAL ("HOP") GOALS FOR OFF-MAP TARGETS. "go to the chair"
+#        failed whenever the chair was seen BEYOND the SLAM'd area. Cause:
+#        every goal we can send has to survive is_goal_free(), which demands
+#        a disc of KNOWN-FREE cells. Around an off-map object every cell is
+#        UNKNOWN (-1), so approach_candidates() returned [] and
+#        farthest_free_along() could only reach the last known-free cell —
+#        i.e. the robot stopped ON the frontier and never crossed it. After
+#        GOAL_FAIL_LIMIT cycles the sighting was dropped and the robot
+#        rescanned. It looked like "it refuses to go there"; it was really
+#        "every goal it is allowed to send is behind it".
+#        Now navigation runs in TWO regimes, chosen automatically:
+#          MAPPED   -> unchanged. The ring of approach goals exists, so we
+#                      send ONE full Nav2 goal and let Nav2 plan the path.
+#          UNMAPPED -> HOP MODE. We send a SHORT Nav2 goal (STEP_GOAL_DIST,
+#                      default 1.5 m) along the bearing to the object, which
+#                      is allowed to end in unknown space (unknown is not
+#                      occupied — Nav2's planner already accepts it, and the
+#                      LiDAR local costmap still guards the robot). On
+#                      arrival SLAM has extended the map, we re-range the
+#                      object and hop again. As soon as the ring becomes
+#                      reachable we switch back to a single full goal.
+#        A hop is STICKY (kept until reached, ~35 deg off-bearing, blocked
+#        or timed out) so we do not preempt Nav2 every second — the same
+#        stutter #30a cured for full goals. Blocked hops sidestep through a
+#        fan of angles and then shorten before giving up.
+#        EXPLORE/PATROL IS UNTOUCHED: hop mode lives entirely inside
+#        navigate_think(); explore_think() still sends full frontier goals.
+#    #32 LIVE FEED THAT DOESN'T FREEZE. Four independent causes, all real:
+#        (a) STALE PAIR — the big one. current_pair() returned self.pair
+#            forever once set, and self.pair is only refreshed when the
+#            ApproximateTimeSynchronizer MATCHES a frame. On the real OAK-D
+#            the two streams drift and matching stops for seconds at a time;
+#            the agent then republished the SAME frame indefinitely (feed
+#            "freezes") and — far worse — kept NAVIGATING on a stale image.
+#            A pair older than PAIR_STALE_S is now discarded and the raw
+#            latest-of-each fallback takes over, with a logged warning.
+#        (b) HEAD-OF-LINE BLOCKING — think(), publish_cmd() and
+#            annotate_think() shared one mutually-exclusive callback group
+#            on a single-threaded spin. A slow YOLO reply (timeout was 15 s!)
+#            froze the feed AND the 10 Hz velocity publisher. Each timer now
+#            has its own callback group and main() uses a MultiThreadedExecutor.
+#            The YOLO timeout is also cut to (2 s connect, 5 s read).
+#        (c) DOUBLE INFERENCE — annotate_think() ran its OWN YOLO pass
+#            whenever the frame stamp differed from the think loop's, which
+#            is most of the time. The feed now never calls YOLO: it reuses
+#            the cached detections while they are fresher than ANNOT_DET_TTL
+#            and prints their age in the caption bar (honest, and it frees
+#            the GPU). Because the feed no longer waits on inference it can
+#            run at 5 Hz instead of 2 Hz.
+#        (d) TRANSPORT — a 750x750 BGR frame is ~1.7 MB. Queued 10 deep over
+#            the default QoS this jams DDS. History is now KEEP_LAST depth 1
+#            (drop old frames, never build a backlog) and a JPEG stream is
+#            published alongside on /vla/annotated/compressed (~50 kB) —
+#            that is the one to use over Wi-Fi and in the GUI.
+#        Plus a watchdog: a dead rqt_image_view is detected and reported,
+#        and a camera that stops delivering frames is announced once.
+#    #33 REMOTE COMMAND BRIDGE (foundation for voice + GUI). The agent no
+#        longer only listens to the keyboard:
+#          /vla/command  (std_msgs/String, in)  - a command from anywhere
+#          /vla/reply    (std_msgs/String, out) - everything the agent says
+#          /vla/status   (std_msgs/String, out) - JSON state at 2 Hz
+#        Commands from every source go through ONE queue served by a worker
+#        thread, so a slow LLM call can never block the ROS executor, and
+#        the terminal keeps working exactly as before. cancel/stop is still
+#        handled instantly at intake so it can preempt a queued command.
+#        voice_command.py and vla_gui.py are pure clients of these topics —
+#        the agent has no idea whether a command was typed or spoken.
+#
+#  Companion file: the updated llm_brain.py (adds context + validation).
+#  Use them together.
+# ─────────────────────────────────────────────────────────────────
+AGENT_VERSION = ("vla_agent v26  (#61 nearest-cluster LiDAR ranging, "
+                 "#60 manual override teleop, "
+                 "#59 10 Hz collision guard, "
+                 "#58 smoother approach, "
+                 "#57 stand off far enough to keep the object in view, "
+                 "#56 step-and-stare scan, "
+                 "#55 LiDAR failure reasons reported, "
+                 "#54 LiDAR object ranging, "
+                 "#53 seeded depth intrinsics, "
+                 "#52 depth intrinsics rescaled to frame size, "
+                 "#51 compressedDepth transport, "
+                 "#50 compressed RGB transport, "
+                 "#49 annotated feed gated per topic, "
+                 "#47 TF at colour-frame stamp, "
+                 "#48 reject stale depth, #46 one subscription per camera stream, "
+                 "#43 longer cached action-server wait, "
+                 "#44 undock retry-loop breaker, #45 sync slop for 1 Hz depth, "
+                 "#37 /robot1 namespace, #38 stereo depth topic, "
+                 "#39 best-effort sensor QoS, #40 RGB->depth pixel mapping, "
+                 "#41 encoding-based mm/m, #42 explicit namespaced TF, "
+                 "#36 no patrol feed prompt, "
+                 "#35 cancel actually stops the robot, "
+                 "#34 feed publishes to any subscriber, "
+                 "#22 dock no-detect zone, #23 live-first memory, "
+                 "#24 forget, #25 typo-tolerant control words, #26 bare yes/no, "
+                 "#27 context expiry, #28 all-instance distances, "
+                 "#29 Create 3 backup ratchet, #30 sticky goals + range-scaled "
+                 "gate + ring-safe blacklist, #31 incremental off-map hop goals, "
+                 "#32 non-freezing live feed, #33 command/reply/status bridge)")
+
+import base64
+import datetime
+import difflib
+import hashlib
+import json
+import math
+import os
+import queue
+import subprocess
+import sys
+import threading
+import time
+
+import cv2
+import numpy as np
+import requests
+import rclpy
+from rclpy.node import Node
+from rclpy.action import ActionClient
+from rclpy.duration import Duration
+from rclpy.qos import (qos_profile_sensor_data, QoSProfile, QoSHistoryPolicy,
+                       QoSReliabilityPolicy, DurabilityPolicy)
+from rclpy.callback_groups import MutuallyExclusiveCallbackGroup   # #32b
+from rclpy.executors import MultiThreadedExecutor                  # #32b
+from sensor_msgs.msg import Image, CameraInfo, LaserScan, CompressedImage
+from std_msgs.msg import String                                    # #33
+from geometry_msgs.msg import PointStamped, Twist
+from nav_msgs.msg import Odometry, OccupancyGrid
+from nav2_msgs.action import NavigateToPose
+from action_msgs.msg import GoalStatus
+from action_msgs.srv import CancelGoal
+# #35: the ACTION-level cancel service. A default-constructed request has a
+# zero goal-id and a zero timestamp, which the action spec defines as
+# "cancel EVERY goal on this server" - stronger than cancelling one handle.
+from cv_bridge import CvBridge
+from tf2_msgs.msg import TFMessage                                 # #42: manual TF subscription
+import tf2_ros
+from tf2_geometry_msgs import do_transform_point
+import message_filters                      # #12: RGB-depth pairing
+
+from llm_brain import decide
+
+# Create 3 dock/undock are optional — guard the import so the agent still
+# runs in setups that don't have irobot_create_msgs.
+try:
+    from irobot_create_msgs.action import Dock, Undock
+    from irobot_create_msgs.msg import DockStatus
+    HAVE_CREATE = True
+except Exception:
+    Dock = Undock = DockStatus = None
+    HAVE_CREATE = False
+
+YOLO_URL    = "http://127.0.0.1:5001/detect"
+
+# ── #37 ROBOT NAMESPACE ──────────────────────────────────────────
+# The real TurtleBot 4 publishes EVERYTHING under a namespace (/robot1 by
+# default). In simulation there was no namespace, so every topic name in
+# v12 was written bare ("/scan", "/cmd_vel"). On the real robot those
+# names do not exist: the agent would start cleanly, print no error, and
+# silently receive nothing and drive nothing. This is the single most
+# important hardware fix in this file.
+#   Override without editing code:  export VLA_NS=/robot2
+#   Run against an un-namespaced robot: export VLA_NS=""
+NS = os.environ.get("VLA_NS", "/robot1").rstrip("/")
+# read the namespace from an environment variable, defaulting to /robot1, and strip any trailing slash so "/robot1/" and "/robot1" behave identically
+
+RGB_TOPIC   = NS + "/oakd/rgb/preview/image_raw"
+RGB_COMPRESSED_TOPIC = RGB_TOPIC + "/compressed"
+# #50: the JPEG version of the same colour stream, ~18x smaller on the wire.
+# This is what the agent subscribes to by default on real hardware.
+USE_COMPRESSED_RGB = os.environ.get("VLA_RAW_RGB", "0") != "1"
+DEPTH_CFG_HEADER_BYTES = 12
+# #51: size of compressed_depth_image_transport's ConfigHeader that prefixes
+# the PNG payload: one int32 format enum plus two float32 quantisation values
+# set VLA_RAW_RGB=1 to go back to the raw stream (useful in simulation, where
+# bandwidth is free and the compressed topic may not exist)
+# colour image, 250x250 on the real OAK-D (much smaller than the sim's 750x750)
+DEPTH_TOPIC = NS + "/oakd/stereo/image_raw"
+DEPTH_COMPRESSED_TOPIC = DEPTH_TOPIC + "/compressedDepth"
+# #51: the driver's oakd_lite.yaml sets stereo.i_low_bandwidth: true, which
+# makes it encode depth ON THE CAMERA and publish it here. The raw
+# stereo/image_raw topic is then only a slow by-product of that pipeline.
+# Measured over the same 20 s window on the real robot: 3 raw frames vs 48
+# compressed frames - 16x more data available on the topic we were ignoring.
+# This, not Wi-Fi bandwidth, is why depth ran at 0.15 Hz while raw colour ran
+# at 13 Hz, and why a chair 1.5 m away was reported at 6.4 m and then 12.8 m:
+# robust_box_depth was reading a frame captured many seconds earlier from a
+# different pose, so it measured the wall behind the chair.
+USE_COMPRESSED_DEPTH = os.environ.get("VLA_RAW_DEPTH", "0") != "1"
+# set VLA_RAW_DEPTH=1 to go back to the raw topic (simulation publishes only that)
+# #38: the real OAK-D publishes depth under stereo/, NOT rgb/preview/depth.
+# rgb/preview/depth simply does not exist on hardware, so v12's depth
+# subscription would never have fired even with the namespace corrected.
+INFO_TOPIC  = NS + "/oakd/rgb/preview/camera_info"
+# intrinsics (K) of the COLOUR image — this is what turns a pixel into a 3D ray
+DEPTH_INFO_TOPIC = NS + "/oakd/stereo/camera_info"
+# #53: stereo/camera_info is published by the RAW depth publisher, which the
+# low-bandwidth pipeline runs at ~0.15 Hz. The agent consumes compressedDepth
+# at ~2.4 Hz, so it can process HUNDREDS of depth frames before the intrinsics
+# ever arrive - and until they do, rgb_px_to_depth_px falls back to crude
+# proportional scaling. That fallback scales the vertical axis by h/250 (2.88)
+# instead of the true 5.12 AND drops the optical-centre offset entirely, so it
+# samples the wrong rows of the depth image. Objects were measured against
+# whatever happened to be higher or lower in the scene, which is why a chair
+# 1.5 m away read 6.4 m, then 7.7 m, then "distance unclear".
+#   These defaults are the values read off this robot's own camera
+# (/robot1/oakd/stereo/camera_info) for its native 1280x720 depth image, so
+# the mapping is correct from the very first frame. A live camera_info always
+# overrides them, and #52 rescales whichever set is in use to the actual frame
+# size, so nothing here is hard-wired to one resolution.
+DEPTH_K_DEFAULT = [1012.45264, 0.0, 649.956177,
+                   0.0, 1012.45264, 347.630371,
+                   0.0, 0.0, 1.0]
+DEPTH_WH_DEFAULT = (1280, 720)
+
+# #54: LiDAR ranging of detected objects.
+USE_LIDAR_RANGE = os.environ.get("VLA_NO_LIDAR_RANGE", "0") != "1"
+# set VLA_NO_LIDAR_RANGE=1 to force the old depth-only behaviour
+LIDAR_BEARING_GUESS_M = 3.0
+# starting distance used to estimate the bearing before the range is known;
+# one refinement pass afterwards removes the error this introduces
+LIDAR_MIN_HALF_SPAN = math.radians(1.0)
+# never sample a span narrower than this, or a distant object gets too few beams
+LIDAR_MAX_HALF_SPAN = math.radians(12.0)
+# ── #61 NEAREST-CLUSTER RANGING (replaces the median) ──────────────
+# THE BUG: scan_range_at() used to return the MEDIAN of every beam inside
+# the detection box's angular span. That silently assumed the object fills
+# most of the span. At LiDAR height a chair is not a solid 0.45 m surface --
+# it is FOUR THIN LEGS. Most beams sail between them and hit the wall
+# behind, so the median reported the WALL. On hardware that produced a
+# chair "at 3.4 m" whether it truly stood at 2 m or at 1 m: a constant, not
+# a distance, because the wall never moved.
+# THE FIX: sort the beams by range and take the NEAREST coherent group.
+# Beams landing on the chair legs sit close together in range; beams that
+# miss jump to a much larger value. That jump is the boundary between the
+# object and whatever is behind it.
+LIDAR_CLUSTER_GAP   = 0.30   # m -- a range jump bigger than this starts a
+                             # new surface. Wider than the depth of a chair
+                             # or a person, narrower than the usual gap
+                             # between an object and the wall behind it.
+LIDAR_CLUSTER_MIN   = 2      # beams -- a genuine surface returns at least
+                             # two adjacent beams; a single short return is
+                             # dust, a reflection, or a passing hand.
+# never wider than this, or a large nearby box swallows its neighbours
+# #40: intrinsics of the DEPTH image. Depth is 1280x720 while colour is
+# 250x250, so a YOLO pixel cannot index the depth array directly. Having
+# both K matrices lets us compute the mapping at runtime instead of
+# hard-coding a scale factor that would break on a different camera config.
+SCAN_TOPIC  = NS + "/scan"
+# RPLIDAR 2D laser scan, used for obstacle stopping
+ODOM_TOPIC  = NS + "/odom"
+# wheel odometry, used for relative moves and for confirming the robot has stopped
+CMD_TOPIC   = NS + "/cmd_vel"
+# velocity commands. SAFETY-CRITICAL: fix #35's zero-barrage publishes here,
+# so a wrong name means "stop" silently does nothing while the robot drives on.
+MAP_TOPIC   = NS + "/map"
+# occupancy grid from SLAM Toolbox
+TF_TOPIC        = NS + "/tf"
+# #42: TF is namespaced too. tf2_ros.TransformListener subscribes to a bare
+# "/tf", so on the real robot the transform buffer stayed permanently empty
+# and every map-frame projection failed.
+TF_STATIC_TOPIC = NS + "/tf_static"
+# static transforms (camera mounting, wheel offsets) — published once, latched
+NAV_ACTION      = NS + "/navigate_to_pose"
+# Nav2's navigation action server, also namespaced on the real robot
+NAV_CANCEL_SRV  = NS + "/navigate_to_pose/_action/cancel_goal"
+# the cancel-all service belonging to that action server (#35)
+DOCK_ACTION     = NS + "/dock"
+# Create 3 docking action
+UNDOCK_ACTION   = NS + "/undock"
+# Create 3 undocking action
+DOCK_STATUS_TOPIC = NS + "/dock_status"
+# tells the agent whether it is currently sitting on the charger
+ANNOT_TOPIC = "/vla/annotated"          # #20: RGB + YOLO boxes, for the live window
+# #32d: the same annotated frame as JPEG. A 750x750 BGR image is ~1.7 MB;
+# the JPEG is ~50 kB. Use THIS one over Wi-Fi and in the GUI.
+ANNOT_COMPRESSED_TOPIC = ANNOT_TOPIC + "/compressed"
+# #33: command bridge — voice node, GUI and any other client speak to the
+# agent through these three topics and nothing else.
+CMD_IN_TOPIC   = "/vla/command"         # std_msgs/String  (in)  a command
+REPLY_TOPIC    = "/vla/reply"           # std_msgs/String  (out) what the agent says
+STATUS_TOPIC   = "/vla/status"          # std_msgs/String  (out) JSON state, 2 Hz
+MAP_FRAME   = "map"
+ROBOT_FRAME = "base_link"
+
+# ── #57 STOP FAR ENOUGH BACK THAT THE CAMERA CAN STILL SEE THE OBJECT ──
+# The colour camera's field of view is 64.6 deg, worked out from the REAL
+# measured intrinsics: 2*atan(cx/fx) = 2*atan(126.94/197.74) = 65.4 deg.
+# A 0.9 m tall chair standing 0.6 m away fills 2*atan(0.45/0.6) = 73 deg of
+# that view -- MORE than the camera's 65.4 deg -- so its top and bottom are
+# cut off and YOLO-World can no longer recognise the shape. Detection died
+# at exactly the moment the robot needed it to confirm arrival.
+# at exactly the moment the robot needed it to confirm arrival. At 1.0 m the
+# same chair fills 2*atan(0.45/1.0) = 48 deg, comfortably inside 65.4 deg, so
+# the object stays recognisable all the way in.
+STOP_DISTANCE     = 1.0
+ARRIVE_TOL        = 0.35
+# ── #59 COLLISION GUARD (replaces the weak v24 version) ────────────
+# v24 ran this check only inside the 1 Hz think-loop, and only once the
+# BELIEVED gap to the target was already under 1.7 m. On hardware it fired
+# at 0.38 m -- the robot had physically reached the chair. Two reasons it
+# was too late, both fixed here:
+#   (a) 1 Hz is not fast enough. At 0.26 m/s the robot travels 0.26 m
+#       between checks, so a guard set at 0.55 m can be at 0.29 m before it
+#       ever runs. The guard now has its OWN 10 Hz timer.
+#   (b) It was gated on the believed distance to the target. That belief
+#       goes stale exactly when it matters: YOLO loses the object at close
+#       range, last_obj_xy freezes at the last (over-estimated) position,
+#       and the robot drives past the real object toward a phantom one.
+#       The guard is now UNCONDITIONAL while under power -- it does not
+#       care what the robot believes, only what the LiDAR measures.
+# The Create 3 is 0.34 m across, so 0.70 m leaves two body-widths of clear
+# space -- enough that a 10 Hz guard can stop the robot before contact even
+# at full speed.
+MIN_FRONT_CLEAR   = 0.70
+# The v24 guard measured the minimum of a +/-15 deg cone. At 1 m that cone is
+# only +/-0.27 m wide -- NARROWER THAN A CHAIR -- so the beams pass between
+# the legs and read the wall behind. A wider arc actually intersects the legs.
+GUARD_ARC_DEG     = 40.0
+# Use the Nth-smallest beam rather than the single smallest, so one spurious
+# short return (dust, a reflection, a passing hand) cannot brake the robot.
+# N=3 still catches a chair leg, which spans several beams at 0.7 m.
+GUARD_MIN_BEAMS   = 3
+GUARD_PERIOD      = 0.1     # s -- the guard's own timer, 10x the think-loop
+# ── #56 STEP-AND-STARE SCAN ────────────────────────────────────────
+# Old behaviour: spin continuously at 0.5 rad/s. The think-loop runs once a
+# second, so the robot swept 0.5 rad = 28.6 deg between two looks -- nearly
+# HALF the 65.4 deg field of view -- and every frame it did look at was
+# motion-blurred by the spin. Objects fell into the gap between looks.
+# New behaviour is what a human sentry does: turn a little, STOP, look
+# properly, turn again. Slower turning shrinks the blur; the pause gives the
+# laggy camera time to deliver a sharp frame and YOLO time to run on it.
+SEARCH_TURN_SPEED = 0.35     # rad/s (was 0.5) -- about 20 deg per think-cycle
+SCAN_STEP_RAD     = 0.61     # rad (~35 deg) of turn before each pause
+SCAN_DWELL_S      = 3.5      # s spent stationary looking, after every step
+# Step 35 deg inside a 65.4 deg view means consecutive looks OVERLAP by about
+# 30 deg, so nothing can hide in a seam between two frames. The 2.5 s dwell is
+# sized against THINK_PERIOD (1.0 s): it guarantees at least two, usually
+# four, detection passes on a sharp stationary image at every step -- the
+# earlier 1.6 s gave only one, so most frames were still blurred by the turn.
+# 360/35 = ~10 steps, so a full scan takes about 55 s. Slower on purpose: a
+# scan that misses the target is not faster, it just fails sooner.
+ADVANCE_SPEED     = 0.20
+ADVANCE_DISTANCE  = 1.5
+OBSTACLE_STOP     = 0.6
+ENABLE_ADVANCE    = True
+
+# #58: was 0.5. Every trigger CANCELS the path Nav2 is driving and starts
+# a new one -- the robot decelerates, replans, accelerates again. That
+# stop-start IS the jerky motion, and each cancel also throws away the
+# controller's smoothing history, which is how it ends up overshooting.
+# Raising the threshold means small frame-to-frame jitter in the believed
+# object position no longer interrupts a perfectly good path; only a
+# genuine move of the object does.
+GOAL_REISSUE        = 0.9    # re-send a nav goal only if the target moved > this (m)
+NEW_INSTANCE_RADIUS = 0.8    # a detection this far from known ones counts as a NEW object (m)
+# #28: when REPORTING what's in frame, two projected positions closer than
+# this are the same physical object seen as two boxes (YOLO-World stacks
+# boxes on plain shapes). Deliberately smaller than NEW_INSTANCE_RADIUS so
+# two genuinely adjacent chairs are still reported separately.
+REPORT_MERGE_RADIUS = 0.40
+FIND_TIMEOUT        = 45.0   # give up "find another" after this long (s)
+LOCATE_TIMEOUT      = 25.0   # #7: give up "find/locate X" (report-only) after this long (s)
+
+# #19a: "go to X" is no longer on a flat stopwatch. While we have NOT seen
+# the target we give up after SEARCH_TIMEOUT. Once we're committed to a
+# target the robot may take as long as it needs, provided it keeps closing
+# the gap: we only quit after NO_PROGRESS_LIMIT seconds without getting at
+# least PROGRESS_EPS metres nearer. (A long detour around an obstacle makes
+# no progress for a while, hence the generous 60 s.)
+# #56: raised from 45 s. A step-and-stare revolution takes ~50 s by design,
+# so the old timeout would have killed the search BEFORE it had turned the
+# full circle once -- the robot would have given up facing away from a target
+# it was about to find. This must always exceed one revolution.
+SEARCH_TIMEOUT      = 120.0  # never saw it -> give up (s)
+NO_PROGRESS_LIMIT   = 60.0   # committed but not closing the gap -> give up (s)
+PROGRESS_EPS        = 0.25   # this much closer counts as real progress (m)
+
+# #19b: the robot is ~0.35 m wide, so a goal needs clear space AROUND it,
+# not just one free cell. Keep this a bit under Nav2's inflation_radius.
+ROBOT_CLEARANCE     = 0.25   # m of required free space around a goal point
+
+# #19c: candidate approach directions around the object, in degrees, offset
+# from "the side the robot is already on" (0 = straight-line approach).
+APPROACH_RING       = (0, 25, -25, 50, -50, 75, -75, 100, -100,
+                       130, -130, 160, -160, 180)
+# Stand-off distances to try. Both are < STOP_DISTANCE + ARRIVE_TOL so that
+# reaching any of them counts as an arrival.
+# #57: raised alongside STOP_DISTANCE so the robot parks where the object
+# is still inside the camera's field of view and can be confirmed.
+APPROACH_STANDOFFS  = (1.00, 1.30)
+# #30c: was 0.40, which is WIDER than the spacing between adjacent ring
+# spots (~0.26 m at a 0.6 m stand-off), so ONE Nav2 refusal also wiped out
+# its neighbours. In open ground that cascaded into a false "I can't find a
+# reachable path". 0.22 m rules out only the refused spot itself.
+GOAL_TRIED_RADIUS   = 0.22
+
+# #30a STICKY GOALS. The goal block below re-ranks all 28 ring candidates
+# EVERY think-cycle and re-sends whenever the winner shifts more than
+# GOAL_REISSUE. Because the believed object position jitters a little each
+# frame (depth noise) and the robot is moving, the winner flips between
+# near-tied spots — so Nav2 was being PREEMPTED roughly once a second. It
+# cancels, replans, starts accelerating, gets preempted again: the goal
+# marker dances in RViz and the robot stutters or looks stuck. Fix: once a
+# goal is accepted, KEEP it while it is still a sane approach, and only
+# re-choose when it stops being valid or the object genuinely moved.
+GOAL_STICK_MIN      = 0.35   # keep the goal while it sits between MIN and MAX
+GOAL_STICK_MAX      = 1.25   #   metres of the (jittering) object position
+OBJ_DRIFT_REISSUE   = 0.80   # re-choose only if the object moved this far (m)
+                             #   since the current goal was picked
+
+# ── #31: INCREMENTAL ("HOP") GOALS INTO UNMAPPED SPACE ──────────────
+# Everything above assumes the object sits inside the SLAM'd area. When it
+# does not, no legal full goal exists (is_goal_free() needs KNOWN-free cells
+# and unmapped cells are -1), so the robot could never cross its own map
+# frontier toward a target it could plainly see. Hop mode sends a SHORT goal
+# along the bearing to the object, allowed to end in unknown-but-not-occupied
+# space, and repeats. Each hop grows the map, so the next hop is planned on
+# better information — this is deliberately a "crawl", not a leap of faith.
+#   Why unknown is safe to enter for 1.5 m and not for 15 m:
+#     * Nav2's global planner already accepts unknown cells (allow_unknown);
+#       what it will NOT do is invent a goal for us.
+#     * The LiDAR-fed LOCAL costmap sees real obstacles inside ~3 m in real
+#       time, so a short hop is covered by live sensing end to end.
+#     * Stereo depth error grows with range. At 10 m the projected object
+#       position can be metres off; committing 1.5 m at a time and re-ranging
+#       costs almost nothing when the estimate turns out to be wrong.
+STEP_GOAL_DIST      = 1.5    # m — nominal length of one hop
+STEP_GOAL_MIN       = 0.60   # m — shorter than this is not worth a Nav2 goal
+STEP_ARRIVE_TOL     = 0.45   # m — this close to the hop goal = plan the next one
+STEP_CLEARANCE      = 0.22   # m — free space required around a hop goal. Slightly
+                             #   under ROBOT_CLEARANCE: hops are short and under
+                             #   live LiDAR cover, so we can afford tighter gaps.
+# Sidestep angles tried (deg, off the robot->object bearing) when the straight
+# hop is blocked. Nav2 plans around obstacles; this only moves the END POINT
+# off a wall so a legal goal exists at all.
+STEP_FAN_DEG        = (0, 20, -20, 40, -40, 60, -60)
+STEP_REPLAN_BEARING = 35.0   # deg — object drifted this far off the hop bearing
+                             #   -> stop crawling that way and re-aim
+STEP_TIMEOUT        = 25.0   # s — one 1.5 m hop should never take this long
+STEP_FAIL_LIMIT     = 8      # consecutive failed hops before we drop the sighting
+                             #   (more generous than GOAL_FAIL_LIMIT: hops are
+                             #   exploratory by nature and cheap to retry)
+STEP_MAX_RANGE      = 25.0   # m — refuse to hop toward a "sighting" further than
+                             #   this. Beyond ~25 m an OAK-D depth reading is
+                             #   noise, and chasing it would walk the robot out
+                             #   of the building.
+
+# #21b teleport gate: a committed target's position may move by at most this
+# much per sighting without confirmation. A bigger jump needs a SECOND look
+# that lands within JUMP_AGREE of the first before it is believed.
+TELEPORT_JUMP       = 3.0    # m — larger jumps are suspicious
+JUMP_AGREE          = 1.0    # m — MINIMUM agreement radius for a confirming look
+# #30b: a FIXED 1.0 m agreement was impossible to satisfy at long range.
+# Stereo depth error grows with distance, so two honest looks at a chair
+# 10 m away routinely disagree by >1 m. The gate therefore never confirmed
+# a legitimate RE-TARGET (the closest chair entering view once the robot had
+# already committed to a far one) and the robot drove to the wrong chair.
+# Agreement now scales with range: max(JUMP_AGREE, JUMP_AGREE_FRAC * d).
+JUMP_AGREE_FRAC     = 0.25
+JUMP_PENDING_TTL    = 6.0    # #30b: a pending jump older than this is stale
+# #21a robust depth: sample grid density across the bounding box
+BOX_DEPTH_GRID      = 5      # 5x5 = 25 samples over the central box region
+
+# #13: how many think-cycles must SEE the target before we commit to it.
+# 2 kills single-frame hallucinations at the cost of ~1 s. Set 1 to disable.
+# (The scan now PAUSES between confirmation looks, so the camera doesn't
+# rotate off the target while it's trying to confirm it.)
+SIGHT_CONFIRM = 2
+
+# #17: "go to X" seeds from remembered instance positions (from find/count/
+# previous navigations) instead of always searching from scratch.
+# (#23: seeding now happens ONLY when the target is not currently visible.)
+MEMORY_SEED = True
+
+# #22: detections projected within this radius of the recorded dock position
+# are treated as the DOCK, whatever YOLO called them. 0.8 m covers the dock
+# plus the ~0.5 m the Create 3 backs off during undock (the recorded point
+# can be either the docked pose or the just-undocked pose).
+DOCK_EXCLUDE_RADIUS = 0.8
+
+# #18/#19c: after this many consecutive failed approach goals for the same
+# sighting, forget that sighting and go back to scanning. With the approach
+# RING (#19c) each failure now costs only one angle, so allow a few more.
+GOAL_FAIL_LIMIT = 5
+
+# #44: how many consecutive undock attempts may fail before the agent gives
+# up on the queued task. Without this the auto-undock branch re-queues the
+# pending step forever and the terminal fills with the same two messages.
+UNDOCK_FAIL_LIMIT = 3
+
+# #12: RGB-depth pairing tolerance.
+# #45 HARDWARE: measured on the real robot, RGB arrives at ~15 Hz but depth
+# only at ~1 Hz, because a raw 1280x720 16-bit depth frame is 1.84 MB and the
+# Wi-Fi link cannot carry more. With a 0.1 s window a 15 Hz stream and a 1 Hz
+# stream almost never land close enough together, so the synchronizer produced
+# no pairs at all and the agent fell back to unsynchronized frames every time.
+# 0.6 s comfortably covers one depth period while still rejecting frames that
+# are a whole second stale.
+SYNC_SLOP_S    = 0.6
+SYNC_QUEUE     = 3
+# #48: largest colour-to-depth capture gap that may still be projected to a
+# map position. Beyond this the range reading describes where the object WAS.
+MAX_PAIR_SKEW_S = 2.0
+# #46: how many frames the synchronizer buffers per stream. Ten was pointless
+# once the slop window covers more than one depth period, and the extra
+# buffering only delayed pairs.
+SYNC_WARN_S    = 6.0        # warn if raw frames flow but no synced pair after this long
+
+# #15: don't spam "server down" more than once per this many seconds
+YOLO_ERR_PERIOD = 10.0
+
+# #14: mission logs (thesis evidence) live here, one file per run
+LOG_DIR = os.path.expanduser("~/vla_logs")
+
+# #9 relative move
+BLOCK_SIZE   = 1.0          # metres per "block" (brain already converts; here for reference)
+MOVE_SPEED   = 0.18         # m/s for relative translate
+ROTATE_SPEED = 0.5          # rad/s for relative turn
+
+# ── #29: CREATE 3 BACKUP-LIMIT RATCHET ──────────────────────────────
+# The Create 3's cliff sensors are all at the FRONT, so with the factory
+# safety setting (safety_override = "none") the firmware refuses to reverse
+# more than a few centimetres — it can't rule out a drop behind it. iRobot's
+# own documentation states the reset condition explicitly: driving FORWARD
+# re-enables backward motion. So "move back 1 m" becomes a ratchet: reverse
+# until the firmware stops us, creep forward a little to clear the limit,
+# reverse again, repeat until the NET displacement is 1 m.
+#   Why not just set safety_override = backup_only / full?  You can, and it
+#   is the faster fix (ros2 param set /motion_control safety_override
+#   backup_only) — but it turns OFF rear cliff protection. The ratchet keeps
+#   the safety system armed and still delivers the commanded motion, which is
+#   the defensible choice for an indoor ISR platform working near stairs,
+#   loading bays and ramps. Both paths are available; the ratchet is default.
+BACKUP_STALL_EPS  = 0.02    # m — net reverse progress that still counts as moving
+BACKUP_STALL_TIME = 2.0     # s — no reverse progress for this long = limit hit
+BACKUP_NUDGE_DIST = 0.15    # m — creep forward this far to clear the limit
+# Net reverse gained per cycle = (firmware allowance) - BACKUP_NUDGE_DIST.
+# With a ~0.30 m allowance and a 0.15 m nudge that's 0.15 m per shuffle, so
+# 1 m of reverse needs ~6 shuffles. 25 therefore covers ~3.7 m — beyond that
+# it is faster and safer to turn around and drive forward.
+#   TUNING: a SMALLER nudge gains more per cycle but may not fully clear the
+#   limit; measure the real allowance on the robot (watch the printed
+#   "reverse limit reached at X m") and set the nudge to about half of it.
+MAX_BACKUP_NUDGES = 25      # give up after this many shuffles (safety valve)
+
+# #4 patrol coverage
+VISITED_RADIUS = 1.0        # frontiers within this of a covered goal are skipped (m)
+TURN_WEIGHT    = 1.5        # how strongly to prefer frontiers ahead (m of cost per rad of turn)
+
+BIN_SIZE         = 0.5
+MIN_FRONTIER     = 4
+BLACKLIST_RADIUS = 0.8
+SAVE_MAP_PATH    = os.path.expanduser("~/warehouse_map")
+
+STUCK_DIST = 0.10      # moved less than this...
+STUCK_TIME = 15.0      # ...for this many seconds while driving = stuck
+MAX_STUCKS = 3         # give up exploring after this many stucks in a row
+
+THINK_PERIOD = 1.0
+PUB_PERIOD   = 0.1
+
+# ── #35: MAKING "STOP" ACTUALLY STOP ────────────────────────────────
+# While navigating, the wheels are driven by NAV2, not by this agent. Nav2's
+# controller publishes to /cmd_vel at about 20 Hz. The old cancel fired
+# goal_handle.cancel_goal_async() without checking the result and published
+# THREE zero-velocity messages - which Nav2's very next tick overwrote. The
+# operator saw "Task cancelled" while the robot kept driving at 0.26 m/s.
+# Three changes fix it:
+#   (a) cancel EVERY goal on the action server, not just our stored handle
+#   (b) hold /cmd_vel at zero for a sustained barrage, faster than Nav2
+#       publishes, so any in-flight command is overwritten rather than
+#       merely competed with
+#   (c) do not claim the robot has stopped until ODOMETRY says it has
+STOP_BARRAGE_S       = 2.0    # s - how long to hold /cmd_vel at zero
+STOP_BARRAGE_PERIOD  = 0.02   # s - 50 Hz, faster than Nav2's ~20 Hz
+STOP_LIN_EPS         = 0.02   # m/s below this counts as stopped
+STOP_ANG_EPS         = 0.05   # rad/s below this counts as stopped
+STOP_CONFIRM_TICKS   = 3      # consecutive still readings before we believe it
+STOP_CONFIRM_TIMEOUT = 6.0    # s - after this, report honestly that it did NOT stop
+
+# #20/#32 annotated feed
+ANNOTATED_FEED  = True     # False -> open the plain raw camera topic instead
+# #32c: the feed no longer runs YOLO itself, so a frame costs only a draw and
+# a JPEG encode (~3 ms). 0.2 s = 5 Hz, which actually looks live.
+ANNOT_PERIOD    = 0.2      # s between annotated frames (only while the feed is open)
+ANNOT_MIN_WIDTH = 750      # upscale narrow preview frames to at least this wide (px)
+ANNOT_MAX_SCALE = 3        # #32d: never upscale more than this (bytes on the wire)
+# #32c: reuse the think-loop's detections for at most this long. Older than
+# this and the boxes would no longer describe what the camera is looking at,
+# so we show clean video instead of lying with stale rectangles.
+ANNOT_DET_TTL   = 1.5      # s
+ANNOT_JPEG_Q    = 80       # #32d: JPEG quality for /vla/annotated/compressed
+
+# #32a: a synchronized (rgb, depth) pair older than this is STALE and must not
+# be reused. Without this the agent republished — and navigated on — a frozen
+# frame whenever the RGB/depth synchronizer stopped matching, which on real
+# hardware happens for seconds at a time. 1.5 s is ~1 think-cycle of grace.
+PAIR_STALE_S    = 1.5
+# #32e: no new camera frame at all for this long = say so once, don't sit mute.
+CAM_STALL_WARN  = 5.0
+
+# #33: how often the JSON status packet goes out for the GUI (s)
+STATUS_PERIOD   = 0.5
+
+QUIT_WORDS = ("quit", "exit")
+STOP_WORDS = ("cancel", "stop", "halt", "abort")
+
+# ── #60 MANUAL OVERRIDE (operator teleoperation) ───────────────────
+# An autonomous ISR platform must be handable back to a human at any moment:
+# to recover it from a spot the planner cannot solve, to inspect something
+# the autonomy did not think worth approaching, or simply to drive it out of
+# the way. These phrases hand the operator the wheel. They are matched
+# DETERMINISTICALLY, before the LLM ever sees them -- the LLM was answering
+# "manual override" with "not supported", because taking control is a system
+# function, not something to reason about.
+MANUAL_WORDS = ("manual override", "manual control", "take control",
+                "manual", "teleop", "override", "i'll drive", "let me drive",
+                "give me control", "manual mode")
+# Standard ROS teleop_twist_keyboard layout, so anyone who has driven a ROS
+# robot already knows it.
+MANUAL_KEYS = {
+    "u": ( 1.0,  1.0),   # forward + left
+    "i": ( 1.0,  0.0),   # forward
+    "o": ( 1.0, -1.0),   # forward + right
+    "j": ( 0.0,  1.0),   # turn left on the spot
+    "k": ( 0.0,  0.0),   # stop
+    "l": ( 0.0, -1.0),   # turn right on the spot
+    "m": (-1.0, -1.0),   # reverse + left  (reversed steering, as when driving backwards)
+    ",": (-1.0,  0.0),   # reverse
+    ".": (-1.0,  1.0),   # reverse + right
+}
+MANUAL_LIN_STEP  = 0.10     # m/s added/removed by '+'/'-'
+MANUAL_ANG_STEP  = 0.20     # rad/s added/removed by '+'/'-'
+MANUAL_LIN_MAX   = 0.26     # m/s -- the Create 3's own limit, do not exceed
+MANUAL_ANG_MAX   = 1.00     # rad/s
+# A key press commands motion for this long, then the robot stops on its own.
+# This is a DEAD-MAN behaviour: if the operator walks away, or the terminal
+# loses focus, or an SSH session drops, the robot halts instead of driving on.
+MANUAL_HOLD_S    = 0.35
+YES_WORDS  = ("yes", "y", "yeah", "yep", "sure", "ok", "okay", "affirmative")
+# #26: the other half of a yes/no answer — meaningless with no question open
+NO_WORDS   = ("no", "nope", "nah", "negative")
+POLITE_PREFIXES = ("please ", "can you ", "could you ", "would you ", "kindly ", "now ", "just ")
+
+# #25: how similar a typed word must be to a control word before we act on it.
+# 0.82 accepts "cancle"->"cancel" (0.83) while rejecting "about"->"abort"
+# (0.80) — "about face" is a real turn command and must NOT cancel the task.
+FUZZY_CONTROL = 0.82
+FUZZY_MIN_LEN = 4          # words shorter than this are never fuzzy-matched
+# #25: real commands that happen to look like control words — never corrected.
+NEVER_CONTROL = ("about", "start", "scan", "stand", "stay", "back", "count")
+
+# #27: conversation context (last action/target) older than this is stale and
+# is no longer offered to the brain for pronoun resolution. Long enough for
+# "find a chair" ... "now go to it"; short enough that a target from ten
+# commands ago can't be resurrected into a nonsense task.
+CONTEXT_TTL = 180.0        # seconds
+
+# Actions that physically move the robot (used for auto-undock).
+MOVE_ACTIONS = ("navigate", "find_another", "explore", "patrol", "move", "locate")
+
+
+def yaw_from_quat(q):
+    return math.atan2(2.0 * (q.w * q.z + q.x * q.y),
+                      1.0 - 2.0 * (q.y * q.y + q.z * q.z))
+
+
+def ang_norm(a):
+    """Wrap an angle to (-pi, pi]. Needed by #31: comparing two bearings
+    without this makes 179 deg and -179 deg look 358 deg apart."""
+    return math.atan2(math.sin(a), math.cos(a))
+
+
+# ── #33: mirror the terminal onto /vla/reply ────────────────────────
+class ReplyTee:
+    """Everything the agent prints also goes out on /vla/reply.
+
+    Why a stdout mirror instead of editing forty print() calls: the agent
+    speaks from dozens of places (notify, step announcements, error paths,
+    the brain's 'thinking...' line). Touching each one is forty chances to
+    miss one and leave the GUI operator staring at a robot that said
+    something only the terminal heard. Wrapping the stream captures all of
+    them at once and changes no existing behaviour — the terminal still
+    prints exactly what it printed before.
+
+    Only complete lines are published, and the 'Command> ' prompt (which is
+    written without a newline) is stripped so the GUI transcript stays clean.
+    """
+
+    def __init__(self, stream, publish):
+        self.stream = stream
+        self.publish = publish
+        self.buf = ""
+        self.lock = threading.Lock()
+
+    def write(self, s):
+        self.stream.write(s)
+        try:
+            with self.lock:
+                self.buf += s
+                lines = []
+                while "\n" in self.buf:
+                    line, self.buf = self.buf.split("\n", 1)
+                    lines.append(line)
+            for line in lines:
+                line = line.replace("Command> ", "").strip()
+                if line:
+                    self.publish(line)
+        except Exception:
+            pass                      # a broken mirror must never break printing
+        return len(s)
+
+    def flush(self):
+        self.stream.flush()
+
+    def isatty(self):
+        try:
+            return self.stream.isatty()
+        except Exception:
+            return False
+
+    def fileno(self):
+        return self.stream.fileno()
+
+
+def strip_politeness(low):
+    """Remove leading 'please ', 'can you ', etc. so short commands like
+    'please stop' / 'can you dock' are recognised."""
+    changed = True
+    while changed:
+        changed = False
+        for p in POLITE_PREFIXES:
+            if low.startswith(p):
+                low = low[len(p):]
+                changed = True
+    return low.strip()
+
+
+# ── #25: typo-tolerant matching for the few words we handle WITHOUT the LLM ──
+def fuzzy_word(word, options, cutoff=FUZZY_CONTROL):
+    """Return the option the operator most likely MEANT, or None.
+
+    Only used for control words (cancel/stop, yes/no). Everything else goes
+    to the LLM, which reads through typos on its own. Deliberately cautious:
+    very short words and known-good commands are never corrected, because a
+    false 'cancel' is annoying and a false 'quit' would be unrecoverable."""
+    if not word or len(word) < FUZZY_MIN_LEN:
+        return None
+    if word in NEVER_CONTROL:
+        return None
+    if word in options:
+        return word
+    m = difflib.get_close_matches(word, [o for o in options if len(o) >= FUZZY_MIN_LEN],
+                                  n=1, cutoff=cutoff)
+    return m[0] if m else None
+
+
+def first_word(low):
+    parts = low.split()
+    return parts[0].strip(".,!?;:") if parts else ""
+
+
+def is_yes(low):
+    """#25: 'yes' / 'yeah' / 'ok' — and near-misses like 'yse', 'yeh'."""
+    w = first_word(strip_politeness(low))
+    return w in YES_WORDS or fuzzy_word(w, YES_WORDS) is not None
+
+
+class MissionLog:
+    """#14: append-only, timestamped run log — evidence for the thesis.
+    Every line: '2026-07-08 14:03:22.512 [TAG] message'. Never crashes
+    the agent: if the disk misbehaves, logging silently stops."""
+
+    def __init__(self):
+        self.f = None
+        # #32b: the multi-threaded executor means think(), the feed timer and
+        # the command worker can all log at the same instant. Interleaved
+        # writes would corrupt the very evidence file this exists to produce.
+        self.lock = threading.Lock()
+        try:
+            os.makedirs(LOG_DIR, exist_ok=True)
+            name = datetime.datetime.now().strftime("vla_run_%Y%m%d_%H%M%S.log")
+            self.path = os.path.join(LOG_DIR, name)
+            self.f = open(self.path, "a", buffering=1)   # line-buffered
+            self.log("RUN", f"{AGENT_VERSION}")
+            self.log("RUN", f"agent started (SIGHT_CONFIRM={SIGHT_CONFIRM}, "
+                            f"SEARCH_TIMEOUT={SEARCH_TIMEOUT}s, "
+                            f"NO_PROGRESS_LIMIT={NO_PROGRESS_LIMIT}s, "
+                            f"ROBOT_CLEARANCE={ROBOT_CLEARANCE}m)")
+        except Exception:
+            self.f = None
+
+    def log(self, tag, msg):
+        if self.f is None:
+            return
+        try:
+            ts = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
+            with self.lock:
+                self.f.write(f"{ts} [{tag}] {msg}\n")
+        except Exception:
+            self.f = None                                # disk problem -> stop logging
+
+
+class _DecodedFilter(message_filters.SimpleFilter):
+    """#50: a message_filters source we drive by hand.
+
+    ApproximateTimeSynchronizer only knows how to read from filters, but the
+    compressed RGB stream has to be DECODED before the rest of the pipeline
+    can use it. This filter is fed manually with the decoded Image message,
+    so the synchronizer, the raw fallback and every downstream consumer keep
+    working on ordinary sensor_msgs/Image exactly as before.
+    """
+    pass
+    # SimpleFilter already provides registerCallback() and signalMessage();
+    # no extra behaviour is needed, only a concrete class to instantiate
+
+
+class VLAAgent(Node):
+    def __init__(self):
+        super().__init__("vla_agent")
+        self.bridge = CvBridge()
+        # #32b: the live feed runs on its own thread now — give it its own
+        # bridge rather than sharing one object across threads.
+        self.feed_bridge = CvBridge()
+        self.K = self.cam_frame = None
+        self.undock_fail_count = 0
+        # #44: consecutive failed undock attempts, reset on any success
+        self.stale_depth_drops = 0
+        self.scan_msg = None
+        # #54: most recent full LaserScan, used to range detected objects
+        self.lidar_fixes = 0
+        self._lidar_reasons = set()
+        # #55: distinct reasons already reported, so each is said once
+        # #54: how many object positions came from the LiDAR rather than depth
+        self._size_reported = False
+        # #52: guards the one-time depth-size report
+        # #48: how many detections were dropped for having too-old depth
+        self._server_seen = {}
+        # #43: remembers which action servers have already been discovered
+        self.K_depth = list(DEPTH_K_DEFAULT)
+        # #53: seeded with this camera's known depth intrinsics so projection
+        # is correct immediately; on_depth_info replaces them when the real
+        # camera_info finally arrives
+        self.depth_wh = DEPTH_WH_DEFAULT
+        # #53: the geometry those intrinsics were calibrated for
+        self.depth_info_live = False
+        # #53: True once a real camera_info has been received
+
+        # #12: the primary camera state is a timestamp-matched (rgb, depth)
+        # PAIR. The raw single-topic copies below are only a fallback.
+        self.pair = None                 # (rgb_msg, depth_msg), same instant
+        self.pair_t = 0.0                # #32a: when that pair ARRIVED (monotonic)
+        self.rgb_raw = None
+        self.rgb_raw_t = 0.0             # #32e: last raw RGB arrival (camera watchdog)
+        self.depth_raw = None
+        self.sync_seen = False           # ever received a matched pair?
+        self.warned_no_sync = False
+        self.warned_stale_pair = False   # #32a: only nag about drift once
+        self.warned_cam_stall = False    # #32e
+        self.start_t = time.monotonic()
+
+        self.have_odom = False
+        self.x = self.y = self.yaw = 0.0
+        self.front_min = float("inf")
+
+        self.mode = None
+        self.target = None
+        self.target_qualifier = None     # #3: nearest / farthest / leftmost / rightmost
+        self.task_id = 0
+        self.goal_handle = None
+        self.cmd = Twist()
+        self.queue = []                  # remaining steps in a multi-step command
+
+        self.search_state = None
+        self.turn_accum = 0.0
+        self.last_yaw = None
+        # #56: step-and-stare bookkeeping. scan_dwell_until is the monotonic
+        # time the current stationary "look" ends (None = not dwelling now).
+        # scan_step_yaw is how far this individual step has turned so far.
+        self.scan_dwell_until = None
+        self.scan_step_yaw = 0.0
+        # #59: after the guard fires, mute it briefly so it does not re-trigger
+        # every 100 ms while the robot is still standing next to the obstacle.
+        self.guard_mute_until = 0.0
+        # #60: True while the operator is driving by hand.
+        self.manual_mode = False
+        # Set by enqueue_command() on the ROS/worker side; ACTED ON by the
+        # input loop. Teleop must run on the thread that owns the terminal,
+        # so the request and the action are deliberately separated.
+        self.manual_requested = False
+        self.advance_start = None
+        self.navigate_start = None       # #6: when the current "go to X" started
+
+        # navigation arrival / tracking state
+        self.last_obj_xy = None          # last seen map position of the current target
+        self.target_announced = False    # have we already said "found it"?
+        self.nav_goal_xy = None          # the goal we last sent for this target
+        self.sight_count = 0             # #13: consecutive-ish sightings before committing
+        self.seen_live = False           # #17: seen with the CAMERA during THIS task (not just memory)
+        self.goal_fail_count = 0         # #18: consecutive unreachable/rejected goals
+        self.best_dist = None            # #19a: closest we've ever been to the target
+        self.last_progress_t = None      # #19a: when best_dist last improved
+        self.goal_tried = []             # #19c: approach goals Nav2 refused this task
+        self.jump_pending = None         # #21b: suspicious sighting awaiting confirmation
+        self.jump_pending_t = 0.0        # #30b: when it was raised (for expiry)
+        self.goal_obj_xy = None          # #30a: object position when goal was picked
+
+        # #31: incremental ("hop") approach into unmapped space
+        self.step_active = False         # is the CURRENT nav goal a hop?
+        self.step_bearing = None         # robot->object bearing the hop was aimed on
+        self.step_start_t = 0.0          # when this hop was issued
+        self.step_len = STEP_GOAL_DIST   # current hop length (shrinks on refusal)
+        self.step_count = 0              # hops used in this task (for the log/GUI)
+        self.step_announced = False      # said "beyond the mapped area" once
+
+        # spatial instance memory (for counting / "find another")
+        self.seen_instances = {}         # class name -> list of distinct (x, y) world positions
+        self.find_baseline = 0
+        self.find_start = 0.0
+        self.locate_start = None         # #7
+        self.dock_xy = None              # #22: dock position in the map frame, once known
+        self.last_located = None         # #23: (target, (x, y)) of the most recent locate hit
+
+        # #11: what we last acted on, for pronoun resolution in the brain
+        self.ctx_last_action = None
+        self.ctx_last_target = None
+        self.ctx_time = 0.0              # #27: when that context was set
+
+        # #9 relative move
+        self.move_spec = None
+        self.move_ref_yaw = None
+        self.move_turned = 0.0
+        self.move_ref_pos = None
+        self.move_moved = 0.0
+        # #29: backward-ratchet state
+        self.move_axis = None            # unit heading vector when the translate started
+        self.backup_best = 0.0           # best net reverse distance achieved so far
+        self.backup_stall_t = None       # when reverse progress last improved
+        self.backup_nudges = 0           # how many forward shuffles we've used
+        self.nudge_from = None           # position where the current shuffle began
+
+        # pending yes/no + whether this command already has a feed step
+        self.pending = None
+        self.has_feed_step = False
+
+        self.map = None
+        self.frontier_navigating = False
+        self.frontier_sent_goal = False
+        self.cur_goal = (0.0, 0.0)
+        self.blacklist = []
+        self.visited_goals = []          # #4: areas we've already covered while patrolling
+        self.explore_start_t = None
+        self.warned_no_map = False
+        self.warned_no_frontier = False
+
+        # stuck detection
+        self.last_pos = None
+        self.last_move_t = None
+        self.consecutive_stucks = 0
+
+        # #10 dock state
+        self.is_docked = False
+        self.dock_known = False
+        self.dock_goal_handle = None
+
+        self.feed_proc = None
+        self.feed_warned_dead = False    # #32e: viewer crashed -> say it once
+
+        # #35: stop-confirmation state
+        self.odom_lin = 0.0              # latest reported forward speed (m/s)
+        self.odom_ang = 0.0              # latest reported turn rate (rad/s)
+        self.stop_until = 0.0            # hold /cmd_vel at zero until this time
+        self.stop_started = None         # when the current stop began
+        self.stop_still_ticks = 0        # consecutive readings that looked stopped
+        self.stop_reported = True        # has the outcome been announced yet?
+        self.shutdown = False
+
+        # #33: one intake queue for EVERY command source (keyboard, /vla/command
+        # from the GUI, /vla/command from the voice node). A worker thread
+        # drains it, so an LLM call that takes three seconds blocks nothing but
+        # itself — not the ROS executor, not the velocity publisher, not the feed.
+        self.cmd_queue = queue.Queue()
+        self.cmd_worker = None
+        self.last_source = "keyboard"    # where the command being served came from
+
+        # #14 mission log + #15 pooled HTTP session for YOLO
+        self.mlog = MissionLog()
+        self.http = requests.Session()
+        # #32b: think() and the command worker can both reach for YOLO now
+        # that they run on different threads. requests.Session is not
+        # documented as thread-safe, and there is one GPU anyway — serialise.
+        self.http_lock = threading.Lock()
+        self.last_yolo_err_t = 0.0
+        # #20: cache of the most recent YOLO result, keyed by the frame's
+        # timestamp, so the annotated feed can REUSE the think-loop's
+        # inference instead of paying for a second pass on the same image.
+        self.last_det = None             # (stamp_key, detections)
+        self.last_det_t = 0.0            # #32c: when last_det was produced
+
+        # ── #39 SENSOR QoS ──────────────────────────────────────────
+        # The real OAK-D, the RPLIDAR and the Create 3 all publish
+        # BEST_EFFORT. A default rclpy subscription is RELIABLE, and a
+        # RELIABLE subscriber does NOT match a BEST_EFFORT publisher — it
+        # receives absolutely nothing, with no warning and no error. In
+        # simulation the Gazebo plugins published RELIABLE, so v12 worked;
+        # on hardware every camera callback would simply never fire.
+        sensor_qos = qos_profile_sensor_data
+        # best-effort, keep-last depth 5 — the standard QoS for sensor streams
+
+        # ── #50 COMPRESSED RGB TRANSPORT ────────────────────────────
+        # The raw colour stream is 250x250x3 = 187 kB per frame, and the
+        # OAK-D publishes it at ~13 Hz: about 2.2 MB/s. Raw depth is 1.84 MB
+        # per frame, so for depth to reach even 2 Hz the link would have to
+        # carry ~6 MB/s. A 2.4 GHz Wi-Fi link does not, so the two streams
+        # compete and the small, frequent colour frames win. Measured result:
+        # depth fell to one frame every twenty seconds, and because
+        # robust_box_depth then read a twenty-second-old frame captured from
+        # a different pose, a chair one metre in front was reported at 9.6 m
+        # and the robot navigated to empty floor.
+        #   The driver already publishes a JPEG version of the same stream at
+        # roughly 1/18th the size. Subscribing to that instead frees the link
+        # for depth. The frame is decoded here and handed on as an ordinary
+        # Image message, so nothing downstream changes.
+        if USE_COMPRESSED_RGB:
+            rgb_sub = _DecodedFilter()
+            # a manually-driven filter standing in for the raw subscription
+            self.create_subscription(CompressedImage, RGB_COMPRESSED_TOPIC,
+                                     self.on_rgb_compressed, sensor_qos)
+            # the real DDS subscription, carrying ~10 kB frames instead of 187 kB
+            self._rgb_filter = rgb_sub
+            # kept on self so the decode callback can push frames into it
+        else:
+            rgb_sub = message_filters.Subscriber(self, Image, RGB_TOPIC,
+                                                 qos_profile=sensor_qos)
+            # original raw path, still available via VLA_RAW_RGB=1
+            self._rgb_filter = None
+        if USE_COMPRESSED_DEPTH:
+            depth_sub = _DecodedFilter()
+            # #51: another hand-driven filter, this time fed by the decoded
+            # compressedDepth stream
+            self.create_subscription(CompressedImage, DEPTH_COMPRESSED_TOPIC,
+                                     self.on_depth_compressed, sensor_qos)
+            # the real subscription, on the topic the camera actually feeds
+            self._depth_filter = depth_sub
+            # kept on self so the decode callback can push frames into it
+        else:
+            depth_sub = message_filters.Subscriber(self, Image, DEPTH_TOPIC,
+                                                   qos_profile=sensor_qos)
+            # original raw path, still available via VLA_RAW_DEPTH=1
+            self._depth_filter = None
+        self.sync = message_filters.ApproximateTimeSynchronizer(
+            [rgb_sub, depth_sub], queue_size=SYNC_QUEUE, slop=SYNC_SLOP_S)
+        # #46: queue_size cut from 10 to 3. Holding ten 640x360 depth frames
+        # served no purpose once the slop window is wider than one depth
+        # period, and the buffer added latency to every pair.
+        self.sync.registerCallback(self.on_rgb_depth)
+        # call on_rgb_depth once a matched (colour, depth) pair is found
+
+        # ── #46 SINGLE SUBSCRIPTION PER STREAM ──────────────────────
+        # v14 subscribed to RGB and depth TWICE each: once through the
+        # synchronizer above, and once more with create_subscription() to
+        # feed the raw fallback. That is four image streams pulled across
+        # the Wi-Fi link when two would do, and DDS does not deduplicate
+        # them — each subscription gets its own copy of every frame.
+        # Measured effect: depth ran at 5.8 Hz with the agent stopped but
+        # collapsed to 0.28 Hz with it running, a 20x drop that was NOT
+        # caused by the link's capacity.
+        #   message_filters.Subscriber inherits registerCallback from
+        # SimpleFilter, so the raw handlers can hang off the SAME
+        # subscription the synchronizer already uses. Same behaviour,
+        # half the traffic.
+        rgb_sub.registerCallback(self.on_rgb)
+        # raw colour frames for the fallback path and the camera watchdog
+        depth_sub.registerCallback(self.on_depth)
+        # raw depth frames for the fallback path
+
+        self.create_subscription(CameraInfo, INFO_TOPIC, self.on_info, sensor_qos)
+        # colour intrinsics K — needed to turn a pixel into a 3D direction
+        self.create_subscription(CameraInfo, DEPTH_INFO_TOPIC,
+                                 self.on_depth_info, sensor_qos)
+        # #40: depth intrinsics K — needed to map a colour pixel onto the depth image
+        self.create_subscription(LaserScan, SCAN_TOPIC, self.on_scan, sensor_qos)
+        # laser scan for obstacle stopping
+        self.create_subscription(Odometry, ODOM_TOPIC, self.on_odom, sensor_qos)
+        # odometry for relative moves and stop confirmation
+        self.create_subscription(OccupancyGrid, MAP_TOPIC, self.on_map,
+                                 QoSProfile(history=QoSHistoryPolicy.KEEP_LAST,
+                                            depth=1,
+                                            reliability=QoSReliabilityPolicy.RELIABLE,
+                                            durability=DurabilityPolicy.TRANSIENT_LOCAL))
+        # the SLAM map is published RELIABLE + TRANSIENT_LOCAL (latched) so a late
+        # subscriber still receives the last map; a volatile subscription would wait
+        # for the next map update, which on a static scene may never come
+        self.cmd_pub = self.create_publisher(Twist, CMD_TOPIC, 10)
+        # velocity publisher — this is the topic the #35 stop barrage floods with zeros
+
+        # ── #42 EXPLICIT NAMESPACED TF ──────────────────────────────
+        # tf2_ros.TransformListener hard-subscribes to a bare "/tf", which
+        # does not exist on the namespaced robot, so the buffer stayed empty
+        # and every projection to the map frame failed. We feed the buffer
+        # ourselves from the correct topics instead.
+        self.create_subscription(TFMessage, TF_TOPIC, self.on_tf, 100)
+        # dynamic transforms (odom->base_link etc.), high queue depth as they arrive fast
+        self.create_subscription(TFMessage, TF_STATIC_TOPIC, self.on_tf_static,
+                                 QoSProfile(history=QoSHistoryPolicy.KEEP_LAST,
+                                            depth=100,
+                                            reliability=QoSReliabilityPolicy.RELIABLE,
+                                            durability=DurabilityPolicy.TRANSIENT_LOCAL))
+        # static transforms are latched — TRANSIENT_LOCAL is required or we miss
+        # the one-and-only publication that happened before we started
+
+        # #20/#32d: annotated stream for the live window. The publishers exist
+        # from startup so rqt_image_view can always find the topics; frames are
+        # only produced while the feed is actually open.
+        #   QoS: RELIABLE so ANY subscriber can connect (a best-effort
+        #   subscriber matches a reliable publisher; the reverse does not
+        #   match at all, which would have made the feed invisible to
+        #   rqt_image_view). History KEEP_LAST depth 1 so a slow viewer causes
+        #   FRAME DROPS instead of a growing backlog — a backlog of 1.7 MB
+        #   images is exactly how the old feed wedged itself permanently.
+        img_qos = QoSProfile(history=QoSHistoryPolicy.KEEP_LAST, depth=1,
+                             reliability=QoSReliabilityPolicy.RELIABLE)
+        self.annot_pub = self.create_publisher(Image, ANNOT_TOPIC, img_qos)
+        self.annot_jpg_pub = self.create_publisher(CompressedImage,
+                                                   ANNOT_COMPRESSED_TOPIC, img_qos)
+
+        # #33: command bridge. /vla/command is deliberately a plain String —
+        # the agent cannot tell (and must not care) whether a command was
+        # typed in the terminal, typed in the GUI or spoken into a microphone.
+        self.reply_pub  = self.create_publisher(String, REPLY_TOPIC, 20)
+        self.status_pub = self.create_publisher(String, STATUS_TOPIC, 5)
+        self.create_subscription(String, CMD_IN_TOPIC, self.on_remote_command, 10)
+
+        self.tf_buffer = tf2_ros.Buffer()
+        # the transform buffer is still tf2's — only the way it is FED changes (#42)
+        self.nav_client = ActionClient(self, NavigateToPose, NAV_ACTION)
+        # #37: Nav2's action server lives at /robot1/navigate_to_pose on the real robot
+        # #35: a direct client on the action server's cancel service. Cancelling
+        # our stored goal handle only works if we HAVE one - and there is a
+        # window between sending a goal and the acceptance callback arriving
+        # where we do not. Cancel-all closes that window.
+        self.nav_cancel_cli = self.create_client(CancelGoal, NAV_CANCEL_SRV)
+        # #37: the cancel-all service belongs to the namespaced action server too;
+        # a wrong name here means "stop" cannot cancel the Nav2 goal at all
+
+        # #10 dock/undock clients + dock status (all optional)
+        if HAVE_CREATE:
+            self.dock_client = ActionClient(self, Dock, DOCK_ACTION)
+            # #37: /robot1/dock on the real robot
+            self.undock_client = ActionClient(self, Undock, UNDOCK_ACTION)
+            # #37: /robot1/undock on the real robot
+            # #16: the Create 3 publishes dock_status BEST-EFFORT. A default
+            # (reliable) subscription silently gets NOTHING -> is_docked would
+            # never update on the real robot. Sensor-data QoS matches it.
+            self.create_subscription(DockStatus, DOCK_STATUS_TOPIC,
+                                     self.on_dock_status, qos_profile_sensor_data)
+            # #37 + #16: namespaced name AND best-effort QoS — both are required
+            # or is_docked never updates and the agent refuses to undock
+        else:
+            self.dock_client = self.undock_client = None
+
+        # #32b: HEAD-OF-LINE BLOCKING. rclpy puts every timer in the node's
+        # default MutuallyExclusiveCallbackGroup, so with a single-threaded
+        # spin only ONE callback runs at a time. think() can block for seconds
+        # inside the YOLO HTTP call — and while it did, publish_cmd() (the
+        # 10 Hz velocity heartbeat) and annotate_think() (the live feed) did
+        # not run at all. That is why the feed "ran for a while and got stuck":
+        # it was being starved by the perception loop. A private group per
+        # timer plus a MultiThreadedExecutor in main() lets them run in
+        # parallel. Shared state is only ever read/assigned as whole objects,
+        # which is atomic under the GIL, so no locking is required.
+        self.cbg_think  = MutuallyExclusiveCallbackGroup()
+        self.cbg_pub    = MutuallyExclusiveCallbackGroup()
+        self.cbg_annot  = MutuallyExclusiveCallbackGroup()
+        self.cbg_status = MutuallyExclusiveCallbackGroup()
+        self.create_timer(THINK_PERIOD, self.think,          callback_group=self.cbg_think)
+        self.create_timer(PUB_PERIOD,   self.publish_cmd,    callback_group=self.cbg_pub)
+        # #59: the collision guard gets its own fast timer, in the same
+        # callback group as publishing so it can never be starved by a
+        # slow think-cycle (a YOLO call can take hundreds of ms).
+        self.create_timer(GUARD_PERIOD, self.collision_guard, callback_group=self.cbg_pub)
+        self.create_timer(STOP_BARRAGE_PERIOD, self.stop_barrage, callback_group=self.cbg_pub)
+        # #35: runs at 50 Hz but returns instantly unless a stop is in progress,
+        # so the idle cost is negligible
+        self.create_timer(ANNOT_PERIOD, self.annotate_think, callback_group=self.cbg_annot)
+        self.create_timer(STATUS_PERIOD, self.publish_status, callback_group=self.cbg_status)  # #33
+
+    # ── #33: outbound speech + state ──
+    def emit_reply(self, text):
+        """Publish one line of agent output on /vla/reply. Called by the
+        stdout mirror, so it must never print anything itself (that would
+        recurse) and must never raise (that would break print())."""
+        try:
+            m = String(); m.data = str(text)[:1000]
+            self.reply_pub.publish(m)
+        except Exception:
+            pass
+
+    def publish_status(self):
+        """A small JSON state packet for the GUI: enough to drive a status
+        bar and the operator's confidence, cheap enough to send at 2 Hz."""
+        try:
+            pose = self.robot_pose_map()
+            dist = None
+            if pose is not None and self.last_obj_xy is not None:
+                dist = round(math.hypot(pose[0] - self.last_obj_xy[0],
+                                        pose[1] - self.last_obj_xy[1]), 2)
+            st = {
+                "version": AGENT_VERSION,
+                "mode": self.mode or "idle",
+                "target": self.target,
+                "state": self.search_state,
+                "docked": bool(self.is_docked) if self.dock_known else None,
+                "map": self.map is not None,
+                "camera": self.current_pair() is not None,
+                "target_dist": dist,
+                "hop_mode": bool(self.step_active),      # #31
+                "hops": self.step_count,                 # #31
+                "feed": bool(self.feed_proc is not None or self.feed_watchers() > 0),
+                # #34: the status bar says "feed on" when the GUI is watching too
+                "busy": bool(self.mode) or not self.cmd_queue.empty(),
+                "queued": self.cmd_queue.qsize(),
+                "source": self.last_source,
+            }
+            m = String(); m.data = json.dumps(st)
+            self.status_pub.publish(m)
+        except Exception:
+            pass
+
+    def on_remote_command(self, msg):
+        """#33: a command from the GUI or the voice node. It goes into the
+        SAME queue the keyboard uses, so there is exactly one command path in
+        this program and no chance of two sources racing each other."""
+        text = (msg.data or "").strip()
+        if not text:
+            return
+        print(f"\n[operator/remote] {text}")
+        self.enqueue_command(text, source="remote")
+
+    # ── sensor callbacks ──
+    def on_rgb_depth(self, rgb_msg, depth_msg):        # #12: matched pair
+        self.pair = (rgb_msg, depth_msg)
+        self.pair_t = time.monotonic()                 # #32a: age it, don't trust it forever
+        self.sync_seen = True
+    def on_rgb(self, m):
+        self.rgb_raw = m
+        self.rgb_raw_t = time.monotonic()              # #32e: camera watchdog
+        self.warned_cam_stall = False
+    def on_depth(self, m): self.depth_raw = m
+    def on_rgb_compressed(self, m):
+        # #50: decode a JPEG colour frame and push it into the pipeline as an
+        # ordinary Image message, so the synchronizer and every downstream
+        # consumer are unaffected by the change of transport.
+        try:
+            buf = np.frombuffer(m.data, dtype=np.uint8)
+            # the JPEG bytes as a flat numpy array, which is what OpenCV wants
+            img = cv2.imdecode(buf, cv2.IMREAD_COLOR)
+            # decode to a BGR image; returns None if the buffer is corrupt
+            if img is None:
+                return
+                # a dropped or partial frame is skipped, never crashes the callback
+            out = self.bridge.cv2_to_imgmsg(img, encoding="bgr8")
+            # wrap it back into a sensor_msgs/Image
+            out.header = m.header
+            # KEEP THE ORIGINAL HEADER: #47 depends on this stamp being the
+            # true capture time, not the time we happened to decode it
+            self._rgb_filter.signalMessage(out)
+            # hand it to the synchronizer and the raw fallback, exactly as a
+            # real message_filters.Subscriber would have done
+        except Exception:
+            pass
+            # never let a bad frame kill the subscription
+
+    def report_stream_sizes(self, w, h):
+        # #52: print the real depth frame size ONCE, next to what camera_info
+        # claims, so a resolution mismatch is visible instead of silent.
+        if self._size_reported:
+            return
+            # only ever printed once per run
+        self._size_reported = True
+        info = ("%dx%d" % tuple(self.depth_wh)) if self.depth_wh else "unknown"
+        # the geometry the intrinsics in use were calibrated for
+        src = "live camera_info" if self.depth_info_live else "seeded defaults (#53)"
+        # says plainly whether real calibration arrived or the seed is in use
+        self.mlog.log("INFO", "depth frames %dx%d, intrinsics %s from %s"
+                      % (w, h, info, src))
+        print("[depth] receiving %dx%d frames; intrinsics %s from %s%s"
+              % (w, h, info, src,
+                 "  -> rescaled (#52)"
+                 if (self.depth_wh and (w, h) != tuple(self.depth_wh)) else ""))
+
+    def on_depth_compressed(self, m):
+        # #51: decode a compressedDepth frame into an ordinary 16UC1 Image.
+        # The wire format is compressed_depth_image_transport's: a 12-byte
+        # ConfigHeader (format enum + two float quantisation constants),
+        # followed by a PNG-encoded image. For 16UC1 the two constants are
+        # unused - the PNG already holds millimetres - so the header is
+        # simply skipped.
+        try:
+            raw = bytes(m.data)
+            # the full payload: config header plus PNG
+            if len(raw) <= DEPTH_CFG_HEADER_BYTES:
+                return
+                # truncated frame, nothing decodable behind the header
+            png = np.frombuffer(raw[DEPTH_CFG_HEADER_BYTES:], dtype=np.uint8)
+            # everything after the 12-byte header is the PNG payload
+            img = cv2.imdecode(png, cv2.IMREAD_UNCHANGED)
+            # IMREAD_UNCHANGED preserves 16-bit depth; IMREAD_COLOR would
+            # silently crush it to 8-bit and destroy every distance reading
+            if img is None or img.dtype != np.uint16:
+                return
+                # only the 16-bit millimetre form is trusted; anything else is skipped
+            out = self.bridge.cv2_to_imgmsg(img, encoding="16UC1")
+            # declare the encoding explicitly so #41 converts millimetres correctly
+            out.header = m.header
+            # keep the true capture time, which #47 and #48 both depend on
+            self.report_stream_sizes(img.shape[1], img.shape[0])
+            # #52: surface the real frame size once so a mismatch is obvious
+            self._depth_filter.signalMessage(out)
+            # hand it to the synchronizer and the #46 raw fallback
+        except Exception:
+            pass
+            # a corrupt frame is skipped, never crashes the callback
+
+    def on_info(self, m):  self.K = m.k; self.cam_frame = m.header.frame_id
+    # store the COLOUR camera's 3x3 intrinsics and its optical frame name
+
+    def on_depth_info(self, m):
+        # #40: store the DEPTH camera's intrinsics so colour pixels can be
+        # mapped onto the depth image. Colour is 250x250, depth is 1280x720.
+        self.K_depth = m.k
+        # K_depth = [fx,0,cx, 0,fy,cy, 0,0,1] for the depth image geometry
+        self.depth_wh = (m.width, m.height)
+        # remember the depth image size for bounds checking
+        if not self.depth_info_live:
+            self.depth_info_live = True
+            # #53: note the switch from seeded defaults to live calibration
+            self.mlog.log("INFO", "live depth camera_info received %dx%d"
+                          % (m.width, m.height))
+
+    def on_tf(self, msg):
+        # #42: feed dynamic transforms from the namespaced /robot1/tf into
+        # the tf2 buffer by hand, because TransformListener listens on "/tf".
+        for t in msg.transforms:
+            # each message carries a list of transforms, not just one
+            try:
+                self.tf_buffer.set_transform(t, "vla_agent")
+                # insert it into the buffer, tagged with who supplied it
+            except Exception:
+                pass
+                # a malformed transform must never crash the callback
+
+    def on_tf_static(self, msg):
+        # #42: same for latched static transforms (camera mount, wheel offsets)
+        for t in msg.transforms:
+            # static transforms also arrive as a list
+            try:
+                self.tf_buffer.set_transform_static(t, "vla_agent")
+                # set_transform_static marks them as valid for all time
+            except Exception:
+                pass
+                # never let a bad static transform kill the subscription
+    def on_map(self, m):   self.map = m
+    def on_odom(self, m):
+        self.x = m.pose.pose.position.x
+        self.y = m.pose.pose.position.y
+        self.yaw = yaw_from_quat(m.pose.pose.orientation)
+        self.have_odom = True
+        # #35: the robot's OWN reported speed. This is the only honest way to
+        # know whether a stop worked - the agent's intent proves nothing when
+        # another node is also publishing to /cmd_vel.
+        self.odom_lin = abs(m.twist.twist.linear.x)
+        # forward/backward speed in m/s
+        self.odom_ang = abs(m.twist.twist.angular.z)
+        # turning rate in rad/s
+    def on_scan(self, m):
+        if len(m.ranges) == 0: return
+        self.scan_msg = m
+        # #54: keep the WHOLE scan, not just the front minimum. Ranging a
+        # detected object needs the beam at that object's bearing, which
+        # means the full array.
+        cone = math.radians(15); best = float("inf")
+        for i, r in enumerate(m.ranges):
+            ang = m.angle_min + i * m.angle_increment
+            if -cone <= ang <= cone and math.isfinite(r) and r > 0.0:
+                best = min(best, r)
+        self.front_min = best
+    def on_dock_status(self, m):
+        self.is_docked = bool(m.is_docked)
+        self.dock_known = True
+        # #22: the first time we learn we're ON the dock, the robot's own map
+        # pose IS the dock's position. (TF may not be up yet at boot — then
+        # robot_xy() is None and we simply try again on the next status msg.)
+        if self.is_docked and self.dock_xy is None:
+            xy = self.robot_xy()
+            if xy is not None:
+                self.set_dock_position(*xy)
+
+    def notify(self, msg):
+        self.mlog.log("ROBOT", msg)                    # #14
+        print(f"\n[robot] {msg}\nCommand> ", end="", flush=True)
+
+    # ── #12: one place decides which frames the whole pipeline uses ──
+    def current_pair(self):
+        """Return a matched (rgb_msg, depth_msg) pair. Prefers the
+        timestamp-synchronized pair; falls back to latest-of-each with a
+        one-time warning if pairing has never worked (e.g. a driver that
+        stamps the two streams from different clocks).
+
+        #32a THE STALE-PAIR BUG. This used to be `if self.pair is not None:
+        return self.pair` — with no notion of age. self.pair is only written
+        when the ApproximateTimeSynchronizer MATCHES a colour frame to a depth
+        frame within SYNC_SLOP_S. In simulation both streams tick off one
+        clock so that always happens. On the real OAK-D they drift, and
+        matching stops for seconds at a time. The result was a single frozen
+        pair returned forever:
+          * the annotated feed republished one still image (the 'feed gets
+            stuck' symptom), and
+          * far more seriously, YOLO, the depth projection and every
+            navigation goal were computed from a photograph of where the
+            robot USED to be.
+        A pair older than PAIR_STALE_S is now dropped and the raw
+        latest-of-each fallback takes over — slightly less accurate, but
+        current, and it is announced so the drift is visible rather than
+        silent."""
+        now = time.monotonic()
+        if self.pair is not None:
+            if now - self.pair_t <= PAIR_STALE_S:
+                return self.pair
+            # stale: fall through to the raw streams, and say so once
+            if not self.warned_stale_pair:
+                self.warned_stale_pair = True
+                age = now - self.pair_t
+                self.notify(f"RGB and depth stopped lining up ({age:.1f}s since the "
+                            f"last matched pair) — switching to the newest frame of "
+                            f"each. Detections stay live; depth accuracy drops a "
+                            f"little while they are out of step.")
+                self.mlog.log("WARN", f"#32a stale sync pair dropped after {age:.1f}s")
+            self.pair = None
+        if self.rgb_raw is not None and self.depth_raw is not None:
+            if (not self.warned_no_sync and not self.sync_seen
+                    and time.monotonic() - self.start_t > SYNC_WARN_S):
+                self.warned_no_sync = True
+                self.notify("RGB and depth timestamps never match (slop "
+                            f"{SYNC_SLOP_S}s) — using unsynchronized frames. "
+                            "Check the camera driver's stamps.")
+                self.mlog.log("WARN", "RGB-depth sync failed; raw fallback in use")
+            return (self.rgb_raw, self.depth_raw)
+        return None
+
+    def camera_ready(self):
+        return self.current_pair() is not None and self.K is not None
+
+    # ── YOLO ──
+    def yolo_detect(self, rgb_msg=None):
+        """Run detection on rgb_msg (or the current pair's RGB). #15: pooled
+        session + throttled error message + logging."""
+        if rgb_msg is None:
+            pair = self.current_pair()
+            if pair is None: return None
+            rgb_msg = pair[0]
+        cv_rgb = self.bridge.imgmsg_to_cv2(rgb_msg, desired_encoding="bgr8")
+        ok, buf = cv2.imencode(".jpg", cv_rgb)
+        img_b64 = base64.b64encode(buf.tobytes()).decode("utf-8")
+        try:
+            # #32b: was timeout=15. Nothing useful can come back 15 seconds
+            # into a 1 Hz control loop — by then the frame describes a world
+            # the robot has already driven through. Worse, the wait used to
+            # freeze the whole node. (connect, read) seconds: fail fast, log
+            # it, and let the next think-cycle try again.
+            with self.http_lock:                        # #32b
+                resp = self.http.post(YOLO_URL, json={"image": img_b64},
+                                      timeout=(2.0, 5.0))
+            dets = resp.json()["detections"]
+            # #20: remember WHICH frame these belong to so the annotated feed
+            # can reuse them instead of running YOLO twice on one image.
+            self.last_det = (self._stamp_key(rgb_msg), dets)
+            self.last_det_t = time.monotonic()          # #32c: for the feed's TTL
+            return dets
+        except Exception as e:
+            now = time.monotonic()
+            self.mlog.log("WARN", f"YOLO request failed: {e}")
+            if now - self.last_yolo_err_t > YOLO_ERR_PERIOD:
+                self.last_yolo_err_t = now
+                print(f"\n[robot] YOLO server error (is yolo_server.py running?): {e}")
+            return None
+
+    # ── project one pixel (u, v) to a map (x, y) using depth + TF ──
+    #    #8/#12: the depth frame is the one PAIRED with the RGB YOLO saw, the
+    #    TF lookup uses its CAPTURE time (with a 'latest' fallback), and depth
+    #    is sampled as a median patch to shrug off noise/holes.
+    # ── #20: median depth (METRES) around a pixel. Factored out of
+    #    project_pixel so the annotated feed's distance labels and the
+    #    navigation goals come from the SAME number — a label that disagreed
+    #    with the goal would be worthless as evidence.
+    # ── #41: convert raw depth values to METRES using the message's own
+    #    declared encoding, instead of guessing from the magnitude. v12 used
+    #    "if d > 100: d /= 1000", which silently mislabels anything closer
+    #    than 10 cm as 50-plus metres. The real OAK-D publishes 16UC1
+    #    (unsigned 16-bit millimetres); simulation published 32FC1 (metres).
+    @staticmethod
+    def depth_units_to_m(d, depth_msg):
+        """Raw depth sample -> metres, decided by the image encoding."""
+        enc = (depth_msg.encoding or "").lower()
+        # read the encoding string the publisher itself declared
+        if enc in ("16uc1", "mono16"):
+            return d / 1000.0
+            # 16-bit integer depth is millimetres by ROS convention
+        if enc in ("32fc1",):
+            return d
+            # 32-bit float depth is already in metres
+        return d / 1000.0 if d > 100 else d
+        # unknown encoding: fall back to v12's magnitude heuristic rather than
+        # returning a number we know is wrong
+
+    # ── #40: map a COLOUR pixel onto the DEPTH image ────────────────
+    #    The OAK-D's colour preview is 250x250 while its depth image is
+    #    1280x720 — different size AND different aspect ratio, so there is
+    #    no single scale factor. v12 indexed depth_img[v, u] with colour
+    #    coordinates and then CLAMPED them into range, which meant every
+    #    detection silently read the depth of a completely different part
+    #    of the scene. Because depth is published in the RGB optical frame
+    #    (aligned), both images share one optical centre, so the correct
+    #    mapping is: un-project through the colour K, re-project through
+    #    the depth K.
+    def rgb_px_to_depth_px(self, u, v, depth_img_shape):
+        """Colour pixel (u, v) -> depth pixel (u_d, v_d), or None if that
+        point lies outside the depth camera's field of view."""
+        h, w = depth_img_shape[:2]
+        # actual depth image dimensions, read from the array itself
+        # #52 RESOLUTION MISMATCH. K_depth comes from stereo/camera_info, which
+        # describes the camera's NATIVE depth size (1280x720). The frames we
+        # actually receive may be smaller - the compressedDepth stream is
+        # produced by the low-bandwidth pipeline and can be downscaled. v19
+        # mapped colour pixels into 1280x720 coordinates and then indexed an
+        # image of a different size: some samples fell outside the array and
+        # returned "distance unclear", while the rest landed on the wrong part
+        # of the scene entirely. That is why the same few wrong distances
+        # (9.6 m, 6.4 m, 4.3 m) kept reappearing for completely different
+        # objects. The intrinsics are therefore rescaled to whatever size the
+        # frame in hand actually is.
+        Kd = self.K_depth
+        if Kd is not None and self.depth_wh is not None:
+            w0, h0 = self.depth_wh
+            # the size camera_info was calibrated for
+            if w0 and h0 and (w0 != w or h0 != h):
+                sx, sy = w / float(w0), h / float(h0)
+                # how much smaller (or larger) the received frame is
+                Kd = [Kd[0]*sx, Kd[1], Kd[2]*sx,
+                      Kd[3], Kd[4]*sy, Kd[5]*sy,
+                      Kd[6], Kd[7], Kd[8]]
+                # focal length and optical centre both scale with the image
+        if Kd is None or self.K is None:
+            # intrinsics not received yet: fall back to proportional scaling
+            # so the agent degrades instead of failing outright
+            ud = u * (w / 250.0) if w else u
+            vd = v * (h / 250.0) if h else v
+            # crude, assumes both images cover the same field of view
+        else:
+            fx_r, fy_r = self.K[0], self.K[4]
+            # colour focal lengths in pixels
+            cx_r, cy_r = self.K[2], self.K[5]
+            # colour optical centre
+            fx_d, fy_d = Kd[0], Kd[4]
+            # depth focal lengths, rescaled to the frame we actually received (#52)
+            cx_d, cy_d = Kd[2], Kd[5]
+            # depth optical centre
+            x = (u - cx_r) / fx_r
+            # horizontal direction of the ray through this colour pixel
+            y = (v - cy_r) / fy_r
+            # vertical direction of the same ray
+            ud = x * fx_d + cx_d
+            # re-project that ray onto the depth image's horizontal axis
+            vd = y * fy_d + cy_d
+            # and onto its vertical axis
+        ud, vd = int(round(ud)), int(round(vd))
+        # depth arrays are indexed by whole pixels
+        if ud < 0 or vd < 0 or ud >= w or vd >= h:
+            return None
+            # OUTSIDE the depth field of view. This must return None, not clamp:
+            # the colour image is taller in FOV than the depth image, so roughly
+            # the top and bottom fifth of every colour frame genuinely has no
+            # depth. Clamping would invent a distance from an unrelated pixel.
+        return ud, vd
+
+    def depth_at(self, u, v, depth_msg):
+        """Return (depth_m, u, v), or None if the patch has too few valid
+        pixels (OAK-D depth has holes) or falls outside the depth FOV."""
+        try:
+            depth_img = self.bridge.imgmsg_to_cv2(depth_msg, desired_encoding="passthrough")
+        except Exception:
+            return None
+        mapped = self.rgb_px_to_depth_px(u, v, depth_img.shape)
+        # #40: translate the colour pixel into depth-image coordinates first
+        if mapped is None:
+            return None
+            # the point is outside the depth camera's view — report honestly
+        ud, vd = mapped
+        # depth-image coordinates to sample around
+        patch = depth_img[max(0, vd-4):vd+5, max(0, ud-4):ud+5].astype(float)
+        # a 9x9 neighbourhood, because a single pixel is easily a hole or speckle
+        patch = patch[np.isfinite(patch) & (patch > 0)]
+        # discard NaNs and zeros — on the OAK-D zero means "no return"
+        if patch.size < 5:                       # too few valid pixels -> unreliable
+            return None
+        d = float(np.median(patch))
+        # median, not mean: one bad reading cannot drag the result
+        if not math.isfinite(d) or d <= 0:
+            return None
+        d = self.depth_units_to_m(d, depth_msg)
+        # #41: convert to metres using the declared encoding
+        return d, int(u), int(v)
+        # NOTE: the returned u, v are the COLOUR pixel, because the caller
+        # projects them through the COLOUR intrinsics in _project_uvd
+
+    def project_pixel(self, u, v, depth_msg=None):
+        if depth_msg is None:
+            pair = self.current_pair()
+            if pair is None: return None
+            depth_msg = pair[1]
+        if self.K is None or self.cam_frame is None:
+            return None
+        got = self.depth_at(u, v, depth_msg)
+        if got is None:
+            return None
+        d, u, v = got
+        return self._project_uvd(u, v, d, depth_msg.header.stamp)
+
+    # ── #21a: depth for a whole BOUNDING BOX, occlusion-robust ──
+    def robust_box_depth(self, box, depth_msg):
+        """Median depth over a grid of samples across the central region of
+        the box. The old single centre-patch read could land on a shelf/rack
+        IN FRONT of a partially occluded target and report the occluder's
+        distance — which is how 'Arrived at the person' fired metres away
+        from the person. With a grid, the occluder must cover most of the
+        box to steal the reading. Returns depth in metres, or None."""
+        try:
+            depth_img = self.bridge.imgmsg_to_cv2(depth_msg, desired_encoding="passthrough")
+        except Exception:
+            return None
+        h, w = depth_img.shape[:2]
+        x1, y1, x2, y2 = box
+        # central 70% of the box: skip the outer rim, which is mostly
+        # background pixels bleeding into the detection
+        mx, my = 0.15 * (x2 - x1), 0.15 * (y2 - y1)
+        xa, xb = x1 + mx, x2 - mx
+        ya, yb = y1 + my, y2 - my
+        n = max(2, BOX_DEPTH_GRID)
+        # grid density, 5 means 25 samples spread across the box
+        vals = []
+        # collected valid depth readings, in raw units
+        for i in range(n):
+            for j in range(n):
+                u = xa + (xb - xa) * (i + 0.5) / n
+                # colour-image x of this grid sample (kept as float for accuracy)
+                v = ya + (yb - ya) * (j + 0.5) / n
+                # colour-image y of this grid sample
+                mapped = self.rgb_px_to_depth_px(u, v, depth_img.shape)
+                # #40: convert the colour pixel into depth-image coordinates.
+                # Without this the grid sampled 25 points from the wrong part
+                # of the depth image entirely, since the box coordinates come
+                # from YOLO on the 250x250 colour frame.
+                if mapped is None:
+                    continue
+                    # sample lies outside the depth FOV — skip it, do not clamp
+                ud, vd = mapped
+                # depth-image coordinates of this sample
+                if 0 <= ud < w and 0 <= vd < h:
+                    d = float(depth_img[vd, ud])
+                    # read the raw depth value at the mapped location
+                    if math.isfinite(d) and d > 0:
+                        vals.append(d)
+                        # keep only real returns; zero means "no measurement"
+        if len(vals) < 5:                        # box mostly holes -> unreliable
+            return None
+        d = float(np.median(vals))
+        # median across the grid: an occluder must cover most of the box to win
+        if not math.isfinite(d) or d <= 0:
+            return None
+        return self.depth_units_to_m(d, depth_msg)
+        # #41: convert to metres using the message's declared encoding
+
+    # ── #54 LIDAR RANGING ───────────────────────────────────────────
+    #    The OAK-D depth path never produced trustworthy distances on this
+    #    robot: a chair 1.5 m away was reported as 6.4, 7.7 and 9.6 m, and the
+    #    SAME few values kept reappearing for different objects in different
+    #    poses, which is the signature of sampling a background surface rather
+    #    than the target. Meanwhile the RPLIDAR, measured against the same
+    #    chair, returned 1.514 m - correct to the centimetre - at 10 Hz, in
+    #    metres, already in the robot's own frame, with no stereo alignment,
+    #    no intrinsics, no compressed transport and no timestamp skew.
+    #    A robot driving on a flat floor needs a BEARING and a RANGE. YOLO
+    #    supplies the bearing from the colour pixel, which is the one axis the
+    #    depth mapping always got right; the LiDAR supplies the range.
+    #    Limitation, stated plainly: the LiDAR sees one horizontal plane, so
+    #    it ranges whatever part of the object crosses that plane (a chair's
+    #    legs, a person's shins). For navigation that is exactly right. It
+    #    cannot range something wholly above or below the plane, and in that
+    #    case this returns None and the depth path is tried instead.
+    def lidar_why(self, reason):
+        """#55: report ONCE per distinct reason why LiDAR ranging was not used.
+        Every previous attempt to fix ranging was a guess about which step
+        failed; this makes the agent say which step failed instead."""
+        if reason in self._lidar_reasons:
+            return
+            # each distinct reason is announced only once, never spammed
+        self._lidar_reasons.add(reason)
+        self.mlog.log("WARN", "lidar ranging unavailable: " + reason)
+        print("\n[lidar] not used — %s\nCommand> " % reason, end="", flush=True)
+
+    def cam_bearing_in_laser(self, u, dist_guess, stamp):
+        """Colour pixel column u -> bearing in the LiDAR's own frame."""
+        if self.K is None:
+            self.lidar_why("no colour camera_info yet (self.K is None)")
+            return None
+        if self.cam_frame is None:
+            self.lidar_why("colour camera frame id unknown")
+            return None
+        if self.scan_msg is None:
+            self.lidar_why("no LaserScan received on " + SCAN_TOPIC)
+            return None
+        fx, cx = self.K[0], self.K[2]
+        # only the horizontal intrinsics matter: bearing is a horizontal angle
+        pt = PointStamped()
+        pt.header.frame_id = self.cam_frame
+        pt.header.stamp = stamp
+        # #47: the COLOUR frame's capture time, so the pose matches the bearing
+        pt.point.x = (u - cx) * dist_guess / fx
+        # sideways offset of the ray at the guessed distance
+        pt.point.y = 0.0
+        # height is irrelevant - the LiDAR only measures in its own plane
+        pt.point.z = dist_guess
+        # forward distance along the optical axis
+        laser_frame = self.scan_msg.header.frame_id
+        try:
+            tf = self.tf_buffer.lookup_transform(
+                laser_frame, self.cam_frame,
+                rclpy.time.Time.from_msg(stamp), timeout=Duration(seconds=0.1))
+            q = do_transform_point(pt, tf)
+        except Exception:
+            try:
+                pt.header.stamp = rclpy.time.Time().to_msg()
+                tf = self.tf_buffer.lookup_transform(
+                    laser_frame, self.cam_frame, rclpy.time.Time())
+                q = do_transform_point(pt, tf)
+            except Exception as e:
+                self.lidar_why("no TF from %s to %s (%s)"
+                               % (self.cam_frame, laser_frame, type(e).__name__))
+                return None
+        # TF is used rather than assuming the camera and LiDAR point the same
+        # way - on the TurtleBot 4 they do not share a yaw
+        return math.atan2(q.point.y, q.point.x)
+        # bearing of the ray as the LiDAR itself would express it
+
+    def scan_range_at(self, bearing, half_span):
+        """Range to the NEAREST SOLID SURFACE in [bearing±half_span].
+
+        #61: this used to return the median of every beam in the span, which
+        reported the wall behind a chair instead of the chair (see the note
+        beside LIDAR_CLUSTER_GAP). It now finds the nearest coherent group of
+        beams -- the closest real surface -- and returns its median."""
+        m = self.scan_msg
+        if m is None or not m.ranges:
+            return None
+        vals = []
+        for i, r in enumerate(m.ranges):
+            if not (math.isfinite(r) and m.range_min <= r <= m.range_max):
+                continue
+                # skip no-returns and out-of-spec readings
+            ang = m.angle_min + i * m.angle_increment
+            d = math.atan2(math.sin(ang - bearing), math.cos(ang - bearing))
+            # signed angular difference, wrapped to +/-pi so 359 deg vs 1 deg
+            # is treated as 2 deg apart rather than 358
+            if abs(d) <= half_span:
+                vals.append(r)
+        if len(vals) < 3:
+            self.lidar_why("only %d valid beams within %.1f deg of bearing "
+                           "%.1f deg (scan frame %s, %d beams total)"
+                           % (len(vals), math.degrees(half_span),
+                              math.degrees(bearing), m.header.frame_id,
+                              len(m.ranges)))
+            return None
+            # too few beams on the target to trust the reading
+
+        vals.sort()
+        # Walk the sorted ranges from nearest to furthest and cut the list
+        # wherever consecutive values jump by more than LIDAR_CLUSTER_GAP.
+        # Each resulting group is one physical surface at one distance.
+        cluster = [vals[0]]
+        for r in vals[1:]:
+            if r - cluster[-1] <= LIDAR_CLUSTER_GAP:
+                cluster.append(r)          # same surface, keep collecting
+            else:
+                if len(cluster) >= LIDAR_CLUSTER_MIN:
+                    break                  # nearest real surface: done
+                cluster = [r]              # too few beams -- treat as noise
+                                           # and start the next group
+        if len(cluster) < LIDAR_CLUSTER_MIN:
+            # Nothing formed a credible surface. Fall back to the old median
+            # rather than returning nothing, so behaviour degrades instead of
+            # failing outright.
+            self.lidar_why("no coherent surface in %d beams near bearing "
+                           "%.1f deg; falling back to the median"
+                           % (len(vals), math.degrees(bearing)))
+            return vals[len(vals) // 2]
+        return cluster[len(cluster) // 2]
+        # median WITHIN the nearest surface: still immune to a single stray
+        # beam, but no longer averaged together with the wall behind
+
+    def lidar_project_box(self, box, rgb_msg):
+        """Map (x, y) of a detection, ranged by LiDAR. None if unavailable."""
+        if rgb_msg is None:
+            self.lidar_why("no colour frame passed to the projector")
+            return None
+        if self.scan_msg is None:
+            self.lidar_why("no LaserScan received on " + SCAN_TOPIC)
+            return None
+        if self.K is None:
+            self.lidar_why("no colour camera_info yet (self.K is None)")
+            return None
+        x1, y1, x2, y2 = box
+        uc = (x1 + x2) / 2.0
+        # horizontal centre of the detection
+        stamp = rgb_msg.header.stamp
+        # first pass: guess a distance to get an approximate bearing
+        b = self.cam_bearing_in_laser(uc, LIDAR_BEARING_GUESS_M, stamp)
+        if b is None:
+            return None
+        # the box's angular half-width, so the median samples the object only
+        fx = self.K[0]
+        half = min(LIDAR_MAX_HALF_SPAN,
+                   max(LIDAR_MIN_HALF_SPAN, abs(x2 - x1) / (2.0 * fx)))
+        r = self.scan_range_at(b, half)
+        if r is None:
+            return None
+        # second pass: redo the bearing at the measured range. The camera and
+        # LiDAR sit a few centimetres apart, so the bearing depends slightly
+        # on distance; one refinement removes that error.
+        b2 = self.cam_bearing_in_laser(uc, r, stamp)
+        if b2 is not None:
+            r2 = self.scan_range_at(b2, half)
+            if r2 is not None:
+                b, r = b2, r2
+        laser_frame = self.scan_msg.header.frame_id
+        pt = PointStamped()
+        pt.header.frame_id = laser_frame
+        pt.header.stamp = stamp
+        pt.point.x = r * math.cos(b)
+        # the measured point, in the LiDAR's own frame
+        pt.point.y = r * math.sin(b)
+        pt.point.z = 0.0
+        try:
+            tf = self.tf_buffer.lookup_transform(
+                MAP_FRAME, laser_frame,
+                rclpy.time.Time.from_msg(stamp), timeout=Duration(seconds=0.1))
+            obj = do_transform_point(pt, tf)
+        except Exception:
+            try:
+                pt.header.stamp = rclpy.time.Time().to_msg()
+                tf = self.tf_buffer.lookup_transform(
+                    MAP_FRAME, laser_frame, rclpy.time.Time())
+                obj = do_transform_point(pt, tf)
+            except Exception as e:
+                self.lidar_why("no TF from %s to %s (%s)"
+                               % (laser_frame, MAP_FRAME, type(e).__name__))
+                return None
+        self.lidar_fixes += 1
+        # counted so it is visible how often ranging came from the LiDAR
+        return obj.point.x, obj.point.y
+
+    def range_for_box(self, box, depth_msg, rgb_msg=None):
+        """Distance in metres to a detection: LiDAR first, depth as fallback."""
+        if USE_LIDAR_RANGE and rgb_msg is not None and self.scan_msg is not None:
+            x1, y1, x2, y2 = box
+            uc = (x1 + x2) / 2.0
+            b = self.cam_bearing_in_laser(uc, LIDAR_BEARING_GUESS_M,
+                                          rgb_msg.header.stamp)
+            if b is not None and self.K is not None:
+                half = min(LIDAR_MAX_HALF_SPAN,
+                           max(LIDAR_MIN_HALF_SPAN,
+                               abs(x2 - x1) / (2.0 * self.K[0])))
+                r = self.scan_range_at(b, half)
+                if r is not None:
+                    b2 = self.cam_bearing_in_laser(uc, r, rgb_msg.header.stamp)
+                    if b2 is not None:
+                        r2 = self.scan_range_at(b2, half)
+                        if r2 is not None:
+                            return r2
+                    return r
+        if depth_msg is None:
+            return None
+        return self.robust_box_depth(box, depth_msg)
+        # depth is still there for anything the LiDAR plane cannot see
+
+    def project_box(self, box, depth_msg, rgb_msg=None):
+        """Map (x, y) of a detection: bearing from the box centre, depth from
+        the occlusion-robust grid over the whole box (#21a).
+
+        #47 WRONG-DIRECTION GOALS. v15 looked up TF at the DEPTH frame's
+        timestamp. That is correct only when RGB and depth are synchronized.
+        On the real robot depth arrives at well under 1 Hz, so current_pair()
+        falls back to latest-of-each and the two frames can be SECONDS apart.
+        The bearing to the target is measured from the COLOUR pixel, but the
+        camera pose was being read at the depth frame's older time. While the
+        robot rotated during a search, that stale yaw rotated the whole ray:
+        an object dead ahead was projected off to one side, and sometimes
+        behind the robot. Nav2 then drove faithfully to a goal that was in
+        the wrong place — the "it backs up and turns away from the chair
+        that is right in front of it" symptom.
+        The bearing and the pose must come from the SAME instant, so TF is
+        now looked up at the COLOUR frame's stamp."""
+        # #54: LiDAR first - it is the sensor that measures this robot's world
+        # correctly. Only if it cannot see the target does the depth path run.
+        if USE_LIDAR_RANGE:
+            p = self.lidar_project_box(box, rgb_msg)
+            if p is not None:
+                return p
+        if self.K is None or self.cam_frame is None or depth_msg is None:
+            return None
+        # #48: refuse to project from depth that is too old to trust. A range
+        # reading from four seconds ago describes where the object was, not
+        # where it is. Saying "distance unclear" is honest; inventing a map
+        # position from it is what sent the robot to empty floor.
+        if rgb_msg is not None:
+            skew = abs(self.stamp_to_sec(rgb_msg.header.stamp)
+                       - self.stamp_to_sec(depth_msg.header.stamp))
+            # how far apart the colour and depth captures actually were
+            if skew > MAX_PAIR_SKEW_S:
+                self.stale_depth_drops += 1
+                # counted so the operator can see how often this happens
+                return None
+        d = self.robust_box_depth(box, depth_msg)
+        if d is None:
+            # fall back to the old centre read rather than dropping the target
+            x1, y1, x2, y2 = box
+            got = self.depth_at((x1 + x2) / 2, (y1 + y2) / 2, depth_msg)
+            if got is None:
+                return None
+            d = got[0]
+        x1, y1, x2, y2 = box
+        stamp = (rgb_msg.header.stamp if rgb_msg is not None
+                 else depth_msg.header.stamp)
+        # #47: the colour frame's stamp is when the BEARING was observed,
+        # which is the pose the ray must be rotated by
+        return self._project_uvd((x1 + x2) / 2, (y1 + y2) / 2, d, stamp)
+
+    @staticmethod
+    def stamp_to_sec(stamp):
+        """ROS time message -> float seconds."""
+        return stamp.sec + stamp.nanosec * 1e-9
+        # nanosec is an integer field; 1e-9 converts it to fractional seconds
+
+    def _project_uvd(self, u, v, d, stamp):
+        """Pixel (u, v) at depth d (m) -> map (x, y) via camera ray + TF at
+        the frame's capture time (#8)."""
+        fx, fy = self.K[0], self.K[4]; cx, cy = self.K[2], self.K[5]
+        pt = PointStamped()
+        pt.header.frame_id = self.cam_frame
+        pt.header.stamp = stamp                  # the time the frame was actually taken
+        pt.point.x = (u - cx) * d / fx
+        pt.point.y = (v - cy) * d / fy
+        pt.point.z = d
+        try:
+            tf = self.tf_buffer.lookup_transform(
+                MAP_FRAME, self.cam_frame, rclpy.time.Time.from_msg(stamp),
+                timeout=Duration(seconds=0.1))
+            obj = do_transform_point(pt, tf)
+        except Exception:
+            try:                                  # fallback: latest TF (old behaviour)
+                pt.header.stamp = rclpy.time.Time().to_msg()
+                tf = self.tf_buffer.lookup_transform(MAP_FRAME, self.cam_frame, rclpy.time.Time())
+                obj = do_transform_point(pt, tf)
+            except Exception:
+                return None
+        return obj.point.x, obj.point.y
+
+    # ── #21b: TELEPORT GATE for committed targets ──
+    def accept_sighting(self, ox, oy, meas_dist=None):
+        """Objects don't teleport; depth noise and occluder-stolen depth do.
+        Once committed to a target, a new sighting that moves it by more than
+        TELEPORT_JUMP metres is held as 'pending' and only believed when a
+        SECOND look agrees with it. One bad frame can no longer hijack the
+        goal or fake an arrival.
+
+        #30b: 'agrees' now SCALES WITH RANGE. Stereo depth error grows with
+        distance, so two honest looks at a target 10 m away can legitimately
+        disagree by more than a metre. The old fixed 1.0 m radius made a
+        genuine RE-TARGET (the closest chair coming into view after the robot
+        had committed to a far one) impossible to confirm — the robot kept
+        driving to the wrong chair. A stale pending also expires, so a single
+        odd frame can't block updates indefinitely."""
+        if self.last_obj_xy is None:
+            self.jump_pending = None
+            return True
+        now = time.monotonic()
+        jump = math.hypot(ox - self.last_obj_xy[0], oy - self.last_obj_xy[1])
+        if jump <= TELEPORT_JUMP:
+            self.jump_pending = None
+            return True
+        agree = max(JUMP_AGREE,
+                    JUMP_AGREE_FRAC * (meas_dist if meas_dist else jump))
+        if (self.jump_pending is not None
+                and now - self.jump_pending_t <= JUMP_PENDING_TTL
+                and math.hypot(ox - self.jump_pending[0],
+                               oy - self.jump_pending[1]) <= agree):
+            self.mlog.log("SIGHT", f"large {self.target} jump ({jump:.1f} m) "
+                                   f"confirmed by a second look — accepting")
+            self.jump_pending = None
+            return True
+        self.mlog.log("WARN", f"suspicious {self.target} jump of {jump:.1f} m "
+                              f"(occlusion/depth noise?) — waiting for a confirming "
+                              f"look (agree radius {agree:.1f} m)")
+        self.jump_pending = (ox, oy)
+        self.jump_pending_t = now
+        return False
+
+    # ── #28: EVERY visible instance of the target, with distances ──
+    def locate_candidates(self):
+        """Return (cands, rx, ry) where cands is a list of
+        (ox, oy, dist_m, pixel_u) for every instance of self.target the camera
+        can see AND range right now, nearest first. Returns ([], None, None)
+        if we can't see or can't range any.
+
+        Factored out of locate_target so that reporting ("how far are the
+        chairs") and acting ("go to the chair") use the SAME numbers — a
+        report that disagreed with the goal would be worthless as evidence."""
+        pair = self.current_pair()
+        if pair is None: return [], None, None
+        rgb_msg, depth_msg = pair
+        detections = self.yolo_detect(rgb_msg)
+        if detections is None: return [], None, None
+        matches = [d for d in detections if self.target and self.target in d["name"].lower()]
+        if not matches: return [], None, None
+        pose = self.robot_pose_map()
+        if pose is None: return [], None, None
+        rx, ry, _ = pose
+        cands = []                               # (ox, oy, dist, pixel_u)
+        for d in matches:
+            x1, y1, x2, y2 = d["box"]
+            proj = self.project_box(d["box"], depth_msg, rgb_msg)  # #21a + #47
+            if proj is None: continue
+            ox, oy = proj
+            # #22: anything sitting ON the dock IS the dock (YOLO-World kept
+            # labelling it "chair") — skip it unless the dock was the target.
+            if "dock" not in self.target and self.near_dock(ox, oy):
+                continue
+            # #28: two boxes on the SAME physical object (YOLO-World stacks
+            # them on plain shapes) must not be reported as two objects.
+            if any(math.hypot(ox - cx, oy - cy) < REPORT_MERGE_RADIUS
+                   for cx, cy, _, _ in cands):
+                continue
+            cands.append((ox, oy, math.hypot(ox - rx, oy - ry), (x1 + x2) / 2))
+        cands.sort(key=lambda c: c[2])           # nearest first
+        return cands, rx, ry
+
+    # ── locate the target; #3: choose nearest (or qualifier) among instances ──
+    def locate_target(self):
+        cands, rx, ry = self.locate_candidates()
+        if not cands: return None
+        q = self.target_qualifier
+        if q == "farthest":
+            ox, oy, dist, _ = max(cands, key=lambda c: c[2])
+        elif q == "leftmost":
+            ox, oy, dist, _ = min(cands, key=lambda c: c[3])   # smaller u = left in image
+        elif q == "rightmost":
+            ox, oy, dist, _ = max(cands, key=lambda c: c[3])
+        else:                                                  # nearest (default)
+            ox, oy, dist, _ = min(cands, key=lambda c: c[2])
+        return ox, oy, rx, ry, dist
+
+    # ── #28: turn a candidate list into one natural sentence ──
+    def describe_distances(self, cands):
+        """'about 6.3 m away' / 'one 6.3 m away and another 12.4 m away' /
+        '2.1 m, 5.4 m and 9.8 m away'. Nearest first."""
+        ds = [c[2] for c in cands]
+        if len(ds) == 1:
+            return f"about {ds[0]:.1f} m away"
+        if len(ds) == 2:
+            return f"one about {ds[0]:.1f} m away and another about {ds[1]:.1f} m away"
+        head = ", ".join(f"{d:.1f} m" for d in ds[:-1])
+        return f"at about {head} and {ds[-1]:.1f} m away"
+
+    # ── project EVERY detection of a class to map (x, y) ──
+    def locate_all(self, target, detections=None, depth_msg=None, rgb_msg=None):
+        # #47: rgb_msg is carried through so the TF lookup can use the COLOUR
+        # frame's stamp, which is the instant the bearing was actually observed
+        if detections is None:
+            pair = self.current_pair()
+            if pair is None: return []
+            detections = self.yolo_detect(pair[0]) or []
+            rgb_msg = pair[0]
+            depth_msg = pair[1]
+        out = []
+        for d in detections:
+            if target and target in d["name"].lower():
+                proj = self.project_box(d["box"], depth_msg, rgb_msg)  # #21a + #47
+                if proj is not None:
+                    if "dock" not in target and self.near_dock(proj[0], proj[1]):
+                        continue                                   # #22
+                    out.append(proj)
+        return out
+
+    # ── remember distinct object positions; return how many were NEW ──
+    def register_instances(self, target, positions):
+        known = self.seen_instances.setdefault(target, [])
+        added = 0
+        for (x, y) in positions:
+            if "dock" not in target and self.near_dock(x, y):
+                continue                         # #22: never memorise the dock as an object
+            if all(math.hypot(x - kx, y - ky) > NEW_INSTANCE_RADIUS for (kx, ky) in known):
+                known.append((x, y)); added += 1
+        return added
+
+    # ── #22: dock no-detect zone ──
+    def set_dock_position(self, x, y):
+        """Remember where the dock is, and purge any 'objects' the memory is
+        holding at that spot — they were the dock wearing a costume."""
+        self.dock_xy = (x, y)
+        self.mlog.log("DOCK", f"dock position recorded at ({x:.2f}, {y:.2f}); "
+                              f"detections within {DOCK_EXCLUDE_RADIUS} m are ignored")
+        for cls in list(self.seen_instances.keys()):
+            if "dock" in cls:
+                continue                         # remembering the dock AS a dock is fine
+            kept = [p for p in self.seen_instances[cls]
+                    if not self.near_dock(p[0], p[1])]
+            dropped = len(self.seen_instances[cls]) - len(kept)
+            if dropped:
+                self.seen_instances[cls] = kept
+                self.mlog.log("MEMORY", f"purged {dropped} remembered {cls} "
+                                        f"position(s) that sat on the dock")
+        if (self.last_located is not None
+                and self.near_dock(self.last_located[1][0], self.last_located[1][1])):
+            self.last_located = None
+
+    def near_dock(self, x, y):
+        """True if (x, y) falls inside the dock's exclusion zone."""
+        return (self.dock_xy is not None and
+                math.hypot(x - self.dock_xy[0], y - self.dock_xy[1]) < DOCK_EXCLUDE_RADIUS)
+
+    def robot_xy(self):
+        pose = self.robot_pose_map()
+        return None if pose is None else (pose[0], pose[1])
+
+    def robot_pose_map(self):
+        """Robot (x, y, yaw) in the MAP frame from TF (correct for goals)."""
+        try:
+            tf = self.tf_buffer.lookup_transform(MAP_FRAME, ROBOT_FRAME, rclpy.time.Time())
+            return (tf.transform.translation.x,
+                    tf.transform.translation.y,
+                    yaw_from_quat(tf.transform.rotation))
+        except Exception:
+            return None
+
+    # ── occupancy-grid helpers (#5: keep goals out of walls) ──
+    def grid_value(self, x, y):
+        m = self.map
+        if m is None: return None
+        res = m.info.resolution
+        ox = m.info.origin.position.x; oy = m.info.origin.position.y
+        cx = int((x - ox) / res); cy = int((y - oy) / res)
+        if cx < 0 or cy < 0 or cx >= m.info.width or cy >= m.info.height:
+            return None
+        return m.data[cy * m.info.width + cx]
+
+    def cell_free(self, x, y):
+        v = self.grid_value(x, y)
+        return v is not None and 0 <= v < 50     # known + not (near-)occupied
+
+    # #19b: a single free CELL is not enough — the robot has a body. Check a
+    # disc of ROBOT_CLEARANCE around the point so our "free" agrees with
+    # Nav2's inflation layer. Without this we happily sent goals 5 cm from a
+    # wall and Nav2 (correctly) refused them, which looked like "it can't
+    # avoid obstacles".
+    def is_goal_free(self, x, y, clearance=ROBOT_CLEARANCE):
+        m = self.map
+        if m is None:
+            return False
+        if not self.cell_free(x, y):
+            return False
+        res = m.info.resolution
+        r = max(1, int(math.ceil(clearance / res)))
+        r2 = r * r
+        for iy in range(-r, r + 1):
+            for ix in range(-r, r + 1):
+                if ix * ix + iy * iy > r2:
+                    continue
+                if not self.cell_free(x + ix * res, y + iy * res):
+                    return False
+        return True
+
+    # ── #31: three-way cell state, so "unknown" stops meaning "forbidden" ──
+    def cell_state(self, x, y):
+        """'free' | 'occupied' | 'unknown'.
+
+        cell_free() above collapses UNKNOWN and OCCUPIED into one answer:
+        False. For a full Nav2 goal that is correct and conservative. For a
+        SHORT hop it is the bug — it is what made the whole unmapped half of
+        the world unreachable. Outside the current grid also counts as
+        unknown, not as a wall: a SLAM map grows, and the robot's own motion
+        is what grows it."""
+        v = self.grid_value(x, y)
+        if v is None:
+            return "unknown"                 # beyond the current grid extent
+        if v < 0:
+            return "unknown"                 # -1: never observed
+        if v >= 50:
+            return "occupied"
+        return "free"
+
+    def is_step_goal_ok(self, x, y, clearance=STEP_CLEARANCE):
+        """#31: may a HOP goal end here? Relaxed twin of is_goal_free():
+        UNKNOWN is acceptable, OCCUPIED never is.
+
+        The safety argument, in order of strength:
+          1. The hop is at most STEP_GOAL_DIST (1.5 m). The LiDAR local
+             costmap covers that range continuously, so the robot is never
+             navigating blind — only PLANNING through cells SLAM has not
+             written yet.
+          2. Nav2's global planner already accepts unknown cells; it simply
+             will not choose a goal for us. This function chooses one.
+          3. If reality disagrees, Nav2 aborts the goal, we shorten the hop
+             and sidestep. The cost of being wrong is one 1.5 m goal."""
+        m = self.map
+        if m is None:
+            return True                      # no map at all: LiDAR + Nav2 still guard us
+        if self.cell_state(x, y) == "occupied":
+            return False
+        res = m.info.resolution
+        r = max(1, int(math.ceil(clearance / res)))
+        r2 = r * r
+        for iy in range(-r, r + 1):
+            for ix in range(-r, r + 1):
+                if ix * ix + iy * iy > r2:
+                    continue
+                if self.cell_state(x + ix * res, y + iy * res) == "occupied":
+                    return False
+        return True
+
+    def object_is_mapped(self, ox, oy, margin=0.8):
+        """#31: is the ground AROUND the object already surveyed? Used only
+        for logging and for the one-off message to the operator — the actual
+        regime switch is driven by whether approach_candidates() can produce
+        a legal full goal, which is the thing that really matters."""
+        m = self.map
+        if m is None:
+            return False
+        res = m.info.resolution
+        r = max(1, int(math.ceil(margin / res)))
+        step = max(1, r // 3)
+        total = unknown = 0
+        for iy in range(-r, r + 1, step):
+            for ix in range(-r, r + 1, step):
+                if ix * ix + iy * iy > r * r:
+                    continue
+                total += 1
+                if self.cell_state(ox + ix * res, oy + iy * res) == "unknown":
+                    unknown += 1
+        return total > 0 and (unknown / float(total)) <= 0.25
+
+    def step_goal_toward(self, ox, oy, rx, ry):
+        """#31: the next HOP. Returns (gx, gy, bearing) or None.
+
+        Aim at the object, walk out self.step_len metres, and accept the
+        first end point that is not inside an obstacle. If the straight line
+        is blocked, fan out sideways (STEP_FAN_DEG) — Nav2 still plans the
+        actual path, we are only moving the END POINT off the wall so that a
+        legal goal exists. If the whole fan is blocked at this length, try
+        shorter lengths before admitting defeat."""
+        dist_obj = math.hypot(ox - rx, oy - ry)
+        if dist_obj < 1e-3:
+            return None
+        base = math.atan2(oy - ry, ox - rx)
+        # never hop further than the object itself, and never past it
+        lengths = []
+        L = min(self.step_len, max(STEP_GOAL_MIN, dist_obj - STOP_DISTANCE))
+        while L >= STEP_GOAL_MIN:
+            lengths.append(L)
+            L *= 0.6
+        if not lengths:
+            return None
+        for L in lengths:
+            for off_deg in STEP_FAN_DEG:
+                a = base + math.radians(off_deg)
+                gx = rx + L * math.cos(a)
+                gy = ry + L * math.sin(a)
+                if not self.is_step_goal_ok(gx, gy):
+                    continue
+                if self.is_goal_tried(gx, gy):
+                    continue                 # Nav2 already refused this exact spot
+                return gx, gy, base
+        return None
+
+    def reset_step_state(self):
+        """#31: back to 'no hop in progress' — called whenever a navigation
+        task starts, ends or is cancelled. step_len is restored to nominal so
+        a hop that had to be shortened around one obstacle does not
+        permanently cripple the next task."""
+        self.step_active = False
+        self.step_bearing = None
+        self.step_start_t = 0.0
+        self.step_len = STEP_GOAL_DIST
+        self.step_count = 0
+        self.step_announced = False
+
+    # ── #19c: candidate approach goals in a RING around the object ──
+    def is_goal_tried(self, x, y):
+        return any(math.hypot(x - tx, y - ty) < GOAL_TRIED_RADIUS
+                   for tx, ty in self.goal_tried)
+
+    def approach_candidates(self, ox, oy, rx, ry):
+        """Return reachable-looking stand-off goals AROUND the object at
+        (ox, oy), best first.
+
+        The old code used exactly ONE goal: the point on the straight line
+        between the robot and the object. If a box sat on that line the task
+        died — even though the object's left/right/far side was wide open.
+        Here we sweep a ring of directions and stand-off distances, drop any
+        that don't fit the robot's footprint or that Nav2 already refused,
+        and rank the rest by travel distance (plus a mild penalty for walking
+        around to the far side). Nav2 still plans the actual path — this only
+        picks WHERE to end up."""
+        if self.map is None:
+            return []
+        base = math.atan2(ry - oy, rx - ox)      # object -> robot: our own side
+        out = []
+        for standoff in APPROACH_STANDOFFS:
+            for off_deg in APPROACH_RING:
+                a = base + math.radians(off_deg)
+                gx = ox + standoff * math.cos(a)
+                gy = oy + standoff * math.sin(a)
+                if not self.is_goal_free(gx, gy):
+                    continue
+                if self.is_goal_tried(gx, gy):
+                    continue
+                travel = math.hypot(gx - rx, gy - ry)
+                cost = travel + 0.30 * abs(math.radians(off_deg))
+                out.append((cost, gx, gy))
+        out.sort(key=lambda c: c[0])
+        return [(gx, gy) for _, gx, gy in out]
+
+    def nudge_to_free(self, x, y, rx, ry):
+        """If (x,y) is in a wall/unknown, pull it back toward the robot to the
+        nearest free point on that line. Returns None if nothing works."""
+        if self.is_goal_free(x, y):
+            return x, y
+        for frac in (0.85, 0.7, 0.55, 0.4, 0.25):
+            nx = rx + (x - rx) * frac; ny = ry + (y - ry) * frac
+            if self.is_goal_free(nx, ny):
+                return nx, ny
+        return None
+
+    # ── #18: approach the EDGE of the known map toward a far target ──
+    def farthest_free_along(self, rx, ry, x, y, min_d=0.5):
+        """Walk the robot->target line in map-resolution steps and return the
+        FARTHEST free point that is at least min_d from the robot. When the
+        target was projected into unmapped space (e.g. a chair seen 14 m away,
+        beyond where SLAM has mapped), this gives Nav2 a reachable goal at the
+        frontier of the known map; as the robot gets there SLAM extends the
+        map and the next think-cycle pushes the goal further. Returns None
+        only if there's no free point beyond min_d (then we should rescan)."""
+        if self.map is None:
+            return None
+        dx, dy = x - rx, y - ry
+        dist = math.hypot(dx, dy)
+        if dist < min_d:
+            return None
+        step = max(self.map.info.resolution, 0.10)
+        best = None
+        n = int(dist / step)
+        for i in range(1, n + 1):
+            d = i * step
+            px = rx + dx / dist * d
+            py = ry + dy / dist * d
+            if d >= min_d and self.is_goal_free(px, py):
+                best = (px, py)     # keep the farthest; walls in between are
+                                    # fine — Nav2 plans AROUND them (#5)
+        return best
+
+    # ── #17: pick a remembered instance of a class (qualifier-aware) ──
+    def recall_instance(self, target):
+        """Return the remembered map (x, y) of a previously seen instance of
+        'target', honouring nearest/farthest. leftmost/rightmost are camera-
+        relative so they don't apply to memory -> fall back to nearest."""
+        # #23: "find a chair" ... "go to it" must return the chair we JUST
+        # located — not whichever remembered chair happens to be nearest.
+        # An explicit qualifier (nearest/farthest/...) still wins.
+        if (self.last_located is not None and self.last_located[0] == target
+                and self.target_qualifier is None):
+            return self.last_located[1]
+        known = self.seen_instances.get(target, [])
+        if not known:
+            return None
+        pose = self.robot_pose_map()
+        if pose is None:
+            return known[-1]                     # best effort: most recent
+        rx, ry, _ = pose
+        if self.target_qualifier == "farthest":
+            return max(known, key=lambda p: math.hypot(p[0]-rx, p[1]-ry))
+        return min(known, key=lambda p: math.hypot(p[0]-rx, p[1]-ry))
+
+    # ── #33: COMMAND INTAKE (any source) ──
+    def enqueue_command(self, text, source="keyboard"):
+        """The ONE door into the agent. The keyboard loop, /vla/command from
+        the GUI and /vla/command from the voice node all come through here, so
+        there is exactly one command path in the program and no way for two
+        sources to race each other into inconsistent state.
+
+        Returns True if the agent should shut down.
+
+        cancel/stop is executed HERE, on the calling thread, instead of being
+        queued — a stop that waits in line behind a three-second LLM call is
+        not a stop. It also DRAINS the queue, because anything the operator
+        asked for before hitting cancel is, by definition, no longer wanted."""
+        cmd = (text or "").strip()
+        if not cmd:
+            return False
+        stripped = strip_politeness(cmd.lower())
+
+        # 'quit' is keyboard-only on purpose. Shutting the agent down is
+        # unrecoverable, and a microphone in a noisy hangar must never be able
+        # to trigger it. (Same reasoning as #25 keeping quit out of fuzzy
+        # matching.)
+        if stripped.startswith(QUIT_WORDS):
+            if source == "keyboard":
+                return True
+            print(f"(ignoring 'quit' from {source} — the agent is shut down from "
+                  f"its own terminal.)")
+            return False
+
+        # #60: manual override is a SYSTEM function, not a task to reason
+        # about. It is matched here, ahead of the LLM, for the same reason
+        # 'stop' is: sending it to the brain got back "not supported", because
+        # a language model has no way to know the agent can yield control.
+        # Keyboard only — a voice command or a GUI click cannot put the robot
+        # into a mode that needs a keyboard to get out of.
+        if any(stripped.startswith(w) for w in MANUAL_WORDS):
+            if source != "keyboard":
+                print(f"(ignoring manual override from {source} — it has to be "
+                      f"taken from the agent's own terminal.)")
+                return False
+            self.mlog.log("CMD", f"(manual override via {source}) {cmd}")
+            self.manual_requested = True
+            return False
+
+        # #1 + #25: cancel/stop preempts EVERYTHING, even with politeness
+        # wrappers — and now even with a typo. ("cancle" used to reach the
+        # LLM and come back as a reject.)
+        hit = None
+        if stripped.startswith(STOP_WORDS):
+            hit = next(w for w in STOP_WORDS if stripped.startswith(w))
+        else:
+            hit = fuzzy_word(first_word(stripped), STOP_WORDS)
+        if hit is not None:
+            typed = first_word(stripped)
+            if typed != hit:
+                print(f"(reading '{typed}' as '{hit}')")
+                self.mlog.log("FUZZY", f"'{typed}' -> '{hit}'")
+            self.mlog.log("CMD", f"(cancel via {source}) {cmd}")
+            dropped = 0
+            while True:
+                try:
+                    self.cmd_queue.get_nowait(); dropped += 1
+                except queue.Empty:
+                    break
+            self.cancel_task()
+            extra = f" ({dropped} queued command(s) dropped.)" if dropped else ""
+            print(f"Stopping...{extra}")
+            # #35: was "Task cancelled. Robot is idle." - which was printed the
+            # instant the REQUEST was sent, while the robot was still driving at
+            # 0.26 m/s. The confirmation now comes from stop_barrage(), and only
+            # once odometry agrees.
+            return False
+
+        self.cmd_queue.put((cmd, source))
+        return False
+
+    def command_worker(self):
+        """#33: drains the intake queue on its own thread.
+
+        Everything slow lives here — the YOLO look-around in handle_command()
+        and the Ollama call inside decide(). Before this, those ran on
+        whichever thread happened to read the keyboard; now they are off the
+        ROS executor entirely, so a thinking robot is still a robot that
+        publishes velocity, streams video and answers /vla/status."""
+        while not self.shutdown:
+            try:
+                cmd, source = self.cmd_queue.get(timeout=0.25)
+            except queue.Empty:
+                continue
+            try:
+                self.last_source = source
+                self.process_command(cmd, source)
+            except Exception as e:
+                self.mlog.log("ERROR", f"command worker failed on {cmd!r}: {e}")
+                print(f"Something went wrong handling that command: {e}")
+
+    def process_command(self, cmd, source="keyboard"):
+        """The old body of the input loop, minus the parts #33 moved to
+        enqueue_command(). Unchanged in behaviour."""
+        stripped = strip_politeness(cmd.lower())
+
+        # a pending yes/no question (e.g. patrol feed prompt)
+        if self.pending is not None:
+            self.resolve_pending(cmd); return
+
+        # #26: a bare "yes"/"no" with NO question open means nothing. It
+        # used to go to the brain, which had nothing to attach it to and
+        # invented a task from stale context ("yes" -> "checking if the
+        # shelf is still there"). Answer honestly instead.
+        bare = first_word(stripped)
+        if (len(stripped.split()) == 1
+                and (bare in YES_WORDS or bare in NO_WORDS
+                     or fuzzy_word(bare, YES_WORDS + NO_WORDS) is not None)):
+            print("I'm not waiting on a yes/no right now — tell me what "
+                  "you'd like me to do (e.g. 'go to the chair', 'patrol', 'dock').")
+            self.mlog.log("CMD", f"(bare confirmation ignored) {cmd}")
+            return
+
+        self.mlog.log("CMD", f"[{source}] {cmd}")                     # #14/#33
+
+        # #10: handle obvious dock/undock deterministically (no camera/LLM needed)
+        di = self.dock_intent(stripped)
+        if di is not None:
+            self.cancel_navigation()
+            self.queue = [{"action": di, "target": None,
+                           "speech": "Undocking." if di == "undock" else "Returning to the dock."}]
+            self.has_feed_step = False
+            self.start_next_step()
+            return
+
+        self.cancel_navigation()
+        self.handle_command(cmd)
+
+    # ── INPUT LOOP (main thread) ──
+    # ── #60: hand the wheel to the operator ────────────────────────
+    def manual_override(self):
+        """Raw-keyboard teleoperation inside the agent's own terminal.
+
+        Runs on the input thread, so the ROS executor keeps spinning
+        underneath: odometry, TF, the camera feed and the status topic all
+        stay live while the operator drives. Returns when the operator
+        presses 'q' (or Ctrl+C), handing control back to the autonomy."""
+        import termios, tty, select        # POSIX-only; imported here so the
+                                           # agent still starts on a system
+                                           # without them (headless/GUI mode)
+        if not sys.stdin or not sys.stdin.isatty():
+            self.notify("Manual override needs a real terminal — "
+                        "run the agent from a console, not the GUI.")
+            return
+
+        self.cancel_task()                 # autonomy lets go before we take over
+        self.manual_mode = True            # #59: mutes the collision guard
+        self.mlog.log("MANUAL", "operator took manual control")
+        print("\n" + "=" * 62)
+        print(" MANUAL OVERRIDE — you are driving.")
+        print("     u  i  o      u/o = forward + turn      i = forward")
+        print("     j  k  l      j/l = turn on the spot    k = stop")
+        print("     m  ,  .      m/. = reverse + turn      , = reverse")
+        print("     +/-  faster / slower        q  = hand back to the robot")
+        print(f" Speed {MANUAL_LIN_MAX:.2f} m/s max. Release the key and the "
+              f"robot stops after {MANUAL_HOLD_S:.2f}s.")
+        print("=" * 62)
+
+        lin = min(0.15, MANUAL_LIN_MAX)    # start gently, not at full speed
+        ang = min(0.50, MANUAL_ANG_MAX)
+        last_key_t = 0.0
+        fd = sys.stdin.fileno()
+        old_term = termios.tcgetattr(fd)   # remember the terminal's settings
+        try:
+            tty.setcbreak(fd)              # read single keys without ENTER
+            while not self.shutdown:
+                # select() with a timeout is what makes this a dead-man switch:
+                # if no key arrives we fall through and publish a stop.
+                ready, _, _ = select.select([sys.stdin], [], [], 0.05)
+                if ready:
+                    ch = sys.stdin.read(1)
+                    if ch == "q" or ch == "\x03":       # q or Ctrl+C
+                        break
+                    if ch in ("+", "="):
+                        lin = min(MANUAL_LIN_MAX, lin + MANUAL_LIN_STEP)
+                        ang = min(MANUAL_ANG_MAX, ang + MANUAL_ANG_STEP)
+                        print(f"\r speed {lin:.2f} m/s  {ang:.2f} rad/s   ", end="", flush=True)
+                        continue
+                    if ch in ("-", "_"):
+                        lin = max(0.05, lin - MANUAL_LIN_STEP)
+                        ang = max(0.10, ang - MANUAL_ANG_STEP)
+                        print(f"\r speed {lin:.2f} m/s  {ang:.2f} rad/s   ", end="", flush=True)
+                        continue
+                    if ch in MANUAL_KEYS:
+                        fwd, turn = MANUAL_KEYS[ch]
+                        t = Twist()
+                        t.linear.x  = fwd  * lin
+                        t.angular.z = turn * ang
+                        self.cmd_pub.publish(t)
+                        last_key_t = time.monotonic()
+                        continue
+                # no key, or a key we don't recognise: has the hold expired?
+                if last_key_t and time.monotonic() - last_key_t > MANUAL_HOLD_S:
+                    self.cmd_pub.publish(Twist())      # dead-man stop
+                    last_key_t = 0.0
+        except Exception as e:
+            self.mlog.log("ERROR", f"manual override: {e}")
+        finally:
+            # Whatever happened, put the terminal back the way we found it and
+            # make certain the wheels are stopped before autonomy resumes.
+            termios.tcsetattr(fd, termios.TCSADRAIN, old_term)
+            for _ in range(5):
+                try: self.cmd_pub.publish(Twist())
+                except Exception: pass
+                time.sleep(0.02)
+            self.manual_mode = False
+            self.mlog.log("MANUAL", "control handed back to the robot")
+            print("\n[robot] Manual override ended — I have control again.")
+
+    def run_input_loop(self):
+        print(f"[{AGENT_VERSION}]")
+        print("VLA agent ready. 'cancel'/'stop' stops a task, 'quit' exits.")
+        print("'manual override' hands you the wheel (drive with u i o j k l m , . "
+              "— press q to give control back).")
+        print("Try: go to the nearest person | find a chair | move forward 2 m | "
+              "turn right 30 | patrol the area | dock | undock | "
+              "go to the person then to the chair")
+        print(f"Also listening on {CMD_IN_TOPIC} (GUI / voice). Everything I say "
+              f"goes out on {REPLY_TOPIC}, state on {STATUS_TOPIC}.\n")
+        self.cmd_worker = threading.Thread(target=self.command_worker, daemon=True)
+        self.cmd_worker.start()
+
+        # #33 HEADLESS MODE. When the GUI (or a launch file, or systemd) starts
+        # the agent there is no terminal attached, so input() raises EOFError
+        # on the very first call. The old loop treated that as "operator typed
+        # quit" and shut the agent down a fraction of a second after it
+        # started — the robot would appear to launch and instantly die. With
+        # no keyboard we simply do not read one: the agent stays up and is
+        # driven entirely through /vla/command, which is exactly what the GUI
+        # and the voice node use anyway.
+        if not sys.stdin or not sys.stdin.isatty():
+            print("No terminal attached — running HEADLESS. "
+                  f"Send commands on {CMD_IN_TOPIC}; Ctrl-C or a SIGTERM to stop.")
+            self.mlog.log("RUN", "headless mode (no tty)")
+            try:
+                while not self.shutdown:
+                    time.sleep(0.25)
+            except KeyboardInterrupt:
+                pass
+            self.shutdown = True
+            return
+
+        while not self.shutdown:
+            try:
+                cmd = input("Command> ").strip()
+            except (EOFError, KeyboardInterrupt):
+                break
+            if not cmd:
+                continue
+            if self.enqueue_command(cmd, source="keyboard"):
+                break
+            # #60: enqueue_command only RAISES the flag; the actual driving
+            # happens here, on the thread that owns the terminal. Doing it in
+            # the worker thread would have two threads reading one keyboard.
+            if self.manual_requested:
+                self.manual_requested = False
+                self.manual_override()
+        self.shutdown = True
+
+    def dock_intent(self, low):
+        """Return 'dock'/'undock' for clear one-word docking commands, else None."""
+        if low in ("undock", "un dock", "leave the dock", "leave dock",
+                   "move off the dock", "get off the dock", "off the dock"):
+            return "undock"
+        if low in ("dock", "go dock", "dock now", "return to dock", "return to the dock",
+                   "go to the dock", "go to dock", "return to base", "go home",
+                   "go to base", "charge", "go charge", "go to the charging station"):
+            return "dock"
+        return None
+
+    def handle_command(self, cmd):
+        # Camera is only needed for vision tasks; the brain still runs without it
+        # so move/dock/explore work before the camera is up.
+        visible = []
+        pair = self.current_pair()
+        if pair is not None:
+            detections = self.yolo_detect(pair[0])
+            if detections:
+                visible = sorted({d["name"] for d in detections})
+        print(f"(I see: {visible if visible else 'nothing'})  thinking...")
+        try:
+            # #11: pass the previous action/target so "go to IT" resolves.
+            # #27: ...but only while it's FRESH. Stale context is how a target
+            # from many commands ago gets resurrected into a nonsense task.
+            if self.ctx_last_target and time.monotonic() - self.ctx_time > CONTEXT_TTL:
+                self.mlog.log("CTX", f"dropping stale context "
+                                     f"({self.ctx_last_action} -> {self.ctx_last_target})")
+                self.ctx_last_action = None
+                self.ctx_last_target = None
+            context = {"last_action": self.ctx_last_action,
+                       "last_target": self.ctx_last_target}
+            decision = decide(cmd, visible, context=context)
+        except Exception as e:
+            self.mlog.log("ERROR", f"brain failed: {e}")
+            print(f"Brain error (is Ollama running?): {e}"); return
+        self.mlog.log("BRAIN", f"{decision}")                             # #14
+        steps = decision.get("steps")
+        if not steps:
+            steps = [decision] if decision.get("action") else []
+        if not steps:
+            print("I didn't catch a clear command."); return
+        self.queue = list(steps)
+        self.has_feed_step = any((s.get("action") or "").lower() == "feed" for s in steps)
+        self.start_next_step()
+
+    def start_next_step(self):
+        if not self.queue:
+            return
+        step = self.queue.pop(0)
+        action = (step.get("action") or "").lower()
+        target = step.get("target")
+        speech = step.get("speech", "")
+        if speech:
+            print(f"[{action}] {speech}")
+        self.mlog.log("STEP", f"{action} target={target!r}")              # #14
+
+        # #11: remember the last thing we acted on for pronoun resolution
+        if target:
+            self.ctx_last_action = action
+            self.ctx_last_target = str(target).lower()
+            self.ctx_time = time.monotonic()                              # #27
+
+        # #10: if the robot is docked and the next step needs motion, undock first
+        # then resume this step. (This is why Nav2 "stopped working" after docking.)
+        if action in MOVE_ACTIONS and HAVE_CREATE and self.is_docked:
+            self.queue.insert(0, step)
+            self.notify("I'm docked — undocking first, then I'll continue.")
+            self.start_dock_action("undock")
+            return
+
+        if action == "navigate":
+            if not target:
+                self.start_next_step(); return
+            self.target = target.lower()
+            self.target_qualifier = (step.get("qualifier") or "").lower() or None   # #3
+            self.search_state = "ROTATE"
+            self.turn_accum = 0.0; self.last_yaw = None; self.advance_start = None
+            self.last_obj_xy = None
+            self.target_announced = False
+            self.nav_goal_xy = None
+            self.sight_count = 0                                                    # #13
+            self.seen_live = False                                                  # #17
+            self.goal_fail_count = 0                                                # #18
+            self.reset_step_state()                                                 # #31
+            self.navigate_start = time.monotonic()                                  # #6
+            self.mode = "navigate"
+            extra = f" ({self.target_qualifier})" if self.target_qualifier else ""
+            # #23 LIVE-FIRST: if the target class is visible RIGHT NOW, search
+            # fresh (it locks on within a couple of think-cycles) and skip the
+            # memory seed — no "I remember..." monologue for something in
+            # plain sight, and no driving to a stale spot while the real
+            # object sits in front of the camera. Memory's job (#17) is only
+            # returning to things that AREN'T currently visible.
+            live_now = False
+            pair = self.current_pair()
+            if pair is not None:
+                dets = self.yolo_detect(pair[0]) or []
+                live_now = any(self.target in d["name"].lower() for d in dets)
+            seed = None
+            if MEMORY_SEED and not live_now:
+                seed = self.recall_instance(self.target)
+            if seed is not None:
+                self.last_obj_xy = seed
+                self.target_announced = True            # suppress duplicate "Found it"
+                pose = self.robot_pose_map()
+                if pose is not None:
+                    d0 = math.hypot(seed[0] - pose[0], seed[1] - pose[1])
+                    print(f"I remember seeing a {self.target} about {d0:.1f} m away — "
+                          f"heading to that spot and I'll confirm it on the way. "
+                          f"(type 'cancel' to stop)")
+                else:
+                    print(f"I remember where a {self.target} was — heading there. "
+                          f"(type 'cancel' to stop)")
+                self.mlog.log("MEMORY", f"seeded {self.target} from remembered "
+                                        f"instance at ({seed[0]:.2f}, {seed[1]:.2f})")
+            else:
+                print(f"Searching for the {self.target}{extra}. (type 'cancel' to stop)")
+
+        elif action == "locate":                                                    # #7
+            if not target:
+                self.start_next_step(); return
+            self.target = target.lower()
+            self.target_qualifier = (step.get("qualifier") or "").lower() or None
+            self.locate_start = time.monotonic()
+            self.last_yaw = None; self.turn_accum = 0.0
+            self.mode = "locate"
+            print(f"Looking for a {self.target} (reporting only, not driving). (type 'cancel' to stop)")
+
+        elif action == "move":                                                      # #9
+            rot_deg = float(step.get("rotation_deg") or 0.0)
+            dist_m  = float(step.get("distance_m") or 0.0)
+            if abs(rot_deg) < 0.5 and abs(dist_m) < 0.01:
+                print("That move had no distance or angle."); self.start_next_step(); return
+            self.move_spec = {
+                "phase":   "rotate" if abs(rot_deg) >= 0.5 else "translate",
+                "rot_rad": abs(math.radians(rot_deg)),
+                "rot_sign": 1 if rot_deg >= 0 else -1,        # + = left / CCW
+                "dist_m":  dist_m,                             # + = forward, - = back
+            }
+            self.move_ref_yaw = None; self.move_ref_pos = None
+            self.mode = "move"
+            parts = []
+            if abs(rot_deg) >= 0.5:
+                parts.append(f"turn {abs(rot_deg):.0f} deg {'left' if rot_deg >= 0 else 'right'}")
+            if abs(dist_m) >= 0.01:
+                parts.append(f"move {'forward' if dist_m > 0 else 'back'} {abs(dist_m):.2f} m")
+            print(f"Relative move: {', '.join(parts)}. (type 'cancel' to stop)")
+
+        elif action == "find_another":
+            if not target:
+                self.start_next_step(); return
+            self.target = target.lower()
+            self.find_baseline = len(self.seen_instances.get(self.target, []))
+            self.find_start = time.monotonic()
+            self.search_state = "ROTATE"
+            self.turn_accum = 0.0; self.last_yaw = None; self.advance_start = None
+            self.mode = "find_more"
+            print(f"Looking for another {self.target}. (type 'cancel' to stop)")
+
+        elif action in ("explore", "patrol"):
+            # #36: the "do you want a live camera feed?" question is gone.
+            # It existed because the ONLY way to see the camera used to be an
+            # rqt_image_view window the agent spawned on request, so asking was
+            # the polite thing to do. Since #34 the operator console subscribes
+            # to /vla/annotated/compressed directly and the feed is already on
+            # screen before the command is even typed - so the question now
+            # interrupts a patrol to offer something the operator can already
+            # see. "patrol the area" is an unambiguous instruction; it should
+            # start a patrol. Saying "patrol with the feed" still works: that
+            # parses as a feed step plus a patrol step, and start_feed() opens
+            # the separate window exactly as before.
+            self.start_explore(label=action)
+
+        elif action in ("dock", "undock"):                                          # #10
+            self.start_dock_action(action)
+            return                              # wait for the action to finish
+
+        elif action == "count":
+            t = (target or "").lower()
+            saved_target = self.target
+            self.target = t                      # locate_candidates works on self.target
+            cands, _, _ = self.locate_candidates() if t else ([], None, None)
+            self.target = saved_target
+            n = len(cands)
+            if t and cands:
+                self.register_instances(t, [(c[0], c[1]) for c in cands])
+                plural = t if n == 1 else t + "s"
+                # #28: a count without distances made the follow-up question
+                # ("at what distance are they?") necessary in the first place.
+                print(f"I can see {n} {plural} right now — {self.describe_distances(cands)}.")
+                self.mlog.log("COUNT", f"{n} {t}(s): "
+                                       + ", ".join(f"{c[2]:.2f}m" for c in cands))
+            else:
+                # nothing ranged: fall back to a plain box count so the answer
+                # is still honest when depth is missing (holes / out of range)
+                pair = self.current_pair()
+                det = (self.yolo_detect(pair[0]) or []) if pair is not None else []
+                nb = sum(1 for d in det if t and t in d["name"].lower())
+                if nb:
+                    print(f"I can see {nb} '{target}' right now, but I can't get a "
+                          f"depth reading on {'it' if nb == 1 else 'them'} from here.")
+                else:
+                    print(f"I can't see any '{target}' right now.")
+            self.start_next_step()
+
+        elif action == "forget":                                            # #24
+            t = (target or "").lower().strip()
+            if t:
+                had = len(self.seen_instances.pop(t, []))
+                if self.last_located is not None and self.last_located[0] == t:
+                    self.last_located = None
+                self.mlog.log("MEMORY", f"forgot {had} remembered {t} position(s)")
+                print(f"Done — I've forgotten every {t} position I had remembered "
+                      f"({had} of them)." if had
+                      else f"I had no remembered {t} positions anyway.")
+            else:
+                n = sum(len(v) for v in self.seen_instances.values())
+                self.seen_instances.clear()
+                self.last_located = None
+                self.mlog.log("MEMORY", f"cleared ALL remembered positions ({n})")
+                print(f"Done — I've cleared my whole spatial memory ({n} position(s)).")
+            self.start_next_step()
+
+        elif action == "describe":
+            # #28: "what do you see" now answers with distances too, so the
+            # operator doesn't have to ask a second question for every object.
+            pair = self.current_pair()
+            det = (self.yolo_detect(pair[0]) or []) if pair is not None else []
+            if not det:
+                print("I see: nothing")
+            else:
+                parts = []
+                for d in det:
+                    nm = d["name"]
+                    bd = self.range_for_box(d["box"], pair[1], pair[0])  # #54, same range nav uses
+                    parts.append(f"{nm} ({bd:.1f} m)" if bd is not None
+                                 else f"{nm} (distance unclear)")
+                print("I see: " + ", ".join(parts))
+            self.start_next_step()
+
+        elif action == "feed":
+            self.start_feed()
+            self.start_next_step()
+
+        else:                                   # answer / reject / clarify -> speech already printed
+            self.start_next_step()
+
+    # ── start frontier explore/patrol ──
+    def start_explore(self, label="explore"):
+        self.blacklist = []
+        self.visited_goals = []                 # #4: fresh coverage memory each patrol
+        self.frontier_navigating = False
+        self.frontier_sent_goal = False
+        self.explore_start_t = time.monotonic()
+        self.warned_no_map = self.warned_no_frontier = False
+        self.consecutive_stucks = 0
+        self.mode = "explore"
+        print(f"Starting to {label} and map the area. (type 'cancel' to stop)")
+
+    # ── handle the answer to a pending yes/no question ──
+    def resolve_pending(self, cmd):
+        p = self.pending
+        self.pending = None
+        if p["type"] == "feed_confirm":
+            if is_yes(cmd):                      # #25: tolerant of 'yse', 'yeh'
+                self.start_feed()
+            else:
+                print("OK, patrolling without the live feed.")
+            self.start_explore(label="patrol")
+
+    # ── cancel + feed ──
+    def cancel_navigation(self):
+        self.task_id += 1
+        self.mode = None
+        self.search_state = None
+        self.target = None
+        self.target_qualifier = None
+        self.queue = []
+        self.pending = None
+        self.last_obj_xy = None
+        self.target_announced = False
+        self.nav_goal_xy = None
+        self.sight_count = 0                    # #13
+        self.seen_live = False                  # #17
+        self.goal_fail_count = 0                # #18
+        self.best_dist = None                   # #19a
+        self.last_progress_t = None             # #19a
+        self.goal_tried = []                    # #19c
+        self.jump_pending = None                # #21b
+        self.goal_obj_xy = None                 # #30a
+        self.reset_step_state()                 # #31
+        self.navigate_start = None
+        self.locate_start = None
+        self.move_spec = None
+        self.nudge_from = None                  # #29
+        self.backup_nudges = 0                  # #29
+        self.frontier_navigating = False
+        self.frontier_sent_goal = False
+        self.last_pos = None; self.last_move_t = None
+        if self.goal_handle is not None:
+            try: self.goal_handle.cancel_goal_async()
+            except Exception: pass
+        self.goal_handle = None
+        if self.dock_goal_handle is not None:
+            try: self.dock_goal_handle.cancel_goal_async()
+            except Exception: pass
+            self.dock_goal_handle = None
+        self.cmd = Twist()
+        self.begin_hard_stop()
+        # #35: replaces the old three-zero burst. See begin_hard_stop().
+
+    # ── #35: A STOP THAT IS ACTUALLY A STOP ──
+    def begin_hard_stop(self):
+        """Cancel every Nav2 goal and hold the wheels at zero until odometry
+        agrees the robot has stopped."""
+        self.cancel_all_nav_goals()
+        # (a) tell Nav2 to abandon everything, so it stops publishing at all
+        self.stop_until = time.monotonic() + STOP_BARRAGE_S
+        # (b) how long to keep overwriting /cmd_vel with zeros
+        self.stop_started = time.monotonic()
+        # when this stop began, for the timeout
+        self.stop_still_ticks = 0
+        # reset the "has it actually stopped" counter
+        self.stop_reported = False
+        # (c) the outcome has not been announced yet - do NOT claim success now
+        self.mlog.log("STOP", "hard stop requested (cancel-all + zero barrage)")
+
+    def cancel_all_nav_goals(self):
+        """Ask the navigate_to_pose server to cancel EVERY goal it holds.
+
+        A default CancelGoal request carries a zero goal-id and a zero
+        timestamp, which the ROS 2 action spec defines as 'cancel all goals'.
+        This is stronger than cancelling self.goal_handle, because that handle
+        is None during the window between sending a goal and the acceptance
+        callback arriving - and a stop pressed inside that window used to do
+        nothing at all."""
+        try:
+            if not self.nav_cancel_cli.service_is_ready():
+                # Nav2 not up (or still starting) - nothing to cancel, and the
+                # zero barrage alone is then sufficient
+                return
+            self.nav_cancel_cli.call_async(CancelGoal.Request())
+            # fire it asynchronously: we must not block the ROS executor here,
+            # and the barrage covers us until it takes effect
+        except Exception as e:
+            self.mlog.log("WARN", f"#35 cancel-all failed: {e}")
+
+    def stop_barrage(self):
+        """50 Hz, in two phases.
+
+        PHASE 1 (while the barrage runs): hold /cmd_vel at zero.
+        PHASE 2 (after it ends): STOP publishing and watch. If Nav2 ignored
+        the cancel it regains the topic here and the robot drives off again.
+
+        The phases must not overlap. Judging the stop DURING the barrage is
+        circular - the robot is only still because we are forcing it still, so
+        it would always look like a success even when the cancel failed."""
+        if self.stop_started is None:
+            return
+            # no stop in progress - this is the idle path, and it is free
+        now = time.monotonic()
+        if now < self.stop_until:
+            try:
+                self.cmd_pub.publish(Twist())
+                # an all-zero Twist. Publishing faster than Nav2 means our zero
+                # is the last word the base hears, instead of being overwritten
+            except Exception:
+                pass
+            self.stop_still_ticks = 0
+            # deliberately do NOT judge yet: see the docstring
+            return
+        if self.stop_reported:
+            self.stop_started = None
+            # outcome announced and the barrage is over - go fully idle
+            return
+        moving = (self.odom_lin > STOP_LIN_EPS or self.odom_ang > STOP_ANG_EPS)
+        # ask the ROBOT whether it is moving, not our own intentions
+        if moving:
+            self.stop_still_ticks = 0
+            # one moving reading resets the count - we want sustained stillness
+        else:
+            self.stop_still_ticks += 1
+        if self.stop_still_ticks >= STOP_CONFIRM_TICKS:
+            self.stop_reported = True
+            self.notify("Stopped. The robot is idle.")
+            # only NOW is it honest to say this: the barrage is off, nothing is
+            # forcing the wheels, and the robot is still not moving
+            self.mlog.log("STOP", "confirmed stopped by odometry after barrage")
+        elif now - self.stop_started > STOP_CONFIRM_TIMEOUT:
+            self.stop_reported = True
+            self.notify(f"I sent the stop but the robot is STILL MOVING "
+                        f"({self.odom_lin:.2f} m/s, {self.odom_ang:.2f} rad/s). "
+                        f"Take manual override now.")
+            # a stop that failed must SAY it failed - silence here would be the
+            # same class of failure as the bug this fix replaces
+            self.mlog.log("ERROR", f"#35 robot still moving {STOP_CONFIRM_TIMEOUT}s "
+                                   f"after stop: lin={self.odom_lin:.2f} "
+                                   f"ang={self.odom_ang:.2f}")
+
+    def cancel_task(self):
+        self.cancel_navigation()
+        self.stop_feed()
+
+    # ── #20: ANNOTATED LIVE FEED ──
+    def _stamp_key(self, msg):
+        s = msg.header.stamp
+        return (s.sec, s.nanosec)
+
+    def _class_color(self, name):
+        """A stable BGR colour per class (md5, not hash(), so the colours are
+        the same every run — screenshots stay consistent across slides)."""
+        h = hashlib.md5(name.encode("utf-8")).digest()
+        return (int(70 + h[0] % 186), int(70 + h[1] % 186), int(70 + h[2] % 186))
+
+    def feed_watchers(self):
+        """#34: how many nodes are subscribed to the annotated feed right now."""
+        try:
+            return (self.annot_pub.get_subscription_count()
+            # counts subscribers on the raw Image topic (e.g. rqt_image_view)
+                    + self.annot_jpg_pub.get_subscription_count())
+            # plus subscribers on the compressed JPEG topic (that is the GUI)
+        except Exception:
+            return 0
+            # if rclpy ever refuses the query, fall back to "nobody watching" -
+            # a blank panel is a far smaller failure than a crashed agent
+
+    def feed_watchdog(self):
+        """#32e: notice when the viewer has died or the camera has stopped,
+        instead of silently publishing into the void."""
+        if self.feed_proc is not None and self.feed_proc.poll() is not None:
+            if not self.feed_warned_dead:
+                self.feed_warned_dead = True
+                self.notify("The live-feed window closed. Say 'show me the feed' "
+                            "to reopen it — the robot is otherwise unaffected.")
+                self.mlog.log("WARN", "#32e rqt_image_view exited")
+            self.feed_proc = None
+        if (self.rgb_raw_t > 0.0 and not self.warned_cam_stall
+                and time.monotonic() - self.rgb_raw_t > CAM_STALL_WARN):
+            self.warned_cam_stall = True
+            self.notify("I've stopped receiving camera frames. Check the OAK-D "
+                        "driver — I can still move, but I'm blind until it's back.")
+            self.mlog.log("WARN", "#32e camera stream stalled")
+
+    def annotate_think(self):
+        """Republish the camera image with YOLO boxes drawn on it, so the live
+        window is screenshot-ready evidence. Only runs while the feed is open.
+
+        #32c: this function no longer runs YOLO. It used to, whenever the
+        current frame's timestamp differed from the one the think-loop had
+        cached — which is most of the time, because the two timers tick at
+        different rates. That meant a second GPU inference per frame AND a
+        second blocking HTTP call on the feed's own thread, so a busy GPU
+        stalled the video. Now the feed only ever DRAWS: it reuses the
+        think-loop's detections while they are fresher than ANNOT_DET_TTL and
+        states their age in the caption bar. If they go stale it shows clean
+        video rather than rectangles that no longer match the picture."""
+        self.feed_watchdog()
+        if not ANNOTATED_FEED:
+            return
+        # the feature is switched off entirely - nothing to do
+        if self.feed_proc is None and self.feed_watchers() == 0:
+            return
+        # #34: publish whenever ANYONE is watching, not only when the agent itself
+        # spawned an rqt_image_view window. The GUI subscribes to
+        # /vla/annotated/compressed directly, so before this fix its camera panel
+        # stayed black unless you ALSO said "show me the feed" and got a second,
+        # redundant window. With zero subscribers we still return immediately, so
+        # the CPU cost when nobody is looking is exactly as before.
+        pair = self.current_pair()
+        if pair is None:
+            return
+        rgb_msg, depth_msg = pair
+        try:
+            img = self.feed_bridge.imgmsg_to_cv2(rgb_msg, desired_encoding="bgr8")
+        except Exception:
+            return
+
+        # #32c: DRAW ONLY — never infer here.
+        key = self._stamp_key(rgb_msg)
+        dets, det_age = [], None
+        cached = self.last_det
+        if cached is not None:
+            age = time.monotonic() - self.last_det_t
+            if cached[0] == key:
+                dets, det_age = cached[1], 0.0        # exactly this frame
+            elif age <= ANNOT_DET_TTL:
+                dets, det_age = cached[1], age        # recent enough to be meaningful
+
+        # the sim's OAK-D preview is only 250x250; upscale so the labels are
+        # readable when this gets pasted into a slide.
+        # #32d: capped — the old ceil() could triple the width and put ~1.7 MB
+        # on the wire per frame, which is what jammed the transport.
+        h0, w0 = img.shape[:2]
+        scale = max(1, min(ANNOT_MAX_SCALE,
+                           int(math.ceil(ANNOT_MIN_WIDTH / float(max(w0, 1))))))
+        img = (cv2.resize(img, (w0 * scale, h0 * scale), interpolation=cv2.INTER_LINEAR)
+               if scale > 1 else img.copy())
+        H, W = img.shape[:2]
+        font = cv2.FONT_HERSHEY_SIMPLEX
+        fs = max(0.40, W / 1500.0)
+        lw = max(2, int(round(W / 400.0)))
+
+        for d in dets:
+            try:
+                x1, y1, x2, y2 = [float(b) for b in d["box"]]
+                name = str(d.get("name", "?"))
+                conf = float(d.get("confidence", 0.0))
+            except Exception:
+                continue
+            # highlight the object we're actually acting on
+            is_target = bool(self.target and self.target in name.lower())
+            color = (0, 255, 0) if is_target else self._class_color(name)
+            X1, Y1 = int(round(x1 * scale)), int(round(y1 * scale))
+            X2, Y2 = int(round(x2 * scale)), int(round(y2 * scale))
+            cv2.rectangle(img, (X1, Y1), (X2, Y2), color, lw + (1 if is_target else 0))
+
+            label = f"{name} {conf * 100:.0f}%"
+            bd = self.robust_box_depth(d["box"], depth_msg)       # #21a: same number nav uses
+            if bd is not None:                   # YOLO + OAK-D depth, in one frame
+                label += f"  {bd:.2f}m"
+            if is_target:
+                label += "  <= TARGET"
+            (tw, tht), _ = cv2.getTextSize(label, font, fs, 1)
+            ly = max(Y1, tht + 6)
+            cv2.rectangle(img, (X1, ly - tht - 6), (X1 + tw + 6, ly), color, -1)
+            cv2.putText(img, label, (X1 + 3, ly - 4), font, fs, (0, 0, 0), 1, cv2.LINE_AA)
+
+        # caption bar ABOVE the image (never covers a detection).
+        # #32c: DET age is stated, so a screenshot can never overclaim that the
+        # boxes were computed on that exact frame.
+        # #31: HOP is shown while the robot is crawling into unmapped space —
+        # one glance tells you which navigation regime is running.
+        det_txt = "DET: none" if det_age is None else (
+            "DET: live" if det_age <= 0.001 else f"DET: {det_age:.1f}s ago")
+        hop_txt = f"   HOP {self.step_count}" if self.step_active else ""
+        cap = (f"MODE: {self.mode or 'idle'}{hop_txt}   TARGET: {self.target or '-'}   "
+               f"OBJECTS: {len(dets)}   {det_txt}   "
+               f"{datetime.datetime.now().strftime('%H:%M:%S')}")
+        (tw, tht), _ = cv2.getTextSize(cap, font, fs, 1)
+        bar = np.zeros((tht + 14, W, 3), dtype=np.uint8)
+        cv2.putText(bar, cap, (6, tht + 5), font, fs, (255, 255, 255), 1, cv2.LINE_AA)
+        img = np.vstack([bar, img])
+
+        # #32d: publish BOTH. The raw Image keeps rqt_image_view and any
+        # existing tooling working; the JPEG is ~30x smaller and is what the
+        # GUI and anything over Wi-Fi should subscribe to. Both use KEEP_LAST
+        # depth 1, so a slow consumer drops frames instead of building the
+        # backlog that used to wedge the stream permanently.
+        #
+        # #49 PER-TOPIC GATING. v16 built and published BOTH every cycle,
+        # regardless of who was listening. The GUI only ever subscribes to the
+        # compressed topic, so with the GUI open the agent was still doing a
+        # cv2_to_imgmsg() and a full serialization of an upscaled frame, five
+        # times a second, for a topic with zero subscribers. That work happens
+        # on the agent's own executor threads, so it starved the camera
+        # callbacks — which is why the feed felt laggy AND why the agent
+        # announced "I've stopped receiving camera frames" while the camera
+        # was in fact publishing normally. Each topic is now built only if
+        # somebody is actually subscribed to that topic.
+        try:
+            if self.annot_pub.get_subscription_count() > 0:
+                # only rqt_image_view and similar raw consumers pay this cost
+                out = self.feed_bridge.cv2_to_imgmsg(img, encoding="bgr8")
+                out.header = rgb_msg.header
+                self.annot_pub.publish(out)
+        except Exception:
+            pass
+        try:
+            if self.annot_jpg_pub.get_subscription_count() > 0:
+                # the JPEG encode is much cheaper, but still skipped if nobody looks
+                ok, buf = cv2.imencode(".jpg", img,
+                                       [int(cv2.IMWRITE_JPEG_QUALITY), ANNOT_JPEG_Q])
+                if ok:
+                    cm = CompressedImage()
+                    cm.header = rgb_msg.header
+                    cm.format = "jpeg"
+                    cm.data = buf.tobytes()
+                    self.annot_jpg_pub.publish(cm)
+        except Exception:
+            pass
+
+    def start_feed(self):
+        self.stop_feed()
+        self.feed_warned_dead = False                # #32e
+        topic = ANNOT_TOPIC if ANNOTATED_FEED else RGB_TOPIC
+        try:
+            self.feed_proc = subprocess.Popen(
+                ["ros2", "run", "rqt_image_view", "rqt_image_view", topic],
+                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            if ANNOTATED_FEED:
+                print(f"Live feed opened on {topic} — YOLO boxes, confidence and "
+                      f"depth distance are drawn on it. (type 'cancel' to close it)")
+                print(f"      (over Wi-Fi or in the GUI use {ANNOT_COMPRESSED_TOPIC} "
+                      f"instead — same picture, ~30x less data)")
+            else:
+                print("Live camera feed opened in a new window. (type 'cancel' to close it)")
+        except FileNotFoundError:
+            print("Live feed needs rqt_image_view:  sudo apt install ros-humble-rqt-image-view")
+
+    def stop_feed(self):
+        if self.feed_proc is not None:
+            try: self.feed_proc.terminate()
+            except Exception: pass
+            self.feed_proc = None
+
+    # ── hard stop — cancel the Nav2 goal AND publish zero velocity ──
+    def stop_base(self):
+        if self.goal_handle is not None:
+            try: self.goal_handle.cancel_goal_async()
+            except Exception: pass
+            self.goal_handle = None
+        self.cmd = Twist()
+        for _ in range(3):
+            try: self.cmd_pub.publish(Twist())
+            except Exception: pass
+
+    # ── #43: robust action-server wait ──────────────────────────────
+    #    On hardware the Create 3's action servers are discovered over
+    #    Wi-Fi through the FastDDS discovery server, and that can take far
+    #    longer than the 3 s v13 allowed. The result was an INTERMITTENT
+    #    "the undock action server isn't up" — it worked twice, then failed
+    #    four times in a row, with the server present in `ros2 action list`
+    #    the whole time. Two changes: wait much longer, and remember that a
+    #    server was found so later calls do not pay the wait again.
+    def wait_action_server(self, client, key, timeout_sec=15.0):
+        """True if the action server is available. Caches success by key."""
+        if client is None:
+            return False
+            # no client was ever constructed (irobot_create_msgs missing)
+        if self._server_seen.get(key):
+            # already discovered earlier in this session
+            if client.server_is_ready():
+                return True
+                # still there — skip the expensive wait entirely
+            # it vanished: fall through and wait again rather than trusting the cache
+        ok = client.wait_for_server(timeout_sec=timeout_sec)
+        # block up to timeout_sec for DDS discovery to complete
+        if ok:
+            self._server_seen[key] = True
+            # remember it so the next dock/undock is instant
+        return ok
+
+    # ── #10 dock / undock as a managed action ──
+    def start_dock_action(self, which):
+        if not HAVE_CREATE or self.dock_client is None:
+            self.notify("Docking isn't available here (irobot_create_msgs not found). "
+                        "On the real Create 3 / TurtleBot 4 this will work.")
+            self.start_next_step(); return
+        client = self.dock_client if which == "dock" else self.undock_client
+        if not self.wait_action_server(client, which):
+            # #43: 15 s of discovery time, not 3
+            self.undock_fail_count += 1
+            # #44: count consecutive failures so we can break the retry loop
+            self.notify(f"The '{which}' action server isn't up (is the Create 3 running?). "
+                        f"Check: ros2 action list | grep -i dock")
+            if which == "undock" and self.undock_fail_count >= UNDOCK_FAIL_LIMIT:
+                # #44 RETRY LOOP: the auto-undock branch re-inserts the pending
+                # step into the queue before calling this, so on failure
+                # start_next_step() pops that same step, sees is_docked still
+                # true, re-inserts it and undocks again — forever. v13 printed
+                # the same two lines over and over until Ctrl+C. After a few
+                # honest attempts we abandon the task instead.
+                self.queue.clear()
+                # drop the pending step so it cannot be popped again
+                self.undock_fail_count = 0
+                # reset for the next command the user types
+                self.notify("I could not undock after several tries, so I've "
+                            "cancelled the task. Undock manually, or check that "
+                            "the Create 3 is awake, then ask me again.")
+                self.mode = "idle"
+                # return to idle rather than leaving a half-started task
+                return
+            self.start_next_step(); return
+        self.undock_fail_count = 0
+        # #44: a successful server lookup clears the failure ratchet
+        self.mode = "dock"
+        self.notify("Docking…" if which == "dock" else "Undocking…")
+        goal = Dock.Goal() if which == "dock" else Undock.Goal()
+        fut = client.send_goal_async(goal)
+        fut.add_done_callback(lambda f: self._dock_accepted(f, which))
+
+    def _dock_accepted(self, future, which):
+        try:
+            gh = future.result()
+        except Exception as e:
+            self.notify(f"Could not send the {which} request: {e}"); self._after_dock(); return
+        if not gh.accepted:
+            self.notify(f"The robot rejected the {which} request."); self._after_dock(); return
+        self.dock_goal_handle = gh
+        gh.get_result_async().add_done_callback(lambda f: self._dock_done(f, which))
+
+    def _dock_done(self, future, which):
+        self.dock_goal_handle = None
+        # #16: check the REAL outcome — the old code assumed success, so a
+        # failed dock left is_docked wrong and later auto-undock logic confused.
+        ok = True
+        try:
+            ok = (future.result().status == GoalStatus.STATUS_SUCCEEDED)
+        except Exception:
+            ok = False
+        if ok:
+            self.is_docked = (which == "dock")
+            # #22: a successful DOCK puts us exactly ON the dock — the best
+            # possible fix of its position (always refresh). After an UNDOCK
+            # we're ~0.5 m off it — good enough only if we know nothing yet.
+            xy = self.robot_xy()
+            if xy is not None and (which == "dock" or self.dock_xy is None):
+                self.set_dock_position(*xy)
+            self.notify("Docked successfully." if which == "dock" else "Undocked — ready to move.")
+        else:
+            self.notify(f"The {which} action did not complete — please check the robot. "
+                        "(dock_status will keep me updated.)")
+        self.mlog.log("DOCK", f"{which} {'ok' if ok else 'FAILED'}")
+        self._after_dock()
+
+    def _after_dock(self):
+        self.mode = None
+        self.start_next_step()                  # continue the queue (e.g. the nav we deferred)
+
+    # ── fast hands ──
+    # ── #59: how much clear space is REALLY in front of the bumper ──
+    def front_clearance(self):
+        """Metres to the nearest solid thing in a +/-GUARD_ARC_DEG arc ahead.
+
+        Returns None when there is no usable scan (never a number we might
+        act on by mistake). Unlike v24's front_min this uses a WIDE arc, so
+        chair legs and table bases are actually intersected instead of being
+        straddled by a narrow cone, and it takes the GUARD_MIN_BEAMS-th
+        smallest range so a single spurious short beam cannot brake us."""
+        m = self.scan_msg
+        if m is None or not m.ranges:
+            return None
+        arc = math.radians(GUARD_ARC_DEG)
+        near = []
+        for i, r in enumerate(m.ranges):
+            ang = m.angle_min + i * m.angle_increment
+            if -arc <= ang <= arc and math.isfinite(r) and r > m.range_min:
+                near.append(r)
+        if len(near) < GUARD_MIN_BEAMS:
+            return None
+        near.sort()
+        return near[GUARD_MIN_BEAMS - 1]
+
+    # ── #59: the guard itself, on its own 10 Hz timer ──────────────
+    def collision_guard(self):
+        """Stop the robot if something solid is closer than MIN_FRONT_CLEAR.
+
+        Runs whether the robot is being driven by Nav2, by a relative-move
+        command, or by the search rotation. It is deliberately independent of
+        every belief the agent holds about where objects are."""
+        if self.manual_mode:
+            return          # #60: the operator has the wheel, and can see
+        if self.mode not in ("navigate", "explore", "find_more", "move"):
+            return          # nothing of ours is driving
+        if self.search_state == "ROTATE":
+            return          # turning on the spot cannot drive into anything
+        if time.monotonic() < self.guard_mute_until:
+            return          # already stopped for this obstacle; don't re-fire
+        d = self.front_clearance()
+        if d is None or d >= MIN_FRONT_CLEAR:
+            return
+
+        # Something is genuinely too close. Kill the motion first, explain after.
+        self.guard_mute_until = time.monotonic() + 5.0
+        self.stop_base()
+        self.mlog.log("GUARD", f"collision guard stopped the robot at {d:.2f} m "
+                               f"(limit {MIN_FRONT_CLEAR} m, mode={self.mode})")
+
+        if self.mode in ("navigate", "find_more") and self.target:
+            # If we were driving at a target, being this close to something
+            # solid means we have arrived at it -- OR that the believed
+            # position was wrong and we nearly hit something else. Say which,
+            # honestly, rather than claiming a clean arrival either way.
+            believed = None
+            xy = self.robot_xy()          # (x, y) in the map frame, or None
+            if self.last_obj_xy is not None and xy is not None:
+                believed = math.hypot(xy[0]-self.last_obj_xy[0],
+                                      xy[1]-self.last_obj_xy[1])
+            if believed is not None and believed > MIN_FRONT_CLEAR + 0.8:
+                self.notify(f"Stopping — something solid is {d:.2f} m ahead, but I "
+                            f"thought the {self.target} was still {believed:.1f} m "
+                            f"away. My distance estimate was wrong, so I'm not "
+                            f"driving any further.")
+                self.mlog.log("WARN", f"belief/LiDAR mismatch: believed {believed:.2f} m, "
+                                      f"measured {d:.2f} m")
+            else:
+                self.notify(f"Arrived at the {self.target} — stopped {d:.2f} m short of it.")
+            self.end_navigate()
+        else:
+            self.notify(f"Stopping — an obstacle is {d:.2f} m ahead.")
+
+    def publish_cmd(self):
+        if time.monotonic() < self.stop_until:
+            return
+            # #35: a stop is in progress. Staying silent here lets the barrage
+            # own /cmd_vel outright, instead of two of our own timers taking
+            # turns to publish different things.
+        if self.mode == "move":
+            self.cmd_pub.publish(self.cmd)
+        elif self.mode == "locate":
+            self.cmd_pub.publish(self.cmd)
+        elif self.mode in ("navigate", "find_more") and self.search_state in ("ROTATE", "ADVANCE"):
+            self.cmd_pub.publish(self.cmd)
+
+    # ── slow brain ──
+    def think(self):
+        self.check_stuck()
+        if self.mode == "navigate":
+            self.navigate_think()
+        elif self.mode == "locate":             # #7
+            self.locate_think()
+        elif self.mode == "move":               # #9
+            self.move_think()
+        elif self.mode == "find_more":
+            self.find_more_think()
+        elif self.mode == "explore":
+            self.explore_think()
+
+    # ── stuck detection ──
+    def check_stuck(self):
+        driving = ((self.mode in ("navigate", "find_more")
+                    and self.search_state in ("NAVIGATING", "ADVANCE"))
+                   or (self.mode == "explore" and self.frontier_navigating))
+        if not driving:
+            self.last_pos = None; self.last_move_t = None; return
+        rxy = self.robot_xy()
+        if rxy is None: return
+        now = time.monotonic()
+        if self.last_pos is None:
+            self.last_pos = rxy; self.last_move_t = now; return
+        if math.hypot(rxy[0]-self.last_pos[0], rxy[1]-self.last_pos[1]) > STUCK_DIST:
+            self.last_pos = rxy; self.last_move_t = now; return
+        if now - self.last_move_t > STUCK_TIME:
+            self.on_stuck()
+
+    def on_stuck(self):
+        self.last_pos = None; self.last_move_t = None
+        self.mlog.log("STUCK", f"mode={self.mode} target={self.target!r}")   # #14
+        if self.goal_handle is not None:
+            try: self.goal_handle.cancel_goal_async()
+            except Exception: pass
+        self.goal_handle = None
+        if self.mode == "explore":
+            self.consecutive_stucks += 1
+            self.blacklist.append(self.cur_goal)
+            self.frontier_navigating = False
+            if self.consecutive_stucks >= MAX_STUCKS:
+                self.notify("I keep getting stuck while exploring. Please take MANUAL OVERRIDE "
+                            "(drive me with teleop), then tell me to continue.")
+                self.cancel_task()
+            else:
+                self.notify("I got stuck at a frontier — skipping it and trying another route.")
+        else:
+            self.notify(f"I'm stuck trying to reach the {self.target}. Please take MANUAL "
+                        "OVERRIDE or give me a new command.")
+            self.cancel_navigation()
+
+    # ── NAVIGATE: drive to the target, pathing around obstacles ──
+    def navigate_think(self):
+        if not self.camera_ready() or not self.have_odom:
+            return
+
+        now = time.monotonic()
+        pose = self.robot_pose_map()
+
+        # #19a: two DIFFERENT clocks, because "I can't find it" and "I can't
+        # reach it" are different failures.
+        #   - not committed yet  -> plain SEARCH_TIMEOUT.
+        #   - committed to a target -> no deadline at all while we keep
+        #     closing the gap; only quit after NO_PROGRESS_LIMIT seconds of
+        #     getting no nearer. The old flat 60 s killed Nav2 mid-drive on
+        #     anything far away, which is what looked like "it can't avoid
+        #     the obstacle".
+        if self.last_obj_xy is None:
+            if self.navigate_start and now - self.navigate_start > SEARCH_TIMEOUT:
+                self.stop_base()
+                if self.seen_live:
+                    self.notify(f"I saw the {self.target} but lost track of it and "
+                                f"couldn't find it again. Try asking me once more.")
+                else:
+                    self.notify(f"Sorry, I couldn't find any {self.target} in this area.")
+                self.end_navigate(); return
+        elif pose is not None:
+            d_now = math.hypot(pose[0] - self.last_obj_xy[0], pose[1] - self.last_obj_xy[1])
+            if self.best_dist is None or d_now < self.best_dist - PROGRESS_EPS:
+                self.best_dist = d_now
+                self.last_progress_t = now              # we're getting closer: keep going
+            elif self.last_progress_t is None:
+                self.last_progress_t = now
+            elif now - self.last_progress_t > NO_PROGRESS_LIMIT:
+                self.stop_base()
+                self.notify(f"I know where the {self.target} is but I can't get any "
+                            f"closer — the way looks blocked. I've remembered its spot, "
+                            f"so try again from somewhere else, or clear the path.")
+                self.mlog.log("WARN", f"no progress toward {self.target} for "
+                                      f"{NO_PROGRESS_LIMIT:.0f}s; best={self.best_dist:.2f}m")
+                self.end_navigate(); return
+
+        found = self.locate_target()
+
+        # #13: require SIGHT_CONFIRM sightings before committing to the target,
+        # so one hallucinated frame doesn't send the robot chasing a ghost.
+        # NEW: HOLD STILL between confirmation looks (the old code kept the
+        # scan spinning, so look #2 was often past the object and confirmation
+        # needed a whole extra revolution). A lost candidate resets the count.
+        if found is not None:
+            ox, oy, rx, ry, dist = found
+            if self.last_obj_xy is None and self.sight_count + 1 < SIGHT_CONFIRM:
+                self.sight_count += 1
+                self.cmd = Twist()               # freeze; re-check next think-cycle
+                return
+            announced_before = self.target_announced
+            first_live = not self.seen_live
+            # #21b: a big unconfirmed jump must not touch our state at all —
+            # keep driving to the CURRENT belief and wait for a second look.
+            if not self.accept_sighting(ox, oy, dist):        # #30b
+                pass
+            else:
+                self.seen_live = True
+                self.goal_fail_count = 0         # #18: a fresh sighting resets failures
+                # #19a: if the target itself has MOVED, the old "closest we ever
+                # got" is meaningless — restart the progress clock so a walking
+                # person (or a re-projected chair) can't trigger a false give-up.
+                if (self.last_obj_xy is not None
+                        and math.hypot(ox - self.last_obj_xy[0], oy - self.last_obj_xy[1]) > 2 * PROGRESS_EPS):
+                    self.best_dist = None
+                    self.last_progress_t = time.monotonic()
+                    self.goal_tried = []         # a moved target deserves fresh angles
+                self.last_obj_xy = (ox, oy)
+                self.register_instances(self.target, [(ox, oy)])   # #17: keep memory fresh
+                if not self.target_announced:
+                    self.notify(f"Found the {self.target} — navigating to it.")
+                    self.mlog.log("SIGHT", f"{self.target} at ({ox:.2f}, {oy:.2f}), "
+                                           f"{dist:.2f} m away")
+                    self.target_announced = True
+                elif announced_before and first_live:
+                    # we started from MEMORY and the camera has now re-confirmed it
+                    self.notify(f"I can see the {self.target} now — it's where I remembered.")
+                    self.mlog.log("SIGHT", f"memory-seeded {self.target} re-confirmed at "
+                                           f"({ox:.2f}, {oy:.2f}), {dist:.2f} m away")
+        elif self.last_obj_xy is None and self.sight_count > 0:
+            self.sight_count = 0                 # candidate vanished mid-confirmation
+
+        # arrive by pose (stop even if depth/YOLO drops at close range).
+        # #17: be honest — if we only ever knew it from memory and never
+        # re-saw it, say so instead of claiming a confirmed arrival.
+        if self.last_obj_xy is not None and pose is not None:
+            rx, ry, _ = pose
+            gap = math.hypot(rx-self.last_obj_xy[0], ry-self.last_obj_xy[1])
+            # #59: the LiDAR safety net that used to live here has moved to
+            # collision_guard(), on its own 10 Hz timer. Gating it on the
+            # believed gap (as v24 did) meant it inherited the very error it
+            # was supposed to protect against. What remains here is the plain
+            # pose-based arrival test, which is all it should ever have been.
+            if gap <= STOP_DISTANCE + ARRIVE_TOL:
+                self.stop_base()
+                if self.seen_live:
+                    self.notify(f"Arrived at the {self.target}.")
+                else:
+                    self.notify(f"I'm at the spot where I last saw the {self.target}, "
+                                f"but I can't see it from here right now — it may have "
+                                f"moved. Say 'go to the {self.target}' to search fresh.")
+                    # stale memory: drop this instance so a fresh search isn't
+                    # poisoned by it again
+                    known = self.seen_instances.get(self.target, [])
+                    self.seen_instances[self.target] = [
+                        p for p in known
+                        if math.hypot(p[0]-self.last_obj_xy[0], p[1]-self.last_obj_xy[1]) > 0.5]
+                    # #23: don't let "go to it" resurrect the same dead point
+                    if (self.last_located is not None
+                            and self.last_located[0] == self.target
+                            and math.hypot(self.last_located[1][0]-self.last_obj_xy[0],
+                                           self.last_located[1][1]-self.last_obj_xy[1]) <= 0.5):
+                        self.last_located = None
+                self.end_navigate(); return
+
+        # #5/#19c: if we know where it is (seen now OR remembered while
+        # occluded), pick a stand-off goal and let Nav2 plan the full path
+        # AROUND obstacles. We no longer insist on the single point directly
+        # between us and the object — we take the cheapest reachable spot on
+        # a ring around it.
+        if self.last_obj_xy is not None and pose is not None:
+            rx, ry, _ = pose
+            ox, oy = self.last_obj_xy
+            dx, dy = ox - rx, oy - ry
+            dist = math.hypot(dx, dy)
+            if dist < 1e-3:
+                return
+
+            # ── #31: WHICH REGIME ARE WE IN? ──────────────────────────
+            # This single call is the regime test. approach_candidates() only
+            # returns points that pass is_goal_free(), i.e. surrounded by
+            # KNOWN-free cells. If it returns anything, the object's
+            # surroundings are mapped and we can plan the real approach in
+            # one shot (unchanged behaviour). If it returns nothing, either
+            # the object is beyond the map or it is walled in — and in both
+            # cases the answer is the same: get closer, one short hop at a
+            # time, and re-decide with better information.
+            cands = self.approach_candidates(ox, oy, rx, ry)
+
+            # #31: the moment the destination becomes mapped, stop crawling.
+            if self.step_active and cands:
+                self.mlog.log("STEP", f"{self.target} area now mapped after "
+                                      f"{self.step_count} hop(s) — switching to a "
+                                      f"direct approach")
+                self.notify(f"The area around the {self.target} is mapped now — "
+                            f"going straight to it.")
+                self.step_active = False
+                self.nav_goal_xy = None          # force a fresh full goal below
+
+            # ── #31: HOP STICKINESS ──
+            # A hop is re-planned only when it is finished or invalid. Without
+            # this we would re-aim every think-cycle at a point 1.5 m ahead of
+            # wherever the robot happens to be — a carrot on a stick that
+            # preempts Nav2 once a second and never arrives anywhere. Same
+            # disease #30a cured for full goals, different goal type.
+            if (self.step_active and self.nav_goal_xy is not None
+                    and self.search_state == "NAVIGATING"):
+                g0x, g0y = self.nav_goal_xy
+                d_goal = math.hypot(rx - g0x, ry - g0y)
+                bearing_now = math.atan2(oy - ry, ox - rx)
+                off = abs(ang_norm(bearing_now - (self.step_bearing
+                                                  if self.step_bearing is not None
+                                                  else bearing_now)))
+                if (d_goal > STEP_ARRIVE_TOL                       # not there yet
+                        and off < math.radians(STEP_REPLAN_BEARING)  # still aimed right
+                        and now - self.step_start_t < STEP_TIMEOUT   # not wedged
+                        and self.is_step_goal_ok(g0x, g0y)):         # still legal
+                    return                       # keep crawling — leave Nav2 alone
+
+            # #30a: STICKY GOAL (FULL goals only). If the goal we are already
+            # driving to is still a sane approach to the (jittering) object
+            # position, KEEP it and let Nav2 finish. Re-ranking the ring every
+            # cycle preempted Nav2 about once a second — that is the dancing
+            # goal marker and the "found it, navigating... but stuck" behaviour.
+            if (not self.step_active and self.nav_goal_xy is not None
+                    and self.search_state == "NAVIGATING"):
+                g0x, g0y = self.nav_goal_xy
+                d_obj = math.hypot(g0x - ox, g0y - oy)
+                drift = (math.hypot(ox - self.goal_obj_xy[0], oy - self.goal_obj_xy[1])
+                         if self.goal_obj_xy is not None else 0.0)
+                if (GOAL_STICK_MIN <= d_obj <= GOAL_STICK_MAX
+                        and drift <= OBJ_DRIFT_REISSUE
+                        and not self.is_goal_tried(g0x, g0y)
+                        and self.is_goal_free(g0x, g0y)):
+                    return                       # goal still good — don't touch it
+
+            safe = None
+            hop = None
+            if cands:
+                safe = cands[0]
+            elif self.goal_tried:
+                # every ring spot has been refused already — forget the
+                # refusals and let Nav2 have another go from where we are now
+                self.mlog.log("WARN", f"all approach goals for {self.target} refused; "
+                                      f"clearing the tried-list and retrying")
+                self.goal_tried = []
+                cands = self.approach_candidates(ox, oy, rx, ry)
+                safe = cands[0] if cands else None
+            if safe is None and self.map is None:
+                # no map at all (e.g. Nav2/SLAM not up) — fall back to the
+                # old straight-line stand-off rather than refusing to move
+                standoff = max(0.0, dist - STOP_DISTANCE)
+                safe = (rx + (dx / dist) * standoff, ry + (dy / dist) * standoff)
+
+            # ── #31: NO LEGAL FULL GOAL -> HOP ────────────────────────
+            # This is the fix for "the robot won't go to an off-map target".
+            # Previously the only remaining option was farthest_free_along(),
+            # which by construction stops at the LAST KNOWN-FREE cell — the
+            # near side of the frontier. The robot dutifully drove to the edge
+            # of its own map, found the same situation there, and after
+            # GOAL_FAIL_LIMIT cycles dropped the sighting. A hop is allowed to
+            # END in unknown space, which is the whole difference.
+            if safe is None and dist <= STEP_MAX_RANGE:
+                hop = self.step_goal_toward(ox, oy, rx, ry)
+            elif safe is None:
+                self.mlog.log("WARN", f"ignoring {self.target} sighting at {dist:.1f} m "
+                                      f"(beyond STEP_MAX_RANGE {STEP_MAX_RANGE} m — "
+                                      f"depth at that range is not trustworthy)")
+
+            if safe is None and hop is None:
+                # #18: last resort — the frontier point on the straight line.
+                # Kept because when the hop fan is blocked by REAL obstacles,
+                # this can still find a known-free detour end point.
+                safe = self.farthest_free_along(rx, ry, ox, oy)
+
+            if safe is None and hop is None:
+                # truly nowhere to go from here toward it
+                self.cmd = Twist()               # kill any stale scan spin (#18)
+                self.goal_fail_count += 1
+                limit = STEP_FAIL_LIMIT if self.step_active else GOAL_FAIL_LIMIT
+                if self.goal_fail_count >= limit:
+                    self.notify(f"I can't find a reachable path toward the "
+                                f"{self.target} from here — searching again.")
+                    self.mlog.log("WARN", f"dropping unreachable sighting of "
+                                          f"{self.target} at ({ox:.2f}, {oy:.2f}) "
+                                          f"after {self.goal_fail_count} attempts "
+                                          f"(hop_mode={self.step_active})")
+                    self.last_obj_xy = None
+                    self.nav_goal_xy = None
+                    self.goal_fail_count = 0
+                    self.target_announced = False
+                    self.sight_count = 0
+                    self.reset_step_state()      # #31
+                    self.search_state = "ROTATE"
+                    self.last_yaw = None; self.turn_accum = 0.0
+                return
+
+            # ── #31: issue a HOP ──────────────────────────────────────
+            if hop is not None:
+                gx, gy, bearing = hop
+                if not self.step_announced:
+                    self.step_announced = True
+                    self.notify(f"The {self.target} is about {dist:.1f} m away, past the "
+                                f"edge of what I've mapped. Moving up in short steps and "
+                                f"mapping as I go.")
+                    self.mlog.log("STEP", f"#31 hop mode engaged for {self.target}: "
+                                          f"object ({ox:.2f}, {oy:.2f}) at {dist:.1f} m, "
+                                          f"area_mapped={self.object_is_mapped(ox, oy)}")
+                self.cmd = Twist()
+                self.search_state = "NAVIGATING"
+                self.step_active = True
+                self.step_bearing = bearing
+                self.step_start_t = now
+                self.step_count += 1
+                self.nav_goal_xy = (gx, gy)
+                self.goal_obj_xy = (ox, oy)
+                hop_len = math.hypot(gx - rx, gy - ry)
+                self.mlog.log("GOAL", f"#31 hop {self.step_count}: {hop_len:.2f} m toward "
+                                      f"{self.target} (still {dist:.1f} m away)")
+                # face along the hop so the camera keeps the target in frame and
+                # we can re-range it on arrival
+                self.send_goal(gx, gy, bearing)
+                return
+
+            # ── full approach goal (mapped destination) ───────────────
+            self.step_active = False
+            gx, gy = safe
+            # #19c: face the OBJECT from the goal, not just our travel
+            # direction — matters now that the goal can be on its far side.
+            fdx, fdy = ox - gx, oy - gy
+            yaw = math.atan2(fdy, fdx) if math.hypot(fdx, fdy) > 1e-3 \
+                else math.atan2(dy, dx)
+            if (self.nav_goal_xy is None or
+                    math.hypot(gx - self.nav_goal_xy[0], gy - self.nav_goal_xy[1]) > GOAL_REISSUE):
+                self.cmd = Twist()
+                self.search_state = "NAVIGATING"
+                self.nav_goal_xy = (gx, gy)
+                self.goal_obj_xy = (ox, oy)      # #30a: for drift tracking
+                self.send_goal(gx, gy, yaw)
+            return
+
+        # never seen it (enough) yet — scan around
+        if self.search_state == "NAVIGATING":
+            return
+        if self.search_state == "ROTATE":
+            self.do_rotate_scan()
+        elif self.search_state == "ADVANCE":
+            self.do_advance()
+
+    # ── LOCATE: look and REPORT only, never drive to it (#7) ──
+    def locate_think(self):
+        if not self.camera_ready():
+            return
+        if self.locate_start and time.monotonic() - self.locate_start > LOCATE_TIMEOUT:
+            self.cmd = Twist()
+            self.notify(f"I don't see any {self.target} in this area.")
+            self.end_locate(); return
+        found = self.locate_target()
+        if found is not None:
+            ox, oy, rx, ry, dist = found
+            self.cmd = Twist()
+            # #28: report EVERY instance in frame, not just the selected one.
+            # "I can see 2 chairs" followed by a single distance was the gap.
+            cands, _, _ = self.locate_candidates()
+            if not cands:                        # vanished between the two looks
+                cands = [(ox, oy, dist, 0.0)]
+            self.register_instances(self.target, [(c[0], c[1]) for c in cands])
+            self.last_located = (self.target, (ox, oy))            # #23: for "go to it"
+            self.mlog.log("MEMORY", f"remembered {len(cands)} {self.target}(s) at "
+                                    + ", ".join(f"({c[0]:.2f}, {c[1]:.2f}) d={c[2]:.2f}m"
+                                                for c in cands))
+            n = len(cands)
+            plural = self.target if n == 1 else self.target + "s"
+            article = f"a {self.target}" if n == 1 else f"{n} {plural}"
+            self.notify(f"Yes — I can see {article} {self.describe_distances(cands)}. "
+                        "I'll remember where they are. "
+                        "(Locating only — not driving to them.)"
+                        if n > 1 else
+                        f"Yes — I can see {article} {self.describe_distances(cands)}. "
+                        "I'll remember where it is. (Locating only — not driving to it.)")
+            self.end_locate(); return
+        # not visible yet -> turn in place to look around (no driving toward it)
+        t = Twist(); t.angular.z = SEARCH_TURN_SPEED
+        self.cmd = t
+
+    # ── MOVE: precise relative turn then translate (#9) ──
+    def move_think(self):
+        if not self.have_odom or self.move_spec is None:
+            return
+        spec = self.move_spec
+
+        if spec["phase"] == "rotate":
+            if self.move_ref_yaw is None:
+                self.move_ref_yaw = self.yaw; self.move_turned = 0.0
+            dyaw = abs(math.atan2(math.sin(self.yaw - self.move_ref_yaw),
+                                  math.cos(self.yaw - self.move_ref_yaw)))
+            self.move_turned += dyaw; self.move_ref_yaw = self.yaw
+            if spec["rot_rad"] - self.move_turned <= math.radians(2.0):
+                self.cmd = Twist()
+                spec["phase"] = "translate"; self.move_ref_pos = None
+            else:
+                t = Twist(); t.angular.z = ROTATE_SPEED * spec["rot_sign"]
+                self.cmd = t
+            return
+
+        if spec["phase"] == "translate":
+            if abs(spec["dist_m"]) < 1e-3:
+                self.finish_move(); return
+            if self.move_ref_pos is None:
+                self.move_ref_pos = (self.x, self.y)
+                # #29: lock the heading NOW. Progress is measured ALONG this
+                # axis (signed), not as raw displacement — otherwise a forward
+                # shuffle would look like backward progress being undone twice.
+                self.move_axis = (math.cos(self.yaw), math.sin(self.yaw))
+                self.move_moved = 0.0
+                self.backup_best = 0.0
+                self.backup_stall_t = None
+                self.backup_nudges = 0
+                self.nudge_from = None
+
+            going_fwd = spec["dist_m"] > 0
+            ax, ay = self.move_axis
+            signed = ((self.x - self.move_ref_pos[0]) * ax +
+                      (self.y - self.move_ref_pos[1]) * ay)
+            # progress TOWARD the goal, always positive when going the right way
+            self.move_moved = signed if going_fwd else -signed
+
+            if going_fwd and self.front_min < OBSTACLE_STOP:
+                self.cmd = Twist()
+                self.notify("There's an obstacle ahead — stopping the move early.")
+                self.finish_move(); return
+            if self.move_moved >= abs(spec["dist_m"]):
+                self.cmd = Twist(); self.finish_move(); return
+
+            # ── #29: reverse ratchet ──
+            if not going_fwd:
+                # (a) currently shuffling forward to clear the firmware limit?
+                if self.nudge_from is not None:
+                    crept = math.hypot(self.x - self.nudge_from[0],
+                                       self.y - self.nudge_from[1])
+                    if crept >= BACKUP_NUDGE_DIST:
+                        self.nudge_from = None
+                        self.backup_stall_t = None
+                        self.backup_best = self.move_moved   # restart the stall watch
+                    elif self.front_min < OBSTACLE_STOP:
+                        # boxed in: can't reverse (firmware) and can't creep
+                        # forward (obstacle). Say so instead of grinding.
+                        self.cmd = Twist()
+                        self.notify(f"I can't reverse any further and there's something "
+                                    f"in front of me, so I can't shuffle forward to reset "
+                                    f"the limit. I managed {self.move_moved:.2f} m of the "
+                                    f"{abs(spec['dist_m']):.2f} m.")
+                        self.mlog.log("MOVE", "backup ratchet blocked front and rear")
+                        self.finish_move(); return
+                    else:
+                        t = Twist(); t.linear.x = MOVE_SPEED
+                        self.cmd = t
+                        return
+
+                # (b) reversing normally — watch for the firmware cutting us off
+                now = time.monotonic()
+                if self.move_moved > self.backup_best + BACKUP_STALL_EPS:
+                    self.backup_best = self.move_moved
+                    self.backup_stall_t = now
+                elif self.backup_stall_t is None:
+                    self.backup_stall_t = now
+                elif now - self.backup_stall_t > BACKUP_STALL_TIME:
+                    if self.backup_nudges >= MAX_BACKUP_NUDGES:
+                        self.cmd = Twist()
+                        self.notify(f"I've hit the reverse limit {self.backup_nudges} times "
+                                    f"and only made {self.move_moved:.2f} m of the "
+                                    f"{abs(spec['dist_m']):.2f} m. Something may be behind "
+                                    f"me — please check, or turn me around and drive forward.")
+                        self.mlog.log("MOVE", f"backup ratchet gave up after "
+                                              f"{self.backup_nudges} nudges at "
+                                              f"{self.move_moved:.2f} m")
+                        self.finish_move(); return
+                    self.backup_nudges += 1
+                    self.nudge_from = (self.x, self.y)
+                    print(f"(reverse limit reached at {self.move_moved:.2f} m — "
+                          f"shuffling {BACKUP_NUDGE_DIST:.2f} m forward to clear it, "
+                          f"then continuing back)")
+                    self.mlog.log("MOVE", f"backup limit at {self.move_moved:.2f} m; "
+                                          f"nudge #{self.backup_nudges} forward "
+                                          f"{BACKUP_NUDGE_DIST} m")
+                    t = Twist(); t.linear.x = MOVE_SPEED
+                    self.cmd = t
+                    return
+
+            t = Twist(); t.linear.x = MOVE_SPEED * (1.0 if going_fwd else -1.0)
+            self.cmd = t
+
+    def finish_move(self):
+        self.cmd = Twist()
+        try: self.cmd_pub.publish(Twist())
+        except Exception: pass
+        # #29: if the ratchet was used, say so — it's real evidence of the
+        # platform constraint being handled, not hidden.
+        if self.backup_nudges:
+            self.notify(f"Done with that move — I made {self.move_moved:.2f} m in "
+                        f"reverse using {self.backup_nudges} forward shuffle"
+                        f"{'s' if self.backup_nudges > 1 else ''} to clear the "
+                        f"Create 3 backup limit.")
+        else:
+            self.notify("Done with that move.")
+        self.backup_nudges = 0
+        self.nudge_from = None
+        self.task_id += 1
+        self.mode = None
+        self.move_spec = None
+        self.start_next_step()
+
+    # ── FIND ANOTHER: scan around until a NEW instance appears ──
+    def find_more_think(self):
+        if not self.camera_ready() or not self.have_odom:
+            return
+        if time.monotonic() - self.find_start > FIND_TIMEOUT:
+            self.cmd = Twist()
+            total = len(self.seen_instances.get(self.target, []))
+            self.notify(f"I couldn't find another {self.target}. I still count {total}. "
+                        "Waiting for further instructions.")
+            self.end_find_more(); return
+
+        pair = self.current_pair()
+        if pair is not None:
+            detections = self.yolo_detect(pair[0])
+            if detections is not None:
+                positions = self.locate_all(self.target, detections, pair[1], pair[0])
+                added = self.register_instances(self.target, positions)
+                total = len(self.seen_instances.get(self.target, []))
+                if added > 0 and total > self.find_baseline:
+                    self.cmd = Twist()
+                    plural = self.target if total == 1 else self.target + "s"
+                    self.notify(f"I found another {self.target}. I now count {total} {plural}. "
+                                "Waiting for further instructions.")
+                    self.end_find_more(); return
+
+        if self.search_state == "ROTATE":
+            self.do_rotate_scan()
+        elif self.search_state == "ADVANCE":
+            self.do_advance()
+
+    def do_rotate_scan(self):
+        # ── #56 STEP-AND-STARE ──────────────────────────────────────
+        # A continuous spin blurs every frame and, at one think-cycle per
+        # second, skips 28.6 deg of a 64.6 deg field of view between looks.
+        # So instead: turn ~25 deg, STOP DEAD, hold still for 1.6 s while the
+        # camera and YOLO get a clean look, then turn again. Detection itself
+        # is not done here -- it happens in the caller every think-cycle --
+        # this method only decides whether the wheels should be moving.
+        now = time.monotonic()
+
+        # PHASE 1: are we currently holding still for a look?
+        if self.scan_dwell_until is not None:
+            if now < self.scan_dwell_until:
+                # Publish an all-zero Twist so the base is genuinely stopped,
+                # not merely un-commanded (an un-commanded base coasts).
+                self.cmd = Twist()
+                return
+            # dwell finished -- begin the next turning step from zero
+            self.scan_dwell_until = None
+            self.scan_step_yaw = 0.0
+            self.last_yaw = None
+
+        # PHASE 2: turning. Measure how far we actually rotated since the
+        # last look, using the odometry yaw rather than assuming the commanded
+        # speed was achieved (carpet, low battery and wheel slip all make the
+        # real turn rate differ from the commanded one).
+        if self.last_yaw is None:
+            self.last_yaw = self.yaw
+        dyaw = abs(math.atan2(math.sin(self.yaw - self.last_yaw),
+                              math.cos(self.yaw - self.last_yaw)))
+        self.turn_accum  += dyaw      # total turned this revolution
+        self.scan_step_yaw += dyaw    # turned during THIS step
+        self.last_yaw = self.yaw
+
+        # PHASE 3: step complete? then stop and start a dwell.
+        if self.scan_step_yaw >= SCAN_STEP_RAD:
+            self.cmd = Twist()                              # stop the wheels
+            self.scan_dwell_until = now + SCAN_DWELL_S      # look from here
+        else:
+            t = Twist(); t.angular.z = SEARCH_TURN_SPEED    # keep turning
+            self.cmd = t
+
+        # PHASE 4: a full revolution done and still nothing found.
+        if self.turn_accum >= 2 * math.pi:
+            self.turn_accum = 0.0; self.last_yaw = None
+            self.scan_dwell_until = None; self.scan_step_yaw = 0.0
+            if ENABLE_ADVANCE:
+                self.advance_start = (self.x, self.y)
+                self.search_state = "ADVANCE"
+                self.notify(f"Can't see the {self.target} here — moving to look elsewhere.")
+
+    def do_advance(self):
+        if self.front_min < OBSTACLE_STOP:
+            self.search_state = "ROTATE"; self.last_yaw = None
+            self.turn_accum = math.pi; return
+        if self.advance_start is not None:
+            moved = math.hypot(self.x - self.advance_start[0], self.y - self.advance_start[1])
+            if moved >= ADVANCE_DISTANCE:
+                self.search_state = "ROTATE"; self.last_yaw = None; self.turn_accum = 0.0
+                return
+        t = Twist(); t.linear.x = ADVANCE_SPEED
+        self.cmd = t
+
+    def end_navigate(self):
+        self.task_id += 1
+        self.mode = None
+        self.search_state = None
+        self.target = None
+        self.target_qualifier = None
+        self.last_obj_xy = None
+        self.target_announced = False
+        self.nav_goal_xy = None
+        self.sight_count = 0                    # #13
+        self.seen_live = False                  # #17
+        self.goal_fail_count = 0                # #18
+        self.best_dist = None                   # #19a
+        self.last_progress_t = None             # #19a
+        self.goal_tried = []                    # #19c
+        self.jump_pending = None                # #21b
+        self.goal_obj_xy = None                 # #30a
+        self.reset_step_state()                 # #31
+        self.navigate_start = None
+        self.cmd = Twist()
+        self.start_next_step()
+
+    def end_locate(self):
+        self.task_id += 1
+        self.mode = None
+        self.target = None
+        self.target_qualifier = None
+        self.locate_start = None
+        self.cmd = Twist()
+        self.start_next_step()
+
+    def end_find_more(self):
+        self.task_id += 1
+        self.mode = None
+        self.search_state = None
+        self.target = None
+        self.cmd = Twist()
+        self.start_next_step()
+
+    # ── EXPLORE / PATROL: frontier mapping with coverage memory (#4) ──
+    def explore_think(self):
+        if self.frontier_navigating: return
+        now = time.monotonic()
+        if self.map is None:
+            if self.explore_start_t and now - self.explore_start_t > 6 and not self.warned_no_map:
+                self.warned_no_map = True
+                self.notify("I'm not receiving a /map. Is SLAM running? Launch with slam:=true.")
+            return
+        pose = self.robot_pose_map()
+        if pose is None: return
+        rx, ry, ryaw = pose
+        clusters = [c for c in self.find_frontiers()
+                    if not self.is_blacklisted(c[0], c[1]) and not self.is_visited(c[0], c[1])]
+        if not clusters:
+            if self.frontier_sent_goal:
+                self.finish_explore()
+            elif (self.explore_start_t and now - self.explore_start_t > 10
+                  and not self.warned_no_frontier):
+                self.warned_no_frontier = True
+                self.notify("No unmapped area found. If you launched in localization mode the map "
+                            "is already complete — relaunch with slam:=true to map fresh.")
+            return
+
+        # #4: prefer frontiers AHEAD (penalise turning around) so it stops
+        # retreating down the path it just came from.
+        def score(c):
+            d = math.hypot(c[0] - rx, c[1] - ry)
+            ang = math.atan2(c[1] - ry, c[0] - rx)
+            turn = abs(math.atan2(math.sin(ang - ryaw), math.cos(ang - ryaw)))
+            return d + TURN_WEIGHT * turn
+        clusters.sort(key=score)
+        gx, gy, _ = clusters[0]
+        yaw = math.atan2(gy - ry, gx - rx)
+        self.frontier_navigating = True
+        self.frontier_sent_goal = True
+        self.cur_goal = (gx, gy)
+        self.send_goal(gx, gy, yaw)
+
+    def is_visited(self, x, y):
+        return any(math.hypot(x - vx, y - vy) < VISITED_RADIUS for vx, vy in self.visited_goals)
+
+    def find_frontiers(self):
+        m = self.map
+        w, h = m.info.width, m.info.height
+        res = m.info.resolution
+        ox = m.info.origin.position.x; oy = m.info.origin.position.y
+        grid = np.array(m.data, dtype=np.int16).reshape((h, w))
+        free = (grid == 0); unknown = (grid == -1)
+        adj = np.zeros_like(unknown)
+        adj[1:, :]  |= unknown[:-1, :]
+        adj[:-1, :] |= unknown[1:, :]
+        adj[:, 1:]  |= unknown[:, :-1]
+        adj[:, :-1] |= unknown[:, 1:]
+        frontier = free & adj
+        ys, xs = np.where(frontier)
+        if len(xs) == 0: return []
+        bins = {}
+        for cy, cx in zip(ys.tolist(), xs.tolist()):
+            wx = ox + (cx + 0.5) * res; wy = oy + (cy + 0.5) * res
+            key = (round(wx / BIN_SIZE), round(wy / BIN_SIZE))
+            bins.setdefault(key, []).append((wx, wy))
+        clusters = []
+        for pts in bins.values():
+            if len(pts) >= MIN_FRONTIER:
+                cx = sum(p[0] for p in pts) / len(pts)
+                cy = sum(p[1] for p in pts) / len(pts)
+                clusters.append((cx, cy, len(pts)))
+        return clusters
+
+    def is_blacklisted(self, x, y):
+        return any(math.hypot(x - bx, y - by) < BLACKLIST_RADIUS
+                   for bx, by in self.blacklist)
+
+    def finish_explore(self):
+        self.notify("Area fully mapped — no frontiers left. Saving the map.")
+        try:
+            subprocess.run(["ros2", "run", "nav2_map_server", "map_saver_cli",
+                            "-f", SAVE_MAP_PATH], timeout=30, check=False)
+            self.notify(f"Map saved to {SAVE_MAP_PATH}.yaml")
+        except Exception as e:
+            self.notify(f"Auto-save failed ({e}); save manually with map_saver_cli.")
+        self.task_id += 1
+        self.mode = None
+        self.frontier_navigating = False
+        self.frontier_sent_goal = False
+        self.start_next_step()
+
+    # ── NAV2 plumbing ──
+    def send_goal(self, x, y, yaw):
+        if not self.nav_client.server_is_ready():
+            return
+        tid = self.task_id
+        self.mlog.log("GOAL", f"({x:.2f}, {y:.2f}) yaw={math.degrees(yaw):.0f}deg "
+                              f"mode={self.mode}")                        # #14
+        goal = NavigateToPose.Goal()
+        goal.pose.header.frame_id = MAP_FRAME
+        goal.pose.header.stamp = self.get_clock().now().to_msg()
+        goal.pose.pose.position.x = x
+        goal.pose.pose.position.y = y
+        goal.pose.pose.orientation.z = math.sin(yaw / 2.0)
+        goal.pose.pose.orientation.w = math.cos(yaw / 2.0)
+        fut = self.nav_client.send_goal_async(goal)
+        fut.add_done_callback(lambda f: self.on_goal_response(f, tid))
+
+    def on_goal_response(self, future, tid):
+        gh = future.result()
+        if tid != self.task_id:
+            try: gh.cancel_goal_async()
+            except Exception: pass
+            return
+        if not gh.accepted:
+            if self.mode == "explore":
+                self.blacklist.append(self.cur_goal); self.frontier_navigating = False
+            elif self.mode in ("navigate", "find_more"):
+                # #19c: remember WHICH goal was refused so the next think-cycle
+                # picks a different spot on the ring instead of re-sending the
+                # same illegal goal until the task dies.
+                if self.nav_goal_xy is not None:
+                    self.goal_tried.append(self.nav_goal_xy)
+                # #31: a REFUSED hop is not a failed task — it means this
+                # particular 1.5 m step ended somewhere Nav2 dislikes. Halve
+                # it and let the next think-cycle re-aim; step_len is restored
+                # by reset_step_state() when the task ends.
+                if self.step_active:
+                    self.step_len = max(STEP_GOAL_MIN, self.step_len * 0.5)
+                    self.mlog.log("STEP", f"#31 hop refused — shortening to "
+                                          f"{self.step_len:.2f} m")
+                self.search_state = "ROTATE"; self.last_yaw = None; self.turn_accum = 0.0
+                self.nav_goal_xy = None
+                self.goal_fail_count += 1                      # #18
+                limit = STEP_FAIL_LIMIT if self.step_active else GOAL_FAIL_LIMIT   # #31
+                if self.mode == "navigate" and self.goal_fail_count >= limit:
+                    self.mlog.log("WARN", "nav goal rejected repeatedly — "
+                                          "dropping sighting, rescanning")
+                    self.last_obj_xy = None
+                    self.target_announced = False
+                    self.sight_count = 0
+                    self.goal_fail_count = 0
+                    self.goal_tried = []
+                    self.reset_step_state()                    # #31
+            return
+        self.goal_handle = gh
+        gh.get_result_async().add_done_callback(lambda f: self.on_result(f, tid))
+
+    def on_result(self, future, tid):
+        if tid != self.task_id:
+            return
+        status = future.result().status
+        self.mlog.log("RESULT", f"nav goal status={status} "
+                                f"({'ok' if status == GoalStatus.STATUS_SUCCEEDED else 'not-succeeded'})")
+        if self.mode == "explore":
+            if status == GoalStatus.STATUS_SUCCEEDED:      # was the magic number 4
+                self.consecutive_stucks = 0
+                self.visited_goals.append(self.cur_goal)   # #4: remember we covered it
+            else:
+                self.blacklist.append(self.cur_goal)
+            self.frontier_navigating = False
+        elif self.mode in ("navigate", "find_more"):
+            self.search_state = "ROTATE"; self.last_yaw = None; self.turn_accum = 0.0
+            if status != GoalStatus.STATUS_SUCCEEDED:          # #18
+                # #19c: Nav2 tried and gave up on THIS spot (no valid path, or
+                # its recoveries failed). Rule that spot out and let the next
+                # cycle approach the object from another side.
+                if self.nav_goal_xy is not None:
+                    self.goal_tried.append(self.nav_goal_xy)
+                    self.mlog.log("WARN", f"nav goal ({self.nav_goal_xy[0]:.2f}, "
+                                          f"{self.nav_goal_xy[1]:.2f}) failed (status={status}); "
+                                          f"trying another approach angle")
+                # #31: an ABORTED hop usually means the unknown space it aimed
+                # into turned out to contain something. Shorten and re-aim —
+                # that is normal, expected progress, not a failure of the task.
+                if self.step_active:
+                    self.step_len = max(STEP_GOAL_MIN, self.step_len * 0.5)
+                    self.mlog.log("STEP", f"#31 hop aborted — shortening to "
+                                          f"{self.step_len:.2f} m and re-aiming")
+                self.goal_fail_count += 1
+                limit = STEP_FAIL_LIMIT if self.step_active else GOAL_FAIL_LIMIT   # #31
+                if self.mode == "navigate" and self.goal_fail_count >= limit:
+                    self.mlog.log("WARN", "every approach to the target failed — "
+                                          "dropping sighting, rescanning")
+                    self.last_obj_xy = None
+                    self.target_announced = False
+                    self.sight_count = 0
+                    self.goal_fail_count = 0
+                    self.goal_tried = []
+                    self.reset_step_state()                    # #31
+            else:
+                self.goal_fail_count = 0
+                # #31: a hop COMPLETED. The map is now bigger than it was when
+                # this hop was planned, so restore the full step length and let
+                # the next think-cycle re-range the target and decide again
+                # (it may well find a full approach goal this time).
+                if self.step_active:
+                    self.step_len = STEP_GOAL_DIST
+                    self.mlog.log("STEP", f"#31 hop {self.step_count} complete — "
+                                          f"re-ranging {self.target}")
+            self.nav_goal_xy = None
+        self.goal_handle = None
+
+
+def main():
+    rclpy.init()
+    node = VLAAgent()
+
+    # #33: mirror the terminal onto /vla/reply, so a GUI operator with zero
+    # technical knowledge sees exactly what the engineer at the terminal sees.
+    real_stdout = sys.stdout
+    sys.stdout = ReplyTee(real_stdout, node.emit_reply)
+
+    # #32b: MULTI-threaded executor. rclpy.spin() is single-threaded and every
+    # timer sits in one mutually-exclusive group by default, so think() —
+    # which blocks on an HTTP call to YOLO — used to stall publish_cmd() (the
+    # 10 Hz velocity heartbeat) and annotate_think() (the live feed) with it.
+    # That starvation is the "feed runs for a while then gets stuck" symptom.
+    # Six threads: four timers + subscriptions + action callbacks, with slack.
+    executor = MultiThreadedExecutor(num_threads=6)
+    executor.add_node(node)
+    spin_thread = threading.Thread(target=executor.spin, daemon=True)
+    spin_thread.start()
+    try:
+        node.run_input_loop()
+    finally:
+        node.shutdown = True
+        node.cancel_task()
+        node.mlog.log("RUN", "agent shutting down")
+        try:
+            executor.shutdown()
+        except Exception:
+            pass
+        sys.stdout = real_stdout
+        node.destroy_node()
+        if rclpy.ok():
+            rclpy.shutdown()
+
+
+if __name__ == "__main__":
+    main()
