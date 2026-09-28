@@ -441,6 +441,14 @@ DEPTH_WH_DEFAULT = (1280, 720)
 # #54: LiDAR ranging of detected objects.
 USE_LIDAR_RANGE = os.environ.get("VLA_NO_LIDAR_RANGE", "0") != "1"
 # set VLA_NO_LIDAR_RANGE=1 to force the old depth-only behaviour
+# #64 (11 Sep, HARDWARE ONLY): VLA_RGB_ONLY=1 lets current_pair() return
+# (rgb, None) when no depth frame has ever arrived, so the camera gate opens
+# on colour alone and YOLO + #54 LiDAR ranging run. Reason: on the real
+# OAK-D Lite the stereo pipeline costs the Pi +7 C and makes colour frames
+# arrive ~4 s late (10 Sep), while colour-only frames arrive in ~50 ms
+# (11 Sep); depth was only ever the FALLBACK ranging source behind the
+# LiDAR. Default "0" = exactly the previous behaviour (simulation).
+RGB_ONLY = os.environ.get("VLA_RGB_ONLY", "0") == "1"
 LIDAR_BEARING_GUESS_M = 3.0
 # starting distance used to estimate the bearing before the range is known;
 # one refinement pass afterwards removes the error this introduces
@@ -518,8 +526,31 @@ ROBOT_FRAME = "base_link"
 # at exactly the moment the robot needed it to confirm arrival. At 1.0 m the
 # same chair fills 2*atan(0.45/1.0) = 48 deg, comfortably inside 65.4 deg, so
 # the object stays recognisable all the way in.
-STOP_DISTANCE     = 1.0
-ARRIVE_TOL        = 0.35
+# #64d (14 Sep, HARDWARE ONLY): VLA_STOP_DISTANCE / VLA_STANDOFFS override the
+# 1.0 m stand-off. The operator wants the robot AT the object, not a metre
+# short. Nav2 rejects goals closer than robot_radius (0.175) to an obstacle and
+# inflates to 0.45 m, so 0.45 m from the object's laser points is the closest
+# accepted goal (front bumper ~0.25-0.30 m from a chair). The camera loses a
+# chair from view below ~1 m (#57); the final approach is pose-based, so that
+# is acceptable. Defaults "1.0" / "1.00,1.30" = exactly the previous behaviour.
+STOP_DISTANCE     = float(os.environ.get("VLA_STOP_DISTANCE", "1.0"))
+# #64b (11 Sep, HARDWARE ONLY): VLA_ARRIVE_TOL overrides the 0.35 m slack.
+# On the real robot Nav2's xy_goal_tolerance (0.25 m) lets it park up to
+# 1.55 m from the belief when the 1.30 m stand-off is chosen, so the arrival
+# test (STOP_DISTANCE + ARRIVE_TOL = 1.35 m) never passes and the robot sits
+# at its goal re-sending it every second (two of three runs, 11 Sep). The
+# hardware launcher sets 0.60. Default "0.35" = exactly the previous behaviour.
+ARRIVE_TOL        = float(os.environ.get("VLA_ARRIVE_TOL", "0.35"))
+# #64e (15 Sep, HARDWARE ONLY): VLA_ARRIVE_IF_SEEN_M — "if I can see it and it
+# is this close, I have arrived." When the target is in the CURRENT camera
+# frame and its measured (LiDAR) distance is at or under this value, the
+# agent stops and announces arrival at once, instead of planning a stand-off
+# goal. Reason: a person standing near furniture leaves no ring goal outside
+# Nav2's 0.45 m inflation, every goal is refused, and the agent then drops
+# the sighting and rescans -- driving away from a person one metre in front
+# of it (20 refusals in a row, 15 Sep). Default "0" = disabled = previous
+# behaviour (simulation). The hardware launcher sets 1.2.
+ARRIVE_IF_SEEN_M  = float(os.environ.get("VLA_ARRIVE_IF_SEEN_M", "0"))
 # ── #59 COLLISION GUARD (replaces the weak v24 version) ────────────
 # v24 ran this check only inside the 1 Hz think-loop, and only once the
 # BELIEVED gap to the target was already under 1.7 m. On hardware it fired
@@ -537,7 +568,31 @@ ARRIVE_TOL        = 0.35
 # The Create 3 is 0.34 m across, so 0.70 m leaves two body-widths of clear
 # space -- enough that a 10 Hz guard can stop the robot before contact even
 # at full speed.
-MIN_FRONT_CLEAR   = 0.70
+# #64c (14 Sep, HARDWARE ONLY): VLA_MIN_FRONT_CLEAR overrides the guard
+# distance. In a crowded room every relative move was stopped at 0.66-0.70 m by
+# people standing nearby (three stops in one minute, 14 Sep); Nav2's inflation
+# layer and the Create 3 bumpers remain. The hardware launcher sets 0.50.
+# Default "0.70" = exactly the previous behaviour.
+MIN_FRONT_CLEAR   = float(os.environ.get("VLA_MIN_FRONT_CLEAR", "0.70"))
+
+# #65 (24 Sep, HARDWARE ONLY): which LASER-FRAME bearing points at the robot's
+# FRONT. The RPLIDAR on this TurtleBot 4 is bolted on rotated: TF says
+# base_link -> rplidar_link is yaw +90 deg, so the beam the scan calls 0 deg
+# looks out of the robot's LEFT side. Both forward guards below sliced the scan
+# around raw 0 deg, i.e. they watched the left flank and braked for whatever
+# stood beside the robot -- measured 24 Sep: guards saw 0.49 m (a desk on the
+# left) while the actual path ahead was 2.30 m clear. That is the "there's an
+# obstacle ahead" with nothing ahead, and the reason MIN_FRONT_CLEAR was
+# lowered to 0.35 on 14 Sep to work around it.
+# Object RANGING was never affected: cam_bearing_in_laser() converts camera
+# pixels through TF into the laser's own frame, so it was always consistent.
+# Default "0" = exactly the old arithmetic, so the simulation is unchanged.
+SCAN_FWD_RAD      = math.radians(float(os.environ.get("VLA_SCAN_FWD_DEG", "0")))
+
+def _off_front(ang):
+    """Angular distance from the robot's FRONT, for a raw laser-frame angle."""
+    d = ang - SCAN_FWD_RAD
+    return abs(math.atan2(math.sin(d), math.cos(d)))
 # The v24 guard measured the minimum of a +/-15 deg cone. At 1 m that cone is
 # only +/-0.27 m wide -- NARROWER THAN A CHAIR -- so the beams pass between
 # the legs and read the wall behind. A wider arc actually intersects the legs.
@@ -640,7 +695,8 @@ APPROACH_RING       = (0, 25, -25, 50, -50, 75, -75, 100, -100,
 # reaching any of them counts as an arrival.
 # #57: raised alongside STOP_DISTANCE so the robot parks where the object
 # is still inside the camera's field of view and can be confirmed.
-APPROACH_STANDOFFS  = (1.00, 1.30)
+APPROACH_STANDOFFS  = tuple(float(x) for x in
+                            os.environ.get("VLA_STANDOFFS", "1.00,1.30").split(","))   # #64d
 # #30c: was 0.40, which is WIDER than the spacing between adjacent ring
 # spots (~0.26 m at a 0.6 m stand-off), so ONE Nav2 refusal also wiped out
 # its neighbours. In open ground that cascaded into a false "I can't find a
@@ -835,7 +891,11 @@ STOP_CONFIRM_TIMEOUT = 6.0    # s - after this, report honestly that it did NOT 
 ANNOTATED_FEED  = True     # False -> open the plain raw camera topic instead
 # #32c: the feed no longer runs YOLO itself, so a frame costs only a draw and
 # a JPEG encode (~3 ms). 0.2 s = 5 Hz, which actually looks live.
-ANNOT_PERIOD    = 0.2      # s between annotated frames (only while the feed is open)
+# #64f (21 Sep, HARDWARE ONLY): VLA_ANNOT_PERIOD overrides the 0.2 s (5 Hz) cap.
+# The feed is PC-local (agent -> GUI) and a frame costs ~3 ms, so 30 Hz is free
+# and makes the operator console as smooth as the raw stream, WITH the boxes.
+# Default "0.2" = exactly the previous behaviour (simulation unchanged).
+ANNOT_PERIOD    = float(os.environ.get("VLA_ANNOT_PERIOD", "0.2"))   # s between annotated frames
 ANNOT_MIN_WIDTH = 750      # upscale narrow preview frames to at least this wide (px)
 ANNOT_MAX_SCALE = 3        # #32d: never upscale more than this (bytes on the wire)
 # #32c: reuse the think-loop's detections for at most this long. Older than
@@ -1645,8 +1705,8 @@ class VLAAgent(Node):
         cone = math.radians(15); best = float("inf")
         for i, r in enumerate(m.ranges):
             ang = m.angle_min + i * m.angle_increment
-            if -cone <= ang <= cone and math.isfinite(r) and r > 0.0:
-                best = min(best, r)
+            if _off_front(ang) <= cone and math.isfinite(r) and r > 0.0:
+                best = min(best, r)          # #65: cone centred on the FRONT
         self.front_min = best
     def on_dock_status(self, m):
         self.is_docked = bool(m.is_docked)
@@ -1709,6 +1769,8 @@ class VLAAgent(Node):
                             "Check the camera driver's stamps.")
                 self.mlog.log("WARN", "RGB-depth sync failed; raw fallback in use")
             return (self.rgb_raw, self.depth_raw)
+        if RGB_ONLY and self.rgb_raw is not None:      # #64: colour-only gate
+            return (self.rgb_raw, None)
         return None
 
     def camera_ready(self):
@@ -3448,7 +3510,8 @@ class VLAAgent(Node):
             cv2.rectangle(img, (X1, Y1), (X2, Y2), color, lw + (1 if is_target else 0))
 
             label = f"{name} {conf * 100:.0f}%"
-            bd = self.robust_box_depth(d["box"], depth_msg)       # #21a: same number nav uses
+            bd = (self.range_for_box(d["box"], depth_msg, rgb_msg) if RGB_ONLY   # #64: LiDAR range
+                  else self.robust_box_depth(d["box"], depth_msg))  # #21a: same number nav uses
             if bd is not None:                   # YOLO + OAK-D depth, in one frame
                 label += f"  {bd:.2f}m"
             if is_target:
@@ -3667,8 +3730,8 @@ class VLAAgent(Node):
         near = []
         for i, r in enumerate(m.ranges):
             ang = m.angle_min + i * m.angle_increment
-            if -arc <= ang <= arc and math.isfinite(r) and r > m.range_min:
-                near.append(r)
+            if _off_front(ang) <= arc and math.isfinite(r) and r > m.range_min:
+                near.append(r)               # #65: arc centred on the FRONT
         if len(near) < GUARD_MIN_BEAMS:
             return None
         near.sort()
@@ -3897,6 +3960,12 @@ class VLAAgent(Node):
                     self.goal_tried = []         # a moved target deserves fresh angles
                 self.last_obj_xy = (ox, oy)
                 self.register_instances(self.target, [(ox, oy)])   # #17: keep memory fresh
+                if ARRIVE_IF_SEEN_M > 0 and dist <= ARRIVE_IF_SEEN_M:   # #64e: seen and close = arrived
+                    self.stop_base()
+                    self.notify(f"Arrived at the {self.target}.")
+                    self.mlog.log("ARRIVE", f"#64e {self.target} in frame at {dist:.2f} m "
+                                            f"(<= {ARRIVE_IF_SEEN_M} m) -- stopping here")
+                    self.end_navigate(); return
                 if not self.target_announced:
                     self.notify(f"Found the {self.target} — navigating to it.")
                     self.mlog.log("SIGHT", f"{self.target} at ({ox:.2f}, {oy:.2f}), "
