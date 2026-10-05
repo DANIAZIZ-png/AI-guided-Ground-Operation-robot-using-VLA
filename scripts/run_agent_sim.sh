@@ -1,8 +1,14 @@
 #!/bin/bash
+# Resolve the repository root from this script's own location, so the script
+# works from any working directory and from a clone anywhere on disk.
+VLA_ROOT="${VLA_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")/.." && pwd)}"
+source "$VLA_ROOT/config/paths.sh"
+VLA_YOLO_ENV="${VLA_YOLO_ENV:-$HOME/yolo-env}"
+VLA_GUI_CONFIG="${VLA_GUI_CONFIG:-$HOME/.vla_gui.json}"
 # ─────────────────────────────────────────────────────────────────
 #  run_agent_sim.sh  (v2) — start the VLA agent against the SIMULATION
 #
-#  RUN:  ~/run_agent_sim.sh          (in ubuntu22-gpu)
+#  RUN:  scripts/run_agent_sim.sh          (in ubuntu22-gpu)
 #
 #  WHAT CHANGED FROM v1
 #    v1 set ROS_DOMAIN_ID=42 to isolate sim from hardware. That BROKE the
@@ -16,7 +22,7 @@
 #    not running sim and hardware at the same time. That is what mattered.
 # ─────────────────────────────────────────────────────────────────
 
-AGENT=~/vla_agent_v28.py
+AGENT="$VLA_SRC_DIR/vla_agent_v28.py"
 # change this ONE line when a new agent version is delivered
 
 unset ROS_DOMAIN_ID

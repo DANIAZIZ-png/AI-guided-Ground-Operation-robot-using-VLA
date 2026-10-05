@@ -1,0 +1,82 @@
+{
+  "_comment": [
+    "SAVE AS  ~/.vla_gui.json   (leading dot)",
+    "Paths confirmed: everything lives in /home/danyalaziz, there is no ~/vla_ws.",
+    "Voice step: add your mic index later, e.g. --mic 3",
+    "  find it with:  python3 ~/voice_command.py --list-devices"
+  ],
+  "sim_mode": true,
+  "steps": [
+    {
+      "name": "YOLO-World server",
+      "where": "box:vla-box",
+      "cmd": "source ~/yolo-env/bin/activate && python ~/yolo_server.py",
+      "probe": "port:5001",
+      "wait_s": 120,
+      "enabled": true
+    },
+    {
+      "name": "Ollama (Qwen2.5-7B)",
+      "where": "host",
+      "cmd": "if pgrep -x ollama >/dev/null; then echo '[ok] ollama already running'; sleep infinity; else ollama serve; fi",
+      "probe": "port:11434",
+      "wait_s": 45,
+      "enabled": true
+    },
+    {
+      "name": "Gazebo + SLAM + Nav2 + RViz",
+      "where": "here",
+      "cmd": "ros2 launch turtlebot4_ignition_bringup turtlebot4_ignition.launch.py model:=lite slam:=true nav2:=true rviz:=true",
+      "probe": "topic:/map",
+      "wait_s": 300,
+      "enabled": true,
+      "sim_only": true
+    },
+    {
+      "name": "TurtleBot 4 Lite (real robot)",
+      "where": "here",
+      "cmd": "ros2 launch turtlebot4_bringup robot.launch.py model:=lite",
+      "probe": "topic:/odom",
+      "wait_s": 120,
+      "enabled": true,
+      "real_only": true
+    },
+    {
+      "name": "SLAM + Nav2 (real robot only)",
+      "where": "here",
+      "cmd": "ros2 launch turtlebot4_navigation slam.launch.py",
+      "probe": "topic:/map",
+      "wait_s": 120,
+      "enabled": true,
+      "real_only": true
+    },
+    {
+      "name": "Spawn demo objects",
+      "where": "here",
+      "cmd": "python3 ~/spawn_objects.py",
+      "probe": "none",
+      "wait_s": 60,
+      "enabled": true,
+      "oneshot": true,
+      "sim_only": true
+    },
+    {
+      "name": "VLA agent (v10)",
+      "where": "here",
+      "cmd": "cd ~ && python3 vla_agent_v10.py",
+      "probe": "topic:/vla/status",
+      "wait_s": 90,
+      "enabled": true,
+      "interactive": true
+    },
+    {
+      "name": "Voice input (Whisper)",
+      "where": "here",
+      "cmd": "cd ~ && python3 voice_command.py --mode ptt",
+      "probe": "topic:/vla/voice/state",
+      "wait_s": 240,
+      "enabled": true,
+      "interactive": true
+    }
+  ]
+}

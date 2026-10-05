@@ -1,0 +1,78 @@
+# Packaging for the five VLA packages.
+#
+#   pip install -e src
+#
+# installs all five and puts their entry points on PATH:
+#
+#   vla-agent        the ROS node and state machine
+#   vla-brain        interactive prompt for the reasoning layer (no ROS needed)
+#   vla-perception   the open-vocabulary detector, served over HTTP
+#   vla-voice        push-to-talk transcription
+#   vla-gui          the operator console
+#
+# ONE pyproject rather than five
+#   The reorg brief asked for a pyproject per package. Five separate
+#   distributions would mean five near-identical files, five version numbers to
+#   keep in step, and -- because vla_agent imports vla_brain -- a dependency
+#   between two of them that has to be re-pinned on every change. They are
+#   always installed and always deployed together, so one distribution with
+#   five packages gives the same import boundaries and the same entry points
+#   with none of that. Split them later if any package ever ships on its own.
+#
+# Dependencies are NOT pinned here on purpose
+#   The versions that produced the recorded results are in env/MANIFEST.md and
+#   env/pip-freeze_*.txt, and the containers in docker/ install from those.
+#   Pinning them again here would be a second source of truth that silently
+#   drifts. rclpy is deliberately absent: it comes from the ROS installation,
+#   not from pip.
+
+[build-system]
+# >=64: PEP 660 `build_editable` landed in setuptools 64.0.0, and without it
+# `pip install -e` fails on a project that has no setup.py.
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vla-ground-robot"
+version = "1.0.0"
+description = "Natural-language control of a TurtleBot 4: local speech, a local LLM, open-vocabulary detection and Nav2"
+readme = "../README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "DANIAZIZ-png" }]
+keywords = ["robotics", "ros2", "vla", "turtlebot4", "nav2", "llm"]
+
+dependencies = [
+  "numpy",
+  "requests",
+  "opencv-python",
+]
+
+[project.optional-dependencies]
+perception = ["ultralytics", "torch", "torchvision", "flask", "pillow"]
+voice = ["faster-whisper", "sounddevice"]
+gui = ["PySide6"]
+dev = ["pytest", "ruff"]
+
+[project.scripts]
+vla-agent = "vla_agent.main:main"
+vla-brain = "vla_brain.brain:main"
+vla-perception = "vla_perception.server:main"
+vla-voice = "vla_voice.listener:main"
+vla-gui = "vla_gui.app:main"
+
+[tool.setuptools]
+# Explicit, because src/ also holds the thin compatibility shims
+# (vla_agent_v28.py, llm_brain.py, yolo_server.py, voice_command.py,
+# vla_gui_v2.py) and vla_paths.py, which are modules rather than packages.
+packages = ["vla_agent", "vla_brain", "vla_perception", "vla_voice", "vla_gui"]
+py-modules = ["vla_paths", "vla_agent_v28", "llm_brain", "yolo_server", "voice_command", "vla_gui_v2"]
+
+# Lint configuration lives in the REPOSITORY ROOT ruff.toml, not here.
+#
+# Ruff resolves config per file by walking up to the nearest pyproject.toml
+# containing a [tool.ruff] section. With one here, everything under src/ used
+# this file and silently ignored the root ruff.toml -- so `ruff check src` and
+# `ruff check tests` enforced different rules, and CI disagreed with a local
+# run. One config at the root avoids that, and avoids two rule lists drifting
+# apart.

@@ -310,9 +310,16 @@ Do this in every new shell before any ROS command.
   + interface whitelist 10.42.0.1), set by `robot_env.sh` and
   `robot_mode.sh`. The old `fastdds_super_client.xml` is untouched.
 - `/opt` nav2.yaml and slam.yaml are back to STOCK (restored from
-  `~/nav2.yaml.pre_v25` and `~/slam.yaml.bak`). The tuned versions are
-  `~/nav2.yaml.today` and `~/slam.yaml.today`, not in use.
+  `nav2.yaml.pre_v25` and `slam.yaml.bak`, now in `archive/params/`).
   `nav2_hw.launch.py` uses the stock `/opt` nav2.yaml.
+- **CORRECTED 5 Oct 2026: `nav2.yaml.today` and `slam.yaml.today` were NOT
+  tuned.** They are byte-identical to the stock backups — `nav2.yaml.today`
+  to `nav2.yaml.pre_v25`, `slam.yaml.today` to `slam.yaml.bak` (verified by
+  sha256). Either the tuning was reverted before being saved, or it was never
+  written to those files. There is no preserved tuning. Both duplicates were
+  deleted during the repository reorg; the originals they copied are in
+  `archive/params/`. The gentler-speed profile that IS real and usable is
+  `config/nav2_hw_slow.yaml` (0.15 m/s, 0.4 rad/s), still untested on hardware.
 - `~/slam_vla.yaml` (the live SLAM params) has
   `minimum_travel_distance: 0.2`, which contradicts the 0.0 rule
   above, yet the map frame stayed valid through 45+ min docked on

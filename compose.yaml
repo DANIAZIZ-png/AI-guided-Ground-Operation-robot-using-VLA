@@ -1,0 +1,234 @@
+# Compose file for the VLA ground robot. Works with Podman and with Docker.
+#
+#   make sim          simulation stack
+#   make robot        hardware stack
+#   make stop         everything down
+#
+# or directly:
+#
+#   podman compose --profile sim   up
+#   docker compose  --profile robot up
+#
+# PROFILES
+#   sim    ollama, perception, sim (Gazebo + SLAM + Nav2), agent, gui, voice
+#   robot  ollama, perception, agent-robot, gui-robot, voice-robot
+#
+#   The simulation and the hardware need OPPOSITE DDS discovery settings and
+#   each fails SILENTLY under the other's -- no error, just an empty topic list.
+#   They are therefore separate services with VLA_MODE fixed, rather than one
+#   service whose mode comes from the environment: a profile and an env var that
+#   have to agree is exactly the kind of footgun that cost days on this project.
+#
+# EVERY SERVICE USES HOST NETWORKING
+#   Not laziness. ROS 2 discovery needs either multicast (simulation) or a
+#   reachable unicast discovery server on the robot's subnet (hardware), and
+#   neither survives a default compose bridge. It is also how the system
+#   actually ran: distrobox uses the host network. A consequence is that
+#   `ports:` is meaningless here -- the services bind the host's ports directly
+#   (Ollama 11434, the detector 5001).
+#
+# GPU
+#   Podman needs the NVIDIA Container Toolkit with a CDI spec:
+#       sudo nvidia-ctk cdi generate --output=/etc/cdi/nvidia.yaml
+#   Docker needs the same toolkit and uses --gpus all. Both are expressed below
+#   through `devices` (CDI) with a Docker-compatible fallback noted inline.
+
+x-ros-image: &ros-image
+  image: vla-ros:1.0
+  build:
+    context: .
+    dockerfile: docker/ros.Dockerfile
+  network_mode: host
+  ipc: host          # DDS shared-memory transport between the containers
+  init: true
+  volumes:
+    - ./logs:/opt/vla/logs
+    - ./models:/opt/vla/models:ro
+    # The source is mounted read-write so an edit on the host takes effect
+    # without a rebuild. The packages are pip-installed editable in the image.
+    - ./src:/opt/vla/src
+    - ./config:/opt/vla/config
+    - ./launch:/opt/vla/launch
+    - ./maps:/opt/vla/maps
+    - ./tools:/opt/vla/tools
+    - ./scripts:/opt/vla/scripts
+    - ./tests:/opt/vla/tests
+  environment: &ros-env
+    VLA_ROOT: /opt/vla
+    VLA_LOG_DIR: /opt/vla/logs
+    VLA_MODEL_DIR: /opt/vla/models
+    VLA_OLLAMA_HOST: http://127.0.0.1:11434
+    YOLO_URL: http://127.0.0.1:5001
+
+x-gpu: &gpu
+  # CDI device, which is what Podman understands. Docker Compose also accepts
+  # this key; if your Docker is older, replace with:
+  #   deploy: { resources: { reservations: { devices: [{ capabilities: [gpu] }] } } }
+  devices:
+    - nvidia.com/gpu=all
+
+x-x11: &x11
+  # Forwarding the host X socket, for the windows that must be visible: the
+  # operator console, RViz, and the agent's own xterm (it needs a real tty --
+  # a pipe silently drops it into headless mode and manual override stops
+  # working).
+  environment:
+    DISPLAY: ${DISPLAY:-:0}
+    QT_X11_NO_MITSHM: "1"
+  volumes:
+    - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    - ${XAUTHORITY:-/dev/null}:/tmp/.docker.xauth:ro
+
+services:
+
+  # -----------------------------------------------------------------------
+  # The local LLM. Official image; the model is pulled into a named volume.
+  # -----------------------------------------------------------------------
+  ollama:
+    image: ollama/ollama:latest
+    profiles: ["sim", "robot"]
+    network_mode: host
+    <<: *gpu
+    volumes:
+      - ollama-models:/root/.ollama
+    environment:
+      # keep_alive -1 keeps the model resident. Without it the first command
+      # after a five-minute pause costs 34 s instead of 0.15 s, which on demo
+      # day looks like the robot has hung.
+      OLLAMA_KEEP_ALIVE: "-1"
+    healthcheck:
+      test: ["CMD-SHELL", "ollama list >/dev/null 2>&1 || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  # -----------------------------------------------------------------------
+  # The open-vocabulary detector.
+  # -----------------------------------------------------------------------
+  perception:
+    image: vla-perception:1.0
+    build:
+      context: .
+      dockerfile: docker/perception.Dockerfile
+    profiles: ["sim", "robot"]
+    network_mode: host
+    <<: *gpu
+    volumes:
+      - ./models:/opt/vla/models:ro
+      - ./logs:/opt/vla/logs
+      - ./src:/opt/vla/src
+    environment:
+      VLA_ROOT: /opt/vla
+      VLA_MODEL_DIR: /opt/vla/models
+      VLA_LOG_DIR: /opt/vla/logs
+      YOLO_PORT: "5001"
+
+  # -----------------------------------------------------------------------
+  # SIM PROFILE
+  # -----------------------------------------------------------------------
+  sim:
+    <<: [*ros-image, *x11]
+    profiles: ["sim"]
+    environment:
+      <<: *ros-env
+      VLA_MODE: sim
+      # 1 runs Gazebo under xvfb. Needed for CI and the smoke test because the
+      # TurtleBot 4 ignition launch builds its own ign_args and gives no way to
+      # ask Gazebo for headless mode.
+      VLA_HEADLESS: ${VLA_HEADLESS:-0}
+      DISPLAY: ${DISPLAY:-:0}
+      QT_X11_NO_MITSHM: "1"
+    command: ["ros2", "launch", "vla_bringup", "sim.launch.py"]
+
+  agent:
+    <<: *ros-image
+    profiles: ["sim"]
+    depends_on: [perception, ollama]
+    environment:
+      <<: *ros-env
+      VLA_MODE: sim
+    # stdin_open + tty: the agent reads from the terminal for manual override
+    # (#60) and checks for a real tty. A pipe puts it back into headless mode.
+    stdin_open: true
+    tty: true
+    command: ["python3", "-u", "/opt/vla/src/vla_agent_v28.py"]
+
+  gui:
+    <<: [*ros-image, *x11]
+    profiles: ["sim"]
+    environment:
+      <<: *ros-env
+      VLA_MODE: sim
+      VLA_GUI_CONFIG: /opt/vla/config/vla_gui.sim.json
+      DISPLAY: ${DISPLAY:-:0}
+      QT_X11_NO_MITSHM: "1"
+    command: ["python3", "-u", "/opt/vla/src/vla_gui_v2.py"]
+
+  voice:
+    <<: *ros-image
+    profiles: ["sim"]
+    devices:
+      - /dev/snd:/dev/snd
+    environment:
+      <<: *ros-env
+      VLA_MODE: sim
+    command: ["bash", "/opt/vla/tools/voice_xterm.sh"]
+
+  # -----------------------------------------------------------------------
+  # ROBOT PROFILE
+  # -----------------------------------------------------------------------
+  # No `sim` service: the robot is the robot. These differ from the sim
+  # services only in VLA_MODE, which selects config/robot.env -- the discovery
+  # server, the interface-whitelisted Fast DDS profile and the /robot1
+  # namespace.
+  #
+  # The Fast DDS XML is already inside ./config, which is mounted, so there is
+  # nothing extra to mount: config/robot.env points
+  # FASTRTPS_DEFAULT_PROFILES_FILE at /opt/vla/config/fastdds_hw_wifi_only.xml.
+  agent-robot:
+    <<: *ros-image
+    profiles: ["robot"]
+    depends_on: [perception, ollama]
+    environment:
+      <<: *ros-env
+      VLA_MODE: robot
+    stdin_open: true
+    tty: true
+    # The hardware launcher, so the hardware-only VLA_* flags are applied in one
+    # place rather than duplicated here and drifting.
+    command: ["bash", "/opt/vla/tools/agent_xterm.sh"]
+
+  gui-robot:
+    <<: [*ros-image, *x11]
+    profiles: ["robot"]
+    environment:
+      <<: *ros-env
+      VLA_MODE: robot
+      VLA_GUI_CONFIG: /opt/vla/config/vla_gui.robot.json
+      DISPLAY: ${DISPLAY:-:0}
+      QT_X11_NO_MITSHM: "1"
+    command: ["python3", "-u", "/opt/vla/src/vla_gui_v2.py"]
+
+  voice-robot:
+    <<: *ros-image
+    profiles: ["robot"]
+    devices:
+      - /dev/snd:/dev/snd
+    environment:
+      <<: *ros-env
+      VLA_MODE: robot
+    command: ["bash", "/opt/vla/tools/voice_xterm.sh"]
+
+  # Nav2 and SLAM for the hardware, with the storm fixes. Separate from the
+  # agent so either can be restarted without the other.
+  nav-robot:
+    <<: *ros-image
+    profiles: ["robot"]
+    environment:
+      <<: *ros-env
+      VLA_MODE: robot
+    command: ["ros2", "launch", "vla_bringup", "robot.launch.py"]
+
+volumes:
+  ollama-models:

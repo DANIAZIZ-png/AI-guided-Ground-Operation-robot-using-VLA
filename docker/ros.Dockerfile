@@ -1,0 +1,206 @@
+# syntax=docker/dockerfile:1
+#
+# The ROS side of the stack: Nav2, SLAM Toolbox, the TurtleBot 4 packages, the
+# Ignition simulation bridge, the agent and the operator console.
+#
+#   podman build -f docker/ros.Dockerfile -t vla-ros:1.0 .
+#   docker build  -f docker/ros.Dockerfile -t vla-ros:1.0 .
+#
+# Build context is the REPOSITORY ROOT, because it copies env/ and docker/.
+#
+# WHAT THIS REPLACES
+#   env/MANIFEST.md records that the ROS container ran from a local Podman
+#   snapshot (localhost/ubuntu22-snapshot:latest, 9.88 GB) that nobody else can
+#   pull. That was the biggest reproducibility hole in the project. This image
+#   is built from a public base plus an exact, verified package list.
+#
+# WHY ubuntu:22.04 AND NOT ros:humble
+#   The ros:humble images carry ROS packages from whenever the image was built,
+#   which is newer than the versions that produced the recorded results. Mixing
+#   them with pinned versions means either apt downgrades or a silent mismatch
+#   on anything not in the pin list. Starting from plain Ubuntu and adding only
+#   the 2026-05-14 snapshot means nothing in the image can be newer than the
+#   snapshot.
+
+FROM ubuntu:22.04
+
+# ---------------------------------------------------------------------------
+# Base system
+# ---------------------------------------------------------------------------
+ENV DEBIAN_FRONTEND=noninteractive \
+    LANG=C.UTF-8 \
+    LC_ALL=C.UTF-8
+
+# Retry downloads. This image pulls ~1,500 .deb files, so a single truncated
+# response fails the whole layer -- which is what happened on the first real
+# build here: apt got 134 bytes instead of 3074 for libomp-dev and reported
+# "File has unexpected size ... Mirror sync in progress?". Nothing was wrong
+# with the Dockerfile; the link was. Anyone building this over an imperfect
+# connection will hit the same thing.
+RUN printf 'Acquire::Retries "6";\nAcquire::http::Timeout "60";\nAcquire::https::Timeout "60";\nAcquire::http::No-Cache "true";\n' \
+      > /etc/apt/apt.conf.d/99-vla-retries
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        ca-certificates \
+        curl \
+        gnupg2 \
+        locales \
+        tzdata \
+    && locale-gen en_US.UTF-8 \
+    && rm -rf /var/lib/apt/lists/*
+
+# ---------------------------------------------------------------------------
+# The ROS apt source, pinned to a dated snapshot
+# ---------------------------------------------------------------------------
+# All 399 packages in docker/ros-packages.txt match this snapshot EXACTLY --
+# verified package by package; see env/ROS_SNAPSHOT.md for the method and the
+# command to re-check it.
+#
+# http, not https: snapshots.ros.org resolves to CloudFront and its certificate
+# does not cover the hostname ("no alternative certificate subject name matches
+# target host name"). [trusted=yes] is acceptable here precisely because every
+# package version is pinned below and verified against the recorded manifest --
+# a tampered mirror could not satisfy the pins.
+ARG ROS_SNAPSHOT=2026-05-14
+ENV ROS_DISTRO=humble
+
+RUN echo "deb [trusted=yes] http://snapshots.ros.org/${ROS_DISTRO}/${ROS_SNAPSHOT}/ubuntu jammy main" \
+      > /etc/apt/sources.list.d/ros2-snapshot.list
+
+# ---------------------------------------------------------------------------
+# ROS, at the recorded versions
+# ---------------------------------------------------------------------------
+# One source of truth: the list is generated from
+# env/ros-humble-packages_ubuntu22-gpu.txt. All 399 are pinned, including
+# transitive dependencies, because dependencies resolved at image build time are
+# exactly what drifts. The build FAILS if any pin cannot be satisfied, which is
+# the point -- a silent substitution would be worse than a broken build.
+COPY docker/ros-packages.txt /tmp/ros-packages.txt
+# The colcon build tooling, needed to build vla_bringup. It is in a SEPARATE
+# list because env/ros-humble-packages_ubuntu22-gpu.txt was generated with
+# `grep ros-humble`, so the python3-colcon-* packages were excluded by
+# construction -- a gap in the manifest, found when this image first failed with
+# "colcon: not found". All 24 are pinned and all 24 match the same 2026-05-14
+# snapshot exactly.
+COPY docker/ros-tooling-packages.txt /tmp/ros-tooling-packages.txt
+
+# The retry loop is belt-and-braces on top of Acquire::Retries: that setting
+# retries a failed request, but a mirror serving a wrong-SIZED file needs the
+# partial download discarded and the index refreshed, which is what
+# `apt-get clean && apt-get update` between attempts does.
+RUN for attempt in 1 2 3; do \
+        echo "=== apt attempt $attempt ===" \
+        && apt-get update \
+        && xargs -a /tmp/ros-packages.txt apt-get install -y --no-install-recommends \
+        && xargs -a /tmp/ros-tooling-packages.txt apt-get install -y --no-install-recommends \
+        && break \
+        || { echo "attempt $attempt failed; clearing partials and retrying"; \
+             apt-get clean; rm -rf /var/lib/apt/lists/*; sleep 10; }; \
+    done \
+    && dpkg -l | grep -q '^ii  ros-humble-navigation2' \
+    && command -v colcon >/dev/null \
+    && rm -rf /var/lib/apt/lists/* /tmp/ros-packages.txt /tmp/ros-tooling-packages.txt
+# The two checks after the loop matter: without them a run where all three
+# attempts failed would still exit 0, and the image would be built missing ROS.
+
+# ---------------------------------------------------------------------------
+# Non-ROS packages the project actually uses
+# ---------------------------------------------------------------------------
+#   xvfb     headless Gazebo and RViz. The TurtleBot 4 ignition launch builds
+#            its own ign_args and offers no way to pass -s or
+#            --headless-rendering, so headless has to come from outside the
+#            launch system: `xvfb-run -a ros2 launch ...`. Installed here so the
+#            setup does not depend on one machine having it.
+#   xterm    the agent and voice launchers need a real tty. A pipe silently puts
+#            the agent back into headless mode and manual override (#60) stops
+#            working, so `xterm -e` is not cosmetic.
+#   iproute2 the Wi-Fi throughput check (awk over /proc/net/dev needs no tools,
+#            but `ip` is used by the hotspot guard)
+#
+# NOTE: ping is deliberately NOT relied upon. It exists but exits 2 with no
+# output for every address inside a container, because containers are not
+# granted the raw socket ICMP needs -- identically whether the robot is up or
+# unplugged. Reachability is tested with bash's /dev/tcp instead.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        python3-pip \
+        python3-opencv \
+        python3-requests \
+        python3-pil \
+        xvfb \
+        xterm \
+        x11-utils \
+        iproute2 \
+        less \
+        nano \
+    && rm -rf /var/lib/apt/lists/*
+
+# Python packages that are not packaged for 22.04.
+#
+# pip and setuptools are upgraded FIRST and deliberately. Ubuntu 22.04 ships
+# pip 22.0.2 with a setuptools too old to provide PEP 660's `build_editable`
+# hook, and `pip install -e` on a pyproject-only project then fails with
+# "build backend is missing the 'build_editable' hook". This is what broke the
+# first build of this image.
+#
+# setuptools is NOT capped. The usual reason to cap it below 66 on Humble is
+# `setup.py develop` breaking in ament_python packages -- vla_bringup is
+# ament_cmake and every ROS package here comes from apt, so nothing in this
+# image builds through setup.py.
+RUN python3 -m pip install --no-cache-dir --upgrade pip setuptools wheel \
+    && python3 -m pip install --no-cache-dir "pytest>=7,<9" ruff
+
+# ---------------------------------------------------------------------------
+# The project
+# ---------------------------------------------------------------------------
+WORKDIR /opt/vla
+COPY src/ /opt/vla/src/
+COPY config/ /opt/vla/config/
+COPY launch/ /opt/vla/launch/
+COPY maps/ /opt/vla/maps/
+COPY tools/ /opt/vla/tools/
+COPY scripts/ /opt/vla/scripts/
+COPY vla_bringup/ /opt/vla/vla_bringup/
+COPY tests/ /opt/vla/tests/
+COPY env/ /opt/vla/env/
+
+# VLA_ROOT is set explicitly so config/paths.sh does not have to guess, and so
+# the two output directories land on mounted volumes rather than inside the
+# image layer.
+ENV VLA_ROOT=/opt/vla \
+    VLA_LOG_DIR=/opt/vla/logs \
+    VLA_MODEL_DIR=/opt/vla/models \
+    PYTHONPATH=/opt/vla/src
+
+RUN mkdir -p /opt/vla/logs /opt/vla/models
+
+# Install the five packages in editable mode so the mounted source wins at run
+# time while the entry points (vla-agent, vla-brain, ...) are on PATH.
+#
+# --no-deps IS LOAD-BEARING. Without it pip resolves this project's declared
+# dependencies and replaced apt's numpy 1.21.5 with numpy 2.2.6 and installed
+# opencv-python 5.0.0.93 over python3-opencv. The ROS Humble Python extensions
+# are built against numpy 1.x, so a numpy 2 ABI underneath rclpy and cv_bridge
+# is a real hazard, and the recorded container ran numpy 1.26.4
+# (env/pip-freeze_ubuntu22-gpu.txt). numpy is therefore pinned to that exact
+# version and everything else comes from apt: python3-opencv provides cv2, and
+# apt's python3-requests is 2.25.1, which is what the manifest records.
+RUN python3 -m pip install --no-cache-dir "numpy==1.26.4" \
+    && python3 -m pip install --no-cache-dir --no-deps -e /opt/vla/src \
+    && python3 -c "import numpy, cv2; print('numpy', numpy.__version__, '/ cv2', cv2.__version__)"
+
+# Build vla_bringup so `ros2 launch vla_bringup robot.launch.py` works.
+# The symlink matters: CMakeLists resolves the repository root by realpath'ing
+# its own directory and going up, which is how the package finds launch/,
+# config/ and maps/ at the repo root.
+RUN . /opt/ros/humble/setup.sh \
+    && mkdir -p /opt/ros2_ws/src \
+    && ln -s /opt/vla/vla_bringup /opt/ros2_ws/src/vla_bringup \
+    && cd /opt/ros2_ws \
+    && colcon build --packages-select vla_bringup \
+    && rm -rf build log
+
+COPY docker/ros-entrypoint.sh /usr/local/bin/ros-entrypoint.sh
+RUN chmod +x /usr/local/bin/ros-entrypoint.sh
+
+ENTRYPOINT ["/usr/local/bin/ros-entrypoint.sh"]
+CMD ["bash"]

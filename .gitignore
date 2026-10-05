@@ -1,3 +1,12 @@
+# --- runtime output directories (VLA_LOG_DIR / VLA_MODEL_DIR defaults) ---
+/logs/
+/models/
+# NOTE: sim_objects/ is NOT ignored -- cup.sdf, red_box.sdf and door.sdf are
+# source assets that tools/spawn_objects.py spawns. Only runtime output is ignored.
+
+# --- local overrides ---
+config/.env
+
 # --- model weights: never commit (hashes are in README.md and env/MANIFEST.md) ---
 *.pt
 *.pth
@@ -35,3 +44,6 @@ Videos/
 *.swp
 *~
 .DS_Store
+
+# tool venv created by `make setup` (podman-compose); not part of the project
+.venv-tools/

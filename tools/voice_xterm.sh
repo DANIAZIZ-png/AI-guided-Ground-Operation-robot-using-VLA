@@ -9,10 +9,33 @@
 # "Library libcublas.so.12 is not found or cannot be loaded". Putting the two
 # directories on LD_LIBRARY_PATH fixes it. voice_command.py itself is unchanged
 # (it is shared with the simulation).
-source /home/danyalaziz/robot_env.sh
-SITE=/home/danyalaziz/.local/lib/python3.10/site-packages
-export LD_LIBRARY_PATH="$SITE/nvidia/cublas/lib:$SITE/nvidia/cudnn/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
-cd /home/danyalaziz
+VLA_ROOT="${VLA_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")/.." && pwd)}"
+source "$VLA_ROOT/config/robot.env"
+# The nvidia/ pip packages sit in whichever site-packages THIS interpreter uses,
+# and that differs between the host and the container, so ask Python instead of
+# hard-coding the directory. Override with VLA_SITE_PACKAGES if needed.
+SITE="${VLA_SITE_PACKAGES:-$(python3 - <<'PY'
+import os, site
+cands = []
+try:
+    cands.append(site.getusersitepackages())
+except Exception:
+    pass
+try:
+    cands += site.getsitepackages()
+except Exception:
+    pass
+print(next((d for d in cands if os.path.isdir(os.path.join(d, "nvidia"))), ""))
+PY
+)}"
+if [ -n "$SITE" ]; then
+    export LD_LIBRARY_PATH="$SITE/nvidia/cublas/lib:$SITE/nvidia/cudnn/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+else
+    echo "WARNING: the pip nvidia/ libraries were not found. Every transcription" >&2
+    echo "         will fail with 'Library libcublas.so.12 is not found'." >&2
+    echo "         Set VLA_SITE_PACKAGES to the site-packages holding nvidia/." >&2
+fi
+cd "$VLA_ROOT"
 # stdin from /dev/null => the node runs HEADLESS (GUI hold-to-talk on
 # /vla/voice/trigger is the only trigger), while its output stays visible here.
 # VLA_MIC overrides the device; "pulse" follows the system default input.
@@ -34,6 +57,6 @@ export VLA_VOICE_PROMPT="${VLA_VOICE_PROMPT:-Robot commands: go to the chair. go
 # Set VLA_VOICE_LAZY_MIC=0 to go back to the always-open microphone.
 export VLA_VOICE_LAZY_MIC="${VLA_VOICE_LAZY_MIC:-1}"
 export VLA_VOICE_LAZY_WARMUP="${VLA_VOICE_LAZY_WARMUP:-0.35}"
-python3 -u /home/danyalaziz/voice_command.py --mode ptt --mic "${VLA_MIC:-pulse}" --model "${VLA_WHISPER:-medium.en}" --min-logprob "${VLA_MIN_LOGPROB:--0.75}" < /dev/null 2>&1 \
-  | tee -a "/home/danyalaziz/vla_logs/voice_$(date +%Y%m%d).log"
+python3 -u "$VLA_SRC_DIR/voice_command.py" --mode ptt --mic "${VLA_MIC:-pulse}" --model "${VLA_WHISPER:-medium.en}" --min-logprob "${VLA_MIN_LOGPROB:--0.75}" < /dev/null 2>&1 \
+  | tee -a "$VLA_LOG_DIR/voice_$(date +%Y%m%d).log"
 echo; echo "[voice exited -- window kept open]"; exec bash

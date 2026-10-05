@@ -2,9 +2,9 @@
 # feed_http.py -- serve a ROS compressed-image topic to a web browser as MJPEG.
 # 21 Sep 2026. HARDWARE tool. Standard library + rclpy only (no Flask needed).
 #
-#   python3 ~/vla_tools/feed_http.py                       # annotated feed (YOLO boxes)
-#   python3 ~/vla_tools/feed_http.py raw                   # raw camera
-#   python3 ~/vla_tools/feed_http.py /some/other/compressed 8082
+#   python3 tools/feed_http.py                       # annotated feed (YOLO boxes)
+#   python3 tools/feed_http.py raw                   # raw camera
+#   python3 tools/feed_http.py /some/other/compressed 8082
 #
 # Then open   http://127.0.0.1:8081/          (page)      in the PC's browser
 #             http://127.0.0.1:8081/stream    (bare MJPEG)

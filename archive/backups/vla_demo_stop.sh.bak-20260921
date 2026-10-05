@@ -1,0 +1,94 @@
+#!/bin/bash
+# =============================================================================
+#  vla_demo_stop.sh  --  shut the hardware demo down and put the robot back
+#  on its charger.  Written 11 Sep 2026.  HARDWARE ONLY.  Run on the HOST.
+#
+#  Order matters:
+#    1  stop the agent, voice node and GUI first -- nothing may publish
+#       velocities while the Dock action drives the robot
+#    2  re-dock with ~/redock.py (needs SLAM + Nav2 still running; long-lived
+#       client, ~30-100 s).  Verifies is_docked AND charging current > 0.
+#       The Dock action can ABORT (10 Sep) -- if it does, this script says so
+#       loudly and leaves the robot where it is for you to dock by hand.
+#    3  vla_tools/shutdown_stack.sh (robot_mode.sh + vla_kill.sh, by path):
+#       kills SLAM, Nav2, RViz and restarts the ROS daemon in robot mode
+#    4  the YOLO server (vla_kill.sh does not cover it), leftover xterms
+#
+#  RUN IT AS  ~/vla_demo_stop.sh  from a plain terminal. Never inline it in a
+#  command whose text names a ROS process (rviz2, ros2 launch, vla_agent ...):
+#  vla_kill.sh group-kills any shell whose command line contains those words,
+#  and that includes the shell running this script (CLAUDE.md).
+#
+#  Options:   --no-dock   skip step 2 (robot already docked by hand, or you
+#                         want it left where it is)
+# =============================================================================
+set -u
+H=/home/danyalaziz
+T=$H/vla_tools
+LOGDIR=$H/vla_logs
+PI=10.42.0.169
+NODOCK=0; [ "${1:-}" = "--no-dock" ] && NODOCK=1
+BOLD=$'\e[1m'; GRN=$'\e[32m'; RED=$'\e[31m'; YEL=$'\e[33m'; CYN=$'\e[36m'; RST=$'\e[0m'
+say()  { printf '%s[%s]%s %s\n' "$CYN" "$(date +%T)" "$RST" "$*"; }
+warn() { printf '%s[%s] WARNING:%s %s\n' "$YEL" "$(date +%T)" "$RST" "$*"; }
+ros()  { distrobox enter ubuntu22-gpu -- bash -c "source $H/robot_env.sh; $1" < /dev/null 2>&1; }   # < /dev/null: no pty, see vla_demo.sh
+# kill every process whose command line matches PATTERN (bracket trick keeps
+# this script's own line out of the match), INT first, then KILL.
+stop_pat() {
+  local pat=$1 p
+  for p in $(pgrep -f "$pat"); do kill -INT "$p" 2>/dev/null; done
+  sleep 3
+  for p in $(pgrep -f "$pat"); do kill -9 "$p" 2>/dev/null; done
+}
+
+say "${BOLD}VLA demo shutdown${RST}"
+
+# ---- 1. operator-side processes first -----------------------------------
+say "1/4  stopping the agent, voice node and GUI"
+stop_pat "[v]la_agent_v28.py"
+stop_pat "[v]oice_command.py"
+stop_pat "[v]la_gui_v2.py"
+for p in $(pgrep -f "[x]term .*-T (VLA AGENT|VOICE hw)"); do kill "$p" 2>/dev/null; done
+say "     agent=$(pgrep -c -f '[v]la_agent_v28') voice=$(pgrep -c -f '[v]oice_command') gui=$(pgrep -c -f '[v]la_gui_v2')  (all should be 0)"
+
+# ---- 2. re-dock ----------------------------------------------------------
+if [ $NODOCK = 1 ]; then
+  say "2/4  --no-dock given: leaving the robot where it is"
+else
+  DOCKED=$(ros "timeout 15 ros2 topic echo /robot1/dock_status --once" | awk '/is_docked/{print $2}')
+  if [ "$DOCKED" = "true" ]; then
+    say "2/4  robot is already docked"
+  elif ! pgrep -f "[c]omponent_container_isolated|[b]t_navigator" >/dev/null || ! pgrep -f "[s]lam_toolbox" >/dev/null; then
+    warn "2/4  Nav2 or SLAM is not running, so redock.py cannot drive to the dock. Dock the robot by hand."
+  else
+    say "2/4  re-docking with redock.py (Nav2 to the staging pose, then the Dock action). ROBOT WILL MOVE."
+    say "     this needs the dock at the map origin, i.e. SLAM started while the robot was docked (vla_demo.sh does that)"
+    ros "timeout 420 python3 $H/redock.py" | grep -vE '^\s*$' | tail -6 | sed 's/^/     /'
+    DOCKED=$(ros "timeout 15 ros2 topic echo /robot1/dock_status --once" | awk '/is_docked/{print $2}')
+    CUR=$(ros "timeout 15 ros2 topic echo /robot1/battery_state --once" | awk '/^current/{print $2}')
+    if [ "$DOCKED" = "true" ] && awk -v c="${CUR:-0}" 'BEGIN{exit !(c > 0)}'; then
+      printf '%s     DOCKED and charging (current %s A)%s\n' "$GRN" "$CUR" "$RST"
+    else
+      printf '\n%s%s  !!! THE ROBOT IS NOT ON THE CHARGER (is_docked=%s, current=%s A).%s\n' "$RED" "$BOLD" "${DOCKED:-?}" "${CUR:-?}" "$RST"
+      printf '%s%s  !!! The Dock action can abort (10 Sep). Please dock it BY HAND now.%s\n\n' "$RED" "$BOLD" "$RST"
+    fi
+  fi
+fi
+
+# ---- 3. the ROS stack ----------------------------------------------------
+say "3/4  stopping SLAM, Nav2, RViz; restarting the daemon in robot mode"
+distrobox enter ubuntu22-gpu -- bash "$T/shutdown_stack.sh" < /dev/null 2>&1 | tail -3 | sed 's/^/     /'   # the daemon vla_kill.sh restarts must outlive this call
+for p in $(pgrep -f "[c]omponent_container_isolated"); do kill -9 "$p" 2>/dev/null; done
+
+# ---- 4. YOLO and windows -------------------------------------------------
+say "4/4  stopping the YOLO server and leftover windows"
+for p in $(pgrep -f "[y]olo_server.py"); do kill -9 "$p" 2>/dev/null; done
+sleep 1
+for p in $(pgrep -f "[x]term .*-T (SLAM hw|NAV2 hw|NAV2 hw composed|RVIZ hw|VLA AGENT|VOICE hw)"); do kill "$p" 2>/dev/null; done
+
+echo
+say "left running: slam=$(pgrep -c -f '[s]lam_toolbox') nav2=$(pgrep -c -f '[c]omponent_container_isolated|[b]t_navigator') rviz=$(pgrep -c -f '[r]viz2 -d') agent=$(pgrep -c -f '[v]la_agent') yolo=$(pgrep -c -f '[y]olo_server') gui=$(pgrep -c -f '[v]la_gui') voice=$(pgrep -c -f '[v]oice_command')   (all 0 = clean)"
+say "ollama left running on purpose (model stays pinned)."
+B=$(ros "timeout 15 ros2 topic echo /robot1/battery_state --once" | awk '/^percentage/{printf "%d %%", $2*100} /^current/{c=$2} END{printf "  current %s A", c}')
+say "robot: battery $B"
+exit 0

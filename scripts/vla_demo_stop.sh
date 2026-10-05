@@ -21,15 +21,16 @@
 #                         want it left where it is)
 # =============================================================================
 set -u
-H=/home/danyalaziz
-T=$H/vla_tools
-LOGDIR=$H/vla_logs
-PI=10.42.0.169
+VLA_ROOT="${VLA_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")/.." && pwd)}"
+source "$VLA_ROOT/config/paths.sh"
+T="$VLA_TOOLS_DIR"
+LOGDIR="$VLA_LOG_DIR"
+PI=${VLA_ROBOT_IP:-10.42.0.169}
 NODOCK=0; [ "${1:-}" = "--no-dock" ] && NODOCK=1
 BOLD=$'\e[1m'; GRN=$'\e[32m'; RED=$'\e[31m'; YEL=$'\e[33m'; CYN=$'\e[36m'; RST=$'\e[0m'
 say()  { printf '%s[%s]%s %s\n' "$CYN" "$(date +%T)" "$RST" "$*"; }
 warn() { printf '%s[%s] WARNING:%s %s\n' "$YEL" "$(date +%T)" "$RST" "$*"; }
-ros()  { distrobox enter ubuntu22-gpu -- bash -c "source $H/robot_env.sh; $1" < /dev/null 2>&1; }   # < /dev/null: no pty, see vla_demo.sh
+ros()  { distrobox enter ubuntu22-gpu -- bash -c "source $VLA_ROOT/config/robot.env; $1" < /dev/null 2>&1; }   # < /dev/null: no pty, see vla_demo.sh
 # kill every process whose command line matches PATTERN (bracket trick keeps
 # this script's own line out of the match), INT first, then KILL.
 stop_pat() {

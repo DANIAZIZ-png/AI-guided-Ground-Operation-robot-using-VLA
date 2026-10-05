@@ -9,11 +9,15 @@ from rclpy.qos import QoSReliabilityPolicy       # controls whether lost packets
 from rclpy.qos import QoSHistoryPolicy           # controls how many old messages are buffered
 from nav_msgs.msg import OccupancyGrid           # the message type slam_toolbox publishes on /robot1/map
 import numpy as np                               # fast array maths: reshape the grid, recolour it, flip it
-import os                                        # only used to expand '~' into /home/danyalaziz
+import os                                        # expands '~' and reads VLA_* paths
 import sys                                       # only used to exit with a non-zero code on timeout
 
 TOPIC = '/robot1/map'                            # the namespaced map topic (plain /map does not exist here)
-OUT = os.path.expanduser('~/vla_map')            # output basename; '.pgm' and '.yaml' get appended
+OUT = os.environ.get('VLA_MAP_OUT') or os.path.join(
+    os.environ.get('VLA_MAP_DIR')
+    or os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'maps'),
+    'vla_map')
+# output basename; '.pgm' and '.yaml' get appended
 TIMEOUT_S = 30.0                                 # give up after 30 s instead of hanging forever
 
 

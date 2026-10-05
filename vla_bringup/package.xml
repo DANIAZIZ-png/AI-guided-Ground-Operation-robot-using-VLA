@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<package format="3">
+  <name>vla_bringup</name>
+  <version>1.0.0</version>
+  <description>
+    Bring-up for the VLA ground robot: Nav2 and SLAM with the Fast DDS storm
+    fixes applied, plus the simulation stack. Installs the repository's launch
+    files, parameters, DDS profiles, RViz layout and saved map so they can be
+    reached with `ros2 launch vla_bringup ...`.
+  </description>
+  <maintainer email="noreply@example.com">DANIAZIZ-png</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <exec_depend>nav2_bringup</exec_depend>
+  <exec_depend>slam_toolbox</exec_depend>
+  <exec_depend>turtlebot4_navigation</exec_depend>
+  <!-- Simulation only; the robot profile does not need these. -->
+  <exec_depend>turtlebot4_ignition_bringup</exec_depend>
+  <exec_depend>rviz2</exec_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

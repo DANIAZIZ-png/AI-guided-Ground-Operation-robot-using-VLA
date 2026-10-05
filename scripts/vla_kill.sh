@@ -2,7 +2,7 @@
 # ─────────────────────────────────────────────────────────────────
 #  vla_kill.sh — stop EVERYTHING this project starts, reliably
 #
-#  RUN:  ~/vla_kill.sh        (in ubuntu22-gpu)
+#  RUN:  scripts/vla_kill.sh        (in ubuntu22-gpu)
 #
 #  WHY THIS FILE EXISTS
 #    The first version of vla_sim.sh killed a hand-written list of ~10
@@ -82,7 +82,7 @@ fi
 # terminal -- where ~/.bashrc strips ROS_DISCOVERY_SERVER and
 # FASTRTPS_DEFAULT_PROFILES_FILE -- that produced a daemon that cannot see
 # the robot at all: `ros2 node list` empty and `topic info` "Unknown topic"
-# in EVERY terminal, until the next `source ~/robot_mode.sh` (2026-09-08).
+# in EVERY terminal, until the next `source scripts/robot_mode.sh` (2026-09-08).
 if ! command -v ros2 >/dev/null 2>&1; then
     echo "  ros2 not on PATH here (host?) -- daemon untouched"
 else
@@ -93,8 +93,8 @@ else
         echo "  daemon restarted in ROBOT mode (server $ROS_DISCOVERY_SERVER)"
     else
         echo "  daemon STOPPED, not restarted: this terminal has no discovery-server"
-        echo "  config. The next 'source ~/robot_mode.sh' (robot) or"
-        echo "  'source ~/sim_mode.sh' (sim) restarts it correctly."
+        echo "  config. The next 'source scripts/robot_mode.sh' (robot) or"
+        echo "  'source scripts/sim_mode.sh' (sim) restarts it correctly."
     fi
 fi
 

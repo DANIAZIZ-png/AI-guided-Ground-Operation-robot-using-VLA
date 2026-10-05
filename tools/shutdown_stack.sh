@@ -1,6 +1,7 @@
 #!/bin/bash
 # Runs from inside ubuntu22-gpu. Sourcing robot_mode.sh first is what lets
 # vla_kill.sh restart the ROS daemon in ROBOT mode instead of leaving it dead.
-source /home/danyalaziz/robot_mode.sh
+VLA_ROOT="${VLA_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")/.." && pwd)}"
+source "$VLA_ROOT/scripts/robot_mode.sh"
 echo "---- now stopping the stack ----"
-/home/danyalaziz/vla_kill.sh
+$VLA_ROOT/scripts/vla_kill.sh

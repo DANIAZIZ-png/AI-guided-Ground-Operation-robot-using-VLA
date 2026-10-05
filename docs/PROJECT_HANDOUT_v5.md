@@ -1068,8 +1068,22 @@ vanishing `map` frame is not.
 | `~/nav2.yaml.pre_v25` | `/opt` nav2 config |
 | `~/slam.yaml.bak` | `/opt` slam config |
 
-The tuned versions from these sessions are preserved as `~/nav2.yaml.today` and
-`~/slam.yaml.today` — **not in use**, kept so the tuning is not lost.
+~~The tuned versions from these sessions are preserved as `~/nav2.yaml.today` and
+`~/slam.yaml.today` — **not in use**, kept so the tuning is not lost.~~
+
+> **CORRECTION (5 October 2026).** That is wrong, and the sentence above is
+> struck through rather than deleted so the record of the error stays visible.
+> `nav2.yaml.today` was **byte-identical** to the stock backup
+> `nav2.yaml.pre_v25`, and `slam.yaml.today` byte-identical to `slam.yaml.bak`
+> — confirmed by sha256 during the repository reorg. **No tuning was preserved
+> by those files.** Either it was reverted before saving or never written to
+> them. The two duplicates have been deleted; the files they duplicated are in
+> `archive/params/`.
+>
+> The one real alternative parameter set is `config/nav2_hw_slow.yaml` (0.15 m/s,
+> 0.4 rad/s), which is a hand-edited copy of the stock file and remains
+> untested on hardware. Any claim in the report that tuned Nav2 or SLAM
+> parameters were produced and retained should be removed.
 
 Anything that behaved differently before 21 Aug because of a `/opt` edit will
 now behave as stock. The `minimum_travel_distance` finding in §14.4 applies to

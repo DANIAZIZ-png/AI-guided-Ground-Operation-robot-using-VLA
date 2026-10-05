@@ -92,8 +92,53 @@ instead of **0.15 s**.
 | faster-whisper `medium.en` `model.bin` | 1 527 904 330 | `11b220779aea4c6f3ce9d2549c8a95ea869ed84066864b999531ef53e594fe5b` |
 | faster-whisper `small.en` `model.bin` | 483 545 366 | `62b2a45b05ee59acb4a5341b33ee35e041395d378d418a18acfe4c9e768ee37a` |
 
-Whisper models are cached at
-`~/.cache/huggingface/hub/models--Systran--faster-whisper-{medium,small}.en/`.
+### faster-whisper: the exact HuggingFace revisions
+
+A model *tag* is not a pin. `faster-whisper` resolves
+`Systran/faster-whisper-medium.en` to whatever `main` points at **today**, so a
+rebuild after this machine is wiped would silently fetch a different model and
+every transcription measurement would stop being reproducible with nothing
+appearing to be wrong.
+
+These are the commits that were actually used, read from
+`~/.cache/huggingface/hub/models--Systran--faster-whisper-*/refs/main`:
+
+| Model | HuggingFace revision |
+|---|---|
+| `Systran/faster-whisper-medium.en` | `a29b04bd15381511a9af671baec01072039215e3` |
+| `Systran/faster-whisper-small.en` | `d1d751a5f8271d482d14ca55d9e2deeebbae577f` |
+
+Every file in each revision, with its sha256:
+
+**medium.en** (`a29b04bd1538…`)
+
+| File | Size (B) | sha256 |
+|---|---|---|
+| `model.bin` | 1 527 904 330 | `11b220779aea4c6f3ce9d2549c8a95ea869ed84066864b999531ef53e594fe5b` |
+| `config.json` | 2 643 | `4a1848ebabe7938d9797c15a2e8e4ce1d36e6fd4a43d096ae5955257c67c7962` |
+| `tokenizer.json` | 2 128 466 | `929c5252409436dce1b38a75d1abbcb5e132d170d8e324e4e04ed915fa2d22df` |
+| `vocabulary.txt` | 422 309 | `ff77588746d3a2595d32ab5b69ffd7b95ce2441ac57533cb66fc3eb575a115cf` |
+
+**small.en** (`d1d751a5f827…`)
+
+| File | Size (B) | sha256 |
+|---|---|---|
+| `model.bin` | 483 545 366 | `62b2a45b05ee59acb4a5341b33ee35e041395d378d418a18acfe4c9e768ee37a` |
+| `config.json` | 2 657 | `666a9605530ac1f61fa8177f3702b4dacec9966749e42610839fcc32661d5fae` |
+| `tokenizer.json` | 2 128 466 | `929c5252409436dce1b38a75d1abbcb5e132d170d8e324e4e04ed915fa2d22df` |
+| `vocabulary.txt` | 422 309 | `ff77588746d3a2595d32ab5b69ffd7b95ce2441ac57533cb66fc3eb575a115cf` |
+
+`tokenizer.json` and `vocabulary.txt` are byte-identical between the two models,
+which is expected: both are English-only Whisper variants sharing one vocabulary.
+
+`scripts/download_models.sh` fetches **these revisions by commit** into
+`$VLA_MODEL_DIR/whisper/` and verifies every hash above. Point
+`VLA_WHISPER_DIR` at that directory, or let the script populate the
+HuggingFace cache, which is content-addressed so a blob's filename *is* its
+sha256.
+
+`medium.en` is the one in use. `small.en` mishears accented English; it is kept
+because the comparison is reported in the handout.
 
 No rosbags (`.db3`, `.mcap`) exist anywhere in the project.
 

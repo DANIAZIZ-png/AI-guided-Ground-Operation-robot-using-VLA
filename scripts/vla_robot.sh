@@ -1,8 +1,14 @@
 #!/bin/bash
+# Resolve the repository root from this script's own location, so the script
+# works from any working directory and from a clone anywhere on disk.
+VLA_ROOT="${VLA_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")/.." && pwd)}"
+source "$VLA_ROOT/config/paths.sh"
+VLA_YOLO_ENV="${VLA_YOLO_ENV:-$HOME/yolo-env}"
+VLA_GUI_CONFIG="${VLA_GUI_CONFIG:-$HOME/.vla_gui.json}"
 # ─────────────────────────────────────────────────────────────────
 #  vla_robot.sh — ONE COMMAND to run the REAL ROBOT demo
 #
-#  RUN:  ~/vla_robot.sh          (in ubuntu22-gpu)
+#  RUN:  scripts/vla_robot.sh          (in ubuntu22-gpu)
 #
 #  Mirror image of vla_sim.sh. Same guarantee: it owns its whole world, so
 #  nothing the simulation left behind can leak into a hardware session.
@@ -23,7 +29,7 @@ fi
 # ── 2. is the robot even reachable? ──────────────────────────────
 if ! timeout 5 bash -c "cat < /dev/null > /dev/tcp/$PI/22" 2>/dev/null; then
     echo "STOP: cannot reach the robot at $PI."
-    echo "Power it on and wait for Wi-Fi, or run ~/vla_sim.sh instead."
+    echo "Power it on and wait for Wi-Fi, or run scripts/vla_sim.sh instead."
     exit 1
 fi
 # DO NOT put `ping` back here. /usr/bin/ping EXISTS inside ubuntu22-gpu but
@@ -58,7 +64,7 @@ echo ""
 
 # ── 4. environment: real robot ───────────────────────────────────
 unset ROS_DOMAIN_ID
-export FASTRTPS_DEFAULT_PROFILES_FILE=$HOME/.ros/fastdds_super_client.xml
+export FASTRTPS_DEFAULT_PROFILES_FILE="${VLA_FASTDDS_PROFILE:-$VLA_CONFIG_DIR/fastdds_super_client.xml}"
 export ROS_DISCOVERY_SERVER="$PI:11811;"
 # the trailing semicolon is REQUIRED -- FastDDS mis-parses the list without it
 export VLA_NS=/robot1
@@ -71,22 +77,22 @@ unset VLA_RAW_DEPTH
 # Same delegation as the sim path: kill by PROCESS GROUP, and refuse to
 # continue if anything survived. A leftover node from a previous run is
 # the single most common cause of a session that looks healthy and is not.
-if [ -x ~/vla_kill.sh ]; then
-    ~/vla_kill.sh || {
+if [ -x "$VLA_ROOT/scripts/vla_kill.sh" ]; then
+    "$VLA_ROOT/scripts/vla_kill.sh" || {
         echo "STOP: could not clear the old stack. Kill the listed PIDs first."
         exit 1
     }
 else
-    echo "STOP: ~/vla_kill.sh not found (chmod +x it)."
+    echo "STOP: $VLA_ROOT/scripts/vla_kill.sh not found (chmod +x it)."
     exit 1
 fi
 
 # ── 6. install the HARDWARE gui config ───────────────────────────
-if [ ! -f ~/.vla_gui.robot.json ]; then
-    echo "STOP: ~/.vla_gui.robot.json not found."
+if [ ! -f "$VLA_CONFIG_DIR/vla_gui.robot.json" ]; then
+    echo "STOP: $VLA_CONFIG_DIR/vla_gui.robot.json not found."
     exit 1
 fi
-cp ~/.vla_gui.robot.json ~/.vla_gui.json
+cp "$VLA_CONFIG_DIR/vla_gui.robot.json" "$VLA_GUI_CONFIG"
 
 echo "robot" > "$LOCK"
 trap 'rm -f "$LOCK"' EXIT
@@ -99,7 +105,7 @@ if ! curl -s --max-time 3 http://localhost:5001/ >/dev/null 2>&1; then
     echo "  !! YOLO-World is NOT running — detection will not work."
     echo "     In a vla-box terminal:"
     echo "       distrobox enter vla-box"
-    echo "       source ~/yolo-env/bin/activate && python ~/yolo_server.py"
+    echo "       source $VLA_YOLO_ENV/bin/activate && python $VLA_SRC_DIR/yolo_server.py"
     echo ""
     read -p "  Press ENTER once YOLO is up (or Ctrl-C to abort)... " _
 fi
@@ -155,7 +161,7 @@ wait_for_topic () {            # $1 = topic, $2 = seconds, $3 = label
 # ── 8. the VLA agent ─────────────────────────────────────────────
 echo ""
 echo "Starting the VLA agent in its OWN TERMINAL window"
-AGENT=~/vla_agent_v28.py                 # change this ONE line for a new version
+AGENT="$VLA_SRC_DIR/vla_agent_v28.py"                 # change this ONE line for a new version
 [ -f "$AGENT" ] || { echo "STOP: $AGENT not found."; exit 1; }
 
 # #60 MANUAL OVERRIDE NEEDS A REAL TTY. `setsid python3 ... > log 2>&1 &` gave
@@ -166,7 +172,7 @@ AGENT=~/vla_agent_v28.py                 # change this ONE line for a new versio
 #
 # DO NOT "keep a log" by piping this: `| tee agent.log` makes stdout a PIPE,
 # isatty() goes false, and the agent is silently headless again with override
-# dead. Nothing is lost -- it writes its own mission log to ~/vla_logs/.
+# dead. Nothing is lost -- it writes its own mission log to $VLA_LOG_DIR/.
 if [ -n "$DISPLAY" ] && command -v xterm >/dev/null 2>&1; then
     setsid xterm -hold -sb -sl 5000 \
            -T "VLA AGENT — type 'manual override' HERE" \
@@ -188,7 +194,7 @@ if ! wait_for_topic /vla/status 90 "the agent (/vla/status)"; then
     echo "  Agent did not come up."
     echo "  Its errors are in the AGENT WINDOW now, not in a file."
     [ -s "$LOG/agent.log" ] && { echo "  (headless-fallback log:)"; tail -30 "$LOG/agent.log"; }
-    echo "  Mission log: ~/vla_logs/"
+    echo "  Mission log: $VLA_LOG_DIR/"
     exit 1
 fi
 # /vla/status is ABSOLUTE in the agent (STATUS_TOPIC): VLA_NS namespaces the
@@ -200,4 +206,4 @@ echo "────────────────────────�
 echo " REAL ROBOT MODE — starting operator console"
 echo "──────────────────────────────────────────"
 
-python3 ~/vla_gui_v2.py
+python3 "$VLA_SRC_DIR/vla_gui_v2.py"

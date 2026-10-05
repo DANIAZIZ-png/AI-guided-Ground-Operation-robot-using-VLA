@@ -2,7 +2,7 @@
 # ─────────────────────────────────────────────────────────────────
 #  run_sim_stack.sh — launch Gazebo + SLAM + Nav2 for the SIMULATION
 #
-#  RUN:  ~/run_sim_stack.sh          (in ubuntu22-gpu)
+#  RUN:  scripts/run_sim_stack.sh          (in ubuntu22-gpu)
 #
 #  Everything the simulation needs, with the environment fixed inside the
 #  script so it does not matter which terminal you start it from. That was

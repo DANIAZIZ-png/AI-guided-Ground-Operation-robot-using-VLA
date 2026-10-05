@@ -1,0 +1,16 @@
+W+20s (K+134s) 21:52:36 | odom: ALIVE 20.000Hz (log 0s old) | Pi load: 1.64 1.60 1.40
+W+40s (K+154s) 21:52:56 | odom: ALIVE 20.000Hz (log 1s old) | Pi load: 1.61 1.60 1.40
+W+60s (K+174s) 21:53:16 | odom: ALIVE 20.000Hz (log 1s old) | Pi load: 1.85 1.66 1.43
+W+80s (K+194s) 21:53:36 | odom: ALIVE 20.000Hz (log 1s old) | Pi load: 2.07 1.71 1.45
+W+100s (K+214s) 21:53:56 | odom: ALIVE 20.000Hz (log 0s old) | Pi load: 1.83 1.68 1.45
+W+120s (K+234s) 21:54:16 | odom: ALIVE 20.000Hz (log 1s old) | Pi load: 1.87 1.70 1.46
+W+140s (K+254s) 21:54:36 | odom: ALIVE 20.000Hz (log 1s old) | Pi load: 2.03 1.75 1.48
+W+160s (K+274s) 21:54:56 | odom: ALIVE 20.000Hz (log 1s old) | Pi load: 1.96 1.75 1.48
+W+180s (K+294s) 21:55:16 | odom: ALIVE 20.000Hz (log 0s old) | Pi load: 1.69 1.70 1.47
+W+200s (K+314s) 21:55:36 | odom: ALIVE 20.000Hz (log 0s old) | Pi load: 2.09 1.79 1.51
+W+220s (K+334s) 21:55:56 | odom: ALIVE 20.000Hz (log 1s old) | Pi load: 2.39 1.87 1.54
+W+240s (K+354s) 21:56:16 | odom: ALIVE 20.000Hz (log 0s old) | Pi load: 2.66 1.96 1.58
+W+260s (K+374s) 21:56:36 | odom: ALIVE 20.000Hz (log 0s old) | Pi load: 2.34 1.93 1.58
+W+280s (K+394s) 21:56:56 | odom: ALIVE 20.000Hz (log 0s old) | Pi load: 2.68 2.03 1.62
+W+300s (K+414s) 21:57:16 | odom: ALIVE 20.000Hz (log 1s old) | Pi load: 3.20 2.18 1.67
+COMPLETE: survived 300s no-SLAM

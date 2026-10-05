@@ -1,7 +1,7 @@
 # undock_hw.py -- undock the real robot from a LONG-LIVED action client.
-# Same pattern as ~/redock.py: create the client, spin 30 s so the reply
+# Same pattern as scripts/redock.py: create the client, spin 30 s so the reply
 # channel is matched, then call. A fresh CLI client gets its reply dropped.
-# Run inside ubuntu22-gpu after: source ~/robot_env.sh.  THE ROBOT MOVES.
+# Run inside ubuntu22-gpu after: source config/robot.env.  THE ROBOT MOVES.
 import sys, time
 import rclpy
 from rclpy.node import Node
