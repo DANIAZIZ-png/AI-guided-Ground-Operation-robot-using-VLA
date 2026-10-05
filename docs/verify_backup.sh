@@ -2,14 +2,15 @@
 # Re-check the two items that block the wipe. Read-only: changes nothing,
 # anywhere, including on the robot.
 #
-#   bash docs/verify_backup.sh [/path/to/backup]
+#   bash docs/verify_backup.sh
 #
-# Default destination: /media/$USER/USB/vla-backup
+# Staging folder: $HOME/vla_media_backup (override with VLA_MEDIA_DIR).
+# Destination:    GitHub Release v1.1-media.
 # See docs/BACKUP_CHECKLIST.md for the full audit.
 
 set -uo pipefail
 
-DEST="${1:-/media/$USER/USB/vla-backup}"
+STAGE_DEFAULT="$HOME/vla_media_backup"
 PI_HOST="${VLA_ROBOT_IP:-10.42.0.169}"
 PI_USER="${VLA_ROBOT_USER:-ubuntu}"
 
@@ -22,62 +23,70 @@ warn() { printf '  %sNOTE%s    %s\n' "$YEL" "$RST" "$*"; }
 
 echo "=============================================================="
 echo " pre-wipe backup re-check"
-echo " destination: $DEST"
+echo " staging:     ${VLA_MEDIA_DIR:-$STAGE_DEFAULT}"
+echo " release:     v1.1-media"
 echo "=============================================================="
 
 # ---------------------------------------------------------------------------
 echo
-echo "1. demo footage and deliverables copied off?"
-# basename|source path -- the 28 Jul recording is deduplicated on purpose
-ITEMS=(
-  "open_house_final_v1.mp4|$HOME/Downloads/open_house_final_v1.mp4"
-  "Demo_Explainer_Danyal_Aziz.mp4|$HOME/Downloads/Demo_Explainer_Danyal_Aziz.mp4"
-  "recording-2026-07-28_21.21.52.mp4|$HOME/Videos/recording-2026-07-28_21.21.52.mp4"
-  "recording-2026-09-30_13.03.49.mp4|$HOME/Videos/recording-2026-09-30_13.03.49.mp4"
-  "recording-2026-09-30_13.01.37.mp4|$HOME/Videos/recording-2026-09-30_13.01.37.mp4"
-  "FYDP_Report_Overleaf__2_.pdf|$HOME/Downloads/FYDP_Report_Overleaf__2_.pdf"
-  "FYDP_Research_Paper_Overleaf.pdf|$HOME/Downloads/FYDP_Research_Paper_Overleaf.pdf"
-  "FYDP_Poster_Danyal_Aziz.pptx|$HOME/Downloads/FYDP_Poster_Danyal_Aziz.pptx"
-  "Open_House-99EC.zip|$HOME/Downloads/Open_House-99EC.zip"
-)
+echo "1. demo footage and deliverables preserved off this disk?"
+# The destination is the GitHub Release v1.1-media, not a USB stick: the files
+# are gathered in ~/vla_media_backup/ and uploaded through the website. This
+# check confirms the staging folder is complete, then delegates the release
+# comparison to verify_release.sh, which is the script that knows how to read
+# the releases API.
+STAGE="${VLA_MEDIA_DIR:-$HOME/vla_media_backup}"
 
-if [ ! -d "$DEST" ]; then
-    bad "the destination $DEST does not exist -- nothing has been copied yet"
+if [ ! -d "$STAGE" ]; then
+    bad "the staging folder $STAGE does not exist"
 else
-    for entry in "${ITEMS[@]}"; do
-        name="${entry%%|*}"; src="${entry#*|}"
-        found=$(find "$DEST" -type f -name "$name" -print -quit 2>/dev/null)
-        if [ -z "$found" ]; then
-            bad "$name"
-            continue
-        fi
-        # compare by content, not by name: a truncated copy is worse than none
-        if [ -f "$src" ]; then
-            if [ "$(sha256sum "$src" | cut -d' ' -f1)" = "$(sha256sum "$found" | cut -d' ' -f1)" ]; then
-                ok "$name (sha256 matches the original)"
-            else
-                bad "$name is present but its sha256 DIFFERS from the original -- copy it again"
-            fi
-        else
-            warn "$name present in the backup; the original is gone, cannot compare"
-        fi
-    done
+    n=$(find "$STAGE" -maxdepth 1 -type f ! -name MANIFEST.txt | wc -l)
+    if [ "$n" -ge 16 ]; then
+        ok "staging folder has $n files ($(du -sh "$STAGE" | cut -f1))"
+    else
+        bad "staging folder has only $n files, expected 16"
+    fi
+    if [ -f "$STAGE/MANIFEST.txt" ]; then
+        # every file must still match the hash recorded when it was staged
+        drift=0
+        while read -r size sha name; do
+            case "$size" in \#*) continue ;; esac
+            [ -f "$STAGE/$name" ] || { bad "$name listed in MANIFEST.txt but missing"; drift=1; continue; }
+            [ "$(sha256sum "$STAGE/$name" | cut -d" " -f1)" = "$sha" ] \
+                || { bad "$name has changed since it was staged"; drift=1; }
+        done < <(grep -v "^#" "$STAGE/MANIFEST.txt")
+        [ "$drift" -eq 0 ] && ok "all staged files match MANIFEST.txt"
+    else
+        warn "no MANIFEST.txt in $STAGE"
+    fi
+fi
+
+if curl -sS --max-time 20 \
+     "https://api.github.com/repos/${VLA_GH_REPO:-DANIAZIZ-png/AI-guided-Ground-Operation-robot-using-VLA}/releases/tags/v1.1-media" \
+     2>/dev/null | grep -q '"tag_name"'; then
+    ok "release v1.1-media exists -- run: bash docs/verify_release.sh"
+else
+    bad "release v1.1-media does not exist yet (see docs/BACKUP_CHECKLIST.md §2a)"
 fi
 
 # ---------------------------------------------------------------------------
 echo
-echo "2. robot reachable, so the Pi configuration can be captured?"
+echo "2. Pi configuration (DEFERRED -- informational, not a blocker)"
 # /dev/tcp, not ping: ping exits 2 with no output inside a container and is
 # useless as a reachability test either way.
+# DEFERRED, and deliberately not a failure: the Pi is not being wiped, so its
+# files survive. Only the written record of what differs from stock is
+# outstanding, and that can be captured whenever the robot is on.
 if timeout 8 bash -c "cat < /dev/null > /dev/tcp/$PI_HOST/22" 2>/dev/null; then
-    ok "$PI_HOST:22 reachable -- run the capture block in docs/BACKUP_CHECKLIST.md §6"
     if [ -d "$(dirname "$0")/../robot_pi" ]; then
-        ok "robot_pi/ already exists -- the capture appears to have been done"
+        ok "robot_pi/ exists -- the Pi capture has been done"
     else
-        bad "robot_pi/ does not exist yet; the Pi configuration has NOT been captured"
+        warn "$PI_HOST:22 is reachable now, so the deferred Pi capture COULD be done"
+        warn "  -> see the capture block in docs/BACKUP_CHECKLIST.md §6 (read-only)"
     fi
 else
-    bad "$PI_HOST:22 not reachable; the Pi configuration cannot be captured right now"
+    warn "deferred: $PI_HOST:22 not reachable, Pi config not captured (does NOT block the wipe --"
+    warn "          the Pi is not being wiped, so the files still exist on it)"
     iface_ip=$(ip -brief addr show 2>/dev/null | awk '/10\.42\.0\./ {print $3}' | head -1)
     if [ -z "$iface_ip" ]; then
         warn "no interface is on the 10.42.0.x subnet -- the hotspot is probably not running."

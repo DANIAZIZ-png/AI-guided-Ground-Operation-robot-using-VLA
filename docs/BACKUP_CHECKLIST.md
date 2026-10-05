@@ -14,21 +14,25 @@ the bytes are in git, not that something with a similar name is.
 
 > ## ❌ NO — not safe to wipe yet
 >
-> Three things are outstanding, all of them actions only you can take:
+> Two blockers remain, both needing you:
 >
-> 1. **~100 MB of academic deliverables and ~71 MB of demo video are in `~` only**
->    and are not in git by design. They must be copied off. **The open house is
->    20 October**, and `open_house_final_v1.mp4` exists in one place on one disk.
+> 1. **138.9 MB of demo video and academic deliverables exist in `~` only.** They
+>    are now gathered in `~/vla_media_backup/` and must be uploaded to the
+>    GitHub Release `v1.1-media` (§2). **The open house is 20 October**, and
+>    `open_house_final_v1.mp4` exists in one place on one disk.
 > 2. **Phase 6 (the portability proof) has not finished.** Until a fresh clone has
 >    been shown to rebuild and run, "the repo is the only copy" is a claim rather
->    than a verified fact.
-> 3. **The robot's own configuration has not been collected** — the Pi was not
->    reachable during this audit (see §6).
+>    than a verified fact. Progress: `docs/REPRODUCIBILITY.md`.
+>
+> **Not a blocker — deferred:** the Pi-side configuration (§6). The Raspberry Pi
+> is **not being wiped**, so those files continue to exist on it; the only thing
+> at stake is the written record of what differs from stock, and that can be
+> captured any time the robot is powered and on the hotspot.
 >
 > Everything in the **git** bucket is done: 38 files were added during this audit
 > and nothing project-related remains uncommitted in `~`.
 >
-> Re-run `bash docs/verify_backup.sh` (§8) to re-check items 1 and 3.
+> Re-run `bash docs/verify_backup.sh` (§8) to re-check blocker 1.
 
 ---
 
@@ -54,9 +58,80 @@ and `snapshot-as-run` holds the as-run original.
 
 ---
 
-## 2. USB / Google Drive — ACTION REQUIRED ⬜
+## 2. GitHub Release `v1.1-media` — ACTION REQUIRED ⬜
 
-Too large or too personal for git. **This is the bucket that blocks the wipe.**
+Too large for git. **This is the one bucket that blocks the wipe.**
+
+All 16 files are already gathered in **`~/vla_media_backup/`** (138.9 MB), with
+`MANIFEST.txt` listing every size and sha256. Upload them to a release using the
+click-by-click steps in §2a, then run:
+
+```bash
+bash docs/verify_release.sh            # sizes against the release
+bash docs/verify_release.sh v1.1-media ~/vla_media_backup --download   # and content
+```
+
+> ⚠️ **The repository is PUBLIC**, so release assets are downloadable by anyone
+> without signing in, and they get indexed. See §2b before uploading the
+> academic documents.
+
+### 2a. Click-by-click: upload to a GitHub Release
+
+Everything is already in `~/vla_media_backup/`. Nothing needs renaming.
+
+1. Open **<https://github.com/DANIAZIZ-png/AI-guided-Ground-Operation-robot-using-VLA/releases/new>**
+   (or: repo → **Releases** in the right sidebar → **Draft a new release**).
+2. Click the **Choose a tag** dropdown. Type **`v1.1-media`** — it will not be in
+   the list — then click **“+ Create new tag: v1.1-media on publish”**.
+3. Leave **Target** as **`main`**. The tag is only a label for the upload; it does
+   not have to point at the media.
+4. In **Release title** put: `v1.1-media — demo footage and deliverables`
+5. In **Describe this release** paste:
+   ```
+   Demo videos, the FYDP report and research paper, presentations and open-house
+   material for the VLA ground robot.
+
+   Sizes and sha256 for every file: docs/media_manifest.txt
+   Verify a download with:  bash docs/verify_release.sh
+   ```
+6. Scroll to **“Attach binaries by dropping them here or selecting them.”**
+   Click it, then in the file picker:
+   - press **Ctrl+L**, type **`~/vla_media_backup`**, press **Enter**
+   - press **Ctrl+A** to select all 17 files
+   - click **Open**
+7. **Wait for every bar to reach 100 %** and for each filename to appear as a
+   finished attachment. 138.9 MB on a slow link takes a few minutes. **Do not
+   click Publish while a bar is still moving** — that is what produces a
+   truncated asset, and it is the exact failure `verify_release.sh` looks for.
+8. Leave **Set as a pre-release** unticked. Click **Publish release**.
+9. Tell me, and I will verify all 16 sizes against the release and tick the row
+   above.
+
+If an upload fails part-way: click the **✕** next to that attachment and drag
+just that file back in. You do not need to start the release over.
+
+### 2b. ⚠️ Before you upload: the repository is public
+
+`DANIAZIZ-png/AI-guided-Ground-Operation-robot-using-VLA` is **public**, so
+release assets can be downloaded by anyone without signing in, and search
+engines index them. Two of these files deserve a moment's thought:
+
+- **`FYDP_Research_Paper_Overleaf.pdf`** — if this paper is under submission
+  anywhere, publishing it yourself can breach the venue's rules or count as
+  prior disclosure.
+- **`FYDP_Report_Overleaf__2_.pdf` and the four presentations** — graded
+  coursework. Published before grading, it is downloadable by other students.
+
+Deleting a release asset later does not un-publish it: it may already be cached
+or mirrored. Three options:
+
+| Option | How |
+|---|---|
+| Upload only the **demo videos** (67.5 MB) | they are the open-house material and the thing with no other copy; keep the documents on Drive or USB |
+| Make the repo **private first** | repo → Settings → scroll to **Danger Zone** → **Change repository visibility** → Private. Releases then need a login |
+| Upload everything as asked | the steps above, unchanged |
+
+Your call — I have not uploaded anything, and nothing here does it for you.
 
 ### Demo footage — needed for the open house on 20 Oct
 
@@ -222,10 +297,15 @@ no secrets").
 
 ---
 
-## 6. The robot (Raspberry Pi) — NOT COLLECTED ⬜
+## 6. The robot (Raspberry Pi) — DEFERRED ⏸ (does not block the wipe)
 
-**The Pi is in scope as a read-only source. It was not reachable during this
-audit, so nothing was collected.**
+**Deferred: the Pi is not being wiped, so capture this later.**
+
+It is in scope as a read-only source, and it was not reachable during this audit,
+so nothing was collected. That is deliberately **not** a blocker: the files still
+live on the Pi and the Pi survives the rebuild. What is outstanding is only the
+*record* of what was changed from stock — useful for the report and for anyone
+rebuilding the robot from scratch, but recoverable at any time the robot is on.
 
 ```
 $ timeout 8 bash -c "cat < /dev/null > /dev/tcp/10.42.0.169/22"
