@@ -84,9 +84,35 @@ def _value(v):
     return {"type": type(v).__name__}
 
 
+#: Environment prefixes that change the agent's MODULE-LEVEL constants at import
+#: time. They are cleared before importing, so a snapshot always describes the
+#: CODE rather than the shell it ran in.
+#:
+#: WHY: the agent computes its topic names from VLA_NS at import
+#: (SCAN_TOPIC = f"{NS}/scan"), and USE_COMPRESSED_RGB/DEPTH from VLA_RAW_*. So
+#: the same unchanged code snapshots differently depending on the mode:
+#:
+#:     no mode / robot   SCAN_TOPIC = "/robot1/scan"   USE_COMPRESSED_RGB = True
+#:     VLA_MODE=sim      SCAN_TOPIC = "/scan"          USE_COMPRESSED_RGB = False
+#:
+#: Found when the gate was first run inside the container image with
+#: VLA_MODE=sim: it reported ~10 constants CHANGED while nothing in the code had
+#: moved. `make test` would have passed in robot mode and failed in sim mode,
+#: which is worse than failing everywhere.
+NEUTRALISE_PREFIXES = ("VLA_", "YOLO_", "ROS_", "FASTRTPS_", "RMW_")
+
+
 def snapshot(modname: str) -> dict:
     if SRC not in sys.path:
         sys.path.insert(0, SRC)
+
+    # Canonical environment, so the snapshot is a property of the code only.
+    # VLA_ROOT goes too: _portable() falls back to REPO, derived from this
+    # file's location, which is what makes the result path-independent.
+    for name in [k for k in os.environ
+                 if k.startswith(NEUTRALISE_PREFIXES)]:
+        del os.environ[name]
+
     mod = importlib.import_module(modname)
 
     consts, funcs, classes = {}, {}, {}

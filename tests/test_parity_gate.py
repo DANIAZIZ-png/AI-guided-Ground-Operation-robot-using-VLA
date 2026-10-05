@@ -199,3 +199,41 @@ def test_portable_is_idempotent():
     from snapshot_agent_api import _portable
     once = _portable("$VLA_ROOT/logs")
     assert once == "$VLA_ROOT/logs"
+
+
+# --------------------------------------------------------------------------
+# the snapshot must describe the CODE, not the shell it ran in
+# --------------------------------------------------------------------------
+# Found when the gate was first run inside the container image with
+# VLA_MODE=sim: it reported ~10 constants CHANGED while nothing in the code had
+# moved, because the agent computes its topic names from VLA_NS at import time
+# and USE_COMPRESSED_RGB/DEPTH from VLA_RAW_*. `make test` would have passed in
+# robot mode and failed in sim mode -- worse than failing everywhere.
+
+def test_the_neutralised_prefixes_cover_the_variables_that_shift_constants():
+    from snapshot_agent_api import NEUTRALISE_PREFIXES
+    for name in ("VLA_NS", "VLA_RAW_RGB", "VLA_RAW_DEPTH", "VLA_LOG_DIR",
+                 "VLA_MODEL_DIR", "VLA_ROOT", "YOLO_PORT", "ROS_DOMAIN_ID"):
+        assert name.startswith(tuple(NEUTRALISE_PREFIXES)), (
+            f"{name} changes the agent's module-level constants but is not "
+            "neutralised before the snapshot is taken"
+        )
+
+
+def test_snapshot_clears_those_variables_from_the_environment():
+    """It mutates os.environ of its own process, which is what makes the result
+    reproducible; the test confirms that rather than trusting the comment."""
+    import importlib
+    import snapshot_agent_api as s
+
+    os.environ["VLA_NS"] = "/sentinel"
+    os.environ["YOLO_PORT"] = "65000"
+    try:
+        # a module with no side effects, so this stays cheap and ROS-free
+        s.snapshot("json")
+        assert "VLA_NS" not in os.environ
+        assert "YOLO_PORT" not in os.environ
+    finally:
+        os.environ.pop("VLA_NS", None)
+        os.environ.pop("YOLO_PORT", None)
+        importlib.reload(s)
