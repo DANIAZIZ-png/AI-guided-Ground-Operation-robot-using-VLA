@@ -1,0 +1,955 @@
+{
+  "classes": {
+    "MissionLog": {
+      "bases": [
+        "object"
+      ],
+      "methods": [
+        "log"
+      ]
+    },
+    "ReplyTee": {
+      "bases": [
+        "object"
+      ],
+      "methods": [
+        "fileno",
+        "flush",
+        "isatty",
+        "write"
+      ]
+    },
+    "VLAAgent": {
+      "bases": [
+        "Node"
+      ],
+      "methods": [
+        "_after_dock",
+        "_apply_descriptor",
+        "_apply_descriptor_and_set",
+        "_apply_descriptors",
+        "_apply_floating_point_range",
+        "_apply_integer_range",
+        "_check_undeclared_parameters",
+        "_class_color",
+        "_count_publishers_or_subscribers",
+        "_dock_accepted",
+        "_dock_done",
+        "_get_info_by_topic",
+        "_project_uvd",
+        "_set_parameters",
+        "_set_parameters_atomically",
+        "_stamp_key",
+        "_validate_qos_or_depth_parameter",
+        "_validate_topic_or_service_name",
+        "_wake_executor",
+        "accept_sighting",
+        "add_on_set_parameters_callback",
+        "add_waitable",
+        "agent_owns_cmd",
+        "annotate_think",
+        "approach_candidates",
+        "begin_hard_stop",
+        "cam_bearing_in_laser",
+        "camera_ready",
+        "cancel_all_nav_goals",
+        "cancel_navigation",
+        "cancel_task",
+        "cell_free",
+        "cell_state",
+        "check_stuck",
+        "collision_guard",
+        "command_worker",
+        "count_publishers",
+        "count_subscribers",
+        "create_client",
+        "create_guard_condition",
+        "create_publisher",
+        "create_rate",
+        "create_service",
+        "create_subscription",
+        "create_timer",
+        "current_pair",
+        "declare_parameter",
+        "declare_parameters",
+        "depth_at",
+        "depth_units_to_m",
+        "describe_distances",
+        "describe_parameter",
+        "describe_parameters",
+        "destroy_client",
+        "destroy_guard_condition",
+        "destroy_node",
+        "destroy_publisher",
+        "destroy_rate",
+        "destroy_service",
+        "destroy_subscription",
+        "destroy_timer",
+        "do_advance",
+        "do_rotate_scan",
+        "dock_intent",
+        "driving_forward",
+        "emit_reply",
+        "end_find_more",
+        "end_locate",
+        "end_navigate",
+        "enqueue_command",
+        "explore_think",
+        "farthest_free_along",
+        "feed_watchdog",
+        "feed_watchers",
+        "find_frontiers",
+        "find_more_think",
+        "finish_explore",
+        "finish_move",
+        "front_clearance",
+        "get_client_names_and_types_by_node",
+        "get_clock",
+        "get_fully_qualified_name",
+        "get_logger",
+        "get_name",
+        "get_namespace",
+        "get_node_names",
+        "get_node_names_and_namespaces",
+        "get_node_names_and_namespaces_with_enclaves",
+        "get_parameter",
+        "get_parameter_or",
+        "get_parameter_type",
+        "get_parameter_types",
+        "get_parameters",
+        "get_parameters_by_prefix",
+        "get_publisher_names_and_types_by_node",
+        "get_publishers_info_by_topic",
+        "get_service_names_and_types",
+        "get_service_names_and_types_by_node",
+        "get_subscriber_names_and_types_by_node",
+        "get_subscriptions_info_by_topic",
+        "get_topic_names_and_types",
+        "grid_value",
+        "handle_command",
+        "has_parameter",
+        "is_blacklisted",
+        "is_goal_free",
+        "is_goal_tried",
+        "is_step_goal_ok",
+        "is_visited",
+        "lidar_project_box",
+        "lidar_why",
+        "locate_all",
+        "locate_candidates",
+        "locate_target",
+        "locate_think",
+        "manual_override",
+        "move_think",
+        "navigate_think",
+        "near_dock",
+        "notify",
+        "nudge_to_free",
+        "object_is_mapped",
+        "on_depth",
+        "on_depth_compressed",
+        "on_depth_info",
+        "on_dock_status",
+        "on_goal_response",
+        "on_info",
+        "on_map",
+        "on_odom",
+        "on_remote_command",
+        "on_result",
+        "on_rgb",
+        "on_rgb_compressed",
+        "on_rgb_depth",
+        "on_scan",
+        "on_stuck",
+        "on_tf",
+        "on_tf_static",
+        "process_command",
+        "project_box",
+        "project_pixel",
+        "publish_cmd",
+        "publish_status",
+        "range_for_box",
+        "recall_instance",
+        "register_instances",
+        "remove_on_set_parameters_callback",
+        "remove_waitable",
+        "report_stream_sizes",
+        "reset_step_state",
+        "resolve_pending",
+        "resolve_service_name",
+        "resolve_topic_name",
+        "rgb_px_to_depth_px",
+        "robot_pose_map",
+        "robot_xy",
+        "robust_box_depth",
+        "run_input_loop",
+        "scan_range_at",
+        "send_goal",
+        "set_descriptor",
+        "set_dock_position",
+        "set_parameters",
+        "set_parameters_atomically",
+        "stamp_to_sec",
+        "start_dock_action",
+        "start_explore",
+        "start_feed",
+        "start_next_step",
+        "step_goal_toward",
+        "stop_barrage",
+        "stop_base",
+        "stop_feed",
+        "think",
+        "undeclare_parameter",
+        "wait_action_server",
+        "yolo_detect"
+      ]
+    },
+    "_DecodedFilter": {
+      "bases": [
+        "SimpleFilter"
+      ],
+      "methods": [
+        "registerCallback",
+        "signalMessage"
+      ]
+    }
+  },
+  "constants": {
+    "ADVANCE_DISTANCE": {
+      "type": "float",
+      "value": 1.5
+    },
+    "ADVANCE_SPEED": {
+      "type": "float",
+      "value": 0.2
+    },
+    "AGENT_VERSION": {
+      "type": "str",
+      "value": "vla_agent v28  (#63 headless-safe console output, #62 direction-aware collision guard, #61 nearest-cluster LiDAR ranging, #60 manual override teleop, #59 10 Hz collision guard, #58 smoother approach, #57 stand off far enough to keep the object in view, #56 step-and-stare scan, #55 LiDAR failure reasons reported, #54 LiDAR object ranging, #53 seeded depth intrinsics, #52 depth intrinsics rescaled to frame size, #51 compressedDepth transport, #50 compressed RGB transport, #49 annotated feed gated per topic, #47 TF at colour-frame stamp, #48 reject stale depth, #46 one subscription per camera stream, #43 longer cached action-server wait, #44 undock retry-loop breaker, #45 sync slop for 1 Hz depth, #37 /robot1 namespace, #38 stereo depth topic, #39 best-effort sensor QoS, #40 RGB->depth pixel mapping, #41 encoding-based mm/m, #42 explicit namespaced TF, #36 no patrol feed prompt, #35 cancel actually stops the robot, #34 feed publishes to any subscriber, #22 dock no-detect zone, #23 live-first memory, #24 forget, #25 typo-tolerant control words, #26 bare yes/no, #27 context expiry, #28 all-instance distances, #29 Create 3 backup ratchet, #30 sticky goals + range-scaled gate + ring-safe blacklist, #31 incremental off-map hop goals, #32 non-freezing live feed, #33 command/reply/status bridge)"
+    },
+    "ANNOTATED_FEED": {
+      "type": "bool",
+      "value": true
+    },
+    "ANNOT_COMPRESSED_TOPIC": {
+      "type": "str",
+      "value": "/vla/annotated/compressed"
+    },
+    "ANNOT_DET_TTL": {
+      "type": "float",
+      "value": 1.5
+    },
+    "ANNOT_JPEG_Q": {
+      "type": "int",
+      "value": 80
+    },
+    "ANNOT_MAX_SCALE": {
+      "type": "int",
+      "value": 3
+    },
+    "ANNOT_MIN_WIDTH": {
+      "type": "int",
+      "value": 750
+    },
+    "ANNOT_PERIOD": {
+      "type": "float",
+      "value": 0.2
+    },
+    "ANNOT_TOPIC": {
+      "type": "str",
+      "value": "/vla/annotated"
+    },
+    "APPROACH_RING": {
+      "items": [
+        "-100",
+        "-130",
+        "-160",
+        "-25",
+        "-50",
+        "-75",
+        "0",
+        "100",
+        "130",
+        "160",
+        "180",
+        "25",
+        "50",
+        "75"
+      ],
+      "len": 14,
+      "type": "tuple"
+    },
+    "APPROACH_STANDOFFS": {
+      "items": [
+        "1.0",
+        "1.3"
+      ],
+      "len": 2,
+      "type": "tuple"
+    },
+    "ARRIVE_IF_SEEN_M": {
+      "type": "float",
+      "value": 0.0
+    },
+    "ARRIVE_TOL": {
+      "type": "float",
+      "value": 0.35
+    },
+    "BACKUP_NUDGE_DIST": {
+      "type": "float",
+      "value": 0.15
+    },
+    "BACKUP_STALL_EPS": {
+      "type": "float",
+      "value": 0.02
+    },
+    "BACKUP_STALL_TIME": {
+      "type": "float",
+      "value": 2.0
+    },
+    "BIN_SIZE": {
+      "type": "float",
+      "value": 0.5
+    },
+    "BLACKLIST_RADIUS": {
+      "type": "float",
+      "value": 0.8
+    },
+    "BLOCK_SIZE": {
+      "type": "float",
+      "value": 1.0
+    },
+    "BOX_DEPTH_GRID": {
+      "type": "int",
+      "value": 5
+    },
+    "CAM_STALL_WARN": {
+      "type": "float",
+      "value": 5.0
+    },
+    "CMD_IN_TOPIC": {
+      "type": "str",
+      "value": "/vla/command"
+    },
+    "CMD_TOPIC": {
+      "type": "str",
+      "value": "/robot1/cmd_vel"
+    },
+    "CONTEXT_TTL": {
+      "type": "float",
+      "value": 180.0
+    },
+    "DEPTH_CFG_HEADER_BYTES": {
+      "type": "int",
+      "value": 12
+    },
+    "DEPTH_COMPRESSED_TOPIC": {
+      "type": "str",
+      "value": "/robot1/oakd/stereo/image_raw/compressedDepth"
+    },
+    "DEPTH_INFO_TOPIC": {
+      "type": "str",
+      "value": "/robot1/oakd/stereo/camera_info"
+    },
+    "DEPTH_K_DEFAULT": {
+      "items": [
+        "0.0",
+        "0.0",
+        "0.0",
+        "0.0",
+        "1.0",
+        "1012.45264",
+        "1012.45264",
+        "347.630371",
+        "649.956177"
+      ],
+      "len": 9,
+      "type": "list"
+    },
+    "DEPTH_TOPIC": {
+      "type": "str",
+      "value": "/robot1/oakd/stereo/image_raw"
+    },
+    "DEPTH_WH_DEFAULT": {
+      "items": [
+        "1280",
+        "720"
+      ],
+      "len": 2,
+      "type": "tuple"
+    },
+    "DOCK_ACTION": {
+      "type": "str",
+      "value": "/robot1/dock"
+    },
+    "DOCK_EXCLUDE_RADIUS": {
+      "type": "float",
+      "value": 0.8
+    },
+    "DOCK_STATUS_TOPIC": {
+      "type": "str",
+      "value": "/robot1/dock_status"
+    },
+    "ENABLE_ADVANCE": {
+      "type": "bool",
+      "value": true
+    },
+    "FIND_TIMEOUT": {
+      "type": "float",
+      "value": 45.0
+    },
+    "FUZZY_CONTROL": {
+      "type": "float",
+      "value": 0.82
+    },
+    "FUZZY_MIN_LEN": {
+      "type": "int",
+      "value": 4
+    },
+    "GOAL_FAIL_LIMIT": {
+      "type": "int",
+      "value": 5
+    },
+    "GOAL_REISSUE": {
+      "type": "float",
+      "value": 0.9
+    },
+    "GOAL_STICK_MAX": {
+      "type": "float",
+      "value": 1.25
+    },
+    "GOAL_STICK_MIN": {
+      "type": "float",
+      "value": 0.35
+    },
+    "GOAL_TRIED_RADIUS": {
+      "type": "float",
+      "value": 0.22
+    },
+    "GUARD_ARC_DEG": {
+      "type": "float",
+      "value": 40.0
+    },
+    "GUARD_MIN_BEAMS": {
+      "type": "int",
+      "value": 3
+    },
+    "GUARD_MIN_FWD_SPEED": {
+      "type": "float",
+      "value": 0.02
+    },
+    "GUARD_PERIOD": {
+      "type": "float",
+      "value": 0.1
+    },
+    "HAVE_CREATE": {
+      "type": "bool",
+      "value": true
+    },
+    "INFO_TOPIC": {
+      "type": "str",
+      "value": "/robot1/oakd/rgb/preview/camera_info"
+    },
+    "JUMP_AGREE": {
+      "type": "float",
+      "value": 1.0
+    },
+    "JUMP_AGREE_FRAC": {
+      "type": "float",
+      "value": 0.25
+    },
+    "JUMP_PENDING_TTL": {
+      "type": "float",
+      "value": 6.0
+    },
+    "LIDAR_BEARING_GUESS_M": {
+      "type": "float",
+      "value": 3.0
+    },
+    "LIDAR_CLUSTER_GAP": {
+      "type": "float",
+      "value": 0.3
+    },
+    "LIDAR_CLUSTER_MIN": {
+      "type": "int",
+      "value": 2
+    },
+    "LIDAR_MAX_HALF_SPAN": {
+      "type": "float",
+      "value": 0.20943951023931956
+    },
+    "LIDAR_MIN_HALF_SPAN": {
+      "type": "float",
+      "value": 0.017453292519943295
+    },
+    "LOCATE_TIMEOUT": {
+      "type": "float",
+      "value": 25.0
+    },
+    "LOG_DIR": {
+      "type": "str",
+      "value": "/home/danyalaziz/repos/AI-guided-Ground-Operation-robot-using-VLA/logs"
+    },
+    "MANUAL_ANG_MAX": {
+      "type": "float",
+      "value": 1.0
+    },
+    "MANUAL_ANG_STEP": {
+      "type": "float",
+      "value": 0.2
+    },
+    "MANUAL_HOLD_S": {
+      "type": "float",
+      "value": 0.35
+    },
+    "MANUAL_KEYS": {
+      "keys": [
+        "','",
+        "'.'",
+        "'i'",
+        "'j'",
+        "'k'",
+        "'l'",
+        "'m'",
+        "'o'",
+        "'u'"
+      ],
+      "len": 9,
+      "type": "dict"
+    },
+    "MANUAL_LIN_MAX": {
+      "type": "float",
+      "value": 0.26
+    },
+    "MANUAL_LIN_STEP": {
+      "type": "float",
+      "value": 0.1
+    },
+    "MANUAL_WORDS": {
+      "items": [
+        "\"i'll drive\"",
+        "'give me control'",
+        "'let me drive'",
+        "'manual control'",
+        "'manual mode'",
+        "'manual override'",
+        "'manual'",
+        "'override'",
+        "'take control'",
+        "'teleop'"
+      ],
+      "len": 10,
+      "type": "tuple"
+    },
+    "MAP_FRAME": {
+      "type": "str",
+      "value": "map"
+    },
+    "MAP_TOPIC": {
+      "type": "str",
+      "value": "/robot1/map"
+    },
+    "MAX_BACKUP_NUDGES": {
+      "type": "int",
+      "value": 25
+    },
+    "MAX_PAIR_SKEW_S": {
+      "type": "float",
+      "value": 2.0
+    },
+    "MAX_STUCKS": {
+      "type": "int",
+      "value": 3
+    },
+    "MEMORY_SEED": {
+      "type": "bool",
+      "value": true
+    },
+    "MIN_FRONTIER": {
+      "type": "int",
+      "value": 4
+    },
+    "MIN_FRONT_CLEAR": {
+      "type": "float",
+      "value": 0.7
+    },
+    "MOVE_ACTIONS": {
+      "items": [
+        "'explore'",
+        "'find_another'",
+        "'locate'",
+        "'move'",
+        "'navigate'",
+        "'patrol'"
+      ],
+      "len": 6,
+      "type": "tuple"
+    },
+    "MOVE_SPEED": {
+      "type": "float",
+      "value": 0.18
+    },
+    "NAV_ACTION": {
+      "type": "str",
+      "value": "/robot1/navigate_to_pose"
+    },
+    "NAV_CANCEL_SRV": {
+      "type": "str",
+      "value": "/robot1/navigate_to_pose/_action/cancel_goal"
+    },
+    "NEVER_CONTROL": {
+      "items": [
+        "'about'",
+        "'back'",
+        "'count'",
+        "'scan'",
+        "'stand'",
+        "'start'",
+        "'stay'"
+      ],
+      "len": 7,
+      "type": "tuple"
+    },
+    "NEW_INSTANCE_RADIUS": {
+      "type": "float",
+      "value": 0.8
+    },
+    "NO_PROGRESS_LIMIT": {
+      "type": "float",
+      "value": 60.0
+    },
+    "NO_WORDS": {
+      "items": [
+        "'nah'",
+        "'negative'",
+        "'no'",
+        "'nope'"
+      ],
+      "len": 4,
+      "type": "tuple"
+    },
+    "NS": {
+      "type": "str",
+      "value": "/robot1"
+    },
+    "OBJ_DRIFT_REISSUE": {
+      "type": "float",
+      "value": 0.8
+    },
+    "OBSTACLE_STOP": {
+      "type": "float",
+      "value": 0.6
+    },
+    "ODOM_TOPIC": {
+      "type": "str",
+      "value": "/robot1/odom"
+    },
+    "PAIR_STALE_S": {
+      "type": "float",
+      "value": 1.5
+    },
+    "POLITE_PREFIXES": {
+      "items": [
+        "'can you '",
+        "'could you '",
+        "'just '",
+        "'kindly '",
+        "'now '",
+        "'please '",
+        "'would you '"
+      ],
+      "len": 7,
+      "type": "tuple"
+    },
+    "PROGRESS_EPS": {
+      "type": "float",
+      "value": 0.25
+    },
+    "PUB_PERIOD": {
+      "type": "float",
+      "value": 0.1
+    },
+    "QUIT_WORDS": {
+      "items": [
+        "'exit'",
+        "'quit'"
+      ],
+      "len": 2,
+      "type": "tuple"
+    },
+    "REPLY_TOPIC": {
+      "type": "str",
+      "value": "/vla/reply"
+    },
+    "REPORT_MERGE_RADIUS": {
+      "type": "float",
+      "value": 0.4
+    },
+    "RGB_COMPRESSED_TOPIC": {
+      "type": "str",
+      "value": "/robot1/oakd/rgb/preview/image_raw/compressed"
+    },
+    "RGB_ONLY": {
+      "type": "bool",
+      "value": false
+    },
+    "RGB_TOPIC": {
+      "type": "str",
+      "value": "/robot1/oakd/rgb/preview/image_raw"
+    },
+    "ROBOT_CLEARANCE": {
+      "type": "float",
+      "value": 0.25
+    },
+    "ROBOT_FRAME": {
+      "type": "str",
+      "value": "base_link"
+    },
+    "ROTATE_SPEED": {
+      "type": "float",
+      "value": 0.5
+    },
+    "SAVE_MAP_PATH": {
+      "type": "str",
+      "value": "/home/danyalaziz/repos/AI-guided-Ground-Operation-robot-using-VLA/maps/warehouse_map"
+    },
+    "SCAN_DWELL_S": {
+      "type": "float",
+      "value": 3.5
+    },
+    "SCAN_FWD_RAD": {
+      "type": "float",
+      "value": 0.0
+    },
+    "SCAN_STEP_RAD": {
+      "type": "float",
+      "value": 0.61
+    },
+    "SCAN_TOPIC": {
+      "type": "str",
+      "value": "/robot1/scan"
+    },
+    "SEARCH_TIMEOUT": {
+      "type": "float",
+      "value": 120.0
+    },
+    "SEARCH_TURN_SPEED": {
+      "type": "float",
+      "value": 0.35
+    },
+    "SIGHT_CONFIRM": {
+      "type": "int",
+      "value": 2
+    },
+    "STATUS_PERIOD": {
+      "type": "float",
+      "value": 0.5
+    },
+    "STATUS_TOPIC": {
+      "type": "str",
+      "value": "/vla/status"
+    },
+    "STEP_ARRIVE_TOL": {
+      "type": "float",
+      "value": 0.45
+    },
+    "STEP_CLEARANCE": {
+      "type": "float",
+      "value": 0.22
+    },
+    "STEP_FAIL_LIMIT": {
+      "type": "int",
+      "value": 8
+    },
+    "STEP_FAN_DEG": {
+      "items": [
+        "-20",
+        "-40",
+        "-60",
+        "0",
+        "20",
+        "40",
+        "60"
+      ],
+      "len": 7,
+      "type": "tuple"
+    },
+    "STEP_GOAL_DIST": {
+      "type": "float",
+      "value": 1.5
+    },
+    "STEP_GOAL_MIN": {
+      "type": "float",
+      "value": 0.6
+    },
+    "STEP_MAX_RANGE": {
+      "type": "float",
+      "value": 25.0
+    },
+    "STEP_REPLAN_BEARING": {
+      "type": "float",
+      "value": 35.0
+    },
+    "STEP_TIMEOUT": {
+      "type": "float",
+      "value": 25.0
+    },
+    "STOP_ANG_EPS": {
+      "type": "float",
+      "value": 0.05
+    },
+    "STOP_BARRAGE_PERIOD": {
+      "type": "float",
+      "value": 0.02
+    },
+    "STOP_BARRAGE_S": {
+      "type": "float",
+      "value": 2.0
+    },
+    "STOP_CONFIRM_TICKS": {
+      "type": "int",
+      "value": 3
+    },
+    "STOP_CONFIRM_TIMEOUT": {
+      "type": "float",
+      "value": 6.0
+    },
+    "STOP_DISTANCE": {
+      "type": "float",
+      "value": 1.0
+    },
+    "STOP_LIN_EPS": {
+      "type": "float",
+      "value": 0.02
+    },
+    "STOP_WORDS": {
+      "items": [
+        "'abort'",
+        "'cancel'",
+        "'halt'",
+        "'stop'"
+      ],
+      "len": 4,
+      "type": "tuple"
+    },
+    "STUCK_DIST": {
+      "type": "float",
+      "value": 0.1
+    },
+    "STUCK_TIME": {
+      "type": "float",
+      "value": 15.0
+    },
+    "SYNC_QUEUE": {
+      "type": "int",
+      "value": 3
+    },
+    "SYNC_SLOP_S": {
+      "type": "float",
+      "value": 0.6
+    },
+    "SYNC_WARN_S": {
+      "type": "float",
+      "value": 6.0
+    },
+    "TELEPORT_JUMP": {
+      "type": "float",
+      "value": 3.0
+    },
+    "TF_STATIC_TOPIC": {
+      "type": "str",
+      "value": "/robot1/tf_static"
+    },
+    "TF_TOPIC": {
+      "type": "str",
+      "value": "/robot1/tf"
+    },
+    "THINK_PERIOD": {
+      "type": "float",
+      "value": 1.0
+    },
+    "TURN_WEIGHT": {
+      "type": "float",
+      "value": 1.5
+    },
+    "UNDOCK_ACTION": {
+      "type": "str",
+      "value": "/robot1/undock"
+    },
+    "UNDOCK_FAIL_LIMIT": {
+      "type": "int",
+      "value": 3
+    },
+    "USE_COMPRESSED_DEPTH": {
+      "type": "bool",
+      "value": true
+    },
+    "USE_COMPRESSED_RGB": {
+      "type": "bool",
+      "value": true
+    },
+    "USE_LIDAR_RANGE": {
+      "type": "bool",
+      "value": true
+    },
+    "VISITED_RADIUS": {
+      "type": "float",
+      "value": 1.0
+    },
+    "YES_WORDS": {
+      "items": [
+        "'affirmative'",
+        "'ok'",
+        "'okay'",
+        "'sure'",
+        "'y'",
+        "'yeah'",
+        "'yep'",
+        "'yes'"
+      ],
+      "len": 8,
+      "type": "tuple"
+    },
+    "YOLO_ERR_PERIOD": {
+      "type": "float",
+      "value": 10.0
+    },
+    "YOLO_URL": {
+      "type": "str",
+      "value": "http://127.0.0.1:5001/detect"
+    },
+    "qos_profile_sensor_data": {
+      "type": "QoSProfile"
+    }
+  },
+  "functions": {
+    "_off_front": {
+      "signature": "(ang)"
+    },
+    "ang_norm": {
+      "signature": "(a)"
+    },
+    "first_word": {
+      "signature": "(low)"
+    },
+    "fuzzy_word": {
+      "signature": "(word, options, cutoff=0.82)"
+    },
+    "is_yes": {
+      "signature": "(low)"
+    },
+    "main": {
+      "signature": "()"
+    },
+    "print": {
+      "signature": "(*args, **kwargs)"
+    },
+    "strip_politeness": {
+      "signature": "(low)"
+    },
+    "yaw_from_quat": {
+      "signature": "(q)"
+    }
+  },
+  "module": "vla_agent_v28"
+}
