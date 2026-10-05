@@ -1,4 +1,0 @@
-#!/bin/bash
-source /home/danyalaziz/robot_env.sh
-ros2 run rviz2 rviz2 -d /home/danyalaziz/vla_hardware.rviz --ros-args -r __ns:=/robot1 -r /tf:=/robot1/tf -r /tf_static:=/robot1/tf_static
-echo; echo "[RViz exited -- window kept open]"; exec bash

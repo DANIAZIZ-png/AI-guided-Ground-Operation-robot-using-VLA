@@ -1,41 +1,37 @@
-# archive/ — superseded, kept for provenance
+# archive/
 
-Nothing in here is live code. It is kept so that intermediate results in the
-report can be traced to the version that produced them.
+**Nothing in here is live code.** It is kept so that intermediate results in the
+report can be traced to the version that produced them. The live programs are in
+`../src/`.
 
-## Why the old agents are *not* in here
-
-`vla_agent.py`, `vla_agent_improved.py` and `vla_agent_v9` … `v27` were already
-committed at the top level of this repository in August and September 2026.
-Moving them would show up as deletions, so they have been **left exactly where
-they were**. They are history, not alternatives — the live agent is
-`vla_agent_v28.py`.
-
-The `reorg` branch will tidy this.
-
-## Contents
-
-| File | Superseded by | Note |
+| Folder | Files | What |
 |---|---|---|
-| `vla_agent_unified_intelligent.py` | `vla_agent_v28.py` | June 2026 prototype |
-| `llm_brain_unified.py` | `llm_brain.py` | early single-file brain |
-| `frontier_explorer.py` | — | autonomous exploration experiment, not used in the demo |
-| `vla_server.py` | `vla_agent_v28.py` | early client/server split |
-| `yolo_camera_node.py` | `yolo_server.py` | ROS-node detector, replaced by the socket server |
-| `yolo_test.py` | `vla_tools/yolo_live_test.py` | manual probe |
-| `ros_stubs.py` | — | stubs used before ROS was available |
-| `sd_flash.sh` | — | one-off SD-card flashing helper |
-| `nav2_fixed.yaml` | stock `/opt` `nav2.yaml` | early hand-tuned params |
-| `nav2.yaml.pre_v25` | stock `/opt` `nav2.yaml` | backup taken before the v25 experiment |
-| `nav2.yaml.today` | — | tuned params, **never put into service** |
-| `slam.yaml.today` | — | tuned params, **never put into service** |
-| `CLAUDE.md.bak-*` (3) | `CLAUDE.md` | operating-manual history |
-| `PROJECT_HANDOUT_v5.md.bak-*` (7) | `docs/PROJECT_HANDOUT_v5.md` | handout history |
-| `vla_tools/*.bak-*` (4) | the live scripts in `vla_tools/` | pre-edit copies |
+| `agents/` | 23 | every earlier agent: `vla_agent.py`, `vla_agent_improved.py`, `vla_agent_unified_intelligent.py`, `vla_agent_v9` … `v27`, and `llm_brain_unified.py`. The live agent is `../src/vla_agent_v28.py`. |
+| `openvla/` | 5 | the **abandoned OpenVLA baseline** — `Openvla_baseline.py`, the action translator, two interactive harnesses and `test_openvla.py`. The project is named after it, but the shipped system does not use it. |
+| `experiments/` | 10 | things tried and dropped: `frontier_explorer.py` (autonomous exploration), `object_explorer/locator/navigator.py` (pre-agent navigation attempts), `vla_server.py` (early client/server split), `yolo_camera_node.py` (ROS-node detector, replaced by the socket server), `ros_stubs.py` (stubs used before ROS was available), `sd_flash.sh`. |
+| `params/` | 3 | `nav2_fixed.yaml` (early hand-tuned Nav2), `nav2.yaml.pre_v25` and `slam.yaml.bak` (stock backups). |
+| `docs/` | 10 | `CLAUDE.md.bak-*` and `PROJECT_HANDOUT_v5.md.bak-*` — the history of the two living documents. |
+| `tools/` | 4 | pre-edit copies of scripts now in `../tools/`. |
+| `report_snapshot_20260912/` | 11 | the frozen copies of the live code and docs taken on **12 September 2026** for the report bundle. These are *older versions*, not duplicates — e.g. `vla_agent_v28.py` here is 253,893 bytes against 255,465 live. |
 
-## On the Nav2 and SLAM params
+## Two files were removed as exact duplicates
 
-`/opt`'s `nav2.yaml` and `slam.yaml` were deliberately **restored to stock**. The
-tuned versions here were not in use when the demo was recorded. The live SLAM
-parameters are `slam_vla.yaml` at the top level, and the gentler-speed profile
-that *is* usable is `nav2_hw_slow.yaml`, also at the top level.
+- `nav2.yaml.today` was **byte-identical** to `params/nav2.yaml.pre_v25`
+- `slam.yaml.today` was **byte-identical** to `params/slam.yaml.bak`
+
+`CLAUDE.md` describes those two as "the tuned versions, not in use". They are not
+tuned: they are unmodified copies of the stock backups. Either the tuning was
+reverted or it was never written to those files. Worth correcting in the handout.
+
+## On the Nav2 and SLAM parameters
+
+`/opt`'s `nav2.yaml` and `slam.yaml` were deliberately **restored to stock** before
+the demo, so the stock files are what produced the recorded results. The live
+SLAM parameters are `../config/slam_vla.yaml`, and the gentler-speed Nav2 profile
+that *is* usable is `../config/nav2_hw_slow.yaml`.
+
+One unreconciled oddity, recorded rather than quietly fixed: `slam_vla.yaml` sets
+`minimum_travel_distance: 0.2`, which contradicts the rule in `CLAUDE.md` that it
+must stay at `0.0` or the `map->odom` transform goes stale while the robot is
+stationary. In practice the map frame stayed valid through 45+ minutes docked.
+Neither was changed without a test.
