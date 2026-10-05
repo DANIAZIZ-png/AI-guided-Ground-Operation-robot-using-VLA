@@ -17,15 +17,10 @@ Final-year design project. The hardware demo ran end to end on **25 September
 ## Quick start
 
 ```bash
-git clone -b reorg https://github.com/DANIAZIZ-png/AI-guided-Ground-Operation-robot-using-VLA.git
+git clone https://github.com/DANIAZIZ-png/AI-guided-Ground-Operation-robot-using-VLA.git
 cd AI-guided-Ground-Operation-robot-using-VLA
 make setup && make sim
 ```
-
-> **`-b reorg` is required for now.** The containers, the Makefile, the tests and
-> the path-independent layout live on the `reorg` branch until it is merged.
-> `main` still has the flat as-run layout with absolute `/home/danyalaziz` paths
-> and no `make setup`. Drop the flag once `reorg` lands on `main`.
 
 `make setup` creates a tool venv, downloads the model weights **and verifies
 every sha256** against `env/MANIFEST.md`, then builds both container images.
