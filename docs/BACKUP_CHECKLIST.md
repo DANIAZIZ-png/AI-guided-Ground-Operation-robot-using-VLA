@@ -12,29 +12,35 @@ the bytes are in git, not that something with a similar name is.
 
 ## VERDICT
 
-> ## ❌ NO — not safe to wipe yet
+> ## ✅ YES — safe to wipe
 >
-> One blocker remains:
+> Nothing of value exists only on this disk.
 >
-> 1. **Phase 6 (the portability proof) has not finished.** Until a fresh clone has
->    been shown to rebuild and run, "the repo is the only copy" is a claim rather
->    than a verified fact. Progress: `docs/REPRODUCIBILITY.md`.
+> | | |
+> |---|---|
+> | Code, configs, docs, evidence | pushed to `main`, `reorg` and `snapshot-as-run`, plus tags `v1.0-fydp-snapshot` and `v1.1-media` |
+> | 138.9 MB of video and deliverables | release **`v1.1-media`**, 16/16 sizes verified, content sampled by sha256 (§2) |
+> | Model weights, ~2.4 GB | re-downloadable, every one hash- or commit-pinned (§3) |
+> | ROS environment | rebuildable from the verified 2026-05-14 snapshot — the 9.88 GB local image is superseded, **do not back it up** (§3) |
+> | A fresh clone of `main` | `make parity` → `PARITY OK`, `make test` → 140 passed |
 >
-> ~~138.9 MB of demo video and academic deliverables exist in `~` only.~~
-> **Done** — all 16 uploaded to release `v1.1-media` and verified by size, with
-> content sampled by sha256 (§2).
+> **Deferred, not blocking:** the Pi-side configuration (§6). The Raspberry Pi is
+> not being wiped, so those files survive; only the written record of what
+> differs from stock is outstanding.
 >
-> **Not a blocker — deferred:** the Pi-side configuration (§6). The Raspberry Pi
-> is **not being wiped**, so those files continue to exist on it; the only thing
-> at stake is the written record of what differs from stock, and that can be
-> captured any time the robot is powered and on the hotspot.
+> **Two things are NOT verified, and neither is data loss** — both are rebuild
+> cost, recreatable from what is in the repository:
+> 1. `vla-perception:1.0` was never built (repeated transfer failures on a slow
+>    link). The Dockerfile and its 64 pins are committed.
+> 2. `make sim` and `tests/smoke_sim.sh` have therefore never been run, so the
+>    simulation is not shown to come up end to end. See
+>    `docs/REPRODUCIBILITY.md` for the exact commands to finish both.
 >
-> Everything in the **git** bucket is done: 38 files were added during this audit
-> and nothing project-related remains uncommitted in `~`.
+> **Still to do by hand before flashing:** §5 lists the credentials and settings
+> that are not files and cannot be committed — Wi-Fi/hotspot password, the
+> Bluetooth pairings, and a new SSH key after the rebuild.
 >
-> Re-run `bash docs/verify_backup.sh` (§8) to re-check blocker 1.
-
----
+> Re-confirm any time with `bash docs/verify_backup.sh`.
 
 ## 1. git — done ✅
 

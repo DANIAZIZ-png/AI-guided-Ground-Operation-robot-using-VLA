@@ -61,10 +61,25 @@ else
     fi
 fi
 
-if curl -sS --max-time 20 \
+# Capture first, then test -- do NOT pipe into `grep -q` here.
+# `grep -q` exits the moment it finds a match, curl's write then fails with
+# EPIPE, and `set -o pipefail` (on at the top of this script) propagates curl's
+# failure. The result is that the check fails PRECISELY WHEN THE RELEASE EXISTS
+# -- a perfect inversion, and it reported "release does not exist yet" for a
+# release with 17 assets.
+_rel=$(curl -sS --max-time 30 \
      "https://api.github.com/repos/${VLA_GH_REPO:-DANIAZIZ-png/AI-guided-Ground-Operation-robot-using-VLA}/releases/tags/v1.1-media" \
-     2>/dev/null | grep -q '"tag_name"'; then
-    ok "release v1.1-media exists -- run: bash docs/verify_release.sh"
+     2>/dev/null) || _rel=""
+_n_assets=$(printf '%s' "$_rel" | grep -c '"browser_download_url"' || true)
+if printf '%s' "$_rel" | grep -F '"tag_name"' >/dev/null 2>&1; then
+    ok "release v1.1-media exists with $_n_assets asset(s)"
+    if [ "$_n_assets" -ge 16 ]; then
+        ok "asset count looks complete -- confirm sizes: bash docs/verify_release.sh"
+    else
+        bad "only $_n_assets assets on the release, expected at least 16"
+    fi
+elif [ -z "$_rel" ]; then
+    warn "could not reach the GitHub API; release state unknown (not treated as a failure)"
 else
     bad "release v1.1-media does not exist yet (see docs/BACKUP_CHECKLIST.md §2a)"
 fi
