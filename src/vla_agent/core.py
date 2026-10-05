@@ -11,6 +11,43 @@ WHY `print` LIVES HERE AND MUST BE IMPORTED EXPLICITLY
     by name. Forgetting to is silent: output reverts to the builtin and the
     broken-pipe crash it fixes comes back.
 """
+
+# The version banner. Printed at startup, written into every mission log and
+# published in /vla/status, so it is what ties a recorded run to the code that
+# produced it. It lives here because core.py's MissionLog, ros_io.py and
+# state_machine.py all reference it.
+AGENT_VERSION = ("vla_agent v28  (#63 headless-safe console output, "
+                 "#62 direction-aware collision guard, "
+                 "#61 nearest-cluster LiDAR ranging, "
+                 "#60 manual override teleop, "
+                 "#59 10 Hz collision guard, "
+                 "#58 smoother approach, "
+                 "#57 stand off far enough to keep the object in view, "
+                 "#56 step-and-stare scan, "
+                 "#55 LiDAR failure reasons reported, "
+                 "#54 LiDAR object ranging, "
+                 "#53 seeded depth intrinsics, "
+                 "#52 depth intrinsics rescaled to frame size, "
+                 "#51 compressedDepth transport, "
+                 "#50 compressed RGB transport, "
+                 "#49 annotated feed gated per topic, "
+                 "#47 TF at colour-frame stamp, "
+                 "#48 reject stale depth, #46 one subscription per camera stream, "
+                 "#43 longer cached action-server wait, "
+                 "#44 undock retry-loop breaker, #45 sync slop for 1 Hz depth, "
+                 "#37 /robot1 namespace, #38 stereo depth topic, "
+                 "#39 best-effort sensor QoS, #40 RGB->depth pixel mapping, "
+                 "#41 encoding-based mm/m, #42 explicit namespaced TF, "
+                 "#36 no patrol feed prompt, "
+                 "#35 cancel actually stops the robot, "
+                 "#34 feed publishes to any subscriber, "
+                 "#22 dock no-detect zone, #23 live-first memory, "
+                 "#24 forget, #25 typo-tolerant control words, #26 bare yes/no, "
+                 "#27 context expiry, #28 all-instance distances, "
+                 "#29 Create 3 backup ratchet, #30 sticky goals + range-scaled "
+                 "gate + ring-safe blacklist, #31 incremental off-map hop goals, "
+                 "#32 non-freezing live feed, #33 command/reply/status bridge)")
+
 import base64
 import datetime
 import difflib
