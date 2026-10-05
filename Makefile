@@ -44,11 +44,28 @@ ROS_SETUP := source /opt/ros/humble/setup.bash
 
 # Run a command in the ROS environment: the distrobox container if present
 # (the development machine), otherwise the built image.
+# Three cases, in order of preference:
+#   1. we are ALREADY in a ROS environment -- run directly. This is the case that
+#      was missing: inside the ROS container `distrobox` is not available, so it
+#      fell through to case 3, where `podman` is not on PATH either, ENGINE
+#      resolved to `docker`, and `make test` died with "docker: command not
+#      found". Running the Makefile from inside the ROS environment is the most
+#      natural thing to do, and it did not work.
+#   2. the distrobox container exists on this host -- enter it.
+#   3. otherwise use the built image.
 define in_ros
-	@if command -v distrobox >/dev/null 2>&1 && distrobox list 2>/dev/null | grep -q ubuntu22-gpu; then \
+	@if [ -n "$$ROS_DISTRO" ] || command -v ros2 >/dev/null 2>&1; then \
+		cd $(VLA_ROOT) && $(1); \
+	elif command -v distrobox >/dev/null 2>&1 && distrobox list 2>/dev/null | grep -q ubuntu22-gpu; then \
 		distrobox enter ubuntu22-gpu -- bash -c '$(ROS_SETUP); cd $(VLA_ROOT); $(1)'; \
+	elif $(ENGINE) image exists $(ROS_IMAGE) 2>/dev/null || $(ENGINE) images -q $(ROS_IMAGE) 2>/dev/null | grep -q .; then \
+		$(ENGINE) run --rm -v $(VLA_ROOT):/opt/vla -w /opt/vla -e VLA_ROOT=/opt/vla $(ROS_IMAGE) bash -c '$(1)'; \
 	else \
-		$(ENGINE) run --rm -v $(VLA_ROOT):/opt/vla -w /opt/vla $(ROS_IMAGE) bash -c '$(1)'; \
+		echo "No ROS environment available. Either:"; \
+		echo "  * source /opt/ros/humble/setup.bash, or"; \
+		echo "  * create the ubuntu22-gpu distrobox container, or"; \
+		echo "  * run 'make image-ros' to build $(ROS_IMAGE)"; \
+		exit 1; \
 	fi
 endef
 
