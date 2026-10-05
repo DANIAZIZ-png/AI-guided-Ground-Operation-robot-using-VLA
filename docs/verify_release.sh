@@ -44,13 +44,16 @@ if printf '%s' "$json" | grep -q '"message": *"Not Found"'; then
     exit 1
 fi
 
-# name<TAB>size, one asset per line
-assets=$(printf '%s' "$json" | python3 -c '
-import json, sys
-d = json.load(sys.stdin)
-for a in d.get("assets", []):
-    print(f"{a[\"name\"]}\t{a[\"size\"]}\t{a.get(\"browser_download_url\",\"\")}")
-' 2>/dev/null)
+# name<TAB>size<TAB>url, one asset per line.
+# The parser is a separate file on purpose: the first version of this inlined a
+# Python f-string inside a single-quoted shell argument, the nested quoting broke,
+# python exited non-zero, and the script reported "0 assets" for a release that
+# actually had 17. A silent parse failure that reads as "nothing was uploaded" is
+# the worst possible way for this to fail.
+PARSER="$(dirname "$0")/release_assets.py"
+[ -f "$PARSER" ] || { echo "${RED}missing $PARSER${RST}"; exit 1; }
+assets=$(printf '%s' "$json" | python3 "$PARSER") || {
+    echo "${RED}could not parse the release JSON${RST}"; exit 1; }
 
 n_assets=$(printf '%s' "$assets" | grep -c . || true)
 echo "assets on the release: $n_assets"

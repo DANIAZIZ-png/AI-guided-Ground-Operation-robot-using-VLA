@@ -14,15 +14,15 @@ the bytes are in git, not that something with a similar name is.
 
 > ## ❌ NO — not safe to wipe yet
 >
-> Two blockers remain, both needing you:
+> One blocker remains:
 >
-> 1. **138.9 MB of demo video and academic deliverables exist in `~` only.** They
->    are now gathered in `~/vla_media_backup/` and must be uploaded to the
->    GitHub Release `v1.1-media` (§2). **The open house is 20 October**, and
->    `open_house_final_v1.mp4` exists in one place on one disk.
-> 2. **Phase 6 (the portability proof) has not finished.** Until a fresh clone has
+> 1. **Phase 6 (the portability proof) has not finished.** Until a fresh clone has
 >    been shown to rebuild and run, "the repo is the only copy" is a claim rather
 >    than a verified fact. Progress: `docs/REPRODUCIBILITY.md`.
+>
+> ~~138.9 MB of demo video and academic deliverables exist in `~` only.~~
+> **Done** — all 16 uploaded to release `v1.1-media` and verified by size, with
+> content sampled by sha256 (§2).
 >
 > **Not a blocker — deferred:** the Pi-side configuration (§6). The Raspberry Pi
 > is **not being wiped**, so those files continue to exist on it; the only thing
@@ -58,7 +58,20 @@ and `snapshot-as-run` holds the as-run original.
 
 ---
 
-## 2. GitHub Release `v1.1-media` — ACTION REQUIRED ⬜
+## 2. GitHub Release `v1.1-media` — DONE ✅
+
+**Uploaded and verified 5 October 2026.** All 16 files are attached to
+<https://github.com/DANIAZIZ-png/AI-guided-Ground-Operation-robot-using-VLA/releases/tag/v1.1-media>
+(17 assets including `MANIFEST.txt`), published, not a draft.
+
+- **All 16 sizes match the originals exactly** (`bash docs/verify_release.sh`).
+- **Content sampled by sha256** on three assets — the two `.docx` and
+  `FYDP_Research_Paper_Overleaf.pdf` — all matching. Size catches a truncated
+  upload; these confirm the bytes.
+
+The repository is public and stays public: this was asked for and confirmed after
+the visibility note in §2b was raised. The academic documents are therefore
+publicly downloadable.
 
 Too large for git. **This is the one bucket that blocks the wipe.**
 

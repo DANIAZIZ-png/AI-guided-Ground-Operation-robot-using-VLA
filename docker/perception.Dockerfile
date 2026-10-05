@@ -59,8 +59,25 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # manifest, and the manifest is what ties the recorded results to the code.
 COPY env/pip-freeze_yolo-env.txt /tmp/requirements.txt
 
-RUN python3 -m pip install --no-cache-dir -r /tmp/requirements.txt \
+# Retries and a long timeout, then a retry loop. The CUDA wheels are 200-423 MB
+# each and the first build of this image died on
+# "ReadTimeoutError: HTTPSConnectionPool(host='files.pythonhosted.org')" partway
+# through nvidia_cufft. Same class of failure as the apt one in ros.Dockerfile:
+# nothing wrong with the pins, just a slow link.
+RUN for attempt in 1 2 3; do \
+        echo "=== pip attempt $attempt ===" \
+        && python3 -m pip install --no-cache-dir \
+             --timeout 120 --retries 10 \
+             -r /tmp/requirements.txt \
+        && break \
+        || { echo "attempt $attempt failed, retrying"; sleep 15; }; \
+    done \
+    && python3 -c "import torch, ultralytics, flask, cv2, numpy; \
+print('torch', torch.__version__, '/ ultralytics', ultralytics.__version__, \
+      '/ numpy', numpy.__version__, '/ cv2', cv2.__version__)" \
     && rm -f /tmp/requirements.txt
+# The import check after the loop matters: without it a run where all three
+# attempts failed would still exit 0 and produce an image with no torch in it.
 
 # ---------------------------------------------------------------------------
 # The detector
