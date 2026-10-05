@@ -33,6 +33,11 @@ mkdir -p "$VLA_MODEL_DIR"
 GRN=$'\e[32m'; RED=$'\e[31m'; YEL=$'\e[33m'; RST=$'\e[0m'
 fail=0
 
+# Show a progress bar when a human is watching; stay silent when the output is
+# redirected. A 1.5 GB download with curl's default meter writes thousands of
+# carriage-return lines into a log file and makes it unreadable.
+if [ -t 1 ]; then CURL_QUIET=(--progress-bar); else CURL_QUIET=(--no-progress-meter); fi
+
 # name|sha256|url
 # Whisper models are fetched by faster-whisper into its own HuggingFace cache on
 # first use, so they are verified rather than placed here; see the note below.
@@ -67,7 +72,7 @@ for entry in "${MODELS[@]}"; do
     fi
 
     printf '  fetching %s ...\n' "$name"
-    if ! curl -fL --retry 3 --retry-delay 2 -o "$dest.part" "$url"; then
+    if ! curl -fL "${CURL_QUIET[@]}" --retry 3 --retry-delay 2 -o "$dest.part" "$url"; then
         printf '  %sFAIL%s    %-22s download failed\n' "$RED" "$RST" "$name"
         rm -f "$dest.part"; fail=1; continue
     fi
@@ -140,7 +145,7 @@ for spec in "${WHISPER[@]}"; do
         # resolve/<revision>/ pins the commit. resolve/main would not.
         url="https://huggingface.co/Systran/faster-whisper-$model/resolve/$rev/$name"
         printf '    fetching %s ...\n' "$name"
-        if ! curl -fL --retry 3 --retry-delay 2 -o "$out.part" "$url"; then
+        if ! curl -fL "${CURL_QUIET[@]}" --retry 3 --retry-delay 2 -o "$out.part" "$url"; then
             printf '    %sFAIL%s    %-16s download failed\n' "$RED" "$RST" "$name"
             rm -f "$out.part"; fail=1; continue
         fi
