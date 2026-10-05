@@ -31,6 +31,15 @@ ENV DEBIAN_FRONTEND=noninteractive \
     LANG=C.UTF-8 \
     LC_ALL=C.UTF-8
 
+# Retry downloads. This image pulls ~1,500 .deb files, so a single truncated
+# response fails the whole layer -- which is what happened on the first real
+# build here: apt got 134 bytes instead of 3074 for libomp-dev and reported
+# "File has unexpected size ... Mirror sync in progress?". Nothing was wrong
+# with the Dockerfile; the link was. Anyone building this over an imperfect
+# connection will hit the same thing.
+RUN printf 'Acquire::Retries "6";\nAcquire::http::Timeout "60";\nAcquire::https::Timeout "60";\nAcquire::http::No-Cache "true";\n' \
+      > /etc/apt/apt.conf.d/99-vla-retries
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
         ca-certificates \
         curl \
@@ -75,10 +84,24 @@ COPY docker/ros-packages.txt /tmp/ros-packages.txt
 # snapshot exactly.
 COPY docker/ros-tooling-packages.txt /tmp/ros-tooling-packages.txt
 
-RUN apt-get update \
-    && xargs -a /tmp/ros-packages.txt apt-get install -y --no-install-recommends \
-    && xargs -a /tmp/ros-tooling-packages.txt apt-get install -y --no-install-recommends \
+# The retry loop is belt-and-braces on top of Acquire::Retries: that setting
+# retries a failed request, but a mirror serving a wrong-SIZED file needs the
+# partial download discarded and the index refreshed, which is what
+# `apt-get clean && apt-get update` between attempts does.
+RUN for attempt in 1 2 3; do \
+        echo "=== apt attempt $attempt ===" \
+        && apt-get update \
+        && xargs -a /tmp/ros-packages.txt apt-get install -y --no-install-recommends \
+        && xargs -a /tmp/ros-tooling-packages.txt apt-get install -y --no-install-recommends \
+        && break \
+        || { echo "attempt $attempt failed; clearing partials and retrying"; \
+             apt-get clean; rm -rf /var/lib/apt/lists/*; sleep 10; }; \
+    done \
+    && dpkg -l | grep -q '^ii  ros-humble-navigation2' \
+    && command -v colcon >/dev/null \
     && rm -rf /var/lib/apt/lists/* /tmp/ros-packages.txt /tmp/ros-tooling-packages.txt
+# The two checks after the loop matter: without them a run where all three
+# attempts failed would still exit 0, and the image would be built missing ROS.
 
 # ---------------------------------------------------------------------------
 # Non-ROS packages the project actually uses

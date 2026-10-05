@@ -1,7 +1,8 @@
 # --- runtime output directories (VLA_LOG_DIR / VLA_MODEL_DIR defaults) ---
 /logs/
 /models/
-/sim_objects/
+# NOTE: sim_objects/ is NOT ignored -- cup.sdf, red_box.sdf and door.sdf are
+# source assets that tools/spawn_objects.py spawns. Only runtime output is ignored.
 
 # --- local overrides ---
 config/.env

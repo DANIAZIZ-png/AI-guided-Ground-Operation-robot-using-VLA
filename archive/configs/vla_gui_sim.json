@@ -1,0 +1,73 @@
+{
+  "_comment": [
+    "SIMULATION launch config for vla_gui_v2.py.",
+    "Save as ~/.vla_gui.json  (keep ~/.vla_gui.json.robot for the real robot).",
+    "",
+    "WHY EVERY STEP RE-SETS ITS OWN ENV:",
+    "  The GUI passes its own environment to every child process. ~/.bashrc",
+    "  sets the Pi's discovery-server vars in every new terminal, so if the",
+    "  GUI was started from a terminal that had them, Gazebo inherits them,",
+    "  registers with a server that is not there, and discovers NOTHING --",
+    "  with no error printed anywhere. Baking the unsets into each cmd makes",
+    "  the config independent of how the GUI was started.",
+    "",
+    "  ROS_DOMAIN_ID is deliberately NOT set. Setting it to 42 broke",
+    "  gz_ros2_control: it runs inside the Gazebo process, does not inherit",
+    "  the domain, and controller_manager never appeared -- the robot spawned",
+    "  but could not move.",
+    "",
+    "STEPS 1 AND 2 ARE DISABLED:",
+    "  distrobox-host-exec returns exit 127 from inside ubuntu22-gpu, so the",
+    "  GUI cannot reach the host or vla-box. Start those two by hand:",
+    "    YOLO   (in vla-box): source ~/yolo-env/bin/activate && python ~/yolo_server.py",
+    "    Ollama (on host)   : ollama serve",
+    "",
+    "where: here | host | box:<name>    probe: port:<n> | topic:<n> | none"
+  ],
+  "sim_mode": true,
+  "steps": [
+    {
+      "name": "YOLO-World server (START BY HAND in vla-box)",
+      "where": "box:vla-box",
+      "cmd": "source ~/yolo-env/bin/activate && python ~/yolo_server.py",
+      "probe": "port:5001",
+      "wait_s": 120,
+      "enabled": false
+    },
+    {
+      "name": "Ollama Qwen2.5-7B (START BY HAND on host)",
+      "where": "host",
+      "cmd": "if pgrep -x ollama >/dev/null; then echo '[ok] already running'; sleep infinity; else ollama serve; fi",
+      "probe": "port:11434",
+      "wait_s": 45,
+      "enabled": false
+    },
+    {
+      "name": "Gazebo + SLAM + Nav2 (sim)",
+      "where": "here",
+      "cmd": "bash ~/run_sim_stack.sh",
+      "probe": "topic:/clock",
+      "wait_s": 300,
+      "enabled": true,
+      "sim_only": true
+    },
+    {
+      "name": "VLA agent (v27, sim)",
+      "where": "here",
+      "cmd": "bash ~/run_agent_sim.sh",
+      "probe": "topic:/vla/status",
+      "wait_s": 120,
+      "enabled": true,
+      "interactive": true
+    },
+    {
+      "name": "Voice input (Whisper, push-to-talk)",
+      "where": "here",
+      "cmd": "unset ROS_DOMAIN_ID FASTRTPS_DEFAULT_PROFILES_FILE ROS_DISCOVERY_SERVER && export VLA_NS='' && cd ~ && python3 voice_command.py --mode ptt --mic pulse --device cpu --compute int8",
+      "probe": "topic:/vla/voice/state",
+      "wait_s": 240,
+      "enabled": true,
+      "interactive": true
+    }
+  ]
+}
