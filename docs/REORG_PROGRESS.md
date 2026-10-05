@@ -12,14 +12,68 @@ has been modified at any point; the live `~/vla_sim.sh` demo is untouched.
 | Phase | What | Status |
 |---|---|---|
 | 1 | Remove hard-coded paths | **DONE** |
-| 2 | Modular code | **DONE except `vla_bringup`** |
-| 3 | Containers (Podman + Docker) | **NEXT** |
-| 4 | One-command use (Makefile) | not started |
-| 5 | Tests and CI | partly done (54 tests; no ruff/CI yet) |
-| 6 | Prove portability (fresh clone) | not started |
-| 7 | Docs | not started |
+| 2 | Modular code, incl. `vla_bringup` | **DONE** |
+| 3 | Containers (Podman + Docker) | **DONE** (image build verifying) |
+| 4 | One-command use (Makefile) | **DONE** |
+| 5 | Tests and CI | **DONE** — 133 tests, ruff clean, CI, pre-commit, MIT |
+| 6 | Prove portability (fresh clone) | **IN PROGRESS** |
+| 7 | Docs | mostly done — README and the corrections landed |
 
 Report to the user after phases **1**, **3** and **6**. Phase 1 reported.
+
+## Current state in one command
+
+```bash
+distrobox enter ubuntu22-gpu -- bash -c '
+  source /opt/ros/humble/setup.bash
+  cd ~/repos/AI-guided-Ground-Operation-robot-using-VLA
+  PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python3 -m pytest tests/ -q
+  python3 tests/snapshot_agent_api.py vla_agent_v28 --compare tests/baseline_agent_api.json
+'
+```
+
+Expect `133 passed` and `PARITY OK`. Without ROS sourced: `91 passed, 2 skipped`
+— that subset is what CI runs.
+
+## Phase 3 and 4 summary
+
+**The key result:** all **399** installed ROS Humble packages match the
+`snapshots.ros.org` Humble snapshot of **2026-05-14** exactly — zero
+differences, zero missing. So `docker/ros.Dockerfile` pins the apt source to
+that date and installs all 399 at their recorded versions, which closes the
+project's biggest reproducibility hole (the ROS container ran from a local
+Podman image nobody else could pull). Method and re-check command:
+`env/ROS_SNAPSHOT.md`.
+
+| File | What |
+|---|---|
+| `docker/ros.Dockerfile` | ubuntu:22.04 + the pinned snapshot + xvfb + xterm; builds `vla_bringup` |
+| `docker/ros-entrypoint.sh` | sources ROS, then `sim.env`/`robot.env` by `VLA_MODE`; unset applies **neither** and says so |
+| `docker/perception.Dockerfile` | Python 3.12, 64 pins from `env/pip-freeze_yolo-env.txt`; removes the host-venv trick |
+| `docker/ros-packages.txt` | generated from the manifest — one source of truth |
+| `compose.yaml` | 10 services, profiles `sim`/`robot`, host networking throughout |
+| `scripts/download_models.sh` | fetch + verify every sha256; verified OK on this machine |
+| `Makefile` | setup/models/images/sim/robot/stop/test/parity/lint/smoke/bringup |
+
+### Things found in Phase 3 worth keeping
+
+- **`snapshots.ros.org` has a TLS certificate mismatch** (CloudFront; the cert
+  does not cover the hostname). Every URL must be `http://`. DNS resolves and
+  443 accepts the connection, so this is not a local problem. The apt source
+  uses `[trusted=yes]`, acceptable only because every version is pinned and
+  verified — a tampered mirror could not satisfy the pins.
+- **No compose provider was installed.** Podman has none built in, and neither
+  `podman-compose` nor `docker-compose` was present. `make setup` installs
+  `podman-compose` into a repo-local `.venv-tools` — no sudo, nothing outside
+  the repository touched. Confirmed working: 1.6.0.
+- **The 399 ROS packages pull in ~1,300 apt dependencies**, many of them `-dev`
+  packages, because that is what was installed on the development machine. The
+  image is correspondingly large. Faithfulness was chosen over size.
+- `ruff`'s config had to move to the repository root. Ruff resolves config per
+  file by walking up to the nearest `pyproject.toml` with a `[tool.ruff]`
+  section, so with one in `src/` everything under `src/` silently ignored the
+  root config and `ruff check src` enforced different rules from
+  `ruff check tests`. One config at the root; `ruff check` now passes clean.
 
 ## How to verify anything, from a cold start
 
@@ -104,13 +158,18 @@ Every launcher names the old paths: `scripts/vla_demo.sh`,
 `scripts/vla_sim.sh`, `scripts/vla_robot.sh`. They were deliberately not
 rewritten, so Phase 2 cannot have broken the bring-up.
 
-### Still to do in Phase 2
+### `vla_bringup` — DONE
 
-`vla_bringup`: a ROS 2 package wrapping `launch/`, `config/` and `maps/`, with
-`sim.launch.py` and `robot.launch.py`. Not started. The launch files work as
-they are (`ros2 launch launch/nav2_hw_composed.launch.py`), so this is tidying
-rather than a blocker — but it is what makes `ros2 launch vla_bringup ...` work,
-and Phase 3's containers will want it.
+An `ament_cmake` package that **installs** the repository's `launch/`, `config/`
+and `maps/` into its share directory rather than moving them, so
+`$VLA_LAUNCH_DIR`, `$VLA_CONFIG_DIR` and the operator console's launch buttons
+keep working. `robot.launch.py` starts `slam_hw.launch.py` then, after 15 s,
+`nav2_hw_composed.launch.py`. Two bugs were caught building it: a single
+`REALPATH` on `<pkg>/..` resolves to the colcon workspace's `src/` rather than
+the repository (REALPATH normalises the `..` before resolving the symlink), and
+before the configure-time guard existed a build silently installed only 4 of 5
+config files — the missing one being the DDS profile the hardware actually
+uses.
 
 ---
 
