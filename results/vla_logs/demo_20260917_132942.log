@@ -1,0 +1,17 @@
+
+[36m[13:29:42 +  0s][0m [1mVLA ground robot -- hardware demo bring-up[0m   (log: /home/danyalaziz/vla_logs/demo_20260917_132942.log)
+
+[36m[13:29:42 +  0s][0m STAGE 0/13  host, containers, robot reachable
+[36m[13:29:44 +  2s][0m STAGE 0/13  host OK, both containers OK, robot reachable   [32mOK[0m
+[36m[13:29:44 +  2s][0m STAGE 1/13  Pi gate (load, temperature, throttling, ROS nodes)
+[36m[13:29:47 +  5s][0m         Pi: load 0.93, 54.0 C, throttled=0x0, ROS nodes 7, up 3500s
+[36m[13:29:47 +  5s][0m STAGE 1/13  Pi gate passed   [32mOK[0m
+[36m[13:29:47 +  5s][0m STAGE 2/13  ROS daemon in robot mode
+
+[31m[1m=====================================================================[0m
+[31m[1m  DEMO ABORTED at stage 2[0m
+[31m[1m  the ROS daemon started BLIND (discovery variables missing). See CLAUDE.md.[0m
+[31m[1m  Nothing more was started. Log: /home/danyalaziz/vla_logs/demo_20260917_132942.log[0m
+[31m[1m  To clean up whatever did start:  ~/vla_demo_stop.sh[0m
+[31m[1m=====================================================================[0m
+

@@ -1,0 +1,3 @@
+2026-07-29 12:33:16.129 [RUN] vla_agent v7  (#22 dock no-detect zone, #23 live-first memory, #24 forget, #25 typo-tolerant control words, #26 bare yes/no, #27 context expiry, #28 all-instance distances, #29 Create 3 backup ratchet)
+2026-07-29 12:33:16.129 [RUN] agent started (SIGHT_CONFIRM=2, SEARCH_TIMEOUT=45.0s, NO_PROGRESS_LIMIT=60.0s, ROBOT_CLEARANCE=0.25m)
+2026-07-29 12:41:22.486 [RUN] agent shutting down

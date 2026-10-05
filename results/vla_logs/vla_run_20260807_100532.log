@@ -1,0 +1,47 @@
+2026-08-07 10:05:32.147 [RUN] vla_agent v13  (#37 /robot1 namespace, #38 stereo depth topic, #39 best-effort sensor QoS, #40 RGB->depth pixel mapping, #41 encoding-based mm/m, #42 explicit namespaced TF, #36 no patrol feed prompt, #35 cancel actually stops the robot, #34 feed publishes to any subscriber, #22 dock no-detect zone, #23 live-first memory, #24 forget, #25 typo-tolerant control words, #26 bare yes/no, #27 context expiry, #28 all-instance distances, #29 Create 3 backup ratchet, #30 sticky goals + range-scaled gate + ring-safe blacklist, #31 incremental off-map hop goals, #32 non-freezing live feed, #33 command/reply/status bridge)
+2026-08-07 10:05:32.147 [RUN] agent started (SIGHT_CONFIRM=2, SEARCH_TIMEOUT=45.0s, NO_PROGRESS_LIMIT=60.0s, ROBOT_CLEARANCE=0.25m)
+2026-08-07 10:05:36.725 [CMD] [keyboard] undock
+2026-08-07 10:05:36.725 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-07 10:05:36.725 [STEP] undock target=None
+2026-08-07 10:05:38.767 [ROBOT] Stopped. The robot is idle.
+2026-08-07 10:05:38.767 [STOP] confirmed stopped by odometry after barrage
+2026-08-07 10:05:39.730 [ROBOT] The 'undock' action server isn't up (is the Create 3 running?). Check: ros2 action list | grep -i dock
+2026-08-07 10:05:45.579 [DOCK] dock position recorded at (-0.00, -0.00); detections within 0.8 m are ignored
+2026-08-07 10:05:46.527 [ROBOT] RGB and depth timestamps never match (slop 0.1s) — using unsynchronized frames. Check the camera driver's stamps.
+2026-08-07 10:05:46.527 [WARN] RGB-depth sync failed; raw fallback in use
+2026-08-07 10:06:20.261 [CMD] [keyboard] undock
+2026-08-07 10:06:21.404 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-07 10:06:21.406 [STEP] undock target=None
+2026-08-07 10:06:21.407 [ROBOT] Undocking…
+2026-08-07 10:06:27.407 [ROBOT] I sent the stop but the robot is STILL MOVING (0.06 m/s, 0.01 rad/s). Take manual override now.
+2026-08-07 10:06:27.407 [ERROR] #35 robot still moving 6.0s after stop: lin=0.06 ang=0.01
+2026-08-07 10:06:37.398 [CMD] [keyboard] undock
+2026-08-07 10:06:37.399 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-07 10:06:37.399 [STEP] undock target=None
+2026-08-07 10:06:37.399 [ROBOT] Undocking…
+2026-08-07 10:06:43.407 [ROBOT] I sent the stop but the robot is STILL MOVING (0.06 m/s, 0.01 rad/s). Take manual override now.
+2026-08-07 10:06:43.407 [ERROR] #35 robot still moving 6.0s after stop: lin=0.06 ang=0.01
+2026-08-07 10:06:55.845 [CMD] [keyboard] undock
+2026-08-07 10:06:55.846 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-07 10:06:55.846 [STEP] undock target=None
+2026-08-07 10:06:58.851 [ROBOT] The 'undock' action server isn't up (is the Create 3 running?). Check: ros2 action list | grep -i dock
+2026-08-07 10:07:01.847 [ROBOT] I sent the stop but the robot is STILL MOVING (0.06 m/s, 0.01 rad/s). Take manual override now.
+2026-08-07 10:07:01.847 [ERROR] #35 robot still moving 6.0s after stop: lin=0.06 ang=0.01
+2026-08-07 10:07:04.773 [CMD] [keyboard] undock
+2026-08-07 10:07:04.773 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-07 10:07:04.773 [STEP] undock target=None
+2026-08-07 10:07:07.778 [ROBOT] The 'undock' action server isn't up (is the Create 3 running?). Check: ros2 action list | grep -i dock
+2026-08-07 10:07:10.787 [ROBOT] I sent the stop but the robot is STILL MOVING (0.06 m/s, 0.01 rad/s). Take manual override now.
+2026-08-07 10:07:10.787 [ERROR] #35 robot still moving 6.0s after stop: lin=0.06 ang=0.01
+2026-08-07 10:07:22.927 [ROBOT] I've stopped receiving camera frames. Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-08-07 10:07:22.927 [WARN] #32e camera stream stalled
+2026-08-07 10:07:32.127 [ROBOT] I've stopped receiving camera frames. Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-08-07 10:07:32.127 [WARN] #32e camera stream stalled
+2026-08-07 10:07:47.527 [ROBOT] I've stopped receiving camera frames. Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-08-07 10:07:47.528 [WARN] #32e camera stream stalled
+2026-08-07 10:07:55.327 [ROBOT] I've stopped receiving camera frames. Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-08-07 10:07:55.327 [WARN] #32e camera stream stalled
+2026-08-07 10:09:53.727 [ROBOT] I've stopped receiving camera frames. Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-08-07 10:09:53.727 [WARN] #32e camera stream stalled
+2026-08-07 10:11:33.606 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-07 10:11:33.606 [RUN] agent shutting down

@@ -1,0 +1,7 @@
+2026-07-08 21:11:53.472 [RUN] agent started (SIGHT_CONFIRM=2, NAVIGATE_TIMEOUT=60.0s)
+2026-07-08 21:12:10.403 [CMD] undock
+2026-07-08 21:12:10.403 [STEP] undock target=None
+2026-07-08 21:12:10.404 [ROBOT] Undocking…
+2026-07-08 21:12:20.821 [ROBOT] Undocked — ready to move.
+2026-07-08 21:12:20.821 [DOCK] undock ok
+2026-07-08 21:12:27.891 [CMD] turturn 180 degree

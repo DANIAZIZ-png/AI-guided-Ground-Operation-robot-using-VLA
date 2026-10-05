@@ -1,0 +1,51 @@
+
+[36m[09:17:55 +  0s][0m [1mVLA ground robot -- hardware demo bring-up[0m   (log: /home/danyalaziz/vla_logs/demo_20260922_091755.log)
+
+[36m[09:17:55 +  0s][0m STAGE 0/13  host, containers, robot reachable
+[36m[09:17:57 +  2s][0m STAGE 0/13  host OK, both containers OK, robot reachable   [32mOK[0m
+[36m[09:17:57 +  2s][0m STAGE 1/13  Pi gate (load, temperature, throttling, ROS nodes)
+[36m[09:17:58 +  3s][0m         Pi: load 0.77, 59.9 C, throttled=0x0, ROS nodes 7, up 414s
+[36m[09:17:58 +  3s][0m STAGE 1/13  Pi gate passed   [32mOK[0m
+[36m[09:17:58 +  3s][0m STAGE 2/13  ROS daemon in robot mode
+[36m[09:18:01 +  6s][0m         daemon OK; waiting 15 s for the Pi's node directory
+[36m[09:18:17 + 22s][0m STAGE 2/13  daemon sees the robot: 11 robot nodes   [32mOK[0m
+[36m[09:18:17 + 22s][0m STAGE 3/13  base alive (odometry, battery, dock state)
+[36m[09:18:24 + 29s][0m         odom 20.281 Hz, battery 99 %, docked=true
+[36m[09:18:24 + 29s][0m STAGE 3/13  base alive   [32mOK[0m
+[36m[09:18:24 + 29s][0m STAGE 4/13  YOLO server (vla-box, background)
+[36m[09:18:24 + 29s][0m         (loading the model takes ~30 s; continuing with Ollama meanwhile)
+[36m[09:18:24 + 29s][0m STAGE 5/13  Ollama serving, model pinned
+[36m[09:18:25 + 30s][0m STAGE 5/13  Ollama answered in 0.3s, qwen2.5:7b pinned (keep_alive=-1)   [32mOK[0m
+[36m[09:18:30 + 35s][0m STAGE 4/13  YOLO server answering on :5001 (classes: 'person', 'box', 'shelf', 'door', 'chair', 'pillar', 'docking station', 'chargi)   [32mOK[0m
+[36m[09:18:30 + 35s][0m STAGE 6/13  SLAM (minimised window)
+[36m[09:18:36 + 41s][0m STAGE 6/13  slam_toolbox publishing /robot1/map   [32mOK[0m
+[36m[09:18:36 + 41s][0m STAGE 7/13  Nav2, composed (minimised window) -- ~60 s incl. the 20 s delayed STARTUP
+[36m[09:19:12 + 77s][0m STAGE 7/13  Nav2 active: 7/7 bonds, velocity_smoother on /robot1/cmd_vel   [32mOK[0m
+[36m[09:19:12 + 77s][0m STAGE 8/13  RViz (visible window -- the live map)
+[36m[09:19:17 + 82s][0m STAGE 8/13  RViz window up (hardware layout, Nav2 Goal tool in /robot1)   [32mOK[0m
+[36m[09:19:17 + 82s][0m STAGE 9/13  undock (the camera only runs off the dock)
+[36m[09:19:19 + 84s][0m         robot is docked -- sending Undock (long-lived client, 30 s settle). ROBOT WILL MOVE.
+09:19:50 undock: goal accepted
+09:19:57 undock result status=4 (4=SUCCEEDED) is_docked=False
+[36m[09:19:59 +124s][0m STAGE 9/13  undocked   [32mOK[0m
+[36m[09:19:59 +124s][0m STAGE 10/13  camera colour frames
+[36m[09:20:04 +129s][0m STAGE 10/13  camera colour at 30.464 Hz (colour-only pipeline; LiDAR does the ranging)   [32mOK[0m
+[36m[09:20:04 +129s][0m         camera stream: 10 fps, JPEG 75, preview 416 px (camera restarts, ~50 s)
+[36m[09:20:51 +176s][0m STAGE 10/13  camera back at 9.934 Hz after the bandwidth change   [32mOK[0m
+[36m[09:20:51 +176s][0m STAGE 11/13  VLA agent (minimised window with a real tty; VLA_RGB_ONLY=1)
+[36m[09:21:00 +185s][0m STAGE 11/13  agent up: /vla/status camera:true   [32mOK[0m
+[36m[09:21:00 +185s][0m STAGE 12/13  voice (push-to-talk from the GUI's gold button)
+[36m[09:21:05 +190s][0m         microphone: Bluetooth earbuds (bluez_input.BB_86_57_3D_AF_79.0)
+[36m[09:21:05 +190s][0m STAGE 12/13  voice node ready (Whisper small.en on the GPU)   [32mOK[0m
+[36m[09:21:05 +190s][0m STAGE 13/13  GUI (visible)
+[36m[09:21:10 +195s][0m STAGE 13/13  GUI up   [32mOK[0m
+
+[32m[1m=====================================================================[0m
+[32m[1m  STACK UP in 197 s.  Pi: temp=65.2'C 1.43 [0m
+[32m[1m=====================================================================[0m
+  Visible: the GUI (commands) and RViz (map).  Minimised: SLAM, Nav2, agent, voice.
+  First command:  "what do you see"      (moves nothing)
+  The demo:       "go to the chair"      (chair 2-3 m ahead, in view, clear floor)
+  Voice:          hold the GUI's gold HOLD-TO-TALK button while speaking.
+  Do NOT close the VLA AGENT window.  Do NOT press START ALL in the GUI.
+  When done:      ~/vla_demo_stop.sh    (re-docks the robot, stops everything)

@@ -1,0 +1,990 @@
+Loading YOLO-World model...
+Warming up (first inference is always the slowest)...
+Warm-up done in 464 ms. Classes = ['person', 'box', 'shelf', 'door', 'chair', 'pillar', 'docking station', 'charging dock', 'cell phone']. Starting server on port 5001.
+Confidence floors: person=0.50, box=0.35, shelf=0.25, door=0.20, chair=0.25, pillar=0.30, docking station=0.15, charging dock=0.15, cell phone=0.20
+ * Serving Flask app 'yolo_server'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.24.189:5001
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [22/Sep/2026 09:18:30] "[31m[1mGET /detect HTTP/1.1[0m" 405 -
+[  47.2 ms] Detected: []
+          filtered: [('person', 0.44, 'floor 0.50'), ('person', 0.44, 'floor 0.50'), ('shelf', 0.06, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:21:16] "POST /detect HTTP/1.1" 200 -
+[  41.6 ms] Detected: []
+          filtered: [('person', 0.46, 'floor 0.50'), ('person', 0.38, 'floor 0.50'), ('person', 0.09, 'floor 0.50')]
+127.0.0.1 - - [22/Sep/2026 09:21:17] "POST /detect HTTP/1.1" 200 -
+[  42.6 ms] Detected: []
+          filtered: [('person', 0.46, 'floor 0.50'), ('person', 0.34, 'floor 0.50'), ('shelf', 0.11, 'floor 0.25'), ('box', 0.06, 'floor 0.35'), ('box', 0.05, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:21:23] "POST /detect HTTP/1.1" 200 -
+[  42.7 ms] Detected: [('shelf', 0.29)]
+          filtered: [('shelf', 0.06, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:21:35] "POST /detect HTTP/1.1" 200 -
+[  43.4 ms] Detected: [('chair', 0.65), ('shelf', 0.64), ('chair', 0.6), ('chair', 0.59), ('chair', 0.43), ('chair', 0.38)]
+          filtered: [('box', 0.15, 'floor 0.35'), ('shelf', 0.15, 'floor 0.25'), ('shelf', 0.12, 'floor 0.25'), ('shelf', 0.11, 'floor 0.25'), ('shelf', 0.09, 'floor 0.25'), ('chair', 0.08, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:21:45] "POST /detect HTTP/1.1" 200 -
+[  41.3 ms] Detected: [('shelf', 0.66), ('chair', 0.66), ('chair', 0.59), ('chair', 0.55), ('chair', 0.51), ('chair', 0.35)]
+          filtered: [('person', 0.3, 'floor 0.50'), ('shelf', 0.22, 'floor 0.25'), ('shelf', 0.17, 'floor 0.25'), ('shelf', 0.12, 'floor 0.25'), ('chair', 0.12, 'floor 0.25'), ('person', 0.12, 'floor 0.50'), ('shelf', 0.09, 'floor 0.25'), ('shelf', 0.09, 'floor 0.25'), ('shelf', 0.07, 'floor 0.25'), ('cell phone', 0.06, 'floor 0.20')]
+127.0.0.1 - - [22/Sep/2026 09:21:46] "POST /detect HTTP/1.1" 200 -
+[  46.3 ms] Detected: [('shelf', 0.68), ('chair', 0.68), ('chair', 0.64), ('chair', 0.61), ('chair', 0.52), ('chair', 0.4)]
+          filtered: [('person', 0.41, 'floor 0.50'), ('box', 0.19, 'floor 0.35'), ('shelf', 0.18, 'floor 0.25'), ('shelf', 0.16, 'floor 0.25'), ('shelf', 0.11, 'floor 0.25'), ('shelf', 0.1, 'floor 0.25'), ('chair', 0.08, 'floor 0.25'), ('cell phone', 0.06, 'floor 0.20'), ('box', 0.06, 'floor 0.35'), ('box', 0.06, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:21:55] "POST /detect HTTP/1.1" 200 -
+[  40.3 ms] Detected: [('shelf', 0.63), ('chair', 0.63), ('chair', 0.6), ('chair', 0.55), ('chair', 0.4)]
+          filtered: [('person', 0.47, 'floor 0.50'), ('shelf', 0.22, 'floor 0.25'), ('box', 0.18, 'floor 0.35'), ('shelf', 0.17, 'floor 0.25'), ('shelf', 0.09, 'floor 0.25'), ('shelf', 0.08, 'floor 0.25'), ('shelf', 0.08, 'floor 0.25'), ('chair', 0.06, 'floor 0.25'), ('box', 0.06, 'floor 0.35'), ('box', 0.05, 'floor 0.35'), ('box', 0.05, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:21:56] "POST /detect HTTP/1.1" 200 -
+[  42.9 ms] Detected: [('shelf', 0.66), ('chair', 0.63), ('chair', 0.59), ('person', 0.58), ('chair', 0.55), ('chair', 0.39)]
+          filtered: [('shelf', 0.2, 'floor 0.25'), ('shelf', 0.18, 'floor 0.25'), ('shelf', 0.13, 'floor 0.25'), ('shelf', 0.09, 'floor 0.25'), ('shelf', 0.08, 'floor 0.25'), ('box', 0.06, 'floor 0.35'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:21:57] "POST /detect HTTP/1.1" 200 -
+[  41.7 ms] Detected: [('shelf', 0.68), ('chair', 0.66), ('chair', 0.63), ('person', 0.62), ('chair', 0.57), ('chair', 0.39), ('chair', 0.35)]
+          filtered: [('shelf', 0.2, 'floor 0.25'), ('shelf', 0.13, 'floor 0.25'), ('shelf', 0.11, 'floor 0.25'), ('chair', 0.1, 'floor 0.25'), ('shelf', 0.1, 'floor 0.25'), ('shelf', 0.06, 'floor 0.25'), ('box', 0.06, 'floor 0.35'), ('box', 0.06, 'floor 0.35'), ('shelf', 0.05, 'floor 0.25'), ('cell phone', 0.05, 'floor 0.20'), ('box', 0.05, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:21:58] "POST /detect HTTP/1.1" 200 -
+[  47.1 ms] Detected: [('person', 0.69), ('chair', 0.69), ('chair', 0.65), ('shelf', 0.65), ('chair', 0.35), ('chair', 0.33)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('box', 0.17, 'floor 0.35'), ('shelf', 0.12, 'floor 0.25'), ('box', 0.1, 'floor 0.35'), ('box', 0.07, 'floor 0.35'), ('shelf', 0.07, 'floor 0.25'), ('chair', 0.06, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:21:59] "POST /detect HTTP/1.1" 200 -
+[  40.8 ms] Detected: [('chair', 0.64), ('shelf', 0.58), ('person', 0.54), ('chair', 0.44), ('chair', 0.3)]
+          filtered: [('shelf', 0.19, 'floor 0.25'), ('shelf', 0.06, 'floor 0.25'), ('chair', 0.06, 'floor 0.25'), ('person', 0.05, 'floor 0.50'), ('box', 0.05, 'floor 0.35'), ('box', 0.05, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:22:00] "POST /detect HTTP/1.1" 200 -
+[  41.3 ms] Detected: [('person', 0.74), ('chair', 0.71), ('shelf', 0.67)]
+          filtered: [('chair', 0.2, 'floor 0.25'), ('chair', 0.17, 'floor 0.25'), ('chair', 0.16, 'floor 0.25'), ('shelf', 0.11, 'floor 0.25'), ('shelf', 0.08, 'floor 0.25'), ('box', 0.07, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:22:01] "POST /detect HTTP/1.1" 200 -
+[  40.8 ms] Detected: [('person', 0.88), ('chair', 0.47), ('chair', 0.38)]
+          filtered: [('chair', 0.17, 'floor 0.25'), ('shelf', 0.14, 'floor 0.25'), ('person', 0.13, 'floor 0.50'), ('shelf', 0.12, 'floor 0.25'), ('box', 0.09, 'floor 0.35'), ('chair', 0.08, 'floor 0.25'), ('shelf', 0.07, 'floor 0.25'), ('cell phone', 0.07, 'floor 0.20')]
+127.0.0.1 - - [22/Sep/2026 09:22:02] "POST /detect HTTP/1.1" 200 -
+[  40.9 ms] Detected: [('person', 0.68), ('chair', 0.44), ('chair', 0.4), ('chair', 0.37)]
+          filtered: [('box', 0.06, 'floor 0.35'), ('person', 0.06, 'floor 0.50'), ('shelf', 0.06, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:22:03] "POST /detect HTTP/1.1" 200 -
+[  40.8 ms] Detected: [('chair', 0.79), ('person', 0.75), ('shelf', 0.68), ('chair', 0.65), ('chair', 0.31)]
+          filtered: [('person', 0.1, 'floor 0.50'), ('shelf', 0.09, 'floor 0.25'), ('cell phone', 0.08, 'floor 0.20'), ('box', 0.06, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:22:04] "POST /detect HTTP/1.1" 200 -
+[  45.0 ms] Detected: [('chair', 0.69), ('chair', 0.68), ('chair', 0.47)]
+          filtered: [('person', 0.42, 'floor 0.50'), ('shelf', 0.23, 'floor 0.25'), ('person', 0.15, 'floor 0.50'), ('shelf', 0.08, 'floor 0.25'), ('shelf', 0.07, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:22:05] "POST /detect HTTP/1.1" 200 -
+[  41.4 ms] Detected: [('chair', 0.69), ('chair', 0.41)]
+          filtered: [('person', 0.3, 'floor 0.50'), ('chair', 0.2, 'floor 0.25'), ('chair', 0.09, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:22:06] "POST /detect HTTP/1.1" 200 -
+[  41.6 ms] Detected: [('chair', 0.35)]
+          filtered: [('shelf', 0.17, 'floor 0.25'), ('shelf', 0.13, 'floor 0.25'), ('chair', 0.1, 'floor 0.25'), ('box', 0.07, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:22:07] "POST /detect HTTP/1.1" 200 -
+[  42.4 ms] Detected: [('shelf', 0.27)]
+          filtered: [('chair', 0.23, 'floor 0.25'), ('shelf', 0.19, 'floor 0.25'), ('chair', 0.06, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:22:08] "POST /detect HTTP/1.1" 200 -
+[  42.7 ms] Detected: [('chair', 0.77), ('chair', 0.56), ('chair', 0.51)]
+          filtered: [('person', 0.28, 'floor 0.50'), ('chair', 0.08, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:22:09] "POST /detect HTTP/1.1" 200 -
+[  41.4 ms] Detected: [('chair', 0.79), ('chair', 0.75), ('chair', 0.56), ('shelf', 0.31)]
+          filtered: [('shelf', 0.23, 'floor 0.25'), ('person', 0.18, 'floor 0.50')]
+127.0.0.1 - - [22/Sep/2026 09:22:10] "POST /detect HTTP/1.1" 200 -
+[  42.7 ms] Detected: [('person', 0.83), ('chair', 0.76), ('chair', 0.74)]
+          filtered: [('person', 0.35, 'floor 0.50'), ('person', 0.21, 'floor 0.50'), ('shelf', 0.13, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:22:11] "POST /detect HTTP/1.1" 200 -
+[  41.9 ms] Detected: [('chair', 0.85), ('person', 0.78), ('chair', 0.42)]
+          filtered: [('shelf', 0.14, 'floor 0.25'), ('chair', 0.08, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:22:12] "POST /detect HTTP/1.1" 200 -
+[  42.9 ms] Detected: [('chair', 0.78), ('person', 0.54)]
+          filtered: [('person', 0.46, 'floor 0.50'), ('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('shelf', 0.07, 'floor 0.25'), ('person', 0.07, 'floor 0.50'), ('shelf', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:22:13] "POST /detect HTTP/1.1" 200 -
+[  41.4 ms] Detected: [('chair', 0.83), ('person', 0.77), ('chair', 0.34), ('shelf', 0.27)]
+          filtered: [('shelf', 0.07, 'floor 0.25'), ('person', 0.07, 'floor 0.50')]
+127.0.0.1 - - [22/Sep/2026 09:22:14] "POST /detect HTTP/1.1" 200 -
+[  40.2 ms] Detected: [('chair', 0.82), ('shelf', 0.29)]
+          filtered: [('person', 0.29, 'floor 0.50'), ('chair', 0.14, 'floor 0.25'), ('shelf', 0.08, 'floor 0.25'), ('box', 0.07, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:22:15] "POST /detect HTTP/1.1" 200 -
+[  40.9 ms] Detected: [('chair', 0.78), ('chair', 0.26)]
+          filtered: [('person', 0.08, 'floor 0.50'), ('shelf', 0.07, 'floor 0.25'), ('box', 0.07, 'floor 0.35'), ('shelf', 0.07, 'floor 0.25'), ('person', 0.06, 'floor 0.50')]
+127.0.0.1 - - [22/Sep/2026 09:22:16] "POST /detect HTTP/1.1" 200 -
+[  43.6 ms] Detected: [('chair', 0.78), ('chair', 0.33)]
+          filtered: [('shelf', 0.13, 'floor 0.25'), ('shelf', 0.06, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('shelf', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:22:17] "POST /detect HTTP/1.1" 200 -
+[  42.1 ms] Detected: [('chair', 0.67)]
+          filtered: [('box', 0.1, 'floor 0.35'), ('person', 0.09, 'floor 0.50'), ('shelf', 0.07, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:22:18] "POST /detect HTTP/1.1" 200 -
+[  41.1 ms] Detected: [('chair', 0.49)]
+127.0.0.1 - - [22/Sep/2026 09:22:19] "POST /detect HTTP/1.1" 200 -
+[  41.2 ms] Detected: [('chair', 0.38)]
+          filtered: [('box', 0.08, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:22:20] "POST /detect HTTP/1.1" 200 -
+[  41.7 ms] Detected: []
+          filtered: [('chair', 0.14, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:22:21] "POST /detect HTTP/1.1" 200 -
+[  41.2 ms] Detected: [('chair', 0.43)]
+          filtered: [('shelf', 0.1, 'floor 0.25'), ('box', 0.09, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:22:22] "POST /detect HTTP/1.1" 200 -
+[  40.7 ms] Detected: []
+          filtered: [('shelf', 0.17, 'floor 0.25'), ('shelf', 0.09, 'floor 0.25'), ('box', 0.08, 'floor 0.35'), ('box', 0.07, 'floor 0.35'), ('shelf', 0.07, 'floor 0.25'), ('box', 0.06, 'floor 0.35'), ('shelf', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:22:23] "POST /detect HTTP/1.1" 200 -
+[  46.2 ms] Detected: []
+          filtered: [('person', 0.14, 'floor 0.50')]
+127.0.0.1 - - [22/Sep/2026 09:22:24] "POST /detect HTTP/1.1" 200 -
+[  48.6 ms] Detected: []
+          filtered: [('person', 0.31, 'floor 0.50'), ('person', 0.23, 'floor 0.50')]
+127.0.0.1 - - [22/Sep/2026 09:23:16] "POST /detect HTTP/1.1" 200 -
+[  44.8 ms] Detected: [('chair', 0.49)]
+          filtered: [('chair', 0.11, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:23:38] "POST /detect HTTP/1.1" 200 -
+[  46.5 ms] Detected: [('person', 0.51)]
+          filtered: [('chair', 0.13, 'floor 0.25'), ('chair', 0.07, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:23:39] "POST /detect HTTP/1.1" 200 -
+[  39.3 ms] Detected: [('chair', 0.3)]
+          filtered: [('chair', 0.09, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:23:43] "POST /detect HTTP/1.1" 200 -
+[  39.9 ms] Detected: [('chair', 0.3)]
+          filtered: [('chair', 0.09, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:23:43] "POST /detect HTTP/1.1" 200 -
+[  39.9 ms] Detected: [('chair', 0.3)]
+          filtered: [('chair', 0.09, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:23:44] "POST /detect HTTP/1.1" 200 -
+[  39.2 ms] Detected: [('chair', 0.3)]
+          filtered: [('chair', 0.09, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:23:45] "POST /detect HTTP/1.1" 200 -
+[  46.0 ms] Detected: [('chair', 0.3)]
+          filtered: [('chair', 0.09, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:23:46] "POST /detect HTTP/1.1" 200 -
+[  39.2 ms] Detected: [('chair', 0.3)]
+          filtered: [('chair', 0.09, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:23:47] "POST /detect HTTP/1.1" 200 -
+[  39.9 ms] Detected: [('chair', 0.3)]
+          filtered: [('chair', 0.09, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:23:48] "POST /detect HTTP/1.1" 200 -
+[  41.2 ms] Detected: [('chair', 0.3)]
+          filtered: [('chair', 0.09, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:23:49] "POST /detect HTTP/1.1" 200 -
+[  39.3 ms] Detected: [('chair', 0.3)]
+          filtered: [('chair', 0.09, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:23:50] "POST /detect HTTP/1.1" 200 -
+[  39.2 ms] Detected: [('chair', 0.3)]
+          filtered: [('chair', 0.09, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:23:51] "POST /detect HTTP/1.1" 200 -
+[  38.7 ms] Detected: [('chair', 0.3)]
+          filtered: [('chair', 0.09, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:23:52] "POST /detect HTTP/1.1" 200 -
+[  40.9 ms] Detected: [('chair', 0.3)]
+          filtered: [('chair', 0.09, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:23:53] "POST /detect HTTP/1.1" 200 -
+[  46.4 ms] Detected: [('chair', 0.3)]
+          filtered: [('chair', 0.09, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:23:54] "POST /detect HTTP/1.1" 200 -
+[  42.5 ms] Detected: [('chair', 0.3)]
+          filtered: [('chair', 0.09, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:23:55] "POST /detect HTTP/1.1" 200 -
+[  39.4 ms] Detected: [('chair', 0.3)]
+          filtered: [('chair', 0.09, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:23:56] "POST /detect HTTP/1.1" 200 -
+[  38.6 ms] Detected: [('chair', 0.3)]
+          filtered: [('chair', 0.09, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:23:57] "POST /detect HTTP/1.1" 200 -
+[  39.2 ms] Detected: [('chair', 0.3)]
+          filtered: [('chair', 0.09, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:23:58] "POST /detect HTTP/1.1" 200 -
+[  40.0 ms] Detected: [('chair', 0.3)]
+          filtered: [('chair', 0.09, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:23:59] "POST /detect HTTP/1.1" 200 -
+[  42.2 ms] Detected: [('chair', 0.3)]
+          filtered: [('chair', 0.09, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:00] "POST /detect HTTP/1.1" 200 -
+[  38.3 ms] Detected: [('chair', 0.3)]
+          filtered: [('chair', 0.09, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:01] "POST /detect HTTP/1.1" 200 -
+[  39.7 ms] Detected: [('chair', 0.3)]
+          filtered: [('chair', 0.09, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:02] "POST /detect HTTP/1.1" 200 -
+[  39.9 ms] Detected: [('chair', 0.3)]
+          filtered: [('chair', 0.09, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:03] "POST /detect HTTP/1.1" 200 -
+[  39.6 ms] Detected: [('chair', 0.3)]
+          filtered: [('chair', 0.09, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:04] "POST /detect HTTP/1.1" 200 -
+[  40.2 ms] Detected: [('chair', 0.3)]
+          filtered: [('chair', 0.09, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:05] "POST /detect HTTP/1.1" 200 -
+[  38.8 ms] Detected: [('chair', 0.3)]
+          filtered: [('chair', 0.09, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:06] "POST /detect HTTP/1.1" 200 -
+[  40.7 ms] Detected: [('chair', 0.3)]
+          filtered: [('chair', 0.09, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:07] "POST /detect HTTP/1.1" 200 -
+[  38.6 ms] Detected: [('chair', 0.3)]
+          filtered: [('chair', 0.09, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:08] "POST /detect HTTP/1.1" 200 -
+[  41.6 ms] Detected: [('chair', 0.3)]
+          filtered: [('chair', 0.09, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:09] "POST /detect HTTP/1.1" 200 -
+[  40.8 ms] Detected: [('chair', 0.3)]
+          filtered: [('chair', 0.09, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:10] "POST /detect HTTP/1.1" 200 -
+[  40.4 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:11] "POST /detect HTTP/1.1" 200 -
+[  39.5 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:12] "POST /detect HTTP/1.1" 200 -
+[  41.6 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:13] "POST /detect HTTP/1.1" 200 -
+[  40.3 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:14] "POST /detect HTTP/1.1" 200 -
+[  47.2 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:15] "POST /detect HTTP/1.1" 200 -
+[  39.7 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:16] "POST /detect HTTP/1.1" 200 -
+[  40.3 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:17] "POST /detect HTTP/1.1" 200 -
+[  39.3 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:18] "POST /detect HTTP/1.1" 200 -
+[  39.4 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:19] "POST /detect HTTP/1.1" 200 -
+[  38.8 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:20] "POST /detect HTTP/1.1" 200 -
+[  39.6 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:21] "POST /detect HTTP/1.1" 200 -
+[  40.3 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:22] "POST /detect HTTP/1.1" 200 -
+[  39.8 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:23] "POST /detect HTTP/1.1" 200 -
+[  39.3 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:24] "POST /detect HTTP/1.1" 200 -
+[  41.2 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:25] "POST /detect HTTP/1.1" 200 -
+[  39.2 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:26] "POST /detect HTTP/1.1" 200 -
+[  39.2 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:27] "POST /detect HTTP/1.1" 200 -
+[  39.2 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:28] "POST /detect HTTP/1.1" 200 -
+[  39.8 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:29] "POST /detect HTTP/1.1" 200 -
+[  38.9 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:30] "POST /detect HTTP/1.1" 200 -
+[  40.9 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:31] "POST /detect HTTP/1.1" 200 -
+[  39.2 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:32] "POST /detect HTTP/1.1" 200 -
+[  38.6 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:33] "POST /detect HTTP/1.1" 200 -
+[  39.1 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:34] "POST /detect HTTP/1.1" 200 -
+[  39.4 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:35] "POST /detect HTTP/1.1" 200 -
+[  39.9 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:36] "POST /detect HTTP/1.1" 200 -
+[  39.6 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:37] "POST /detect HTTP/1.1" 200 -
+[  39.0 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:38] "POST /detect HTTP/1.1" 200 -
+[  45.2 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:39] "POST /detect HTTP/1.1" 200 -
+[  39.5 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:40] "POST /detect HTTP/1.1" 200 -
+[  40.2 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:41] "POST /detect HTTP/1.1" 200 -
+[  41.7 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:42] "POST /detect HTTP/1.1" 200 -
+[  41.1 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:43] "POST /detect HTTP/1.1" 200 -
+[  39.3 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:44] "POST /detect HTTP/1.1" 200 -
+[  39.2 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:45] "POST /detect HTTP/1.1" 200 -
+[  39.6 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:46] "POST /detect HTTP/1.1" 200 -
+[  42.1 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:47] "POST /detect HTTP/1.1" 200 -
+[  39.1 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:48] "POST /detect HTTP/1.1" 200 -
+[  39.8 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:49] "POST /detect HTTP/1.1" 200 -
+[  39.5 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:50] "POST /detect HTTP/1.1" 200 -
+[  39.8 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:51] "POST /detect HTTP/1.1" 200 -
+[  40.4 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:52] "POST /detect HTTP/1.1" 200 -
+[  40.3 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:53] "POST /detect HTTP/1.1" 200 -
+[  40.0 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:54] "POST /detect HTTP/1.1" 200 -
+[  43.6 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:55] "POST /detect HTTP/1.1" 200 -
+[  39.3 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:56] "POST /detect HTTP/1.1" 200 -
+[  45.4 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:57] "POST /detect HTTP/1.1" 200 -
+[  39.9 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:58] "POST /detect HTTP/1.1" 200 -
+[  41.9 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:24:59] "POST /detect HTTP/1.1" 200 -
+[  40.1 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:25:00] "POST /detect HTTP/1.1" 200 -
+[  41.6 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:25:01] "POST /detect HTTP/1.1" 200 -
+[  41.4 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:25:02] "POST /detect HTTP/1.1" 200 -
+[  39.8 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:25:03] "POST /detect HTTP/1.1" 200 -
+[  40.8 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:25:04] "POST /detect HTTP/1.1" 200 -
+[  39.7 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:25:05] "POST /detect HTTP/1.1" 200 -
+[  39.8 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:25:06] "POST /detect HTTP/1.1" 200 -
+[  42.0 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:25:07] "POST /detect HTTP/1.1" 200 -
+[  39.2 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:25:08] "POST /detect HTTP/1.1" 200 -
+[  40.3 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:25:09] "POST /detect HTTP/1.1" 200 -
+[  39.8 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:25:10] "POST /detect HTTP/1.1" 200 -
+[  46.9 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:25:11] "POST /detect HTTP/1.1" 200 -
+[  41.3 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:25:12] "POST /detect HTTP/1.1" 200 -
+[  40.6 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:25:13] "POST /detect HTTP/1.1" 200 -
+[  39.6 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:25:14] "POST /detect HTTP/1.1" 200 -
+[  38.5 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:25:15] "POST /detect HTTP/1.1" 200 -
+[  39.6 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:25:16] "POST /detect HTTP/1.1" 200 -
+[  39.4 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:25:17] "POST /detect HTTP/1.1" 200 -
+[  40.8 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:25:18] "POST /detect HTTP/1.1" 200 -
+[  40.1 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:25:19] "POST /detect HTTP/1.1" 200 -
+[  38.5 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:25:20] "POST /detect HTTP/1.1" 200 -
+[  42.0 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:25:21] "POST /detect HTTP/1.1" 200 -
+[  39.8 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:25:22] "POST /detect HTTP/1.1" 200 -
+[  38.7 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:25:23] "POST /detect HTTP/1.1" 200 -
+[  39.5 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:25:24] "POST /detect HTTP/1.1" 200 -
+[  41.3 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:25:25] "POST /detect HTTP/1.1" 200 -
+[  42.0 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:25:26] "POST /detect HTTP/1.1" 200 -
+[  39.6 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:25:27] "POST /detect HTTP/1.1" 200 -
+[  40.7 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:25:28] "POST /detect HTTP/1.1" 200 -
+[  38.7 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:25:29] "POST /detect HTTP/1.1" 200 -
+[  39.3 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:25:30] "POST /detect HTTP/1.1" 200 -
+[  40.0 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:25:31] "POST /detect HTTP/1.1" 200 -
+[  39.8 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:25:32] "POST /detect HTTP/1.1" 200 -
+[  40.5 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:25:33] "POST /detect HTTP/1.1" 200 -
+[  40.3 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:25:34] "POST /detect HTTP/1.1" 200 -
+[  39.5 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:25:35] "POST /detect HTTP/1.1" 200 -
+[  39.1 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:25:36] "POST /detect HTTP/1.1" 200 -
+[  41.6 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:25:37] "POST /detect HTTP/1.1" 200 -
+[  39.8 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:25:38] "POST /detect HTTP/1.1" 200 -
+[  39.1 ms] Detected: [('person', 0.88), ('chair', 0.79), ('chair', 0.52)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:25:39] "POST /detect HTTP/1.1" 200 -
+[  42.8 ms] Detected: [('shelf', 0.38), ('shelf', 0.33)]
+          filtered: [('person', 0.33, 'floor 0.50'), ('box', 0.1, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:26:07] "POST /detect HTTP/1.1" 200 -
+[  43.7 ms] Detected: [('person', 0.82), ('chair', 0.67), ('chair', 0.6)]
+          filtered: [('shelf', 0.13, 'floor 0.25'), ('chair', 0.13, 'floor 0.25'), ('chair', 0.1, 'floor 0.25'), ('chair', 0.06, 'floor 0.25'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:26:30] "POST /detect HTTP/1.1" 200 -
+[  41.0 ms] Detected: [('person', 0.82), ('chair', 0.67), ('chair', 0.6)]
+          filtered: [('shelf', 0.13, 'floor 0.25'), ('chair', 0.13, 'floor 0.25'), ('chair', 0.1, 'floor 0.25'), ('chair', 0.06, 'floor 0.25'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:26:30] "POST /detect HTTP/1.1" 200 -
+[  44.3 ms] Detected: [('person', 0.75), ('chair', 0.62), ('chair', 0.4)]
+          filtered: [('person', 0.26, 'floor 0.50'), ('chair', 0.14, 'floor 0.25'), ('chair', 0.14, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('shelf', 0.09, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:28:36] "POST /detect HTTP/1.1" 200 -
+[  65.6 ms] Detected: [('person', 0.87), ('person', 0.7), ('person', 0.59), ('chair', 0.57)]
+          filtered: [('person', 0.14, 'floor 0.50'), ('person', 0.07, 'floor 0.50'), ('chair', 0.06, 'floor 0.25'), ('person', 0.05, 'floor 0.50'), ('person', 0.05, 'floor 0.50')]
+127.0.0.1 - - [22/Sep/2026 09:30:34] "POST /detect HTTP/1.1" 200 -
+[  40.8 ms] Detected: [('person', 0.88), ('person', 0.79), ('person', 0.77), ('chair', 0.6)]
+          filtered: [('chair', 0.11, 'floor 0.25'), ('person', 0.08, 'floor 0.50'), ('person', 0.07, 'floor 0.50')]
+127.0.0.1 - - [22/Sep/2026 09:30:35] "POST /detect HTTP/1.1" 200 -
+[  42.4 ms] Detected: [('person', 0.84), ('person', 0.77), ('person', 0.71), ('chair', 0.55)]
+          filtered: [('chair', 0.18, 'floor 0.25'), ('person', 0.15, 'floor 0.50'), ('chair', 0.05, 'floor 0.25'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:30:39] "POST /detect HTTP/1.1" 200 -
+[  42.2 ms] Detected: [('person', 0.84), ('person', 0.73), ('person', 0.69), ('chair', 0.47)]
+          filtered: [('chair', 0.2, 'floor 0.25'), ('person', 0.11, 'floor 0.50'), ('chair', 0.06, 'floor 0.25'), ('person', 0.06, 'floor 0.50')]
+127.0.0.1 - - [22/Sep/2026 09:30:40] "POST /detect HTTP/1.1" 200 -
+[  40.3 ms] Detected: [('person', 0.86), ('person', 0.76), ('person', 0.71), ('chair', 0.43)]
+          filtered: [('chair', 0.12, 'floor 0.25'), ('person', 0.1, 'floor 0.50')]
+127.0.0.1 - - [22/Sep/2026 09:30:45] "POST /detect HTTP/1.1" 200 -
+[  39.7 ms] Detected: [('person', 0.85), ('person', 0.78), ('person', 0.72), ('chair', 0.52), ('chair', 0.27)]
+          filtered: [('person', 0.13, 'floor 0.50'), ('chair', 0.1, 'floor 0.25'), ('chair', 0.06, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:30:46] "POST /detect HTTP/1.1" 200 -
+[  41.2 ms] Detected: [('person', 0.85), ('person', 0.78), ('person', 0.72), ('chair', 0.52), ('chair', 0.27)]
+          filtered: [('person', 0.13, 'floor 0.50'), ('chair', 0.1, 'floor 0.25'), ('chair', 0.06, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:30:46] "POST /detect HTTP/1.1" 200 -
+[  39.9 ms] Detected: [('person', 0.85), ('person', 0.8), ('person', 0.74), ('chair', 0.59)]
+          filtered: [('chair', 0.22, 'floor 0.25'), ('person', 0.12, 'floor 0.50'), ('chair', 0.08, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:30:47] "POST /detect HTTP/1.1" 200 -
+[  40.5 ms] Detected: [('person', 0.85), ('person', 0.83), ('person', 0.69)]
+          filtered: [('chair', 0.14, 'floor 0.25'), ('chair', 0.09, 'floor 0.25'), ('person', 0.06, 'floor 0.50')]
+127.0.0.1 - - [22/Sep/2026 09:30:48] "POST /detect HTTP/1.1" 200 -
+[  41.1 ms] Detected: [('person', 0.83), ('person', 0.78), ('person', 0.53)]
+          filtered: [('person', 0.22, 'floor 0.50')]
+127.0.0.1 - - [22/Sep/2026 09:30:49] "POST /detect HTTP/1.1" 200 -
+[  41.8 ms] Detected: [('person', 0.88), ('person', 0.81)]
+          filtered: [('shelf', 0.1, 'floor 0.25'), ('person', 0.1, 'floor 0.50'), ('shelf', 0.09, 'floor 0.25'), ('box', 0.08, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:30:50] "POST /detect HTTP/1.1" 200 -
+[  40.2 ms] Detected: [('person', 0.88), ('person', 0.76)]
+127.0.0.1 - - [22/Sep/2026 09:30:51] "POST /detect HTTP/1.1" 200 -
+[  40.2 ms] Detected: [('person', 0.9), ('person', 0.84)]
+          filtered: [('box', 0.1, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:30:52] "POST /detect HTTP/1.1" 200 -
+[  40.6 ms] Detected: [('person', 0.88), ('person', 0.66)]
+          filtered: [('chair', 0.09, 'floor 0.25'), ('person', 0.07, 'floor 0.50')]
+127.0.0.1 - - [22/Sep/2026 09:30:53] "POST /detect HTTP/1.1" 200 -
+[  41.2 ms] Detected: [('person', 0.94), ('person', 0.9), ('person', 0.82)]
+          filtered: [('chair', 0.2, 'floor 0.25'), ('chair', 0.06, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('person', 0.05, 'floor 0.50')]
+127.0.0.1 - - [22/Sep/2026 09:30:54] "POST /detect HTTP/1.1" 200 -
+[  39.9 ms] Detected: [('person', 0.93), ('person', 0.91), ('person', 0.83)]
+          filtered: [('chair', 0.22, 'floor 0.25'), ('box', 0.06, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:30:55] "POST /detect HTTP/1.1" 200 -
+[  40.9 ms] Detected: [('person', 0.85), ('person', 0.84), ('person', 0.82)]
+          filtered: [('chair', 0.16, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:30:56] "POST /detect HTTP/1.1" 200 -
+[  40.8 ms] Detected: [('person', 0.83), ('chair', 0.79), ('person', 0.67)]
+          filtered: [('person', 0.19, 'floor 0.50'), ('shelf', 0.18, 'floor 0.25'), ('chair', 0.08, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:30:57] "POST /detect HTTP/1.1" 200 -
+[  40.5 ms] Detected: [('person', 0.84), ('person', 0.77), ('chair', 0.74), ('person', 0.63)]
+          filtered: [('chair', 0.14, 'floor 0.25'), ('shelf', 0.09, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:30:58] "POST /detect HTTP/1.1" 200 -
+[  41.4 ms] Detected: [('chair', 0.81), ('person', 0.81), ('person', 0.59)]
+          filtered: [('chair', 0.24, 'floor 0.25'), ('chair', 0.23, 'floor 0.25'), ('shelf', 0.08, 'floor 0.25'), ('person', 0.07, 'floor 0.50')]
+127.0.0.1 - - [22/Sep/2026 09:30:59] "POST /detect HTTP/1.1" 200 -
+[  40.7 ms] Detected: [('chair', 0.73), ('person', 0.71), ('person', 0.64)]
+          filtered: [('shelf', 0.17, 'floor 0.25'), ('chair', 0.16, 'floor 0.25'), ('chair', 0.13, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:31:00] "POST /detect HTTP/1.1" 200 -
+[  42.5 ms] Detected: [('person', 0.88), ('person', 0.51)]
+          filtered: [('chair', 0.16, 'floor 0.25'), ('chair', 0.12, 'floor 0.25'), ('shelf', 0.1, 'floor 0.25'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:31:01] "POST /detect HTTP/1.1" 200 -
+[  41.6 ms] Detected: [('person', 0.89), ('person', 0.58), ('chair', 0.54)]
+          filtered: [('chair', 0.07, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:31:02] "POST /detect HTTP/1.1" 200 -
+[  39.9 ms] Detected: [('person', 0.93), ('person', 0.7), ('chair', 0.51)]
+          filtered: [('chair', 0.09, 'floor 0.25'), ('chair', 0.07, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:31:03] "POST /detect HTTP/1.1" 200 -
+[  44.1 ms] Detected: [('person', 0.93), ('person', 0.68), ('chair', 0.65)]
+127.0.0.1 - - [22/Sep/2026 09:31:04] "POST /detect HTTP/1.1" 200 -
+[  40.2 ms] Detected: [('person', 0.94), ('person', 0.85), ('chair', 0.56)]
+          filtered: [('person', 0.08, 'floor 0.50')]
+127.0.0.1 - - [22/Sep/2026 09:31:05] "POST /detect HTTP/1.1" 200 -
+[  39.9 ms] Detected: [('person', 0.92), ('person', 0.84), ('chair', 0.26)]
+          filtered: [('person', 0.26, 'floor 0.50')]
+127.0.0.1 - - [22/Sep/2026 09:31:06] "POST /detect HTTP/1.1" 200 -
+[  45.9 ms] Detected: [('person', 0.91), ('person', 0.83), ('chair', 0.35)]
+127.0.0.1 - - [22/Sep/2026 09:31:07] "POST /detect HTTP/1.1" 200 -
+[  39.8 ms] Detected: [('person', 0.91), ('person', 0.85), ('chair', 0.33)]
+127.0.0.1 - - [22/Sep/2026 09:31:08] "POST /detect HTTP/1.1" 200 -
+[  42.0 ms] Detected: [('person', 0.91), ('person', 0.89)]
+127.0.0.1 - - [22/Sep/2026 09:31:09] "POST /detect HTTP/1.1" 200 -
+[  41.1 ms] Detected: [('person', 0.88), ('person', 0.88)]
+          filtered: [('person', 0.21, 'floor 0.50'), ('person', 0.06, 'floor 0.50')]
+127.0.0.1 - - [22/Sep/2026 09:31:10] "POST /detect HTTP/1.1" 200 -
+[  39.9 ms] Detected: [('person', 0.9), ('person', 0.86)]
+          filtered: [('shelf', 0.06, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:31:11] "POST /detect HTTP/1.1" 200 -
+[  40.5 ms] Detected: [('person', 0.87)]
+          filtered: [('shelf', 0.08, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:31:12] "POST /detect HTTP/1.1" 200 -
+[  44.2 ms] Detected: [('person', 0.82)]
+          filtered: [('shelf', 0.09, 'floor 0.25'), ('shelf', 0.05, 'floor 0.25'), ('person', 0.05, 'floor 0.50'), ('shelf', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:31:13] "POST /detect HTTP/1.1" 200 -
+[  42.0 ms] Detected: [('person', 0.81)]
+          filtered: [('shelf', 0.14, 'floor 0.25'), ('shelf', 0.08, 'floor 0.25'), ('shelf', 0.06, 'floor 0.25'), ('person', 0.05, 'floor 0.50')]
+127.0.0.1 - - [22/Sep/2026 09:31:14] "POST /detect HTTP/1.1" 200 -
+[  44.6 ms] Detected: [('person', 0.85)]
+127.0.0.1 - - [22/Sep/2026 09:31:15] "POST /detect HTTP/1.1" 200 -
+[  40.4 ms] Detected: [('person', 0.8)]
+          filtered: [('person', 0.12, 'floor 0.50'), ('shelf', 0.11, 'floor 0.25'), ('shelf', 0.07, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:31:16] "POST /detect HTTP/1.1" 200 -
+[  41.0 ms] Detected: [('person', 0.85), ('person', 0.82)]
+          filtered: [('shelf', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:31:17] "POST /detect HTTP/1.1" 200 -
+[  42.0 ms] Detected: [('person', 0.75), ('person', 0.67), ('person', 0.66)]
+          filtered: [('shelf', 0.07, 'floor 0.25'), ('shelf', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:31:18] "POST /detect HTTP/1.1" 200 -
+[  40.9 ms] Detected: [('person', 0.54)]
+          filtered: [('person', 0.1, 'floor 0.50')]
+127.0.0.1 - - [22/Sep/2026 09:31:19] "POST /detect HTTP/1.1" 200 -
+[  40.5 ms] Detected: [('person', 0.69)]
+          filtered: [('shelf', 0.15, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:31:20] "POST /detect HTTP/1.1" 200 -
+[  42.4 ms] Detected: [('person', 0.69)]
+          filtered: [('shelf', 0.1, 'floor 0.25'), ('shelf', 0.07, 'floor 0.25'), ('shelf', 0.06, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:31:21] "POST /detect HTTP/1.1" 200 -
+[  44.4 ms] Detected: [('person', 0.85)]
+127.0.0.1 - - [22/Sep/2026 09:31:22] "POST /detect HTTP/1.1" 200 -
+[  46.2 ms] Detected: [('person', 0.59)]
+127.0.0.1 - - [22/Sep/2026 09:31:23] "POST /detect HTTP/1.1" 200 -
+[  40.4 ms] Detected: [('person', 0.84)]
+          filtered: [('person', 0.48, 'floor 0.50')]
+127.0.0.1 - - [22/Sep/2026 09:31:24] "POST /detect HTTP/1.1" 200 -
+[  40.9 ms] Detected: [('person', 0.86)]
+          filtered: [('shelf', 0.11, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:31:25] "POST /detect HTTP/1.1" 200 -
+[  39.4 ms] Detected: [('person', 0.83)]
+127.0.0.1 - - [22/Sep/2026 09:31:26] "POST /detect HTTP/1.1" 200 -
+[  40.8 ms] Detected: [('person', 0.84)]
+127.0.0.1 - - [22/Sep/2026 09:31:27] "POST /detect HTTP/1.1" 200 -
+[  40.5 ms] Detected: [('person', 0.8)]
+127.0.0.1 - - [22/Sep/2026 09:31:28] "POST /detect HTTP/1.1" 200 -
+[  40.5 ms] Detected: [('person', 0.85)]
+127.0.0.1 - - [22/Sep/2026 09:31:29] "POST /detect HTTP/1.1" 200 -
+[  39.8 ms] Detected: [('person', 0.8)]
+127.0.0.1 - - [22/Sep/2026 09:31:30] "POST /detect HTTP/1.1" 200 -
+[  41.5 ms] Detected: [('person', 0.74)]
+          filtered: [('shelf', 0.07, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:31:31] "POST /detect HTTP/1.1" 200 -
+[  39.5 ms] Detected: [('person', 0.81)]
+127.0.0.1 - - [22/Sep/2026 09:31:32] "POST /detect HTTP/1.1" 200 -
+[  40.3 ms] Detected: [('person', 0.58)]
+          filtered: [('person', 0.18, 'floor 0.50'), ('shelf', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:31:33] "POST /detect HTTP/1.1" 200 -
+[  40.8 ms] Detected: []
+          filtered: [('person', 0.28, 'floor 0.50'), ('shelf', 0.07, 'floor 0.25'), ('shelf', 0.06, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:31:42] "POST /detect HTTP/1.1" 200 -
+[  40.3 ms] Detected: [('box', 0.5), ('shelf', 0.25)]
+          filtered: [('box', 0.14, 'floor 0.35'), ('shelf', 0.13, 'floor 0.25'), ('box', 0.12, 'floor 0.35'), ('shelf', 0.12, 'floor 0.25'), ('shelf', 0.07, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:31:51] "POST /detect HTTP/1.1" 200 -
+[  46.9 ms] Detected: [('person', 0.9)]
+          filtered: [('chair', 0.22, 'floor 0.25'), ('chair', 0.16, 'floor 0.25'), ('box', 0.13, 'floor 0.35'), ('box', 0.12, 'floor 0.35'), ('chair', 0.06, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:33:50] "POST /detect HTTP/1.1" 200 -
+[  43.0 ms] Detected: [('person', 0.89), ('chair', 0.86), ('chair', 0.85)]
+          filtered: [('person', 0.35, 'floor 0.50'), ('person', 0.29, 'floor 0.50'), ('person', 0.12, 'floor 0.50')]
+127.0.0.1 - - [22/Sep/2026 09:35:11] "POST /detect HTTP/1.1" 200 -
+[  40.3 ms] Detected: [('chair', 0.86), ('person', 0.83), ('chair', 0.64)]
+          filtered: [('person', 0.23, 'floor 0.50'), ('person', 0.16, 'floor 0.50'), ('person', 0.13, 'floor 0.50'), ('shelf', 0.1, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:35:12] "POST /detect HTTP/1.1" 200 -
+[  43.3 ms] Detected: [('chair', 0.83), ('chair', 0.8)]
+          filtered: [('person', 0.46, 'floor 0.50'), ('person', 0.3, 'floor 0.50'), ('person', 0.22, 'floor 0.50'), ('box', 0.19, 'floor 0.35'), ('box', 0.07, 'floor 0.35'), ('shelf', 0.06, 'floor 0.25'), ('box', 0.06, 'floor 0.35'), ('shelf', 0.06, 'floor 0.25'), ('box', 0.06, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:35:16] "POST /detect HTTP/1.1" 200 -
+[  40.1 ms] Detected: [('chair', 0.78), ('chair', 0.78)]
+          filtered: [('box', 0.32, 'floor 0.35'), ('person', 0.18, 'floor 0.50'), ('person', 0.15, 'floor 0.50'), ('person', 0.12, 'floor 0.50'), ('shelf', 0.07, 'floor 0.25'), ('box', 0.07, 'floor 0.35'), ('box', 0.05, 'floor 0.35'), ('box', 0.05, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:35:17] "POST /detect HTTP/1.1" 200 -
+[  41.7 ms] Detected: [('chair', 0.82), ('chair', 0.79)]
+          filtered: [('person', 0.28, 'floor 0.50'), ('box', 0.14, 'floor 0.35'), ('box', 0.11, 'floor 0.35'), ('person', 0.09, 'floor 0.50'), ('shelf', 0.07, 'floor 0.25'), ('shelf', 0.06, 'floor 0.25'), ('box', 0.06, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:35:19] "POST /detect HTTP/1.1" 200 -
+[  42.5 ms] Detected: [('chair', 0.82), ('chair', 0.77), ('person', 0.63)]
+          filtered: [('person', 0.33, 'floor 0.50'), ('box', 0.19, 'floor 0.35'), ('box', 0.06, 'floor 0.35'), ('shelf', 0.06, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:35:20] "POST /detect HTTP/1.1" 200 -
+[  43.1 ms] Detected: [('chair', 0.84), ('chair', 0.83), ('person', 0.79)]
+          filtered: [('box', 0.24, 'floor 0.35'), ('person', 0.1, 'floor 0.50'), ('box', 0.09, 'floor 0.35'), ('shelf', 0.08, 'floor 0.25'), ('shelf', 0.08, 'floor 0.25'), ('box', 0.08, 'floor 0.35'), ('shelf', 0.06, 'floor 0.25'), ('person', 0.05, 'floor 0.50')]
+127.0.0.1 - - [22/Sep/2026 09:35:26] "POST /detect HTTP/1.1" 200 -
+[  39.3 ms] Detected: [('chair', 0.85), ('chair', 0.83), ('person', 0.78)]
+          filtered: [('box', 0.21, 'floor 0.35'), ('person', 0.15, 'floor 0.50'), ('shelf', 0.08, 'floor 0.25'), ('box', 0.08, 'floor 0.35'), ('shelf', 0.08, 'floor 0.25'), ('shelf', 0.06, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:35:27] "POST /detect HTTP/1.1" 200 -
+[  40.0 ms] Detected: [('chair', 0.84), ('chair', 0.8), ('person', 0.76)]
+          filtered: [('person', 0.3, 'floor 0.50'), ('box', 0.2, 'floor 0.35'), ('shelf', 0.07, 'floor 0.25'), ('shelf', 0.07, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('box', 0.06, 'floor 0.35'), ('shelf', 0.06, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:35:32] "POST /detect HTTP/1.1" 200 -
+[  39.6 ms] Detected: [('chair', 0.84), ('chair', 0.82), ('person', 0.75)]
+          filtered: [('person', 0.2, 'floor 0.50'), ('box', 0.17, 'floor 0.35'), ('shelf', 0.09, 'floor 0.25'), ('shelf', 0.09, 'floor 0.25'), ('shelf', 0.06, 'floor 0.25'), ('box', 0.05, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:35:37] "POST /detect HTTP/1.1" 200 -
+[  39.8 ms] Detected: [('chair', 0.82), ('chair', 0.82), ('person', 0.78)]
+          filtered: [('box', 0.21, 'floor 0.35'), ('person', 0.08, 'floor 0.50'), ('box', 0.07, 'floor 0.35'), ('shelf', 0.07, 'floor 0.25'), ('shelf', 0.07, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:35:38] "POST /detect HTTP/1.1" 200 -
+[  40.3 ms] Detected: [('chair', 0.84), ('chair', 0.8), ('person', 0.76)]
+          filtered: [('box', 0.2, 'floor 0.35'), ('box', 0.07, 'floor 0.35'), ('person', 0.07, 'floor 0.50'), ('shelf', 0.07, 'floor 0.25'), ('shelf', 0.06, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:35:41] "POST /detect HTTP/1.1" 200 -
+[  39.9 ms] Detected: [('chair', 0.85), ('chair', 0.84), ('person', 0.75)]
+          filtered: [('person', 0.25, 'floor 0.50'), ('box', 0.21, 'floor 0.35'), ('box', 0.11, 'floor 0.35'), ('shelf', 0.09, 'floor 0.25'), ('shelf', 0.06, 'floor 0.25'), ('shelf', 0.06, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:35:42] "POST /detect HTTP/1.1" 200 -
+[  46.3 ms] Detected: [('chair', 0.81), ('chair', 0.8), ('person', 0.54)]
+          filtered: [('box', 0.15, 'floor 0.35'), ('shelf', 0.14, 'floor 0.25'), ('shelf', 0.12, 'floor 0.25'), ('person', 0.11, 'floor 0.50'), ('shelf', 0.07, 'floor 0.25'), ('box', 0.06, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:35:48] "POST /detect HTTP/1.1" 200 -
+[  40.5 ms] Detected: [('chair', 0.83), ('chair', 0.83)]
+          filtered: [('box', 0.16, 'floor 0.35'), ('shelf', 0.11, 'floor 0.25'), ('shelf', 0.1, 'floor 0.25'), ('person', 0.09, 'floor 0.50'), ('person', 0.08, 'floor 0.50'), ('box', 0.07, 'floor 0.35'), ('box', 0.07, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:35:50] "POST /detect HTTP/1.1" 200 -
+[  40.4 ms] Detected: [('chair', 0.88), ('person', 0.82), ('chair', 0.75), ('shelf', 0.28)]
+          filtered: [('box', 0.21, 'floor 0.35'), ('box', 0.16, 'floor 0.35'), ('box', 0.08, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:35:51] "POST /detect HTTP/1.1" 200 -
+[  44.1 ms] Detected: [('chair', 0.87), ('person', 0.83)]
+          filtered: [('person', 0.18, 'floor 0.50'), ('box', 0.12, 'floor 0.35'), ('shelf', 0.07, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:36:04] "POST /detect HTTP/1.1" 200 -
+[  40.4 ms] Detected: [('person', 0.9), ('chair', 0.88), ('chair', 0.85), ('shelf', 0.32)]
+          filtered: [('box', 0.27, 'floor 0.35'), ('shelf', 0.19, 'floor 0.25'), ('box', 0.09, 'floor 0.35'), ('box', 0.09, 'floor 0.35'), ('shelf', 0.08, 'floor 0.25'), ('box', 0.07, 'floor 0.35'), ('box', 0.07, 'floor 0.35'), ('shelf', 0.05, 'floor 0.25'), ('box', 0.05, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:36:12] "POST /detect HTTP/1.1" 200 -
+[  46.1 ms] Detected: [('person', 0.91), ('chair', 0.89), ('chair', 0.83), ('box', 0.43)]
+          filtered: [('shelf', 0.2, 'floor 0.25'), ('shelf', 0.12, 'floor 0.25'), ('shelf', 0.1, 'floor 0.25'), ('shelf', 0.07, 'floor 0.25'), ('shelf', 0.07, 'floor 0.25'), ('shelf', 0.06, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:36:27] "POST /detect HTTP/1.1" 200 -
+[  40.5 ms] Detected: [('chair', 0.9), ('person', 0.89), ('chair', 0.77), ('shelf', 0.34)]
+          filtered: [('box', 0.22, 'floor 0.35'), ('shelf', 0.14, 'floor 0.25'), ('shelf', 0.07, 'floor 0.25'), ('box', 0.06, 'floor 0.35'), ('shelf', 0.06, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:36:34] "POST /detect HTTP/1.1" 200 -
+[  39.4 ms] Detected: [('chair', 0.9), ('person', 0.89), ('chair', 0.73), ('shelf', 0.44)]
+          filtered: [('box', 0.24, 'floor 0.35'), ('shelf', 0.24, 'floor 0.25'), ('person', 0.22, 'floor 0.50'), ('shelf', 0.09, 'floor 0.25'), ('shelf', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:36:35] "POST /detect HTTP/1.1" 200 -
+[  40.1 ms] Detected: [('chair', 0.9), ('person', 0.89), ('chair', 0.74)]
+          filtered: [('box', 0.28, 'floor 0.35'), ('shelf', 0.25, 'floor 0.25'), ('shelf', 0.21, 'floor 0.25'), ('shelf', 0.09, 'floor 0.25'), ('person', 0.06, 'floor 0.50'), ('shelf', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:36:39] "POST /detect HTTP/1.1" 200 -
+[  44.0 ms] Detected: [('person', 0.93), ('chair', 0.89), ('chair', 0.81)]
+          filtered: [('box', 0.28, 'floor 0.35'), ('shelf', 0.24, 'floor 0.25'), ('shelf', 0.21, 'floor 0.25'), ('box', 0.09, 'floor 0.35'), ('box', 0.08, 'floor 0.35'), ('shelf', 0.07, 'floor 0.25'), ('shelf', 0.06, 'floor 0.25'), ('box', 0.06, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:36:51] "POST /detect HTTP/1.1" 200 -
+[  49.2 ms] Detected: []
+          filtered: [('shelf', 0.17, 'floor 0.25'), ('shelf', 0.08, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:37:03] "POST /detect HTTP/1.1" 200 -
+[  40.4 ms] Detected: []
+          filtered: [('shelf', 0.19, 'floor 0.25'), ('shelf', 0.07, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:37:17] "POST /detect HTTP/1.1" 200 -
+[  40.1 ms] Detected: [('chair', 0.92), ('person', 0.91), ('person', 0.62), ('shelf', 0.44)]
+          filtered: [('shelf', 0.07, 'floor 0.25'), ('shelf', 0.06, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:37:26] "POST /detect HTTP/1.1" 200 -
+[  44.0 ms] Detected: [('person', 0.89), ('person', 0.84)]
+          filtered: [('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:38:08] "POST /detect HTTP/1.1" 200 -
+[  41.7 ms] Detected: [('person', 0.88), ('person', 0.84)]
+127.0.0.1 - - [22/Sep/2026 09:38:08] "POST /detect HTTP/1.1" 200 -
+[  42.7 ms] Detected: [('person', 0.88), ('person', 0.81)]
+          filtered: [('chair', 0.09, 'floor 0.25'), ('box', 0.06, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:38:13] "POST /detect HTTP/1.1" 200 -
+[  41.4 ms] Detected: [('person', 0.88), ('person', 0.8)]
+          filtered: [('box', 0.07, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:38:14] "POST /detect HTTP/1.1" 200 -
+[  40.1 ms] Detected: [('person', 0.89), ('person', 0.83)]
+          filtered: [('chair', 0.1, 'floor 0.25'), ('box', 0.07, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:38:14] "POST /detect HTTP/1.1" 200 -
+[  45.4 ms] Detected: [('person', 0.89), ('person', 0.83)]
+          filtered: [('shelf', 0.18, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:38:15] "POST /detect HTTP/1.1" 200 -
+[  40.0 ms] Detected: [('person', 0.79), ('person', 0.56)]
+          filtered: [('box', 0.22, 'floor 0.35'), ('chair', 0.07, 'floor 0.25'), ('chair', 0.07, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:38:16] "POST /detect HTTP/1.1" 200 -
+[  41.0 ms] Detected: [('person', 0.88), ('chair', 0.45)]
+          filtered: [('shelf', 0.12, 'floor 0.25'), ('shelf', 0.1, 'floor 0.25'), ('shelf', 0.07, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:38:17] "POST /detect HTTP/1.1" 200 -
+[  41.9 ms] Detected: [('person', 0.83), ('chair', 0.51), ('shelf', 0.35), ('shelf', 0.34)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('shelf', 0.18, 'floor 0.25'), ('chair', 0.14, 'floor 0.25'), ('shelf', 0.06, 'floor 0.25'), ('shelf', 0.06, 'floor 0.25'), ('box', 0.05, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:38:18] "POST /detect HTTP/1.1" 200 -
+[  40.3 ms] Detected: [('person', 0.84), ('chair', 0.67), ('shelf', 0.3)]
+          filtered: [('shelf', 0.17, 'floor 0.25'), ('box', 0.08, 'floor 0.35'), ('shelf', 0.07, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:38:19] "POST /detect HTTP/1.1" 200 -
+[  41.4 ms] Detected: [('person', 0.87), ('shelf', 0.39)]
+          filtered: [('chair', 0.15, 'floor 0.25'), ('shelf', 0.11, 'floor 0.25'), ('shelf', 0.1, 'floor 0.25'), ('shelf', 0.09, 'floor 0.25'), ('chair', 0.06, 'floor 0.25'), ('box', 0.06, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:38:20] "POST /detect HTTP/1.1" 200 -
+[  41.2 ms] Detected: [('person', 0.85), ('shelf', 0.41)]
+          filtered: [('box', 0.08, 'floor 0.35'), ('chair', 0.06, 'floor 0.25'), ('shelf', 0.06, 'floor 0.25'), ('chair', 0.06, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:38:21] "POST /detect HTTP/1.1" 200 -
+[  42.1 ms] Detected: [('person', 0.76), ('shelf', 0.37)]
+          filtered: [('shelf', 0.23, 'floor 0.25'), ('chair', 0.16, 'floor 0.25'), ('box', 0.15, 'floor 0.35'), ('box', 0.1, 'floor 0.35'), ('shelf', 0.09, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:38:22] "POST /detect HTTP/1.1" 200 -
+[  39.9 ms] Detected: [('person', 0.71), ('shelf', 0.32)]
+          filtered: [('shelf', 0.17, 'floor 0.25'), ('box', 0.13, 'floor 0.35'), ('box', 0.11, 'floor 0.35'), ('chair', 0.09, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:38:23] "POST /detect HTTP/1.1" 200 -
+[  40.1 ms] Detected: [('person', 0.81), ('shelf', 0.3)]
+          filtered: [('box', 0.14, 'floor 0.35'), ('shelf', 0.13, 'floor 0.25'), ('box', 0.09, 'floor 0.35'), ('box', 0.07, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:38:37] "POST /detect HTTP/1.1" 200 -
+[  41.5 ms] Detected: [('person', 0.56)]
+          filtered: [('person', 0.22, 'floor 0.50'), ('person', 0.13, 'floor 0.50'), ('shelf', 0.09, 'floor 0.25'), ('box', 0.08, 'floor 0.35'), ('box', 0.07, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:38:47] "POST /detect HTTP/1.1" 200 -
+[  41.7 ms] Detected: [('person', 0.53)]
+          filtered: [('person', 0.31, 'floor 0.50'), ('person', 0.09, 'floor 0.50'), ('shelf', 0.08, 'floor 0.25'), ('box', 0.07, 'floor 0.35'), ('box', 0.06, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:38:48] "POST /detect HTTP/1.1" 200 -
+[  39.9 ms] Detected: [('person', 0.74)]
+          filtered: [('person', 0.21, 'floor 0.50'), ('person', 0.18, 'floor 0.50'), ('shelf', 0.15, 'floor 0.25'), ('box', 0.07, 'floor 0.35'), ('box', 0.06, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:38:55] "POST /detect HTTP/1.1" 200 -
+[  39.5 ms] Detected: [('person', 0.73)]
+          filtered: [('person', 0.25, 'floor 0.50'), ('person', 0.18, 'floor 0.50'), ('shelf', 0.14, 'floor 0.25'), ('box', 0.09, 'floor 0.35'), ('box', 0.09, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:38:56] "POST /detect HTTP/1.1" 200 -
+[  42.7 ms] Detected: [('person', 0.66)]
+          filtered: [('chair', 0.23, 'floor 0.25'), ('person', 0.15, 'floor 0.50'), ('person', 0.14, 'floor 0.50'), ('shelf', 0.13, 'floor 0.25'), ('box', 0.09, 'floor 0.35'), ('box', 0.08, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:39:00] "POST /detect HTTP/1.1" 200 -
+[  41.8 ms] Detected: [('person', 0.65)]
+          filtered: [('chair', 0.23, 'floor 0.25'), ('shelf', 0.14, 'floor 0.25'), ('person', 0.14, 'floor 0.50'), ('person', 0.12, 'floor 0.50')]
+127.0.0.1 - - [22/Sep/2026 09:39:01] "POST /detect HTTP/1.1" 200 -
+[  41.4 ms] Detected: [('chair', 0.29)]
+          filtered: [('person', 0.47, 'floor 0.50'), ('box', 0.07, 'floor 0.35'), ('box', 0.05, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:39:07] "POST /detect HTTP/1.1" 200 -
+[  40.4 ms] Detected: [('person', 0.58), ('chair', 0.29)]
+          filtered: [('box', 0.1, 'floor 0.35'), ('box', 0.08, 'floor 0.35'), ('person', 0.07, 'floor 0.50')]
+127.0.0.1 - - [22/Sep/2026 09:39:15] "POST /detect HTTP/1.1" 200 -
+[  40.7 ms] Detected: [('person', 0.58)]
+          filtered: [('chair', 0.18, 'floor 0.25'), ('person', 0.1, 'floor 0.50'), ('box', 0.07, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:39:16] "POST /detect HTTP/1.1" 200 -
+[  41.3 ms] Detected: [('person', 0.57)]
+          filtered: [('chair', 0.22, 'floor 0.25'), ('box', 0.1, 'floor 0.35'), ('box', 0.1, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:39:16] "POST /detect HTTP/1.1" 200 -
+[  41.4 ms] Detected: [('person', 0.55)]
+          filtered: [('chair', 0.17, 'floor 0.25'), ('box', 0.06, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:39:19] "POST /detect HTTP/1.1" 200 -
+[  39.6 ms] Detected: []
+          filtered: [('person', 0.37, 'floor 0.50'), ('chair', 0.13, 'floor 0.25'), ('box', 0.08, 'floor 0.35'), ('shelf', 0.07, 'floor 0.25'), ('shelf', 0.06, 'floor 0.25'), ('person', 0.06, 'floor 0.50')]
+127.0.0.1 - - [22/Sep/2026 09:39:20] "POST /detect HTTP/1.1" 200 -
+[  39.4 ms] Detected: [('person', 0.67), ('chair', 0.3)]
+          filtered: [('box', 0.07, 'floor 0.35'), ('box', 0.06, 'floor 0.35'), ('person', 0.05, 'floor 0.50')]
+127.0.0.1 - - [22/Sep/2026 09:39:21] "POST /detect HTTP/1.1" 200 -
+[  40.0 ms] Detected: [('person', 0.52)]
+          filtered: [('person', 0.26, 'floor 0.50'), ('box', 0.19, 'floor 0.35'), ('box', 0.07, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:39:22] "POST /detect HTTP/1.1" 200 -
+[  40.1 ms] Detected: []
+          filtered: [('shelf', 0.08, 'floor 0.25'), ('box', 0.05, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:39:23] "POST /detect HTTP/1.1" 200 -
+[  40.3 ms] Detected: []
+          filtered: [('box', 0.09, 'floor 0.35'), ('shelf', 0.09, 'floor 0.25'), ('shelf', 0.06, 'floor 0.25'), ('box', 0.06, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:39:24] "POST /detect HTTP/1.1" 200 -
+[  41.8 ms] Detected: []
+          filtered: [('box', 0.11, 'floor 0.35'), ('box', 0.06, 'floor 0.35'), ('shelf', 0.06, 'floor 0.25'), ('shelf', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:39:25] "POST /detect HTTP/1.1" 200 -
+[  39.8 ms] Detected: []
+          filtered: [('box', 0.09, 'floor 0.35'), ('shelf', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:39:26] "POST /detect HTTP/1.1" 200 -
+[  39.9 ms] Detected: []
+          filtered: [('box', 0.09, 'floor 0.35'), ('box', 0.07, 'floor 0.35'), ('shelf', 0.06, 'floor 0.25'), ('shelf', 0.06, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:39:27] "POST /detect HTTP/1.1" 200 -
+[  40.1 ms] Detected: []
+          filtered: [('shelf', 0.13, 'floor 0.25'), ('pillar', 0.05, 'floor 0.30')]
+127.0.0.1 - - [22/Sep/2026 09:39:28] "POST /detect HTTP/1.1" 200 -
+[  39.2 ms] Detected: []
+          filtered: [('box', 0.12, 'floor 0.35'), ('shelf', 0.07, 'floor 0.25'), ('shelf', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:39:29] "POST /detect HTTP/1.1" 200 -
+[  39.9 ms] Detected: []
+          filtered: [('shelf', 0.1, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:39:30] "POST /detect HTTP/1.1" 200 -
+[  40.2 ms] Detected: []
+127.0.0.1 - - [22/Sep/2026 09:39:31] "POST /detect HTTP/1.1" 200 -
+[  39.3 ms] Detected: []
+          filtered: [('shelf', 0.07, 'floor 0.25'), ('door', 0.05, 'floor 0.20')]
+127.0.0.1 - - [22/Sep/2026 09:39:32] "POST /detect HTTP/1.1" 200 -
+[  43.0 ms] Detected: []
+          filtered: [('person', 0.07, 'floor 0.50'), ('shelf', 0.06, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:39:33] "POST /detect HTTP/1.1" 200 -
+[  44.6 ms] Detected: []
+          filtered: [('person', 0.25, 'floor 0.50'), ('shelf', 0.24, 'floor 0.25'), ('box', 0.16, 'floor 0.35'), ('person', 0.12, 'floor 0.50'), ('person', 0.08, 'floor 0.50'), ('shelf', 0.06, 'floor 0.25'), ('shelf', 0.06, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:39:34] "POST /detect HTTP/1.1" 200 -
+[  40.4 ms] Detected: [('person', 0.5)]
+          filtered: [('box', 0.2, 'floor 0.35'), ('shelf', 0.15, 'floor 0.25'), ('box', 0.14, 'floor 0.35'), ('box', 0.1, 'floor 0.35'), ('person', 0.09, 'floor 0.50'), ('box', 0.06, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:39:35] "POST /detect HTTP/1.1" 200 -
+[  40.2 ms] Detected: [('person', 0.6)]
+          filtered: [('box', 0.15, 'floor 0.35'), ('chair', 0.09, 'floor 0.25'), ('box', 0.07, 'floor 0.35'), ('box', 0.06, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:39:41] "POST /detect HTTP/1.1" 200 -
+[  40.2 ms] Detected: [('shelf', 0.54), ('chair', 0.52), ('chair', 0.47), ('chair', 0.47), ('shelf', 0.44)]
+          filtered: [('chair', 0.24, 'floor 0.25'), ('chair', 0.19, 'floor 0.25'), ('shelf', 0.17, 'floor 0.25'), ('box', 0.17, 'floor 0.35'), ('shelf', 0.12, 'floor 0.25'), ('box', 0.11, 'floor 0.35'), ('shelf', 0.06, 'floor 0.25'), ('person', 0.06, 'floor 0.50')]
+127.0.0.1 - - [22/Sep/2026 09:39:49] "POST /detect HTTP/1.1" 200 -
+[  42.0 ms] Detected: [('shelf', 0.58), ('shelf', 0.57), ('chair', 0.53), ('chair', 0.5), ('chair', 0.44)]
+          filtered: [('chair', 0.24, 'floor 0.25'), ('shelf', 0.2, 'floor 0.25'), ('chair', 0.2, 'floor 0.25'), ('box', 0.13, 'floor 0.35'), ('shelf', 0.12, 'floor 0.25'), ('box', 0.11, 'floor 0.35'), ('shelf', 0.06, 'floor 0.25'), ('box', 0.05, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:39:49] "POST /detect HTTP/1.1" 200 -
+[  40.4 ms] Detected: [('chair', 0.54), ('shelf', 0.54), ('shelf', 0.5), ('chair', 0.47), ('chair', 0.36), ('chair', 0.28)]
+          filtered: [('shelf', 0.2, 'floor 0.25'), ('chair', 0.2, 'floor 0.25'), ('shelf', 0.13, 'floor 0.25'), ('box', 0.13, 'floor 0.35'), ('box', 0.09, 'floor 0.35'), ('box', 0.06, 'floor 0.35'), ('shelf', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:39:53] "POST /detect HTTP/1.1" 200 -
+[  40.4 ms] Detected: [('shelf', 0.62), ('shelf', 0.55), ('chair', 0.53), ('chair', 0.51), ('chair', 0.48), ('chair', 0.29), ('shelf', 0.26)]
+          filtered: [('chair', 0.23, 'floor 0.25'), ('shelf', 0.14, 'floor 0.25'), ('shelf', 0.09, 'floor 0.25'), ('box', 0.09, 'floor 0.35'), ('shelf', 0.08, 'floor 0.25'), ('box', 0.06, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:39:54] "POST /detect HTTP/1.1" 200 -
+[  40.1 ms] Detected: [('shelf', 0.56), ('shelf', 0.55), ('chair', 0.53), ('chair', 0.52), ('chair', 0.45), ('shelf', 0.3), ('chair', 0.25)]
+          filtered: [('chair', 0.23, 'floor 0.25'), ('box', 0.12, 'floor 0.35'), ('shelf', 0.1, 'floor 0.25'), ('box', 0.08, 'floor 0.35'), ('shelf', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:39:54] "POST /detect HTTP/1.1" 200 -
+[  42.0 ms] Detected: [('shelf', 0.54), ('chair', 0.53), ('shelf', 0.53), ('chair', 0.5), ('chair', 0.43)]
+          filtered: [('chair', 0.24, 'floor 0.25'), ('shelf', 0.24, 'floor 0.25'), ('chair', 0.23, 'floor 0.25'), ('shelf', 0.12, 'floor 0.25'), ('box', 0.1, 'floor 0.35'), ('shelf', 0.08, 'floor 0.25'), ('box', 0.07, 'floor 0.35'), ('person', 0.06, 'floor 0.50')]
+127.0.0.1 - - [22/Sep/2026 09:39:55] "POST /detect HTTP/1.1" 200 -
+[  41.3 ms] Detected: [('chair', 0.59), ('shelf', 0.53), ('chair', 0.44), ('chair', 0.37), ('shelf', 0.32)]
+          filtered: [('person', 0.26, 'floor 0.50'), ('shelf', 0.23, 'floor 0.25'), ('chair', 0.18, 'floor 0.25'), ('chair', 0.08, 'floor 0.25'), ('box', 0.06, 'floor 0.35'), ('chair', 0.06, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:39:56] "POST /detect HTTP/1.1" 200 -
+[  44.0 ms] Detected: [('shelf', 0.53), ('chair', 0.49), ('chair', 0.45), ('chair', 0.43)]
+          filtered: [('box', 0.22, 'floor 0.35'), ('chair', 0.21, 'floor 0.25'), ('shelf', 0.17, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('shelf', 0.07, 'floor 0.25'), ('shelf', 0.05, 'floor 0.25'), ('shelf', 0.05, 'floor 0.25'), ('shelf', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:39:57] "POST /detect HTTP/1.1" 200 -
+[  40.3 ms] Detected: [('chair', 0.57), ('chair', 0.47), ('shelf', 0.42)]
+          filtered: [('person', 0.26, 'floor 0.50'), ('box', 0.21, 'floor 0.35'), ('person', 0.21, 'floor 0.50'), ('chair', 0.1, 'floor 0.25'), ('chair', 0.1, 'floor 0.25'), ('chair', 0.07, 'floor 0.25'), ('box', 0.07, 'floor 0.35'), ('shelf', 0.07, 'floor 0.25'), ('chair', 0.06, 'floor 0.25'), ('shelf', 0.06, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:39:58] "POST /detect HTTP/1.1" 200 -
+[  40.3 ms] Detected: [('box', 0.56), ('box', 0.44), ('chair', 0.36)]
+          filtered: [('person', 0.42, 'floor 0.50'), ('person', 0.23, 'floor 0.50'), ('shelf', 0.14, 'floor 0.25'), ('person', 0.14, 'floor 0.50'), ('person', 0.13, 'floor 0.50'), ('box', 0.05, 'floor 0.35'), ('box', 0.05, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:39:59] "POST /detect HTTP/1.1" 200 -
+[  40.9 ms] Detected: [('chair', 0.65), ('shelf', 0.64), ('shelf', 0.31)]
+          filtered: [('person', 0.3, 'floor 0.50'), ('box', 0.24, 'floor 0.35'), ('box', 0.11, 'floor 0.35'), ('chair', 0.09, 'floor 0.25'), ('chair', 0.06, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:40:12] "POST /detect HTTP/1.1" 200 -
+[  40.3 ms] Detected: [('chair', 0.65), ('shelf', 0.64)]
+          filtered: [('shelf', 0.23, 'floor 0.25'), ('box', 0.23, 'floor 0.35'), ('shelf', 0.11, 'floor 0.25'), ('chair', 0.08, 'floor 0.25'), ('shelf', 0.08, 'floor 0.25'), ('shelf', 0.07, 'floor 0.25'), ('box', 0.07, 'floor 0.35'), ('person', 0.06, 'floor 0.50')]
+127.0.0.1 - - [22/Sep/2026 09:40:12] "POST /detect HTTP/1.1" 200 -
+[  44.7 ms] Detected: [('shelf', 0.65), ('chair', 0.63), ('shelf', 0.34)]
+          filtered: [('person', 0.27, 'floor 0.50'), ('person', 0.18, 'floor 0.50'), ('box', 0.16, 'floor 0.35'), ('chair', 0.13, 'floor 0.25'), ('box', 0.07, 'floor 0.35'), ('shelf', 0.06, 'floor 0.25'), ('shelf', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:40:16] "POST /detect HTTP/1.1" 200 -
+[  41.9 ms] Detected: [('person', 0.8), ('shelf', 0.63), ('chair', 0.63), ('person', 0.62)]
+          filtered: [('chair', 0.2, 'floor 0.25'), ('shelf', 0.19, 'floor 0.25'), ('box', 0.1, 'floor 0.35'), ('chair', 0.07, 'floor 0.25'), ('shelf', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:40:17] "POST /detect HTTP/1.1" 200 -
+[  40.2 ms] Detected: [('person', 0.84), ('person', 0.68)]
+          filtered: [('box', 0.2, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:40:18] "POST /detect HTTP/1.1" 200 -
+[  45.7 ms] Detected: [('person', 0.8), ('box', 0.43)]
+          filtered: [('person', 0.37, 'floor 0.50'), ('person', 0.36, 'floor 0.50'), ('chair', 0.23, 'floor 0.25'), ('box', 0.21, 'floor 0.35'), ('chair', 0.14, 'floor 0.25'), ('box', 0.1, 'floor 0.35'), ('chair', 0.07, 'floor 0.25'), ('box', 0.07, 'floor 0.35'), ('box', 0.07, 'floor 0.35'), ('box', 0.06, 'floor 0.35'), ('shelf', 0.06, 'floor 0.25'), ('box', 0.06, 'floor 0.35'), ('person', 0.06, 'floor 0.50')]
+127.0.0.1 - - [22/Sep/2026 09:40:19] "POST /detect HTTP/1.1" 200 -
+[  43.5 ms] Detected: [('person', 0.75), ('box', 0.51), ('box', 0.36)]
+          filtered: [('person', 0.25, 'floor 0.50'), ('person', 0.24, 'floor 0.50'), ('chair', 0.11, 'floor 0.25'), ('box', 0.1, 'floor 0.35'), ('shelf', 0.1, 'floor 0.25'), ('chair', 0.08, 'floor 0.25'), ('box', 0.08, 'floor 0.35'), ('box', 0.07, 'floor 0.35'), ('chair', 0.06, 'floor 0.25'), ('shelf', 0.06, 'floor 0.25'), ('chair', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:40:19] "POST /detect HTTP/1.1" 200 -
+[  40.4 ms] Detected: [('shelf', 0.72), ('person', 0.67), ('shelf', 0.66), ('person', 0.62), ('chair', 0.46), ('chair', 0.33)]
+          filtered: [('chair', 0.19, 'floor 0.25'), ('chair', 0.18, 'floor 0.25'), ('shelf', 0.17, 'floor 0.25'), ('box', 0.12, 'floor 0.35'), ('shelf', 0.11, 'floor 0.25'), ('person', 0.11, 'floor 0.50'), ('chair', 0.08, 'floor 0.25'), ('chair', 0.07, 'floor 0.25'), ('box', 0.07, 'floor 0.35'), ('shelf', 0.05, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:40:29] "POST /detect HTTP/1.1" 200 -
+[  44.9 ms] Detected: [('chair', 0.73)]
+          filtered: [('box', 0.26, 'floor 0.35'), ('box', 0.13, 'floor 0.35'), ('shelf', 0.07, 'floor 0.25'), ('box', 0.05, 'floor 0.35'), ('box', 0.05, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:40:47] "POST /detect HTTP/1.1" 200 -
+[  43.9 ms] Detected: [('chair', 0.78), ('charging dock', 0.2)]
+          filtered: [('box', 0.32, 'floor 0.35'), ('chair', 0.1, 'floor 0.25'), ('box', 0.07, 'floor 0.35'), ('shelf', 0.07, 'floor 0.25'), ('box', 0.06, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:40:47] "POST /detect HTTP/1.1" 200 -
+[  40.7 ms] Detected: [('chair', 0.74), ('box', 0.69)]
+          filtered: [('charging dock', 0.13, 'floor 0.15'), ('shelf', 0.13, 'floor 0.25'), ('box', 0.1, 'floor 0.35'), ('box', 0.08, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:41:01] "POST /detect HTTP/1.1" 200 -
+[  40.9 ms] Detected: [('chair', 0.78), ('box', 0.64)]
+          filtered: [('shelf', 0.11, 'floor 0.25'), ('charging dock', 0.1, 'floor 0.15'), ('box', 0.09, 'floor 0.35'), ('box', 0.08, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:41:02] "POST /detect HTTP/1.1" 200 -
+[  40.0 ms] Detected: [('chair', 0.78), ('box', 0.67)]
+          filtered: [('charging dock', 0.13, 'floor 0.15'), ('shelf', 0.12, 'floor 0.25'), ('box', 0.05, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:41:13] "POST /detect HTTP/1.1" 200 -
+[  42.1 ms] Detected: [('chair', 0.74), ('box', 0.67)]
+          filtered: [('charging dock', 0.12, 'floor 0.15'), ('shelf', 0.12, 'floor 0.25'), ('box', 0.06, 'floor 0.35'), ('box', 0.06, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:41:14] "POST /detect HTTP/1.1" 200 -
+[  39.6 ms] Detected: [('chair', 0.72), ('box', 0.68)]
+          filtered: [('charging dock', 0.14, 'floor 0.15'), ('shelf', 0.11, 'floor 0.25'), ('box', 0.06, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:41:14] "POST /detect HTTP/1.1" 200 -
+[  40.7 ms] Detected: [('chair', 0.75), ('box', 0.63)]
+          filtered: [('charging dock', 0.1, 'floor 0.15'), ('shelf', 0.1, 'floor 0.25'), ('box', 0.07, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:41:15] "POST /detect HTTP/1.1" 200 -
+[  40.2 ms] Detected: [('box', 0.76), ('chair', 0.33), ('charging dock', 0.31)]
+          filtered: [('shelf', 0.24, 'floor 0.25'), ('chair', 0.11, 'floor 0.25'), ('chair', 0.1, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:41:16] "POST /detect HTTP/1.1" 200 -
+[  41.3 ms] Detected: [('chair', 0.59)]
+          filtered: [('shelf', 0.19, 'floor 0.25'), ('chair', 0.18, 'floor 0.25'), ('chair', 0.15, 'floor 0.25'), ('shelf', 0.1, 'floor 0.25'), ('chair', 0.09, 'floor 0.25'), ('charging dock', 0.09, 'floor 0.15'), ('box', 0.06, 'floor 0.35'), ('box', 0.05, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:41:17] "POST /detect HTTP/1.1" 200 -
+[  41.0 ms] Detected: [('charging dock', 0.2)]
+          filtered: [('chair', 0.19, 'floor 0.25'), ('shelf', 0.19, 'floor 0.25'), ('chair', 0.06, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:41:18] "POST /detect HTTP/1.1" 200 -
+[  47.2 ms] Detected: [('box', 0.72), ('shelf', 0.34)]
+          filtered: [('charging dock', 0.08, 'floor 0.15'), ('shelf', 0.05, 'floor 0.25'), ('box', 0.05, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:42:18] "POST /detect HTTP/1.1" 200 -
+[  40.7 ms] Detected: [('box', 0.72), ('shelf', 0.28)]
+          filtered: [('box', 0.09, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:42:18] "POST /detect HTTP/1.1" 200 -
+[  41.3 ms] Detected: [('box', 0.73), ('shelf', 0.34)]
+          filtered: [('box', 0.06, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:42:26] "POST /detect HTTP/1.1" 200 -
+[  40.1 ms] Detected: [('box', 0.71), ('shelf', 0.31)]
+          filtered: [('box', 0.06, 'floor 0.35'), ('box', 0.05, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:42:27] "POST /detect HTTP/1.1" 200 -
+[  40.1 ms] Detected: [('box', 0.72), ('shelf', 0.28)]
+127.0.0.1 - - [22/Sep/2026 09:42:32] "POST /detect HTTP/1.1" 200 -
+[  40.2 ms] Detected: [('box', 0.69), ('shelf', 0.4)]
+          filtered: [('box', 0.07, 'floor 0.35'), ('box', 0.06, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:42:42] "POST /detect HTTP/1.1" 200 -
+[  39.6 ms] Detected: [('box', 0.73), ('shelf', 0.33)]
+127.0.0.1 - - [22/Sep/2026 09:42:42] "POST /detect HTTP/1.1" 200 -
+[  43.4 ms] Detected: [('box', 0.73), ('shelf', 0.3)]
+          filtered: [('box', 0.13, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:42:45] "POST /detect HTTP/1.1" 200 -
+[  40.6 ms] Detected: [('box', 0.72), ('shelf', 0.32)]
+          filtered: [('box', 0.09, 'floor 0.35'), ('box', 0.05, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:42:46] "POST /detect HTTP/1.1" 200 -
+[  41.1 ms] Detected: [('box', 0.74), ('shelf', 0.38)]
+          filtered: [('charging dock', 0.06, 'floor 0.15')]
+127.0.0.1 - - [22/Sep/2026 09:42:50] "POST /detect HTTP/1.1" 200 -
+[  39.3 ms] Detected: [('box', 0.72), ('shelf', 0.3)]
+          filtered: [('box', 0.1, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:42:51] "POST /detect HTTP/1.1" 200 -
+[  40.5 ms] Detected: [('box', 0.72), ('shelf', 0.28)]
+          filtered: [('box', 0.07, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:42:52] "POST /detect HTTP/1.1" 200 -
+[  39.8 ms] Detected: [('box', 0.57)]
+          filtered: [('shelf', 0.1, 'floor 0.25'), ('shelf', 0.07, 'floor 0.25'), ('box', 0.05, 'floor 0.35')]
+127.0.0.1 - - [22/Sep/2026 09:42:53] "POST /detect HTTP/1.1" 200 -
+[  42.6 ms] Detected: [('charging dock', 0.16)]
+          filtered: [('shelf', 0.23, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:43:20] "POST /detect HTTP/1.1" 200 -
+[  47.8 ms] Detected: []
+          filtered: [('shelf', 0.21, 'floor 0.25'), ('shelf', 0.19, 'floor 0.25'), ('box', 0.12, 'floor 0.35'), ('shelf', 0.11, 'floor 0.25'), ('box', 0.08, 'floor 0.35'), ('chair', 0.06, 'floor 0.25'), ('chair', 0.06, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:44:33] "POST /detect HTTP/1.1" 200 -
+[  44.0 ms] Detected: []
+          filtered: [('shelf', 0.2, 'floor 0.25'), ('box', 0.18, 'floor 0.35'), ('shelf', 0.17, 'floor 0.25'), ('shelf', 0.11, 'floor 0.25'), ('box', 0.09, 'floor 0.35'), ('chair', 0.06, 'floor 0.25'), ('chair', 0.06, 'floor 0.25')]
+127.0.0.1 - - [22/Sep/2026 09:44:45] "POST /detect HTTP/1.1" 200 -
+Killed

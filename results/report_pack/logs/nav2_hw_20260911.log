@@ -1,0 +1,985 @@
+[INFO] [launch]: All log files can be found below /home/danyalaziz/.ros/log/2026-09-11-08-09-28-780040-Precision-3660-462526
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [controller_server-1]: process started with pid [462529]
+[INFO] [smoother_server-2]: process started with pid [462531]
+[INFO] [planner_server-3]: process started with pid [462533]
+[INFO] [behavior_server-4]: process started with pid [462535]
+[INFO] [bt_navigator-5]: process started with pid [462537]
+[INFO] [waypoint_follower-6]: process started with pid [462539]
+[INFO] [velocity_smoother-7]: process started with pid [462541]
+[INFO] [lifecycle_manager-8]: process started with pid [462543]
+[lifecycle_manager-8] [INFO] [1789096168.884815675] [robot1.lifecycle_manager_navigation]: Creating
+[velocity_smoother-7] [INFO] [1789096168.885062428] [robot1.velocity_smoother]: 
+[velocity_smoother-7] 	velocity_smoother lifecycle node launched. 
+[velocity_smoother-7] 	Waiting on external lifecycle transitions to activate
+[velocity_smoother-7] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[waypoint_follower-6] [INFO] [1789096168.885105149] [robot1.waypoint_follower]: 
+[waypoint_follower-6] 	waypoint_follower lifecycle node launched. 
+[waypoint_follower-6] 	Waiting on external lifecycle transitions to activate
+[waypoint_follower-6] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[waypoint_follower-6] [INFO] [1789096168.885316275] [robot1.waypoint_follower]: Creating
+[lifecycle_manager-8] [INFO] [1789096168.885441413] [robot1.lifecycle_manager_navigation]: [34m[1mCreating and initializing lifecycle service clients[0m[0m
+[bt_navigator-5] [INFO] [1789096168.886475448] [robot1.bt_navigator]: 
+[bt_navigator-5] 	bt_navigator lifecycle node launched. 
+[bt_navigator-5] 	Waiting on external lifecycle transitions to activate
+[bt_navigator-5] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[bt_navigator-5] [INFO] [1789096168.886524676] [robot1.bt_navigator]: Creating
+[smoother_server-2] [INFO] [1789096168.889597323] [robot1.smoother_server]: 
+[smoother_server-2] 	smoother_server lifecycle node launched. 
+[smoother_server-2] 	Waiting on external lifecycle transitions to activate
+[smoother_server-2] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[controller_server-1] [INFO] [1789096168.890065750] [robot1.controller_server]: 
+[controller_server-1] 	controller_server lifecycle node launched. 
+[controller_server-1] 	Waiting on external lifecycle transitions to activate
+[controller_server-1] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[smoother_server-2] [INFO] [1789096168.890209947] [robot1.smoother_server]: Creating smoother server
+[planner_server-3] [INFO] [1789096168.890741176] [robot1.planner_server]: 
+[planner_server-3] 	planner_server lifecycle node launched. 
+[planner_server-3] 	Waiting on external lifecycle transitions to activate
+[planner_server-3] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[behavior_server-4] [INFO] [1789096168.890790046] [robot1.behavior_server]: 
+[behavior_server-4] 	behavior_server lifecycle node launched. 
+[behavior_server-4] 	Waiting on external lifecycle transitions to activate
+[behavior_server-4] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-3] [INFO] [1789096168.891293952] [robot1.planner_server]: Creating
+[controller_server-1] [INFO] [1789096168.891572601] [robot1.controller_server]: Creating controller server
+[planner_server-3] [INFO] [1789096168.892516697] [robot1.global_costmap.global_costmap]: 
+[planner_server-3] 	global_costmap lifecycle node launched. 
+[planner_server-3] 	Waiting on external lifecycle transitions to activate
+[planner_server-3] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-3] [INFO] [1789096168.892702731] [robot1.global_costmap.global_costmap]: Creating Costmap
+[controller_server-1] [INFO] [1789096168.892996480] [robot1.local_costmap.local_costmap]: 
+[controller_server-1] 	local_costmap lifecycle node launched. 
+[controller_server-1] 	Waiting on external lifecycle transitions to activate
+[controller_server-1] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[controller_server-1] [INFO] [1789096168.893204243] [robot1.local_costmap.local_costmap]: Creating Costmap
+[lifecycle_manager-8] [INFO] [1789096170.885807968] [robot1.lifecycle_manager_navigation]: Waiting for service controller_server/get_state...
+[lifecycle_manager-8] [INFO] [1789096172.885989883] [robot1.lifecycle_manager_navigation]: Waiting for service controller_server/get_state...
+[lifecycle_manager-8] [INFO] [1789096174.886210747] [robot1.lifecycle_manager_navigation]: Waiting for service controller_server/get_state...
+[lifecycle_manager-8] [INFO] [1789096176.886371444] [robot1.lifecycle_manager_navigation]: Waiting for service controller_server/get_state...
+[lifecycle_manager-8] [INFO] [1789096178.886541621] [robot1.lifecycle_manager_navigation]: Waiting for service controller_server/get_state...
+[lifecycle_manager-8] [INFO] [1789096180.886724585] [robot1.lifecycle_manager_navigation]: Waiting for service controller_server/get_state...
+[lifecycle_manager-8] [INFO] [1789096182.886897436] [robot1.lifecycle_manager_navigation]: Waiting for service controller_server/get_state...
+[lifecycle_manager-8] [INFO] [1789096184.887073902] [robot1.lifecycle_manager_navigation]: Waiting for service controller_server/get_state...
+[lifecycle_manager-8] [INFO] [1789096186.887180490] [robot1.lifecycle_manager_navigation]: Waiting for service controller_server/get_state...
+[INFO] [nav2_startup-9]: process started with pid [462769]
+[lifecycle_manager-8] [INFO] [1789096188.887421009] [robot1.lifecycle_manager_navigation]: Waiting for service controller_server/get_state...
+[nav2_startup-9] waiting for service to become available...
+[nav2_startup-9] requester: making request: nav2_msgs.srv.ManageLifecycleNodes_Request(command=0)
+[nav2_startup-9] 
+[lifecycle_manager-8] [INFO] [1789096221.616326105] [robot1.lifecycle_manager_navigation]: [34m[1mStarting managed nodes bringup...[0m[0m
+[lifecycle_manager-8] [INFO] [1789096221.616386535] [robot1.lifecycle_manager_navigation]: [34m[1mConfiguring controller_server[0m[0m
+[controller_server-1] [INFO] [1789096221.616761594] [robot1.controller_server]: Configuring controller interface
+[controller_server-1] [INFO] [1789096221.616940180] [robot1.controller_server]: getting goal checker plugins..
+[controller_server-1] [INFO] [1789096221.617032127] [robot1.controller_server]: Controller frequency set to 20.0000Hz
+[controller_server-1] [INFO] [1789096221.617051795] [robot1.local_costmap.local_costmap]: Configuring
+[controller_server-1] [INFO] [1789096221.644788040] [robot1.local_costmap.local_costmap]: Using plugin "static_layer"
+[controller_server-1] [INFO] [1789096221.646594295] [robot1.local_costmap.local_costmap]: Subscribing to the map topic (/robot1/map) with transient local durability
+[controller_server-1] [INFO] [1789096221.655115988] [robot1.local_costmap.local_costmap]: Initialized plugin "static_layer"
+[controller_server-1] [INFO] [1789096221.655135502] [robot1.local_costmap.local_costmap]: Using plugin "voxel_layer"
+[controller_server-1] [INFO] [1789096221.655660308] [robot1.local_costmap.local_costmap]: Subscribed to Topics: scan
+[controller_server-1] [INFO] [1789096221.678126867] [robot1.local_costmap.local_costmap]: Initialized plugin "voxel_layer"
+[controller_server-1] [INFO] [1789096221.678156942] [robot1.local_costmap.local_costmap]: Using plugin "inflation_layer"
+[controller_server-1] [INFO] [1789096221.678654075] [robot1.local_costmap.local_costmap]: Initialized plugin "inflation_layer"
+[controller_server-1] [INFO] [1789096221.717475469] [robot1.controller_server]: Created progress_checker : progress_checker of type nav2_controller::SimpleProgressChecker
+[controller_server-1] [INFO] [1789096221.717968912] [robot1.controller_server]: Created goal checker : general_goal_checker of type nav2_controller::SimpleGoalChecker
+[controller_server-1] [INFO] [1789096221.718190992] [robot1.controller_server]: Controller Server has general_goal_checker  goal checkers available.
+[controller_server-1] [INFO] [1789096221.718901836] [robot1.controller_server]: Created controller : FollowPath of type dwb_core::DWBLocalPlanner
+[controller_server-1] [INFO] [1789096221.724674278] [robot1.controller_server]: Setting transform_tolerance to 0.200000
+[controller_server-1] [INFO] [1789096221.764633776] [robot1.controller_server]: Using critic "RotateToGoal" (dwb_critics::RotateToGoalCritic)
+[controller_server-1] [INFO] [1789096221.764977908] [robot1.controller_server]: Critic plugin initialized
+[controller_server-1] [INFO] [1789096221.765052117] [robot1.controller_server]: Using critic "Oscillation" (dwb_critics::OscillationCritic)
+[controller_server-1] [INFO] [1789096221.765292667] [robot1.controller_server]: Critic plugin initialized
+[controller_server-1] [INFO] [1789096221.765367964] [robot1.controller_server]: Using critic "BaseObstacle" (dwb_critics::BaseObstacleCritic)
+[controller_server-1] [INFO] [1789096221.765475616] [robot1.controller_server]: Critic plugin initialized
+[controller_server-1] [INFO] [1789096221.765527360] [robot1.controller_server]: Using critic "GoalAlign" (dwb_critics::GoalAlignCritic)
+[controller_server-1] [INFO] [1789096221.765701034] [robot1.controller_server]: Critic plugin initialized
+[controller_server-1] [INFO] [1789096221.765762029] [robot1.controller_server]: Using critic "PathAlign" (dwb_critics::PathAlignCritic)
+[controller_server-1] [INFO] [1789096221.773291923] [robot1.controller_server]: Critic plugin initialized
+[controller_server-1] [INFO] [1789096221.773363959] [robot1.controller_server]: Using critic "PathDist" (dwb_critics::PathDistCritic)
+[controller_server-1] [INFO] [1789096221.773485214] [robot1.controller_server]: Critic plugin initialized
+[controller_server-1] [INFO] [1789096221.773540456] [robot1.controller_server]: Using critic "GoalDist" (dwb_critics::GoalDistCritic)
+[controller_server-1] [INFO] [1789096221.773652794] [robot1.controller_server]: Critic plugin initialized
+[controller_server-1] [INFO] [1789096221.773659596] [robot1.controller_server]: Controller Server has FollowPath  controllers available.
+[lifecycle_manager-8] [INFO] [1789096221.816106869] [robot1.lifecycle_manager_navigation]: [34m[1mConfiguring smoother_server[0m[0m
+[smoother_server-2] [INFO] [1789096221.816442929] [robot1.smoother_server]: Configuring smoother server
+[smoother_server-2] [INFO] [1789096221.827044872] [robot1.smoother_server]: Created smoother : simple_smoother of type nav2_smoother::SimpleSmoother
+[smoother_server-2] [INFO] [1789096221.827395380] [robot1.smoother_server]: Smoother Server has simple_smoother  smoothers available.
+[lifecycle_manager-8] [INFO] [1789096221.854344464] [robot1.lifecycle_manager_navigation]: [34m[1mConfiguring planner_server[0m[0m
+[planner_server-3] [INFO] [1789096221.854580779] [robot1.planner_server]: Configuring
+[planner_server-3] [INFO] [1789096221.854621829] [robot1.global_costmap.global_costmap]: Configuring
+[controller_server-1] [INFO] [1789096221.860575972] [robot1.local_costmap.local_costmap]: StaticLayer: Resizing static layer to 134 X 259 at 0.050000 m/pix
+[planner_server-3] [INFO] [1789096221.879078158] [robot1.global_costmap.global_costmap]: Using plugin "static_layer"
+[planner_server-3] [INFO] [1789096221.880838049] [robot1.global_costmap.global_costmap]: Subscribing to the map topic (/robot1/map) with transient local durability
+[planner_server-3] [INFO] [1789096221.886464912] [robot1.global_costmap.global_costmap]: Initialized plugin "static_layer"
+[planner_server-3] [INFO] [1789096221.886479646] [robot1.global_costmap.global_costmap]: Using plugin "obstacle_layer"
+[planner_server-3] [INFO] [1789096221.886818110] [robot1.global_costmap.global_costmap]: Subscribed to Topics: scan
+[planner_server-3] [INFO] [1789096221.918790144] [robot1.global_costmap.global_costmap]: Initialized plugin "obstacle_layer"
+[planner_server-3] [INFO] [1789096221.918815606] [robot1.global_costmap.global_costmap]: Using plugin "inflation_layer"
+[planner_server-3] [INFO] [1789096221.919258623] [robot1.global_costmap.global_costmap]: Initialized plugin "inflation_layer"
+[planner_server-3] [INFO] [1789096221.971675970] [robot1.planner_server]: Created global planner plugin GridBased of type nav2_navfn_planner/NavfnPlanner
+[planner_server-3] [INFO] [1789096221.971699946] [robot1.planner_server]: Configuring plugin GridBased of type NavfnPlanner
+[planner_server-3] [INFO] [1789096221.972013122] [robot1.planner_server]: Planner Server has GridBased  planners available.
+[lifecycle_manager-8] [INFO] [1789096222.044245478] [robot1.lifecycle_manager_navigation]: [34m[1mConfiguring behavior_server[0m[0m
+[behavior_server-4] [INFO] [1789096222.044570772] [robot1.behavior_server]: Configuring
+[behavior_server-4] [INFO] [1789096222.061544222] [robot1.behavior_server]: Creating behavior plugin spin of type nav2_behaviors/Spin
+[behavior_server-4] [INFO] [1789096222.061893892] [robot1.behavior_server]: Configuring spin
+[behavior_server-4] [INFO] [1789096222.080110737] [robot1.behavior_server]: Creating behavior plugin backup of type nav2_behaviors/BackUp
+[behavior_server-4] [INFO] [1789096222.080474905] [robot1.behavior_server]: Configuring backup
+[behavior_server-4] [INFO] [1789096222.113914132] [robot1.behavior_server]: Creating behavior plugin drive_on_heading of type nav2_behaviors/DriveOnHeading
+[behavior_server-4] [INFO] [1789096222.114309743] [robot1.behavior_server]: Configuring drive_on_heading
+[behavior_server-4] [INFO] [1789096222.264288961] [robot1.behavior_server]: Creating behavior plugin assisted_teleop of type nav2_behaviors/AssistedTeleop
+[behavior_server-4] [INFO] [1789096222.265135521] [robot1.behavior_server]: Configuring assisted_teleop
+[behavior_server-4] [INFO] [1789096222.314990157] [robot1.behavior_server]: Creating behavior plugin wait of type nav2_behaviors/Wait
+[behavior_server-4] [INFO] [1789096222.315371604] [robot1.behavior_server]: Configuring wait
+[lifecycle_manager-8] [INFO] [1789096222.373773859] [robot1.lifecycle_manager_navigation]: [34m[1mConfiguring bt_navigator[0m[0m
+[bt_navigator-5] [INFO] [1789096222.374024766] [robot1.bt_navigator]: Configuring
+[planner_server-3] [INFO] [1789096222.474284140] [robot1.global_costmap.global_costmap]: StaticLayer: Resizing costmap to 134 X 259 at 0.050000 m/pix
+[lifecycle_manager-8] [INFO] [1789096222.810714983] [robot1.lifecycle_manager_navigation]: [34m[1mConfiguring waypoint_follower[0m[0m
+[waypoint_follower-6] [INFO] [1789096222.810841274] [robot1.waypoint_follower]: Configuring
+[waypoint_follower-6] [INFO] [1789096222.841184275] [robot1.waypoint_follower]: Created waypoint_task_executor : wait_at_waypoint of type nav2_waypoint_follower::WaitAtWaypoint
+[lifecycle_manager-8] [INFO] [1789096222.841662268] [robot1.lifecycle_manager_navigation]: [34m[1mConfiguring velocity_smoother[0m[0m
+[velocity_smoother-7] [INFO] [1789096222.841797910] [robot1.velocity_smoother]: Configuring velocity smoother
+[lifecycle_manager-8] [INFO] [1789096222.843787116] [robot1.lifecycle_manager_navigation]: [34m[1mActivating controller_server[0m[0m
+[controller_server-1] [INFO] [1789096222.843890701] [robot1.controller_server]: Activating
+[controller_server-1] [INFO] [1789096222.843928995] [robot1.local_costmap.local_costmap]: Activating
+[controller_server-1] [INFO] [1789096222.843939233] [robot1.local_costmap.local_costmap]: Checking transform
+[controller_server-1] [INFO] [1789096222.844018528] [robot1.local_costmap.local_costmap]: start
+[controller_server-1] [INFO] [1789096223.094907756] [robot1.controller_server]: Creating bond (controller_server) to lifecycle manager.
+[lifecycle_manager-8] [INFO] [1789096223.297753403] [robot1.lifecycle_manager_navigation]: Server controller_server connected with bond.
+[lifecycle_manager-8] [INFO] [1789096223.297808002] [robot1.lifecycle_manager_navigation]: [34m[1mActivating smoother_server[0m[0m
+[smoother_server-2] [INFO] [1789096223.298090376] [robot1.smoother_server]: Activating
+[smoother_server-2] [INFO] [1789096223.298115360] [robot1.smoother_server]: Creating bond (smoother_server) to lifecycle manager.
+[lifecycle_manager-8] [INFO] [1789096223.400313733] [robot1.lifecycle_manager_navigation]: Server smoother_server connected with bond.
+[lifecycle_manager-8] [INFO] [1789096223.400347261] [robot1.lifecycle_manager_navigation]: [34m[1mActivating planner_server[0m[0m
+[planner_server-3] [INFO] [1789096223.400613863] [robot1.planner_server]: Activating
+[planner_server-3] [INFO] [1789096223.400659042] [robot1.global_costmap.global_costmap]: Activating
+[planner_server-3] [INFO] [1789096223.400674368] [robot1.global_costmap.global_costmap]: Checking transform
+[planner_server-3] [INFO] [1789096223.400774940] [robot1.global_costmap.global_costmap]: Timed out waiting for transform from base_link to map to become available, tf error: Lookup would require extrapolation into the past.  Requested time 1789096223.327971 but the earliest data is at time 1789096224.255621, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] [INFO] [1789096223.900784815] [robot1.global_costmap.global_costmap]: Timed out waiting for transform from base_link to map to become available, tf error: Lookup would require extrapolation into the past.  Requested time 1789096223.727880 but the earliest data is at time 1789096224.255621, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] [INFO] [1789096224.400834351] [robot1.global_costmap.global_costmap]: start
+[planner_server-3] [INFO] [1789096225.451736451] [robot1.planner_server]: Activating plugin GridBased of type NavfnPlanner
+[planner_server-3] [INFO] [1789096225.452399697] [robot1.planner_server]: Creating bond (planner_server) to lifecycle manager.
+[lifecycle_manager-8] [INFO] [1789096225.711764620] [robot1.lifecycle_manager_navigation]: Server planner_server connected with bond.
+[lifecycle_manager-8] [INFO] [1789096225.711818013] [robot1.lifecycle_manager_navigation]: [34m[1mActivating behavior_server[0m[0m
+[behavior_server-4] [INFO] [1789096225.712116550] [robot1.behavior_server]: Activating
+[behavior_server-4] [INFO] [1789096225.712145947] [robot1.behavior_server]: Activating spin
+[behavior_server-4] [INFO] [1789096225.712160784] [robot1.behavior_server]: Activating backup
+[behavior_server-4] [INFO] [1789096225.712170074] [robot1.behavior_server]: Activating drive_on_heading
+[behavior_server-4] [INFO] [1789096225.712180007] [robot1.behavior_server]: Activating assisted_teleop
+[behavior_server-4] [INFO] [1789096225.712189362] [robot1.behavior_server]: Activating wait
+[behavior_server-4] [INFO] [1789096225.712202492] [robot1.behavior_server]: Creating bond (behavior_server) to lifecycle manager.
+[lifecycle_manager-8] [INFO] [1789096226.014542192] [robot1.lifecycle_manager_navigation]: Server behavior_server connected with bond.
+[lifecycle_manager-8] [INFO] [1789096226.014574591] [robot1.lifecycle_manager_navigation]: [34m[1mActivating bt_navigator[0m[0m
+[bt_navigator-5] [INFO] [1789096226.014880335] [robot1.bt_navigator]: Activating
+[bt_navigator-5] [INFO] [1789096226.917317430] [robot1.bt_navigator]: Creating bond (bt_navigator) to lifecycle manager.
+[lifecycle_manager-8] [INFO] [1789096227.474724870] [robot1.lifecycle_manager_navigation]: Server bt_navigator connected with bond.
+[lifecycle_manager-8] [INFO] [1789096227.474774634] [robot1.lifecycle_manager_navigation]: [34m[1mActivating waypoint_follower[0m[0m
+[waypoint_follower-6] [INFO] [1789096227.475105981] [robot1.waypoint_follower]: Activating
+[waypoint_follower-6] [INFO] [1789096227.475147008] [robot1.waypoint_follower]: Creating bond (waypoint_follower) to lifecycle manager.
+[lifecycle_manager-8] [INFO] [1789096228.778483339] [robot1.lifecycle_manager_navigation]: Server waypoint_follower connected with bond.
+[lifecycle_manager-8] [INFO] [1789096228.778528760] [robot1.lifecycle_manager_navigation]: [34m[1mActivating velocity_smoother[0m[0m
+[velocity_smoother-7] [INFO] [1789096228.778827411] [robot1.velocity_smoother]: Activating
+[velocity_smoother-7] [INFO] [1789096228.778871102] [robot1.velocity_smoother]: Creating bond (velocity_smoother) to lifecycle manager.
+[lifecycle_manager-8] [INFO] [1789096228.972548945] [robot1.lifecycle_manager_navigation]: Server velocity_smoother connected with bond.
+[lifecycle_manager-8] [INFO] [1789096228.972578660] [robot1.lifecycle_manager_navigation]: [34m[1mManaged nodes are active[0m[0m
+[lifecycle_manager-8] [INFO] [1789096228.972584110] [robot1.lifecycle_manager_navigation]: [34m[1mCreating bond timer...[0m[0m
+[nav2_startup-9] response:
+[nav2_startup-9] nav2_msgs.srv.ManageLifecycleNodes_Response(success=True)
+[nav2_startup-9] 
+[INFO] [nav2_startup-9]: process has finished cleanly [pid 462769]
+[controller_server-1] [INFO] [1789096769.642673417] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789096769.182 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789096769.645144350] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789096769.182 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[ERROR] [lifecycle_manager-8]: process[lifecycle_manager-8] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[ERROR] [velocity_smoother-7]: process[velocity_smoother-7] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[ERROR] [waypoint_follower-6]: process[waypoint_follower-6] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[ERROR] [bt_navigator-5]: process[bt_navigator-5] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[ERROR] [behavior_server-4]: process[behavior_server-4] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[ERROR] [planner_server-3]: process[planner_server-3] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[ERROR] [smoother_server-2]: process[smoother_server-2] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[ERROR] [controller_server-1]: process[controller_server-1] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[INFO] [lifecycle_manager-8]: sending signal 'SIGTERM' to process[lifecycle_manager-8]
+[INFO] [velocity_smoother-7]: sending signal 'SIGTERM' to process[velocity_smoother-7]
+[INFO] [waypoint_follower-6]: sending signal 'SIGTERM' to process[waypoint_follower-6]
+[INFO] [bt_navigator-5]: sending signal 'SIGTERM' to process[bt_navigator-5]
+[INFO] [behavior_server-4]: sending signal 'SIGTERM' to process[behavior_server-4]
+[INFO] [planner_server-3]: sending signal 'SIGTERM' to process[planner_server-3]
+[INFO] [smoother_server-2]: sending signal 'SIGTERM' to process[smoother_server-2]
+[INFO] [controller_server-1]: sending signal 'SIGTERM' to process[controller_server-1]
+[lifecycle_manager-8] [INFO] [1789097987.050570750] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[lifecycle_manager-8] [INFO] [1789097987.050655335] [robot1.lifecycle_manager_navigation]: Running Nav2 LifecycleManager rcl preshutdown (lifecycle_manager_navigation)
+[lifecycle_manager-8] [INFO] [1789097987.050685003] [robot1.lifecycle_manager_navigation]: [34m[1mTerminating bond timer...[0m[0m
+[velocity_smoother-7] [INFO] [1789097987.051007407] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[velocity_smoother-7] [INFO] [1789097987.051078603] [robot1.velocity_smoother]: Running Nav2 LifecycleNode rcl preshutdown (velocity_smoother)
+[velocity_smoother-7] [INFO] [1789097987.051126598] [robot1.velocity_smoother]: Deactivating
+[velocity_smoother-7] [INFO] [1789097987.051145374] [robot1.velocity_smoother]: Destroying bond (velocity_smoother) to lifecycle manager.
+[waypoint_follower-6] [INFO] [1789097987.051407306] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[waypoint_follower-6] [INFO] [1789097987.051461296] [robot1.waypoint_follower]: Running Nav2 LifecycleNode rcl preshutdown (waypoint_follower)
+[waypoint_follower-6] [INFO] [1789097987.051493369] [robot1.waypoint_follower]: Deactivating
+[waypoint_follower-6] [INFO] [1789097987.051503857] [robot1.waypoint_follower]: Destroying bond (waypoint_follower) to lifecycle manager.
+[bt_navigator-5] [INFO] [1789097987.051818881] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[bt_navigator-5] [INFO] [1789097987.051856272] [robot1.bt_navigator]: Running Nav2 LifecycleNode rcl preshutdown (bt_navigator)
+[bt_navigator-5] [INFO] [1789097987.051885090] [robot1.bt_navigator]: Deactivating
+[bt_navigator-5] [INFO] [1789097987.051896296] [robot1.bt_navigator]: Destroying bond (bt_navigator) to lifecycle manager.
+[behavior_server-4] [INFO] [1789097987.052214938] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[behavior_server-4] [INFO] [1789097987.052309036] [robot1.behavior_server]: Running Nav2 LifecycleNode rcl preshutdown (behavior_server)
+[behavior_server-4] [INFO] [1789097987.052355125] [robot1.behavior_server]: Deactivating
+[behavior_server-4] [INFO] [1789097987.052384943] [robot1.behavior_server]: Destroying bond (behavior_server) to lifecycle manager.
+[planner_server-3] [INFO] [1789097987.052668485] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[planner_server-3] [INFO] [1789097987.052729118] [robot1.planner_server]: Running Nav2 LifecycleNode rcl preshutdown (planner_server)
+[planner_server-3] [INFO] [1789097987.052768692] [robot1.planner_server]: Deactivating
+[planner_server-3] [INFO] [1789097987.052792261] [robot1.global_costmap.global_costmap]: Deactivating
+[smoother_server-2] [INFO] [1789097987.053055155] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[smoother_server-2] [INFO] [1789097987.053114803] [robot1.smoother_server]: Running Nav2 LifecycleNode rcl preshutdown (smoother_server)
+[smoother_server-2] [INFO] [1789097987.053139332] [robot1.smoother_server]: Deactivating
+[smoother_server-2] [INFO] [1789097987.053146761] [robot1.smoother_server]: Destroying bond (smoother_server) to lifecycle manager.
+[controller_server-1] [INFO] [1789097987.053409201] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[controller_server-1] [INFO] [1789097987.053457878] [robot1.controller_server]: Running Nav2 LifecycleNode rcl preshutdown (controller_server)
+[controller_server-1] [INFO] [1789097987.053495444] [robot1.controller_server]: Deactivating
+[controller_server-1] [INFO] [1789097987.053522801] [robot1.local_costmap.local_costmap]: Deactivating
+[velocity_smoother-7] [INFO] [1789097987.061384209] [robot1.velocity_smoother]: Cleaning up
+[velocity_smoother-7] [INFO] [1789097987.061421693] [robot1.velocity_smoother]: Destroying bond (velocity_smoother) to lifecycle manager.
+[waypoint_follower-6] [INFO] [1789097987.061695151] [robot1.waypoint_follower]: Cleaning up
+[bt_navigator-5] [INFO] [1789097987.062062364] [robot1.bt_navigator]: Cleaning up
+[behavior_server-4] [INFO] [1789097987.082586305] [robot1.behavior_server]: Cleaning up
+[smoother_server-2] [INFO] [1789097987.083283321] [robot1.smoother_server]: Cleaning up
+[velocity_smoother-7] [INFO] [1789097987.091399493] [robot1.velocity_smoother]: Destroying
+[waypoint_follower-6] [INFO] [1789097987.100263418] [robot1.waypoint_follower]: Destroying bond (waypoint_follower) to lifecycle manager.
+[waypoint_follower-6] [INFO] [1789097987.235425752] [robot1.waypoint_follower]: Destroying
+[controller_server-1] [INFO] [1789097987.244825984] [robot1.controller_server]: Destroying bond (controller_server) to lifecycle manager.
+[controller_server-1] [INFO] [1789097987.255077866] [robot1.controller_server]: Cleaning up
+[controller_server-1] [INFO] [1789097987.255175198] [robot1.local_costmap.local_costmap]: Cleaning up
+[smoother_server-2] [INFO] [1789097987.264576955] [robot1.smoother_server]: Destroying bond (smoother_server) to lifecycle manager.
+[smoother_server-2] [INFO] [1789097987.314256245] [robot1.smoother_server]: Destroying
+[INFO] [velocity_smoother-7]: process has finished cleanly [pid 462541]
+[planner_server-3] [INFO] [1789097987.401078700] [robot1.planner_server]: Deactivating plugin GridBased of type NavfnPlanner
+[planner_server-3] [INFO] [1789097987.401118900] [robot1.planner_server]: Destroying bond (planner_server) to lifecycle manager.
+[planner_server-3] [INFO] [1789097987.411260745] [robot1.planner_server]: Cleaning up
+[lifecycle_manager-8] [INFO] [1789097987.428411206] [robot1.lifecycle_manager_navigation]: Destroying lifecycle_manager_navigation
+[INFO] [waypoint_follower-6]: process has finished cleanly [pid 462539]
+[INFO] [smoother_server-2]: process has finished cleanly [pid 462531]
+[behavior_server-4] [INFO] [1789097987.605741318] [robot1.behavior_server]: Destroying bond (behavior_server) to lifecycle manager.
+[INFO] [lifecycle_manager-8]: process has finished cleanly [pid 462543]
+[planner_server-3] [INFO] [1789097987.715742680] [robot1.global_costmap.global_costmap]: Cleaning up
+[planner_server-3] [INFO] [1789097987.869467956] [robot1.planner_server]: Cleaning up plugin GridBased of type NavfnPlanner
+[planner_server-3] [INFO] [1789097987.869499588] [robot1.planner_server]: Destroying plugin GridBased of type NavfnPlanner
+[behavior_server-4] [INFO] [1789097987.979005045] [robot1.behavior_server]: Destroying
+[planner_server-3] [INFO] [1789097988.132938833] [robot1.planner_server]: Destroying bond (planner_server) to lifecycle manager.
+[controller_server-1] [INFO] [1789097988.189262733] [robot1.controller_server]: Destroying bond (controller_server) to lifecycle manager.
+[INFO] [behavior_server-4]: process has finished cleanly [pid 462535]
+[planner_server-3] [INFO] [1789097988.245333726] [robot1.global_costmap.global_costmap]: Destroying
+[controller_server-1] [INFO] [1789097988.288705049] [robot1.local_costmap.local_costmap]: Destroying
+[planner_server-3] [INFO] [1789097988.450141899] [robot1.planner_server]: Destroying
+[controller_server-1] [INFO] [1789097988.469697453] [robot1.controller_server]: Destroying
+[INFO] [planner_server-3]: process has finished cleanly [pid 462533]
+[INFO] [controller_server-1]: process has finished cleanly [pid 462529]
+[bt_navigator-5] [INFO] [1789097989.208169094] [robot1.bt_navigator]: Completed Cleaning up
+[bt_navigator-5] [INFO] [1789097989.208211244] [robot1.bt_navigator]: Destroying bond (bt_navigator) to lifecycle manager.
+[bt_navigator-5] [INFO] [1789097989.231542059] [robot1.bt_navigator]: Destroying
+[INFO] [bt_navigator-5]: process has finished cleanly [pid 462537]
+[INFO] [launch]: All log files can be found below /home/danyalaziz/.ros/log/2026-09-11-08-53-52-863159-Precision-3660-487194
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [controller_server-1]: process started with pid [487199]
+[INFO] [smoother_server-2]: process started with pid [487201]
+[INFO] [planner_server-3]: process started with pid [487203]
+[INFO] [behavior_server-4]: process started with pid [487205]
+[INFO] [bt_navigator-5]: process started with pid [487207]
+[INFO] [waypoint_follower-6]: process started with pid [487209]
+[INFO] [velocity_smoother-7]: process started with pid [487211]
+[INFO] [lifecycle_manager-8]: process started with pid [487213]
+[velocity_smoother-7] [INFO] [1789098832.973627454] [robot1.velocity_smoother]: 
+[velocity_smoother-7] 	velocity_smoother lifecycle node launched. 
+[velocity_smoother-7] 	Waiting on external lifecycle transitions to activate
+[velocity_smoother-7] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[waypoint_follower-6] [INFO] [1789098832.974029497] [robot1.waypoint_follower]: 
+[waypoint_follower-6] 	waypoint_follower lifecycle node launched. 
+[waypoint_follower-6] 	Waiting on external lifecycle transitions to activate
+[waypoint_follower-6] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[waypoint_follower-6] [INFO] [1789098832.974258293] [robot1.waypoint_follower]: Creating
+[planner_server-3] [INFO] [1789098832.976822036] [robot1.planner_server]: 
+[planner_server-3] 	planner_server lifecycle node launched. 
+[planner_server-3] 	Waiting on external lifecycle transitions to activate
+[planner_server-3] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[smoother_server-2] [INFO] [1789098832.977244340] [robot1.smoother_server]: 
+[smoother_server-2] 	smoother_server lifecycle node launched. 
+[smoother_server-2] 	Waiting on external lifecycle transitions to activate
+[smoother_server-2] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-3] [INFO] [1789098832.977432358] [robot1.planner_server]: Creating
+[controller_server-1] [INFO] [1789098832.977565405] [robot1.controller_server]: 
+[controller_server-1] 	controller_server lifecycle node launched. 
+[controller_server-1] 	Waiting on external lifecycle transitions to activate
+[controller_server-1] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[lifecycle_manager-8] [INFO] [1789098832.977837315] [robot1.lifecycle_manager_navigation]: Creating
+[smoother_server-2] [INFO] [1789098832.977912381] [robot1.smoother_server]: Creating smoother server
+[lifecycle_manager-8] [INFO] [1789098832.978548258] [robot1.lifecycle_manager_navigation]: [34m[1mCreating and initializing lifecycle service clients[0m[0m
+[planner_server-3] [INFO] [1789098832.978758470] [robot1.global_costmap.global_costmap]: 
+[planner_server-3] 	global_costmap lifecycle node launched. 
+[planner_server-3] 	Waiting on external lifecycle transitions to activate
+[planner_server-3] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-3] [INFO] [1789098832.978973146] [robot1.global_costmap.global_costmap]: Creating Costmap
+[controller_server-1] [INFO] [1789098832.979020230] [robot1.controller_server]: Creating controller server
+[bt_navigator-5] [INFO] [1789098832.979793954] [robot1.bt_navigator]: 
+[bt_navigator-5] 	bt_navigator lifecycle node launched. 
+[bt_navigator-5] 	Waiting on external lifecycle transitions to activate
+[bt_navigator-5] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[bt_navigator-5] [INFO] [1789098832.979851874] [robot1.bt_navigator]: Creating
+[controller_server-1] [INFO] [1789098832.980444725] [robot1.local_costmap.local_costmap]: 
+[controller_server-1] 	local_costmap lifecycle node launched. 
+[controller_server-1] 	Waiting on external lifecycle transitions to activate
+[controller_server-1] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[controller_server-1] [INFO] [1789098832.980639007] [robot1.local_costmap.local_costmap]: Creating Costmap
+[behavior_server-4] [INFO] [1789098832.981006303] [robot1.behavior_server]: 
+[behavior_server-4] 	behavior_server lifecycle node launched. 
+[behavior_server-4] 	Waiting on external lifecycle transitions to activate
+[behavior_server-4] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[lifecycle_manager-8] [INFO] [1789098834.978957607] [robot1.lifecycle_manager_navigation]: Waiting for service controller_server/get_state...
+[lifecycle_manager-8] [INFO] [1789098836.979180991] [robot1.lifecycle_manager_navigation]: Waiting for service controller_server/get_state...
+[lifecycle_manager-8] [INFO] [1789098839.606058671] [robot1.lifecycle_manager_navigation]: Waiting for service smoother_server/get_state...
+[lifecycle_manager-8] [INFO] [1789098841.606234439] [robot1.lifecycle_manager_navigation]: Waiting for service smoother_server/get_state...
+[lifecycle_manager-8] [INFO] [1789098843.606432611] [robot1.lifecycle_manager_navigation]: Waiting for service smoother_server/get_state...
+[lifecycle_manager-8] [INFO] [1789098845.606617535] [robot1.lifecycle_manager_navigation]: Waiting for service smoother_server/get_state...
+[INFO] [nav2_startup-9]: process started with pid [487454]
+[nav2_startup-9] waiting for service to become available...
+[nav2_startup-9] requester: making request: nav2_msgs.srv.ManageLifecycleNodes_Request(command=0)
+[nav2_startup-9] 
+[lifecycle_manager-8] [INFO] [1789098855.203408799] [robot1.lifecycle_manager_navigation]: [34m[1mStarting managed nodes bringup...[0m[0m
+[lifecycle_manager-8] [INFO] [1789098855.203444614] [robot1.lifecycle_manager_navigation]: [34m[1mConfiguring controller_server[0m[0m
+[controller_server-1] [INFO] [1789098855.203744538] [robot1.controller_server]: Configuring controller interface
+[controller_server-1] [INFO] [1789098855.203893559] [robot1.controller_server]: getting goal checker plugins..
+[controller_server-1] [INFO] [1789098855.203967444] [robot1.controller_server]: Controller frequency set to 20.0000Hz
+[controller_server-1] [INFO] [1789098855.203981568] [robot1.local_costmap.local_costmap]: Configuring
+[controller_server-1] [INFO] [1789098855.244792371] [robot1.local_costmap.local_costmap]: Using plugin "static_layer"
+[controller_server-1] [INFO] [1789098855.246571559] [robot1.local_costmap.local_costmap]: Subscribing to the map topic (/robot1/map) with transient local durability
+[controller_server-1] [INFO] [1789098855.254585832] [robot1.local_costmap.local_costmap]: Initialized plugin "static_layer"
+[controller_server-1] [INFO] [1789098855.254598998] [robot1.local_costmap.local_costmap]: Using plugin "voxel_layer"
+[controller_server-1] [INFO] [1789098855.254934817] [robot1.local_costmap.local_costmap]: Subscribed to Topics: scan
+[controller_server-1] [INFO] [1789098855.284154100] [robot1.local_costmap.local_costmap]: Initialized plugin "voxel_layer"
+[controller_server-1] [INFO] [1789098855.284173793] [robot1.local_costmap.local_costmap]: Using plugin "inflation_layer"
+[controller_server-1] [INFO] [1789098855.284542144] [robot1.local_costmap.local_costmap]: Initialized plugin "inflation_layer"
+[controller_server-1] [INFO] [1789098855.330905050] [robot1.controller_server]: Created progress_checker : progress_checker of type nav2_controller::SimpleProgressChecker
+[controller_server-1] [INFO] [1789098855.331299040] [robot1.controller_server]: Created goal checker : general_goal_checker of type nav2_controller::SimpleGoalChecker
+[controller_server-1] [INFO] [1789098855.331494749] [robot1.controller_server]: Controller Server has general_goal_checker  goal checkers available.
+[controller_server-1] [INFO] [1789098855.332148259] [robot1.controller_server]: Created controller : FollowPath of type dwb_core::DWBLocalPlanner
+[controller_server-1] [INFO] [1789098855.342390974] [robot1.controller_server]: Setting transform_tolerance to 0.200000
+[controller_server-1] [INFO] [1789098855.434889281] [robot1.controller_server]: Using critic "RotateToGoal" (dwb_critics::RotateToGoalCritic)
+[controller_server-1] [INFO] [1789098855.440249242] [robot1.controller_server]: Critic plugin initialized
+[controller_server-1] [INFO] [1789098855.440351622] [robot1.controller_server]: Using critic "Oscillation" (dwb_critics::OscillationCritic)
+[controller_server-1] [INFO] [1789098855.440637189] [robot1.controller_server]: Critic plugin initialized
+[controller_server-1] [INFO] [1789098855.440709820] [robot1.controller_server]: Using critic "BaseObstacle" (dwb_critics::BaseObstacleCritic)
+[controller_server-1] [INFO] [1789098855.440818961] [robot1.controller_server]: Critic plugin initialized
+[controller_server-1] [INFO] [1789098855.440881000] [robot1.controller_server]: Using critic "GoalAlign" (dwb_critics::GoalAlignCritic)
+[controller_server-1] [INFO] [1789098855.446540937] [robot1.controller_server]: Critic plugin initialized
+[controller_server-1] [INFO] [1789098855.446651485] [robot1.controller_server]: Using critic "PathAlign" (dwb_critics::PathAlignCritic)
+[controller_server-1] [INFO] [1789098855.446836582] [robot1.controller_server]: Critic plugin initialized
+[controller_server-1] [INFO] [1789098855.446896062] [robot1.controller_server]: Using critic "PathDist" (dwb_critics::PathDistCritic)
+[controller_server-1] [INFO] [1789098855.447018651] [robot1.controller_server]: Critic plugin initialized
+[controller_server-1] [INFO] [1789098855.447081660] [robot1.controller_server]: Using critic "GoalDist" (dwb_critics::GoalDistCritic)
+[controller_server-1] [INFO] [1789098855.447206642] [robot1.controller_server]: Critic plugin initialized
+[controller_server-1] [INFO] [1789098855.447213967] [robot1.controller_server]: Controller Server has FollowPath  controllers available.
+[lifecycle_manager-8] [INFO] [1789098855.514868538] [robot1.lifecycle_manager_navigation]: [34m[1mConfiguring smoother_server[0m[0m
+[smoother_server-2] [INFO] [1789098855.515179760] [robot1.smoother_server]: Configuring smoother server
+[smoother_server-2] [INFO] [1789098855.537388782] [robot1.smoother_server]: Created smoother : simple_smoother of type nav2_smoother::SimpleSmoother
+[smoother_server-2] [INFO] [1789098855.546822206] [robot1.smoother_server]: Smoother Server has simple_smoother  smoothers available.
+[lifecycle_manager-8] [INFO] [1789098855.567521072] [robot1.lifecycle_manager_navigation]: [34m[1mConfiguring planner_server[0m[0m
+[planner_server-3] [INFO] [1789098855.567645087] [robot1.planner_server]: Configuring
+[planner_server-3] [INFO] [1789098855.567670127] [robot1.global_costmap.global_costmap]: Configuring
+[planner_server-3] [INFO] [1789098855.590902132] [robot1.global_costmap.global_costmap]: Using plugin "static_layer"
+[planner_server-3] [INFO] [1789098855.592655138] [robot1.global_costmap.global_costmap]: Subscribing to the map topic (/robot1/map) with transient local durability
+[planner_server-3] [INFO] [1789098855.599271608] [robot1.global_costmap.global_costmap]: Initialized plugin "static_layer"
+[planner_server-3] [INFO] [1789098855.599289279] [robot1.global_costmap.global_costmap]: Using plugin "obstacle_layer"
+[planner_server-3] [INFO] [1789098855.599659875] [robot1.global_costmap.global_costmap]: Subscribed to Topics: scan
+[planner_server-3] [INFO] [1789098855.649969086] [robot1.global_costmap.global_costmap]: Initialized plugin "obstacle_layer"
+[planner_server-3] [INFO] [1789098855.649991398] [robot1.global_costmap.global_costmap]: Using plugin "inflation_layer"
+[planner_server-3] [INFO] [1789098855.659866723] [robot1.global_costmap.global_costmap]: Initialized plugin "inflation_layer"
+[planner_server-3] [INFO] [1789098855.719019082] [robot1.planner_server]: Created global planner plugin GridBased of type nav2_navfn_planner/NavfnPlanner
+[planner_server-3] [INFO] [1789098855.719042284] [robot1.planner_server]: Configuring plugin GridBased of type NavfnPlanner
+[planner_server-3] [INFO] [1789098855.719463737] [robot1.planner_server]: Planner Server has GridBased  planners available.
+[lifecycle_manager-8] [INFO] [1789098855.877874989] [robot1.lifecycle_manager_navigation]: [34m[1mConfiguring behavior_server[0m[0m
+[behavior_server-4] [INFO] [1789098855.878015156] [robot1.behavior_server]: Configuring
+[behavior_server-4] [INFO] [1789098855.901327724] [robot1.behavior_server]: Creating behavior plugin spin of type nav2_behaviors/Spin
+[behavior_server-4] [INFO] [1789098855.901697103] [robot1.behavior_server]: Configuring spin
+[behavior_server-4] [INFO] [1789098855.922813804] [robot1.behavior_server]: Creating behavior plugin backup of type nav2_behaviors/BackUp
+[behavior_server-4] [INFO] [1789098855.923274558] [robot1.behavior_server]: Configuring backup
+[behavior_server-4] [INFO] [1789098855.951271620] [robot1.behavior_server]: Creating behavior plugin drive_on_heading of type nav2_behaviors/DriveOnHeading
+[behavior_server-4] [INFO] [1789098855.951700224] [robot1.behavior_server]: Configuring drive_on_heading
+[behavior_server-4] [INFO] [1789098855.989729830] [robot1.behavior_server]: Creating behavior plugin assisted_teleop of type nav2_behaviors/AssistedTeleop
+[behavior_server-4] [INFO] [1789098855.990548965] [robot1.behavior_server]: Configuring assisted_teleop
+[behavior_server-4] [INFO] [1789098856.064930251] [robot1.behavior_server]: Creating behavior plugin wait of type nav2_behaviors/Wait
+[behavior_server-4] [INFO] [1789098856.065318073] [robot1.behavior_server]: Configuring wait
+[lifecycle_manager-8] [INFO] [1789098856.117017466] [robot1.lifecycle_manager_navigation]: [34m[1mConfiguring bt_navigator[0m[0m
+[bt_navigator-5] [INFO] [1789098856.117244405] [robot1.bt_navigator]: Configuring
+[lifecycle_manager-8] [INFO] [1789098856.384005326] [robot1.lifecycle_manager_navigation]: [34m[1mConfiguring waypoint_follower[0m[0m
+[waypoint_follower-6] [INFO] [1789098856.384125409] [robot1.waypoint_follower]: Configuring
+[waypoint_follower-6] [INFO] [1789098856.422015498] [robot1.waypoint_follower]: Created waypoint_task_executor : wait_at_waypoint of type nav2_waypoint_follower::WaitAtWaypoint
+[lifecycle_manager-8] [INFO] [1789098856.422465647] [robot1.lifecycle_manager_navigation]: [34m[1mConfiguring velocity_smoother[0m[0m
+[velocity_smoother-7] [INFO] [1789098856.422582241] [robot1.velocity_smoother]: Configuring velocity smoother
+[lifecycle_manager-8] [INFO] [1789098856.424373939] [robot1.lifecycle_manager_navigation]: [34m[1mActivating controller_server[0m[0m
+[controller_server-1] [INFO] [1789098856.424482453] [robot1.controller_server]: Activating
+[controller_server-1] [INFO] [1789098856.424504070] [robot1.local_costmap.local_costmap]: Activating
+[controller_server-1] [INFO] [1789098856.424510218] [robot1.local_costmap.local_costmap]: Checking transform
+[controller_server-1] [INFO] [1789098856.424521442] [robot1.local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[controller_server-1] [INFO] [1789098856.924578006] [robot1.local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[controller_server-1] [INFO] [1789098857.424578715] [robot1.local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[controller_server-1] [INFO] [1789098857.924575248] [robot1.local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[controller_server-1] [INFO] [1789098858.424574966] [robot1.local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[controller_server-1] [INFO] [1789098858.924577696] [robot1.local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[controller_server-1] [INFO] [1789098859.424575495] [robot1.local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[controller_server-1] [INFO] [1789098859.924576150] [robot1.local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[controller_server-1] [INFO] [1789098860.424576665] [robot1.local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[controller_server-1] [INFO] [1789098860.924576844] [robot1.local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[controller_server-1] [INFO] [1789098861.424605795] [robot1.local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[controller_server-1] [INFO] [1789098861.924574399] [robot1.local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[controller_server-1] [INFO] [1789098862.424578226] [robot1.local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[controller_server-1] [INFO] [1789098862.924577614] [robot1.local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[controller_server-1] [INFO] [1789098863.424608131] [robot1.local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[controller_server-1] [INFO] [1789098863.924578949] [robot1.local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[controller_server-1] [INFO] [1789098864.424576414] [robot1.local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[controller_server-1] [INFO] [1789098864.924578007] [robot1.local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[controller_server-1] [INFO] [1789098865.424578560] [robot1.local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[controller_server-1] [INFO] [1789098865.924576772] [robot1.local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[controller_server-1] [INFO] [1789098866.424576949] [robot1.local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[controller_server-1] [INFO] [1789098866.924608414] [robot1.local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[controller_server-1] [INFO] [1789098867.424575853] [robot1.local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[controller_server-1] [INFO] [1789098867.924576084] [robot1.local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[controller_server-1] [INFO] [1789098868.424660529] [robot1.local_costmap.local_costmap]: start
+[controller_server-1] [INFO] [1789098868.684461174] [robot1.controller_server]: Creating bond (controller_server) to lifecycle manager.
+[controller_server-1] [WARN] [1789098870.424844912] [robot1.local_costmap.local_costmap]: Can't update static costmap layer, no map received
+[controller_server-1] [WARN] [1789098872.424884388] [robot1.local_costmap.local_costmap]: Can't update static costmap layer, no map received
+[controller_server-1] [INFO] [1789098873.384214900] [robot1.local_costmap.local_costmap]: StaticLayer: Resizing static layer to 134 X 259 at 0.050000 m/pix
+[planner_server-3] [INFO] [1789098878.363092706] [robot1.global_costmap.global_costmap]: StaticLayer: Resizing costmap to 134 X 259 at 0.050000 m/pix
+[lifecycle_manager-8] [INFO] [1789098878.785401544] [robot1.lifecycle_manager_navigation]: Server controller_server connected with bond.
+[lifecycle_manager-8] [INFO] [1789098878.785483212] [robot1.lifecycle_manager_navigation]: [34m[1mActivating smoother_server[0m[0m
+[smoother_server-2] [INFO] [1789098878.785779259] [robot1.smoother_server]: Activating
+[smoother_server-2] [INFO] [1789098878.785808490] [robot1.smoother_server]: Creating bond (smoother_server) to lifecycle manager.
+[lifecycle_manager-8] [INFO] [1789098882.487661755] [robot1.lifecycle_manager_navigation]: Server smoother_server connected with bond.
+[lifecycle_manager-8] [INFO] [1789098882.487705699] [robot1.lifecycle_manager_navigation]: [34m[1mActivating planner_server[0m[0m
+[planner_server-3] [INFO] [1789098882.507136903] [robot1.planner_server]: Activating
+[planner_server-3] [INFO] [1789098882.507185404] [robot1.global_costmap.global_costmap]: Activating
+[planner_server-3] [INFO] [1789098882.507199934] [robot1.global_costmap.global_costmap]: Checking transform
+[planner_server-3] [INFO] [1789098882.507299044] [robot1.global_costmap.global_costmap]: start
+[planner_server-3] [INFO] [1789098883.579947136] [robot1.planner_server]: Activating plugin GridBased of type NavfnPlanner
+[planner_server-3] [INFO] [1789098883.634650924] [robot1.planner_server]: Creating bond (planner_server) to lifecycle manager.
+[controller_server-1] [INFO] [1789098884.173344213] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098883.417 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789098884.822962366] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098884.166 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[lifecycle_manager-8] [INFO] [1789098885.284514490] [robot1.lifecycle_manager_navigation]: Server planner_server connected with bond.
+[lifecycle_manager-8] [INFO] [1789098885.284549968] [robot1.lifecycle_manager_navigation]: [34m[1mActivating behavior_server[0m[0m
+[behavior_server-4] [INFO] [1789098885.290237863] [robot1.behavior_server]: Activating
+[behavior_server-4] [INFO] [1789098885.290255969] [robot1.behavior_server]: Activating spin
+[behavior_server-4] [INFO] [1789098885.290263650] [robot1.behavior_server]: Activating backup
+[behavior_server-4] [INFO] [1789098885.290268486] [robot1.behavior_server]: Activating drive_on_heading
+[behavior_server-4] [INFO] [1789098885.290273746] [robot1.behavior_server]: Activating assisted_teleop
+[behavior_server-4] [INFO] [1789098885.290278477] [robot1.behavior_server]: Activating wait
+[behavior_server-4] [INFO] [1789098885.290285665] [robot1.behavior_server]: Creating bond (behavior_server) to lifecycle manager.
+[controller_server-1] [INFO] [1789098887.538807406] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098886.682 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[lifecycle_manager-8] [INFO] [1789098887.585016177] [robot1.lifecycle_manager_navigation]: Server behavior_server connected with bond.
+[lifecycle_manager-8] [INFO] [1789098887.585067109] [robot1.lifecycle_manager_navigation]: [34m[1mActivating bt_navigator[0m[0m
+[bt_navigator-5] [INFO] [1789098887.700444819] [robot1.bt_navigator]: Activating
+[planner_server-3] [INFO] [1789098887.811963473] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098887.036 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789098890.716328515] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098889.957 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789098894.154898040] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098893.457 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789098895.034039530] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098894.227 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[bt_navigator-5] [INFO] [1789098895.879044505] [robot1.bt_navigator]: Creating bond (bt_navigator) to lifecycle manager.
+[controller_server-1] [INFO] [1789098896.805278981] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098895.723 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789098898.479362588] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098897.891 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789098899.598254442] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098898.991 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789098901.912749075] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098901.149 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789098902.858482524] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098902.221 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[lifecycle_manager-8] [INFO] [1789098902.887431851] [robot1.lifecycle_manager_navigation]: Server bt_navigator connected with bond.
+[lifecycle_manager-8] [INFO] [1789098902.887480442] [robot1.lifecycle_manager_navigation]: [34m[1mActivating waypoint_follower[0m[0m
+[waypoint_follower-6] [INFO] [1789098902.887832368] [robot1.waypoint_follower]: Activating
+[waypoint_follower-6] [INFO] [1789098902.887861956] [robot1.waypoint_follower]: Creating bond (waypoint_follower) to lifecycle manager.
+[lifecycle_manager-8] [INFO] [1789098903.330395738] [robot1.lifecycle_manager_navigation]: Server waypoint_follower connected with bond.
+[lifecycle_manager-8] [INFO] [1789098903.330441823] [robot1.lifecycle_manager_navigation]: [34m[1mActivating velocity_smoother[0m[0m
+[velocity_smoother-7] [INFO] [1789098903.330818587] [robot1.velocity_smoother]: Activating
+[velocity_smoother-7] [INFO] [1789098903.330879086] [robot1.velocity_smoother]: Creating bond (velocity_smoother) to lifecycle manager.
+[lifecycle_manager-8] [INFO] [1789098904.043703305] [robot1.lifecycle_manager_navigation]: Server velocity_smoother connected with bond.
+[lifecycle_manager-8] [INFO] [1789098904.043739320] [robot1.lifecycle_manager_navigation]: [34m[1mManaged nodes are active[0m[0m
+[lifecycle_manager-8] [INFO] [1789098904.043745219] [robot1.lifecycle_manager_navigation]: [34m[1mCreating bond timer...[0m[0m
+[nav2_startup-9] response:
+[nav2_startup-9] nav2_msgs.srv.ManageLifecycleNodes_Response(success=True)
+[nav2_startup-9] 
+[INFO] [nav2_startup-9]: process has finished cleanly [pid 487454]
+[lifecycle_manager-8] [INFO] [1789098904.243816401] [robot1.lifecycle_manager_navigation]: [34m[1mHave not received a heartbeat from controller_server.[0m[0m
+[lifecycle_manager-8] [ERROR] [1789098904.243841683] [robot1.lifecycle_manager_navigation]: CRITICAL FAILURE: SERVER controller_server IS DOWN after not receiving a heartbeat for 30000 ms. Shutting down related nodes.
+[lifecycle_manager-8] [INFO] [1789098904.243858795] [robot1.lifecycle_manager_navigation]: [34m[1mTerminating bond timer...[0m[0m
+[lifecycle_manager-8] [INFO] [1789098904.243862550] [robot1.lifecycle_manager_navigation]: [34m[1mResetting managed nodes...[0m[0m
+[lifecycle_manager-8] [INFO] [1789098904.243865841] [robot1.lifecycle_manager_navigation]: [34m[1mDeactivating velocity_smoother[0m[0m
+[velocity_smoother-7] [INFO] [1789098904.282839673] [robot1.velocity_smoother]: Deactivating
+[velocity_smoother-7] [INFO] [1789098904.282903544] [robot1.velocity_smoother]: Destroying bond (velocity_smoother) to lifecycle manager.
+[lifecycle_manager-8] [INFO] [1789098904.394492172] [robot1.lifecycle_manager_navigation]: [34m[1mDeactivating waypoint_follower[0m[0m
+[waypoint_follower-6] [INFO] [1789098904.394789245] [robot1.waypoint_follower]: Deactivating
+[waypoint_follower-6] [INFO] [1789098904.394814014] [robot1.waypoint_follower]: Destroying bond (waypoint_follower) to lifecycle manager.
+[lifecycle_manager-8] [INFO] [1789098904.506423561] [robot1.lifecycle_manager_navigation]: [34m[1mDeactivating bt_navigator[0m[0m
+[bt_navigator-5] [INFO] [1789098904.687953564] [robot1.bt_navigator]: Deactivating
+[bt_navigator-5] [INFO] [1789098904.687986818] [robot1.bt_navigator]: Destroying bond (bt_navigator) to lifecycle manager.
+[lifecycle_manager-8] [INFO] [1789098905.067748974] [robot1.lifecycle_manager_navigation]: [34m[1mDeactivating behavior_server[0m[0m
+[behavior_server-4] [INFO] [1789098905.068080091] [robot1.behavior_server]: Deactivating
+[behavior_server-4] [INFO] [1789098905.068120469] [robot1.behavior_server]: Destroying bond (behavior_server) to lifecycle manager.
+[controller_server-1] [INFO] [1789098905.430020495] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098904.481 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[lifecycle_manager-8] [INFO] [1789098905.624611649] [robot1.lifecycle_manager_navigation]: [34m[1mDeactivating planner_server[0m[0m
+[planner_server-3] [INFO] [1789098905.653303998] [robot1.planner_server]: Deactivating
+[planner_server-3] [INFO] [1789098905.653354455] [robot1.global_costmap.global_costmap]: Deactivating
+[planner_server-3] [INFO] [1789098906.507532905] [robot1.planner_server]: Deactivating plugin GridBased of type NavfnPlanner
+[planner_server-3] [INFO] [1789098906.507573165] [robot1.planner_server]: Destroying bond (planner_server) to lifecycle manager.
+[lifecycle_manager-8] [INFO] [1789098907.167302532] [robot1.lifecycle_manager_navigation]: [34m[1mDeactivating smoother_server[0m[0m
+[smoother_server-2] [INFO] [1789098907.167737752] [robot1.smoother_server]: Deactivating
+[smoother_server-2] [INFO] [1789098907.167762143] [robot1.smoother_server]: Destroying bond (smoother_server) to lifecycle manager.
+[lifecycle_manager-8] [INFO] [1789098907.279331461] [robot1.lifecycle_manager_navigation]: [34m[1mDeactivating controller_server[0m[0m
+[controller_server-1] [INFO] [1789098907.503727958] [robot1.controller_server]: Deactivating
+[controller_server-1] [INFO] [1789098907.503766041] [robot1.local_costmap.local_costmap]: Deactivating
+[controller_server-1] [INFO] [1789098907.624919517] [robot1.controller_server]: Destroying bond (controller_server) to lifecycle manager.
+[lifecycle_manager-8] [INFO] [1789098907.697595896] [robot1.lifecycle_manager_navigation]: [34m[1mCleaning up velocity_smoother[0m[0m
+[velocity_smoother-7] [INFO] [1789098907.697933630] [robot1.velocity_smoother]: Cleaning up
+[lifecycle_manager-8] [INFO] [1789098907.698914689] [robot1.lifecycle_manager_navigation]: [34m[1mCleaning up waypoint_follower[0m[0m
+[waypoint_follower-6] [INFO] [1789098907.699059262] [robot1.waypoint_follower]: Cleaning up
+[lifecycle_manager-8] [INFO] [1789098907.950103374] [robot1.lifecycle_manager_navigation]: [34m[1mCleaning up bt_navigator[0m[0m
+[bt_navigator-5] [INFO] [1789098907.950213367] [robot1.bt_navigator]: Cleaning up
+[bt_navigator-5] [INFO] [1789098912.431563609] [robot1.bt_navigator]: Completed Cleaning up
+[lifecycle_manager-8] [INFO] [1789098912.432015097] [robot1.lifecycle_manager_navigation]: [34m[1mCleaning up behavior_server[0m[0m
+[behavior_server-4] [INFO] [1789098912.432224369] [robot1.behavior_server]: Cleaning up
+[lifecycle_manager-8] [INFO] [1789098913.306671528] [robot1.lifecycle_manager_navigation]: [34m[1mCleaning up planner_server[0m[0m
+[planner_server-3] [INFO] [1789098913.306826525] [robot1.planner_server]: Cleaning up
+[planner_server-3] [INFO] [1789098913.785457164] [robot1.global_costmap.global_costmap]: Cleaning up
+[planner_server-3] [INFO] [1789098913.834138076] [robot1.planner_server]: Cleaning up plugin GridBased of type NavfnPlanner
+[planner_server-3] [INFO] [1789098913.834182748] [robot1.planner_server]: Destroying plugin GridBased of type NavfnPlanner
+[lifecycle_manager-8] [INFO] [1789098914.221693987] [robot1.lifecycle_manager_navigation]: [34m[1mCleaning up smoother_server[0m[0m
+[smoother_server-2] [INFO] [1789098914.221822306] [robot1.smoother_server]: Cleaning up
+[lifecycle_manager-8] [INFO] [1789098914.280358081] [robot1.lifecycle_manager_navigation]: [34m[1mCleaning up controller_server[0m[0m
+[controller_server-1] [INFO] [1789098914.284460778] [robot1.controller_server]: Cleaning up
+[controller_server-1] [INFO] [1789098914.344010612] [robot1.local_costmap.local_costmap]: Cleaning up
+[lifecycle_manager-8] [INFO] [1789098914.541986510] [robot1.lifecycle_manager_navigation]: [34m[1mManaged nodes have been reset[0m[0m
+[lifecycle_manager-8] [INFO] [1789098915.717439173] [robot1.lifecycle_manager_navigation]: [34m[1mSuccessfully re-established connections from server respawns, starting back up.[0m[0m
+[lifecycle_manager-8] [INFO] [1789098915.717466406] [robot1.lifecycle_manager_navigation]: [34m[1mStarting managed nodes bringup...[0m[0m
+[lifecycle_manager-8] [INFO] [1789098915.717470797] [robot1.lifecycle_manager_navigation]: [34m[1mConfiguring controller_server[0m[0m
+[controller_server-1] [INFO] [1789098915.817223632] [robot1.controller_server]: Configuring controller interface
+[controller_server-1] [INFO] [1789098915.817255918] [robot1.controller_server]: getting goal checker plugins..
+[controller_server-1] [INFO] [1789098915.817264553] [robot1.controller_server]: Controller frequency set to 20.0000Hz
+[controller_server-1] [INFO] [1789098915.817274231] [robot1.local_costmap.local_costmap]: Configuring
+[controller_server-1] 
+[controller_server-1] >>> [rcutils|error_handling.c:108] rcutils_set_error_state()
+[controller_server-1] This error state is being overwritten:
+[controller_server-1] 
+[controller_server-1]   'timer is canceled, at ./src/rcl/timer.c:249'
+[controller_server-1] 
+[controller_server-1] with this new error message:
+[controller_server-1] 
+[controller_server-1]   'Handle's typesupport identifier (rosidl_typesupport_cpp) is not supported by this library, at ./src/type_support_dispatch.hpp:111'
+[controller_server-1] 
+[controller_server-1] rcutils_reset_error() should be called after error handling to avoid this.
+[controller_server-1] <<<
+[controller_server-1] [INFO] [1789098915.912955084] [robot1.local_costmap.local_costmap]: Using plugin "static_layer"
+[controller_server-1] [INFO] [1789098915.913005250] [robot1.local_costmap.local_costmap]: Subscribing to the map topic (/robot1/map) with transient local durability
+[controller_server-1] [INFO] [1789098915.926520402] [robot1.local_costmap.local_costmap]: Initialized plugin "static_layer"
+[controller_server-1] [INFO] [1789098915.926539192] [robot1.local_costmap.local_costmap]: Using plugin "voxel_layer"
+[controller_server-1] [INFO] [1789098915.926568832] [robot1.local_costmap.local_costmap]: Subscribed to Topics: scan
+[controller_server-1] [INFO] [1789098915.960992278] [robot1.local_costmap.local_costmap]: Initialized plugin "voxel_layer"
+[controller_server-1] [INFO] [1789098915.961018653] [robot1.local_costmap.local_costmap]: Using plugin "inflation_layer"
+[controller_server-1] [INFO] [1789098915.961072556] [robot1.local_costmap.local_costmap]: Initialized plugin "inflation_layer"
+[controller_server-1] [INFO] [1789098916.377120146] [robot1.controller_server]: Created progress_checker : progress_checker of type nav2_controller::SimpleProgressChecker
+[controller_server-1] [INFO] [1789098916.377154215] [robot1.controller_server]: Created goal checker : general_goal_checker of type nav2_controller::SimpleGoalChecker
+[controller_server-1] [INFO] [1789098916.377161851] [robot1.controller_server]: Controller Server has general_goal_checker general_goal_checker  goal checkers available.
+[controller_server-1] [INFO] [1789098916.377433607] [robot1.controller_server]: Created controller : FollowPath of type dwb_core::DWBLocalPlanner
+[controller_server-1] [INFO] [1789098916.377448098] [robot1.controller_server]: Setting transform_tolerance to 0.200000
+[controller_server-1] [INFO] [1789098916.388543326] [robot1.local_costmap.local_costmap]: StaticLayer: Resizing static layer to 134 X 259 at 0.050000 m/pix
+[controller_server-1] [INFO] [1789098916.924539359] [robot1.controller_server]: Using critic "RotateToGoal" (dwb_critics::RotateToGoalCritic)
+[controller_server-1] [INFO] [1789098916.924567957] [robot1.controller_server]: Critic plugin initialized
+[controller_server-1] [INFO] [1789098916.924578001] [robot1.controller_server]: Using critic "Oscillation" (dwb_critics::OscillationCritic)
+[controller_server-1] [INFO] [1789098916.924583548] [robot1.controller_server]: Critic plugin initialized
+[controller_server-1] [INFO] [1789098916.924591248] [robot1.controller_server]: Using critic "BaseObstacle" (dwb_critics::BaseObstacleCritic)
+[controller_server-1] [INFO] [1789098916.924595766] [robot1.controller_server]: Critic plugin initialized
+[controller_server-1] [INFO] [1789098916.924603423] [robot1.controller_server]: Using critic "GoalAlign" (dwb_critics::GoalAlignCritic)
+[controller_server-1] [INFO] [1789098916.924615010] [robot1.controller_server]: Critic plugin initialized
+[controller_server-1] [INFO] [1789098916.924622038] [robot1.controller_server]: Using critic "PathAlign" (dwb_critics::PathAlignCritic)
+[controller_server-1] [INFO] [1789098916.924629521] [robot1.controller_server]: Critic plugin initialized
+[controller_server-1] [INFO] [1789098916.924636311] [robot1.controller_server]: Using critic "PathDist" (dwb_critics::PathDistCritic)
+[controller_server-1] [INFO] [1789098916.924642768] [robot1.controller_server]: Critic plugin initialized
+[controller_server-1] [INFO] [1789098916.924649569] [robot1.controller_server]: Using critic "GoalDist" (dwb_critics::GoalDistCritic)
+[controller_server-1] [INFO] [1789098916.924656326] [robot1.controller_server]: Critic plugin initialized
+[controller_server-1] [INFO] [1789098916.924661668] [robot1.controller_server]: Controller Server has FollowPath FollowPath  controllers available.
+[lifecycle_manager-8] [INFO] [1789098917.384316147] [robot1.lifecycle_manager_navigation]: [34m[1mConfiguring smoother_server[0m[0m
+[smoother_server-2] [INFO] [1789098917.384601418] [robot1.smoother_server]: Configuring smoother server
+[smoother_server-2] [INFO] [1789098917.460980395] [robot1.smoother_server]: Created smoother : simple_smoother of type nav2_smoother::SimpleSmoother
+[smoother_server-2] [INFO] [1789098917.461009211] [robot1.smoother_server]: Smoother Server has simple_smoother simple_smoother  smoothers available.
+[lifecycle_manager-8] [INFO] [1789098917.584488811] [robot1.lifecycle_manager_navigation]: [34m[1mConfiguring planner_server[0m[0m
+[planner_server-3] [INFO] [1789098917.609245942] [robot1.planner_server]: Configuring
+[planner_server-3] [INFO] [1789098917.609272631] [robot1.global_costmap.global_costmap]: Configuring
+[planner_server-3] [INFO] [1789098917.689069315] [robot1.global_costmap.global_costmap]: Using plugin "static_layer"
+[planner_server-3] [INFO] [1789098917.689127669] [robot1.global_costmap.global_costmap]: Subscribing to the map topic (/robot1/map) with transient local durability
+[planner_server-3] [INFO] [1789098917.707477086] [robot1.global_costmap.global_costmap]: Initialized plugin "static_layer"
+[planner_server-3] [INFO] [1789098917.707500604] [robot1.global_costmap.global_costmap]: Using plugin "obstacle_layer"
+[planner_server-3] [INFO] [1789098917.707531372] [robot1.global_costmap.global_costmap]: Subscribed to Topics: scan
+[planner_server-3] [INFO] [1789098917.716529836] [robot1.global_costmap.global_costmap]: Initialized plugin "obstacle_layer"
+[planner_server-3] [INFO] [1789098917.716549644] [robot1.global_costmap.global_costmap]: Using plugin "inflation_layer"
+[planner_server-3] [INFO] [1789098917.716599197] [robot1.global_costmap.global_costmap]: Initialized plugin "inflation_layer"
+[planner_server-3] [INFO] [1789098917.858966482] [robot1.planner_server]: Created global planner plugin GridBased of type nav2_navfn_planner/NavfnPlanner
+[planner_server-3] [INFO] [1789098917.858988846] [robot1.planner_server]: Configuring plugin GridBased of type NavfnPlanner
+[planner_server-3] [INFO] [1789098917.858999973] [robot1.planner_server]: Planner Server has GridBased GridBased  planners available.
+[planner_server-3] [INFO] [1789098917.888590516] [robot1.global_costmap.global_costmap]: StaticLayer: Resizing costmap to 134 X 259 at 0.050000 m/pix
+[lifecycle_manager-8] [INFO] [1789098918.165566573] [robot1.lifecycle_manager_navigation]: [34m[1mConfiguring behavior_server[0m[0m
+[behavior_server-4] [INFO] [1789098918.165952778] [robot1.behavior_server]: Configuring
+[behavior_server-4] [INFO] [1789098918.271413229] [robot1.behavior_server]: Creating behavior plugin spin of type nav2_behaviors/Spin
+[behavior_server-4] [INFO] [1789098918.271451260] [robot1.behavior_server]: Configuring spin
+[behavior_server-4] [INFO] [1789098918.366006038] [robot1.behavior_server]: Creating behavior plugin backup of type nav2_behaviors/BackUp
+[behavior_server-4] [INFO] [1789098918.366047700] [robot1.behavior_server]: Configuring backup
+[behavior_server-4] [INFO] [1789098918.402829251] [robot1.behavior_server]: Creating behavior plugin drive_on_heading of type nav2_behaviors/DriveOnHeading
+[behavior_server-4] [INFO] [1789098918.402884090] [robot1.behavior_server]: Configuring drive_on_heading
+[behavior_server-4] [INFO] [1789098918.428825219] [robot1.behavior_server]: Creating behavior plugin assisted_teleop of type nav2_behaviors/AssistedTeleop
+[behavior_server-4] [INFO] [1789098918.428862577] [robot1.behavior_server]: Configuring assisted_teleop
+[behavior_server-4] [INFO] [1789098918.465850693] [robot1.behavior_server]: Creating behavior plugin wait of type nav2_behaviors/Wait
+[behavior_server-4] [INFO] [1789098918.465883653] [robot1.behavior_server]: Configuring wait
+[lifecycle_manager-8] [INFO] [1789098918.546335860] [robot1.lifecycle_manager_navigation]: [34m[1mConfiguring bt_navigator[0m[0m
+[bt_navigator-5] [INFO] [1789098918.546549836] [robot1.bt_navigator]: Configuring
+[lifecycle_manager-8] [INFO] [1789098921.372554197] [robot1.lifecycle_manager_navigation]: [34m[1mConfiguring waypoint_follower[0m[0m
+[waypoint_follower-6] [INFO] [1789098921.372764230] [robot1.waypoint_follower]: Configuring
+[waypoint_follower-6] [INFO] [1789098921.624160027] [robot1.waypoint_follower]: Created waypoint_task_executor : wait_at_waypoint of type nav2_waypoint_follower::WaitAtWaypoint
+[lifecycle_manager-8] [INFO] [1789098921.624463745] [robot1.lifecycle_manager_navigation]: [34m[1mConfiguring velocity_smoother[0m[0m
+[velocity_smoother-7] [INFO] [1789098921.635586729] [robot1.velocity_smoother]: Configuring velocity smoother
+[lifecycle_manager-8] [INFO] [1789098921.667576162] [robot1.lifecycle_manager_navigation]: [34m[1mActivating controller_server[0m[0m
+[controller_server-1] [INFO] [1789098921.863140281] [robot1.controller_server]: Activating
+[controller_server-1] [INFO] [1789098921.863185426] [robot1.local_costmap.local_costmap]: Activating
+[controller_server-1] [INFO] [1789098921.863197643] [robot1.local_costmap.local_costmap]: Checking transform
+[controller_server-1] [INFO] [1789098921.863271980] [robot1.local_costmap.local_costmap]: start
+[controller_server-1] [INFO] [1789098922.131525897] [robot1.controller_server]: Creating bond (controller_server) to lifecycle manager.
+[lifecycle_manager-8] [INFO] [1789098932.658939606] [robot1.lifecycle_manager_navigation]: Server controller_server connected with bond.
+[lifecycle_manager-8] [INFO] [1789098932.658974517] [robot1.lifecycle_manager_navigation]: [34m[1mActivating smoother_server[0m[0m
+[smoother_server-2] [INFO] [1789098932.659284699] [robot1.smoother_server]: Activating
+[smoother_server-2] [INFO] [1789098932.659316569] [robot1.smoother_server]: Creating bond (smoother_server) to lifecycle manager.
+[controller_server-1] [INFO] [1789098940.371989377] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098938.993 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[lifecycle_manager-8] [INFO] [1789098942.071623796] [robot1.lifecycle_manager_navigation]: Server smoother_server connected with bond.
+[lifecycle_manager-8] [INFO] [1789098942.071663135] [robot1.lifecycle_manager_navigation]: [34m[1mActivating planner_server[0m[0m
+[planner_server-3] [INFO] [1789098942.120519505] [robot1.planner_server]: Activating
+[planner_server-3] [INFO] [1789098942.120550305] [robot1.global_costmap.global_costmap]: Activating
+[planner_server-3] [INFO] [1789098942.120557304] [robot1.global_costmap.global_costmap]: Checking transform
+[planner_server-3] [INFO] [1789098942.120611870] [robot1.global_costmap.global_costmap]: start
+[planner_server-3] [INFO] [1789098943.198764886] [robot1.planner_server]: Activating plugin GridBased of type NavfnPlanner
+[controller_server-1] [INFO] [1789098943.205165048] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098942.368 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789098943.232168930] [robot1.planner_server]: Creating bond (planner_server) to lifecycle manager.
+[planner_server-3] [INFO] [1789098943.506139928] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098942.783 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[lifecycle_manager-8] [INFO] [1789098944.282468854] [robot1.lifecycle_manager_navigation]: Server planner_server connected with bond.
+[lifecycle_manager-8] [INFO] [1789098944.282509336] [robot1.lifecycle_manager_navigation]: [34m[1mActivating behavior_server[0m[0m
+[behavior_server-4] [INFO] [1789098944.311525325] [robot1.behavior_server]: Activating
+[behavior_server-4] [INFO] [1789098944.311552072] [robot1.behavior_server]: Activating spin
+[behavior_server-4] [INFO] [1789098944.311556941] [robot1.behavior_server]: Activating backup
+[behavior_server-4] [INFO] [1789098944.311561063] [robot1.behavior_server]: Activating drive_on_heading
+[behavior_server-4] [INFO] [1789098944.311564970] [robot1.behavior_server]: Activating assisted_teleop
+[behavior_server-4] [INFO] [1789098944.311568738] [robot1.behavior_server]: Activating wait
+[behavior_server-4] [INFO] [1789098944.311573286] [robot1.behavior_server]: Creating bond (behavior_server) to lifecycle manager.
+[lifecycle_manager-8] [INFO] [1789098945.105533090] [robot1.lifecycle_manager_navigation]: Server behavior_server connected with bond.
+[lifecycle_manager-8] [INFO] [1789098945.105574861] [robot1.lifecycle_manager_navigation]: [34m[1mActivating bt_navigator[0m[0m
+[bt_navigator-5] [INFO] [1789098945.105913452] [robot1.bt_navigator]: Activating
+[controller_server-1] [INFO] [1789098945.767550300] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098944.935 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789098946.225676343] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098945.431 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[bt_navigator-5] [ERROR] [1789098946.496193142] [robot1.bt_navigator_navigate_through_poses_rclcpp_node]: "compute_path_through_poses" action server not available after waiting for 1.00s
+[bt_navigator-5] [ERROR] [1789098947.146240874] [robot1.bt_navigator]: Exception when loading BT: Action server compute_path_through_poses not available
+[bt_navigator-5] [ERROR] [1789098947.146296923] [robot1.bt_navigator]: Error loading XML file: /opt/ros/humble/share/nav2_bt_navigator/behavior_trees/navigate_through_poses_w_replanning_and_recovery.xml
+[lifecycle_manager-8] [ERROR] [1789098947.146717912] [robot1.lifecycle_manager_navigation]: Failed to change state for node: bt_navigator
+[lifecycle_manager-8] [ERROR] [1789098947.146759912] [robot1.lifecycle_manager_navigation]: Failed to bring up all requested nodes. Aborting bringup.
+[controller_server-1] [INFO] [1789098948.626756141] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098947.394 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789098953.219855403] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098951.933 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789098955.655440553] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098954.961 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789098956.472616093] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098955.517 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789098958.460525268] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098957.789 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789098960.207270102] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098959.123 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789098961.354450885] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098960.729 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789098963.466860198] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098962.751 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789098965.297420046] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098964.491 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789098967.695190690] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098966.951 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789098968.653243658] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098968.054 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789098971.941729080] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098971.178 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789098975.440447530] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098974.753 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789098975.458050969] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098974.490 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789098979.725332139] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098979.190 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789098980.159490654] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098979.385 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789098982.795395479] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098982.130 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789098984.984146408] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098984.163 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789098988.154173316] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098987.566 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789098988.221220537] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098987.239 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789098991.461110898] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098989.855 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789098991.730043413] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098991.091 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789098994.425608985] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098993.485 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789098995.252458119] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098994.012 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789098997.507273099] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098996.660 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789098997.831320448] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789098997.154 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099001.170570759] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099000.563 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099003.470630001] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099002.849 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099005.586221758] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099004.966 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099006.927667284] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099006.254 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099009.640100961] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099008.429 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099013.271052984] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099012.596 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099013.425093448] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099012.596 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099017.140941551] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099016.189 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099018.486062988] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099016.871 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099021.846927238] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099021.094 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099021.853947785] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099021.094 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099025.439682161] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099024.715 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099026.265216074] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099025.509 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099028.770779574] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099027.868 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099033.252585874] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099032.628 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099033.951244203] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099033.211 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099038.207828053] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099037.319 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099039.453987953] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099038.778 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099041.613165462] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099040.756 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099046.090581773] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099045.552 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099048.118800605] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099047.444 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099050.036224458] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099049.434 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099051.072655553] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099050.456 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099052.893540989] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099052.265 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099053.620791533] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099052.825 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099056.675113792] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099056.203 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099057.420507095] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099056.853 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099061.160194348] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099060.040 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099062.433160380] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099061.777 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099063.675441899] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099062.517 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099066.288528878] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099065.750 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099067.371241753] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099066.656 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099069.734477910] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099069.097 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099070.034363080] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099069.400 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099073.600114073] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099072.920 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099073.829149134] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099073.286 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099076.747333523] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099076.062 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099079.504270943] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099078.790 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099080.039496834] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099079.348 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099084.274978225] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099083.740 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099084.292899317] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099083.740 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099086.872707460] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099086.230 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099086.975981071] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099085.910 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099090.268431772] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099089.434 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099090.304317259] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099089.434 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099092.806698851] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099092.011 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099093.208987354] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099092.503 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099096.026592506] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099095.298 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099096.074870506] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099095.298 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099099.031488087] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099098.431 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099099.039250129] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099098.431 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099102.847182537] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099102.280 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099102.979407130] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099102.280 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099105.884489292] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099105.197 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099108.386911798] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099107.808 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099110.871584165] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099110.143 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099111.118007674] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099110.435 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099113.690689787] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099113.029 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099114.048305682] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099113.351 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099116.794565495] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099115.679 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099117.356534189] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099116.487 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099119.505558863] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099118.775 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099123.613490666] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099122.945 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099123.628314900] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099122.945 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099126.713166034] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099126.163 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099127.046934571] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099126.378 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099129.576406562] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099128.903 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099129.975635161] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099129.253 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099132.935609492] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099132.326 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099135.494943125] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099134.795 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099135.534381667] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099134.795 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099138.269818199] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099137.581 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099139.288372946] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099138.678 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099141.389664473] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099140.716 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099142.384887545] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099141.789 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099144.578314869] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099143.888 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099145.777098922] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099145.244 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099149.340180729] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099148.616 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099149.543965333] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099149.025 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099152.086776824] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099151.365 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099152.165008895] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099151.365 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099158.045919144] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099157.492 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099158.066272748] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099157.492 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099161.417584104] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099160.448 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099164.330666665] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099163.506 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099164.626275874] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099163.506 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099169.044343507] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099167.566 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099172.312789786] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099171.642 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099172.320617041] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099171.642 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099175.100453061] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099174.396 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099175.707944577] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099175.035 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099178.272448858] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099177.410 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099178.378554813] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099177.755 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099181.791057369] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099181.054 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099182.458739855] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099181.790 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099184.741820516] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099183.841 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099185.172458838] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099184.334 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099188.000713143] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099187.445 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099188.088012885] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099187.445 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099191.282941407] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099190.502 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099192.564533818] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099191.934 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099194.492825237] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099193.612 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099195.388868744] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099194.809 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099198.336884998] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099197.807 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099198.345039062] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099197.807 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099201.711684141] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099201.189 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099201.827798268] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099201.189 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099204.766531183] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099204.120 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099204.817152151] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099204.120 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099209.452479484] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099208.734 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099212.671969732] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099211.423 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099215.092082328] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099214.437 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099215.964784088] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099215.324 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099218.484287704] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099217.233 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099221.204310021] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099220.595 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099221.213418285] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099220.595 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099224.525249029] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099223.803 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099225.211114176] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099224.571 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099230.798025689] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099230.143 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099231.046415608] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099230.145 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099233.496072347] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099232.669 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099234.170549377] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099233.262 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099236.330671541] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099235.525 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099237.834135471] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099236.921 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099239.093861704] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099238.431 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099241.133736214] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099240.483 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099241.853901082] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099241.188 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099246.565718520] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099246.024 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099247.048262870] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099246.024 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099249.975272252] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099249.080 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099250.000303910] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099249.080 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099252.938311388] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099251.928 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099258.276512431] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099257.658 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099259.065425513] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099258.255 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099261.311020092] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099260.615 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099262.220286234] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099261.307 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099264.816669318] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099263.819 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099266.182740769] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099265.458 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099268.956324929] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099268.158 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099271.552592371] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099270.829 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099272.030690520] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099271.466 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099274.543658399] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099273.899 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099275.363600021] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099274.484 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099278.684485633] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099277.881 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099281.188597025] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099280.610 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099282.150747733] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099281.428 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099286.206831629] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099285.669 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099289.246194803] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099288.553 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099289.748511684] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099289.255 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099292.446417521] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099291.568 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099295.910289907] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099295.381 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099295.937200698] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099295.381 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099299.089608492] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099298.442 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099299.331908760] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099298.776 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099302.364557972] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099300.284 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099304.923410419] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099303.937 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099306.070206710] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099305.407 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099309.386475659] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099308.648 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099310.718142103] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099310.032 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099312.044169139] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099311.493 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099314.948028501] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099314.265 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099314.951069066] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099314.265 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099317.999025494] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099317.101 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099318.452343589] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099317.804 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099321.347545362] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099320.562 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099321.550966393] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099320.868 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099325.867110209] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099325.029 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099326.326157592] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099325.559 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099328.848836507] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099327.852 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099332.753356189] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099332.105 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099335.552119496] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099334.903 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099338.335410245] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099337.677 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099338.335524486] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099337.677 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099340.974142141] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099340.084 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099343.041562428] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099342.399 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099344.130426802] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099343.432 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099346.960701960] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099346.336 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099347.176484321] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099346.336 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099350.811509396] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099350.243 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099351.026704687] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099350.243 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099353.607573731] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099352.836 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099353.654586938] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099352.836 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099357.008047398] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099356.139 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099357.044635268] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099356.139 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099359.972495014] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099359.373 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099360.637275158] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099360.087 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099362.797587767] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099362.098 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099363.479087032] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099362.693 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099365.806627776] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099364.907 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099369.582737016] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099368.900 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099369.582963044] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099368.900 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099372.420673992] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099371.852 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099372.517468453] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099371.852 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099375.147563105] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099374.539 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099375.751546562] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099374.810 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099377.672551595] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099376.896 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099380.365891787] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099379.520 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099382.760409408] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099382.170 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099384.150962224] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099383.252 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099386.853231188] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099386.215 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099386.883853067] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099386.215 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099390.766350594] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099389.908 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099392.745532825] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099392.150 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[controller_server-1] [INFO] [1789099394.562289707] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099393.788 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789099395.377567213] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099394.645 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789099397.697775182] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789099396.664 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[ERROR] [lifecycle_manager-8]: process[lifecycle_manager-8] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[ERROR] [velocity_smoother-7]: process[velocity_smoother-7] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[ERROR] [waypoint_follower-6]: process[waypoint_follower-6] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[ERROR] [bt_navigator-5]: process[bt_navigator-5] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[INFO] [lifecycle_manager-8]: sending signal 'SIGTERM' to process[lifecycle_manager-8]
+[ERROR] [behavior_server-4]: process[behavior_server-4] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[ERROR] [planner_server-3]: process[planner_server-3] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[ERROR] [smoother_server-2]: process[smoother_server-2] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[INFO] [velocity_smoother-7]: sending signal 'SIGTERM' to process[velocity_smoother-7]
+[ERROR] [controller_server-1]: process[controller_server-1] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[INFO] [waypoint_follower-6]: sending signal 'SIGTERM' to process[waypoint_follower-6]
+[INFO] [bt_navigator-5]: sending signal 'SIGTERM' to process[bt_navigator-5]
+[lifecycle_manager-8] [INFO] [1789099398.106619828] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[lifecycle_manager-8] [INFO] [1789099398.106703783] [robot1.lifecycle_manager_navigation]: Running Nav2 LifecycleManager rcl preshutdown (lifecycle_manager_navigation)
+[INFO] [behavior_server-4]: sending signal 'SIGTERM' to process[behavior_server-4]
+[INFO] [planner_server-3]: sending signal 'SIGTERM' to process[planner_server-3]
+[INFO] [smoother_server-2]: sending signal 'SIGTERM' to process[smoother_server-2]
+[velocity_smoother-7] [INFO] [1789099398.107430028] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[velocity_smoother-7] [INFO] [1789099398.107478811] [robot1.velocity_smoother]: Running Nav2 LifecycleNode rcl preshutdown (velocity_smoother)
+[velocity_smoother-7] [INFO] [1789099398.107509367] [robot1.velocity_smoother]: Cleaning up
+[velocity_smoother-7] [INFO] [1789099398.107521891] [robot1.velocity_smoother]: Destroying bond (velocity_smoother) to lifecycle manager.
+[INFO] [controller_server-1]: sending signal 'SIGTERM' to process[controller_server-1]
+[waypoint_follower-6] [INFO] [1789099398.107961549] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[waypoint_follower-6] [INFO] [1789099398.108032135] [robot1.waypoint_follower]: Running Nav2 LifecycleNode rcl preshutdown (waypoint_follower)
+[waypoint_follower-6] [INFO] [1789099398.108063785] [robot1.waypoint_follower]: Cleaning up
+[velocity_smoother-7] [INFO] [1789099398.108226079] [robot1.velocity_smoother]: Destroying
+[bt_navigator-5] [INFO] [1789099398.108336379] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[bt_navigator-5] [INFO] [1789099398.108441359] [robot1.bt_navigator]: Running Nav2 LifecycleNode rcl preshutdown (bt_navigator)
+[bt_navigator-5] [INFO] [1789099398.108474900] [robot1.bt_navigator]: Cleaning up
+[behavior_server-4] [INFO] [1789099398.108834192] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[behavior_server-4] [INFO] [1789099398.108898422] [robot1.behavior_server]: Running Nav2 LifecycleNode rcl preshutdown (behavior_server)
+[behavior_server-4] [INFO] [1789099398.108924297] [robot1.behavior_server]: Deactivating
+[behavior_server-4] [INFO] [1789099398.108938340] [robot1.behavior_server]: Destroying bond (behavior_server) to lifecycle manager.
+[planner_server-3] [INFO] [1789099398.109287436] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[planner_server-3] [INFO] [1789099398.109345340] [robot1.planner_server]: Running Nav2 LifecycleNode rcl preshutdown (planner_server)
+[planner_server-3] [INFO] [1789099398.109393700] [robot1.planner_server]: Deactivating
+[planner_server-3] [INFO] [1789099398.109416843] [robot1.global_costmap.global_costmap]: Deactivating
+[smoother_server-2] [INFO] [1789099398.109689411] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[smoother_server-2] [INFO] [1789099398.109727032] [robot1.smoother_server]: Running Nav2 LifecycleNode rcl preshutdown (smoother_server)
+[smoother_server-2] [INFO] [1789099398.109752294] [robot1.smoother_server]: Deactivating
+[smoother_server-2] [INFO] [1789099398.109759061] [robot1.smoother_server]: Destroying bond (smoother_server) to lifecycle manager.
+[controller_server-1] [INFO] [1789099398.110198517] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[controller_server-1] [INFO] [1789099398.110228771] [robot1.controller_server]: Running Nav2 LifecycleNode rcl preshutdown (controller_server)
+[controller_server-1] [INFO] [1789099398.110252298] [robot1.controller_server]: Deactivating
+[controller_server-1] [INFO] [1789099398.110263030] [robot1.local_costmap.local_costmap]: Deactivating
+[planner_server-3] [INFO] [1789099398.120759175] [robot1.planner_server]: Deactivating plugin GridBased of type NavfnPlanner
+[planner_server-3] [INFO] [1789099398.120779610] [robot1.planner_server]: Destroying bond (planner_server) to lifecycle manager.
+[smoother_server-2] [INFO] [1789099398.209955528] [robot1.smoother_server]: Cleaning up
+[planner_server-3] [INFO] [1789099398.224283496] [robot1.planner_server]: Cleaning up
+[waypoint_follower-6] [INFO] [1789099398.268273049] [robot1.waypoint_follower]: Destroying bond (waypoint_follower) to lifecycle manager.
+[controller_server-1] [INFO] [1789099398.310223497] [robot1.controller_server]: Destroying bond (controller_server) to lifecycle manager.
+[controller_server-1] [INFO] [1789099398.320386663] [robot1.controller_server]: Cleaning up
+[controller_server-1] [INFO] [1789099398.320428532] [robot1.local_costmap.local_costmap]: Cleaning up
+[behavior_server-4] [INFO] [1789099398.365229589] [robot1.behavior_server]: Cleaning up
+[waypoint_follower-6] [INFO] [1789099398.382158092] [robot1.waypoint_follower]: Destroying
+[smoother_server-2] [INFO] [1789099398.498908374] [robot1.smoother_server]: Destroying bond (smoother_server) to lifecycle manager.
+[INFO] [velocity_smoother-7]: process has finished cleanly [pid 487211]
+[smoother_server-2] [INFO] [1789099398.668264205] [robot1.smoother_server]: Destroying
+[INFO] [waypoint_follower-6]: process has finished cleanly [pid 487209]
+[lifecycle_manager-8] [INFO] [1789099398.772079224] [robot1.lifecycle_manager_navigation]: Destroying lifecycle_manager_navigation
+[INFO] [lifecycle_manager-8]: process has finished cleanly [pid 487213]
+[INFO] [smoother_server-2]: process has finished cleanly [pid 487201]
+[behavior_server-4] [INFO] [1789099400.878905070] [robot1.behavior_server]: Destroying bond (behavior_server) to lifecycle manager.
+[ERROR] [bt_navigator-5]: process[bt_navigator-5] failed to terminate '10.0' seconds after receiving 'SIGTERM', escalating to 'SIGKILL'
+[ERROR] [behavior_server-4]: process[behavior_server-4] failed to terminate '10.0' seconds after receiving 'SIGTERM', escalating to 'SIGKILL'
+[ERROR] [planner_server-3]: process[planner_server-3] failed to terminate '10.0' seconds after receiving 'SIGTERM', escalating to 'SIGKILL'
+[ERROR] [controller_server-1]: process[controller_server-1] failed to terminate '10.0' seconds after receiving 'SIGTERM', escalating to 'SIGKILL'
+[INFO] [bt_navigator-5]: sending signal 'SIGKILL' to process[bt_navigator-5]
+[INFO] [behavior_server-4]: sending signal 'SIGKILL' to process[behavior_server-4]
+[INFO] [planner_server-3]: sending signal 'SIGKILL' to process[planner_server-3]
+[INFO] [controller_server-1]: sending signal 'SIGKILL' to process[controller_server-1]
+[ERROR] [behavior_server-4]: process has died [pid 487205, exit code -9, cmd '/opt/ros/humble/lib/nav2_behaviors/behavior_server --ros-args --log-level info --ros-args -r __node:=behavior_server -r __ns:=/robot1 --params-file /tmp/launch_params_mjrod_sr -r /robot1/global_costmap/scan:=/robot1/scan -r /robot1/local_costmap/scan:=/robot1/scan -r /tf:=tf -r /tf_static:=tf_static'].
+[ERROR] [bt_navigator-5]: process has died [pid 487207, exit code -9, cmd '/opt/ros/humble/lib/nav2_bt_navigator/bt_navigator --ros-args --log-level info --ros-args -r __node:=bt_navigator -r __ns:=/robot1 --params-file /tmp/launch_params_mjrod_sr -r /robot1/global_costmap/scan:=/robot1/scan -r /robot1/local_costmap/scan:=/robot1/scan -r /tf:=tf -r /tf_static:=tf_static'].
+[ERROR] [planner_server-3]: process has died [pid 487203, exit code -9, cmd '/opt/ros/humble/lib/nav2_planner/planner_server --ros-args --log-level info --ros-args -r __node:=planner_server -r __ns:=/robot1 --params-file /tmp/launch_params_mjrod_sr -r /robot1/global_costmap/scan:=/robot1/scan -r /robot1/local_costmap/scan:=/robot1/scan -r /tf:=tf -r /tf_static:=tf_static'].
+[ERROR] [controller_server-1]: process has died [pid 487199, exit code -9, cmd '/opt/ros/humble/lib/nav2_controller/controller_server --ros-args --log-level info --ros-args -r __node:=controller_server -r __ns:=/robot1 --params-file /tmp/launch_params_mjrod_sr -r /robot1/global_costmap/scan:=/robot1/scan -r /robot1/local_costmap/scan:=/robot1/scan -r /tf:=tf -r /tf_static:=tf_static -r cmd_vel:=cmd_vel_nav'].

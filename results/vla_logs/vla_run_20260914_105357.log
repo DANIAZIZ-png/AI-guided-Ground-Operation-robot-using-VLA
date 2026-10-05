@@ -1,0 +1,22 @@
+2026-09-14 10:53:57.131 [RUN] vla_agent v28  (#63 headless-safe console output, #62 direction-aware collision guard, #61 nearest-cluster LiDAR ranging, #60 manual override teleop, #59 10 Hz collision guard, #58 smoother approach, #57 stand off far enough to keep the object in view, #56 step-and-stare scan, #55 LiDAR failure reasons reported, #54 LiDAR object ranging, #53 seeded depth intrinsics, #52 depth intrinsics rescaled to frame size, #51 compressedDepth transport, #50 compressed RGB transport, #49 annotated feed gated per topic, #47 TF at colour-frame stamp, #48 reject stale depth, #46 one subscription per camera stream, #43 longer cached action-server wait, #44 undock retry-loop breaker, #45 sync slop for 1 Hz depth, #37 /robot1 namespace, #38 stereo depth topic, #39 best-effort sensor QoS, #40 RGB->depth pixel mapping, #41 encoding-based mm/m, #42 explicit namespaced TF, #36 no patrol feed prompt, #35 cancel actually stops the robot, #34 feed publishes to any subscriber, #22 dock no-detect zone, #23 live-first memory, #24 forget, #25 typo-tolerant control words, #26 bare yes/no, #27 context expiry, #28 all-instance distances, #29 Create 3 backup ratchet, #30 sticky goals + range-scaled gate + ring-safe blacklist, #31 incremental off-map hop goals, #32 non-freezing live feed, #33 command/reply/status bridge)
+2026-09-14 10:53:57.131 [RUN] agent started (SIGHT_CONFIRM=2, SEARCH_TIMEOUT=120.0s, NO_PROGRESS_LIMIT=60.0s, ROBOT_CLEARANCE=0.25m)
+2026-09-14 10:54:52.151 [CMD] [remote] what do you see
+2026-09-14 10:54:52.152 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-14 10:54:53.845 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a chair and a person.', 'target': None}]}
+2026-09-14 10:54:53.846 [STEP] describe target=None
+2026-09-14 10:54:54.209 [ROBOT] Stopped. The robot is idle.
+2026-09-14 10:54:54.210 [STOP] confirmed stopped by odometry after barrage
+2026-09-14 10:55:08.851 [CMD] [remote] go to the chair
+2026-09-14 10:55:08.851 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-14 10:55:09.486 [BRAIN] {'steps': [{'action': 'navigate', 'speech': 'Heading to the chair.', 'target': 'chair'}]}
+2026-09-14 10:55:09.486 [STEP] navigate target='chair'
+2026-09-14 10:55:10.909 [ROBOT] Stopped. The robot is idle.
+2026-09-14 10:55:10.909 [STOP] confirmed stopped by odometry after barrage
+2026-09-14 10:55:11.200 [ROBOT] Found the chair — navigating to it.
+2026-09-14 10:55:11.201 [SIGHT] chair at (-1.89, 0.85), 1.86 m away
+2026-09-14 10:55:11.202 [GOAL] (-0.59, 0.95) yaw=-176deg mode=navigate
+2026-09-14 10:55:11.250 [GUARD] collision guard stopped the robot at 0.55 m (limit 0.7 m, mode=navigate)
+2026-09-14 10:55:11.250 [ROBOT] Stopping — something solid is 0.55 m ahead, but I thought the chair was still 1.9 m away. My distance estimate was wrong, so I'm not driving any further.
+2026-09-14 10:55:11.250 [WARN] belief/LiDAR mismatch: believed 1.86 m, measured 0.55 m
+2026-09-14 10:57:25.020 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-14 10:57:25.020 [RUN] agent shutting down

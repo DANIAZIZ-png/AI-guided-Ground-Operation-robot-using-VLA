@@ -1,0 +1,4 @@
+#!/bin/bash
+source /home/danyalaziz/robot_env.sh
+ros2 launch turtlebot4_navigation slam.launch.py namespace:=/robot1 params:=/home/danyalaziz/slam_vla.yaml
+echo; echo "[SLAM exited -- window kept open; close it when done]"; exec bash

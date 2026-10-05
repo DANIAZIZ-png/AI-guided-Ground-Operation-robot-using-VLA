@@ -1,0 +1,213 @@
+2026-08-05 13:57:29.359 [RUN] vla_agent v12  (#36 no patrol feed prompt, #35 cancel actually stops the robot, #34 feed publishes to any subscriber, #22 dock no-detect zone, #23 live-first memory, #24 forget, #25 typo-tolerant control words, #26 bare yes/no, #27 context expiry, #28 all-instance distances, #29 Create 3 backup ratchet, #30 sticky goals + range-scaled gate + ring-safe blacklist, #31 incremental off-map hop goals, #32 non-freezing live feed, #33 command/reply/status bridge)
+2026-08-05 13:57:29.359 [RUN] agent started (SIGHT_CONFIRM=2, SEARCH_TIMEOUT=45.0s, NO_PROGRESS_LIMIT=60.0s, ROBOT_CLEARANCE=0.25m)
+2026-08-05 13:57:29.497 [RUN] headless mode (no tty)
+2026-08-05 13:59:15.640 [CMD] [remote] move forward one minute
+2026-08-05 13:59:15.642 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-05 13:59:17.696 [ROBOT] Stopped. The robot is idle.
+2026-08-05 13:59:17.698 [STOP] confirmed stopped by odometry after barrage
+2026-08-05 13:59:20.096 [BRAIN] {'steps': [{'action': 'move', 'speech': "Moving forward one minute would be too far, so I'll just stay put.", 'target': None, 'distance_m': 0.0, 'rotation_deg': 0.0}]}
+2026-08-05 13:59:20.096 [STEP] move target=None
+2026-08-05 13:59:23.027 [CMD] [remote] move forward one meter
+2026-08-05 13:59:23.027 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-05 13:59:23.832 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Moving forward one metre.', 'target': None, 'distance_m': 1.0, 'rotation_deg': 0.0}]}
+2026-08-05 13:59:23.832 [STEP] move target=None
+2026-08-05 13:59:25.076 [ROBOT] Stopped. The robot is idle.
+2026-08-05 13:59:25.077 [STOP] confirmed stopped by odometry after barrage
+2026-08-05 13:59:31.497 [ROBOT] Done with that move.
+2026-08-05 13:59:35.991 [CMD] [remote] turn right 50 degrees
+2026-08-05 13:59:35.992 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-05 13:59:36.828 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning fifty degrees to the right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -50.0}]}
+2026-08-05 13:59:36.828 [STEP] move target=None
+2026-08-05 13:59:38.037 [ROBOT] Stopped. The robot is idle.
+2026-08-05 13:59:38.037 [STOP] confirmed stopped by odometry after barrage
+2026-08-05 13:59:41.497 [ROBOT] Done with that move.
+2026-08-05 13:59:44.858 [CMD] [remote] what do you see
+2026-08-05 13:59:44.859 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-05 13:59:45.736 [BRAIN] {'steps': [{'action': 'describe', 'speech': "I don't see anything right now.", 'target': None}]}
+2026-08-05 13:59:45.736 [STEP] describe target=None
+2026-08-05 13:59:46.916 [ROBOT] Stopped. The robot is idle.
+2026-08-05 13:59:46.917 [STOP] confirmed stopped by odometry after barrage
+2026-08-05 13:59:51.843 [CMD] [remote] move forward one meters
+2026-08-05 13:59:51.844 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-05 13:59:52.645 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Moving forward one meter.', 'target': None, 'distance_m': 1.0, 'rotation_deg': 0.0}]}
+2026-08-05 13:59:52.645 [STEP] move target=None
+2026-08-05 13:59:53.897 [ROBOT] Stopped. The robot is idle.
+2026-08-05 13:59:53.897 [STOP] confirmed stopped by odometry after barrage
+2026-08-05 14:00:00.499 [ROBOT] Done with that move.
+2026-08-05 14:00:01.715 [CMD] [remote] what do you see
+2026-08-05 14:00:01.716 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-05 14:00:02.559 [BRAIN] {'steps': [{'action': 'describe', 'speech': "I don't see anything right now.", 'target': None}]}
+2026-08-05 14:00:02.559 [STEP] describe target=None
+2026-08-05 14:00:03.756 [ROBOT] Stopped. The robot is idle.
+2026-08-05 14:00:03.757 [STOP] confirmed stopped by odometry after barrage
+2026-08-05 14:00:06.435 [CMD] [remote] turn right
+2026-08-05 14:00:06.436 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-05 14:00:07.270 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ninety degrees right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -90.0}]}
+2026-08-05 14:00:07.270 [STEP] move target=None
+2026-08-05 14:00:08.476 [ROBOT] Stopped. The robot is idle.
+2026-08-05 14:00:08.477 [STOP] confirmed stopped by odometry after barrage
+2026-08-05 14:00:13.497 [ROBOT] Done with that move.
+2026-08-05 14:00:16.344 [CMD] [remote] what do you see
+2026-08-05 14:00:16.344 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-05 14:00:17.048 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a box and a person.', 'target': None}]}
+2026-08-05 14:00:17.048 [STEP] describe target=None
+2026-08-05 14:00:18.396 [ROBOT] Stopped. The robot is idle.
+2026-08-05 14:00:18.397 [STOP] confirmed stopped by odometry after barrage
+2026-08-05 14:00:21.951 [CMD] [remote] go to the person
+2026-08-05 14:00:21.952 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-05 14:00:22.583 [BRAIN] {'steps': [{'action': 'navigate', 'speech': 'Heading to the person.', 'target': 'person'}]}
+2026-08-05 14:00:22.583 [STEP] navigate target='person'
+2026-08-05 14:00:23.996 [ROBOT] Stopped. The robot is idle.
+2026-08-05 14:00:23.997 [STOP] confirmed stopped by odometry after barrage
+2026-08-05 14:00:24.560 [ROBOT] Found the person — navigating to it.
+2026-08-05 14:00:24.560 [SIGHT] person at (1.13, -0.84), 1.84 m away
+2026-08-05 14:00:24.563 [GOAL] (1.57, -0.05) yaw=-120deg mode=navigate
+2026-08-05 14:00:27.875 [RESULT] nav goal status=4 (ok)
+2026-08-05 14:00:28.568 [GOAL] (1.56, -0.07) yaw=-121deg mode=navigate
+2026-08-05 14:00:28.880 [RESULT] nav goal status=4 (ok)
+2026-08-05 14:00:29.569 [GOAL] (1.55, -0.07) yaw=-121deg mode=navigate
+2026-08-05 14:00:29.631 [RESULT] nav goal status=4 (ok)
+2026-08-05 14:00:30.572 [GOAL] (1.55, -0.07) yaw=-121deg mode=navigate
+2026-08-05 14:00:30.636 [RESULT] nav goal status=4 (ok)
+2026-08-05 14:00:31.569 [GOAL] (1.55, -0.07) yaw=-121deg mode=navigate
+2026-08-05 14:00:31.631 [RESULT] nav goal status=4 (ok)
+2026-08-05 14:00:32.566 [GOAL] (1.55, -0.07) yaw=-121deg mode=navigate
+2026-08-05 14:00:32.628 [RESULT] nav goal status=4 (ok)
+2026-08-05 14:00:33.568 [GOAL] (1.55, -0.07) yaw=-121deg mode=navigate
+2026-08-05 14:00:33.630 [RESULT] nav goal status=4 (ok)
+2026-08-05 14:00:34.575 [GOAL] (1.54, -0.07) yaw=-121deg mode=navigate
+2026-08-05 14:00:34.638 [RESULT] nav goal status=4 (ok)
+2026-08-05 14:00:35.573 [GOAL] (1.54, -0.07) yaw=-121deg mode=navigate
+2026-08-05 14:00:35.636 [RESULT] nav goal status=4 (ok)
+2026-08-05 14:00:36.563 [GOAL] (1.55, -0.07) yaw=-121deg mode=navigate
+2026-08-05 14:00:36.626 [RESULT] nav goal status=4 (ok)
+2026-08-05 14:00:37.568 [GOAL] (1.56, -0.07) yaw=-121deg mode=navigate
+2026-08-05 14:00:37.631 [RESULT] nav goal status=4 (ok)
+2026-08-05 14:00:38.565 [GOAL] (1.56, -0.07) yaw=-121deg mode=navigate
+2026-08-05 14:00:38.627 [RESULT] nav goal status=4 (ok)
+2026-08-05 14:00:39.578 [GOAL] (1.56, -0.07) yaw=-121deg mode=navigate
+2026-08-05 14:00:39.640 [RESULT] nav goal status=4 (ok)
+2026-08-05 14:00:40.567 [GOAL] (1.56, -0.07) yaw=-121deg mode=navigate
+2026-08-05 14:00:40.629 [RESULT] nav goal status=4 (ok)
+2026-08-05 14:00:41.623 [GOAL] (1.56, -0.07) yaw=-121deg mode=navigate
+2026-08-05 14:00:41.691 [RESULT] nav goal status=4 (ok)
+2026-08-05 14:00:42.017 [CMD] (cancel via remote) stop
+2026-08-05 14:00:42.018 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-05 14:00:44.076 [ROBOT] Stopped. The robot is idle.
+2026-08-05 14:00:44.076 [STOP] confirmed stopped by odometry after barrage
+2026-08-05 14:00:46.382 [CMD] [remote] turn left
+2026-08-05 14:00:46.383 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-05 14:00:47.173 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ninety degrees left.', 'target': None, 'distance_m': 0.0, 'rotation_deg': 90.0}]}
+2026-08-05 14:00:47.173 [STEP] move target=None
+2026-08-05 14:00:48.436 [ROBOT] Stopped. The robot is idle.
+2026-08-05 14:00:48.437 [STOP] confirmed stopped by odometry after barrage
+2026-08-05 14:00:53.496 [ROBOT] Done with that move.
+2026-08-05 14:00:59.555 [CMD] [remote] what do you see
+2026-08-05 14:00:59.556 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-05 14:01:00.269 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I can see a chair.', 'target': None}]}
+2026-08-05 14:01:00.270 [STEP] describe target=None
+2026-08-05 14:01:01.597 [ROBOT] Stopped. The robot is idle.
+2026-08-05 14:01:01.597 [STOP] confirmed stopped by odometry after barrage
+2026-08-05 14:01:04.480 [CMD] [remote] go to the chair
+2026-08-05 14:01:04.480 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-05 14:01:05.160 [BRAIN] {'steps': [{'action': 'navigate', 'speech': 'Heading to the chair.', 'target': 'chair'}]}
+2026-08-05 14:01:05.160 [STEP] navigate target='chair'
+2026-08-05 14:01:06.537 [ROBOT] Stopped. The robot is idle.
+2026-08-05 14:01:06.538 [STOP] confirmed stopped by odometry after barrage
+2026-08-05 14:01:06.564 [ROBOT] Found the chair — navigating to it.
+2026-08-05 14:01:06.564 [SIGHT] chair at (14.65, -2.93), 13.33 m away
+2026-08-05 14:01:06.565 [ROBOT] The chair is about 13.3 m away, past the edge of what I've mapped. Moving up in short steps and mapping as I go.
+2026-08-05 14:01:06.565 [STEP] #31 hop mode engaged for chair: object (14.65, -2.93) at 13.3 m, area_mapped=False
+2026-08-05 14:01:06.565 [GOAL] #31 hop 1: 1.50 m toward chair (still 13.3 m away)
+2026-08-05 14:01:06.565 [GOAL] (3.12, -0.22) yaw=-13deg mode=navigate
+2026-08-05 14:01:11.569 [GOAL] #31 hop 2: 1.50 m toward chair (still 12.3 m away)
+2026-08-05 14:01:11.570 [GOAL] (4.17, -0.43) yaw=-14deg mode=navigate
+2026-08-05 14:01:11.578 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-05 14:01:11.578 [WARN] nav goal (4.17, -0.43) failed (status=6); trying another approach angle
+2026-08-05 14:01:11.578 [STEP] #31 hop aborted — shortening to 0.75 m and re-aiming
+2026-08-05 14:01:12.569 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-05 14:01:12.569 [GOAL] #31 hop 3: 0.75 m toward chair (still 12.1 m away)
+2026-08-05 14:01:12.570 [GOAL] (3.62, -0.32) yaw=-15deg mode=navigate
+2026-08-05 14:01:12.578 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-05 14:01:12.578 [WARN] nav goal (3.62, -0.32) failed (status=6); trying another approach angle
+2026-08-05 14:01:12.578 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-05 14:01:13.565 [GOAL] #31 hop 4: 0.60 m toward chair (still 12.4 m away)
+2026-08-05 14:01:13.566 [GOAL] (3.68, -0.43) yaw=-20deg mode=navigate
+2026-08-05 14:01:13.578 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-05 14:01:13.578 [WARN] nav goal (3.68, -0.43) failed (status=6); trying another approach angle
+2026-08-05 14:01:13.578 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-05 14:01:14.565 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-05 14:01:14.566 [GOAL] #31 hop 5: 0.60 m toward chair (still 12.2 m away)
+2026-08-05 14:01:14.567 [GOAL] (3.88, -0.50) yaw=-20deg mode=navigate
+2026-08-05 14:01:14.579 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-05 14:01:14.579 [WARN] nav goal (3.88, -0.50) failed (status=6); trying another approach angle
+2026-08-05 14:01:14.579 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-05 14:01:15.564 [GOAL] #31 hop 6: 0.60 m toward chair (still 11.9 m away)
+2026-08-05 14:01:15.565 [GOAL] (4.09, -0.51) yaw=-14deg mode=navigate
+2026-08-05 14:01:15.569 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-05 14:01:15.569 [WARN] nav goal (4.09, -0.51) failed (status=6); trying another approach angle
+2026-08-05 14:01:15.569 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-05 14:01:16.554 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-05 14:01:16.554 [GOAL] #31 hop 7: 0.60 m toward chair (still 11.3 m away)
+2026-08-05 14:01:16.555 [GOAL] (4.24, -0.56) yaw=-13deg mode=navigate
+2026-08-05 14:01:16.557 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-05 14:01:16.558 [WARN] nav goal (4.24, -0.56) failed (status=6); trying another approach angle
+2026-08-05 14:01:16.558 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-05 14:01:17.564 [GOAL] #31 hop 8: 0.60 m toward chair (still 11.7 m away)
+2026-08-05 14:01:17.564 [GOAL] (4.42, -0.67) yaw=-19deg mode=navigate
+2026-08-05 14:01:17.569 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-05 14:01:17.569 [WARN] nav goal (4.42, -0.67) failed (status=6); trying another approach angle
+2026-08-05 14:01:17.569 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-05 14:01:18.554 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-05 14:01:18.554 [GOAL] #31 hop 9: 0.60 m toward chair (still 11.5 m away)
+2026-08-05 14:01:18.555 [GOAL] (4.58, -0.71) yaw=-19deg mode=navigate
+2026-08-05 14:01:18.558 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-05 14:01:18.558 [WARN] nav goal (4.58, -0.71) failed (status=6); trying another approach angle
+2026-08-05 14:01:18.558 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-05 14:01:18.591 [CMD] (cancel via remote) cancel
+2026-08-05 14:01:18.592 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-05 14:01:20.636 [ROBOT] Stopped. The robot is idle.
+2026-08-05 14:01:20.637 [STOP] confirmed stopped by odometry after barrage
+2026-08-05 14:01:24.127 [CMD] (cancel via remote) cancel
+2026-08-05 14:01:24.128 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-05 14:01:26.176 [ROBOT] Stopped. The robot is idle.
+2026-08-05 14:01:26.177 [STOP] confirmed stopped by odometry after barrage
+2026-08-05 14:01:31.093 [CMD] [remote] move backwards
+2026-08-05 14:01:31.093 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-05 14:01:31.902 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Moving backwards half a meter.', 'target': None, 'distance_m': -0.5, 'rotation_deg': 0.0}]}
+2026-08-05 14:01:31.902 [STEP] move target=None
+2026-08-05 14:01:33.136 [ROBOT] Stopped. The robot is idle.
+2026-08-05 14:01:33.137 [STOP] confirmed stopped by odometry after barrage
+2026-08-05 14:01:36.497 [MOVE] backup limit at 0.18 m; nudge #1 forward 0.15 m
+2026-08-05 14:01:42.497 [MOVE] backup limit at 0.02 m; nudge #2 forward 0.15 m
+2026-08-05 14:01:49.497 [MOVE] backup limit at -0.14 m; nudge #3 forward 0.15 m
+2026-08-05 14:01:56.496 [MOVE] backup limit at -0.30 m; nudge #4 forward 0.15 m
+2026-08-05 14:02:02.497 [MOVE] backup limit at -0.46 m; nudge #5 forward 0.15 m
+2026-08-05 14:02:07.671 [CMD] (cancel via remote) cancel
+2026-08-05 14:02:07.672 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-05 14:02:09.717 [ROBOT] Stopped. The robot is idle.
+2026-08-05 14:02:09.718 [STOP] confirmed stopped by odometry after barrage
+2026-08-05 14:02:13.083 [CMD] [remote] and that i want to
+2026-08-05 14:02:13.084 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-05 14:02:14.067 [BRAIN] {'steps': [{'action': 'reject', 'speech': "I'm not sure what you mean — do you want me to go back or look for something else?", 'target': None}]}
+2026-08-05 14:02:14.068 [STEP] reject target=None
+2026-08-05 14:02:14.784 [CMD] (cancel via remote) cancel
+2026-08-05 14:02:14.784 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-05 14:02:16.836 [ROBOT] Stopped. The robot is idle.
+2026-08-05 14:02:16.837 [STOP] confirmed stopped by odometry after barrage
+2026-08-05 14:02:18.346 [CMD] [remote] done i don't
+2026-08-05 14:02:18.347 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-05 14:02:19.060 [BRAIN] {'steps': [{'action': 'reject', 'speech': 'Understood, not doing anything further.', 'target': None}]}
+2026-08-05 14:02:19.067 [STEP] reject target=None
+2026-08-05 14:02:20.397 [ROBOT] Stopped. The robot is idle.
+2026-08-05 14:02:20.398 [STOP] confirmed stopped by odometry after barrage
+2026-08-05 14:02:28.506 [CMD] [remote] turn around
+2026-08-05 14:02:28.507 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-05 14:02:29.310 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning around.', 'target': None, 'distance_m': 0.0, 'rotation_deg': 180.0}]}
+2026-08-05 14:02:29.310 [STEP] move target=None
+2026-08-05 14:02:30.556 [ROBOT] Stopped. The robot is idle.
+2026-08-05 14:02:30.557 [STOP] confirmed stopped by odometry after barrage
+2026-08-05 14:02:38.497 [ROBOT] Done with that move.
+2026-08-05 14:03:07.715 [WARN] #35 cancel-all failed: failed to check service availability: rcl node's context is invalid, at ./src/rcl/node.c:428
+2026-08-05 14:03:07.715 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-05 14:03:07.715 [RUN] agent shutting down

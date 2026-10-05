@@ -1,0 +1,290 @@
+#!/bin/bash
+# =============================================================================
+#  vla_demo.sh  --  ONE-COMMAND HARDWARE DEMO for the VLA ground robot
+#  Written 11 Sep 2026.  HARDWARE ONLY.  Never touches the simulation path.
+#
+#  Run from the Ubuntu HOST (not inside a container):     ~/vla_demo.sh
+#  Stop everything and re-dock:                            ~/vla_demo_stop.sh
+#
+#  What it does, in order (each stage has a check; the script STOPS at the
+#  first failed gate with a loud message instead of starting a broken stack):
+#    0  host / container / robot reachability
+#    1  Pi gate: load, temperature, throttle flags, ROS nodes up
+#    2  ROS daemon restarted in robot mode (not blind)
+#    3  base alive: /robot1/odom ~20 Hz, battery
+#    4  YOLO server (vla-box, background, log)    ] started early, they take
+#    5  Ollama serving + model pinned in memory    ] time and need no ROS
+#    6  SLAM         (xterm, minimised)
+#    7  Nav2         (xterm, minimised)  composed launch, parameter-event storm fix
+#    8  RViz         (xterm, VISIBLE)    the live map for the examiner
+#    9  undock if docked (the camera only runs undocked)
+#   10  camera colour frames flowing (colour-only pipeline, ~50 ms latency)
+#   11  VLA agent    (xterm, minimised, real tty)  VLA_RGB_ONLY=1
+#   12  voice node   (xterm, minimised)  earbuds connected if possible
+#   13  GUI          (VISIBLE)  the operator console
+#
+#  Windows you see: the GUI and RViz. Everything else starts iconified; find
+#  them in the taskbar if you need a log.  Do NOT close the "VLA AGENT" window
+#  (it kills the agent) -- ~/vla_demo_stop.sh does the shutdown.
+#
+#  Facts this script relies on (all in CHANGELOG_2026-09-11.md):
+#   * robot_env.sh sets the hardware DDS profile; sim never sources it
+#   * nav2_hw_composed.launch.py keeps /parameter_events and /rosout off the
+#     Wi-Fi link (otherwise Fast DDS floods the Pi at ~7,400 packets/s)
+#   * the OAK-D runs colour-only; the agent's depth gate is bypassed by the
+#     VLA_RGB_ONLY flag in vla_tools/agent_xterm.sh; ranging is by LiDAR
+#   * a fresh ROS client needs up to ~20 s before its replies arrive, so the
+#     robot tools here are all long-lived clients (30 s settle)
+# =============================================================================
+set -u
+H=/home/danyalaziz
+T=$H/vla_tools
+LOGDIR=$H/vla_logs
+DAY=$(date +%Y%m%d)
+PI=10.42.0.169
+mkdir -p "$LOGDIR"
+DEMOLOG=$LOGDIR/demo_${DAY}_$(date +%H%M%S).log
+T0=$(date +%s)
+# test hook: VLA_DEMO_STOP_AFTER=8 ~/vla_demo.sh  stops cleanly after stage 8 (nothing moves before stage 9)
+STOP_AFTER=${VLA_DEMO_STOP_AFTER:-99}
+
+# ---- output helpers ---------------------------------------------------------
+BOLD=$'\e[1m'; GRN=$'\e[32m'; RED=$'\e[31m'; YEL=$'\e[33m'; CYN=$'\e[36m'; RST=$'\e[0m'
+say()  { printf '%s[%s +%3ds]%s %s\n' "$CYN" "$(date +%T)" "$(( $(date +%s) - T0 ))" "$RST" "$*" | tee -a "$DEMOLOG"; }
+ok()   { printf '%s[%s +%3ds]%s %s   %sOK%s\n' "$CYN" "$(date +%T)" "$(( $(date +%s) - T0 ))" "$RST" "$*" "$GRN" "$RST" | tee -a "$DEMOLOG"
+         local n; n=$(printf '%s' "$*" | grep -oE 'STAGE [0-9]+' | grep -oE '[0-9]+')
+         if [ -n "$n" ] && [ "$n" -ge "$STOP_AFTER" ]; then say "VLA_DEMO_STOP_AFTER=$STOP_AFTER reached -- stopping here (test mode)"; exit 0; fi; }
+warn() { printf '%s[%s +%3ds] WARNING:%s %s\n' "$YEL" "$(date +%T)" "$(( $(date +%s) - T0 ))" "$RST" "$*" | tee -a "$DEMOLOG"; }
+die()  {
+  printf '\n%s%s=====================================================================%s\n' "$RED" "$BOLD" "$RST" | tee -a "$DEMOLOG"
+  printf '%s%s  DEMO ABORTED at stage %s%s\n' "$RED" "$BOLD" "$1" "$RST" | tee -a "$DEMOLOG"
+  printf '%s%s  %s%s\n' "$RED" "$BOLD" "$2" "$RST" | tee -a "$DEMOLOG"
+  printf '%s%s  Nothing more was started. Log: %s%s\n' "$RED" "$BOLD" "$DEMOLOG" "$RST" | tee -a "$DEMOLOG"
+  printf '%s%s  To clean up whatever did start:  ~/vla_demo_stop.sh%s\n' "$RED" "$BOLD" "$RST" | tee -a "$DEMOLOG"
+  printf '%s%s=====================================================================%s\n\n' "$RED" "$BOLD" "$RST" | tee -a "$DEMOLOG"
+  exit 1
+}
+
+# run one command inside ubuntu22-gpu with the HARDWARE environment
+ros() { distrobox enter ubuntu22-gpu -- bash -c "source $H/robot_env.sh; $1" 2>&1; }
+# open a launcher script in its own xterm inside ubuntu22-gpu.
+#   xwin TITLE SCRIPT [iconic|visible] [extra xterm args]
+xwin() {
+  local title=$1 script=$2 mode=${3:-iconic}; shift 3 || true
+  local icon=""; [ "$mode" = iconic ] && icon="-iconic"
+  ( cd "$H" && nohup distrobox enter ubuntu22-gpu -- setsid xterm $icon "$@" -T "$title" -e bash "$script" >/dev/null 2>&1 & )
+}
+# wait_for SECONDS "description" command...   (command runs on the host; success = exit 0)
+wait_for() {
+  local limit=$1 what=$2; shift 2; local t=0
+  while [ $t -lt $limit ]; do
+    if "$@" >/dev/null 2>&1; then return 0; fi
+    sleep 5; t=$((t+5))
+  done
+  return 1
+}
+
+echo | tee -a "$DEMOLOG"
+say "${BOLD}VLA ground robot -- hardware demo bring-up${RST}   (log: $DEMOLOG)"
+echo | tee -a "$DEMOLOG"
+
+# =============================================================================
+say "STAGE 0/13  host, containers, robot reachable"
+[ -f /run/.containerenv ] && die 0 "This script must run on the HOST, not inside a container."
+command -v distrobox >/dev/null || die 0 "distrobox not found on the host."
+distrobox enter ubuntu22-gpu -- true >/dev/null 2>&1 || die 0 "cannot enter the ubuntu22-gpu container."
+distrobox enter vla-box -- true >/dev/null 2>&1 || die 0 "cannot enter the vla-box container (YOLO)."
+distrobox enter ubuntu22-gpu -- which xterm >/dev/null 2>&1 || die 0 "no xterm inside ubuntu22-gpu."
+if ! timeout 5 bash -c "cat < /dev/null > /dev/tcp/$PI/22" 2>/dev/null; then
+  say "        robot $PI not answering yet -- waiting up to 90 s (a cold Pi boot takes ~60 s)"
+  wait_for 90 "robot ssh port" timeout 5 bash -c "cat < /dev/null > /dev/tcp/$PI/22" \
+    || die 0 "robot $PI not reachable on port 22 -- is it powered on and on the hotspot?"
+fi
+ok "STAGE 0/13  host OK, both containers OK, robot reachable"
+
+# =============================================================================
+say "STAGE 1/13  Pi gate (load, temperature, throttling, ROS nodes)"
+PIINFO=$(timeout 40 ssh -o ConnectTimeout=15 -o BatchMode=yes ubuntu@$PI \
+  'echo "LOAD=$(cut -d" " -f1 /proc/loadavg) TEMP=$(vcgencmd measure_temp | tr -dc 0-9.) THR=$(vcgencmd get_throttled | cut -d= -f2) NODES=$(pgrep -c -f __node:=) UP=$(cut -d. -f1 /proc/uptime)"' 2>/dev/null)
+[ -n "$PIINFO" ] || die 1 "ssh to ubuntu@$PI answered nothing (key-based ssh from the host is required)."
+eval "$PIINFO"
+say "        Pi: load $LOAD, ${TEMP} C, throttled=$THR, ROS nodes $NODES, up ${UP}s"
+awk -v t="$TEMP" 'BEGIN{exit !(t < 80)}' || die 1 "Pi is at ${TEMP} C (limit 80). Let it cool; check nothing is flooding the link."
+case "$THR" in *0) ;; *) die 1 "Pi throttled=$THR (must end in 0): it is thermally or power limited RIGHT NOW." ;; esac
+if awk -v l="$LOAD" 'BEGIN{exit !(l >= 2.5)}'; then
+  die 1 "Pi load is $LOAD (limit 2.5). Something is already loading the Pi -- reboot it (ssh ubuntu@$PI sudo reboot) and retry."
+elif awk -v l="$LOAD" 'BEGIN{exit !(l >= 1.5)}'; then
+  warn "Pi load $LOAD is above the 1.5 guideline (fine right after a boot; suspicious otherwise)."
+fi
+if [ "$NODES" -lt 6 ]; then
+  say "        only $NODES ROS nodes on the Pi yet -- waiting up to 120 s for its bring-up"
+  wait_for 120 "pi nodes" bash -c "[ \$(timeout 10 ssh -o BatchMode=yes ubuntu@$PI 'pgrep -c -f __node:=' 2>/dev/null || echo 0) -ge 6 ]" \
+    || die 1 "the Pi's ROS nodes did not come up (fewer than 6 after 2 min). Check turtlebot4.service on the Pi."
+fi
+ok "STAGE 1/13  Pi gate passed"
+
+# =============================================================================
+say "STAGE 2/13  ROS daemon in robot mode"
+ros "fastdds shm clean >/dev/null; ros2 daemon stop >/dev/null 2>&1; sleep 2; ros2 daemon start >/dev/null 2>&1"
+bash "$T/daemoncheck.sh" 2>/dev/null | grep -q "daemon OK" || die 2 "the ROS daemon started BLIND (discovery variables missing). See CLAUDE.md."
+say "        daemon OK; waiting 15 s for the Pi's node directory"
+sleep 15
+see_robot() {   # sets NL; true when the robot's nodes are listed
+  local i; NL=""
+  for i in 1 2 3; do
+    NL=$(ros "timeout 30 ros2 node list" | tr '\n' ' ')
+    echo "$NL" | grep -q turtlebot4_node && echo "$NL" | grep -q rplidar_composition && return 0
+    sleep 10
+  done
+  return 1
+}
+if ! see_robot; then
+  # 12 Sep: after a robot power-cycle the Pi's discovery server can come up
+  # half-deaf to Wi-Fi clients (topics visible, no node names, no data; the Pi
+  # itself sees everything). Restarting its two services fixed it in ~90 s.
+  warn "no robot nodes visible -- restarting discovery.service + turtlebot4.service on the Pi (once), ~90 s"
+  timeout 60 ssh -o BatchMode=yes ubuntu@$PI 'sudo -n systemctl restart discovery.service turtlebot4.service' 2>/dev/null \
+    || die 2 "could not restart the Pi's services over ssh (needs passwordless sudo on the Pi)."
+  sleep 75
+  ros "ros2 daemon stop >/dev/null 2>&1; sleep 2; ros2 daemon start >/dev/null 2>&1"
+  sleep 20
+  see_robot || die 2 "still no /robot1/turtlebot4_node after restarting the Pi's services. Reboot the robot (power switch) and retry. Got: $NL"
+fi
+ok "STAGE 2/13  daemon sees the robot: $(echo "$NL" | grep -o '/robot1/[a-z_0-9]*' | wc -l) robot nodes"
+
+# =============================================================================
+say "STAGE 3/13  base alive (odometry, battery, dock state)"
+HZ=$(ros "timeout 20 ros2 topic hz /robot1/odom" | grep -m1 "average rate" | awk '{print $3}')
+[ -n "$HZ" ] || die 3 "no /robot1/odom messages in 20 s -- the Create 3 base is silent. Only a physical power-cycle fixes that (CLAUDE.md)."
+awk -v h="$HZ" 'BEGIN{exit !(h > 10)}' || die 3 "/robot1/odom at only $HZ Hz (expect ~20)."
+BATT=$(ros "timeout 15 ros2 topic echo /robot1/battery_state --once" | awk '/^percentage/{printf "%d", $2*100}')
+DOCKED=$(ros "timeout 15 ros2 topic echo /robot1/dock_status --once" | awk '/is_docked/{print $2}')
+say "        odom $HZ Hz, battery ${BATT:-?} %, docked=${DOCKED:-?}"
+[ -n "$BATT" ] && [ "$BATT" -lt 20 ] && die 3 "battery at ${BATT} % -- too low for a drive. Charge first."
+[ -n "$BATT" ] && [ "$BATT" -lt 35 ] && warn "battery ${BATT} % -- roughly $(( BATT * 5 / 3 )) min of driving with the camera on."
+ok "STAGE 3/13  base alive"
+
+# =============================================================================
+say "STAGE 4/13  YOLO server (vla-box, background)"
+if curl -s -m 3 -o /dev/null -w '%{http_code}' http://127.0.0.1:5001/detect 2>/dev/null | grep -q 405; then
+  say "        already running"
+else
+  ( nohup distrobox enter vla-box -- bash -c "source $H/yolo-env/bin/activate && python -u $H/yolo_server.py" > "$LOGDIR/yolo_$DAY.log" 2>&1 & )
+fi
+say "        (loading the model takes ~30 s; continuing with Ollama meanwhile)"
+
+# =============================================================================
+say "STAGE 5/13  Ollama serving, model pinned"
+if ! pgrep -f "[o]llama serve" >/dev/null; then
+  say "        starting ollama serve"
+  ( nohup ollama serve > "$LOGDIR/ollama_$DAY.log" 2>&1 & )
+  wait_for 30 "ollama" curl -s -m 2 http://127.0.0.1:11434/api/tags || die 5 "ollama serve did not answer on 11434 within 30 s."
+fi
+PIN=$(curl -s -m 120 http://127.0.0.1:11434/api/chat -d '{"model":"qwen2.5:7b","messages":[{"role":"user","content":"hi"}],"stream":false,"keep_alive":-1}' 2>/dev/null | python3 -c "import sys,json; d=json.load(sys.stdin); print('%.1fs' % (d.get('total_duration',0)/1e9))" 2>/dev/null)
+[ -n "$PIN" ] || die 5 "Ollama did not answer a test chat with qwen2.5:7b (is the model pulled?)."
+ok "STAGE 5/13  Ollama answered in $PIN, qwen2.5:7b pinned (keep_alive=-1)"
+
+# back to YOLO: it should be up by now
+wait_for 90 "yolo" bash -c "curl -s -m 3 -o /dev/null -w '%{http_code}' http://127.0.0.1:5001/detect | grep -q 405" \
+  || die 4 "YOLO server not answering on port 5001 after 90 s. Log: $LOGDIR/yolo_$DAY.log"
+ok "STAGE 4/13  YOLO server answering on :5001 (classes: $(grep -o "Classes = \[[^]]*\]" "$LOGDIR/yolo_$DAY.log" | tail -1 | cut -c12-90))"
+
+# =============================================================================
+say "STAGE 6/13  SLAM (minimised window)"
+xwin "SLAM hw" "$T/slam_xterm.sh" iconic -geometry 110x30
+wait_for 60 "slam" bash -c "distrobox enter ubuntu22-gpu -- bash -c 'source $H/robot_env.sh; timeout 20 ros2 topic info /robot1/map -v' 2>/dev/null | grep -q slam_toolbox" \
+  || die 6 "slam_toolbox is not publishing /robot1/map after 60 s. Open the SLAM hw window from the taskbar for its error."
+ok "STAGE 6/13  slam_toolbox publishing /robot1/map"
+
+# =============================================================================
+say "STAGE 7/13  Nav2, composed (minimised window) -- ~60 s incl. the 20 s delayed STARTUP"
+NAVLOG=$LOGDIR/nav2_hwc_$DAY.log; touch "$NAVLOG"; N0=$(wc -l < "$NAVLOG")
+xwin "NAV2 hw composed" "$T/nav2_hwc_xterm.sh" iconic -geometry 130x35
+wait_for 150 "nav2 active" bash -c "tail -n +$((N0+1)) '$NAVLOG' | grep -q 'Managed nodes are active'" \
+  || die 7 "Nav2 did not reach 'Managed nodes are active' in 150 s. Log: $NAVLOG"
+if tail -n +$((N0+1)) "$NAVLOG" | grep -qE "IS DOWN|Aborting bringup"; then
+  die 7 "Nav2 activated and then FAILED (bond lost). Log: $NAVLOG"
+fi
+VS=$(ros "timeout 30 ros2 topic info /robot1/cmd_vel -v" | grep -c velocity_smoother)
+[ "$VS" = 1 ] || die 7 "velocity_smoother is not the publisher of /robot1/cmd_vel (got $VS) -- the robot would not move."
+ok "STAGE 7/13  Nav2 active: $(tail -n +$((N0+1)) "$NAVLOG" | grep -c 'connected with bond')/7 bonds, velocity_smoother on /robot1/cmd_vel"
+
+# =============================================================================
+say "STAGE 8/13  RViz (visible window -- the live map)"
+xwin "RVIZ hw" "$T/rviz_hw_xterm.sh" visible -geometry 100x12
+# (/robot1/goal_pose exists as soon as Nav2 is up, so look for the RViz window itself)
+wait_for 90 "rviz" bash -c "xwininfo -root -tree 2>/dev/null | grep -qE '\"[^\"]*RViz[^\"]*\": \(\"rviz2\"'" \
+  || die 8 "the RViz window did not appear within 90 s. Open the RVIZ hw window from the taskbar for its error."
+ok "STAGE 8/13  RViz window up (hardware layout, Nav2 Goal tool in /robot1)"
+
+# =============================================================================
+say "STAGE 9/13  undock (the camera only runs off the dock)"
+DOCKED=$(ros "timeout 15 ros2 topic echo /robot1/dock_status --once" | awk '/is_docked/{print $2}')
+if [ "$DOCKED" = "true" ]; then
+  say "        robot is docked -- sending Undock (long-lived client, 30 s settle). ROBOT WILL MOVE."
+  ros "timeout 170 python3 $T/undock_hw.py" | tail -2 | tee -a "$DEMOLOG"
+  DOCKED=$(ros "timeout 15 ros2 topic echo /robot1/dock_status --once" | awk '/is_docked/{print $2}')
+  [ "$DOCKED" = "false" ] || die 9 "undock did not complete (is_docked=$DOCKED)."
+  ok "STAGE 9/13  undocked"
+else
+  warn "robot was already off the dock. If it was MOVED BY HAND since SLAM started, set a 2D Pose Estimate in RViz before any 'go to'."
+  ok "STAGE 9/13  already undocked"
+fi
+
+# =============================================================================
+say "STAGE 10/13  camera colour frames"
+CHZ=""
+for i in 1 2 3; do
+  CHZ=$(ros "timeout 25 ros2 topic hz /robot1/oakd/rgb/preview/image_raw/compressed" | grep -m1 "average rate" | awk '{print $3}')
+  [ -n "$CHZ" ] && break
+done
+[ -n "$CHZ" ] || die 10 "no colour frames on /robot1/oakd/rgb/preview/image_raw/compressed after ~75 s. The OAK-D did not start; power-cycle the robot."
+ok "STAGE 10/13  camera colour at $CHZ Hz (colour-only pipeline; LiDAR does the ranging)"
+
+# =============================================================================
+say "STAGE 11/13  VLA agent (minimised window with a real tty; VLA_RGB_ONLY=1)"
+xwin "VLA AGENT" "$T/agent_xterm.sh" iconic -hold -geometry 120x40
+wait_for 90 "agent" bash -c "distrobox enter ubuntu22-gpu -- bash -c 'source $H/robot_env.sh; timeout 20 ros2 topic echo /vla/status --once --full-length' 2>/dev/null | grep -q '\"camera\": true'" \
+  || die 11 "the agent's /vla/status never reported camera:true within 90 s. Open the VLA AGENT window from the taskbar."
+ok "STAGE 11/13  agent up: /vla/status camera:true"
+
+# =============================================================================
+say "STAGE 12/13  voice (push-to-talk from the GUI's gold button)"
+for mac in 18:95:52:6B:5B:FD BB:86:57:3D:AF:79; do
+  bluetoothctl info $mac 2>/dev/null | grep -q "Connected: yes" && break
+  timeout 25 bluetoothctl connect $mac >/dev/null 2>&1 && { sleep 4; break; }
+done
+SRC=$(pactl get-default-source 2>/dev/null)
+case "$SRC" in
+  *bluez*)   say "        microphone: Bluetooth earbuds ($SRC)" ;;
+  *monitor*) warn "the default input is a SPEAKER MONITOR ($SRC): voice will hear nothing. Switch the earbuds on (out of the case) and pick them as input in Sound settings." ;;
+  *)         say "        microphone: $SRC" ;;
+esac
+xwin "VOICE hw" "$T/voice_xterm.sh" iconic -geometry 110x25
+wait_for 60 "voice" bash -c "tail -20 '$LOGDIR/voice_$DAY.log' 2>/dev/null | grep -q 'faster-whisper ready'" \
+  && ok "STAGE 12/13  voice node ready (Whisper small.en on the GPU)" \
+  || warn "voice node not ready after 60 s -- typed commands still work. Log: $LOGDIR/voice_$DAY.log"
+
+# =============================================================================
+say "STAGE 13/13  GUI (visible)"
+cp "$H/.vla_gui.robot.json" "$H/.vla_gui.json"
+( cd "$H" && nohup distrobox enter ubuntu22-gpu -- bash -c "source $H/robot_env.sh; cd $H; python3 $H/vla_gui_v2.py" > "$LOGDIR/gui_$DAY.log" 2>&1 & )
+wait_for 40 "gui" bash -c "xwininfo -root -tree 2>/dev/null | grep -q 'Operator Console'" \
+  || die 13 "the GUI window did not appear in 40 s. Log: $LOGDIR/gui_$DAY.log"
+ok "STAGE 13/13  GUI up"
+
+# =============================================================================
+PITEMP=$(timeout 15 ssh -o BatchMode=yes ubuntu@$PI 'vcgencmd measure_temp; cut -d" " -f1 /proc/loadavg' 2>/dev/null | tr '\n' ' ')
+echo | tee -a "$DEMOLOG"
+printf '%s%s=====================================================================%s\n' "$GRN" "$BOLD" "$RST" | tee -a "$DEMOLOG"
+printf '%s%s  STACK UP in %d s.  Pi: %s%s\n' "$GRN" "$BOLD" "$(( $(date +%s) - T0 ))" "$PITEMP" "$RST" | tee -a "$DEMOLOG"
+printf '%s%s=====================================================================%s\n' "$GRN" "$BOLD" "$RST" | tee -a "$DEMOLOG"
+cat <<EOF | tee -a "$DEMOLOG"
+  Visible: the GUI (commands) and RViz (map).  Minimised: SLAM, Nav2, agent, voice.
+  First command:  "what do you see"      (moves nothing)
+  The demo:       "go to the chair"      (chair 2-3 m ahead, in view, clear floor)
+  Voice:          hold the GUI's gold HOLD-TO-TALK button while speaking.
+  Do NOT close the VLA AGENT window.  Do NOT press START ALL in the GUI.
+  When done:      ~/vla_demo_stop.sh    (re-docks the robot, stops everything)
+EOF
+exit 0

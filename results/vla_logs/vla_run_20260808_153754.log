@@ -1,0 +1,142 @@
+2026-08-08 15:37:54.827 [RUN] vla_agent v20  (#52 depth intrinsics rescaled to frame size, #51 compressedDepth transport, #50 compressed RGB transport, #49 annotated feed gated per topic, #47 TF at colour-frame stamp, #48 reject stale depth, #46 one subscription per camera stream, #43 longer cached action-server wait, #44 undock retry-loop breaker, #45 sync slop for 1 Hz depth, #37 /robot1 namespace, #38 stereo depth topic, #39 best-effort sensor QoS, #40 RGB->depth pixel mapping, #41 encoding-based mm/m, #42 explicit namespaced TF, #36 no patrol feed prompt, #35 cancel actually stops the robot, #34 feed publishes to any subscriber, #22 dock no-detect zone, #23 live-first memory, #24 forget, #25 typo-tolerant control words, #26 bare yes/no, #27 context expiry, #28 all-instance distances, #29 Create 3 backup ratchet, #30 sticky goals + range-scaled gate + ring-safe blacklist, #31 incremental off-map hop goals, #32 non-freezing live feed, #33 command/reply/status bridge)
+2026-08-08 15:37:54.827 [RUN] agent started (SIGHT_CONFIRM=2, SEARCH_TIMEOUT=45.0s, NO_PROGRESS_LIMIT=60.0s, ROBOT_CLEARANCE=0.25m)
+2026-08-08 15:37:57.219 [INFO] depth frames 1280x720, camera_info unknown
+2026-08-08 15:38:00.842 [ROBOT] RGB and depth timestamps never match (slop 0.6s) — using unsynchronized frames. Check the camera driver's stamps.
+2026-08-08 15:38:00.843 [WARN] RGB-depth sync failed; raw fallback in use
+2026-08-08 15:38:05.614 [CMD] [keyboard] turn rigturn right
+2026-08-08 15:38:05.615 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 15:38:06.237 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ninety degrees right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -90.0}]}
+2026-08-08 15:38:06.238 [STEP] move target=None
+2026-08-08 15:38:07.662 [ROBOT] Stopped. The robot is idle.
+2026-08-08 15:38:07.662 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 15:38:12.842 [ROBOT] Done with that move.
+2026-08-08 15:38:21.278 [CMD] [keyboard] turn left 40 degree
+2026-08-08 15:38:21.278 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 15:38:21.897 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning forty degrees to the left.', 'target': None, 'distance_m': 0.0, 'rotation_deg': 40.0}]}
+2026-08-08 15:38:21.898 [STEP] move target=None
+2026-08-08 15:38:23.322 [ROBOT] Stopped. The robot is idle.
+2026-08-08 15:38:23.322 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 15:38:25.842 [ROBOT] Done with that move.
+2026-08-08 15:38:29.966 [CMD] [keyboard] what do you see
+2026-08-08 15:38:29.966 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 15:38:30.567 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a box and a chair.', 'target': None}]}
+2026-08-08 15:38:30.568 [STEP] describe target=None
+2026-08-08 15:38:32.022 [ROBOT] Stopped. The robot is idle.
+2026-08-08 15:38:32.022 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 15:38:39.918 [CMD] [keyboard] give me live feed
+2026-08-08 15:38:39.918 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 15:38:40.518 [BRAIN] {'steps': [{'action': 'feed', 'speech': 'Showing the current view from the camera.', 'target': None}]}
+2026-08-08 15:38:40.519 [STEP] feed target=None
+2026-08-08 15:38:41.962 [ROBOT] Stopped. The robot is idle.
+2026-08-08 15:38:41.962 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 15:38:51.550 [CMD] [keyboard] what do you see
+2026-08-08 15:38:51.551 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 15:38:52.107 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a box and a chair.', 'target': None}]}
+2026-08-08 15:38:52.107 [STEP] describe target=None
+2026-08-08 15:38:53.602 [ROBOT] Stopped. The robot is idle.
+2026-08-08 15:38:53.602 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 15:39:00.814 [CMD] [keyboard] go to the chair
+2026-08-08 15:39:00.814 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 15:39:01.381 [BRAIN] {'steps': [{'action': 'navigate', 'speech': 'Heading to the chair.', 'target': 'chair'}]}
+2026-08-08 15:39:01.381 [STEP] navigate target='chair'
+2026-08-08 15:39:02.862 [ROBOT] Stopped. The robot is idle.
+2026-08-08 15:39:02.862 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 15:39:15.889 [ROBOT] Can't see the chair here — moving to look elsewhere.
+2026-08-08 15:39:25.470 [CMD] (cancel via keyboard) stop
+2026-08-08 15:39:25.470 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 15:39:27.522 [ROBOT] Stopped. The robot is idle.
+2026-08-08 15:39:27.522 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 15:39:31.486 [CMD] [keyboard] turn around
+2026-08-08 15:39:31.486 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 15:39:32.075 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning around.', 'target': None, 'distance_m': 0.0, 'rotation_deg': 180.0}]}
+2026-08-08 15:39:32.075 [STEP] move target=None
+2026-08-08 15:39:33.542 [ROBOT] Stopped. The robot is idle.
+2026-08-08 15:39:33.543 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 15:39:41.842 [ROBOT] Done with that move.
+2026-08-08 15:39:49.118 [CMD] [keyboard] move 1meter ahead
+2026-08-08 15:39:49.118 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 15:39:49.707 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Moving forward one meter.', 'target': None, 'distance_m': 1.0, 'rotation_deg': 0.0}]}
+2026-08-08 15:39:49.707 [STEP] move target=None
+2026-08-08 15:39:51.162 [ROBOT] Stopped. The robot is idle.
+2026-08-08 15:39:51.163 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 15:39:57.842 [ROBOT] Done with that move.
+2026-08-08 15:40:04.878 [CMD] [keyboard] turn 30 left
+2026-08-08 15:40:04.878 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 15:40:05.503 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning thirty degrees to the left.', 'target': None, 'distance_m': 0.0, 'rotation_deg': 30.0}]}
+2026-08-08 15:40:05.503 [STEP] move target=None
+2026-08-08 15:40:06.922 [ROBOT] Stopped. The robot is idle.
+2026-08-08 15:40:06.922 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 15:40:09.842 [ROBOT] Done with that move.
+2026-08-08 15:40:16.894 [CMD] [keyboard] turn 45 right
+2026-08-08 15:40:16.895 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 15:40:17.522 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning forty-five degrees to the right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -45.0}]}
+2026-08-08 15:40:17.522 [STEP] move target=None
+2026-08-08 15:40:18.942 [ROBOT] Stopped. The robot is idle.
+2026-08-08 15:40:18.942 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 15:40:21.842 [ROBOT] Done with that move.
+2026-08-08 15:40:25.982 [CMD] [keyboard] turn right 30
+2026-08-08 15:40:25.982 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 15:40:26.591 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning thirty degrees to the right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -30.0}]}
+2026-08-08 15:40:26.592 [STEP] move target=None
+2026-08-08 15:40:28.022 [ROBOT] Stopped. The robot is idle.
+2026-08-08 15:40:28.022 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 15:40:30.842 [ROBOT] Done with that move.
+2026-08-08 15:40:47.630 [CMD] [keyboard] turn left 10 dgree
+2026-08-08 15:40:47.630 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 15:40:48.287 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ten degrees to the left.', 'target': None, 'distance_m': 0.0, 'rotation_deg': 10.0}]}
+2026-08-08 15:40:48.287 [STEP] move target=None
+2026-08-08 15:40:49.682 [ROBOT] Stopped. The robot is idle.
+2026-08-08 15:40:49.682 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 15:40:51.842 [ROBOT] Done with that move.
+2026-08-08 15:40:59.902 [CMD] [keyboard] move 1 meter ahead
+2026-08-08 15:40:59.902 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 15:41:00.481 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Moving forward one metre.', 'target': None, 'distance_m': 1.0, 'rotation_deg': 0.0}]}
+2026-08-08 15:41:00.481 [STEP] move target=None
+2026-08-08 15:41:01.962 [ROBOT] Stopped. The robot is idle.
+2026-08-08 15:41:01.962 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 15:41:08.842 [ROBOT] Done with that move.
+2026-08-08 15:41:15.486 [CMD] [keyboard] 1 meter
+2026-08-08 15:41:15.486 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 15:41:16.093 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Moving forward one metre.', 'target': None, 'distance_m': 1.0, 'rotation_deg': 0.0}]}
+2026-08-08 15:41:16.093 [STEP] move target=None
+2026-08-08 15:41:17.542 [ROBOT] Stopped. The robot is idle.
+2026-08-08 15:41:17.542 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 15:41:23.842 [ROBOT] Done with that move.
+2026-08-08 15:41:36.286 [CMD] [keyboard] turn right 30
+2026-08-08 15:41:36.286 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 15:41:36.964 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning thirty degrees to the right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -30.0}]}
+2026-08-08 15:41:36.964 [STEP] move target=None
+2026-08-08 15:41:38.342 [ROBOT] Stopped. The robot is idle.
+2026-08-08 15:41:38.343 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 15:41:40.842 [ROBOT] Done with that move.
+2026-08-08 15:41:48.383 [CMD] [keyboard] what do you see
+2026-08-08 15:41:48.383 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 15:41:48.913 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I can see a person.', 'target': None}]}
+2026-08-08 15:41:48.913 [STEP] describe target=None
+2026-08-08 15:41:50.442 [ROBOT] Stopped. The robot is idle.
+2026-08-08 15:41:50.443 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 15:41:57.646 [CMD] [keyboard] go to the person
+2026-08-08 15:41:57.647 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 15:41:58.138 [BRAIN] {'steps': [{'action': 'navigate', 'speech': 'Heading to the person.', 'target': 'person'}]}
+2026-08-08 15:41:58.138 [STEP] navigate target='person'
+2026-08-08 15:41:59.702 [ROBOT] Stopped. The robot is idle.
+2026-08-08 15:41:59.702 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 15:42:07.470 [CMD] (cancel via keyboard) stop
+2026-08-08 15:42:07.470 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 15:42:09.522 [ROBOT] Stopped. The robot is idle.
+2026-08-08 15:42:09.522 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 15:43:48.094 [CMD] [keyboard] turn aroung
+2026-08-08 15:43:48.095 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 15:43:48.703 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning around.', 'target': None, 'distance_m': 0.0, 'rotation_deg': 180.0}]}
+2026-08-08 15:43:48.703 [STEP] move target=None
+2026-08-08 15:43:50.142 [ROBOT] Stopped. The robot is idle.
+2026-08-08 15:43:50.142 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 15:43:57.842 [ROBOT] Done with that move.
+2026-08-08 15:44:04.014 [CMD] [keyboard] what do you see
+2026-08-08 15:44:04.015 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 15:44:04.585 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a chair and a person.', 'target': None}]}
+2026-08-08 15:44:04.585 [STEP] describe target=None
+2026-08-08 15:44:06.062 [ROBOT] Stopped. The robot is idle.
+2026-08-08 15:44:06.062 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 15:45:04.799 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 15:45:04.799 [RUN] agent shutting down

@@ -1,0 +1,16 @@
+# Host .bashrc lines 118-130, copied verbatim on 2026-10-05.
+# The live ~/.bashrc was NOT modified.
+
+if [ -f /opt/ros/humble/setup.bash ]; then
+    source /opt/ros/humble/setup.bash
+fi
+alias vlavoice='python3 voice_command.py --mic pulse --min-logprob -0.6 --device cpu'
+source /etc/turtlebot4_discovery/setup.bash
+export FASTRTPS_DEFAULT_PROFILES_FILE=~/.ros/fastdds_super_client.xml
+
+# VLA: hardware discovery vars only when VLA_MODE=robot is exported first.
+# Otherwise every new terminal silently points at the Pi and cannot see
+# the simulation — no error, just nothing.
+if [ "$VLA_MODE" != "robot" ]; then
+    unset ROS_DISCOVERY_SERVER FASTRTPS_DEFAULT_PROFILES_FILE
+fi

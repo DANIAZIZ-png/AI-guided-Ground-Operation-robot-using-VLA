@@ -1,0 +1,83 @@
+2026-09-21 10:44:55.678 [RUN] vla_agent v28  (#63 headless-safe console output, #62 direction-aware collision guard, #61 nearest-cluster LiDAR ranging, #60 manual override teleop, #59 10 Hz collision guard, #58 smoother approach, #57 stand off far enough to keep the object in view, #56 step-and-stare scan, #55 LiDAR failure reasons reported, #54 LiDAR object ranging, #53 seeded depth intrinsics, #52 depth intrinsics rescaled to frame size, #51 compressedDepth transport, #50 compressed RGB transport, #49 annotated feed gated per topic, #47 TF at colour-frame stamp, #48 reject stale depth, #46 one subscription per camera stream, #43 longer cached action-server wait, #44 undock retry-loop breaker, #45 sync slop for 1 Hz depth, #37 /robot1 namespace, #38 stereo depth topic, #39 best-effort sensor QoS, #40 RGB->depth pixel mapping, #41 encoding-based mm/m, #42 explicit namespaced TF, #36 no patrol feed prompt, #35 cancel actually stops the robot, #34 feed publishes to any subscriber, #22 dock no-detect zone, #23 live-first memory, #24 forget, #25 typo-tolerant control words, #26 bare yes/no, #27 context expiry, #28 all-instance distances, #29 Create 3 backup ratchet, #30 sticky goals + range-scaled gate + ring-safe blacklist, #31 incremental off-map hop goals, #32 non-freezing live feed, #33 command/reply/status bridge)
+2026-09-21 10:44:55.678 [RUN] agent started (SIGHT_CONFIRM=2, SEARCH_TIMEOUT=120.0s, NO_PROGRESS_LIMIT=60.0s, ROBOT_CLEARANCE=0.25m)
+2026-09-21 10:46:28.665 [CMD] [remote] what do you see
+2026-09-21 10:46:28.666 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-21 10:46:29.283 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I can see a chair.', 'target': None}]}
+2026-09-21 10:46:29.283 [STEP] describe target=None
+2026-09-21 10:46:30.714 [ROBOT] Stopped. The robot is idle.
+2026-09-21 10:46:30.714 [STOP] confirmed stopped by odometry after barrage
+2026-09-21 10:46:31.955 [CMD] [remote] go to the chair
+2026-09-21 10:46:31.956 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-21 10:46:32.446 [BRAIN] {'steps': [{'action': 'navigate', 'speech': 'Heading to the chair.', 'target': 'chair'}]}
+2026-09-21 10:46:32.446 [STEP] navigate target='chair'
+2026-09-21 10:46:33.741 [ROBOT] Found the chair — navigating to it.
+2026-09-21 10:46:33.741 [SIGHT] chair at (-2.51, 0.68), 2.48 m away
+2026-09-21 10:46:33.742 [ROBOT] The chair is about 2.5 m away, past the edge of what I've mapped. Moving up in short steps and mapping as I go.
+2026-09-21 10:46:33.742 [STEP] #31 hop mode engaged for chair: object (-2.51, 0.68) at 2.5 m, area_mapped=False
+2026-09-21 10:46:33.742 [GOAL] #31 hop 1: 1.50 m toward chair (still 2.5 m away)
+2026-09-21 10:46:33.742 [GOAL] (-1.57, 0.41) yaw=164deg mode=navigate
+2026-09-21 10:46:34.013 [ROBOT] Stopped. The robot is idle.
+2026-09-21 10:46:34.014 [STOP] confirmed stopped by odometry after barrage
+2026-09-21 10:46:35.742 [STEP] chair area now mapped after 1 hop(s) — switching to a direct approach
+2026-09-21 10:46:35.742 [ROBOT] The area around the chair is mapped now — going straight to it.
+2026-09-21 10:46:35.742 [GOAL] (-1.76, 0.35) yaw=167deg mode=navigate
+2026-09-21 10:46:35.754 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-21 10:46:35.754 [WARN] nav goal (-1.76, 0.35) failed (status=6); trying another approach angle
+2026-09-21 10:46:36.740 [GOAL] (-1.76, 0.71) yaw=-167deg mode=navigate
+2026-09-21 10:46:36.744 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-21 10:46:36.744 [WARN] nav goal (-1.76, 0.71) failed (status=6); trying another approach angle
+2026-09-21 10:46:37.740 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-09-21 10:46:37.741 [GOAL] (-1.75, 0.39) yaw=169deg mode=navigate
+2026-09-21 10:46:37.744 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-21 10:46:37.744 [WARN] nav goal (-1.75, 0.39) failed (status=6); trying another approach angle
+2026-09-21 10:46:38.742 [GOAL] (-1.77, 0.77) yaw=-163deg mode=navigate
+2026-09-21 10:46:38.744 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-21 10:46:38.744 [WARN] nav goal (-1.77, 0.77) failed (status=6); trying another approach angle
+2026-09-21 10:46:39.744 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-09-21 10:46:39.745 [GOAL] (-1.74, 0.44) yaw=173deg mode=navigate
+2026-09-21 10:46:39.754 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-21 10:46:39.754 [WARN] nav goal (-1.74, 0.44) failed (status=6); trying another approach angle
+2026-09-21 10:46:39.754 [WARN] every approach to the target failed — dropping sighting, rescanning
+2026-09-21 10:46:41.504 [RESULT] nav goal status=4 (ok)
+2026-09-21 10:46:42.743 [ROBOT] Arrived at the chair.
+2026-09-21 10:46:42.743 [ARRIVE] #64e chair in frame at 1.04 m (<= 1.2 m) -- stopping here
+2026-09-21 10:46:45.405 [CMD] [remote] turn around
+2026-09-21 10:46:45.405 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-21 10:46:45.986 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning around.', 'target': None, 'distance_m': 0.0, 'rotation_deg': 180.0}]}
+2026-09-21 10:46:45.986 [STEP] move target=None
+2026-09-21 10:46:47.454 [ROBOT] Stopped. The robot is idle.
+2026-09-21 10:46:47.454 [STOP] confirmed stopped by odometry after barrage
+2026-09-21 10:46:47.494 [ROBOT] I've stopped receiving camera frames (none for over 5s). Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-09-21 10:46:47.494 [WARN] #32e camera stream stalled (>5s)
+2026-09-21 10:46:49.668 [WARN] #32e camera stream RESUMED after 7.3s
+2026-09-21 10:46:49.668 [ROBOT] Camera frames are back — the gap was 7.3s.
+2026-09-21 10:46:57.694 [ROBOT] Done with that move.
+2026-09-21 10:47:01.495 [CMD] [remote] move forward ten centimeter fifty centimeter
+2026-09-21 10:47:01.496 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-21 10:47:02.125 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Moving forward eighty centimeters.', 'target': None, 'distance_m': 0.8, 'rotation_deg': 0.0}]}
+2026-09-21 10:47:02.125 [STEP] move target=None
+2026-09-21 10:47:03.554 [ROBOT] Stopped. The robot is idle.
+2026-09-21 10:47:03.554 [STOP] confirmed stopped by odometry after barrage
+2026-09-21 10:47:08.694 [ROBOT] Done with that move.
+2026-09-21 10:47:12.640 [CMD] [remote] turn right
+2026-09-21 10:47:12.640 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-21 10:47:13.277 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ninety degrees to the right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -90.0}]}
+2026-09-21 10:47:13.277 [STEP] move target=None
+2026-09-21 10:47:14.694 [ROBOT] Stopped. The robot is idle.
+2026-09-21 10:47:14.694 [STOP] confirmed stopped by odometry after barrage
+2026-09-21 10:47:16.162 [CMD] (cancel via remote) cancel
+2026-09-21 10:47:16.163 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-21 10:47:18.118 [CMD] [remote] dock
+2026-09-21 10:47:18.118 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-21 10:47:18.118 [STEP] dock target=None
+2026-09-21 10:47:18.118 [ROBOT] Docking…
+2026-09-21 10:47:24.134 [ROBOT] I sent the stop but the robot is STILL MOVING (0.01 m/s, 0.63 rad/s). Take manual override now.
+2026-09-21 10:47:24.134 [ERROR] #35 robot still moving 6.0s after stop: lin=0.01 ang=0.63
+2026-09-21 10:47:46.820 [DOCK] dock position recorded at (0.01, 0.00); detections within 0.8 m are ignored
+2026-09-21 10:47:48.496 [DOCK] dock position recorded at (0.01, 0.00); detections within 0.8 m are ignored
+2026-09-21 10:47:48.496 [ROBOT] Docked successfully.
+2026-09-21 10:47:48.497 [DOCK] dock ok
+2026-09-21 10:47:53.294 [ROBOT] I've stopped receiving camera frames (none for over 5s). Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-09-21 10:47:53.294 [WARN] #32e camera stream stalled (>5s)
+2026-09-21 10:48:10.317 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-21 10:48:10.317 [RUN] agent shutting down

@@ -1,0 +1,155 @@
+2026-09-15 11:32:36.247 [RUN] vla_agent v28  (#63 headless-safe console output, #62 direction-aware collision guard, #61 nearest-cluster LiDAR ranging, #60 manual override teleop, #59 10 Hz collision guard, #58 smoother approach, #57 stand off far enough to keep the object in view, #56 step-and-stare scan, #55 LiDAR failure reasons reported, #54 LiDAR object ranging, #53 seeded depth intrinsics, #52 depth intrinsics rescaled to frame size, #51 compressedDepth transport, #50 compressed RGB transport, #49 annotated feed gated per topic, #47 TF at colour-frame stamp, #48 reject stale depth, #46 one subscription per camera stream, #43 longer cached action-server wait, #44 undock retry-loop breaker, #45 sync slop for 1 Hz depth, #37 /robot1 namespace, #38 stereo depth topic, #39 best-effort sensor QoS, #40 RGB->depth pixel mapping, #41 encoding-based mm/m, #42 explicit namespaced TF, #36 no patrol feed prompt, #35 cancel actually stops the robot, #34 feed publishes to any subscriber, #22 dock no-detect zone, #23 live-first memory, #24 forget, #25 typo-tolerant control words, #26 bare yes/no, #27 context expiry, #28 all-instance distances, #29 Create 3 backup ratchet, #30 sticky goals + range-scaled gate + ring-safe blacklist, #31 incremental off-map hop goals, #32 non-freezing live feed, #33 command/reply/status bridge)
+2026-09-15 11:32:36.247 [RUN] agent started (SIGHT_CONFIRM=2, SEARCH_TIMEOUT=120.0s, NO_PROGRESS_LIMIT=60.0s, ROBOT_CLEARANCE=0.25m)
+2026-09-15 11:33:32.163 [CMD] [remote] what do you see
+2026-09-15 11:33:32.164 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-15 11:33:33.727 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a chair and a person.', 'target': None}]}
+2026-09-15 11:33:33.728 [STEP] describe target=None
+2026-09-15 11:33:34.222 [ROBOT] Stopped. The robot is idle.
+2026-09-15 11:33:34.222 [STOP] confirmed stopped by odometry after barrage
+2026-09-15 11:34:14.811 [CMD] [remote] what do you see
+2026-09-15 11:34:14.812 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-15 11:34:15.388 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a chair.', 'target': None}]}
+2026-09-15 11:34:15.388 [STEP] describe target=None
+2026-09-15 11:34:16.862 [ROBOT] Stopped. The robot is idle.
+2026-09-15 11:34:16.862 [STOP] confirmed stopped by odometry after barrage
+2026-09-15 11:34:24.840 [CMD] [remote] what do you see
+2026-09-15 11:34:24.841 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-15 11:34:25.404 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a person.', 'target': None}]}
+2026-09-15 11:34:25.404 [STEP] describe target=None
+2026-09-15 11:34:26.882 [ROBOT] Stopped. The robot is idle.
+2026-09-15 11:34:26.882 [STOP] confirmed stopped by odometry after barrage
+2026-09-15 11:34:33.812 [CMD] [remote] turn right
+2026-09-15 11:34:33.812 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-15 11:34:34.434 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ninety degrees right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -90.0}]}
+2026-09-15 11:34:34.434 [STEP] move target=None
+2026-09-15 11:34:35.862 [ROBOT] Stopped. The robot is idle.
+2026-09-15 11:34:35.862 [STOP] confirmed stopped by odometry after barrage
+2026-09-15 11:34:40.262 [ROBOT] Done with that move.
+2026-09-15 11:35:19.623 [CMD] [remote] what do you see
+2026-09-15 11:35:19.624 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-15 11:35:20.244 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a chair and a person.', 'target': None}]}
+2026-09-15 11:35:20.244 [STEP] describe target=None
+2026-09-15 11:35:21.682 [ROBOT] Stopped. The robot is idle.
+2026-09-15 11:35:21.682 [STOP] confirmed stopped by odometry after barrage
+2026-09-15 11:35:25.201 [CMD] [remote] what do you see
+2026-09-15 11:35:25.201 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-15 11:35:25.797 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a chair and a person.', 'target': None}]}
+2026-09-15 11:35:25.797 [STEP] describe target=None
+2026-09-15 11:35:27.242 [ROBOT] Stopped. The robot is idle.
+2026-09-15 11:35:27.242 [STOP] confirmed stopped by odometry after barrage
+2026-09-15 11:35:36.732 [CMD] [remote] go to the person
+2026-09-15 11:35:36.733 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-15 11:35:37.220 [BRAIN] {'steps': [{'action': 'navigate', 'speech': 'Heading to the person.', 'target': 'person'}]}
+2026-09-15 11:35:37.220 [STEP] navigate target='person'
+2026-09-15 11:35:38.308 [ROBOT] Found the person — navigating to it.
+2026-09-15 11:35:38.308 [SIGHT] person at (-0.82, 2.33), 2.43 m away
+2026-09-15 11:35:38.309 [GOAL] (-0.59, 1.57) yaw=107deg mode=navigate
+2026-09-15 11:35:38.782 [ROBOT] Stopped. The robot is idle.
+2026-09-15 11:35:38.782 [STOP] confirmed stopped by odometry after barrage
+2026-09-15 11:35:45.062 [ROBOT] I've stopped receiving camera frames (none for over 5s). Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-09-15 11:35:45.062 [WARN] #32e camera stream stalled (>5s)
+2026-09-15 11:35:52.207 [WARN] #32e camera stream RESUMED after 12.2s
+2026-09-15 11:35:52.207 [ROBOT] Camera frames are back — the gap was 12.2s.
+2026-09-15 11:35:54.411 [GOAL] (-1.64, 1.06) yaw=120deg mode=navigate
+2026-09-15 11:35:54.421 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-15 11:35:54.421 [WARN] nav goal (-1.64, 1.06) failed (status=6); trying another approach angle
+2026-09-15 11:35:55.411 [GOAL] (-1.27, 1.96) yaw=-165deg mode=navigate
+2026-09-15 11:35:55.421 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-15 11:35:55.421 [WARN] nav goal (-1.27, 1.96) failed (status=6); trying another approach angle
+2026-09-15 11:35:56.408 [WARN] suspicious person jump of 5.2 m (occlusion/depth noise?) — waiting for a confirming look (agree radius 1.6 m)
+2026-09-15 11:35:56.409 [GOAL] (-1.89, 1.17) yaw=105deg mode=navigate
+2026-09-15 11:35:56.421 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-15 11:35:56.421 [WARN] nav goal (-1.89, 1.17) failed (status=6); trying another approach angle
+2026-09-15 11:35:57.408 [SIGHT] large person jump (5.2 m) confirmed by a second look — accepting
+2026-09-15 11:35:57.408 [GOAL] (-2.64, 6.13) yaw=113deg mode=navigate
+2026-09-15 11:35:57.411 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-15 11:35:57.412 [WARN] nav goal (-2.64, 6.13) failed (status=6); trying another approach angle
+2026-09-15 11:35:58.409 [WARN] suspicious person jump of 4.4 m (occlusion/depth noise?) — waiting for a confirming look (agree radius 1.0 m)
+2026-09-15 11:35:58.410 [WARN] all approach goals for person refused; clearing the tried-list and retrying
+2026-09-15 11:35:58.411 [GOAL] (-2.64, 6.13) yaw=113deg mode=navigate
+2026-09-15 11:35:58.421 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-15 11:35:58.421 [WARN] nav goal (-2.64, 6.13) failed (status=6); trying another approach angle
+2026-09-15 11:35:59.408 [SIGHT] large person jump (5.4 m) confirmed by a second look — accepting
+2026-09-15 11:35:59.411 [GOAL] (-0.88, 1.26) yaw=148deg mode=navigate
+2026-09-15 11:35:59.420 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-15 11:35:59.420 [WARN] nav goal (-0.88, 1.26) failed (status=6); trying another approach angle
+2026-09-15 11:36:00.410 [GOAL] (-1.85, 1.09) yaw=176deg mode=navigate
+2026-09-15 11:36:00.421 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-15 11:36:00.421 [WARN] nav goal (-1.85, 1.09) failed (status=6); trying another approach angle
+2026-09-15 11:36:01.411 [GOAL] (-1.22, 0.64) yaw=-155deg mode=navigate
+2026-09-15 11:36:01.421 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-15 11:36:01.421 [WARN] nav goal (-1.22, 0.64) failed (status=6); trying another approach angle
+2026-09-15 11:36:02.413 [GOAL] (-1.32, 0.39) yaw=-144deg mode=navigate
+2026-09-15 11:36:02.422 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-15 11:36:02.422 [WARN] nav goal (-1.32, 0.39) failed (status=6); trying another approach angle
+2026-09-15 11:36:03.412 [GOAL] (-1.76, -0.55) yaw=-130deg mode=navigate
+2026-09-15 11:36:03.421 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-15 11:36:03.421 [WARN] nav goal (-1.76, -0.55) failed (status=6); trying another approach angle
+2026-09-15 11:36:04.409 [GOAL] (-2.07, -0.40) yaw=-105deg mode=navigate
+2026-09-15 11:36:04.411 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-15 11:36:04.411 [WARN] nav goal (-2.07, -0.40) failed (status=6); trying another approach angle
+2026-09-15 11:36:05.414 [GOAL] (-0.94, -1.08) yaw=-137deg mode=navigate
+2026-09-15 11:36:05.421 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-15 11:36:05.421 [WARN] nav goal (-0.94, -1.08) failed (status=6); trying another approach angle
+2026-09-15 11:36:05.462 [ROBOT] I've stopped receiving camera frames (none for over 5s). Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-09-15 11:36:05.462 [WARN] #32e camera stream stalled (>5s)
+2026-09-15 11:36:06.408 [GOAL] (-1.13, -0.92) yaw=-109deg mode=navigate
+2026-09-15 11:36:06.411 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-15 11:36:06.411 [WARN] nav goal (-1.13, -0.92) failed (status=6); trying another approach angle
+2026-09-15 11:36:07.416 [GOAL] (-0.27, -1.02) yaw=-84deg mode=navigate
+2026-09-15 11:36:07.421 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-15 11:36:07.421 [WARN] nav goal (-0.27, -1.02) failed (status=6); trying another approach angle
+2026-09-15 11:36:08.411 [GOAL] (-0.60, -1.13) yaw=-59deg mode=navigate
+2026-09-15 11:36:08.421 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-15 11:36:08.421 [WARN] nav goal (-0.60, -1.13) failed (status=6); trying another approach angle
+2026-09-15 11:36:09.372 [WARN] #32e camera stream RESUMED after 9.0s
+2026-09-15 11:36:09.372 [ROBOT] Camera frames are back — the gap was 9.0s.
+2026-09-15 11:36:09.411 [GOAL] (-0.13, -0.28) yaw=-75deg mode=navigate
+2026-09-15 11:36:09.421 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-15 11:36:09.421 [WARN] nav goal (-0.13, -0.28) failed (status=6); trying another approach angle
+2026-09-15 11:36:10.412 [GOAL] (-0.44, -0.44) yaw=-50deg mode=navigate
+2026-09-15 11:36:10.421 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-15 11:36:10.421 [WARN] nav goal (-0.44, -0.44) failed (status=6); trying another approach angle
+2026-09-15 11:36:11.415 [GOAL] (-0.65, -0.71) yaw=-25deg mode=navigate
+2026-09-15 11:36:11.420 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-15 11:36:11.421 [WARN] nav goal (-0.65, -0.71) failed (status=6); trying another approach angle
+2026-09-15 11:36:12.409 [GOAL] (-0.53, -1.05) yaw=0deg mode=navigate
+2026-09-15 11:36:12.421 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-15 11:36:12.421 [WARN] nav goal (-0.53, -1.05) failed (status=6); trying another approach angle
+2026-09-15 11:36:13.409 [GOAL] (-0.47, -1.31) yaw=25deg mode=navigate
+2026-09-15 11:36:13.421 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-15 11:36:13.421 [WARN] nav goal (-0.47, -1.31) failed (status=6); trying another approach angle
+2026-09-15 11:36:14.412 [GOAL] (-0.27, -1.55) yaw=55deg mode=navigate
+2026-09-15 11:36:14.420 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-15 11:36:14.421 [WARN] nav goal (-0.27, -1.55) failed (status=6); trying another approach angle
+2026-09-15 11:36:15.410 [GOAL] (0.02, -1.65) yaw=85deg mode=navigate
+2026-09-15 11:36:15.421 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-15 11:36:15.421 [WARN] nav goal (0.02, -1.65) failed (status=6); trying another approach angle
+2026-09-15 11:36:16.409 [GOAL] (-0.79, -1.06) yaw=-2deg mode=navigate
+2026-09-15 11:36:16.411 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-15 11:36:16.411 [WARN] nav goal (-0.79, -1.06) failed (status=6); trying another approach angle
+2026-09-15 11:36:17.411 [GOAL] (-0.10, -0.51) yaw=-75deg mode=navigate
+2026-09-15 11:36:17.420 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-15 11:36:17.421 [WARN] nav goal (-0.10, -0.51) failed (status=6); trying another approach angle
+2026-09-15 11:36:18.408 [GOAL] (-0.67, -1.43) yaw=25deg mode=navigate
+2026-09-15 11:36:18.411 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-15 11:36:18.411 [WARN] nav goal (-0.67, -1.43) failed (status=6); trying another approach angle
+2026-09-15 11:36:19.413 [GOAL] (-0.41, -1.75) yaw=55deg mode=navigate
+2026-09-15 11:36:19.420 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-15 11:36:19.421 [WARN] nav goal (-0.41, -1.75) failed (status=6); trying another approach angle
+2026-09-15 11:36:20.412 [GOAL] (-0.28, -0.66) yaw=-48deg mode=navigate
+2026-09-15 11:36:20.420 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-15 11:36:20.420 [WARN] nav goal (-0.28, -0.66) failed (status=6); trying another approach angle
+2026-09-15 11:36:20.462 [ROBOT] I've stopped receiving camera frames (none for over 5s). Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-09-15 11:36:20.462 [WARN] #32e camera stream stalled (>5s)
+2026-09-15 11:36:21.410 [GOAL] (-0.29, -0.95) yaw=-18deg mode=navigate
+2026-09-15 11:36:21.421 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-15 11:36:21.421 [WARN] nav goal (-0.29, -0.95) failed (status=6); trying another approach angle
+2026-09-15 11:36:22.411 [GOAL] (-0.18, 0.05) yaw=-68deg mode=navigate
+2026-09-15 11:36:22.421 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-15 11:36:22.421 [WARN] nav goal (-0.18, 0.05) failed (status=6); trying another approach angle
+2026-09-15 11:36:23.379 [CMD] (cancel via remote) cancel
+2026-09-15 11:36:23.380 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-15 11:42:47.043 [WARN] #35 cancel-all failed: failed to check service availability: rcl node's context is invalid, at ./src/rcl/node.c:428
+2026-09-15 11:42:47.043 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-15 11:42:47.043 [RUN] agent shutting down

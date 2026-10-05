@@ -1,0 +1,87 @@
+# VLA Ground Robot — FYDP context
+
+Read `PROJECT_HANDOUT_v5.md` in this folder before doing anything.
+It is the authoritative record of this project. If something I say
+conflicts with it, say so rather than guessing.
+
+## Where commands must run
+
+You are on the Ubuntu 24.04 HOST. `distrobox` works from here.
+Verify with: `[ -f /run/.containerenv ] && echo CONTAINER || echo HOST`
+
+**ROS / Gazebo / Nav2 / the agent** — inside `ubuntu22-gpu`. Each
+call is a FRESH shell, so the unsets and the ROS source must be
+repeated every single time:
+
+    distrobox enter ubuntu22-gpu -- bash -c \
+      "unset ROS_DISCOVERY_SERVER FASTRTPS_DEFAULT_PROFILES_FILE ROS_DOMAIN_ID; \
+       source /opt/ros/humble/setup.bash; <command>"
+
+Simulation and hardware use OPPOSITE settings, and both fail
+SILENTLY in the other's — no error, just nothing works. Never skip
+the unsets.
+
+**YOLO** — inside `vla-box`:
+
+    distrobox enter vla-box -- bash -c "<command>"
+
+**Ollama, ~/vla_kill.sh, ssh to the robot** — directly on the host.
+
+The home folder is SHARED between host and containers, so any file
+edit works from here with no wrapping at all.
+
+## Container gotchas
+
+- **`ping` does not work inside `ubuntu22-gpu`.** It exists at
+  `/usr/bin/ping` but exits 2 with ZERO output for every address —
+  containers are not granted the raw socket ICMP needs. It fails
+  identically whether the robot is up or unplugged, so it can never
+  be used as a reachability test. Test reachability with bash's
+  `/dev/tcp` instead — no privilege needed, and it tests a real
+  connection, which is what ROS actually depends on:
+
+      timeout 5 bash -c "cat < /dev/null > /dev/tcp/10.42.0.169/22"
+
+  Exit 0 = reachable.
+
+- **`/etc/turtlebot4_discovery/setup.bash` sets ONLY
+  `ROS_DISCOVERY_SERVER`.** It does NOT set
+  `FASTRTPS_DEFAULT_PROFILES_FILE`. Source it on its own and the
+  robot is undiscoverable, silently — no error, just an empty topic
+  list. Hardware needs BOTH, together:
+
+      export FASTRTPS_DEFAULT_PROFILES_FILE=$HOME/.ros/fastdds_super_client.xml
+      export ROS_DISCOVERY_SERVER="10.42.0.169:11811;"
+
+## Do not run these
+
+- `~/vla_sim.sh` — ends with the GUI in the foreground; it will hang
+  you forever. I run this one myself.
+- Anything that makes the physical robot MOVE. The stop command is
+  known to be unreliable (handout section 8.1). Propose the command,
+  let me run it.
+- Do NOT close the **VLA AGENT** xterm window. Both launch scripts
+  now start the agent in its own terminal so it has a real tty —
+  manual override (#60) is typed in THAT window and works nowhere
+  else. Closing it kills the agent. Never pipe or redirect the
+  agent's output either (`| tee`, `> log`): a pipe is not a tty, and
+  it silently puts the agent back in headless mode with override
+  dead. It writes its own log to `~/vla_logs/` regardless.
+
+## How I want you to work
+
+- One step at a time. Give the command, run it, tell me the result,
+  then stop and wait for me.
+- Say plainly whether each step passed or failed.
+- Short answers. I am a student, not a systems engineer — explain
+  terms I might not know.
+- Surgical edits only. Do not rewrite files that work.
+- Verify every script with `bash -n` and every Python file with
+  `python3 -m py_compile` before saying it is done.
+
+## Useful facts
+
+- Robot (Raspberry Pi): 10.42.0.169, user `ubuntu`
+- Containers: `ubuntu22-gpu` (ROS), `vla-box` (YOLO)
+- Current agent: `vla_agent_v28.py`
+- Kill everything: `~/vla_kill.sh`

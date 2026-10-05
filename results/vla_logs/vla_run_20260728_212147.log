@@ -1,0 +1,182 @@
+2026-07-28 21:21:47.847 [RUN] vla_agent v7  (#22 dock no-detect zone, #23 live-first memory, #24 forget, #25 typo-tolerant control words, #26 bare yes/no, #27 context expiry, #28 all-instance distances, #29 Create 3 backup ratchet)
+2026-07-28 21:21:47.848 [RUN] agent started (SIGHT_CONFIRM=2, SEARCH_TIMEOUT=45.0s, NO_PROGRESS_LIMIT=60.0s, ROBOT_CLEARANCE=0.25m)
+2026-07-28 21:21:59.315 [CMD] what do ou see
+2026-07-28 21:22:00.141 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a chair.', 'target': None}]}
+2026-07-28 21:22:00.141 [STEP] describe target=None
+2026-07-28 21:22:07.603 [CMD] go to the closest chair
+2026-07-28 21:22:08.397 [BRAIN] {'steps': [{'action': 'navigate', 'speech': 'Heading to the nearest chair.', 'target': 'chair', 'qualifier': 'nearest'}]}
+2026-07-28 21:22:08.397 [STEP] navigate target='chair'
+2026-07-28 21:22:10.314 [ROBOT] Found the chair — navigating to it.
+2026-07-28 21:22:10.314 [SIGHT] chair at (13.53, -4.94), 12.90 m away
+2026-07-28 21:22:10.317 [GOAL] (3.90, -0.28) yaw=-26deg mode=navigate
+2026-07-28 21:22:19.302 [RESULT] nav goal status=4 (ok)
+2026-07-28 21:22:24.295 [ROBOT] I can't find a reachable path toward the chair from here — searching again.
+2026-07-28 21:22:24.295 [WARN] dropping unreachable sighting of chair at (14.72, -4.22)
+2026-07-28 21:22:27.302 [ROBOT] Found the chair — navigating to it.
+2026-07-28 21:22:27.302 [SIGHT] chair at (14.65, -3.13), 11.35 m away
+2026-07-28 21:22:27.303 [GOAL] (8.22, -1.41) yaw=-15deg mode=navigate
+2026-07-28 21:22:29.294 [GOAL] (14.36, -2.46) yaw=-66deg mode=navigate
+2026-07-28 21:22:29.305 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:22:29.305 [WARN] nav goal (14.36, -2.46) failed (status=6); trying another approach angle
+2026-07-28 21:22:30.309 [GOAL] (14.59, -2.83) yaw=-67deg mode=navigate
+2026-07-28 21:22:30.316 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:22:30.316 [WARN] nav goal (14.59, -2.83) failed (status=6); trying another approach angle
+2026-07-28 21:22:31.312 [GOAL] (13.85, -3.04) yaw=-17deg mode=navigate
+2026-07-28 21:22:31.317 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:22:31.317 [WARN] nav goal (13.85, -3.04) failed (status=6); trying another approach angle
+2026-07-28 21:22:32.299 [GOAL] (13.90, -3.64) yaw=7deg mode=navigate
+2026-07-28 21:22:32.305 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:22:32.305 [WARN] nav goal (13.90, -3.64) failed (status=6); trying another approach angle
+2026-07-28 21:22:33.311 [GOAL] (11.35, -3.43) yaw=-26deg mode=navigate
+2026-07-28 21:22:33.316 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:22:33.316 [WARN] nav goal (11.35, -3.43) failed (status=6); trying another approach angle
+2026-07-28 21:22:34.309 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-07-28 21:22:34.324 [GOAL] (11.59, -3.66) yaw=-27deg mode=navigate
+2026-07-28 21:22:34.336 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:22:34.336 [WARN] nav goal (11.59, -3.66) failed (status=6); trying another approach angle
+2026-07-28 21:22:35.302 [GOAL] (14.19, -4.56) yaw=-52deg mode=navigate
+2026-07-28 21:22:35.307 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:22:35.307 [WARN] nav goal (14.19, -4.56) failed (status=6); trying another approach angle
+2026-07-28 21:22:36.307 [GOAL] (13.68, -3.77) yaw=-21deg mode=navigate
+2026-07-28 21:22:36.317 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:22:36.317 [WARN] nav goal (13.68, -3.77) failed (status=6); trying another approach angle
+2026-07-28 21:22:37.307 [GOAL] (13.92, -4.14) yaw=4deg mode=navigate
+2026-07-28 21:22:37.316 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:22:37.316 [WARN] nav goal (13.92, -4.14) failed (status=6); trying another approach angle
+2026-07-28 21:22:38.300 [GOAL] (13.72, -4.51) yaw=29deg mode=navigate
+2026-07-28 21:22:38.307 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:22:38.307 [WARN] nav goal (13.72, -4.51) failed (status=6); trying another approach angle
+2026-07-28 21:22:39.296 [GOAL] (14.15, -3.22) yaw=-71deg mode=navigate
+2026-07-28 21:22:39.305 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:22:39.305 [WARN] nav goal (14.15, -3.22) failed (status=6); trying another approach angle
+2026-07-28 21:22:40.310 [GOAL] (14.67, -3.07) yaw=-95deg mode=navigate
+2026-07-28 21:22:40.317 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:22:40.318 [WARN] nav goal (14.67, -3.07) failed (status=6); trying another approach angle
+2026-07-28 21:22:41.319 [GOAL] (14.55, -4.57) yaw=82deg mode=navigate
+2026-07-28 21:22:41.329 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:22:41.329 [WARN] nav goal (14.55, -4.57) failed (status=6); trying another approach angle
+2026-07-28 21:22:42.310 [GOAL] (14.34, -2.83) yaw=-68deg mode=navigate
+2026-07-28 21:22:42.316 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:22:42.316 [WARN] nav goal (14.34, -2.83) failed (status=6); trying another approach angle
+2026-07-28 21:22:43.306 [GOAL] (14.11, -4.62) yaw=55deg mode=navigate
+2026-07-28 21:22:43.315 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:22:43.315 [WARN] nav goal (14.11, -4.62) failed (status=6); trying another approach angle
+2026-07-28 21:22:44.303 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-07-28 21:22:44.307 [GOAL] (13.81, -3.44) yaw=-19deg mode=navigate
+2026-07-28 21:22:44.315 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:22:44.315 [WARN] nav goal (13.81, -3.44) failed (status=6); trying another approach angle
+2026-07-28 21:22:45.297 [GOAL] (13.67, -4.06) yaw=4deg mode=navigate
+2026-07-28 21:22:45.305 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:22:45.305 [WARN] nav goal (13.67, -4.06) failed (status=6); trying another approach angle
+2026-07-28 21:22:46.300 [GOAL] (14.03, -3.84) yaw=-21deg mode=navigate
+2026-07-28 21:22:46.306 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:22:46.306 [WARN] nav goal (14.03, -3.84) failed (status=6); trying another approach angle
+2026-07-28 21:22:47.303 [GOAL] (13.78, -4.50) yaw=29deg mode=navigate
+2026-07-28 21:22:47.311 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:22:47.311 [WARN] nav goal (13.78, -4.50) failed (status=6); trying another approach angle
+2026-07-28 21:22:48.311 [GOAL] (14.20, -3.17) yaw=-71deg mode=navigate
+2026-07-28 21:22:48.317 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:22:48.317 [WARN] nav goal (14.20, -3.17) failed (status=6); trying another approach angle
+2026-07-28 21:22:49.296 [GOAL] (14.61, -3.15) yaw=-96deg mode=navigate
+2026-07-28 21:22:49.305 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:22:49.305 [WARN] nav goal (14.61, -3.15) failed (status=6); trying another approach angle
+2026-07-28 21:22:50.300 [GOAL] (14.53, -4.46) yaw=81deg mode=navigate
+2026-07-28 21:22:50.306 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:22:50.306 [WARN] nav goal (14.53, -4.46) failed (status=6); trying another approach angle
+2026-07-28 21:22:51.294 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-07-28 21:22:51.297 [GOAL] (13.81, -3.41) yaw=-18deg mode=navigate
+2026-07-28 21:22:51.307 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:22:51.307 [WARN] nav goal (13.81, -3.41) failed (status=6); trying another approach angle
+2026-07-28 21:22:52.314 [GOAL] (13.67, -4.06) yaw=4deg mode=navigate
+2026-07-28 21:22:52.326 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:22:52.326 [WARN] nav goal (13.67, -4.06) failed (status=6); trying another approach angle
+2026-07-28 21:22:53.297 [GOAL] (14.24, -3.09) yaw=-70deg mode=navigate
+2026-07-28 21:22:53.306 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:22:53.306 [WARN] nav goal (14.24, -3.09) failed (status=6); trying another approach angle
+2026-07-28 21:22:54.299 [GOAL] (14.00, -3.79) yaw=-21deg mode=navigate
+2026-07-28 21:22:54.309 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:22:54.309 [WARN] nav goal (14.00, -3.79) failed (status=6); trying another approach angle
+2026-07-28 21:22:55.309 [GOAL] (14.16, -4.51) yaw=57deg mode=navigate
+2026-07-28 21:22:55.316 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:22:55.316 [WARN] nav goal (14.16, -4.51) failed (status=6); trying another approach angle
+2026-07-28 21:22:56.302 [GOAL] (14.70, -3.00) yaw=-95deg mode=navigate
+2026-07-28 21:22:56.310 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:22:56.310 [WARN] nav goal (14.70, -3.00) failed (status=6); trying another approach angle
+2026-07-28 21:22:57.299 [GOAL] (14.78, -4.54) yaw=109deg mode=navigate
+2026-07-28 21:22:57.306 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:22:57.306 [WARN] nav goal (14.78, -4.54) failed (status=6); trying another approach angle
+2026-07-28 21:22:58.296 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-07-28 21:22:58.299 [GOAL] (13.79, -3.48) yaw=-18deg mode=navigate
+2026-07-28 21:22:58.306 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:22:58.306 [WARN] nav goal (13.79, -3.48) failed (status=6); trying another approach angle
+2026-07-28 21:22:59.308 [GOAL] (13.68, -3.97) yaw=5deg mode=navigate
+2026-07-28 21:22:59.317 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:22:59.317 [WARN] nav goal (13.68, -3.97) failed (status=6); trying another approach angle
+2026-07-28 21:23:00.317 [GOAL] (13.82, -4.37) yaw=30deg mode=navigate
+2026-07-28 21:23:00.326 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:23:00.326 [WARN] nav goal (13.82, -4.37) failed (status=6); trying another approach angle
+2026-07-28 21:23:01.304 [GOAL] (14.29, -3.11) yaw=-71deg mode=navigate
+2026-07-28 21:23:01.314 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:23:01.314 [WARN] nav goal (14.29, -3.11) failed (status=6); trying another approach angle
+2026-07-28 21:23:02.299 [GOAL] (14.39, -4.55) yaw=79deg mode=navigate
+2026-07-28 21:23:02.306 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:23:02.306 [WARN] nav goal (14.39, -4.55) failed (status=6); trying another approach angle
+2026-07-28 21:23:03.299 [GOAL] (14.00, -4.74) yaw=53deg mode=navigate
+2026-07-28 21:23:03.306 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:23:03.306 [WARN] nav goal (14.00, -4.74) failed (status=6); trying another approach angle
+2026-07-28 21:23:04.495 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-07-28 21:23:04.498 [GOAL] (13.67, -3.72) yaw=-22deg mode=navigate
+2026-07-28 21:23:04.507 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:23:04.507 [WARN] nav goal (13.67, -3.72) failed (status=6); trying another approach angle
+2026-07-28 21:23:05.298 [GOAL] (13.59, -4.12) yaw=4deg mode=navigate
+2026-07-28 21:23:05.305 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:23:05.305 [WARN] nav goal (13.59, -4.12) failed (status=6); trying another approach angle
+2026-07-28 21:23:06.291 [GOAL] (13.76, -4.51) yaw=30deg mode=navigate
+2026-07-28 21:23:06.295 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:23:06.295 [WARN] nav goal (13.76, -4.51) failed (status=6); trying another approach angle
+2026-07-28 21:23:07.307 [GOAL] (14.11, -3.18) yaw=-70deg mode=navigate
+2026-07-28 21:23:07.315 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:23:07.315 [WARN] nav goal (14.11, -3.18) failed (status=6); trying another approach angle
+2026-07-28 21:23:08.307 [GOAL] (14.50, -3.03) yaw=-92deg mode=navigate
+2026-07-28 21:23:08.317 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:23:08.317 [WARN] nav goal (14.50, -3.03) failed (status=6); trying another approach angle
+2026-07-28 21:23:09.307 [GOAL] (14.05, -3.95) yaw=10deg mode=navigate
+2026-07-28 21:23:09.315 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:23:09.315 [WARN] nav goal (14.05, -3.95) failed (status=6); trying another approach angle
+2026-07-28 21:23:10.304 [GOAL] (14.23, -4.67) yaw=59deg mode=navigate
+2026-07-28 21:23:10.315 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:23:10.315 [WARN] nav goal (14.23, -4.67) failed (status=6); trying another approach angle
+2026-07-28 21:23:11.299 [GOAL] (14.87, -4.57) yaw=111deg mode=navigate
+2026-07-28 21:23:11.306 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:23:11.306 [WARN] nav goal (14.87, -4.57) failed (status=6); trying another approach angle
+2026-07-28 21:23:12.295 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-07-28 21:23:12.298 [GOAL] (13.75, -3.76) yaw=-19deg mode=navigate
+2026-07-28 21:23:12.306 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:23:12.306 [WARN] nav goal (13.75, -3.76) failed (status=6); trying another approach angle
+2026-07-28 21:23:13.296 [GOAL] (13.72, -4.16) yaw=8deg mode=navigate
+2026-07-28 21:23:13.306 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:23:13.306 [WARN] nav goal (13.72, -4.16) failed (status=6); trying another approach angle
+2026-07-28 21:23:14.296 [GOAL] (13.90, -4.53) yaw=35deg mode=navigate
+2026-07-28 21:23:14.308 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:23:14.308 [WARN] nav goal (13.90, -4.53) failed (status=6); trying another approach angle
+2026-07-28 21:23:15.308 [GOAL] (14.30, -3.26) yaw=-65deg mode=navigate
+2026-07-28 21:23:15.316 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:23:15.316 [WARN] nav goal (14.30, -3.26) failed (status=6); trying another approach angle
+2026-07-28 21:23:16.298 [GOAL] (14.39, -4.61) yaw=63deg mode=navigate
+2026-07-28 21:23:16.306 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:23:16.306 [WARN] nav goal (14.39, -4.61) failed (status=6); trying another approach angle
+2026-07-28 21:23:17.294 [GOAL] (14.74, -4.84) yaw=94deg mode=navigate
+2026-07-28 21:23:17.306 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:23:17.306 [WARN] nav goal (14.74, -4.84) failed (status=6); trying another approach angle
+2026-07-28 21:23:18.314 [GOAL] (14.86, -3.19) yaw=-110deg mode=navigate
+2026-07-28 21:23:18.326 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:23:18.326 [WARN] nav goal (14.86, -3.19) failed (status=6); trying another approach angle
+2026-07-28 21:23:19.305 [GOAL] (14.14, -4.64) yaw=-55deg mode=navigate
+2026-07-28 21:23:19.315 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-28 21:23:19.315 [WARN] nav goal (14.14, -4.64) failed (status=6); trying another approach angle
+2026-07-28 21:23:20.293 [ROBOT] Arrived at the chair.
+2026-07-28 21:23:30.500 [CMD] give me live feed
+2026-07-28 21:23:31.285 [BRAIN] {'steps': [{'action': 'feed', 'speech': 'Showing you the current view from my camera.', 'target': None}]}
+2026-07-28 21:23:31.286 [STEP] feed target=None
+2026-07-29 12:42:09.833 [DOCK] dock position recorded at (14.07, -4.48); detections within 0.8 m are ignored
+2026-07-29 12:42:09.833 [MEMORY] purged 2 remembered chair position(s) that sat on the dock

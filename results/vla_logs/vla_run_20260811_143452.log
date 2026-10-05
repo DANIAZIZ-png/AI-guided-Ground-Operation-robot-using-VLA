@@ -1,0 +1,82 @@
+2026-08-11 14:34:52.830 [RUN] vla_agent v26  (#61 nearest-cluster LiDAR ranging, #60 manual override teleop, #59 10 Hz collision guard, #58 smoother approach, #57 stand off far enough to keep the object in view, #56 step-and-stare scan, #55 LiDAR failure reasons reported, #54 LiDAR object ranging, #53 seeded depth intrinsics, #52 depth intrinsics rescaled to frame size, #51 compressedDepth transport, #50 compressed RGB transport, #49 annotated feed gated per topic, #47 TF at colour-frame stamp, #48 reject stale depth, #46 one subscription per camera stream, #43 longer cached action-server wait, #44 undock retry-loop breaker, #45 sync slop for 1 Hz depth, #37 /robot1 namespace, #38 stereo depth topic, #39 best-effort sensor QoS, #40 RGB->depth pixel mapping, #41 encoding-based mm/m, #42 explicit namespaced TF, #36 no patrol feed prompt, #35 cancel actually stops the robot, #34 feed publishes to any subscriber, #22 dock no-detect zone, #23 live-first memory, #24 forget, #25 typo-tolerant control words, #26 bare yes/no, #27 context expiry, #28 all-instance distances, #29 Create 3 backup ratchet, #30 sticky goals + range-scaled gate + ring-safe blacklist, #31 incremental off-map hop goals, #32 non-freezing live feed, #33 command/reply/status bridge)
+2026-08-11 14:34:52.830 [RUN] agent started (SIGHT_CONFIRM=2, SEARCH_TIMEOUT=120.0s, NO_PROGRESS_LIMIT=60.0s, ROBOT_CLEARANCE=0.25m)
+2026-08-11 14:34:57.663 [CMD] [keyboard] what do you see
+2026-08-11 14:34:57.663 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-11 14:34:58.263 [BRAIN] {'steps': [{'action': 'describe', 'speech': "I don't see anything right now.", 'target': None}]}
+2026-08-11 14:34:58.264 [STEP] describe target=None
+2026-08-11 14:34:59.194 [INFO] depth frames 1280x720, intrinsics 1280x720 from seeded defaults (#53)
+2026-08-11 14:34:59.199 [INFO] live depth camera_info received 1280x720
+2026-08-11 14:34:59.705 [ROBOT] Stopped. The robot is idle.
+2026-08-11 14:34:59.706 [STOP] confirmed stopped by odometry after barrage
+2026-08-11 14:35:02.083 [ROBOT] RGB and depth stopped lining up (2.2s since the last matched pair) — switching to the newest frame of each. Detections stay live; depth accuracy drops a little while they are out of step.
+2026-08-11 14:35:02.083 [WARN] #32a stale sync pair dropped after 2.2s
+2026-08-11 14:35:09.408 [CMD] [keyboard] shd show me live feed
+2026-08-11 14:35:09.408 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-11 14:35:09.999 [BRAIN] {'steps': [{'action': 'feed', 'speech': 'Showing you the live camera feed.', 'target': None}]}
+2026-08-11 14:35:09.999 [STEP] feed target=None
+2026-08-11 14:35:11.466 [ROBOT] Stopped. The robot is idle.
+2026-08-11 14:35:11.466 [STOP] confirmed stopped by odometry after barrage
+2026-08-11 14:35:25.536 [CMD] [keyboard] what do you see
+2026-08-11 14:35:25.536 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-11 14:35:26.116 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a cardboard box and a computer tower.', 'target': None}]}
+2026-08-11 14:35:26.116 [STEP] describe target=None
+2026-08-11 14:35:27.586 [ROBOT] Stopped. The robot is idle.
+2026-08-11 14:35:27.586 [STOP] confirmed stopped by odometry after barrage
+2026-08-11 14:38:24.544 [CMD] [keyboard] what do you see
+2026-08-11 14:38:24.544 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-11 14:38:25.307 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I can see a cardboard box, a computer monitor, and a computer tower.', 'target': None}]}
+2026-08-11 14:38:25.307 [STEP] describe target=None
+2026-08-11 14:38:26.586 [ROBOT] Stopped. The robot is idle.
+2026-08-11 14:38:26.586 [STOP] confirmed stopped by odometry after barrage
+2026-08-11 14:38:46.144 [CMD] [keyboard] what do you see
+2026-08-11 14:38:46.145 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-11 14:38:46.963 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I can see a cardboard box, a computer monitor, a computer tower, and a person.', 'target': None}]}
+2026-08-11 14:38:46.963 [STEP] describe target=None
+2026-08-11 14:38:48.186 [ROBOT] Stopped. The robot is idle.
+2026-08-11 14:38:48.186 [STOP] confirmed stopped by odometry after barrage
+2026-08-11 14:38:56.224 [CMD] [keyboard] go to the computer moniter
+2026-08-11 14:38:56.224 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-11 14:38:56.745 [BRAIN] {'steps': [{'action': 'navigate', 'speech': 'Heading to the computer monitor.', 'target': 'computer monitor'}]}
+2026-08-11 14:38:56.746 [STEP] navigate target='computer monitor'
+2026-08-11 14:38:58.265 [ROBOT] Stopped. The robot is idle.
+2026-08-11 14:38:58.266 [STOP] confirmed stopped by odometry after barrage
+2026-08-11 14:39:07.136 [CMD] [keyboard] turn right
+2026-08-11 14:39:07.137 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-11 14:39:07.750 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ninety degrees to the right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -90.0}]}
+2026-08-11 14:39:07.750 [STEP] move target=None
+2026-08-11 14:39:07.846 [GUARD] collision guard stopped the robot at 0.69 m (limit 0.7 m, mode=move)
+2026-08-11 14:39:07.846 [ROBOT] Stopping — an obstacle is 0.69 m ahead.
+2026-08-11 14:39:09.185 [ROBOT] Stopped. The robot is idle.
+2026-08-11 14:39:09.186 [STOP] confirmed stopped by odometry after barrage
+2026-08-11 14:39:12.946 [GUARD] collision guard stopped the robot at 0.69 m (limit 0.7 m, mode=move)
+2026-08-11 14:39:12.946 [ROBOT] Stopping — an obstacle is 0.69 m ahead.
+2026-08-11 14:39:15.872 [CMD] (cancel via keyboard) stop
+2026-08-11 14:39:16.745 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-11 14:39:18.786 [ROBOT] Stopped. The robot is idle.
+2026-08-11 14:39:18.786 [STOP] confirmed stopped by odometry after barrage
+2026-08-11 14:39:21.552 [CMD] [keyboard] tuturn right
+2026-08-11 14:39:21.552 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-11 14:39:22.163 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ninety degrees right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -90.0}]}
+2026-08-11 14:39:22.163 [STEP] move target=None
+2026-08-11 14:39:22.246 [GUARD] collision guard stopped the robot at 0.68 m (limit 0.7 m, mode=move)
+2026-08-11 14:39:22.246 [ROBOT] Stopping — an obstacle is 0.68 m ahead.
+2026-08-11 14:39:23.605 [ROBOT] Stopped. The robot is idle.
+2026-08-11 14:39:23.606 [STOP] confirmed stopped by odometry after barrage
+2026-08-11 14:39:27.752 [GUARD] collision guard stopped the robot at 0.68 m (limit 0.7 m, mode=move)
+2026-08-11 14:39:27.753 [ROBOT] Stopping — an obstacle is 0.68 m ahead.
+2026-08-11 14:39:36.896 [CMD] [keyboard] move 1m
+2026-08-11 14:39:36.896 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-11 14:39:37.497 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Moving forward one metre.', 'target': None, 'distance_m': 1.0, 'rotation_deg': 0.0}]}
+2026-08-11 14:39:37.497 [STEP] move target=None
+2026-08-11 14:39:39.246 [ROBOT] Stopped. The robot is idle.
+2026-08-11 14:39:39.246 [STOP] confirmed stopped by odometry after barrage
+2026-08-11 14:40:45.517 [ROBOT] I've stopped receiving camera frames. Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-08-11 14:40:45.517 [WARN] #32e camera stream stalled
+2026-08-11 14:41:07.084 [CMD] (manual override via keyboard) manual overrride
+2026-08-11 14:41:09.091 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-11 14:41:09.091 [MANUAL] operator took manual control
+2026-08-11 14:41:11.146 [ROBOT] Stopped. The robot is idle.
+2026-08-11 14:41:11.146 [STOP] confirmed stopped by odometry after barrage
+2026-08-11 14:41:32.265 [MANUAL] control handed back to the robot
+2026-08-11 14:41:36.462 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-11 14:41:36.463 [RUN] agent shutting down

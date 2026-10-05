@@ -1,0 +1,16 @@
+2026-07-28 10:49:47.200 [RUN] vla_agent v7  (#22 dock no-detect zone, #23 live-first memory, #24 forget, #25 typo-tolerant control words, #26 bare yes/no, #27 context expiry, #28 all-instance distances, #29 Create 3 backup ratchet)
+2026-07-28 10:49:47.200 [RUN] agent started (SIGHT_CONFIRM=2, SEARCH_TIMEOUT=45.0s, NO_PROGRESS_LIMIT=60.0s, ROBOT_CLEARANCE=0.25m)
+2026-07-28 10:49:49.542 [DOCK] dock position recorded at (0.09, 0.00); detections within 0.8 m are ignored
+2026-07-28 13:06:28.107 [CMD] undock
+2026-07-28 13:06:28.108 [STEP] undock target=None
+2026-07-28 13:06:28.108 [ROBOT] Undocking…
+2026-07-28 13:06:39.234 [ROBOT] Undocked — ready to move.
+2026-07-28 13:06:39.234 [DOCK] undock ok
+2026-07-28 13:06:44.891 [CMD] turn right
+2026-07-28 13:07:21.816 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ninety degrees right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -90.0}]}
+2026-07-28 13:07:21.816 [STEP] move target=None
+2026-07-28 13:07:27.575 [ROBOT] Done with that move.
+2026-07-28 13:07:41.851 [CMD] dock
+2026-07-28 13:07:41.851 [STEP] dock target=None
+2026-07-28 13:07:41.852 [ROBOT] Docking…
+2026-07-28 13:07:52.604 [RUN] agent shutting down

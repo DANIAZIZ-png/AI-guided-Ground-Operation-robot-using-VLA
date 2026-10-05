@@ -1,0 +1,68 @@
+2026-08-11 14:41:52.309 [RUN] vla_agent v25  (#60 manual override teleop, #59 10 Hz collision guard, #58 smoother approach, #57 stand off far enough to keep the object in view, #56 step-and-stare scan, #55 LiDAR failure reasons reported, #54 LiDAR object ranging, #53 seeded depth intrinsics, #52 depth intrinsics rescaled to frame size, #51 compressedDepth transport, #50 compressed RGB transport, #49 annotated feed gated per topic, #47 TF at colour-frame stamp, #48 reject stale depth, #46 one subscription per camera stream, #43 longer cached action-server wait, #44 undock retry-loop breaker, #45 sync slop for 1 Hz depth, #37 /robot1 namespace, #38 stereo depth topic, #39 best-effort sensor QoS, #40 RGB->depth pixel mapping, #41 encoding-based mm/m, #42 explicit namespaced TF, #36 no patrol feed prompt, #35 cancel actually stops the robot, #34 feed publishes to any subscriber, #22 dock no-detect zone, #23 live-first memory, #24 forget, #25 typo-tolerant control words, #26 bare yes/no, #27 context expiry, #28 all-instance distances, #29 Create 3 backup ratchet, #30 sticky goals + range-scaled gate + ring-safe blacklist, #31 incremental off-map hop goals, #32 non-freezing live feed, #33 command/reply/status bridge)
+2026-08-11 14:41:52.309 [RUN] agent started (SIGHT_CONFIRM=2, SEARCH_TIMEOUT=120.0s, NO_PROGRESS_LIMIT=60.0s, ROBOT_CLEARANCE=0.25m)
+2026-08-11 14:41:58.944 [CMD] [keyboard] move 1m
+2026-08-11 14:41:58.945 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-11 14:41:59.504 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Moving forward one metre.', 'target': None, 'distance_m': 1.0, 'rotation_deg': 0.0}]}
+2026-08-11 14:41:59.504 [STEP] move target=None
+2026-08-11 14:42:00.852 [INFO] depth frames 1280x720, intrinsics 1280x720 from seeded defaults (#53)
+2026-08-11 14:42:00.854 [INFO] live depth camera_info received 1280x720
+2026-08-11 14:42:00.926 [ROBOT] RGB and depth timestamps never match (slop 0.6s) — using unsynchronized frames. Check the camera driver's stamps.
+2026-08-11 14:42:00.926 [WARN] RGB-depth sync failed; raw fallback in use
+2026-08-11 14:42:00.985 [ROBOT] Stopped. The robot is idle.
+2026-08-11 14:42:00.986 [STOP] confirmed stopped by odometry after barrage
+2026-08-11 14:44:01.226 [GUARD] collision guard stopped the robot at 0.28 m (limit 0.7 m, mode=move)
+2026-08-11 14:44:01.226 [ROBOT] Stopping — an obstacle is 0.28 m ahead.
+2026-08-11 14:44:07.336 [GUARD] collision guard stopped the robot at 0.26 m (limit 0.7 m, mode=move)
+2026-08-11 14:44:07.336 [ROBOT] I've stopped receiving camera frames. Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-08-11 14:44:07.337 [ROBOT] Stopping — an obstacle is 0.26 m ahead.
+2026-08-11 14:44:07.338 [WARN] #32e camera stream stalled
+2026-08-11 14:44:12.426 [GUARD] collision guard stopped the robot at 0.41 m (limit 0.7 m, mode=move)
+2026-08-11 14:44:12.426 [ROBOT] Stopping — an obstacle is 0.41 m ahead.
+2026-08-11 14:44:20.422 [GUARD] collision guard stopped the robot at 0.41 m (limit 0.7 m, mode=move)
+2026-08-11 14:44:20.422 [ROBOT] Stopping — an obstacle is 0.41 m ahead.
+2026-08-11 14:44:25.426 [GUARD] collision guard stopped the robot at 0.36 m (limit 0.7 m, mode=move)
+2026-08-11 14:44:25.426 [ROBOT] Stopping — an obstacle is 0.36 m ahead.
+2026-08-11 14:44:31.262 [GUARD] collision guard stopped the robot at 0.35 m (limit 0.7 m, mode=move)
+2026-08-11 14:44:31.262 [ROBOT] Stopping — an obstacle is 0.35 m ahead.
+2026-08-11 14:44:36.326 [GUARD] collision guard stopped the robot at 0.35 m (limit 0.7 m, mode=move)
+2026-08-11 14:44:36.326 [ROBOT] Stopping — an obstacle is 0.35 m ahead.
+2026-08-11 14:44:41.426 [GUARD] collision guard stopped the robot at 0.35 m (limit 0.7 m, mode=move)
+2026-08-11 14:44:41.426 [ROBOT] Stopping — an obstacle is 0.35 m ahead.
+2026-08-11 14:44:46.526 [GUARD] collision guard stopped the robot at 0.35 m (limit 0.7 m, mode=move)
+2026-08-11 14:44:46.526 [ROBOT] Stopping — an obstacle is 0.35 m ahead.
+2026-08-11 14:44:51.626 [GUARD] collision guard stopped the robot at 0.35 m (limit 0.7 m, mode=move)
+2026-08-11 14:44:51.626 [ROBOT] Stopping — an obstacle is 0.35 m ahead.
+2026-08-11 14:44:57.835 [GUARD] collision guard stopped the robot at 0.41 m (limit 0.7 m, mode=move)
+2026-08-11 14:44:57.835 [ROBOT] Stopping — an obstacle is 0.41 m ahead.
+2026-08-11 14:45:02.926 [GUARD] collision guard stopped the robot at 0.41 m (limit 0.7 m, mode=move)
+2026-08-11 14:45:02.926 [ROBOT] Stopping — an obstacle is 0.41 m ahead.
+2026-08-11 14:45:08.016 [GUARD] collision guard stopped the robot at 0.41 m (limit 0.7 m, mode=move)
+2026-08-11 14:45:08.017 [ROBOT] Stopping — an obstacle is 0.41 m ahead.
+2026-08-11 14:45:13.026 [GUARD] collision guard stopped the robot at 0.41 m (limit 0.7 m, mode=move)
+2026-08-11 14:45:13.026 [ROBOT] Stopping — an obstacle is 0.41 m ahead.
+2026-08-11 14:45:18.126 [GUARD] collision guard stopped the robot at 0.41 m (limit 0.7 m, mode=move)
+2026-08-11 14:45:18.126 [ROBOT] Stopping — an obstacle is 0.41 m ahead.
+2026-08-11 14:45:23.226 [GUARD] collision guard stopped the robot at 0.41 m (limit 0.7 m, mode=move)
+2026-08-11 14:45:23.226 [ROBOT] Stopping — an obstacle is 0.41 m ahead.
+2026-08-11 14:45:28.326 [GUARD] collision guard stopped the robot at 0.41 m (limit 0.7 m, mode=move)
+2026-08-11 14:45:28.326 [ROBOT] Stopping — an obstacle is 0.41 m ahead.
+2026-08-11 14:45:33.426 [GUARD] collision guard stopped the robot at 0.40 m (limit 0.7 m, mode=move)
+2026-08-11 14:45:33.426 [ROBOT] Stopping — an obstacle is 0.40 m ahead.
+2026-08-11 14:45:39.721 [GUARD] collision guard stopped the robot at 0.41 m (limit 0.7 m, mode=move)
+2026-08-11 14:45:39.721 [ROBOT] Stopping — an obstacle is 0.41 m ahead.
+2026-08-11 14:45:44.726 [GUARD] collision guard stopped the robot at 0.31 m (limit 0.7 m, mode=move)
+2026-08-11 14:45:44.726 [ROBOT] Stopping — an obstacle is 0.31 m ahead.
+2026-08-11 14:45:49.826 [GUARD] collision guard stopped the robot at 0.31 m (limit 0.7 m, mode=move)
+2026-08-11 14:45:49.826 [ROBOT] Stopping — an obstacle is 0.31 m ahead.
+2026-08-11 14:45:54.926 [GUARD] collision guard stopped the robot at 0.31 m (limit 0.7 m, mode=move)
+2026-08-11 14:45:54.926 [ROBOT] Stopping — an obstacle is 0.31 m ahead.
+2026-08-11 14:46:00.026 [GUARD] collision guard stopped the robot at 0.31 m (limit 0.7 m, mode=move)
+2026-08-11 14:46:00.026 [ROBOT] Stopping — an obstacle is 0.31 m ahead.
+2026-08-11 14:46:05.126 [GUARD] collision guard stopped the robot at 0.44 m (limit 0.7 m, mode=move)
+2026-08-11 14:46:05.126 [ROBOT] Stopping — an obstacle is 0.44 m ahead.
+2026-08-11 14:46:49.025 [CMD] (cancel via keyboard) stop
+2026-08-11 14:46:49.025 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-11 14:46:51.065 [ROBOT] Stopped. The robot is idle.
+2026-08-11 14:46:51.066 [STOP] confirmed stopped by odometry after barrage
+2026-08-11 14:46:52.531 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-11 14:46:52.531 [RUN] agent shutting down

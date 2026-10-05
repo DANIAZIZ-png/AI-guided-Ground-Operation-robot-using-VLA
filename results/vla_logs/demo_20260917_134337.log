@@ -1,0 +1,18 @@
+
+[36m[13:43:37 +  0s][0m [1mVLA ground robot -- hardware demo bring-up[0m   (log: /home/danyalaziz/vla_logs/demo_20260917_134337.log)
+
+[36m[13:43:37 +  0s][0m STAGE 0/13  host, containers, robot reachable
+[36m[13:43:39 +  2s][0m STAGE 0/13  host OK, both containers OK, robot reachable   [32mOK[0m
+[36m[13:43:39 +  2s][0m STAGE 1/13  Pi gate (load, temperature, throttling, ROS nodes)
+[36m[13:43:42 +  5s][0m         Pi: load 0.75, 54.0 C, throttled=0x0, ROS nodes 7, up 4335s
+[36m[13:43:42 +  5s][0m STAGE 1/13  Pi gate passed   [32mOK[0m
+[36m[13:43:42 +  5s][0m STAGE 2/13  ROS daemon in robot mode
+[33m[13:43:45 +  8s] WARNING:[0m the ROS daemon is blind (no discovery variables) -- killing stray daemons and restarting once
+
+[31m[1m=====================================================================[0m
+[31m[1m  DEMO ABORTED at stage 2[0m
+[31m[1m  the ROS daemon still starts BLIND after a clean restart. Close every terminal that ran ros2 without robot_mode.sh, then retry.[0m
+[31m[1m  Nothing more was started. Log: /home/danyalaziz/vla_logs/demo_20260917_134337.log[0m
+[31m[1m  To clean up whatever did start:  ~/vla_demo_stop.sh[0m
+[31m[1m=====================================================================[0m
+

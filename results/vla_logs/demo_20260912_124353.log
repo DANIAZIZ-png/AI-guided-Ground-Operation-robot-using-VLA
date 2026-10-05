@@ -1,0 +1,15 @@
+
+[36m[12:43:53 +  0s][0m [1mVLA ground robot -- hardware demo bring-up[0m   (log: /home/danyalaziz/vla_logs/demo_20260912_124353.log)
+
+[36m[12:43:53 +  0s][0m STAGE 0/13  host, containers, robot reachable
+[36m[12:43:54 +  1s][0m STAGE 0/13  host OK, both containers OK, robot reachable   [32mOK[0m
+[36m[12:43:54 +  1s][0m STAGE 1/13  Pi gate (load, temperature, throttling, ROS nodes)
+[36m[12:43:56 +  3s][0m         Pi: load 1.26, 55.0 C, throttled=0x0, ROS nodes 7, up 1408s
+[36m[12:43:56 +  3s][0m STAGE 1/13  Pi gate passed   [32mOK[0m
+[36m[12:43:56 +  3s][0m STAGE 2/13  ROS daemon in robot mode
+[36m[12:43:59 +  6s][0m         daemon OK; waiting 15 s for the Pi's node directory
+[36m[12:44:15 + 22s][0m STAGE 2/13  daemon sees the robot: 11 robot nodes   [32mOK[0m
+[36m[12:44:15 + 22s][0m STAGE 3/13  base alive (odometry, battery, dock state)
+[36m[12:44:22 + 29s][0m         odom 19.922 Hz, battery 99 %, docked=true
+[36m[12:44:22 + 29s][0m STAGE 3/13  base alive   [32mOK[0m
+[36m[12:44:22 + 29s][0m VLA_DEMO_STOP_AFTER=3 reached -- stopping here (test mode)

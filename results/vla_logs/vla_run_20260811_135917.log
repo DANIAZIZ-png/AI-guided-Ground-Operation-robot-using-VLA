@@ -1,0 +1,51 @@
+2026-08-11 13:59:17.845 [RUN] vla_agent v26  (#61 nearest-cluster LiDAR ranging, #60 manual override teleop, #59 10 Hz collision guard, #58 smoother approach, #57 stand off far enough to keep the object in view, #56 step-and-stare scan, #55 LiDAR failure reasons reported, #54 LiDAR object ranging, #53 seeded depth intrinsics, #52 depth intrinsics rescaled to frame size, #51 compressedDepth transport, #50 compressed RGB transport, #49 annotated feed gated per topic, #47 TF at colour-frame stamp, #48 reject stale depth, #46 one subscription per camera stream, #43 longer cached action-server wait, #44 undock retry-loop breaker, #45 sync slop for 1 Hz depth, #37 /robot1 namespace, #38 stereo depth topic, #39 best-effort sensor QoS, #40 RGB->depth pixel mapping, #41 encoding-based mm/m, #42 explicit namespaced TF, #36 no patrol feed prompt, #35 cancel actually stops the robot, #34 feed publishes to any subscriber, #22 dock no-detect zone, #23 live-first memory, #24 forget, #25 typo-tolerant control words, #26 bare yes/no, #27 context expiry, #28 all-instance distances, #29 Create 3 backup ratchet, #30 sticky goals + range-scaled gate + ring-safe blacklist, #31 incremental off-map hop goals, #32 non-freezing live feed, #33 command/reply/status bridge)
+2026-08-11 13:59:17.845 [RUN] agent started (SIGHT_CONFIRM=2, SEARCH_TIMEOUT=120.0s, NO_PROGRESS_LIMIT=60.0s, ROBOT_CLEARANCE=0.25m)
+2026-08-11 13:59:20.226 [INFO] depth frames 1280x720, intrinsics 1280x720 from seeded defaults (#53)
+2026-08-11 13:59:20.228 [INFO] live depth camera_info received 1280x720
+2026-08-11 13:59:23.159 [ROBOT] RGB and depth stopped lining up (1.6s since the last matched pair) — switching to the newest frame of each. Detections stay live; depth accuracy drops a little while they are out of step.
+2026-08-11 13:59:23.160 [WARN] #32a stale sync pair dropped after 1.6s
+2026-08-11 13:59:29.466 [CMD] [keyboard] what do you see
+2026-08-11 13:59:29.467 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-11 13:59:31.519 [ROBOT] Stopped. The robot is idle.
+2026-08-11 13:59:31.519 [STOP] confirmed stopped by odometry after barrage
+2026-08-11 14:00:06.160 [BRAIN] {'steps': [{'action': 'describe', 'speech': "I don't see anything right now.", 'target': None}]}
+2026-08-11 14:00:06.160 [STEP] describe target=None
+2026-08-11 14:00:06.209 [CMD] [keyboard] show me
+2026-08-11 14:00:06.209 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-11 14:00:06.750 [BRAIN] {'steps': [{'action': 'describe', 'speech': "There's nothing in view right now.", 'target': None}]}
+2026-08-11 14:00:06.750 [STEP] describe target=None
+2026-08-11 14:00:06.793 [CMD] [keyboard] what do you see
+2026-08-11 14:00:06.793 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-11 14:00:07.410 [BRAIN] {'steps': [{'action': 'describe', 'speech': "I don't see anything right now.", 'target': None}]}
+2026-08-11 14:00:07.410 [STEP] describe target=None
+2026-08-11 14:00:07.454 [CMD] [keyboard] clear
+2026-08-11 14:00:07.454 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-11 14:00:07.981 [BRAIN] {'steps': [{'action': 'forget', 'speech': 'Clearing all my remembered positions.', 'target': None}]}
+2026-08-11 14:00:07.981 [STEP] forget target=None
+2026-08-11 14:00:07.981 [MEMORY] cleared ALL remembered positions (0)
+2026-08-11 14:00:09.498 [ROBOT] Stopped. The robot is idle.
+2026-08-11 14:00:09.499 [STOP] confirmed stopped by odometry after barrage
+2026-08-11 14:00:13.802 [CMD] [keyboard] what do you see
+2026-08-11 14:00:13.802 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-11 14:00:14.359 [BRAIN] {'steps': [{'action': 'describe', 'speech': "I don't see anything right now.", 'target': None}]}
+2026-08-11 14:00:14.359 [STEP] describe target=None
+2026-08-11 14:00:15.859 [ROBOT] Stopped. The robot is idle.
+2026-08-11 14:00:15.859 [STOP] confirmed stopped by odometry after barrage
+2026-08-11 14:00:18.363 [CMD] [keyboard] sshow me
+2026-08-11 14:00:18.363 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-11 14:00:18.848 [BRAIN] {'steps': [{'action': 'feed', 'speech': 'Showing you the current view.', 'target': None}]}
+2026-08-11 14:00:18.848 [STEP] feed target=None
+2026-08-11 14:00:20.418 [ROBOT] Stopped. The robot is idle.
+2026-08-11 14:00:20.419 [STOP] confirmed stopped by odometry after barrage
+2026-08-11 14:00:58.359 [ROBOT] I've stopped receiving camera frames. Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-08-11 14:00:58.359 [WARN] #32e camera stream stalled
+2026-08-11 14:02:28.959 [ROBOT] The live-feed window closed. Say 'show me the feed' to reopen it — the robot is otherwise unaffected.
+2026-08-11 14:02:28.959 [WARN] #32e rqt_image_view exited
+2026-08-11 14:03:12.252 [CMD] [keyboard] show me live feed
+2026-08-11 14:03:12.252 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-11 14:03:12.854 [BRAIN] {'steps': [{'action': 'feed', 'speech': 'Showing you the live camera feed.', 'target': None}]}
+2026-08-11 14:03:12.854 [STEP] feed target=None
+2026-08-11 14:03:14.299 [ROBOT] Stopped. The robot is idle.
+2026-08-11 14:03:14.299 [STOP] confirmed stopped by odometry after barrage
+2026-08-11 14:11:01.676 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-11 14:11:01.677 [RUN] agent shutting down

@@ -1,0 +1,41 @@
+2026-08-09 15:13:25.660 [RUN] vla_agent v23  (#55 LiDAR failure reasons reported, #54 LiDAR object ranging, #53 seeded depth intrinsics, #52 depth intrinsics rescaled to frame size, #51 compressedDepth transport, #50 compressed RGB transport, #49 annotated feed gated per topic, #47 TF at colour-frame stamp, #48 reject stale depth, #46 one subscription per camera stream, #43 longer cached action-server wait, #44 undock retry-loop breaker, #45 sync slop for 1 Hz depth, #37 /robot1 namespace, #38 stereo depth topic, #39 best-effort sensor QoS, #40 RGB->depth pixel mapping, #41 encoding-based mm/m, #42 explicit namespaced TF, #36 no patrol feed prompt, #35 cancel actually stops the robot, #34 feed publishes to any subscriber, #22 dock no-detect zone, #23 live-first memory, #24 forget, #25 typo-tolerant control words, #26 bare yes/no, #27 context expiry, #28 all-instance distances, #29 Create 3 backup ratchet, #30 sticky goals + range-scaled gate + ring-safe blacklist, #31 incremental off-map hop goals, #32 non-freezing live feed, #33 command/reply/status bridge)
+2026-08-09 15:13:25.660 [RUN] agent started (SIGHT_CONFIRM=2, SEARCH_TIMEOUT=45.0s, NO_PROGRESS_LIMIT=60.0s, ROBOT_CLEARANCE=0.25m)
+2026-08-09 15:13:30.618 [INFO] depth frames 1280x720, intrinsics 1280x720 from seeded defaults (#53)
+2026-08-09 15:13:30.652 [INFO] live depth camera_info received 1280x720
+2026-08-09 15:13:31.192 [DOCK] dock position recorded at (-0.00, -0.00); detections within 0.8 m are ignored
+2026-08-09 15:13:31.797 [ROBOT] RGB and depth timestamps never match (slop 0.6s) — using unsynchronized frames. Check the camera driver's stamps.
+2026-08-09 15:13:31.797 [WARN] RGB-depth sync failed; raw fallback in use
+2026-08-09 15:13:55.358 [CMD] [keyboard] what do you see
+2026-08-09 15:13:55.358 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-09 15:13:57.417 [ROBOT] Stopped. The robot is idle.
+2026-08-09 15:13:57.417 [STOP] confirmed stopped by odometry after barrage
+2026-08-09 15:14:31.608 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a chair.', 'target': None}]}
+2026-08-09 15:14:31.608 [STEP] describe target=None
+2026-08-09 15:14:31.705 [CMD] [keyboard] undock
+2026-08-09 15:14:31.706 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-09 15:14:31.706 [STEP] undock target=None
+2026-08-09 15:14:31.707 [ROBOT] Undocking…
+2026-08-09 15:14:31.707 [CMD] [keyboard] what do you see
+2026-08-09 15:14:31.707 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-09 15:14:32.317 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a box and a chair.', 'target': None}]}
+2026-08-09 15:14:32.318 [STEP] describe target=None
+2026-08-09 15:14:33.756 [ROBOT] Stopped. The robot is idle.
+2026-08-09 15:14:33.757 [STOP] confirmed stopped by odometry after barrage
+2026-08-09 15:14:43.294 [CMD] [keyboard] undock
+2026-08-09 15:14:43.294 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-09 15:14:43.294 [STEP] undock target=None
+2026-08-09 15:14:43.295 [ROBOT] Undocking…
+2026-08-09 15:14:45.336 [ROBOT] Stopped. The robot is idle.
+2026-08-09 15:14:45.337 [STOP] confirmed stopped by odometry after barrage
+2026-08-09 15:16:02.798 [CMD] [keyboard] undock
+2026-08-09 15:16:02.799 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-09 15:16:02.799 [STEP] undock target=None
+2026-08-09 15:16:04.857 [ROBOT] Stopped. The robot is idle.
+2026-08-09 15:16:04.857 [STOP] confirmed stopped by odometry after barrage
+2026-08-09 15:16:17.823 [ROBOT] The 'undock' action server isn't up (is the Create 3 running?). Check: ros2 action list | grep -i dock
+2026-08-09 15:18:14.797 [ROBOT] I've stopped receiving camera frames. Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-08-09 15:18:14.797 [WARN] #32e camera stream stalled
+2026-08-09 15:20:29.797 [ROBOT] RGB and depth stopped lining up (1.7s since the last matched pair) — switching to the newest frame of each. Detections stay live; depth accuracy drops a little while they are out of step.
+2026-08-09 15:20:29.797 [WARN] #32a stale sync pair dropped after 1.7s
+2026-08-09 15:22:46.997 [ROBOT] I've stopped receiving camera frames. Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-08-09 15:22:46.997 [WARN] #32e camera stream stalled

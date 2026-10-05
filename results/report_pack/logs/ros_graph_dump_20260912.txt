@@ -1,0 +1,828 @@
+=== NODES
+/launch_ros_2237
+/launch_ros_32292
+/robot1/analyzers
+/robot1/behavior_server
+/robot1/bt_navigator
+/robot1/bt_navigator_navigate_through_poses_rclcpp_node
+/robot1/bt_navigator_navigate_to_pose_rclcpp_node
+/robot1/controller_server
+/robot1/create3_repub
+/robot1/global_costmap/global_costmap
+/robot1/joint_state_publisher
+/robot1/joy_linux_node
+/robot1/lifecycle_manager_navigation
+/robot1/local_costmap/local_costmap
+/robot1/nav2_container
+/robot1/oakd
+/robot1/oakd_container
+/robot1/planner_server
+/robot1/robot_state_publisher
+/robot1/rplidar_composition
+/robot1/rviz
+/robot1/rviz_navigation_dialog_action_client
+/robot1/slam_toolbox
+/robot1/smoother_server
+/robot1/teleop_twist_joy_node
+/robot1/transform_listener_impl_56db974664d0
+/robot1/transform_listener_impl_5f41ba871570
+/robot1/transform_listener_impl_77ec040017c0
+/robot1/transform_listener_impl_77ec0c008fe0
+/robot1/transform_listener_impl_77ec140017f0
+/robot1/transform_listener_impl_77ec200063a0
+/robot1/turtlebot4_diagnostics
+/robot1/turtlebot4_node
+/robot1/velocity_smoother
+/robot1/waypoint_follower
+
+=== TOPICS (name : type)
+/diagnostics [diagnostic_msgs/msg/DiagnosticArray]
+/parameter_events [rcl_interfaces/msg/ParameterEvent]
+/pc/parameter_events [rcl_interfaces/msg/ParameterEvent]
+/pc/rosout [rcl_interfaces/msg/Log]
+/robot1/battery_state [sensor_msgs/msg/BatteryState]
+/robot1/behavior_server/transition_event [lifecycle_msgs/msg/TransitionEvent]
+/robot1/behavior_tree_log [nav2_msgs/msg/BehaviorTreeLog]
+/robot1/bond [bond/msg/Status]
+/robot1/bt_navigator/transition_event [lifecycle_msgs/msg/TransitionEvent]
+/robot1/clicked_point [geometry_msgs/msg/PointStamped]
+/robot1/cmd_audio [irobot_create_msgs/msg/AudioNoteVector]
+/robot1/cmd_lightring [irobot_create_msgs/msg/LightringLeds]
+/robot1/cmd_vel [geometry_msgs/msg/Twist]
+/robot1/cmd_vel_nav [geometry_msgs/msg/Twist]
+/robot1/cmd_vel_teleop [geometry_msgs/msg/Twist]
+/robot1/controller_server/transition_event [lifecycle_msgs/msg/TransitionEvent]
+/robot1/cost_cloud [sensor_msgs/msg/PointCloud2]
+/robot1/diagnostics_agg [diagnostic_msgs/msg/DiagnosticArray]
+/robot1/diagnostics [diagnostic_msgs/msg/DiagnosticArray]
+/robot1/diagnostics_toplevel_state [diagnostic_msgs/msg/DiagnosticStatus]
+/robot1/dock_status [irobot_create_msgs/msg/DockStatus]
+/robot1/evaluation [dwb_msgs/msg/LocalPlanEvaluation]
+/robot1/function_calls [std_msgs/msg/String]
+/robot1/global_costmap/costmap [nav_msgs/msg/OccupancyGrid]
+/robot1/global_costmap/costmap_raw [nav2_msgs/msg/Costmap]
+/robot1/global_costmap/costmap_updates [map_msgs/msg/OccupancyGridUpdate]
+/robot1/global_costmap/footprint [geometry_msgs/msg/Polygon]
+/robot1/global_costmap/global_costmap/transition_event [lifecycle_msgs/msg/TransitionEvent]
+/robot1/global_costmap/published_footprint [geometry_msgs/msg/PolygonStamped]
+/robot1/goal_pose [geometry_msgs/msg/PoseStamped]
+/robot1/hazard_detection [irobot_create_msgs/msg/HazardDetectionVector]
+/robot1/imu [sensor_msgs/msg/Imu]
+/robot1/initialpose [geometry_msgs/msg/PoseWithCovarianceStamped]
+/robot1/interface_buttons [irobot_create_msgs/msg/InterfaceButtons]
+/robot1/ip [std_msgs/msg/String]
+/robot1/joint_states [sensor_msgs/msg/JointState]
+/robot1/joy [sensor_msgs/msg/Joy]
+/robot1/joy/set_feedback [sensor_msgs/msg/JoyFeedbackArray]
+/robot1/local_costmap/clearing_endpoints [sensor_msgs/msg/PointCloud2]
+/robot1/local_costmap/costmap [nav_msgs/msg/OccupancyGrid]
+/robot1/local_costmap/costmap_raw [nav2_msgs/msg/Costmap]
+/robot1/local_costmap/costmap_updates [map_msgs/msg/OccupancyGridUpdate]
+/robot1/local_costmap/footprint [geometry_msgs/msg/Polygon]
+/robot1/local_costmap/local_costmap/transition_event [lifecycle_msgs/msg/TransitionEvent]
+/robot1/local_costmap/published_footprint [geometry_msgs/msg/PolygonStamped]
+/robot1/local_costmap/voxel_grid [nav2_msgs/msg/VoxelGrid]
+/robot1/local_plan [nav_msgs/msg/Path]
+/robot1/map_metadata [nav_msgs/msg/MapMetaData]
+/robot1/map [nav_msgs/msg/OccupancyGrid]
+/robot1/map_updates [map_msgs/msg/OccupancyGridUpdate]
+/robot1/marker [visualization_msgs/msg/MarkerArray]
+/robot1/mouse [irobot_create_msgs/msg/Mouse]
+/robot1/oakd/rgb/preview/image_raw [sensor_msgs/msg/Image]
+/robot1/odom [nav_msgs/msg/Odometry]
+/robot1/plan [nav_msgs/msg/Path]
+/robot1/planner_server/transition_event [lifecycle_msgs/msg/TransitionEvent]
+/robot1/plan_smoothed [nav_msgs/msg/Path]
+/robot1/pose [geometry_msgs/msg/PoseWithCovarianceStamped]
+/robot1/preempt_teleop [std_msgs/msg/Empty]
+/robot1/received_global_plan [nav_msgs/msg/Path]
+/robot1/robot_description [std_msgs/msg/String]
+/robot1/scan [sensor_msgs/msg/LaserScan]
+/robot1/slam_toolbox/feedback [visualization_msgs/msg/InteractiveMarkerFeedback]
+/robot1/slam_toolbox/graph_visualization [visualization_msgs/msg/MarkerArray]
+/robot1/slam_toolbox/scan_visualization [sensor_msgs/msg/LaserScan]
+/robot1/slam_toolbox/update [visualization_msgs/msg/InteractiveMarkerUpdate]
+/robot1/smoother_server/transition_event [lifecycle_msgs/msg/TransitionEvent]
+/robot1/speed_limit [nav2_msgs/msg/SpeedLimit]
+/robot1/tf_static [tf2_msgs/msg/TFMessage]
+/robot1/tf [tf2_msgs/msg/TFMessage]
+/robot1/transformed_global_plan [nav_msgs/msg/Path]
+/robot1/velocity_smoother/transition_event [lifecycle_msgs/msg/TransitionEvent]
+/robot1/waypoint_follower/transition_event [lifecycle_msgs/msg/TransitionEvent]
+/robot1/waypoints [visualization_msgs/msg/MarkerArray]
+/robot1/wheel_status [irobot_create_msgs/msg/WheelStatus]
+/rosout [rcl_interfaces/msg/Log]
+
+=== QoS of key topics
+--- /robot1/scan
+  Type: sensor_msgs/msg/LaserScan
+  Publisher count: 1
+  Node name: rplidar_composition
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Subscription count: 5
+  Node name: local_costmap
+  Node namespace: /robot1/local_costmap
+    Reliability: BEST_EFFORT
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: global_costmap
+  Node namespace: /robot1/global_costmap
+    Reliability: BEST_EFFORT
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: rviz
+  Node namespace: /robot1
+    Reliability: BEST_EFFORT
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: slam_toolbox
+  Node namespace: /robot1
+    Reliability: BEST_EFFORT
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: turtlebot4_diagnostics
+  Node namespace: /robot1
+    Reliability: BEST_EFFORT
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+--- /robot1/odom
+  Type: nav_msgs/msg/Odometry
+  Publisher count: 1
+  Node name: create3_repub
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: TRANSIENT_LOCAL
+  Subscription count: 3
+  Node name: controller_server
+  Node namespace: /robot1
+    Reliability: BEST_EFFORT
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: bt_navigator
+  Node namespace: /robot1
+    Reliability: BEST_EFFORT
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: rviz
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+--- /robot1/tf
+  Type: tf2_msgs/msg/TFMessage
+  Publisher count: 4
+  Node name: slam_toolbox
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: slam_toolbox
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: create3_repub
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: TRANSIENT_LOCAL
+  Node name: robot_state_publisher
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Subscription count: 7
+  Node name: transform_listener_impl_77ec200063a0
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: transform_listener_impl_77ec140017f0
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: transform_listener_impl_77ec0c008fe0
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: transform_listener_impl_77ec040017c0
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: bt_navigator
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: transform_listener_impl_56db974664d0
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: transform_listener_impl_5f41ba871570
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+--- /robot1/tf_static
+  Type: tf2_msgs/msg/TFMessage
+  Publisher count: 2
+  Node name: create3_repub
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: TRANSIENT_LOCAL
+  Node name: robot_state_publisher
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: TRANSIENT_LOCAL
+  Subscription count: 7
+  Node name: transform_listener_impl_77ec200063a0
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: TRANSIENT_LOCAL
+  Node name: transform_listener_impl_77ec140017f0
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: TRANSIENT_LOCAL
+  Node name: transform_listener_impl_77ec0c008fe0
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: TRANSIENT_LOCAL
+  Node name: transform_listener_impl_77ec040017c0
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: TRANSIENT_LOCAL
+  Node name: bt_navigator
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: TRANSIENT_LOCAL
+  Node name: transform_listener_impl_56db974664d0
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: TRANSIENT_LOCAL
+  Node name: transform_listener_impl_5f41ba871570
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: TRANSIENT_LOCAL
+--- /robot1/map
+  Type: nav_msgs/msg/OccupancyGrid
+  Publisher count: 1
+  Node name: slam_toolbox
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: TRANSIENT_LOCAL
+  Subscription count: 4
+  Node name: local_costmap
+  Node namespace: /robot1/local_costmap
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: TRANSIENT_LOCAL
+  Node name: global_costmap
+  Node namespace: /robot1/global_costmap
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: TRANSIENT_LOCAL
+  Node name: rviz
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: TRANSIENT_LOCAL
+  Node name: slam_toolbox
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+--- /robot1/cmd_vel
+  Type: geometry_msgs/msg/Twist
+  Publisher count: 7
+  Node name: behavior_server
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: behavior_server
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: behavior_server
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: behavior_server
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: behavior_server
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: velocity_smoother
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: teleop_twist_joy_node
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Subscription count: 1
+  Node name: create3_repub
+  Node namespace: /robot1
+    Reliability: BEST_EFFORT
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+--- /robot1/battery_state
+  Type: sensor_msgs/msg/BatteryState
+  Publisher count: 1
+  Node name: create3_repub
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: TRANSIENT_LOCAL
+  Subscription count: 2
+  Node name: turtlebot4_node
+  Node namespace: /robot1
+    Reliability: BEST_EFFORT
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: turtlebot4_diagnostics
+  Node namespace: /robot1
+    Reliability: BEST_EFFORT
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+--- /robot1/dock_status
+  Type: irobot_create_msgs/msg/DockStatus
+  Publisher count: 1
+  Node name: create3_repub
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: TRANSIENT_LOCAL
+  Subscription count: 2
+  Node name: turtlebot4_node
+  Node namespace: /robot1
+    Reliability: BEST_EFFORT
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: turtlebot4_diagnostics
+  Node namespace: /robot1
+    Reliability: BEST_EFFORT
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+--- /robot1/oakd/rgb/preview/image_raw/compressed
+--- /robot1/oakd/rgb/preview/camera_info
+--- /robot1/global_costmap/costmap
+  Type: nav_msgs/msg/OccupancyGrid
+  Publisher count: 1
+  Node name: global_costmap
+  Node namespace: /robot1/global_costmap
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: TRANSIENT_LOCAL
+  Subscription count: 1
+  Node name: rviz
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: TRANSIENT_LOCAL
+--- /robot1/local_costmap/costmap
+  Type: nav_msgs/msg/OccupancyGrid
+  Publisher count: 1
+  Node name: local_costmap
+  Node namespace: /robot1/local_costmap
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: TRANSIENT_LOCAL
+  Subscription count: 1
+  Node name: rviz
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: TRANSIENT_LOCAL
+--- /robot1/plan
+  Type: nav_msgs/msg/Path
+  Publisher count: 1
+  Node name: planner_server
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Subscription count: 1
+  Node name: rviz
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+--- /robot1/imu
+  Type: sensor_msgs/msg/Imu
+  Publisher count: 1
+  Node name: create3_repub
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: TRANSIENT_LOCAL
+  Subscription count: 1
+  Node name: turtlebot4_diagnostics
+  Node namespace: /robot1
+    Reliability: BEST_EFFORT
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+--- /vla/command
+--- /vla/status
+--- /vla/reply
+--- /vla/voice/trigger
+--- /parameter_events
+  Type: rcl_interfaces/msg/ParameterEvent
+  Publisher count: 18
+  Node name: _ros2cli_daemon_0_01f3f1c2dacd4393ab3474bafc48d317
+  Node namespace: /
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: launch_ros_32292
+  Node namespace: /
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: rviz
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: rviz_navigation_dialog_action_client
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: slam_toolbox
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: _ros2cli_daemon_0_534f0941476947209de7335f89f2cb82
+  Node namespace: /
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: launch_ros_2237
+  Node namespace: /
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: turtlebot4_node
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: create3_repub
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: joy_linux_node
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: teleop_twist_joy_node
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: rplidar_composition
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: oakd
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: robot_state_publisher
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: joint_state_publisher
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: analyzers
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: turtlebot4_diagnostics
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: _NODE_NAME_UNKNOWN_
+  Node namespace: _NODE_NAMESPACE_UNKNOWN_
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Subscription count: 26
+  Node name: rviz
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: transform_listener_impl_56db974664d0
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: rviz_navigation_dialog_action_client
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: slam_toolbox
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: transform_listener_impl_5f41ba871570
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: turtlebot4_node
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: create3_repub
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: joy_linux_node
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: teleop_twist_joy_node
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: rplidar_composition
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: oakd_container
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: oakd
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: robot_state_publisher
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: robot_state_publisher
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: analyzers
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: analyzers
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: _NODE_NAME_UNKNOWN_
+  Node namespace: _NODE_NAMESPACE_UNKNOWN_
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: _NODE_NAME_UNKNOWN_
+  Node namespace: _NODE_NAMESPACE_UNKNOWN_
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: _NODE_NAME_UNKNOWN_
+  Node namespace: _NODE_NAMESPACE_UNKNOWN_
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: _NODE_NAME_UNKNOWN_
+  Node namespace: _NODE_NAMESPACE_UNKNOWN_
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: _NODE_NAME_UNKNOWN_
+  Node namespace: _NODE_NAMESPACE_UNKNOWN_
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: _NODE_NAME_UNKNOWN_
+  Node namespace: _NODE_NAMESPACE_UNKNOWN_
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: _NODE_NAME_UNKNOWN_
+  Node namespace: _NODE_NAMESPACE_UNKNOWN_
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: _NODE_NAME_UNKNOWN_
+  Node namespace: _NODE_NAMESPACE_UNKNOWN_
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: _NODE_NAME_UNKNOWN_
+  Node namespace: _NODE_NAMESPACE_UNKNOWN_
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: _NODE_NAME_UNKNOWN_
+  Node namespace: _NODE_NAMESPACE_UNKNOWN_
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+--- /pc/parameter_events
+  Type: rcl_interfaces/msg/ParameterEvent
+  Publisher count: 12
+  Node name: controller_server
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: local_costmap
+  Node namespace: /robot1/local_costmap
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: smoother_server
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: planner_server
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: global_costmap
+  Node namespace: /robot1/global_costmap
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: behavior_server
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: bt_navigator
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: waypoint_follower
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: velocity_smoother
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: lifecycle_manager_navigation
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: bt_navigator_navigate_to_pose_rclcpp_node
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: bt_navigator_navigate_through_poses_rclcpp_node
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Subscription count: 17
+  Node name: nav2_container
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: controller_server
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: local_costmap
+  Node namespace: /robot1/local_costmap
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: smoother_server
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: planner_server
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: global_costmap
+  Node namespace: /robot1/global_costmap
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: behavior_server
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: bt_navigator
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: waypoint_follower
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: velocity_smoother
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: lifecycle_manager_navigation
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: transform_listener_impl_77ec200063a0
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: transform_listener_impl_77ec140017f0
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: transform_listener_impl_77ec0c008fe0
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: transform_listener_impl_77ec040017c0
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: bt_navigator_navigate_to_pose_rclcpp_node
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE
+  Node name: bt_navigator_navigate_through_poses_rclcpp_node
+  Node namespace: /robot1
+    Reliability: RELIABLE
+    History (Depth): UNKNOWN
+    Durability: VOLATILE

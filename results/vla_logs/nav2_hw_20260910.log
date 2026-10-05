@@ -1,0 +1,1019 @@
+=== marker ===
+=== BRINGUP 09:44:39 ===
+[INFO] [launch]: All log files can be found below /home/danyalaziz/.ros/log/2026-09-10-09-44-39-860123-Precision-3660-19401
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [controller_server-1]: process started with pid [19404]
+[INFO] [smoother_server-2]: process started with pid [19406]
+[INFO] [planner_server-3]: process started with pid [19408]
+[INFO] [behavior_server-4]: process started with pid [19410]
+[INFO] [bt_navigator-5]: process started with pid [19412]
+[INFO] [waypoint_follower-6]: process started with pid [19414]
+[INFO] [velocity_smoother-7]: process started with pid [19416]
+[INFO] [lifecycle_manager-8]: process started with pid [19418]
+[waypoint_follower-6] [INFO] [1789015480.257139351] [robot1.waypoint_follower]: 
+[waypoint_follower-6] 	waypoint_follower lifecycle node launched. 
+[waypoint_follower-6] 	Waiting on external lifecycle transitions to activate
+[waypoint_follower-6] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[controller_server-1] [INFO] [1789015480.257160023] [robot1.controller_server]: 
+[controller_server-1] 	controller_server lifecycle node launched. 
+[controller_server-1] 	Waiting on external lifecycle transitions to activate
+[controller_server-1] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-3] [INFO] [1789015480.257186720] [robot1.planner_server]: 
+[planner_server-3] 	planner_server lifecycle node launched. 
+[planner_server-3] 	Waiting on external lifecycle transitions to activate
+[planner_server-3] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[velocity_smoother-7] [INFO] [1789015480.284020291] [robot1.velocity_smoother]: 
+[velocity_smoother-7] 	velocity_smoother lifecycle node launched. 
+[velocity_smoother-7] 	Waiting on external lifecycle transitions to activate
+[velocity_smoother-7] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[lifecycle_manager-8] [INFO] [1789015480.322388212] [robot1.lifecycle_manager_navigation]: Creating
+[lifecycle_manager-8] [INFO] [1789015480.323041656] [robot1.lifecycle_manager_navigation]: [34m[1mCreating and initializing lifecycle service clients[0m[0m
+[waypoint_follower-6] [INFO] [1789015480.334226036] [robot1.waypoint_follower]: Creating
+[smoother_server-2] [INFO] [1789015480.420900420] [robot1.smoother_server]: 
+[smoother_server-2] 	smoother_server lifecycle node launched. 
+[smoother_server-2] 	Waiting on external lifecycle transitions to activate
+[smoother_server-2] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[behavior_server-4] [INFO] [1789015480.420942679] [robot1.behavior_server]: 
+[behavior_server-4] 	behavior_server lifecycle node launched. 
+[behavior_server-4] 	Waiting on external lifecycle transitions to activate
+[behavior_server-4] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[bt_navigator-5] [INFO] [1789015480.530548115] [robot1.bt_navigator]: 
+[bt_navigator-5] 	bt_navigator lifecycle node launched. 
+[bt_navigator-5] 	Waiting on external lifecycle transitions to activate
+[bt_navigator-5] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[bt_navigator-5] [INFO] [1789015480.530606038] [robot1.bt_navigator]: Creating
+[planner_server-3] [INFO] [1789015480.567681888] [robot1.planner_server]: Creating
+[smoother_server-2] [INFO] [1789015480.567690232] [robot1.smoother_server]: Creating smoother server
+[controller_server-1] [INFO] [1789015480.568565389] [robot1.controller_server]: Creating controller server
+[planner_server-3] [INFO] [1789015480.569091019] [robot1.global_costmap.global_costmap]: 
+[planner_server-3] 	global_costmap lifecycle node launched. 
+[planner_server-3] 	Waiting on external lifecycle transitions to activate
+[planner_server-3] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[controller_server-1] [INFO] [1789015480.569925468] [robot1.local_costmap.local_costmap]: 
+[controller_server-1] 	local_costmap lifecycle node launched. 
+[controller_server-1] 	Waiting on external lifecycle transitions to activate
+[controller_server-1] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-3] [INFO] [1789015480.587753287] [robot1.global_costmap.global_costmap]: Creating Costmap
+[controller_server-1] [INFO] [1789015480.587754417] [robot1.local_costmap.local_costmap]: Creating Costmap
+[lifecycle_manager-8] [INFO] [1789015482.323381557] [robot1.lifecycle_manager_navigation]: Waiting for service controller_server/get_state...
+[lifecycle_manager-8] [INFO] [1789015486.230666709] [robot1.lifecycle_manager_navigation]: Waiting for service smoother_server/get_state...
+[lifecycle_manager-8] [INFO] [1789015488.230903449] [robot1.lifecycle_manager_navigation]: Waiting for service smoother_server/get_state...
+[lifecycle_manager-8] [INFO] [1789015490.231135943] [robot1.lifecycle_manager_navigation]: Waiting for service smoother_server/get_state...
+[lifecycle_manager-8] [INFO] [1789015492.231312462] [robot1.lifecycle_manager_navigation]: Waiting for service smoother_server/get_state...
+[lifecycle_manager-8] [INFO] [1789015494.231475627] [robot1.lifecycle_manager_navigation]: Waiting for service smoother_server/get_state...
+[lifecycle_manager-8] [INFO] [1789015496.231628169] [robot1.lifecycle_manager_navigation]: Waiting for service smoother_server/get_state...
+[lifecycle_manager-8] [INFO] [1789015498.231808157] [robot1.lifecycle_manager_navigation]: Waiting for service smoother_server/get_state...
+[INFO] [nav2_startup-9]: process started with pid [19626]
+[lifecycle_manager-8] [INFO] [1789015500.231964136] [robot1.lifecycle_manager_navigation]: Waiting for service smoother_server/get_state...
+[nav2_startup-9] waiting for service to become available...
+[lifecycle_manager-8] [INFO] [1789015502.232155437] [robot1.lifecycle_manager_navigation]: Waiting for service smoother_server/get_state...
+[lifecycle_manager-8] [INFO] [1789015504.942698080] [robot1.lifecycle_manager_navigation]: Waiting for service bt_navigator/get_state...
+[lifecycle_manager-8] [INFO] [1789015506.942883801] [robot1.lifecycle_manager_navigation]: Waiting for service bt_navigator/get_state...
+[lifecycle_manager-8] [INFO] [1789015508.943081537] [robot1.lifecycle_manager_navigation]: Waiting for service bt_navigator/get_state...
+[lifecycle_manager-8] [INFO] [1789015510.943239081] [robot1.lifecycle_manager_navigation]: Waiting for service bt_navigator/get_state...
+[lifecycle_manager-8] [INFO] [1789015512.943451569] [robot1.lifecycle_manager_navigation]: Waiting for service bt_navigator/get_state...
+[lifecycle_manager-8] [INFO] [1789015514.943618176] [robot1.lifecycle_manager_navigation]: Waiting for service bt_navigator/get_state...
+[lifecycle_manager-8] [INFO] [1789015516.943796352] [robot1.lifecycle_manager_navigation]: Waiting for service bt_navigator/get_state...
+[lifecycle_manager-8] [INFO] [1789015518.943980647] [robot1.lifecycle_manager_navigation]: Waiting for service bt_navigator/get_state...
+[lifecycle_manager-8] [INFO] [1789015520.944166458] [robot1.lifecycle_manager_navigation]: Waiting for service bt_navigator/get_state...
+[lifecycle_manager-8] [INFO] [1789015522.944351068] [robot1.lifecycle_manager_navigation]: Waiting for service bt_navigator/get_state...
+[lifecycle_manager-8] [INFO] [1789015524.944505677] [robot1.lifecycle_manager_navigation]: Waiting for service bt_navigator/get_state...
+[lifecycle_manager-8] [INFO] [1789015526.944670154] [robot1.lifecycle_manager_navigation]: Waiting for service bt_navigator/get_state...
+[lifecycle_manager-8] [INFO] [1789015528.944810552] [robot1.lifecycle_manager_navigation]: Waiting for service bt_navigator/get_state...
+[lifecycle_manager-8] [INFO] [1789015530.944975249] [robot1.lifecycle_manager_navigation]: Waiting for service bt_navigator/get_state...
+[lifecycle_manager-8] [INFO] [1789015532.945158439] [robot1.lifecycle_manager_navigation]: Waiting for service bt_navigator/get_state...
+[lifecycle_manager-8] [INFO] [1789015534.945331978] [robot1.lifecycle_manager_navigation]: Waiting for service bt_navigator/get_state...
+[lifecycle_manager-8] [INFO] [1789015536.945442960] [robot1.lifecycle_manager_navigation]: Waiting for service bt_navigator/get_state...
+[lifecycle_manager-8] [INFO] [1789015538.945597158] [robot1.lifecycle_manager_navigation]: Waiting for service bt_navigator/get_state...
+[lifecycle_manager-8] [INFO] [1789015540.945766231] [robot1.lifecycle_manager_navigation]: Waiting for service bt_navigator/get_state...
+[lifecycle_manager-8] [INFO] [1789015542.945905561] [robot1.lifecycle_manager_navigation]: Waiting for service bt_navigator/get_state...
+[lifecycle_manager-8] [INFO] [1789015544.946054534] [robot1.lifecycle_manager_navigation]: Waiting for service bt_navigator/get_state...
+[lifecycle_manager-8] [INFO] [1789015546.946212206] [robot1.lifecycle_manager_navigation]: Waiting for service bt_navigator/get_state...
+[nav2_startup-9] requester: making request: nav2_msgs.srv.ManageLifecycleNodes_Request(command=0)
+[nav2_startup-9] 
+[lifecycle_manager-8] [INFO] [1789015549.017655764] [robot1.lifecycle_manager_navigation]: [34m[1mStarting managed nodes bringup...[0m[0m
+[lifecycle_manager-8] [INFO] [1789015549.017698964] [robot1.lifecycle_manager_navigation]: [34m[1mConfiguring controller_server[0m[0m
+[controller_server-1] [INFO] [1789015549.018120843] [robot1.controller_server]: Configuring controller interface
+[controller_server-1] [INFO] [1789015549.018230211] [robot1.controller_server]: getting goal checker plugins..
+[controller_server-1] [INFO] [1789015549.018274774] [robot1.controller_server]: Controller frequency set to 20.0000Hz
+[controller_server-1] [INFO] [1789015549.018289391] [robot1.local_costmap.local_costmap]: Configuring
+[controller_server-1] [INFO] [1789015549.020770885] [robot1.local_costmap.local_costmap]: Using plugin "static_layer"
+[controller_server-1] [INFO] [1789015549.050503555] [robot1.local_costmap.local_costmap]: Subscribing to the map topic (/robot1/map) with transient local durability
+[controller_server-1] [INFO] [1789015549.051135803] [robot1.local_costmap.local_costmap]: Initialized plugin "static_layer"
+[controller_server-1] [INFO] [1789015549.051152017] [robot1.local_costmap.local_costmap]: Using plugin "voxel_layer"
+[controller_server-1] [INFO] [1789015549.051332396] [robot1.local_costmap.local_costmap]: Subscribed to Topics: scan
+[controller_server-1] [INFO] [1789015549.053706534] [robot1.local_costmap.local_costmap]: Initialized plugin "voxel_layer"
+[controller_server-1] [INFO] [1789015549.053718843] [robot1.local_costmap.local_costmap]: Using plugin "inflation_layer"
+[controller_server-1] [INFO] [1789015549.053924118] [robot1.local_costmap.local_costmap]: Initialized plugin "inflation_layer"
+[controller_server-1] [INFO] [1789015549.162546705] [robot1.controller_server]: Created progress_checker : progress_checker of type nav2_controller::SimpleProgressChecker
+[controller_server-1] [INFO] [1789015549.167147174] [robot1.controller_server]: Created goal checker : general_goal_checker of type nav2_controller::SimpleGoalChecker
+[controller_server-1] [INFO] [1789015549.167291750] [robot1.controller_server]: Controller Server has general_goal_checker  goal checkers available.
+[controller_server-1] [INFO] [1789015549.215341066] [robot1.controller_server]: Created controller : FollowPath of type dwb_core::DWBLocalPlanner
+[controller_server-1] [INFO] [1789015549.215681992] [robot1.controller_server]: Setting transform_tolerance to 0.200000
+[controller_server-1] [INFO] [1789015549.258186454] [robot1.controller_server]: Using critic "RotateToGoal" (dwb_critics::RotateToGoalCritic)
+[controller_server-1] [INFO] [1789015549.258513002] [robot1.controller_server]: Critic plugin initialized
+[controller_server-1] [INFO] [1789015549.258574844] [robot1.controller_server]: Using critic "Oscillation" (dwb_critics::OscillationCritic)
+[controller_server-1] [INFO] [1789015549.258725645] [robot1.controller_server]: Critic plugin initialized
+[controller_server-1] [INFO] [1789015549.258769478] [robot1.controller_server]: Using critic "BaseObstacle" (dwb_critics::BaseObstacleCritic)
+[controller_server-1] [INFO] [1789015549.258832396] [robot1.controller_server]: Critic plugin initialized
+[controller_server-1] [INFO] [1789015549.258904044] [robot1.controller_server]: Using critic "GoalAlign" (dwb_critics::GoalAlignCritic)
+[controller_server-1] [INFO] [1789015549.259024206] [robot1.controller_server]: Critic plugin initialized
+[controller_server-1] [INFO] [1789015549.259063682] [robot1.controller_server]: Using critic "PathAlign" (dwb_critics::PathAlignCritic)
+[controller_server-1] [INFO] [1789015549.259159171] [robot1.controller_server]: Critic plugin initialized
+[controller_server-1] [INFO] [1789015549.259198856] [robot1.controller_server]: Using critic "PathDist" (dwb_critics::PathDistCritic)
+[controller_server-1] [INFO] [1789015549.259271130] [robot1.controller_server]: Critic plugin initialized
+[controller_server-1] [INFO] [1789015549.259307335] [robot1.controller_server]: Using critic "GoalDist" (dwb_critics::GoalDistCritic)
+[controller_server-1] [INFO] [1789015549.259382928] [robot1.controller_server]: Critic plugin initialized
+[controller_server-1] [INFO] [1789015549.259391379] [robot1.controller_server]: Controller Server has FollowPath  controllers available.
+[lifecycle_manager-8] [INFO] [1789015549.424420196] [robot1.lifecycle_manager_navigation]: [34m[1mConfiguring smoother_server[0m[0m
+[smoother_server-2] [INFO] [1789015549.424581599] [robot1.smoother_server]: Configuring smoother server
+[smoother_server-2] [INFO] [1789015549.428472065] [robot1.smoother_server]: Created smoother : simple_smoother of type nav2_smoother::SimpleSmoother
+[smoother_server-2] [INFO] [1789015549.428666288] [robot1.smoother_server]: Smoother Server has simple_smoother  smoothers available.
+[lifecycle_manager-8] [INFO] [1789015549.430402484] [robot1.lifecycle_manager_navigation]: [34m[1mConfiguring planner_server[0m[0m
+[planner_server-3] [INFO] [1789015549.430519429] [robot1.planner_server]: Configuring
+[planner_server-3] [INFO] [1789015549.430543185] [robot1.global_costmap.global_costmap]: Configuring
+[planner_server-3] [INFO] [1789015549.432578937] [robot1.global_costmap.global_costmap]: Using plugin "static_layer"
+[planner_server-3] [INFO] [1789015549.434095979] [robot1.global_costmap.global_costmap]: Subscribing to the map topic (/robot1/map) with transient local durability
+[planner_server-3] [INFO] [1789015549.434587041] [robot1.global_costmap.global_costmap]: Initialized plugin "static_layer"
+[planner_server-3] [INFO] [1789015549.434598011] [robot1.global_costmap.global_costmap]: Using plugin "obstacle_layer"
+[planner_server-3] [INFO] [1789015549.434786039] [robot1.global_costmap.global_costmap]: Subscribed to Topics: scan
+[planner_server-3] [INFO] [1789015549.435911404] [robot1.global_costmap.global_costmap]: Initialized plugin "obstacle_layer"
+[planner_server-3] [INFO] [1789015549.435924055] [robot1.global_costmap.global_costmap]: Using plugin "inflation_layer"
+[planner_server-3] [INFO] [1789015549.436175124] [robot1.global_costmap.global_costmap]: Initialized plugin "inflation_layer"
+[planner_server-3] [INFO] [1789015549.982698958] [robot1.planner_server]: Created global planner plugin GridBased of type nav2_navfn_planner/NavfnPlanner
+[planner_server-3] [INFO] [1789015549.982726219] [robot1.planner_server]: Configuring plugin GridBased of type NavfnPlanner
+[planner_server-3] [INFO] [1789015549.982905027] [robot1.planner_server]: Planner Server has GridBased  planners available.
+[lifecycle_manager-8] [INFO] [1789015550.581812396] [robot1.lifecycle_manager_navigation]: [34m[1mConfiguring behavior_server[0m[0m
+[behavior_server-4] [INFO] [1789015550.582000230] [robot1.behavior_server]: Configuring
+[behavior_server-4] [INFO] [1789015550.585749548] [robot1.behavior_server]: Creating behavior plugin spin of type nav2_behaviors/Spin
+[behavior_server-4] [INFO] [1789015550.605528103] [robot1.behavior_server]: Configuring spin
+[behavior_server-4] [INFO] [1789015550.607106388] [robot1.behavior_server]: Creating behavior plugin backup of type nav2_behaviors/BackUp
+[behavior_server-4] [INFO] [1789015550.617272691] [robot1.behavior_server]: Configuring backup
+[behavior_server-4] [INFO] [1789015550.726311413] [robot1.behavior_server]: Creating behavior plugin drive_on_heading of type nav2_behaviors/DriveOnHeading
+[behavior_server-4] [INFO] [1789015550.741116913] [robot1.behavior_server]: Configuring drive_on_heading
+[behavior_server-4] [INFO] [1789015550.742419170] [robot1.behavior_server]: Creating behavior plugin assisted_teleop of type nav2_behaviors/AssistedTeleop
+[behavior_server-4] [INFO] [1789015550.759051867] [robot1.behavior_server]: Configuring assisted_teleop
+[behavior_server-4] [INFO] [1789015550.824994119] [robot1.behavior_server]: Creating behavior plugin wait of type nav2_behaviors/Wait
+[behavior_server-4] [INFO] [1789015550.832710061] [robot1.behavior_server]: Configuring wait
+[lifecycle_manager-8] [INFO] [1789015550.848944458] [robot1.lifecycle_manager_navigation]: [34m[1mConfiguring bt_navigator[0m[0m
+[bt_navigator-5] [INFO] [1789015550.849133646] [robot1.bt_navigator]: Configuring
+[controller_server-1] [INFO] [1789015551.317812670] [robot1.local_costmap.local_costmap]: StaticLayer: Resizing static layer to 141 X 281 at 0.050000 m/pix
+[lifecycle_manager-8] [INFO] [1789015551.349786050] [robot1.lifecycle_manager_navigation]: [34m[1mConfiguring waypoint_follower[0m[0m
+[waypoint_follower-6] [INFO] [1789015551.349986473] [robot1.waypoint_follower]: Configuring
+[waypoint_follower-6] [INFO] [1789015551.354442259] [robot1.waypoint_follower]: Created waypoint_task_executor : wait_at_waypoint of type nav2_waypoint_follower::WaitAtWaypoint
+[lifecycle_manager-8] [INFO] [1789015551.354744627] [robot1.lifecycle_manager_navigation]: [34m[1mConfiguring velocity_smoother[0m[0m
+[velocity_smoother-7] [INFO] [1789015551.354867772] [robot1.velocity_smoother]: Configuring velocity smoother
+[lifecycle_manager-8] [INFO] [1789015551.356121467] [robot1.lifecycle_manager_navigation]: [34m[1mActivating controller_server[0m[0m
+[controller_server-1] [INFO] [1789015551.356221054] [robot1.controller_server]: Activating
+[controller_server-1] [INFO] [1789015551.356255620] [robot1.local_costmap.local_costmap]: Activating
+[controller_server-1] [INFO] [1789015551.356268761] [robot1.local_costmap.local_costmap]: Checking transform
+[controller_server-1] [INFO] [1789015551.356293536] [robot1.local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Could not find a connection between 'odom' and 'base_link' because they are not part of the same tree.Tf has two or more unconnected trees.
+[controller_server-1] [INFO] [1789015551.856462425] [robot1.local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Could not find a connection between 'odom' and 'base_link' because they are not part of the same tree.Tf has two or more unconnected trees.
+[controller_server-1] [INFO] [1789015552.356458223] [robot1.local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Could not find a connection between 'odom' and 'base_link' because they are not part of the same tree.Tf has two or more unconnected trees.
+[controller_server-1] [INFO] [1789015552.856465875] [robot1.local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Could not find a connection between 'odom' and 'base_link' because they are not part of the same tree.Tf has two or more unconnected trees.
+[controller_server-1] [INFO] [1789015553.356508863] [robot1.local_costmap.local_costmap]: start
+[controller_server-1] [INFO] [1789015553.607016109] [robot1.controller_server]: Creating bond (controller_server) to lifecycle manager.
+[planner_server-3] [INFO] [1789015554.861472062] [robot1.global_costmap.global_costmap]: StaticLayer: Resizing costmap to 141 X 281 at 0.050000 m/pix
+[lifecycle_manager-8] [INFO] [1789015557.130391779] [robot1.lifecycle_manager_navigation]: Server controller_server connected with bond.
+[lifecycle_manager-8] [INFO] [1789015557.130452908] [robot1.lifecycle_manager_navigation]: [34m[1mActivating smoother_server[0m[0m
+[smoother_server-2] [INFO] [1789015557.130806778] [robot1.smoother_server]: Activating
+[smoother_server-2] [INFO] [1789015557.130843231] [robot1.smoother_server]: Creating bond (smoother_server) to lifecycle manager.
+[lifecycle_manager-8] [INFO] [1789015558.232897303] [robot1.lifecycle_manager_navigation]: Server smoother_server connected with bond.
+[lifecycle_manager-8] [INFO] [1789015558.232944046] [robot1.lifecycle_manager_navigation]: [34m[1mActivating planner_server[0m[0m
+[planner_server-3] [INFO] [1789015558.233266460] [robot1.planner_server]: Activating
+[planner_server-3] [INFO] [1789015558.233307567] [robot1.global_costmap.global_costmap]: Activating
+[planner_server-3] [INFO] [1789015558.233322073] [robot1.global_costmap.global_costmap]: Checking transform
+[planner_server-3] [INFO] [1789015558.233419185] [robot1.global_costmap.global_costmap]: start
+[planner_server-3] [INFO] [1789015559.284214318] [robot1.planner_server]: Activating plugin GridBased of type NavfnPlanner
+[planner_server-3] [INFO] [1789015559.284886343] [robot1.planner_server]: Creating bond (planner_server) to lifecycle manager.
+[lifecycle_manager-8] [INFO] [1789015559.707752964] [robot1.lifecycle_manager_navigation]: Server planner_server connected with bond.
+[lifecycle_manager-8] [INFO] [1789015559.707794051] [robot1.lifecycle_manager_navigation]: [34m[1mActivating behavior_server[0m[0m
+[behavior_server-4] [INFO] [1789015559.708164444] [robot1.behavior_server]: Activating
+[behavior_server-4] [INFO] [1789015559.708191752] [robot1.behavior_server]: Activating spin
+[behavior_server-4] [INFO] [1789015559.708213153] [robot1.behavior_server]: Activating backup
+[behavior_server-4] [INFO] [1789015559.708223492] [robot1.behavior_server]: Activating drive_on_heading
+[behavior_server-4] [INFO] [1789015559.708232719] [robot1.behavior_server]: Activating assisted_teleop
+[behavior_server-4] [INFO] [1789015559.708242431] [robot1.behavior_server]: Activating wait
+[behavior_server-4] [INFO] [1789015559.708255114] [robot1.behavior_server]: Creating bond (behavior_server) to lifecycle manager.
+[lifecycle_manager-8] [INFO] [1789015560.071673913] [robot1.lifecycle_manager_navigation]: Server behavior_server connected with bond.
+[lifecycle_manager-8] [INFO] [1789015560.071704961] [robot1.lifecycle_manager_navigation]: [34m[1mActivating bt_navigator[0m[0m
+[bt_navigator-5] [INFO] [1789015560.071932460] [robot1.bt_navigator]: Activating
+[bt_navigator-5] [INFO] [1789015560.661615223] [robot1.bt_navigator]: Creating bond (bt_navigator) to lifecycle manager.
+[lifecycle_manager-8] [INFO] [1789015562.299779467] [robot1.lifecycle_manager_navigation]: Server bt_navigator connected with bond.
+[lifecycle_manager-8] [INFO] [1789015562.299874820] [robot1.lifecycle_manager_navigation]: [34m[1mActivating waypoint_follower[0m[0m
+[waypoint_follower-6] [INFO] [1789015562.300174760] [robot1.waypoint_follower]: Activating
+[waypoint_follower-6] [INFO] [1789015562.300213698] [robot1.waypoint_follower]: Creating bond (waypoint_follower) to lifecycle manager.
+[lifecycle_manager-8] [INFO] [1789015562.902608121] [robot1.lifecycle_manager_navigation]: Server waypoint_follower connected with bond.
+[lifecycle_manager-8] [INFO] [1789015562.902635325] [robot1.lifecycle_manager_navigation]: [34m[1mActivating velocity_smoother[0m[0m
+[velocity_smoother-7] [INFO] [1789015562.902910561] [robot1.velocity_smoother]: Activating
+[velocity_smoother-7] [INFO] [1789015562.902969097] [robot1.velocity_smoother]: Creating bond (velocity_smoother) to lifecycle manager.
+[lifecycle_manager-8] [INFO] [1789015563.005876663] [robot1.lifecycle_manager_navigation]: Server velocity_smoother connected with bond.
+[lifecycle_manager-8] [INFO] [1789015563.005922612] [robot1.lifecycle_manager_navigation]: [34m[1mManaged nodes are active[0m[0m
+[lifecycle_manager-8] [INFO] [1789015563.005928182] [robot1.lifecycle_manager_navigation]: [34m[1mCreating bond timer...[0m[0m
+[nav2_startup-9] response:
+[nav2_startup-9] nav2_msgs.srv.ManageLifecycleNodes_Response(success=True)
+[nav2_startup-9] 
+[INFO] [nav2_startup-9]: process has finished cleanly [pid 19626]
+[controller_server-1] [INFO] [1789015768.296514312] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789015767.868 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789015768.299302117] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789015767.868 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [ERROR] [1789016097.536733233] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789016086.452463 but the earliest data is at time 1789016087.422082, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789016098.535821752] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789016086.452463 but the earliest data is at time 1789016088.463232, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789016099.535588895] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789016086.452463 but the earliest data is at time 1789016089.454755, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789016100.536979672] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789016086.452463 but the earliest data is at time 1789016090.414449, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789016101.536200417] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789016086.452463 but the earliest data is at time 1789016091.454363, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789016102.536604430] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789016086.452463 but the earliest data is at time 1789016092.463226, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789016103.536033132] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789016086.452463 but the earliest data is at time 1789016093.407294, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789016104.535947015] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789016086.452463 but the earliest data is at time 1789016094.463309, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789016105.536037009] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789016086.452463 but the earliest data is at time 1789016095.454864, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [INFO] [1789016106.139895503] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789016105.677 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [ERROR] [1789016106.535876619] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789016106.463287 but the earliest data is at time 1789016107.554285, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789016107.538226439] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789016107.456018 but the earliest data is at time 1789016107.554285, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[bt_navigator-5] [INFO] [1789016982.682551314] [robot1.bt_navigator]: Begin navigating from current location (-0.13, 0.00) to (-2.00, 0.00)
+[controller_server-1] [INFO] [1789016982.703208439] [robot1.controller_server]: Received a goal, begin computing control effort.
+[controller_server-1] [WARN] [1789016982.703256796] [robot1.controller_server]: No goal checker was specified in parameter 'current_goal_checker'. Server will use only plugin loaded general_goal_checker . This warning will appear once.
+[controller_server-1] [INFO] [1789016983.753430970] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789016983.956743124] [robot1.local_costmap.local_costmap]: StaticLayer: Resizing static layer to 146 X 301 at 0.050000 m/pix
+[planner_server-3] [INFO] [1789016984.233585217] [robot1.global_costmap.global_costmap]: StaticLayer: Resizing costmap to 146 X 301 at 0.050000 m/pix
+[controller_server-1] [INFO] [1789016984.803394301] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789016985.556743022] [robot1.local_costmap.local_costmap]: StaticLayer: Resizing static layer to 171 X 301 at 0.050000 m/pix
+[controller_server-1] [INFO] [1789016985.803373209] [robot1.controller_server]: Passing new path to controller.
+[planner_server-3] [INFO] [1789016986.233525420] [robot1.global_costmap.global_costmap]: StaticLayer: Resizing costmap to 171 X 301 at 0.050000 m/pix
+[controller_server-1] [INFO] [1789016986.853393369] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789016987.853374634] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789016988.556725545] [robot1.local_costmap.local_costmap]: StaticLayer: Resizing static layer to 188 X 301 at 0.050000 m/pix
+[controller_server-1] [INFO] [1789016988.903428138] [robot1.controller_server]: Passing new path to controller.
+[planner_server-3] [INFO] [1789016989.233555348] [robot1.global_costmap.global_costmap]: StaticLayer: Resizing costmap to 188 X 301 at 0.050000 m/pix
+[controller_server-1] [INFO] [1789016989.953377261] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789016990.953399435] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789016992.003409320] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789016993.003374434] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789016994.053378679] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789016995.103441777] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789016996.103402022] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789016997.153377735] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789016998.153374556] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789016999.203377096] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789017000.253377473] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789017001.253398851] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789017002.303396664] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [ERROR] [1789017003.255294279] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017003.255342488] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017003.255425205] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [INFO] [1789017003.303396964] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [ERROR] [1789017003.303577916] [robot1.controller_server]: Failed to make progress
+[controller_server-1] [WARN] [1789017003.303604011] [robot1.controller_server]: [follow_path] [ActionServer] Aborting handle.
+[controller_server-1] [INFO] [1789017003.332888618] [robot1.local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[controller_server-1] [INFO] [1789017003.333385843] [robot1.controller_server]: Received a goal, begin computing control effort.
+[controller_server-1] [INFO] [1789017004.333489196] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [ERROR] [1789017004.585372848] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017004.585404542] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017004.585484860] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017004.635360412] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017004.635390310] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017004.635459178] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [INFO] [1789017005.383492050] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789017006.433511578] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789017007.433491104] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789017008.483491619] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789017009.483490450] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789017010.533491111] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789017011.583491829] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789017012.583490172] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [ERROR] [1789017013.383563036] [robot1.controller_server]: Failed to make progress
+[controller_server-1] [WARN] [1789017013.383622707] [robot1.controller_server]: [follow_path] [ActionServer] Aborting handle.
+[controller_server-1] [INFO] [1789017013.402810436] [robot1.local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[planner_server-3] [INFO] [1789017013.403118323] [robot1.global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-3] [WARN] [1789017014.245289847] [robot1.planner_server]: Planner loop missed its desired rate of 20.0000 Hz. Current loop rate is 1.1879 Hz
+[controller_server-1] [INFO] [1789017014.263026455] [robot1.controller_server]: Received a goal, begin computing control effort.
+[controller_server-1] [INFO] [1789017015.313211721] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789017016.363196560] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789017017.363224310] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789017018.413216923] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789017019.413218185] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789017020.463222668] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789017021.463219233] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789017022.513215731] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789017023.563226317] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789017024.563220029] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789017025.613197009] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789017026.613216923] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789017027.514970671] [robot1.controller_server]: Reached the goal!
+[bt_navigator-5] [INFO] [1789017027.552754570] [robot1.bt_navigator]: Goal succeeded
+[controller_server-1] [INFO] [1789017274.956717722] [robot1.local_costmap.local_costmap]: StaticLayer: Resizing static layer to 188 X 302 at 0.050000 m/pix
+[planner_server-3] [INFO] [1789017275.233556496] [robot1.global_costmap.global_costmap]: StaticLayer: Resizing costmap to 188 X 302 at 0.050000 m/pix
+[controller_server-1] [INFO] [1789017281.556753804] [robot1.local_costmap.local_costmap]: StaticLayer: Resizing static layer to 190 X 302 at 0.050000 m/pix
+[planner_server-3] [INFO] [1789017282.233557963] [robot1.global_costmap.global_costmap]: StaticLayer: Resizing costmap to 190 X 302 at 0.050000 m/pix
+[controller_server-1] [INFO] [1789017325.556821111] [robot1.local_costmap.local_costmap]: StaticLayer: Resizing static layer to 190 X 303 at 0.050000 m/pix
+[planner_server-3] [INFO] [1789017326.233550912] [robot1.global_costmap.global_costmap]: StaticLayer: Resizing costmap to 190 X 303 at 0.050000 m/pix
+[bt_navigator-5] [INFO] [1789017489.429099899] [robot1.bt_navigator]: Begin navigating from current location (-0.18, -0.07) to (0.30, 1.62)
+[controller_server-1] [INFO] [1789017489.449572897] [robot1.controller_server]: Received a goal, begin computing control effort.
+[bt_navigator-5] [INFO] [1789017490.439284350] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789017490.439423655] [robot1.bt_navigator]: Begin navigating from current location (-0.15, 0.08) to (0.03, 0.70)
+[controller_server-1] [INFO] [1789017490.499772393] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [ERROR] [1789017490.601655948] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017490.601692229] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017490.601765182] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017490.652459309] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017490.652485763] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017490.652550323] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017490.701661374] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017490.701685188] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017490.701770068] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017490.751667029] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017490.751692344] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017490.751755201] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017490.802022346] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017490.802047032] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017490.802116017] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017490.851806072] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017490.851831216] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017490.851893636] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017490.851908064] [robot1.controller_server]: Controller patience exceeded
+[controller_server-1] [WARN] [1789017490.851918974] [robot1.controller_server]: [follow_path] [ActionServer] Aborting handle.
+[controller_server-1] [INFO] [1789017490.869382184] [robot1.local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[controller_server-1] [INFO] [1789017490.869871637] [robot1.controller_server]: Received a goal, begin computing control effort.
+[controller_server-1] [ERROR] [1789017490.963102001] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017490.963149075] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017490.963235703] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [WARN] [1789017490.963304614] [robot1.controller_server]: Control loop missed its desired rate of 20.0000Hz
+[controller_server-1] [ERROR] [1789017490.966268839] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017490.966284652] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017490.966372778] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017490.972660427] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017490.972689343] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017490.972759112] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017491.021942112] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017491.021969465] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017491.022034254] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017491.071913953] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017491.071938499] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017491.072006171] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017491.121938352] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017491.121966240] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017491.122044788] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017491.171936325] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017491.171962137] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017491.172028079] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017491.172043634] [robot1.controller_server]: Controller patience exceeded
+[controller_server-1] [WARN] [1789017491.172055930] [robot1.controller_server]: [follow_path] [ActionServer] Aborting handle.
+[behavior_server-4] [INFO] [1789017491.189814833] [robot1.behavior_server]: Running spin
+[behavior_server-4] [INFO] [1789017491.189939799] [robot1.behavior_server]: Turning 1.57 for spin behavior.
+[bt_navigator-5] [INFO] [1789017491.439329492] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789017491.439419303] [robot1.bt_navigator]: Begin navigating from current location (-0.11, 0.19) to (-0.02, 0.48)
+[bt_navigator-5] [INFO] [1789017492.439306772] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789017492.439388258] [robot1.bt_navigator]: Begin navigating from current location (-0.09, 0.21) to (0.54, 0.44)
+[behavior_server-4] [WARN] [1789017493.390187178] [robot1.behavior_server]: Collision Ahead - Exiting Spin
+[behavior_server-4] [WARN] [1789017493.390227396] [robot1.behavior_server]: spin failed
+[behavior_server-4] [WARN] [1789017493.390241990] [robot1.behavior_server]: [spin] [ActionServer] Aborting handle.
+[behavior_server-4] [INFO] [1789017493.419776762] [robot1.behavior_server]: Running wait
+[bt_navigator-5] [INFO] [1789017493.439257253] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789017493.439386852] [robot1.bt_navigator]: Begin navigating from current location (-0.09, 0.22) to (-0.01, 1.80)
+[bt_navigator-5] [INFO] [1789017494.439264251] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789017494.439396504] [robot1.bt_navigator]: Begin navigating from current location (-0.09, 0.22) to (0.54, 1.80)
+[bt_navigator-5] [INFO] [1789017495.439262069] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789017495.439394237] [robot1.bt_navigator]: Begin navigating from current location (-0.09, 0.22) to (-0.56, 1.86)
+[bt_navigator-5] [INFO] [1789017496.439249962] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789017496.439333599] [robot1.bt_navigator]: Begin navigating from current location (-0.09, 0.22) to (-1.10, 1.61)
+[bt_navigator-5] [INFO] [1789017497.439265948] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789017497.439414531] [robot1.bt_navigator]: Begin navigating from current location (-0.09, 0.22) to (-1.29, 1.84)
+[behavior_server-4] [INFO] [1789017498.419917161] [robot1.behavior_server]: wait completed successfully
+[bt_navigator-5] [INFO] [1789017498.439332352] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789017498.439458543] [robot1.bt_navigator]: Begin navigating from current location (-0.09, 0.22) to (-0.75, 2.03)
+[controller_server-1] [INFO] [1789017498.469631449] [robot1.controller_server]: Received a goal, begin computing control effort.
+[controller_server-1] [ERROR] [1789017498.473026873] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017498.473058167] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017498.473147852] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017498.522892415] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017498.522916110] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017498.522994078] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017498.571714987] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017498.571738889] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017498.571795175] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017498.621826445] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017498.621850073] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017498.621910408] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017498.671736000] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017498.671760884] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017498.671829902] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017498.721764815] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017498.721788936] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017498.721852106] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017498.771773935] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017498.771795617] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017498.771860049] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017498.771899119] [robot1.controller_server]: Controller patience exceeded
+[controller_server-1] [WARN] [1789017498.771909851] [robot1.controller_server]: [follow_path] [ActionServer] Aborting handle.
+[controller_server-1] [INFO] [1789017498.789463943] [robot1.local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[controller_server-1] [INFO] [1789017498.789942935] [robot1.controller_server]: Received a goal, begin computing control effort.
+[controller_server-1] [ERROR] [1789017498.963240814] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017498.963288997] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017498.963401833] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [WARN] [1789017498.963462786] [robot1.controller_server]: Control loop missed its desired rate of 20.0000Hz
+[controller_server-1] [ERROR] [1789017498.965369067] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017498.965386334] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017498.965436852] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017499.017475437] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017499.017504185] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017499.017580472] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017499.069696892] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017499.069721546] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017499.069794301] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017499.121806025] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017499.121829049] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017499.121885919] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017499.121899855] [robot1.controller_server]: Controller patience exceeded
+[controller_server-1] [WARN] [1789017499.121910454] [robot1.controller_server]: [follow_path] [ActionServer] Aborting handle.
+[behavior_server-4] [INFO] [1789017499.139639497] [robot1.behavior_server]: Running backup
+[behavior_server-4] [INFO] [1789017499.139751951] [robot1.behavior_server]: DriveOnHeading: no acceleration or deceleration limits set
+[behavior_server-4] [WARN] [1789017499.139835393] [robot1.behavior_server]: Collision Ahead - Exiting DriveOnHeading
+[behavior_server-4] [WARN] [1789017499.139845978] [robot1.behavior_server]: backup failed
+[behavior_server-4] [WARN] [1789017499.139855408] [robot1.behavior_server]: [backup] [ActionServer] Aborting handle.
+[controller_server-1] [INFO] [1789017499.169567912] [robot1.local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[planner_server-3] [INFO] [1789017499.169991476] [robot1.global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-3] [WARN] [1789017499.240944448] [robot1.planner_server]: Planner loop missed its desired rate of 20.0000 Hz. Current loop rate is 14.1887 Hz
+[controller_server-1] [INFO] [1789017499.259483271] [robot1.controller_server]: Received a goal, begin computing control effort.
+[controller_server-1] [ERROR] [1789017499.362793927] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017499.362837204] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017499.362921752] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [WARN] [1789017499.362985916] [robot1.controller_server]: Control loop missed its desired rate of 20.0000Hz
+[controller_server-1] [ERROR] [1789017499.366073244] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017499.366095964] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017499.366171953] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017499.418721311] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017499.418748860] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017499.418817602] [robot1.controller_server]: No valid trajectories out of 419! 
+[bt_navigator-5] [INFO] [1789017499.439349865] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789017499.439480938] [robot1.bt_navigator]: Begin navigating from current location (-0.09, 0.22) to (-1.63, 1.38)
+[controller_server-1] [ERROR] [1789017499.470960045] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017499.470981653] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017499.471043288] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017499.523091539] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017499.523114146] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017499.523170677] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017499.575200056] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017499.575224183] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017499.575303043] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017499.575318406] [robot1.controller_server]: Controller patience exceeded
+[controller_server-1] [WARN] [1789017499.575330385] [robot1.controller_server]: [follow_path] [ActionServer] Aborting handle.
+[controller_server-1] [INFO] [1789017499.589612766] [robot1.local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[controller_server-1] [INFO] [1789017499.590100052] [robot1.controller_server]: Received a goal, begin computing control effort.
+[controller_server-1] [ERROR] [1789017499.762756237] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017499.762789840] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017499.762859449] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [WARN] [1789017499.762901544] [robot1.controller_server]: Control loop missed its desired rate of 20.0000Hz
+[controller_server-1] [ERROR] [1789017499.764751967] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017499.764759956] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017499.764796319] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017499.816800668] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017499.816825617] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017499.816895229] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017499.869753541] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017499.869779874] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017499.869864949] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017499.921930181] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017499.921952895] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017499.922013578] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017499.922028485] [robot1.controller_server]: Controller patience exceeded
+[controller_server-1] [WARN] [1789017499.922038967] [robot1.controller_server]: [follow_path] [ActionServer] Aborting handle.
+[behavior_server-4] [INFO] [1789017499.939601581] [robot1.behavior_server]: Running spin
+[behavior_server-4] [INFO] [1789017499.939657971] [robot1.behavior_server]: Turning 1.57 for spin behavior.
+[bt_navigator-5] [INFO] [1789017500.439327375] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789017500.439411026] [robot1.bt_navigator]: Begin navigating from current location (-0.09, 0.22) to (-1.02, 2.18)
+[bt_navigator-5] [INFO] [1789017501.439271772] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789017501.439354332] [robot1.bt_navigator]: Begin navigating from current location (-0.09, 0.22) to (-1.68, 1.66)
+[behavior_server-4] [WARN] [1789017501.539837168] [robot1.behavior_server]: Collision Ahead - Exiting Spin
+[behavior_server-4] [WARN] [1789017501.539869024] [robot1.behavior_server]: spin failed
+[behavior_server-4] [WARN] [1789017501.539879897] [robot1.behavior_server]: [spin] [ActionServer] Aborting handle.
+[behavior_server-4] [INFO] [1789017501.569659618] [robot1.behavior_server]: Running wait
+[bt_navigator-5] [INFO] [1789017502.429267414] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789017502.429337105] [robot1.bt_navigator]: Begin navigating from current location (-0.09, 0.22) to (-0.47, 2.40)
+[bt_navigator-5] [INFO] [1789017503.439308409] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789017503.439405403] [robot1.bt_navigator]: Begin navigating from current location (-0.09, 0.22) to (-0.72, 2.48)
+[bt_navigator-5] [INFO] [1789017504.439263893] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789017504.439346659] [robot1.bt_navigator]: Begin navigating from current location (-0.09, 0.22) to (-0.89, 0.12)
+[bt_navigator-5] [INFO] [1789017505.439299202] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789017505.439413448] [robot1.bt_navigator]: Begin navigating from current location (-0.09, 0.22) to (-0.78, 0.69)
+[bt_navigator-5] [INFO] [1789017506.429346442] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789017506.429441483] [robot1.bt_navigator]: Begin navigating from current location (-0.09, 0.22) to (-0.64, -0.40)
+[behavior_server-4] [INFO] [1789017506.569820269] [robot1.behavior_server]: wait completed successfully
+[controller_server-1] [INFO] [1789017506.619489625] [robot1.controller_server]: Received a goal, begin computing control effort.
+[controller_server-1] [ERROR] [1789017506.622427344] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017506.622455502] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017506.622535743] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017506.671600724] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017506.671621412] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017506.671682516] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017506.721598569] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017506.721622527] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017506.721682632] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017506.771581488] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017506.771604541] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017506.771664795] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017506.821579403] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017506.821604358] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017506.821674285] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017506.871540378] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017506.871562239] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017506.871621797] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017506.921564710] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017506.921588291] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017506.921661042] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017506.921677615] [robot1.controller_server]: Controller patience exceeded
+[controller_server-1] [WARN] [1789017506.921687650] [robot1.controller_server]: [follow_path] [ActionServer] Aborting handle.
+[controller_server-1] [INFO] [1789017506.939444716] [robot1.local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[controller_server-1] [INFO] [1789017506.939806401] [robot1.controller_server]: Received a goal, begin computing control effort.
+[controller_server-1] [ERROR] [1789017506.963009982] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017506.963045080] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017506.963125452] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017506.992912775] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017506.992938200] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017506.992998468] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017507.041945602] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017507.041970273] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017507.042037993] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017507.091935186] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017507.091959187] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017507.092028830] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017507.141864043] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017507.141897740] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017507.141970057] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017507.191901287] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017507.191925389] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017507.191989499] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017507.241884520] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017507.241908594] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017507.241967669] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017507.241982113] [robot1.controller_server]: Controller patience exceeded
+[controller_server-1] [WARN] [1789017507.241992542] [robot1.controller_server]: [follow_path] [ActionServer] Aborting handle.
+[behavior_server-4] [INFO] [1789017507.259654726] [robot1.behavior_server]: Running backup
+[behavior_server-4] [WARN] [1789017507.259791498] [robot1.behavior_server]: Collision Ahead - Exiting DriveOnHeading
+[behavior_server-4] [WARN] [1789017507.259805710] [robot1.behavior_server]: backup failed
+[behavior_server-4] [WARN] [1789017507.259809777] [robot1.behavior_server]: [backup] [ActionServer] Aborting handle.
+[controller_server-1] [INFO] [1789017507.289498201] [robot1.local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[planner_server-3] [INFO] [1789017507.289675345] [robot1.global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[bt_navigator-5] [INFO] [1789017507.429319473] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789017507.429438147] [robot1.bt_navigator]: Begin navigating from current location (-0.09, 0.22) to (-0.96, -0.27)
+[planner_server-3] [WARN] [1789017508.240305856] [robot1.planner_server]: Planner loop missed its desired rate of 20.0000 Hz. Current loop rate is 1.0522 Hz
+[controller_server-1] [INFO] [1789017508.259572412] [robot1.controller_server]: Received a goal, begin computing control effort.
+[controller_server-1] [ERROR] [1789017508.262719967] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017508.262749399] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017508.262836023] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017508.312858382] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017508.312892385] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017508.312983699] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017508.362933982] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017508.362966932] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017508.363048550] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017508.412865474] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017508.412902738] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017508.412990500] [robot1.controller_server]: No valid trajectories out of 419! 
+[bt_navigator-5] [INFO] [1789017508.439295878] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789017508.439370388] [robot1.bt_navigator]: Begin navigating from current location (-0.09, 0.22) to (-1.15, 1.13)
+[controller_server-1] [ERROR] [1789017508.462827176] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017508.462856699] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017508.462940339] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017508.512811007] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017508.512842949] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017508.512923116] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017508.561657735] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017508.561683100] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017508.561747950] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017508.561763599] [robot1.controller_server]: Controller patience exceeded
+[controller_server-1] [WARN] [1789017508.561775163] [robot1.controller_server]: [follow_path] [ActionServer] Aborting handle.
+[controller_server-1] [INFO] [1789017508.579543235] [robot1.local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[controller_server-1] [INFO] [1789017508.580121343] [robot1.controller_server]: Received a goal, begin computing control effort.
+[controller_server-1] [ERROR] [1789017508.762257674] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017508.762290381] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017508.762350087] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [WARN] [1789017508.762394538] [robot1.controller_server]: Control loop missed its desired rate of 20.0000Hz
+[controller_server-1] [ERROR] [1789017508.764251888] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017508.764260146] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017508.764305664] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017508.816300340] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017508.816324837] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017508.816391957] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017508.868421283] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017508.868446112] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017508.868518357] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017508.920523743] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017508.920546528] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017508.920606121] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017508.920621312] [robot1.controller_server]: Controller patience exceeded
+[controller_server-1] [WARN] [1789017508.920632134] [robot1.controller_server]: [follow_path] [ActionServer] Aborting handle.
+[behavior_server-4] [INFO] [1789017508.939528427] [robot1.behavior_server]: Running spin
+[behavior_server-4] [INFO] [1789017508.939597723] [robot1.behavior_server]: Turning 1.57 for spin behavior.
+[bt_navigator-5] [INFO] [1789017509.429273116] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789017509.429359245] [robot1.bt_navigator]: Begin navigating from current location (-0.09, 0.22) to (-0.98, -0.85)
+[bt_navigator-5] [INFO] [1789017510.429283422] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789017510.429380219] [robot1.bt_navigator]: Begin navigating from current location (-0.09, 0.22) to (-1.32, 0.89)
+[bt_navigator-5] [INFO] [1789017511.429319777] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789017511.429423840] [robot1.bt_navigator]: Begin navigating from current location (-0.09, 0.23) to (-1.72, 1.05)
+[bt_navigator-5] [INFO] [1789017513.439315521] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789017513.439414594] [robot1.bt_navigator]: Begin navigating from current location (-0.10, 0.23) to (-0.71, -0.02)
+[behavior_server-4] [INFO] [1789017514.139764889] [robot1.behavior_server]: spin completed successfully
+[controller_server-1] [INFO] [1789017514.189589139] [robot1.controller_server]: Received a goal, begin computing control effort.
+[controller_server-1] [ERROR] [1789017514.192613910] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017514.192643045] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017514.192728806] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017514.242873249] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017514.242906576] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017514.242988382] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017514.292727778] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017514.292764999] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017514.292856821] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017514.342305405] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017514.342332834] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017514.342405166] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017514.391668858] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017514.391697644] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017514.391764687] [robot1.controller_server]: No valid trajectories out of 419! 
+[bt_navigator-5] [INFO] [1789017514.429306486] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789017514.429411633] [robot1.bt_navigator]: Begin navigating from current location (-0.10, 0.23) to (-0.34, -0.46)
+[controller_server-1] [ERROR] [1789017514.441687410] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017514.441704970] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017514.441766834] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017514.491633820] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017514.491656449] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017514.491722497] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017514.491737511] [robot1.controller_server]: Controller patience exceeded
+[controller_server-1] [WARN] [1789017514.491747494] [robot1.controller_server]: [follow_path] [ActionServer] Aborting handle.
+[controller_server-1] [INFO] [1789017514.509470219] [robot1.local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[controller_server-1] [INFO] [1789017514.509721103] [robot1.controller_server]: Received a goal, begin computing control effort.
+[controller_server-1] [ERROR] [1789017514.562904865] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017514.562958842] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017514.563048158] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [WARN] [1789017514.563118544] [robot1.controller_server]: Control loop missed its desired rate of 20.0000Hz
+[controller_server-1] [ERROR] [1789017514.566016194] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017514.566036912] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017514.566116937] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017514.611796680] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017514.611821712] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017514.611908111] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017514.661888028] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017514.661912266] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017514.661981407] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017514.711796082] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017514.711817734] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017514.711899559] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017514.761762743] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017514.761785650] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017514.761846340] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017514.811787214] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017514.811814465] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017514.811885259] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017514.811900657] [robot1.controller_server]: Controller patience exceeded
+[controller_server-1] [WARN] [1789017514.811910822] [robot1.controller_server]: [follow_path] [ActionServer] Aborting handle.
+[behavior_server-4] [INFO] [1789017514.829598639] [robot1.behavior_server]: Running wait
+[bt_navigator-5] [INFO] [1789017515.439251133] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789017515.439322459] [robot1.bt_navigator]: Begin navigating from current location (-0.10, 0.23) to (-0.64, -0.44)
+[bt_navigator-5] [INFO] [1789017516.429303070] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789017516.429431262] [robot1.bt_navigator]: Begin navigating from current location (-0.10, 0.23) to (-0.96, -0.71)
+[bt_navigator-5] [INFO] [1789017517.439283217] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789017517.439386147] [robot1.bt_navigator]: Begin navigating from current location (-0.10, 0.23) to (-0.23, 0.00)
+[bt_navigator-5] [INFO] [1789017518.439258723] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789017518.439337795] [robot1.bt_navigator]: Begin navigating from current location (-0.10, 0.23) to (-0.52, -0.29)
+[bt_navigator-5] [INFO] [1789017519.439302904] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789017519.439398881] [robot1.bt_navigator]: Begin navigating from current location (-0.10, 0.23) to (-0.83, 0.20)
+[behavior_server-4] [INFO] [1789017519.829737141] [robot1.behavior_server]: wait completed successfully
+[controller_server-1] [INFO] [1789017519.879548525] [robot1.controller_server]: Received a goal, begin computing control effort.
+[controller_server-1] [ERROR] [1789017519.881833617] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017519.881863455] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017519.881941191] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017519.931596968] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017519.931619878] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017519.931689765] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017519.981632831] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017519.981663809] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017519.981761456] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017520.031863757] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017520.031890739] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017520.031960846] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017520.081655299] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017520.081680883] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017520.081760017] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017520.131608962] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017520.131634189] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017520.131716622] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017520.181945704] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017520.181975424] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017520.182091526] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017520.182123883] [robot1.controller_server]: Controller patience exceeded
+[controller_server-1] [WARN] [1789017520.182158735] [robot1.controller_server]: [follow_path] [ActionServer] Aborting handle.
+[controller_server-1] [INFO] [1789017520.199572132] [robot1.local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[controller_server-1] [INFO] [1789017520.199973159] [robot1.controller_server]: Received a goal, begin computing control effort.
+[controller_server-1] [ERROR] [1789017520.363147431] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017520.363194553] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017520.363273878] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [WARN] [1789017520.363343520] [robot1.controller_server]: Control loop missed its desired rate of 20.0000Hz
+[controller_server-1] [ERROR] [1789017520.365257651] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017520.365282092] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017520.365330763] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017520.417294882] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017520.417321020] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017520.417392250] [robot1.controller_server]: No valid trajectories out of 419! 
+[bt_navigator-5] [INFO] [1789017520.439285018] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789017520.439344512] [robot1.bt_navigator]: Begin navigating from current location (-0.10, 0.23) to (-0.07, -0.40)
+[controller_server-1] [ERROR] [1789017520.469389722] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017520.469407539] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017520.469475212] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017520.521435273] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017520.521457011] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[controller_server-1] [WARN] [1789017520.521515004] [robot1.controller_server]: No valid trajectories out of 419! 
+[controller_server-1] [ERROR] [1789017520.521529441] [robot1.controller_server]: Controller patience exceeded
+[controller_server-1] [WARN] [1789017520.521540016] [robot1.controller_server]: [follow_path] [ActionServer] Aborting handle.
+[bt_navigator-5] [WARN] [1789017520.549246806] [robot1.bt_navigator]: [navigate_to_pose] [ActionServer] Aborting handle.
+[bt_navigator-5] [ERROR] [1789017520.549376941] [robot1.bt_navigator]: Goal failed
+[controller_server-1] [INFO] [1789017849.956751548] [robot1.local_costmap.local_costmap]: StaticLayer: Resizing static layer to 190 X 303 at 0.050000 m/pix
+[planner_server-3] [INFO] [1789017850.233549052] [robot1.global_costmap.global_costmap]: StaticLayer: Resizing costmap to 190 X 303 at 0.050000 m/pix
+[bt_navigator-5] [INFO] [1789017866.428797739] [robot1.bt_navigator]: Begin navigating from current location (-0.40, 0.35) to (-1.61, 0.83)
+[controller_server-1] [INFO] [1789017866.449362137] [robot1.controller_server]: Received a goal, begin computing control effort.
+[controller_server-1] [INFO] [1789017867.499539794] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789017867.956725862] [robot1.local_costmap.local_costmap]: StaticLayer: Resizing static layer to 193 X 304 at 0.050000 m/pix
+[planner_server-3] [INFO] [1789017868.233556188] [robot1.global_costmap.global_costmap]: StaticLayer: Resizing costmap to 193 X 304 at 0.050000 m/pix
+[bt_navigator-5] [INFO] [1789017868.429001749] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789017868.429096104] [robot1.bt_navigator]: Begin navigating from current location (-0.58, 0.56) to (-2.08, 1.65)
+[controller_server-1] [INFO] [1789017868.549563449] [robot1.controller_server]: Passing new path to controller.
+[bt_navigator-5] [INFO] [1789017869.439046927] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789017869.439180080] [robot1.bt_navigator]: Begin navigating from current location (-0.63, 0.75) to (-1.76, 1.04)
+[controller_server-1] [INFO] [1789017869.549541546] [robot1.controller_server]: Passing new path to controller.
+[bt_navigator-5] [INFO] [1789017870.428982889] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789017870.429155583] [robot1.bt_navigator]: Begin navigating from current location (-0.71, 0.98) to (-0.99, 1.20)
+[controller_server-1] [INFO] [1789017870.599541120] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789017871.051354866] [robot1.controller_server]: Reached the goal!
+[bt_navigator-5] [INFO] [1789017871.089033795] [robot1.bt_navigator]: Goal succeeded
+[bt_navigator-5] [INFO] [1789017871.429968438] [robot1.bt_navigator]: Begin navigating from current location (-0.86, 1.03) to (-1.25, 1.35)
+[controller_server-1] [INFO] [1789017871.450351341] [robot1.controller_server]: Received a goal, begin computing control effort.
+[controller_server-1] [INFO] [1789017872.450528680] [robot1.controller_server]: Goal was canceled. Stopping the robot.
+[controller_server-1] [INFO] [1789017872.450558667] [robot1.controller_server]: [follow_path] [ActionServer] Client requested to cancel the goal. Cancelling.
+[bt_navigator-5] [INFO] [1789017872.450770014] [robot1.bt_navigator]: [navigate_to_pose] [ActionServer] Client requested to cancel the goal. Cancelling.
+[bt_navigator-5] [INFO] [1789017872.450841648] [robot1.bt_navigator]: Goal canceled
+[bt_navigator-5] [INFO] [1789017996.429220767] [robot1.bt_navigator]: Begin navigating from current location (-1.04, 1.18) to (0.10, 5.70)
+[controller_server-1] [INFO] [1789017996.449673812] [robot1.controller_server]: Received a goal, begin computing control effort.
+[bt_navigator-5] [INFO] [1789017997.439427909] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789017997.439504364] [robot1.bt_navigator]: Begin navigating from current location (-1.02, 1.36) to (-0.34, 4.00)
+[controller_server-1] [INFO] [1789017997.499870367] [robot1.controller_server]: Passing new path to controller.
+[bt_navigator-5] [INFO] [1789017998.449439928] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789017998.449544725] [robot1.bt_navigator]: Begin navigating from current location (-0.99, 1.58) to (-0.41, 3.74)
+[controller_server-1] [INFO] [1789017998.549853276] [robot1.controller_server]: Passing new path to controller.
+[bt_navigator-5] [INFO] [1789017999.439435360] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789017999.439535855] [robot1.bt_navigator]: Begin navigating from current location (-0.96, 1.82) to (-0.96, 3.83)
+[controller_server-1] [INFO] [1789017999.549854136] [robot1.controller_server]: Passing new path to controller.
+[bt_navigator-5] [INFO] [1789018000.439431717] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789018000.439532804] [robot1.bt_navigator]: Begin navigating from current location (-0.93, 2.06) to (-0.50, 3.47)
+[controller_server-1] [INFO] [1789018000.599856094] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789018000.956728081] [robot1.local_costmap.local_costmap]: StaticLayer: Resizing static layer to 193 X 309 at 0.050000 m/pix
+[planner_server-3] [INFO] [1789018001.233554102] [robot1.global_costmap.global_costmap]: StaticLayer: Resizing costmap to 193 X 309 at 0.050000 m/pix
+[bt_navigator-5] [INFO] [1789018001.439428044] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789018001.439513175] [robot1.bt_navigator]: Begin navigating from current location (-0.92, 2.29) to (-0.03, 3.40)
+[controller_server-1] [INFO] [1789018001.599854034] [robot1.controller_server]: Passing new path to controller.
+[bt_navigator-5] [INFO] [1789018002.439429946] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789018002.439513502] [robot1.bt_navigator]: Begin navigating from current location (-0.86, 2.52) to (-0.45, 4.02)
+[controller_server-1] [INFO] [1789018002.649871065] [robot1.controller_server]: Passing new path to controller.
+[bt_navigator-5] [INFO] [1789018003.439372008] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789018003.439460323] [robot1.bt_navigator]: Begin navigating from current location (-0.74, 2.73) to (0.10, 3.87)
+[controller_server-1] [INFO] [1789018003.699852247] [robot1.controller_server]: Passing new path to controller.
+[bt_navigator-5] [INFO] [1789018004.429372424] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789018004.429479965] [robot1.bt_navigator]: Begin navigating from current location (-0.67, 2.90) to (-0.29, 4.80)
+[controller_server-1] [INFO] [1789018004.699872554] [robot1.controller_server]: Passing new path to controller.
+[bt_navigator-5] [INFO] [1789018005.439432032] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789018005.439514303] [robot1.bt_navigator]: Begin navigating from current location (-0.63, 3.04) to (-0.44, 3.54)
+[controller_server-1] [INFO] [1789018005.749874188] [robot1.controller_server]: Passing new path to controller.
+[bt_navigator-5] [INFO] [1789018006.439369905] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789018006.439435783] [robot1.bt_navigator]: Begin navigating from current location (-0.58, 3.25) to (-0.30, 3.93)
+[controller_server-1] [INFO] [1789018006.749867333] [robot1.controller_server]: Passing new path to controller.
+[bt_navigator-5] [INFO] [1789018007.439468601] [robot1.bt_navigator]: Received goal preemption request
+[bt_navigator-5] [INFO] [1789018007.439556803] [robot1.bt_navigator]: Begin navigating from current location (-0.51, 3.43) to (0.14, 3.76)
+[controller_server-1] [INFO] [1789018007.799853949] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789018008.799851733] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789018009.849869609] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789018010.849853939] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789018011.899853753] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789018012.949878347] [robot1.controller_server]: Passing new path to controller.
+[controller_server-1] [INFO] [1789018013.751658521] [robot1.controller_server]: Reached the goal!
+[bt_navigator-5] [INFO] [1789018013.789495411] [robot1.bt_navigator]: Goal succeeded
+[controller_server-1] [INFO] [1789018122.556761704] [robot1.local_costmap.local_costmap]: StaticLayer: Resizing static layer to 193 X 311 at 0.050000 m/pix
+[planner_server-3] [INFO] [1789018123.233562098] [robot1.global_costmap.global_costmap]: StaticLayer: Resizing costmap to 193 X 311 at 0.050000 m/pix
+[controller_server-1] [INFO] [1789018128.956822170] [robot1.local_costmap.local_costmap]: StaticLayer: Resizing static layer to 193 X 313 at 0.050000 m/pix
+[planner_server-3] [INFO] [1789018129.233561231] [robot1.global_costmap.global_costmap]: StaticLayer: Resizing costmap to 193 X 313 at 0.050000 m/pix
+[planner_server-3] [ERROR] [1789018184.536568971] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018173.995859 but the earliest data is at time 1789018174.321065, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789018185.536249014] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018173.995859 but the earliest data is at time 1789018175.423842, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789018186.536625111] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018173.995859 but the earliest data is at time 1789018176.431455, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789018187.537229830] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018173.995859 but the earliest data is at time 1789018177.376110, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789018188.537220435] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018173.995859 but the earliest data is at time 1789018178.415377, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789018189.536483373] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018173.995859 but the earliest data is at time 1789018179.471886, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [INFO] [1789018189.738566538] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789018189.264 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [ERROR] [1789018190.536424260] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018173.995859 but the earliest data is at time 1789018180.415734, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789018191.536328995] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018173.995859 but the earliest data is at time 1789018181.375921, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789018192.536656198] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018173.995859 but the earliest data is at time 1789018182.417250, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789018193.536308116] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018173.995859 but the earliest data is at time 1789018183.376987, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789018194.536448479] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018173.995859 but the earliest data is at time 1789018184.384796, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789018195.536507638] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018173.995859 but the earliest data is at time 1789018185.424191, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [INFO] [1789018196.660047419] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789018196.179 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [ERROR] [1789018197.536086240] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018197.425003 but the earliest data is at time 1789018198.056255, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [INFO] [1789018219.558947675] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789018218.789 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789018219.559037414] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789018218.789 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [ERROR] [1789018524.536551564] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018513.819222 but the earliest data is at time 1789018514.419095, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789018525.536271973] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018513.819222 but the earliest data is at time 1789018515.426980, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789018526.536390281] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018513.819222 but the earliest data is at time 1789018516.435117, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [INFO] [1789018526.630708770] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789018526.165 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [ERROR] [1789018527.536443388] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018513.819222 but the earliest data is at time 1789018517.380148, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789018528.536469226] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018513.819222 but the earliest data is at time 1789018518.371380, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789018529.536421255] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018513.819222 but the earliest data is at time 1789018519.429025, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789018530.536400370] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018513.819222 but the earliest data is at time 1789018520.371439, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789018531.536623429] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018513.819222 but the earliest data is at time 1789018521.284126, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789018532.536680264] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018513.819222 but the earliest data is at time 1789018522.324401, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789018533.536399465] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation at time 1789018533.284370, but only time 1789018534.809640 is in the buffer, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789018534.536351893] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation at time 1789018534.421191, but only time 1789018534.809640 is in the buffer, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[bt_navigator-5] [INFO] [1789018540.110319692] [robot1.bt_navigator]: Begin navigating from current location (-0.25, -0.08) to (-0.56, -0.05)
+[controller_server-1] [INFO] [1789018540.130688871] [robot1.controller_server]: Received a goal, begin computing control effort.
+[controller_server-1] [ERROR] [1789018540.130912574] [tf_help]: Transform data too old when converting from odom to map
+[controller_server-1] [ERROR] [1789018540.130948125] [tf_help]: Data time: 1789018540s 22315653ns, Transform time: 1789018534s 809639631ns
+[controller_server-1] [WARN] [1789018540.130976750] [robot1.controller_server]: Unable to transform robot pose into global plan's frame
+[controller_server-1] [ERROR] [1789018540.131066076] [tf_help]: Transform data too old when converting from map to odom
+[controller_server-1] [ERROR] [1789018540.131078448] [tf_help]: Data time: 1789018540s 110681282ns, Transform time: 1789018534s 809639631ns
+[controller_server-1] [ERROR] [1789018540.180938760] [tf_help]: Transform data too old when converting from odom to map
+[controller_server-1] [ERROR] [1789018540.180977311] [tf_help]: Data time: 1789018540s 132356892ns, Transform time: 1789018534s 809639631ns
+[controller_server-1] [WARN] [1789018540.181005604] [robot1.controller_server]: Unable to transform robot pose into global plan's frame
+[controller_server-1] [ERROR] [1789018540.181111538] [tf_help]: Transform data too old when converting from map to odom
+[controller_server-1] [ERROR] [1789018540.181121797] [tf_help]: Data time: 1789018540s 110681282ns, Transform time: 1789018534s 809639631ns
+[controller_server-1] [ERROR] [1789018540.230948356] [tf_help]: Transform data too old when converting from odom to map
+[controller_server-1] [ERROR] [1789018540.230987675] [tf_help]: Data time: 1789018540s 132356892ns, Transform time: 1789018534s 809639631ns
+[controller_server-1] [WARN] [1789018540.231015501] [robot1.controller_server]: Unable to transform robot pose into global plan's frame
+[controller_server-1] [ERROR] [1789018540.231139917] [tf_help]: Transform data too old when converting from map to odom
+[controller_server-1] [ERROR] [1789018540.231159416] [tf_help]: Data time: 1789018540s 110681282ns, Transform time: 1789018534s 809639631ns
+[controller_server-1] [ERROR] [1789018540.280948191] [tf_help]: Transform data too old when converting from odom to map
+[controller_server-1] [ERROR] [1789018540.280973924] [tf_help]: Data time: 1789018540s 182311354ns, Transform time: 1789018534s 809639631ns
+[controller_server-1] [WARN] [1789018540.280993072] [robot1.controller_server]: Unable to transform robot pose into global plan's frame
+[controller_server-1] [ERROR] [1789018540.281057797] [tf_help]: Transform data too old when converting from map to odom
+[controller_server-1] [ERROR] [1789018540.281061533] [tf_help]: Data time: 1789018540s 110681282ns, Transform time: 1789018534s 809639631ns
+[controller_server-1] [ERROR] [1789018540.330919405] [tf_help]: Transform data too old when converting from odom to map
+[controller_server-1] [ERROR] [1789018540.330945584] [tf_help]: Data time: 1789018540s 230244978ns, Transform time: 1789018534s 809639631ns
+[controller_server-1] [WARN] [1789018540.330963842] [robot1.controller_server]: Unable to transform robot pose into global plan's frame
+[controller_server-1] [ERROR] [1789018540.331026933] [tf_help]: Transform data too old when converting from map to odom
+[controller_server-1] [ERROR] [1789018540.331030773] [tf_help]: Data time: 1789018540s 110681282ns, Transform time: 1789018534s 809639631ns
+[controller_server-1] [ERROR] [1789018540.380922810] [tf_help]: Transform data too old when converting from odom to map
+[controller_server-1] [ERROR] [1789018540.380949997] [tf_help]: Data time: 1789018540s 276401776ns, Transform time: 1789018534s 809639631ns
+[controller_server-1] [WARN] [1789018540.380969564] [robot1.controller_server]: Unable to transform robot pose into global plan's frame
+[controller_server-1] [ERROR] [1789018540.381036538] [tf_help]: Transform data too old when converting from map to odom
+[controller_server-1] [ERROR] [1789018540.381047890] [tf_help]: Data time: 1789018540s 110681282ns, Transform time: 1789018534s 809639631ns
+[controller_server-1] [ERROR] [1789018540.430943629] [tf_help]: Transform data too old when converting from odom to map
+[controller_server-1] [ERROR] [1789018540.430969284] [tf_help]: Data time: 1789018540s 324541586ns, Transform time: 1789018534s 809639631ns
+[controller_server-1] [WARN] [1789018540.430987978] [robot1.controller_server]: Unable to transform robot pose into global plan's frame
+[controller_server-1] [ERROR] [1789018540.431007045] [robot1.controller_server]: Controller patience exceeded
+[controller_server-1] [WARN] [1789018540.431027664] [robot1.controller_server]: [follow_path] [ActionServer] Aborting handle.
+[controller_server-1] [INFO] [1789018540.450697479] [robot1.local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[controller_server-1] [INFO] [1789018540.450976615] [robot1.controller_server]: Received a goal, begin computing control effort.
+[controller_server-1] [ERROR] [1789018540.561203979] [tf_help]: Transform data too old when converting from odom to map
+[controller_server-1] [ERROR] [1789018540.561255227] [tf_help]: Data time: 1789018540s 468360752ns, Transform time: 1789018534s 809639631ns
+[controller_server-1] [WARN] [1789018540.561282808] [robot1.controller_server]: Unable to transform robot pose into global plan's frame
+[controller_server-1] [ERROR] [1789018540.561386300] [tf_help]: Transform data too old when converting from map to odom
+[controller_server-1] [ERROR] [1789018540.561398485] [tf_help]: Data time: 1789018540s 110681282ns, Transform time: 1789018534s 809639631ns
+[controller_server-1] [WARN] [1789018540.561405509] [robot1.controller_server]: Control loop missed its desired rate of 20.0000Hz
+[controller_server-1] [ERROR] [1789018540.561448267] [tf_help]: Transform data too old when converting from odom to map
+[controller_server-1] [ERROR] [1789018540.561454651] [tf_help]: Data time: 1789018540s 468360752ns, Transform time: 1789018534s 809639631ns
+[controller_server-1] [WARN] [1789018540.561470069] [robot1.controller_server]: Unable to transform robot pose into global plan's frame
+[controller_server-1] [ERROR] [1789018540.561533428] [tf_help]: Transform data too old when converting from map to odom
+[controller_server-1] [ERROR] [1789018540.561540657] [tf_help]: Data time: 1789018540s 110681282ns, Transform time: 1789018534s 809639631ns
+[controller_server-1] [ERROR] [1789018540.611675903] [tf_help]: Transform data too old when converting from odom to map
+[controller_server-1] [ERROR] [1789018540.611710496] [tf_help]: Data time: 1789018540s 532359170ns, Transform time: 1789018534s 809639631ns
+[controller_server-1] [WARN] [1789018540.611737192] [robot1.controller_server]: Unable to transform robot pose into global plan's frame
+[controller_server-1] [ERROR] [1789018540.611832781] [tf_help]: Transform data too old when converting from map to odom
+[controller_server-1] [ERROR] [1789018540.611841237] [tf_help]: Data time: 1789018540s 110681282ns, Transform time: 1789018534s 809639631ns
+[controller_server-1] [ERROR] [1789018540.661977077] [tf_help]: Transform data too old when converting from odom to map
+[controller_server-1] [ERROR] [1789018540.662009304] [tf_help]: Data time: 1789018540s 532359170ns, Transform time: 1789018534s 809639631ns
+[controller_server-1] [WARN] [1789018540.662032826] [robot1.controller_server]: Unable to transform robot pose into global plan's frame
+[controller_server-1] [ERROR] [1789018540.662128647] [tf_help]: Transform data too old when converting from map to odom
+[controller_server-1] [ERROR] [1789018540.662136741] [tf_help]: Data time: 1789018540s 110681282ns, Transform time: 1789018534s 809639631ns
+[controller_server-1] [ERROR] [1789018540.712273269] [tf_help]: Transform data too old when converting from odom to map
+[controller_server-1] [ERROR] [1789018540.712307599] [tf_help]: Data time: 1789018540s 629267711ns, Transform time: 1789018534s 809639631ns
+[controller_server-1] [WARN] [1789018540.712333082] [robot1.controller_server]: Unable to transform robot pose into global plan's frame
+[controller_server-1] [ERROR] [1789018540.712437046] [tf_help]: Transform data too old when converting from map to odom
+[controller_server-1] [ERROR] [1789018540.712449700] [tf_help]: Data time: 1789018540s 110681282ns, Transform time: 1789018534s 809639631ns
+[controller_server-1] [ERROR] [1789018540.762589946] [tf_help]: Transform data too old when converting from odom to map
+[controller_server-1] [ERROR] [1789018540.762619434] [tf_help]: Data time: 1789018540s 676383204ns, Transform time: 1789018534s 809639631ns
+[controller_server-1] [WARN] [1789018540.762658250] [robot1.controller_server]: Unable to transform robot pose into global plan's frame
+[controller_server-1] [ERROR] [1789018540.762688263] [robot1.controller_server]: Controller patience exceeded
+[controller_server-1] [WARN] [1789018540.762726413] [robot1.controller_server]: [follow_path] [ActionServer] Aborting handle.
+[behavior_server-4] [INFO] [1789018540.780668425] [robot1.behavior_server]: Running backup
+[behavior_server-4] [WARN] [1789018550.780942971] [robot1.behavior_server]: Exceeded time allowance before reaching the DriveOnHeading goal - Exiting DriveOnHeading
+[behavior_server-4] [WARN] [1789018550.780977635] [robot1.behavior_server]: backup failed
+[behavior_server-4] [WARN] [1789018550.780983692] [robot1.behavior_server]: [backup] [ActionServer] Aborting handle.
+[controller_server-1] [INFO] [1789018550.800557309] [robot1.local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[planner_server-3] [INFO] [1789018550.800998121] [robot1.global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-3] [WARN] [1789018551.241805410] [robot1.planner_server]: Planner loop missed its desired rate of 20.0000 Hz. Current loop rate is 2.2708 Hz
+[controller_server-1] [INFO] [1789018551.260673154] [robot1.controller_server]: Received a goal, begin computing control effort.
+[controller_server-1] [INFO] [1789018552.112606113] [robot1.controller_server]: Reached the goal!
+[bt_navigator-5] [INFO] [1789018552.150548329] [robot1.bt_navigator]: Goal succeeded
+[controller_server-1] [INFO] [1789018579.432201771] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789018578.539 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789018580.338524155] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789018579.480 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789018591.852590698] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789018587.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789018598.019442957] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789018597.473 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789018611.098553287] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789018609.263 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789018611.283016615] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789018609.263 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789018613.642513914] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789018609.763 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789018620.840103883] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789018613.080 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [ERROR] [1789018626.536083177] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018611.262537 but the earliest data is at time 1789018613.289205, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789018627.535979860] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018611.262537 but the earliest data is at time 1789018613.289205, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789018628.536143639] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018611.262537 but the earliest data is at time 1789018613.289205, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789018629.536357534] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018611.262537 but the earliest data is at time 1789018613.289205, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [INFO] [1789018629.540399926] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789018622.754 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [ERROR] [1789018658.536388667] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018641.794059 but the earliest data is at time 1789018645.540465, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789018659.536154627] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018641.794059 but the earliest data is at time 1789018645.540465, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789018660.536392572] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018641.794059 but the earliest data is at time 1789018645.540465, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789018661.536308861] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018641.794059 but the earliest data is at time 1789018645.540465, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789018662.536761314] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018641.794059 but the earliest data is at time 1789018645.540465, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789018663.536408836] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018641.794059 but the earliest data is at time 1789018645.540465, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789018664.536343753] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018641.794059 but the earliest data is at time 1789018649.681322, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789018665.536247715] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018641.794059 but the earliest data is at time 1789018649.681322, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789018666.536176833] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018641.794059 but the earliest data is at time 1789018649.681322, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789018667.536492677] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018641.794059 but the earliest data is at time 1789018649.681322, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789018668.536332295] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018641.794059 but the earliest data is at time 1789018653.632495, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789018669.536686271] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018641.794059 but the earliest data is at time 1789018653.632495, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789018670.536446645] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018641.794059 but the earliest data is at time 1789018653.632495, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789018671.536380770] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018641.794059 but the earliest data is at time 1789018653.632495, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789018672.537010568] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018641.794059 but the earliest data is at time 1789018653.632495, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789018673.536626926] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018641.794059 but the earliest data is at time 1789018657.842094, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789018674.537263786] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018641.794059 but the earliest data is at time 1789018657.842094, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [INFO] [1789018677.007457227] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789018669.741 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [INFO] [1789018807.970464179] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789018802.467 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [ERROR] [1789018814.536478070] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018798.874852 but the earliest data is at time 1789018801.129912, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789018815.536166668] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018798.874852 but the earliest data is at time 1789018805.029837, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789018816.536462075] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018798.874852 but the earliest data is at time 1789018805.029837, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [INFO] [1789018816.604679478] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789018811.612 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [ERROR] [1789018817.537146515] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018798.874852 but the earliest data is at time 1789018805.029837, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [INFO] [1789018820.012210746] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789018818.406 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-3] [ERROR] [1789018847.535749902] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1789018837.400727 but the earliest data is at time 1789018837.527369, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [ERROR] [1789018848.536004961] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation at time 1789018847.272541, but only time 1789018848.288244 is in the buffer, when looking up transform from frame [base_link] to frame [map]
+[planner_server-3] 
+[planner_server-3] [INFO] [1789018848.605799714] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789018846.288 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789018850.059440295] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789018849.609 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789018852.570217768] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789018851.714 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[lifecycle_manager-8] [INFO] [1789018880.413565988] [robot1.lifecycle_manager_navigation]: [34m[1mHave not received a heartbeat from smoother_server.[0m[0m
+[lifecycle_manager-8] [ERROR] [1789018880.413599236] [robot1.lifecycle_manager_navigation]: CRITICAL FAILURE: SERVER smoother_server IS DOWN after not receiving a heartbeat for 30000 ms. Shutting down related nodes.
+[lifecycle_manager-8] [INFO] [1789018880.413619881] [robot1.lifecycle_manager_navigation]: [34m[1mTerminating bond timer...[0m[0m
+[lifecycle_manager-8] [INFO] [1789018880.413623850] [robot1.lifecycle_manager_navigation]: [34m[1mResetting managed nodes...[0m[0m
+[lifecycle_manager-8] [INFO] [1789018880.413626963] [robot1.lifecycle_manager_navigation]: [34m[1mDeactivating velocity_smoother[0m[0m
+[controller_server-1] [INFO] [1789018892.597442778] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789018888.335 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789018898.041115456] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789018893.112 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-1] [INFO] [1789018901.102063703] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1789018895.818 for reason 'the timestamp on the message is earlier than all the data in the transform cache'

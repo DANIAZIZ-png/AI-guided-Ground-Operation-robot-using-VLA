@@ -1,0 +1,42 @@
+2026-07-28 13:09:42.882 [RUN] vla_agent v7  (#22 dock no-detect zone, #23 live-first memory, #24 forget, #25 typo-tolerant control words, #26 bare yes/no, #27 context expiry, #28 all-instance distances, #29 Create 3 backup ratchet)
+2026-07-28 13:09:42.883 [RUN] agent started (SIGHT_CONFIRM=2, SEARCH_TIMEOUT=45.0s, NO_PROGRESS_LIMIT=60.0s, ROBOT_CLEARANCE=0.25m)
+2026-07-28 13:09:46.103 [DOCK] dock position recorded at (3.00, 0.00); detections within 0.8 m are ignored
+2026-07-28 13:09:51.485 [CMD] undock
+2026-07-28 13:09:51.485 [STEP] undock target=None
+2026-07-28 13:09:51.486 [ROBOT] Undocking…
+2026-07-28 13:10:02.587 [ROBOT] Undocked — ready to move.
+2026-07-28 13:10:02.587 [DOCK] undock ok
+2026-07-28 13:10:05.723 [CMD] turn right
+2026-07-28 13:10:06.573 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ninety degrees right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -90.0}]}
+2026-07-28 13:10:06.573 [STEP] move target=None
+2026-07-28 13:10:11.925 [ROBOT] Done with that move.
+2026-07-28 13:10:16.060 [CMD] move 1mmove 1m
+2026-07-28 13:10:17.270 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Moving forward one metre.', 'target': None, 'distance_m': 1.0, 'rotation_deg': 0.0}, {'action': 'move', 'speech': 'Moving forward another metre.', 'target': None, 'distance_m': 1.0, 'rotation_deg': 0.0}]}
+2026-07-28 13:10:17.270 [STEP] move target=None
+2026-07-28 13:10:24.925 [ROBOT] Done with that move.
+2026-07-28 13:10:24.926 [STEP] move target=None
+2026-07-28 13:10:32.925 [ROBOT] Done with that move.
+2026-07-28 13:10:39.179 [CMD] turn right
+2026-07-28 13:10:40.026 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ninety degrees right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -90.0}]}
+2026-07-28 13:10:40.027 [STEP] move target=None
+2026-07-28 13:10:45.925 [ROBOT] Done with that move.
+2026-07-28 13:10:50.923 [CMD] what do you see
+2026-07-28 13:10:51.796 [BRAIN] {'steps': [{'action': 'describe', 'speech': "I don't see anything right now.", 'target': None}]}
+2026-07-28 13:10:51.796 [STEP] describe target=None
+2026-07-28 13:10:59.595 [CMD] move ahead 3 m
+2026-07-28 13:11:00.406 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Moving forward three meters.', 'target': None, 'distance_m': 3.0, 'rotation_deg': 0.0}]}
+2026-07-28 13:11:00.406 [STEP] move target=None
+2026-07-28 13:11:11.868 [CMD] turn right 15
+2026-07-28 13:11:12.734 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning fifteen degrees to the right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -15.0}]}
+2026-07-28 13:11:12.734 [STEP] move target=None
+2026-07-28 13:11:14.925 [ROBOT] Done with that move.
+2026-07-28 13:11:20.843 [CMD] what do you see
+2026-07-28 13:11:21.635 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a chair.', 'target': None}]}
+2026-07-28 13:11:21.635 [STEP] describe target=None
+2026-07-28 13:11:28.219 [CMD] go to the chair
+2026-07-28 13:11:28.924 [BRAIN] {'steps': [{'action': 'navigate', 'speech': 'Heading to the chair.', 'target': 'chair'}]}
+2026-07-28 13:11:28.924 [STEP] navigate target='chair'
+2026-07-28 13:11:30.003 [ROBOT] Found the chair — navigating to it.
+2026-07-28 13:11:30.003 [SIGHT] chair at (13.01, -11.46), 14.87 m away
+2026-07-28 13:12:31.926 [ROBOT] I know where the chair is but I can't get any closer — the way looks blocked. I've remembered its spot, so try again from somewhere else, or clear the path.
+2026-07-28 13:12:31.926 [WARN] no progress toward chair for 60s; best=14.87m

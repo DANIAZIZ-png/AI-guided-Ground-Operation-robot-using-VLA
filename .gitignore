@@ -1,0 +1,37 @@
+# --- model weights: never commit (hashes are in README.md and env/MANIFEST.md) ---
+*.pt
+*.pth
+*.onnx
+*.engine
+*.safetensors
+weights/
+
+# --- virtualenvs / containers ---
+yolo-env/
+openvla-env/
+venv/
+.venv/
+
+# --- python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# --- rosbags and other bulk recordings ---
+*.db3
+*.mcap
+*.bag
+
+# --- host clutter that happens to sit in $HOME ---
+.cache/
+.local/
+Downloads/
+Documents/
+Videos/
+.minecraft/
+.tlauncher/
+
+# --- editor / OS ---
+*.swp
+*~
+.DS_Store

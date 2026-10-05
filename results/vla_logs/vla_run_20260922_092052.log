@@ -1,0 +1,761 @@
+2026-09-22 09:20:52.307 [RUN] vla_agent v28  (#63 headless-safe console output, #62 direction-aware collision guard, #61 nearest-cluster LiDAR ranging, #60 manual override teleop, #59 10 Hz collision guard, #58 smoother approach, #57 stand off far enough to keep the object in view, #56 step-and-stare scan, #55 LiDAR failure reasons reported, #54 LiDAR object ranging, #53 seeded depth intrinsics, #52 depth intrinsics rescaled to frame size, #51 compressedDepth transport, #50 compressed RGB transport, #49 annotated feed gated per topic, #47 TF at colour-frame stamp, #48 reject stale depth, #46 one subscription per camera stream, #43 longer cached action-server wait, #44 undock retry-loop breaker, #45 sync slop for 1 Hz depth, #37 /robot1 namespace, #38 stereo depth topic, #39 best-effort sensor QoS, #40 RGB->depth pixel mapping, #41 encoding-based mm/m, #42 explicit namespaced TF, #36 no patrol feed prompt, #35 cancel actually stops the robot, #34 feed publishes to any subscriber, #22 dock no-detect zone, #23 live-first memory, #24 forget, #25 typo-tolerant control words, #26 bare yes/no, #27 context expiry, #28 all-instance distances, #29 Create 3 backup ratchet, #30 sticky goals + range-scaled gate + ring-safe blacklist, #31 incremental off-map hop goals, #32 non-freezing live feed, #33 command/reply/status bridge)
+2026-09-22 09:20:52.307 [RUN] agent started (SIGHT_CONFIRM=2, SEARCH_TIMEOUT=120.0s, NO_PROGRESS_LIMIT=60.0s, ROBOT_CLEARANCE=0.25m)
+2026-09-22 09:21:16.592 [CMD] [remote] what do you see
+2026-09-22 09:21:16.592 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:21:17.199 [BRAIN] {'steps': [{'action': 'describe', 'speech': "I don't see anything right now.", 'target': None}]}
+2026-09-22 09:21:17.200 [STEP] describe target=None
+2026-09-22 09:21:18.642 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:21:18.643 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:21:23.118 [CMD] [remote] turn left
+2026-09-22 09:21:23.118 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:21:23.780 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ninety degrees left.', 'target': None, 'distance_m': 0.0, 'rotation_deg': 90.0}]}
+2026-09-22 09:21:23.780 [STEP] move target=None
+2026-09-22 09:21:25.162 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:21:25.162 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:21:30.322 [ROBOT] Done with that move.
+2026-09-22 09:21:35.662 [CMD] [remote] turn right 30
+2026-09-22 09:21:35.662 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:21:36.339 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning thirty degrees to the right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -30.0}]}
+2026-09-22 09:21:36.339 [STEP] move target=None
+2026-09-22 09:21:37.723 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:21:37.723 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:21:40.322 [ROBOT] Done with that move.
+2026-09-22 09:21:45.951 [CMD] [remote] what do you se
+2026-09-22 09:21:45.951 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:21:46.607 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a chair and a shelf.', 'target': None}]}
+2026-09-22 09:21:46.607 [STEP] describe target=None
+2026-09-22 09:21:48.002 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:21:48.002 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:21:55.934 [CMD] [remote] go to the farthes chair
+2026-09-22 09:21:55.934 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:21:56.575 [BRAIN] {'steps': [{'action': 'navigate', 'speech': 'Heading to the farthest chair.', 'target': 'chair', 'qualifier': 'farthest'}]}
+2026-09-22 09:21:56.575 [STEP] navigate target='chair'
+2026-09-22 09:21:57.982 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:21:57.983 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:21:58.378 [ROBOT] Found the chair — navigating to it.
+2026-09-22 09:21:58.378 [SIGHT] chair at (-0.80, -6.25), 6.29 m away
+2026-09-22 09:21:58.379 [ROBOT] The chair is about 6.3 m away, past the edge of what I've mapped. Moving up in short steps and mapping as I go.
+2026-09-22 09:21:58.379 [STEP] #31 hop mode engaged for chair: object (-0.80, -6.25) at 6.3 m, area_mapped=False
+2026-09-22 09:21:58.379 [GOAL] #31 hop 1: 1.50 m toward chair (still 6.3 m away)
+2026-09-22 09:21:58.379 [GOAL] (-0.30, -1.49) yaw=-96deg mode=navigate
+2026-09-22 09:22:01.373 [WARN] suspicious chair jump of 4.1 m (occlusion/depth noise?) — waiting for a confirming look (agree radius 1.0 m)
+2026-09-22 09:22:02.374 [SIGHT] large chair jump (3.3 m) confirmed by a second look — accepting
+2026-09-22 09:22:02.377 [STEP] chair area now mapped after 1 hop(s) — switching to a direct approach
+2026-09-22 09:22:02.377 [ROBOT] The area around the chair is mapped now — going straight to it.
+2026-09-22 09:22:02.377 [GOAL] (-0.58, -2.09) yaw=-103deg mode=navigate
+2026-09-22 09:22:02.381 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:22:02.381 [WARN] nav goal (-0.58, -2.09) failed (status=6); trying another approach angle
+2026-09-22 09:22:03.374 [WARN] suspicious chair jump of 3.2 m (occlusion/depth noise?) — waiting for a confirming look (agree radius 1.3 m)
+2026-09-22 09:22:03.376 [GOAL] (-0.25, -2.25) yaw=-130deg mode=navigate
+2026-09-22 09:22:03.381 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:22:03.381 [WARN] nav goal (-0.25, -2.25) failed (status=6); trying another approach angle
+2026-09-22 09:22:04.372 [SIGHT] large chair jump (3.2 m) confirmed by a second look — accepting
+2026-09-22 09:22:04.373 [GOAL] (-1.46, -5.21) yaw=-107deg mode=navigate
+2026-09-22 09:22:04.380 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:22:04.380 [WARN] nav goal (-1.46, -5.21) failed (status=6); trying another approach angle
+2026-09-22 09:22:05.382 [GOAL] (-0.60, -4.73) yaw=-95deg mode=navigate
+2026-09-22 09:22:05.390 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:22:05.391 [WARN] nav goal (-0.60, -4.73) failed (status=6); trying another approach angle
+2026-09-22 09:22:06.373 [GOAL] (-1.48, -3.99) yaw=-115deg mode=navigate
+2026-09-22 09:22:06.381 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:22:06.381 [WARN] nav goal (-1.48, -3.99) failed (status=6); trying another approach angle
+2026-09-22 09:22:07.373 [GOAL] (-1.54, -3.74) yaw=175deg mode=navigate
+2026-09-22 09:22:07.381 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:22:07.381 [WARN] nav goal (-1.54, -3.74) failed (status=6); trying another approach angle
+2026-09-22 09:22:08.371 [GOAL] (-1.79, -3.09) yaw=-133deg mode=navigate
+2026-09-22 09:22:08.381 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:22:08.381 [WARN] nav goal (-1.79, -3.09) failed (status=6); trying another approach angle
+2026-09-22 09:22:09.376 [GOAL] (-1.32, -5.03) yaw=-98deg mode=navigate
+2026-09-22 09:22:09.381 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:22:09.381 [WARN] nav goal (-1.32, -5.03) failed (status=6); trying another approach angle
+2026-09-22 09:22:10.376 [GOAL] (-0.64, -4.96) yaw=-83deg mode=navigate
+2026-09-22 09:22:10.381 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:22:10.381 [WARN] nav goal (-0.64, -4.96) failed (status=6); trying another approach angle
+2026-09-22 09:22:11.373 [GOAL] (-1.37, -6.04) yaw=-65deg mode=navigate
+2026-09-22 09:22:11.381 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:22:11.381 [WARN] nav goal (-1.37, -6.04) failed (status=6); trying another approach angle
+2026-09-22 09:22:12.374 [GOAL] (-1.12, -5.50) yaw=-93deg mode=navigate
+2026-09-22 09:22:12.381 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:22:12.381 [WARN] nav goal (-1.12, -5.50) failed (status=6); trying another approach angle
+2026-09-22 09:22:13.371 [GOAL] #31 hop 2: 1.50 m toward chair (still 3.9 m away)
+2026-09-22 09:22:13.372 [GOAL] (-1.04, -4.53) yaw=-91deg mode=navigate
+2026-09-22 09:22:13.381 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:22:13.381 [WARN] nav goal (-1.04, -4.53) failed (status=6); trying another approach angle
+2026-09-22 09:22:13.381 [STEP] #31 hop aborted — shortening to 0.75 m and re-aiming
+2026-09-22 09:22:14.372 [STEP] chair area now mapped after 2 hop(s) — switching to a direct approach
+2026-09-22 09:22:14.373 [ROBOT] The area around the chair is mapped now — going straight to it.
+2026-09-22 09:22:14.373 [GOAL] (-1.12, -5.46) yaw=-93deg mode=navigate
+2026-09-22 09:22:14.381 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:22:14.381 [WARN] nav goal (-1.12, -5.46) failed (status=6); trying another approach angle
+2026-09-22 09:22:15.371 [GOAL] (-1.01, -5.85) yaw=-90deg mode=navigate
+2026-09-22 09:22:15.381 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:22:15.381 [WARN] nav goal (-1.01, -5.85) failed (status=6); trying another approach angle
+2026-09-22 09:22:16.372 [GOAL] (-1.31, -6.02) yaw=-64deg mode=navigate
+2026-09-22 09:22:16.381 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:22:16.381 [WARN] nav goal (-1.31, -6.02) failed (status=6); trying another approach angle
+2026-09-22 09:22:17.375 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-09-22 09:22:17.376 [GOAL] #31 hop 3: 0.75 m toward chair (still 3.0 m away)
+2026-09-22 09:22:17.376 [GOAL] (-1.01, -4.68) yaw=-88deg mode=navigate
+2026-09-22 09:22:17.381 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:22:17.381 [WARN] nav goal (-1.01, -4.68) failed (status=6); trying another approach angle
+2026-09-22 09:22:17.381 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-09-22 09:22:18.373 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-09-22 09:22:18.374 [GOAL] #31 hop 4: 0.60 m toward chair (still 2.7 m away)
+2026-09-22 09:22:18.374 [GOAL] (-1.01, -4.77) yaw=-87deg mode=navigate
+2026-09-22 09:22:18.381 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:22:18.381 [WARN] nav goal (-1.01, -4.77) failed (status=6); trying another approach angle
+2026-09-22 09:22:18.381 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-09-22 09:22:19.373 [STEP] chair area now mapped after 4 hop(s) — switching to a direct approach
+2026-09-22 09:22:19.373 [ROBOT] The area around the chair is mapped now — going straight to it.
+2026-09-22 09:22:19.374 [GOAL] (-0.97, -5.49) yaw=-87deg mode=navigate
+2026-09-22 09:22:19.381 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:22:19.381 [WARN] nav goal (-0.97, -5.49) failed (status=6); trying another approach angle
+2026-09-22 09:22:20.372 [GOAL] (-0.95, -5.71) yaw=-86deg mode=navigate
+2026-09-22 09:22:20.381 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:22:20.381 [WARN] nav goal (-0.95, -5.71) failed (status=6); trying another approach angle
+2026-09-22 09:22:21.371 [GOAL] (-0.62, -5.56) yaw=-111deg mode=navigate
+2026-09-22 09:22:21.381 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:22:21.381 [WARN] nav goal (-0.62, -5.56) failed (status=6); trying another approach angle
+2026-09-22 09:22:22.371 [GOAL] (-1.28, -5.62) yaw=-58deg mode=navigate
+2026-09-22 09:22:22.381 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:22:22.381 [WARN] nav goal (-1.28, -5.62) failed (status=6); trying another approach angle
+2026-09-22 09:22:23.370 [GOAL] (-0.31, -5.72) yaw=-134deg mode=navigate
+2026-09-22 09:22:23.382 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:22:23.382 [WARN] nav goal (-0.31, -5.72) failed (status=6); trying another approach angle
+2026-09-22 09:22:24.374 [ROBOT] Arrived at the chair.
+2026-09-22 09:23:16.198 [CMD] [remote] turn around
+2026-09-22 09:23:16.199 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:23:16.814 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning around.', 'target': None, 'distance_m': 0.0, 'rotation_deg': 180.0}]}
+2026-09-22 09:23:16.814 [STEP] move target=None
+2026-09-22 09:23:18.242 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:23:18.243 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:23:26.322 [ROBOT] Done with that move.
+2026-09-22 09:23:38.571 [CMD] [remote] what do you see
+2026-09-22 09:23:38.572 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:23:39.080 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a chair.', 'target': None}]}
+2026-09-22 09:23:39.080 [STEP] describe target=None
+2026-09-22 09:23:40.622 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:23:40.623 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:23:43.175 [CMD] [remote] go to the person
+2026-09-22 09:23:43.175 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:23:43.665 [BRAIN] {'steps': [{'action': 'navigate', 'speech': 'Heading to the person.', 'target': 'person'}]}
+2026-09-22 09:23:43.665 [STEP] navigate target='person'
+2026-09-22 09:23:45.223 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:23:45.223 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:23:47.123 [ROBOT] I've stopped receiving camera frames (none for over 5s). Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-09-22 09:23:47.123 [WARN] #32e camera stream stalled (>5s)
+2026-09-22 09:24:10.678 [WARN] #32e camera stream RESUMED after 28.6s
+2026-09-22 09:24:10.678 [ROBOT] Camera frames are back — the gap was 28.6s.
+2026-09-22 09:24:15.723 [ROBOT] I've stopped receiving camera frames (none for over 5s). Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-09-22 09:24:15.723 [WARN] #32e camera stream stalled (>5s)
+2026-09-22 09:25:39.469 [ROBOT] Arrived at the person.
+2026-09-22 09:25:39.469 [ARRIVE] #64e person in frame at 0.91 m (<= 1.2 m) -- stopping here
+2026-09-22 09:25:50.952 [WARN] #32e camera stream RESUMED after 100.3s
+2026-09-22 09:25:50.952 [ROBOT] Camera frames are back — the gap was 100.3s.
+2026-09-22 09:25:58.323 [ROBOT] I've stopped receiving camera frames (none for over 5s). Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-09-22 09:25:58.323 [WARN] #32e camera stream stalled (>5s)
+2026-09-22 09:26:04.855 [WARN] #32e camera stream RESUMED after 11.6s
+2026-09-22 09:26:04.855 [ROBOT] Camera frames are back — the gap was 11.6s.
+2026-09-22 09:26:07.536 [CMD] [remote] turn left
+2026-09-22 09:26:07.536 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:26:08.158 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ninety degrees left.', 'target': None, 'distance_m': 0.0, 'rotation_deg': 90.0}]}
+2026-09-22 09:26:08.159 [STEP] move target=None
+2026-09-22 09:26:09.582 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:26:09.583 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:26:09.923 [ROBOT] I've stopped receiving camera frames (none for over 5s). Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-09-22 09:26:09.923 [WARN] #32e camera stream stalled (>5s)
+2026-09-22 09:26:18.135 [WARN] #32e camera stream RESUMED after 13.3s
+2026-09-22 09:26:18.135 [ROBOT] Camera frames are back — the gap was 13.3s.
+2026-09-22 09:26:24.322 [ROBOT] Done with that move.
+2026-09-22 09:26:26.415 [CMD] (cancel via remote) cancel
+2026-09-22 09:26:26.416 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:26:28.462 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:26:28.462 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:26:30.300 [CMD] [remote] what do you see
+2026-09-22 09:26:30.300 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:26:30.875 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I can see a chair and a person.', 'target': None}]}
+2026-09-22 09:26:30.875 [STEP] describe target=None
+2026-09-22 09:26:32.342 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:26:32.343 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:26:45.323 [ROBOT] I've stopped receiving camera frames (none for over 5s). Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-09-22 09:26:45.323 [WARN] #32e camera stream stalled (>5s)
+2026-09-22 09:26:47.979 [WARN] #32e camera stream RESUMED after 7.8s
+2026-09-22 09:26:47.979 [ROBOT] Camera frames are back — the gap was 7.8s.
+2026-09-22 09:27:09.522 [ROBOT] I've stopped receiving camera frames (none for over 5s). Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-09-22 09:27:09.523 [WARN] #32e camera stream stalled (>5s)
+2026-09-22 09:27:15.196 [WARN] #32e camera stream RESUMED after 10.8s
+2026-09-22 09:27:15.196 [ROBOT] Camera frames are back — the gap was 10.8s.
+2026-09-22 09:27:20.722 [ROBOT] I've stopped receiving camera frames (none for over 5s). Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-09-22 09:27:20.723 [WARN] #32e camera stream stalled (>5s)
+2026-09-22 09:27:26.228 [WARN] #32e camera stream RESUMED after 10.6s
+2026-09-22 09:27:26.228 [ROBOT] Camera frames are back — the gap was 10.6s.
+2026-09-22 09:27:37.322 [ROBOT] I've stopped receiving camera frames (none for over 5s). Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-09-22 09:27:37.323 [WARN] #32e camera stream stalled (>5s)
+2026-09-22 09:28:36.339 [CMD] [remote] move forward one meter
+2026-09-22 09:28:36.340 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:28:36.389 [CTX] dropping stale context (navigate -> person)
+2026-09-22 09:28:36.920 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Moving forward one metre.', 'target': None, 'distance_m': 1.0, 'rotation_deg': 0.0}]}
+2026-09-22 09:28:36.920 [STEP] move target=None
+2026-09-22 09:28:38.382 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:28:38.383 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:29:09.323 [ROBOT] Done with that move.
+2026-09-22 09:29:15.862 [WARN] #32e camera stream RESUMED after 103.6s
+2026-09-22 09:29:15.862 [ROBOT] Camera frames are back — the gap was 103.6s.
+2026-09-22 09:29:20.923 [ROBOT] I've stopped receiving camera frames (none for over 5s). Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-09-22 09:29:20.923 [WARN] #32e camera stream stalled (>5s)
+2026-09-22 09:29:40.587 [WARN] #32e camera stream RESUMED after 24.7s
+2026-09-22 09:29:40.587 [ROBOT] Camera frames are back — the gap was 24.7s.
+2026-09-22 09:29:47.923 [ROBOT] I've stopped receiving camera frames (none for over 5s). Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-09-22 09:29:47.923 [WARN] #32e camera stream stalled (>5s)
+2026-09-22 09:29:51.901 [WARN] #32e camera stream RESUMED after 9.1s
+2026-09-22 09:29:51.901 [ROBOT] Camera frames are back — the gap was 9.1s.
+2026-09-22 09:30:01.522 [ROBOT] I've stopped receiving camera frames (none for over 5s). Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-09-22 09:30:01.523 [WARN] #32e camera stream stalled (>5s)
+2026-09-22 09:30:08.040 [WARN] #32e camera stream RESUMED after 11.5s
+2026-09-22 09:30:08.040 [ROBOT] Camera frames are back — the gap was 11.5s.
+2026-09-22 09:30:13.122 [ROBOT] I've stopped receiving camera frames (none for over 5s). Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-09-22 09:30:13.123 [WARN] #32e camera stream stalled (>5s)
+2026-09-22 09:30:20.131 [WARN] #32e camera stream RESUMED after 12.1s
+2026-09-22 09:30:20.131 [ROBOT] Camera frames are back — the gap was 12.1s.
+2026-09-22 09:30:34.671 [CMD] [remote] what do you see
+2026-09-22 09:30:34.671 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:30:35.329 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a chair and a person.', 'target': None}]}
+2026-09-22 09:30:35.329 [STEP] describe target=None
+2026-09-22 09:30:36.722 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:30:36.723 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:30:39.592 [CMD] [remote] what do you see
+2026-09-22 09:30:39.593 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:30:40.225 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I can see a chair and a person.', 'target': None}]}
+2026-09-22 09:30:40.225 [STEP] describe target=None
+2026-09-22 09:30:41.642 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:30:41.643 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:30:45.697 [CMD] [remote] go to the farthest person
+2026-09-22 09:30:45.698 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:30:46.303 [BRAIN] {'steps': [{'action': 'navigate', 'speech': 'Heading to the farthest person.', 'target': 'person', 'qualifier': 'farthest'}]}
+2026-09-22 09:30:46.303 [STEP] navigate target='person'
+2026-09-22 09:30:47.370 [ROBOT] Found the person — navigating to it.
+2026-09-22 09:30:47.370 [SIGHT] person at (-1.78, 6.71), 10.89 m away
+2026-09-22 09:30:47.372 [GOAL] (-1.69, 5.92) yaw=96deg mode=navigate
+2026-09-22 09:30:48.125 [WARN] lidar ranging unavailable: only 2 valid beams within 2.8 deg of bearing -77.8 deg (scan frame rplidar_link, 1080 beams total)
+2026-09-22 09:30:51.702 [ROBOT] I sent the stop but the robot is STILL MOVING (0.26 m/s, 0.00 rad/s). Take manual override now.
+2026-09-22 09:30:51.703 [ERROR] #35 robot still moving 6.0s after stop: lin=0.26 ang=0.00
+2026-09-22 09:30:52.373 [GOAL] (-1.30, 3.53) yaw=96deg mode=navigate
+2026-09-22 09:30:52.383 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:30:52.384 [WARN] nav goal (-1.30, 3.53) failed (status=6); trying another approach angle
+2026-09-22 09:30:53.372 [GOAL] (-2.39, 6.26) yaw=101deg mode=navigate
+2026-09-22 09:30:53.374 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:30:53.374 [WARN] nav goal (-2.39, 6.26) failed (status=6); trying another approach angle
+2026-09-22 09:30:54.376 [GOAL] (-1.10, 6.07) yaw=93deg mode=navigate
+2026-09-22 09:30:54.384 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:30:54.384 [WARN] nav goal (-1.10, 6.07) failed (status=6); trying another approach angle
+2026-09-22 09:30:55.373 [GOAL] (0.65, 3.99) yaw=78deg mode=navigate
+2026-09-22 09:30:55.384 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:30:55.385 [WARN] nav goal (0.65, 3.99) failed (status=6); trying another approach angle
+2026-09-22 09:30:56.373 [GOAL] (-0.04, 5.96) yaw=85deg mode=navigate
+2026-09-22 09:30:56.384 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:30:56.384 [WARN] nav goal (-0.04, 5.96) failed (status=6); trying another approach angle
+2026-09-22 09:30:57.375 [GOAL] (-0.61, 6.05) yaw=89deg mode=navigate
+2026-09-22 09:30:57.383 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:30:57.383 [WARN] nav goal (-0.61, 6.05) failed (status=6); trying another approach angle
+2026-09-22 09:30:58.373 [GOAL] (-1.91, 6.14) yaw=98deg mode=navigate
+2026-09-22 09:30:58.383 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:30:58.383 [WARN] nav goal (-1.91, 6.14) failed (status=6); trying another approach angle
+2026-09-22 09:30:59.373 [GOAL] (-0.29, 6.13) yaw=86deg mode=navigate
+2026-09-22 09:30:59.383 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:30:59.384 [WARN] nav goal (-0.29, 6.13) failed (status=6); trying another approach angle
+2026-09-22 09:31:00.374 [GOAL] (0.18, 6.10) yaw=109deg mode=navigate
+2026-09-22 09:31:00.383 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:31:00.383 [WARN] nav goal (0.18, 6.10) failed (status=6); trying another approach angle
+2026-09-22 09:31:01.373 [GOAL] (-0.56, 6.11) yaw=58deg mode=navigate
+2026-09-22 09:31:01.383 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:31:01.384 [WARN] nav goal (-0.56, 6.11) failed (status=6); trying another approach angle
+2026-09-22 09:31:02.376 [GOAL] (-1.53, 3.68) yaw=96deg mode=navigate
+2026-09-22 09:31:02.384 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:31:02.384 [WARN] nav goal (-1.53, 3.68) failed (status=6); trying another approach angle
+2026-09-22 09:31:03.373 [GOAL] (-1.48, 4.08) yaw=95deg mode=navigate
+2026-09-22 09:31:03.384 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:31:03.384 [WARN] nav goal (-1.48, 4.08) failed (status=6); trying another approach angle
+2026-09-22 09:31:04.376 [GOAL] (-1.97, 3.88) yaw=73deg mode=navigate
+2026-09-22 09:31:04.383 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:31:04.383 [WARN] nav goal (-1.97, 3.88) failed (status=6); trying another approach angle
+2026-09-22 09:31:05.374 [GOAL] (-1.99, 3.61) yaw=74deg mode=navigate
+2026-09-22 09:31:05.383 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:31:05.383 [WARN] nav goal (-1.99, 3.61) failed (status=6); trying another approach angle
+2026-09-22 09:31:06.372 [GOAL] (-1.69, 3.84) yaw=100deg mode=navigate
+2026-09-22 09:31:06.374 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:31:06.374 [WARN] nav goal (-1.69, 3.84) failed (status=6); trying another approach angle
+2026-09-22 09:31:07.378 [GOAL] (-1.15, 3.95) yaw=151deg mode=navigate
+2026-09-22 09:31:07.384 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:31:07.384 [WARN] nav goal (-1.15, 3.95) failed (status=6); trying another approach angle
+2026-09-22 09:31:08.372 [GOAL] (-2.19, 3.86) yaw=51deg mode=navigate
+2026-09-22 09:31:08.374 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:31:08.374 [WARN] nav goal (-2.19, 3.86) failed (status=6); trying another approach angle
+2026-09-22 09:31:09.374 [GOAL] (-1.70, 3.46) yaw=103deg mode=navigate
+2026-09-22 09:31:09.384 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:31:09.384 [WARN] nav goal (-1.70, 3.46) failed (status=6); trying another approach angle
+2026-09-22 09:31:10.373 [GOAL] (-0.96, 4.18) yaw=149deg mode=navigate
+2026-09-22 09:31:10.383 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:31:10.383 [WARN] nav goal (-0.96, 4.18) failed (status=6); trying another approach angle
+2026-09-22 09:31:11.374 [GOAL] (-1.16, 4.39) yaw=177deg mode=navigate
+2026-09-22 09:31:11.383 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:31:11.383 [WARN] nav goal (-1.16, 4.39) failed (status=6); trying another approach angle
+2026-09-22 09:31:12.373 [GOAL] (-1.41, 4.39) yaw=-178deg mode=navigate
+2026-09-22 09:31:12.383 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:31:12.383 [WARN] nav goal (-1.41, 4.39) failed (status=6); trying another approach angle
+2026-09-22 09:31:13.377 [GOAL] (-1.23, 4.71) yaw=-153deg mode=navigate
+2026-09-22 09:31:13.383 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:31:13.384 [WARN] nav goal (-1.23, 4.71) failed (status=6); trying another approach angle
+2026-09-22 09:31:14.374 [GOAL] (-2.37, 3.69) yaw=57deg mode=navigate
+2026-09-22 09:31:14.383 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:31:14.383 [WARN] nav goal (-2.37, 3.69) failed (status=6); trying another approach angle
+2026-09-22 09:31:15.377 [GOAL] (-2.74, 4.25) yaw=7deg mode=navigate
+2026-09-22 09:31:15.383 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:31:15.383 [WARN] nav goal (-2.74, 4.25) failed (status=6); trying another approach angle
+2026-09-22 09:31:16.372 [GOAL] (-2.48, 4.60) yaw=-23deg mode=navigate
+2026-09-22 09:31:16.375 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:31:16.375 [WARN] nav goal (-2.48, 4.60) failed (status=6); trying another approach angle
+2026-09-22 09:31:17.374 [GOAL] (-1.52, 5.01) yaw=-125deg mode=navigate
+2026-09-22 09:31:17.383 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:31:17.383 [WARN] nav goal (-1.52, 5.01) failed (status=6); trying another approach angle
+2026-09-22 09:31:18.375 [GOAL] (-1.30, 3.78) yaw=131deg mode=navigate
+2026-09-22 09:31:18.384 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:31:18.384 [WARN] nav goal (-1.30, 3.78) failed (status=6); trying another approach angle
+2026-09-22 09:31:19.373 [GOAL] (-1.82, 4.99) yaw=-93deg mode=navigate
+2026-09-22 09:31:19.383 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:31:19.384 [WARN] nav goal (-1.82, 4.99) failed (status=6); trying another approach angle
+2026-09-22 09:31:20.373 [GOAL] (-2.70, 4.77) yaw=-21deg mode=navigate
+2026-09-22 09:31:20.383 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:31:20.384 [WARN] nav goal (-2.70, 4.77) failed (status=6); trying another approach angle
+2026-09-22 09:31:21.376 [GOAL] (-2.28, 4.82) yaw=-49deg mode=navigate
+2026-09-22 09:31:21.383 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:31:21.383 [WARN] nav goal (-2.28, 4.82) failed (status=6); trying another approach angle
+2026-09-22 09:31:22.377 [GOAL] (-2.55, 3.91) yaw=39deg mode=navigate
+2026-09-22 09:31:22.383 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:31:22.384 [WARN] nav goal (-2.55, 3.91) failed (status=6); trying another approach angle
+2026-09-22 09:31:23.379 [GOAL] (-1.95, 5.20) yaw=-85deg mode=navigate
+2026-09-22 09:31:23.384 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:31:23.384 [WARN] nav goal (-1.95, 5.20) failed (status=6); trying another approach angle
+2026-09-22 09:31:24.373 [GOAL] (-0.81, 4.54) yaw=-177deg mode=navigate
+2026-09-22 09:31:24.383 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:31:24.383 [WARN] nav goal (-0.81, 4.54) failed (status=6); trying another approach angle
+2026-09-22 09:31:25.372 [GOAL] (-2.22, 4.41) yaw=8deg mode=navigate
+2026-09-22 09:31:25.383 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:31:25.383 [WARN] nav goal (-2.22, 4.41) failed (status=6); trying another approach angle
+2026-09-22 09:31:26.372 [GOAL] (-2.19, 5.12) yaw=-63deg mode=navigate
+2026-09-22 09:31:26.374 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:31:26.374 [WARN] nav goal (-2.19, 5.12) failed (status=6); trying another approach angle
+2026-09-22 09:31:27.373 [WARN] all approach goals for person refused; clearing the tried-list and retrying
+2026-09-22 09:31:27.376 [GOAL] (-1.46, 3.69) yaw=116deg mode=navigate
+2026-09-22 09:31:27.383 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:31:27.383 [WARN] nav goal (-1.46, 3.69) failed (status=6); trying another approach angle
+2026-09-22 09:31:28.372 [GOAL] (-1.19, 3.93) yaw=142deg mode=navigate
+2026-09-22 09:31:28.376 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:31:28.376 [WARN] nav goal (-1.19, 3.93) failed (status=6); trying another approach angle
+2026-09-22 09:31:29.373 [GOAL] (-1.77, 3.60) yaw=92deg mode=navigate
+2026-09-22 09:31:29.384 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:31:29.384 [WARN] nav goal (-1.77, 3.60) failed (status=6); trying another approach angle
+2026-09-22 09:31:30.372 [GOAL] (-1.76, 3.83) yaw=91deg mode=navigate
+2026-09-22 09:31:30.375 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:31:30.375 [WARN] nav goal (-1.76, 3.83) failed (status=6); trying another approach angle
+2026-09-22 09:31:31.374 [GOAL] (-0.95, 4.23) yaw=164deg mode=navigate
+2026-09-22 09:31:31.384 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:31:31.384 [WARN] nav goal (-0.95, 4.23) failed (status=6); trying another approach angle
+2026-09-22 09:31:32.372 [GOAL] (-2.07, 3.72) yaw=64deg mode=navigate
+2026-09-22 09:31:32.377 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:31:32.377 [WARN] nav goal (-2.07, 3.72) failed (status=6); trying another approach angle
+2026-09-22 09:31:33.370 [ROBOT] Arrived at the person.
+2026-09-22 09:31:33.370 [ARRIVE] #64e person in frame at 1.18 m (<= 1.2 m) -- stopping here
+2026-09-22 09:31:42.835 [CMD] [remote] turn right
+2026-09-22 09:31:42.835 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:31:43.459 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ninety degrees to the right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -90.0}]}
+2026-09-22 09:31:43.459 [STEP] move target=None
+2026-09-22 09:31:44.882 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:31:44.883 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:31:49.322 [ROBOT] Done with that move.
+2026-09-22 09:31:51.590 [CMD] [remote] move forward one meter
+2026-09-22 09:31:51.591 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:31:52.161 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Moving forward one metre.', 'target': None, 'distance_m': 1.0, 'rotation_deg': 0.0}]}
+2026-09-22 09:31:52.161 [STEP] move target=None
+2026-09-22 09:31:53.642 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:31:53.642 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:32:00.322 [ROBOT] Done with that move.
+2026-09-22 09:33:50.486 [CMD] [remote] control the area
+2026-09-22 09:33:50.486 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:33:50.539 [CTX] dropping stale context (navigate -> person)
+2026-09-22 09:33:51.015 [BRAIN] {'steps': [{'action': 'patrol', 'speech': 'Patrolling the area.', 'target': None}]}
+2026-09-22 09:33:51.015 [STEP] patrol target=None
+2026-09-22 09:33:51.327 [GOAL] (3.55, -3.46) yaw=73deg mode=explore
+2026-09-22 09:33:52.542 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:33:52.542 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:33:59.589 [RESULT] nav goal status=4 (ok)
+2026-09-22 09:34:00.325 [GOAL] (4.34, -2.03) yaw=61deg mode=explore
+2026-09-22 09:34:06.597 [RESULT] nav goal status=4 (ok)
+2026-09-22 09:34:07.325 [GOAL] (4.40, -0.43) yaw=74deg mode=explore
+2026-09-22 09:34:29.723 [GUARD] collision guard stopped the robot at 0.34 m (limit 0.35 m, mode=explore)
+2026-09-22 09:34:29.723 [ROBOT] Stopping — an obstacle is 0.34 m ahead.
+2026-09-22 09:34:29.747 [RESULT] nav goal status=5 (not-succeeded)
+2026-09-22 09:34:30.324 [GOAL] (1.93, 0.05) yaw=171deg mode=explore
+2026-09-22 09:34:42.588 [RESULT] nav goal status=4 (ok)
+2026-09-22 09:34:43.325 [GOAL] (0.93, -0.34) yaw=-145deg mode=explore
+2026-09-22 09:34:44.723 [GUARD] collision guard stopped the robot at 0.34 m (limit 0.35 m, mode=explore)
+2026-09-22 09:34:44.723 [ROBOT] Stopping — an obstacle is 0.34 m ahead.
+2026-09-22 09:34:44.747 [RESULT] nav goal status=5 (not-succeeded)
+2026-09-22 09:34:45.324 [GOAL] (1.90, 1.77) yaw=81deg mode=explore
+2026-09-22 09:34:49.823 [GUARD] collision guard stopped the robot at 0.28 m (limit 0.35 m, mode=explore)
+2026-09-22 09:34:49.823 [ROBOT] Stopping — an obstacle is 0.28 m ahead.
+2026-09-22 09:34:49.847 [RESULT] nav goal status=5 (not-succeeded)
+2026-09-22 09:34:50.325 [GOAL] (2.53, 2.59) yaw=64deg mode=explore
+2026-09-22 09:35:11.791 [CMD] [remote] what do you see
+2026-09-22 09:35:11.792 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:35:12.430 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a chair and a person.', 'target': None}]}
+2026-09-22 09:35:12.430 [STEP] describe target=None
+2026-09-22 09:35:13.842 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:35:13.842 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:35:16.572 [CMD] [remote] what do you see
+2026-09-22 09:35:16.573 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:35:17.152 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a chair.', 'target': None}]}
+2026-09-22 09:35:17.152 [STEP] describe target=None
+2026-09-22 09:35:18.623 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:35:18.623 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:35:19.822 [CMD] [remote] how many chairs
+2026-09-22 09:35:19.823 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:35:20.332 [BRAIN] {'steps': [{'action': 'count', 'speech': 'Counting the chairs now.', 'target': 'chair'}]}
+2026-09-22 09:35:20.332 [STEP] count target='chair'
+2026-09-22 09:35:20.383 [COUNT] 2 chair(s): 3.85m, 4.32m
+2026-09-22 09:35:21.882 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:35:21.882 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:35:26.491 [CMD] [remote] can you find another person
+2026-09-22 09:35:26.492 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:35:27.024 [BRAIN] {'steps': [{'action': 'find_another', 'speech': 'Looking for another person.', 'target': 'person'}]}
+2026-09-22 09:35:27.024 [STEP] find_another target='person'
+2026-09-22 09:35:27.367 [ROBOT] I found another person. I now count 7 persons. Waiting for further instructions.
+2026-09-22 09:35:28.543 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:35:28.543 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:35:32.946 [CMD] [remote] wait forget everything
+2026-09-22 09:35:32.947 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:35:33.471 [BRAIN] {'steps': [{'action': 'forget', 'speech': 'Clearing all my remembered positions.', 'target': None}]}
+2026-09-22 09:35:33.471 [STEP] forget target=None
+2026-09-22 09:35:33.471 [MEMORY] cleared ALL remembered positions (14)
+2026-09-22 09:35:35.002 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:35:35.003 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:35:37.824 [CMD] [remote] what do you see
+2026-09-22 09:35:37.824 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:35:38.393 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I can see a chair and a person.', 'target': None}]}
+2026-09-22 09:35:38.393 [STEP] describe target=None
+2026-09-22 09:35:39.882 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:35:39.882 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:35:41.180 [CMD] [remote] find another person
+2026-09-22 09:35:41.181 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:35:41.712 [BRAIN] {'steps': [{'action': 'find_another', 'speech': 'Looking for another person.', 'target': 'person'}]}
+2026-09-22 09:35:41.712 [STEP] find_another target='person'
+2026-09-22 09:35:42.369 [ROBOT] I found another person. I now count 1 person. Waiting for further instructions.
+2026-09-22 09:35:43.222 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:35:43.223 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:35:48.813 [CMD] [remote] look for another person
+2026-09-22 09:35:48.814 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:35:49.351 [BRAIN] {'steps': [{'action': 'find_another', 'speech': 'Looking for another person.', 'target': 'person'}]}
+2026-09-22 09:35:49.351 [STEP] find_another target='person'
+2026-09-22 09:35:50.862 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:35:50.863 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:35:51.370 [ROBOT] I found another person. I now count 2 persons. Waiting for further instructions.
+2026-09-22 09:36:04.607 [CMD] [remote] turn right
+2026-09-22 09:36:04.608 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:36:05.278 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ninety degrees to the right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -90.0}]}
+2026-09-22 09:36:05.278 [STEP] move target=None
+2026-09-22 09:36:06.662 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:36:06.662 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:36:07.847 [CMD] (cancel via remote) cancel
+2026-09-22 09:36:07.847 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:36:09.902 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:36:09.903 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:36:12.270 [CMD] [remote] move forward two meters
+2026-09-22 09:36:12.270 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:36:12.863 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Moving forward two metres.', 'target': None, 'distance_m': 2.0, 'rotation_deg': 0.0}]}
+2026-09-22 09:36:12.863 [STEP] move target=None
+2026-09-22 09:36:14.323 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:36:14.323 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:36:15.423 [GUARD] collision guard stopped the robot at 0.27 m (limit 0.35 m, mode=move)
+2026-09-22 09:36:15.423 [ROBOT] Stopping — an obstacle is 0.27 m ahead.
+2026-09-22 09:36:21.023 [GUARD] collision guard stopped the robot at 0.25 m (limit 0.35 m, mode=move)
+2026-09-22 09:36:21.023 [ROBOT] Stopping — an obstacle is 0.25 m ahead.
+2026-09-22 09:36:22.815 [CMD] (cancel via remote) cancel
+2026-09-22 09:36:22.816 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:36:24.862 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:36:24.863 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:36:27.427 [CMD] [remote] turn right
+2026-09-22 09:36:27.428 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:36:28.078 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ninety degrees to the right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -90.0}]}
+2026-09-22 09:36:28.079 [STEP] move target=None
+2026-09-22 09:36:29.482 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:36:29.482 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:36:29.719 [CMD] (cancel via remote) cancel
+2026-09-22 09:36:29.719 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:36:31.943 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:36:31.943 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:36:34.537 [CMD] [remote] what do you see
+2026-09-22 09:36:34.538 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:36:35.163 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a chair, a person, and a shelf.', 'target': None}]}
+2026-09-22 09:36:35.163 [STEP] describe target=None
+2026-09-22 09:36:36.582 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:36:36.582 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:36:39.130 [CMD] [remote] move forward two meters
+2026-09-22 09:36:39.131 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:36:39.715 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Moving forward two metres.', 'target': None, 'distance_m': 2.0, 'rotation_deg': 0.0}]}
+2026-09-22 09:36:39.715 [STEP] move target=None
+2026-09-22 09:36:40.323 [GUARD] collision guard stopped the robot at 0.23 m (limit 0.35 m, mode=move)
+2026-09-22 09:36:40.323 [ROBOT] Stopping — an obstacle is 0.23 m ahead.
+2026-09-22 09:36:41.182 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:36:41.183 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:36:42.323 [ROBOT] There's an obstacle ahead — stopping the move early.
+2026-09-22 09:36:42.324 [ROBOT] Done with that move.
+2026-09-22 09:36:51.478 [CMD] [remote] turn right 30 degrees
+2026-09-22 09:36:51.478 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:36:52.132 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning thirty degrees to the right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -30.0}]}
+2026-09-22 09:36:52.132 [STEP] move target=None
+2026-09-22 09:36:53.523 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:36:53.523 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:36:59.322 [ROBOT] Done with that move.
+2026-09-22 09:37:03.633 [CMD] [remote] move forward 10 centimeters
+2026-09-22 09:37:03.633 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:37:04.285 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Moving forward ten centimeters.', 'target': None, 'distance_m': 0.1, 'rotation_deg': 0.0}]}
+2026-09-22 09:37:04.285 [STEP] move target=None
+2026-09-22 09:37:04.322 [ROBOT] There's an obstacle ahead — stopping the move early.
+2026-09-22 09:37:04.323 [ROBOT] Done with that move.
+2026-09-22 09:37:05.682 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:37:05.683 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:37:17.288 [CMD] [remote] turn left 20 degrees
+2026-09-22 09:37:17.288 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:37:17.928 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning twenty degrees to the left.', 'target': None, 'distance_m': 0.0, 'rotation_deg': 20.0}]}
+2026-09-22 09:37:17.928 [STEP] move target=None
+2026-09-22 09:37:19.342 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:37:19.342 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:37:21.322 [ROBOT] Done with that move.
+2026-09-22 09:37:26.660 [CMD] [remote] move forward two meters
+2026-09-22 09:37:26.660 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:37:27.258 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Moving forward two metres.', 'target': None, 'distance_m': 2.0, 'rotation_deg': 0.0}]}
+2026-09-22 09:37:27.258 [STEP] move target=None
+2026-09-22 09:37:27.322 [ROBOT] There's an obstacle ahead — stopping the move early.
+2026-09-22 09:37:27.323 [ROBOT] Done with that move.
+2026-09-22 09:37:28.702 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:37:28.703 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:37:41.951 [CMD] (manual override via keyboard) manual override
+2026-09-22 09:37:41.952 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:37:41.952 [MANUAL] operator took manual control
+2026-09-22 09:37:44.002 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:37:44.003 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:38:08.083 [CMD] [remote] what do you see
+2026-09-22 09:38:08.083 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:38:08.614 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I can see a person.', 'target': None}]}
+2026-09-22 09:38:08.614 [STEP] describe target=None
+2026-09-22 09:38:10.142 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:38:10.142 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:38:13.577 [CMD] [remote] go to the farthest person
+2026-09-22 09:38:13.578 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:38:14.194 [BRAIN] {'steps': [{'action': 'navigate', 'speech': 'Heading to the farthest person.', 'target': 'person', 'qualifier': 'farthest'}]}
+2026-09-22 09:38:14.194 [STEP] navigate target='person'
+2026-09-22 09:38:15.377 [ROBOT] Found the person — navigating to it.
+2026-09-22 09:38:15.377 [SIGHT] person at (-2.54, 0.54), 2.93 m away
+2026-09-22 09:38:15.378 [GOAL] (-1.75, 0.69) yaw=-169deg mode=navigate
+2026-09-22 09:38:15.622 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:38:15.623 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:38:23.369 [ROBOT] Arrived at the person.
+2026-09-22 09:38:23.369 [ARRIVE] #64e person in frame at 1.16 m (<= 1.2 m) -- stopping here
+2026-09-22 09:38:37.078 [CMD] [remote] turn that off
+2026-09-22 09:38:37.078 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:38:37.723 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ninety degrees to the left.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -90.0}]}
+2026-09-22 09:38:37.725 [STEP] move target=None
+2026-09-22 09:38:39.122 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:38:39.123 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:38:43.322 [ROBOT] Done with that move.
+2026-09-22 09:38:47.772 [CMD] [remote] what do you see
+2026-09-22 09:38:47.772 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:38:48.285 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a person.', 'target': None}]}
+2026-09-22 09:38:48.285 [STEP] describe target=None
+2026-09-22 09:38:49.822 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:38:49.823 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:38:55.048 [CMD] [remote] find another person
+2026-09-22 09:38:55.049 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:38:55.574 [BRAIN] {'steps': [{'action': 'find_another', 'speech': 'Looking for another person.', 'target': 'person'}]}
+2026-09-22 09:38:55.574 [STEP] find_another target='person'
+2026-09-22 09:38:56.369 [ROBOT] I found another person. I now count 4 persons. Waiting for further instructions.
+2026-09-22 09:38:57.102 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:38:57.102 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:38:59.988 [CMD] [remote] look for another one
+2026-09-22 09:38:59.989 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:39:00.516 [BRAIN] {'steps': [{'action': 'find_another', 'speech': 'Looking for another person.', 'target': 'person'}]}
+2026-09-22 09:39:00.516 [STEP] find_another target='person'
+2026-09-22 09:39:01.370 [ROBOT] I found another person. I now count 5 persons. Waiting for further instructions.
+2026-09-22 09:39:02.042 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:39:02.043 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:39:07.949 [CMD] [remote] forget about person
+2026-09-22 09:39:07.950 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:39:08.464 [BRAIN] {'steps': [{'action': 'forget', 'speech': 'Forgetting about the person.', 'target': 'person'}]}
+2026-09-22 09:39:08.464 [STEP] forget target='person'
+2026-09-22 09:39:08.464 [MEMORY] forgot 5 remembered person position(s)
+2026-09-22 09:39:10.002 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:39:10.002 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:39:15.260 [CMD] [remote] look for a
+2026-09-22 09:39:15.260 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:39:15.758 [BRAIN] {'steps': [{'action': 'locate', 'speech': 'Looking for the person.', 'target': 'person'}]}
+2026-09-22 09:39:15.759 [STEP] locate target='person'
+2026-09-22 09:39:16.417 [MEMORY] remembered 1 person(s) at (-1.44, 3.15) d=2.43m
+2026-09-22 09:39:16.417 [ROBOT] Yes — I can see a person about 2.4 m away. I'll remember where it is. (Locating only — not driving to it.)
+2026-09-22 09:39:17.302 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:39:17.302 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:39:19.743 [CMD] [remote] look for another person
+2026-09-22 09:39:19.744 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:39:20.271 [BRAIN] {'steps': [{'action': 'find_another', 'speech': 'Looking for another person.', 'target': 'person'}]}
+2026-09-22 09:39:20.271 [STEP] find_another target='person'
+2026-09-22 09:39:21.802 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:39:21.803 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:39:35.370 [ROBOT] I found another person. I now count 2 persons. Waiting for further instructions.
+2026-09-22 09:39:41.745 [CMD] [remote] turn left
+2026-09-22 09:39:41.745 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:39:42.362 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ninety degrees left.', 'target': None, 'distance_m': 0.0, 'rotation_deg': 90.0}]}
+2026-09-22 09:39:42.363 [STEP] move target=None
+2026-09-22 09:39:43.802 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:39:43.802 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:39:46.144 [CMD] (cancel via remote) stop
+2026-09-22 09:39:46.145 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:39:48.202 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:39:48.202 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:39:48.963 [CMD] [remote] what do you see
+2026-09-22 09:39:48.964 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:39:49.520 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a chair and a shelf.', 'target': None}]}
+2026-09-22 09:39:49.520 [STEP] describe target=None
+2026-09-22 09:39:51.022 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:39:51.023 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:39:53.587 [CMD] [remote] go to the shelf
+2026-09-22 09:39:53.588 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:39:54.089 [BRAIN] {'steps': [{'action': 'navigate', 'speech': 'Heading to the shelf.', 'target': 'shelf'}]}
+2026-09-22 09:39:54.089 [STEP] navigate target='shelf'
+2026-09-22 09:39:55.374 [ROBOT] Found the shelf — navigating to it.
+2026-09-22 09:39:55.374 [SIGHT] shelf at (-1.81, -1.04), 1.81 m away
+2026-09-22 09:39:55.376 [GOAL] (-1.70, -0.45) yaw=-101deg mode=navigate
+2026-09-22 09:39:55.642 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:39:55.643 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:39:56.375 [WARN] suspicious shelf jump of 4.2 m (occlusion/depth noise?) — waiting for a confirming look (agree radius 1.4 m)
+2026-09-22 09:39:57.376 [WARN] suspicious shelf jump of 5.3 m (occlusion/depth noise?) — waiting for a confirming look (agree radius 1.7 m)
+2026-09-22 09:39:59.368 [ROBOT] Arrived at the shelf.
+2026-09-22 09:40:12.335 [CMD] [remote] what do you see
+2026-09-22 09:40:12.336 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:40:12.895 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a chair and a shelf.', 'target': None}]}
+2026-09-22 09:40:12.895 [STEP] describe target=None
+2026-09-22 09:40:14.382 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:40:14.383 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:40:16.074 [CMD] [remote] can you find a box
+2026-09-22 09:40:16.075 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:40:16.583 [BRAIN] {'steps': [{'action': 'locate', 'speech': 'Looking for a box.', 'target': 'box'}]}
+2026-09-22 09:40:16.583 [STEP] locate target='box'
+2026-09-22 09:40:18.122 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:40:18.123 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:40:19.427 [MEMORY] remembered 2 box(s) at (-1.63, -1.27) d=1.15m, (-0.15, -4.48) d=4.43m
+2026-09-22 09:40:19.427 [ROBOT] Yes — I can see 2 boxs one about 1.2 m away and another about 4.4 m away. I'll remember where they are. (Locating only — not driving to them.)
+2026-09-22 09:40:29.951 [CMD] [remote] turn left
+2026-09-22 09:40:29.952 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:40:30.566 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ninety degrees left.', 'target': None, 'distance_m': 0.0, 'rotation_deg': 90.0}]}
+2026-09-22 09:40:30.567 [STEP] move target=None
+2026-09-22 09:40:32.002 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:40:32.003 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:40:36.322 [ROBOT] Done with that move.
+2026-09-22 09:40:47.268 [CMD] [remote] what do you see
+2026-09-22 09:40:47.268 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:40:47.785 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a chair.', 'target': None}]}
+2026-09-22 09:40:47.785 [STEP] describe target=None
+2026-09-22 09:40:49.322 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:40:49.323 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:41:01.917 [CMD] [remote] what do you see
+2026-09-22 09:41:01.918 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:41:02.491 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I can see a box and a chair.', 'target': None}]}
+2026-09-22 09:41:02.491 [STEP] describe target=None
+2026-09-22 09:41:03.962 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:41:03.963 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:41:13.595 [CMD] [remote] go to the box and stop
+2026-09-22 09:41:13.595 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:41:14.089 [BRAIN] {'steps': [{'action': 'navigate', 'speech': 'Heading to the box.', 'target': 'box'}]}
+2026-09-22 09:41:14.089 [STEP] navigate target='box'
+2026-09-22 09:41:15.371 [ROBOT] Found the box — navigating to it.
+2026-09-22 09:41:15.372 [SIGHT] box at (0.27, -0.11), 1.49 m away
+2026-09-22 09:41:15.373 [GOAL] (-0.53, -0.13) yaw=2deg mode=navigate
+2026-09-22 09:41:15.642 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:41:15.643 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:41:17.935 [RESULT] nav goal status=4 (ok)
+2026-09-22 09:41:18.368 [ROBOT] Arrived at the box.
+2026-09-22 09:42:18.129 [CMD] [remote] what do you
+2026-09-22 09:42:18.130 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:42:18.647 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'Showing what I see now.', 'target': None}]}
+2026-09-22 09:42:18.647 [STEP] describe target=None
+2026-09-22 09:42:20.182 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:42:20.182 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:42:26.192 [CMD] [remote] can you find me another bo-
+2026-09-22 09:42:26.193 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:42:26.719 [BRAIN] {'steps': [{'action': 'find_another', 'speech': 'Looking for another box.', 'target': 'box'}]}
+2026-09-22 09:42:26.719 [STEP] find_another target='box'
+2026-09-22 09:42:27.369 [ROBOT] I found another box. I now count 4 boxs. Waiting for further instructions.
+2026-09-22 09:42:28.242 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:42:28.243 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:42:32.350 [CMD] [remote] forget box
+2026-09-22 09:42:32.351 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:42:32.893 [BRAIN] {'steps': [{'action': 'forget', 'speech': 'Forgetting where the last box was.', 'target': 'box'}]}
+2026-09-22 09:42:32.893 [STEP] forget target='box'
+2026-09-22 09:42:32.893 [MEMORY] forgot 4 remembered box position(s)
+2026-09-22 09:42:34.402 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:42:34.402 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:42:41.996 [CMD] [remote] what do you see
+2026-09-22 09:42:41.996 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:42:42.549 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a box and a shelf.', 'target': None}]}
+2026-09-22 09:42:42.549 [STEP] describe target=None
+2026-09-22 09:42:44.042 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:42:44.043 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:42:45.616 [CMD] [remote] can you find another box
+2026-09-22 09:42:45.616 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:42:46.137 [BRAIN] {'steps': [{'action': 'find_another', 'speech': 'Looking for another box.', 'target': 'box'}]}
+2026-09-22 09:42:46.137 [STEP] find_another target='box'
+2026-09-22 09:42:46.369 [ROBOT] I found another box. I now count 1 box. Waiting for further instructions.
+2026-09-22 09:42:47.662 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:42:47.663 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:42:50.532 [CMD] [remote] look for another
+2026-09-22 09:42:50.532 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:42:51.065 [BRAIN] {'steps': [{'action': 'find_another', 'speech': 'Looking for another box.', 'target': 'box'}]}
+2026-09-22 09:42:51.065 [STEP] find_another target='box'
+2026-09-22 09:42:52.582 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:42:52.583 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:42:53.371 [ROBOT] I found another box. I now count 2 boxs. Waiting for further instructions.
+2026-09-22 09:43:20.049 [CMD] [remote] what is the current battery percentage
+2026-09-22 09:43:20.050 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:43:21.099 [BRAIN] {'steps': [{'action': 'answer', 'speech': "I don't have a built-in battery meter, but I can show you the charging dock.", 'target': None}, {'action': 'feed', 'speech': 'Opening the live camera feed to show the charging dock.', 'target': None}]}
+2026-09-22 09:43:21.100 [STEP] answer target=None
+2026-09-22 09:43:21.100 [STEP] feed target=None
+2026-09-22 09:43:22.102 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:43:22.103 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:44:22.123 [ROBOT] The live-feed window closed. Say 'show me the feed' to reopen it — the robot is otherwise unaffected.
+2026-09-22 09:44:22.123 [WARN] #32e rqt_image_view exited
+2026-09-22 09:44:33.329 [CMD] [remote] what can you do
+2026-09-22 09:44:33.330 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:44:34.074 [BRAIN] {'steps': [{'action': 'answer', 'speech': 'I can navigate, locate objects, count, explore areas, patrol, move precisely, and more.', 'target': None}]}
+2026-09-22 09:44:34.074 [STEP] answer target=None
+2026-09-22 09:44:35.382 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:44:35.382 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:44:45.297 [CMD] [remote] what more can you do
+2026-09-22 09:44:45.298 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:44:46.052 [BRAIN] {'steps': [{'action': 'answer', 'speech': 'I can map areas, patrol known zones, count objects, and drive to or locate various indoor items.', 'target': None}]}
+2026-09-22 09:44:46.052 [STEP] answer target=None
+2026-09-22 09:44:47.342 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:44:47.343 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:47:07.392 [CMD] [remote] dock
+2026-09-22 09:47:07.393 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:47:07.393 [STEP] dock target=None
+2026-09-22 09:47:07.393 [ROBOT] Docking…
+2026-09-22 09:47:13.402 [ROBOT] I sent the stop but the robot is STILL MOVING (0.08 m/s, 0.24 rad/s). Take manual override now.
+2026-09-22 09:47:13.402 [ERROR] #35 robot still moving 6.0s after stop: lin=0.08 ang=0.24
+2026-09-22 09:47:32.722 [DOCK] dock position recorded at (0.00, -0.02); detections within 0.8 m are ignored
+2026-09-22 09:47:32.722 [MEMORY] purged 1 remembered box position(s) that sat on the dock
+2026-09-22 09:47:34.939 [DOCK] dock position recorded at (0.00, -0.02); detections within 0.8 m are ignored
+2026-09-22 09:47:34.939 [ROBOT] Docked successfully.
+2026-09-22 09:47:34.939 [DOCK] dock ok
+2026-09-22 09:47:39.322 [ROBOT] I've stopped receiving camera frames (none for over 5s). Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-09-22 09:47:39.323 [WARN] #32e camera stream stalled (>5s)
+2026-09-22 09:48:22.888 [MANUAL] control handed back to the robot
+2026-09-22 09:48:22.888 [WARN] #35 cancel-all failed: failed to check service availability: rcl node's context is invalid, at ./src/rcl/node.c:428
+2026-09-22 09:48:22.888 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:48:22.889 [RUN] agent shutting down

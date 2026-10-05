@@ -1,0 +1,138 @@
+2026-09-22 08:15:37.559 [RUN] vla_agent v28  (#63 headless-safe console output, #62 direction-aware collision guard, #61 nearest-cluster LiDAR ranging, #60 manual override teleop, #59 10 Hz collision guard, #58 smoother approach, #57 stand off far enough to keep the object in view, #56 step-and-stare scan, #55 LiDAR failure reasons reported, #54 LiDAR object ranging, #53 seeded depth intrinsics, #52 depth intrinsics rescaled to frame size, #51 compressedDepth transport, #50 compressed RGB transport, #49 annotated feed gated per topic, #47 TF at colour-frame stamp, #48 reject stale depth, #46 one subscription per camera stream, #43 longer cached action-server wait, #44 undock retry-loop breaker, #45 sync slop for 1 Hz depth, #37 /robot1 namespace, #38 stereo depth topic, #39 best-effort sensor QoS, #40 RGB->depth pixel mapping, #41 encoding-based mm/m, #42 explicit namespaced TF, #36 no patrol feed prompt, #35 cancel actually stops the robot, #34 feed publishes to any subscriber, #22 dock no-detect zone, #23 live-first memory, #24 forget, #25 typo-tolerant control words, #26 bare yes/no, #27 context expiry, #28 all-instance distances, #29 Create 3 backup ratchet, #30 sticky goals + range-scaled gate + ring-safe blacklist, #31 incremental off-map hop goals, #32 non-freezing live feed, #33 command/reply/status bridge)
+2026-09-22 08:15:37.559 [RUN] agent started (SIGHT_CONFIRM=2, SEARCH_TIMEOUT=120.0s, NO_PROGRESS_LIMIT=60.0s, ROBOT_CLEARANCE=0.25m)
+2026-09-22 08:17:09.515 [CMD] [remote] turn around
+2026-09-22 08:17:09.516 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 08:17:11.001 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning around.', 'target': None, 'distance_m': 0.0, 'rotation_deg': 180.0}]}
+2026-09-22 08:17:11.001 [STEP] move target=None
+2026-09-22 08:17:11.565 [ROBOT] Stopped. The robot is idle.
+2026-09-22 08:17:11.565 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 08:17:21.625 [ROBOT] Done with that move.
+2026-09-22 08:17:25.271 [ROBOT] I've stopped receiving camera frames (none for over 5s). Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-09-22 08:17:25.271 [WARN] #32e camera stream stalled (>5s)
+2026-09-22 08:17:29.098 [CMD] [remote] turn right 20
+2026-09-22 08:17:29.098 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 08:17:29.750 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning twenty degrees to the right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -20.0}]}
+2026-09-22 08:17:29.750 [STEP] move target=None
+2026-09-22 08:17:31.145 [ROBOT] Stopped. The robot is idle.
+2026-09-22 08:17:31.145 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 08:17:32.244 [WARN] #32e camera stream RESUMED after 12.0s
+2026-09-22 08:17:32.244 [ROBOT] Camera frames are back — the gap was 12.0s.
+2026-09-22 08:17:37.349 [ROBOT] I've stopped receiving camera frames (none for over 5s). Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-09-22 08:17:37.349 [WARN] #32e camera stream stalled (>5s)
+2026-09-22 08:17:40.030 [CMD] [remote] dock
+2026-09-22 08:17:40.030 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 08:17:40.030 [STEP] dock target=None
+2026-09-22 08:17:40.030 [ROBOT] Docking…
+2026-09-22 08:17:44.204 [WARN] #32e camera stream RESUMED after 11.9s
+2026-09-22 08:17:44.204 [ROBOT] Camera frames are back — the gap was 11.9s.
+2026-09-22 08:17:44.265 [ROBOT] Stopped. The robot is idle.
+2026-09-22 08:17:44.265 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 08:17:49.328 [ROBOT] I've stopped receiving camera frames (none for over 5s). Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-09-22 08:17:49.328 [WARN] #32e camera stream stalled (>5s)
+2026-09-22 08:17:49.790 [WARN] #32e camera stream RESUMED after 5.5s
+2026-09-22 08:17:49.790 [ROBOT] Camera frames are back — the gap was 5.5s.
+2026-09-22 08:17:54.806 [ROBOT] I've stopped receiving camera frames (none for over 5s). Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-09-22 08:17:54.807 [WARN] #32e camera stream stalled (>5s)
+2026-09-22 08:17:59.507 [WARN] #32e camera stream RESUMED after 9.7s
+2026-09-22 08:17:59.507 [ROBOT] Camera frames are back — the gap was 9.7s.
+2026-09-22 08:18:10.580 [ROBOT] I've stopped receiving camera frames (none for over 5s). Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-09-22 08:18:10.580 [WARN] #32e camera stream stalled (>5s)
+2026-09-22 08:18:21.186 [DOCK] dock position recorded at (0.00, 0.02); detections within 0.8 m are ignored
+2026-09-22 08:18:23.921 [DOCK] dock position recorded at (0.00, 0.02); detections within 0.8 m are ignored
+2026-09-22 08:18:23.921 [ROBOT] Docked successfully.
+2026-09-22 08:18:23.921 [DOCK] dock ok
+2026-09-22 09:03:41.821 [CMD] [remote] undock
+2026-09-22 09:03:41.821 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:03:41.821 [STEP] undock target=None
+2026-09-22 09:03:41.822 [ROBOT] Undocking…
+2026-09-22 09:03:44.945 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:03:44.945 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:03:47.357 [WARN] #32e camera stream RESUMED after 2741.8s
+2026-09-22 09:03:47.357 [ROBOT] Camera frames are back — the gap was 2741.8s.
+2026-09-22 09:03:47.609 [ROBOT] Undocked — ready to move.
+2026-09-22 09:03:47.610 [DOCK] undock ok
+2026-09-22 09:03:54.477 [CMD] [remote] what do you see
+2026-09-22 09:03:54.477 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:03:56.525 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:03:56.525 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:03:57.718 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a chair.', 'target': None}]}
+2026-09-22 09:03:57.718 [STEP] describe target=None
+2026-09-22 09:04:01.885 [CMD] [remote] go to the chair
+2026-09-22 09:04:01.886 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:04:02.388 [BRAIN] {'steps': [{'action': 'navigate', 'speech': 'Heading to the chair.', 'target': 'chair'}]}
+2026-09-22 09:04:02.388 [STEP] navigate target='chair'
+2026-09-22 09:04:03.945 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:04:03.945 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:04:07.676 [ROBOT] Found the chair — navigating to it.
+2026-09-22 09:04:07.676 [SIGHT] chair at (-1.65, -1.30), 2.01 m away
+2026-09-22 09:04:07.677 [GOAL] (-1.04, -0.78) yaw=-139deg mode=navigate
+2026-09-22 09:04:12.679 [ROBOT] The chair is about 2.3 m away, past the edge of what I've mapped. Moving up in short steps and mapping as I go.
+2026-09-22 09:04:12.679 [STEP] #31 hop mode engaged for chair: object (-2.34, -1.21) at 2.3 m, area_mapped=False
+2026-09-22 09:04:12.679 [GOAL] #31 hop 1: 1.50 m toward chair (still 2.3 m away)
+2026-09-22 09:04:12.679 [GOAL] (-1.28, -1.23) yaw=-152deg mode=navigate
+2026-09-22 09:04:12.689 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:04:12.689 [WARN] nav goal (-1.28, -1.23) failed (status=6); trying another approach angle
+2026-09-22 09:04:12.689 [STEP] #31 hop aborted — shortening to 0.75 m and re-aiming
+2026-09-22 09:04:13.175 [ROBOT] I've stopped receiving camera frames (none for over 5s). Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-09-22 09:04:13.175 [WARN] #32e camera stream stalled (>5s)
+2026-09-22 09:04:13.675 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-09-22 09:04:13.679 [GOAL] #31 hop 2: 0.75 m toward chair (still 2.3 m away)
+2026-09-22 09:04:13.679 [GOAL] (-0.93, -0.47) yaw=-152deg mode=navigate
+2026-09-22 09:04:13.689 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-22 09:04:13.689 [WARN] nav goal (-0.93, -0.47) failed (status=6); trying another approach angle
+2026-09-22 09:04:13.689 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-09-22 09:04:14.281 [WARN] #32e camera stream RESUMED after 6.1s
+2026-09-22 09:04:14.281 [ROBOT] Camera frames are back — the gap was 6.1s.
+2026-09-22 09:04:14.677 [ROBOT] Arrived at the chair.
+2026-09-22 09:04:14.677 [ARRIVE] #64e chair in frame at 1.16 m (<= 1.2 m) -- stopping here
+2026-09-22 09:05:47.869 [CMD] [remote] turn around
+2026-09-22 09:05:47.869 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:05:48.479 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning around.', 'target': None, 'distance_m': 0.0, 'rotation_deg': 180.0}]}
+2026-09-22 09:05:48.479 [STEP] move target=None
+2026-09-22 09:05:49.925 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:05:49.925 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:06:03.625 [ROBOT] Done with that move.
+2026-09-22 09:06:03.967 [CMD] [remote] turn left
+2026-09-22 09:06:03.967 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:06:04.591 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ninety degrees left.', 'target': None, 'distance_m': 0.0, 'rotation_deg': 90.0}]}
+2026-09-22 09:06:04.591 [STEP] move target=None
+2026-09-22 09:06:06.025 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:06:06.025 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:06:13.568 [ROBOT] I've stopped receiving camera frames (none for over 5s). Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-09-22 09:06:13.569 [WARN] #32e camera stream stalled (>5s)
+2026-09-22 09:06:13.569 [CMD] [remote] what do you see
+2026-09-22 09:06:13.570 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:06:14.115 [BRAIN] {'steps': [{'action': 'describe', 'speech': "I don't see anything right now.", 'target': None}]}
+2026-09-22 09:06:14.115 [STEP] describe target=None
+2026-09-22 09:06:19.145 [ROBOT] Stopped. The robot is idle.
+2026-09-22 09:06:19.145 [STOP] confirmed stopped by odometry after barrage
+2026-09-22 09:06:24.328 [WARN] #32e camera stream RESUMED after 19.6s
+2026-09-22 09:06:24.328 [ROBOT] Camera frames are back — the gap was 19.6s.
+2026-09-22 09:07:08.405 [ROBOT] I've stopped receiving camera frames (none for over 5s). Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-09-22 09:07:08.405 [WARN] #32e camera stream stalled (>5s)
+2026-09-22 09:07:09.470 [WARN] #32e camera stream RESUMED after 6.1s
+2026-09-22 09:07:09.470 [ROBOT] Camera frames are back — the gap was 6.1s.
+2026-09-22 09:07:42.989 [ROBOT] I've stopped receiving camera frames (none for over 5s). Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-09-22 09:07:42.989 [WARN] #32e camera stream stalled (>5s)
+2026-09-22 09:08:03.745 [WARN] #32e camera stream RESUMED after 25.8s
+2026-09-22 09:08:03.745 [ROBOT] Camera frames are back — the gap was 25.8s.
+2026-09-22 09:08:12.557 [ROBOT] I've stopped receiving camera frames (none for over 5s). Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-09-22 09:08:12.558 [WARN] #32e camera stream stalled (>5s)
+2026-09-22 09:08:13.917 [WARN] #32e camera stream RESUMED after 6.4s
+2026-09-22 09:08:13.917 [ROBOT] Camera frames are back — the gap was 6.4s.
+2026-09-22 09:08:18.926 [ROBOT] I've stopped receiving camera frames (none for over 5s). Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-09-22 09:08:18.926 [WARN] #32e camera stream stalled (>5s)
+2026-09-22 09:08:38.163 [WARN] #32e camera stream RESUMED after 24.2s
+2026-09-22 09:08:38.163 [ROBOT] Camera frames are back — the gap was 24.2s.
+2026-09-22 09:08:47.273 [ROBOT] I've stopped receiving camera frames (none for over 5s). Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-09-22 09:08:47.273 [WARN] #32e camera stream stalled (>5s)
+2026-09-22 09:08:49.560 [WARN] #32e camera stream RESUMED after 7.3s
+2026-09-22 09:08:49.560 [ROBOT] Camera frames are back — the gap was 7.3s.
+2026-09-22 09:08:54.566 [ROBOT] I've stopped receiving camera frames (none for over 5s). Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-09-22 09:08:54.566 [WARN] #32e camera stream stalled (>5s)
+2026-09-22 09:09:12.815 [WARN] #32e camera stream RESUMED after 23.3s
+2026-09-22 09:09:12.815 [ROBOT] Camera frames are back — the gap was 23.3s.
+2026-09-22 09:09:25.355 [ROBOT] I've stopped receiving camera frames (none for over 5s). Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-09-22 09:09:25.355 [WARN] #32e camera stream stalled (>5s)
+2026-09-22 09:10:12.496 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-22 09:10:12.496 [RUN] agent shutting down

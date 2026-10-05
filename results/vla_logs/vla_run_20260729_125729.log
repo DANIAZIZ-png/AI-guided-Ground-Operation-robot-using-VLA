@@ -1,0 +1,8 @@
+2026-07-29 12:57:29.118 [RUN] vla_agent v8  (#22 dock no-detect zone, #23 live-first memory, #24 forget, #25 typo-tolerant control words, #26 bare yes/no, #27 context expiry, #28 all-instance distances, #29 Create 3 backup ratchet, #30 sticky goals + range-scaled gate + ring-safe blacklist)
+2026-07-29 12:57:29.119 [RUN] agent started (SIGHT_CONFIRM=2, SEARCH_TIMEOUT=45.0s, NO_PROGRESS_LIMIT=60.0s, ROBOT_CLEARANCE=0.25m)
+2026-07-29 12:57:34.620 [CMD] what do you see
+2026-07-29 12:57:35.477 [BRAIN] {'steps': [{'action': 'describe', 'speech': "I don't see anything right now.", 'target': None}]}
+2026-07-29 12:57:35.477 [STEP] describe target=None
+2026-07-29 12:57:40.555 [CMD] give me live feed\
+2026-07-29 12:57:41.391 [BRAIN] {'steps': [{'action': 'feed', 'speech': 'Showing you the current view from my camera.', 'target': None}]}
+2026-07-29 12:57:41.391 [STEP] feed target=None

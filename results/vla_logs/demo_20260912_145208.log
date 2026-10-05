@@ -1,0 +1,12 @@
+
+[36m[14:52:08 +  0s][0m [1mVLA ground robot -- hardware demo bring-up[0m   (log: /home/danyalaziz/vla_logs/demo_20260912_145208.log)
+
+[36m[14:52:08 +  0s][0m STAGE 0/13  host, containers, robot reachable
+
+[31m[1m=====================================================================[0m
+[31m[1m  DEMO ABORTED at stage 0[0m
+[31m[1m  This script must run on the HOST, not inside a container.[0m
+[31m[1m  Nothing more was started. Log: /home/danyalaziz/vla_logs/demo_20260912_145208.log[0m
+[31m[1m  To clean up whatever did start:  ~/vla_demo_stop.sh[0m
+[31m[1m=====================================================================[0m
+

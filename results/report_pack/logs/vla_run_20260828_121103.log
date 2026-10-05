@@ -1,0 +1,263 @@
+2026-08-28 12:11:03.584 [RUN] vla_agent v28  (#63 headless-safe console output, #62 direction-aware collision guard, #61 nearest-cluster LiDAR ranging, #60 manual override teleop, #59 10 Hz collision guard, #58 smoother approach, #57 stand off far enough to keep the object in view, #56 step-and-stare scan, #55 LiDAR failure reasons reported, #54 LiDAR object ranging, #53 seeded depth intrinsics, #52 depth intrinsics rescaled to frame size, #51 compressedDepth transport, #50 compressed RGB transport, #49 annotated feed gated per topic, #47 TF at colour-frame stamp, #48 reject stale depth, #46 one subscription per camera stream, #43 longer cached action-server wait, #44 undock retry-loop breaker, #45 sync slop for 1 Hz depth, #37 /robot1 namespace, #38 stereo depth topic, #39 best-effort sensor QoS, #40 RGB->depth pixel mapping, #41 encoding-based mm/m, #42 explicit namespaced TF, #36 no patrol feed prompt, #35 cancel actually stops the robot, #34 feed publishes to any subscriber, #22 dock no-detect zone, #23 live-first memory, #24 forget, #25 typo-tolerant control words, #26 bare yes/no, #27 context expiry, #28 all-instance distances, #29 Create 3 backup ratchet, #30 sticky goals + range-scaled gate + ring-safe blacklist, #31 incremental off-map hop goals, #32 non-freezing live feed, #33 command/reply/status bridge)
+2026-08-28 12:11:03.584 [RUN] agent started (SIGHT_CONFIRM=2, SEARCH_TIMEOUT=120.0s, NO_PROGRESS_LIMIT=60.0s, ROBOT_CLEARANCE=0.25m)
+2026-08-28 12:11:04.578 [INFO] live depth camera_info received 320x240
+2026-08-28 12:11:04.712 [DOCK] dock position recorded at (-0.00, -0.00); detections within 0.8 m are ignored
+2026-08-28 12:11:20.329 [CMD] [remote] undock
+2026-08-28 12:11:20.330 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-28 12:11:20.330 [STEP] undock target=None
+2026-08-28 12:11:20.330 [ROBOT] Undocking…
+2026-08-28 12:11:23.658 [ROBOT] Stopped. The robot is idle.
+2026-08-28 12:11:23.659 [STOP] confirmed stopped by odometry after barrage
+2026-08-28 12:11:30.418 [ROBOT] Undocked — ready to move.
+2026-08-28 12:11:30.419 [DOCK] undock ok
+2026-08-28 12:11:59.198 [CMD] [remote] done right
+2026-08-28 12:11:59.198 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-28 12:12:01.259 [ROBOT] Stopped. The robot is idle.
+2026-08-28 12:12:01.260 [STOP] confirmed stopped by odometry after barrage
+2026-08-28 12:12:20.902 [CMD] (cancel via remote) cancel
+2026-08-28 12:12:20.903 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-28 12:12:22.958 [ROBOT] Stopped. The robot is idle.
+2026-08-28 12:12:22.959 [STOP] confirmed stopped by odometry after barrage
+2026-08-28 12:12:36.228 [BRAIN] {'steps': [{'action': 'answer', 'speech': 'Is there something specific you need me to do or check?', 'target': None}]}
+2026-08-28 12:12:36.230 [STEP] answer target=None
+2026-08-28 12:12:36.230 [CMD] [remote] turn right
+2026-08-28 12:12:36.231 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-28 12:12:37.102 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ninety degrees right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -90.0}]}
+2026-08-28 12:12:37.102 [STEP] move target=None
+2026-08-28 12:12:38.278 [ROBOT] Stopped. The robot is idle.
+2026-08-28 12:12:38.279 [STOP] confirmed stopped by odometry after barrage
+2026-08-28 12:12:43.019 [ROBOT] Done with that move.
+2026-08-28 12:12:48.046 [CMD] [remote] man will overwrite
+2026-08-28 12:12:48.047 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-28 12:12:49.060 [BRAIN] {'steps': [{'action': 'clarify', 'speech': "I'm not sure what you mean by 'man will overwrite'. Could you please provide more details or clarify your request?", 'target': None}]}
+2026-08-28 12:12:49.061 [STEP] clarify target=None
+2026-08-28 12:12:50.098 [ROBOT] Stopped. The robot is idle.
+2026-08-28 12:12:50.099 [STOP] confirmed stopped by odometry after barrage
+2026-08-28 12:12:55.004 [CMD] [remote] emmanuel o'riley
+2026-08-28 12:12:55.005 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-28 12:12:55.930 [BRAIN] {'steps': [{'action': 'clarify', 'speech': "Could you please provide more context or a task related to 'emmanuel o'riley'?", 'target': None}]}
+2026-08-28 12:12:55.930 [STEP] clarify target=None
+2026-08-28 12:12:57.058 [ROBOT] Stopped. The robot is idle.
+2026-08-28 12:12:57.059 [STOP] confirmed stopped by odometry after barrage
+2026-08-28 12:13:12.585 [CMD] [remote] patrol the area
+2026-08-28 12:13:12.586 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-28 12:13:13.304 [BRAIN] {'steps': [{'action': 'explore', 'speech': 'Exploring and mapping the area.', 'target': None}]}
+2026-08-28 12:13:13.304 [STEP] explore target=None
+2026-08-28 12:13:14.025 [GOAL] (0.47, 0.04) yaw=3deg mode=explore
+2026-08-28 12:13:17.542 [CMD] (cancel via remote) cancel
+2026-08-28 12:13:17.543 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-28 12:13:19.598 [ROBOT] Stopped. The robot is idle.
+2026-08-28 12:13:19.599 [STOP] confirmed stopped by odometry after barrage
+2026-08-28 12:13:23.500 [CMD] [remote] what do you see
+2026-08-28 12:13:23.500 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-28 12:13:24.256 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a person.', 'target': None}]}
+2026-08-28 12:13:24.256 [STEP] describe target=None
+2026-08-28 12:13:25.559 [ROBOT] Stopped. The robot is idle.
+2026-08-28 12:13:25.559 [STOP] confirmed stopped by odometry after barrage
+2026-08-28 12:13:25.867 [CMD] [remote] what do you see
+2026-08-28 12:13:25.868 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-28 12:13:26.616 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a person.', 'target': None}]}
+2026-08-28 12:13:26.617 [STEP] describe target=None
+2026-08-28 12:13:27.918 [ROBOT] Stopped. The robot is idle.
+2026-08-28 12:13:27.919 [STOP] confirmed stopped by odometry after barrage
+2026-08-28 12:13:31.575 [CMD] [remote] move to 3 meters ahead
+2026-08-28 12:13:31.576 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-28 12:13:32.368 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Moving forward three meters.', 'target': None, 'distance_m': 3.0, 'rotation_deg': 0.0}]}
+2026-08-28 12:13:32.368 [STEP] move target=None
+2026-08-28 12:13:33.619 [ROBOT] Stopped. The robot is idle.
+2026-08-28 12:13:33.620 [STOP] confirmed stopped by odometry after barrage
+2026-08-28 12:13:39.923 [CMD] (cancel via remote) stop
+2026-08-28 12:13:39.923 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-28 12:13:41.978 [ROBOT] Stopped. The robot is idle.
+2026-08-28 12:13:41.978 [STOP] confirmed stopped by odometry after barrage
+2026-08-28 12:13:43.949 [CMD] [remote] what do you see
+2026-08-28 12:13:43.949 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-28 12:13:44.743 [BRAIN] {'steps': [{'action': 'describe', 'speech': "I don't see anything right now.", 'target': None}]}
+2026-08-28 12:13:44.743 [STEP] describe target=None
+2026-08-28 12:13:45.998 [ROBOT] Stopped. The robot is idle.
+2026-08-28 12:13:45.999 [STOP] confirmed stopped by odometry after barrage
+2026-08-28 12:13:48.762 [CMD] [remote] move 3 meters
+2026-08-28 12:13:48.762 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-28 12:13:49.536 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Moving forward three metres.', 'target': None, 'distance_m': 3.0, 'rotation_deg': 0.0}]}
+2026-08-28 12:13:49.536 [STEP] move target=None
+2026-08-28 12:13:50.819 [ROBOT] Stopped. The robot is idle.
+2026-08-28 12:13:50.820 [STOP] confirmed stopped by odometry after barrage
+2026-08-28 12:14:09.019 [ROBOT] Done with that move.
+2026-08-28 12:14:13.113 [CMD] [remote] what do you see
+2026-08-28 12:14:13.113 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-28 12:14:13.877 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a chair.', 'target': None}]}
+2026-08-28 12:14:13.877 [STEP] describe target=None
+2026-08-28 12:14:15.158 [ROBOT] Stopped. The robot is idle.
+2026-08-28 12:14:15.159 [STOP] confirmed stopped by odometry after barrage
+2026-08-28 12:14:17.731 [CMD] [remote] go to the chair
+2026-08-28 12:14:17.732 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-28 12:14:18.392 [BRAIN] {'steps': [{'action': 'navigate', 'speech': 'Heading to the chair.', 'target': 'chair'}]}
+2026-08-28 12:14:18.392 [STEP] navigate target='chair'
+2026-08-28 12:14:19.778 [ROBOT] Stopped. The robot is idle.
+2026-08-28 12:14:19.779 [STOP] confirmed stopped by odometry after barrage
+2026-08-28 12:14:20.082 [ROBOT] Found the chair — navigating to it.
+2026-08-28 12:14:20.083 [SIGHT] chair at (14.99, -4.43), 11.60 m away
+2026-08-28 12:14:20.084 [GOAL] (14.46, -3.24) yaw=-66deg mode=navigate
+2026-08-28 12:14:21.086 [ROBOT] The chair is about 11.5 m away, past the edge of what I've mapped. Moving up in short steps and mapping as I go.
+2026-08-28 12:14:21.087 [STEP] #31 hop mode engaged for chair: object (14.85, -5.14) at 11.5 m, area_mapped=False
+2026-08-28 12:14:21.088 [GOAL] #31 hop 1: 1.50 m toward chair (still 11.5 m away)
+2026-08-28 12:14:21.088 [GOAL] (5.41, -1.77) yaw=-20deg mode=navigate
+2026-08-28 12:14:21.097 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:14:21.098 [WARN] nav goal (5.41, -1.77) failed (status=6); trying another approach angle
+2026-08-28 12:14:21.098 [STEP] #31 hop aborted — shortening to 0.75 m and re-aiming
+2026-08-28 12:14:22.085 [STEP] chair area now mapped after 1 hop(s) — switching to a direct approach
+2026-08-28 12:14:22.086 [ROBOT] The area around the chair is mapped now — going straight to it.
+2026-08-28 12:14:22.087 [GOAL] (13.70, -3.64) yaw=-14deg mode=navigate
+2026-08-28 12:14:22.096 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:14:22.096 [WARN] nav goal (13.70, -3.64) failed (status=6); trying another approach angle
+2026-08-28 12:14:23.085 [GOAL] #31 hop 2: 0.75 m toward chair (still 11.1 m away)
+2026-08-28 12:14:23.086 [GOAL] (5.18, -1.59) yaw=-20deg mode=navigate
+2026-08-28 12:14:23.096 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:14:23.097 [WARN] nav goal (5.18, -1.59) failed (status=6); trying another approach angle
+2026-08-28 12:14:23.097 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-28 12:14:24.082 [STEP] chair area now mapped after 2 hop(s) — switching to a direct approach
+2026-08-28 12:14:24.083 [ROBOT] The area around the chair is mapped now — going straight to it.
+2026-08-28 12:14:24.084 [GOAL] (13.82, -4.85) yaw=-21deg mode=navigate
+2026-08-28 12:14:24.086 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:14:24.086 [WARN] nav goal (13.82, -4.85) failed (status=6); trying another approach angle
+2026-08-28 12:14:25.091 [GOAL] (13.78, -3.96) yaw=-16deg mode=navigate
+2026-08-28 12:14:25.096 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:14:25.097 [WARN] nav goal (13.78, -3.96) failed (status=6); trying another approach angle
+2026-08-28 12:14:26.099 [GOAL] (13.58, -3.73) yaw=-15deg mode=navigate
+2026-08-28 12:14:26.106 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:14:26.107 [WARN] nav goal (13.58, -3.73) failed (status=6); trying another approach angle
+2026-08-28 12:14:27.086 [GOAL] (13.93, -3.06) yaw=-39deg mode=navigate
+2026-08-28 12:14:27.096 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:14:27.096 [WARN] nav goal (13.93, -3.06) failed (status=6); trying another approach angle
+2026-08-28 12:14:28.091 [GOAL] (13.63, -3.46) yaw=-13deg mode=navigate
+2026-08-28 12:14:28.096 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:14:28.096 [WARN] nav goal (13.63, -3.46) failed (status=6); trying another approach angle
+2026-08-28 12:14:29.088 [GOAL] (13.95, -3.48) yaw=-13deg mode=navigate
+2026-08-28 12:14:29.097 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:14:29.097 [WARN] nav goal (13.95, -3.48) failed (status=6); trying another approach angle
+2026-08-28 12:14:30.093 [GOAL] (13.87, -4.45) yaw=37deg mode=navigate
+2026-08-28 12:14:30.097 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:14:30.097 [WARN] nav goal (13.87, -4.45) failed (status=6); trying another approach angle
+2026-08-28 12:14:31.090 [GOAL] (13.79, -3.67) yaw=-15deg mode=navigate
+2026-08-28 12:14:31.096 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:14:31.096 [WARN] nav goal (13.79, -3.67) failed (status=6); trying another approach angle
+2026-08-28 12:14:32.090 [GOAL] (13.59, -4.41) yaw=8deg mode=navigate
+2026-08-28 12:14:32.096 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:14:32.096 [WARN] nav goal (13.59, -4.41) failed (status=6); trying another approach angle
+2026-08-28 12:14:33.090 [GOAL] (13.95, -4.98) yaw=33deg mode=navigate
+2026-08-28 12:14:33.096 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:14:33.097 [WARN] nav goal (13.95, -4.98) failed (status=6); trying another approach angle
+2026-08-28 12:14:34.094 [GOAL] (14.50, -3.21) yaw=-68deg mode=navigate
+2026-08-28 12:14:34.098 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:14:34.098 [WARN] nav goal (14.50, -3.21) failed (status=6); trying another approach angle
+2026-08-28 12:14:35.088 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-28 12:14:35.090 [GOAL] (13.64, -3.88) yaw=-17deg mode=navigate
+2026-08-28 12:14:35.096 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:14:35.097 [WARN] nav goal (13.64, -3.88) failed (status=6); trying another approach angle
+2026-08-28 12:14:36.088 [GOAL] (13.67, -3.59) yaw=-14deg mode=navigate
+2026-08-28 12:14:36.097 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:14:36.098 [WARN] nav goal (13.67, -3.59) failed (status=6); trying another approach angle
+2026-08-28 12:14:37.089 [GOAL] (13.95, -3.21) yaw=-40deg mode=navigate
+2026-08-28 12:14:37.097 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:14:37.098 [WARN] nav goal (13.95, -3.21) failed (status=6); trying another approach angle
+2026-08-28 12:14:38.092 [GOAL] (13.62, -4.20) yaw=10deg mode=navigate
+2026-08-28 12:14:38.097 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:14:38.097 [WARN] nav goal (13.62, -4.20) failed (status=6); trying another approach angle
+2026-08-28 12:14:39.093 [GOAL] (13.04, -3.39) yaw=-14deg mode=navigate
+2026-08-28 12:14:39.097 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:14:39.097 [WARN] nav goal (13.04, -3.39) failed (status=6); trying another approach angle
+2026-08-28 12:14:40.092 [GOAL] (13.65, -3.84) yaw=-17deg mode=navigate
+2026-08-28 12:14:40.097 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:14:40.097 [WARN] nav goal (13.65, -3.84) failed (status=6); trying another approach angle
+2026-08-28 12:14:41.096 [GOAL] (13.65, -4.25) yaw=9deg mode=navigate
+2026-08-28 12:14:41.107 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:14:41.107 [WARN] nav goal (13.65, -4.25) failed (status=6); trying another approach angle
+2026-08-28 12:14:42.097 [GOAL] (13.02, -3.55) yaw=-16deg mode=navigate
+2026-08-28 12:14:42.107 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:14:42.107 [WARN] nav goal (13.02, -3.55) failed (status=6); trying another approach angle
+2026-08-28 12:14:43.096 [GOAL] (13.27, -3.19) yaw=-43deg mode=navigate
+2026-08-28 12:14:43.106 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:14:43.106 [WARN] nav goal (13.27, -3.19) failed (status=6); trying another approach angle
+2026-08-28 12:14:44.091 [GOAL] (13.65, -3.81) yaw=-17deg mode=navigate
+2026-08-28 12:14:44.096 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:14:44.098 [WARN] nav goal (13.65, -3.81) failed (status=6); trying another approach angle
+2026-08-28 12:14:45.107 [GOAL] (13.68, -4.16) yaw=11deg mode=navigate
+2026-08-28 12:14:45.117 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:14:45.117 [WARN] nav goal (13.68, -4.16) failed (status=6); trying another approach angle
+2026-08-28 12:14:46.090 [GOAL] (13.02, -3.51) yaw=-16deg mode=navigate
+2026-08-28 12:14:46.097 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:14:46.097 [WARN] nav goal (13.02, -3.51) failed (status=6); trying another approach angle
+2026-08-28 12:14:47.100 [GOAL] (13.27, -3.14) yaw=-43deg mode=navigate
+2026-08-28 12:14:47.107 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:14:47.107 [WARN] nav goal (13.27, -3.14) failed (status=6); trying another approach angle
+2026-08-28 12:14:48.093 [GOAL] (13.64, -3.72) yaw=-16deg mode=navigate
+2026-08-28 12:14:48.096 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:14:48.096 [WARN] nav goal (13.64, -3.72) failed (status=6); trying another approach angle
+2026-08-28 12:14:49.096 [GOAL] (12.85, -3.37) yaw=-14deg mode=navigate
+2026-08-28 12:14:49.107 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:14:49.107 [WARN] nav goal (12.85, -3.37) failed (status=6); trying another approach angle
+2026-08-28 12:14:50.088 [GOAL] (13.69, -3.64) yaw=-16deg mode=navigate
+2026-08-28 12:14:50.097 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:14:50.097 [WARN] nav goal (13.69, -3.64) failed (status=6); trying another approach angle
+2026-08-28 12:14:51.091 [GOAL] (13.64, -4.17) yaw=9deg mode=navigate
+2026-08-28 12:14:51.097 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:14:51.098 [WARN] nav goal (13.64, -4.17) failed (status=6); trying another approach angle
+2026-08-28 12:14:52.102 [GOAL] (12.83, -3.39) yaw=-17deg mode=navigate
+2026-08-28 12:14:52.106 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:14:52.107 [WARN] nav goal (12.83, -3.39) failed (status=6); trying another approach angle
+2026-08-28 12:14:53.087 [GOAL] (13.03, -3.53) yaw=-19deg mode=navigate
+2026-08-28 12:14:53.097 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:14:53.097 [WARN] nav goal (13.03, -3.53) failed (status=6); trying another approach angle
+2026-08-28 12:14:54.090 [GOAL] (12.75, -4.01) yaw=6deg mode=navigate
+2026-08-28 12:14:54.097 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:14:54.097 [WARN] nav goal (12.75, -4.01) failed (status=6); trying another approach angle
+2026-08-28 12:14:55.101 [GOAL] (13.11, -2.97) yaw=-44deg mode=navigate
+2026-08-28 12:14:55.107 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:14:55.107 [WARN] nav goal (13.11, -2.97) failed (status=6); trying another approach angle
+2026-08-28 12:14:56.099 [GOAL] (13.33, -3.69) yaw=-20deg mode=navigate
+2026-08-28 12:14:56.108 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:14:56.108 [WARN] nav goal (13.33, -3.69) failed (status=6); trying another approach angle
+2026-08-28 12:14:57.099 [GOAL] (13.32, -3.23) yaw=-44deg mode=navigate
+2026-08-28 12:14:57.107 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:14:57.107 [WARN] nav goal (13.32, -3.23) failed (status=6); trying another approach angle
+2026-08-28 12:14:58.099 [GOAL] (13.07, -3.96) yaw=8deg mode=navigate
+2026-08-28 12:14:58.107 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:14:58.107 [WARN] nav goal (13.07, -3.96) failed (status=6); trying another approach angle
+2026-08-28 12:14:59.093 [GOAL] (13.28, -4.05) yaw=7deg mode=navigate
+2026-08-28 12:14:59.098 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:14:59.098 [WARN] nav goal (13.28, -4.05) failed (status=6); trying another approach angle
+2026-08-28 12:15:00.088 [GOAL] (13.53, -3.30) yaw=-45deg mode=navigate
+2026-08-28 12:15:00.097 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:15:00.097 [WARN] nav goal (13.53, -3.30) failed (status=6); trying another approach angle
+2026-08-28 12:15:01.103 [GOAL] (12.93, -4.58) yaw=32deg mode=navigate
+2026-08-28 12:15:01.109 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:15:01.109 [WARN] nav goal (12.93, -4.58) failed (status=6); trying another approach angle
+2026-08-28 12:15:02.092 [GOAL] (13.17, -4.65) yaw=31deg mode=navigate
+2026-08-28 12:15:02.098 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:15:02.098 [WARN] nav goal (13.17, -4.65) failed (status=6); trying another approach angle
+2026-08-28 12:15:03.091 [GOAL] (12.84, -4.24) yaw=-2deg mode=navigate
+2026-08-28 12:15:03.097 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:15:03.098 [WARN] nav goal (12.84, -4.24) failed (status=6); trying another approach angle
+2026-08-28 12:15:04.092 [GOAL] (13.21, -4.30) yaw=-51deg mode=navigate
+2026-08-28 12:15:04.098 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:15:04.099 [WARN] nav goal (13.21, -4.30) failed (status=6); trying another approach angle
+2026-08-28 12:15:05.098 [GOAL] (13.37, -4.54) yaw=-49deg mode=navigate
+2026-08-28 12:15:05.108 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:15:05.109 [WARN] nav goal (13.37, -4.54) failed (status=6); trying another approach angle
+2026-08-28 12:15:06.090 [GOAL] (12.86, -4.81) yaw=-20deg mode=navigate
+2026-08-28 12:15:06.096 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:15:06.096 [WARN] nav goal (12.86, -4.81) failed (status=6); trying another approach angle
+2026-08-28 12:15:07.097 [GOAL] (13.57, -4.80) yaw=-46deg mode=navigate
+2026-08-28 12:15:07.108 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:15:07.108 [WARN] nav goal (13.57, -4.80) failed (status=6); trying another approach angle
+2026-08-28 12:15:08.091 [GOAL] (13.74, -5.06) yaw=-43deg mode=navigate
+2026-08-28 12:15:08.097 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:15:08.098 [WARN] nav goal (13.74, -5.06) failed (status=6); trying another approach angle
+2026-08-28 12:15:09.090 [GOAL] (14.24, -4.80) yaw=-64deg mode=navigate
+2026-08-28 12:15:09.098 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-28 12:15:09.098 [WARN] nav goal (14.24, -4.80) failed (status=6); trying another approach angle
+2026-08-28 12:15:10.096 [ROBOT] Arrived at the chair.
+2026-08-28 12:15:34.351 [CMD] (cancel via remote) cancel
+2026-08-28 12:15:34.351 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-28 12:15:36.398 [ROBOT] Stopped. The robot is idle.
+2026-08-28 12:15:36.399 [STOP] confirmed stopped by odometry after barrage

@@ -1,0 +1,22 @@
+2026-07-28 21:18:07.567 [RUN] vla_agent v7  (#22 dock no-detect zone, #23 live-first memory, #24 forget, #25 typo-tolerant control words, #26 bare yes/no, #27 context expiry, #28 all-instance distances, #29 Create 3 backup ratchet)
+2026-07-28 21:18:07.567 [RUN] agent started (SIGHT_CONFIRM=2, SEARCH_TIMEOUT=45.0s, NO_PROGRESS_LIMIT=60.0s, ROBOT_CLEARANCE=0.25m)
+2026-07-28 21:18:17.059 [CMD] turn right
+2026-07-28 21:18:17.870 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ninety degrees right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -90.0}]}
+2026-07-28 21:18:17.870 [STEP] move target=None
+2026-07-28 21:18:23.627 [ROBOT] Done with that move.
+2026-07-28 21:18:42.755 [CMD] what do you see
+2026-07-28 21:18:43.591 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a chair and a person.', 'target': None}]}
+2026-07-28 21:18:43.591 [STEP] describe target=None
+2026-07-28 21:18:55.267 [CMD] go to the perso and then to the chair
+2026-07-28 21:18:56.238 [BRAIN] {'steps': [{'action': 'navigate', 'speech': 'Heading to the person.', 'target': 'person'}, {'action': 'navigate', 'speech': 'Then to the chair.', 'target': 'chair'}]}
+2026-07-28 21:18:56.238 [STEP] navigate target='person'
+2026-07-28 21:18:57.704 [ROBOT] Found the person — navigating to it.
+2026-07-28 21:18:57.704 [SIGHT] person at (1.38, -0.94), 1.72 m away
+2026-07-28 21:18:57.706 [GOAL] (0.62, -0.45) yaw=-33deg mode=navigate
+2026-07-28 21:19:01.267 [RESULT] nav goal status=4 (ok)
+2026-07-28 21:19:01.708 [GOAL] (0.50, -0.80) yaw=-10deg mode=navigate
+2026-07-28 21:19:03.692 [ROBOT] Arrived at the person.
+2026-07-28 21:19:03.692 [STEP] navigate target='chair'
+2026-07-28 21:19:07.697 [ROBOT] Found the chair — navigating to it.
+2026-07-28 21:19:07.697 [SIGHT] chair at (13.70, -4.86), 13.79 m away
+2026-07-28 21:19:38.227 [RUN] agent shutting down

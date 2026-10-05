@@ -1,0 +1,4 @@
+Gtk-Message: 10:16:28.924: Failed to load module "canberra-gtk-module"
+Gtk-Message: 10:16:28.924: Failed to load module "canberra-gtk-module"
+
+** (python3:34459): WARNING **: 10:16:54.206: atk-bridge: get_device_events_reply: unknown signature

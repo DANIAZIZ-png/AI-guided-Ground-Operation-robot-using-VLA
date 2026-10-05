@@ -1,0 +1,126 @@
+2026-07-17 11:40:25.677 [RUN] agent started (SIGHT_CONFIRM=2, SEARCH_TIMEOUT=45.0s, NO_PROGRESS_LIMIT=60.0s, ROBOT_CLEARANCE=0.25m)
+2026-07-17 11:40:33.363 [CMD] move back 1
+2026-07-17 11:40:35.152 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Moving backward a bit.', 'target': None, 'distance_m': -0.5, 'rotation_deg': 0.0}]}
+2026-07-17 11:40:35.152 [STEP] move target=None
+2026-07-17 11:40:42.292 [CMD] move right
+2026-07-17 11:40:43.066 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': 90.0}]}
+2026-07-17 11:40:43.066 [STEP] move target=None
+2026-07-17 11:40:48.744 [ROBOT] Done with that move.
+2026-07-17 11:40:54.819 [CMD] move left
+2026-07-17 11:40:55.603 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning left a bit.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -90.0}]}
+2026-07-17 11:40:55.603 [STEP] move target=None
+2026-07-17 11:40:59.571 [CMD] left
+2026-07-17 11:41:00.382 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning left a bit.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -90.0}]}
+2026-07-17 11:41:00.382 [STEP] move target=None
+2026-07-17 11:41:05.744 [ROBOT] Done with that move.
+2026-07-17 11:41:07.635 [CMD] left
+2026-07-17 11:41:08.432 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning left a bit.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -90.0}]}
+2026-07-17 11:41:08.432 [STEP] move target=None
+2026-07-17 11:41:13.744 [ROBOT] Done with that move.
+2026-07-17 11:41:19.459 [CMD] find a persom find a persom
+2026-07-17 11:41:20.129 [BRAIN] {'steps': [{'action': 'locate', 'speech': 'Looking for a person.', 'target': 'person'}]}
+2026-07-17 11:41:20.129 [STEP] locate target='person'
+2026-07-17 11:41:22.819 [MEMORY] remembered person at (-14.22, 3.30)
+2026-07-17 11:41:22.820 [ROBOT] Yes — I can see a person about 28.0 m away. I'll remember where it is. (Locating only — not driving to it.)
+2026-07-17 11:41:31.075 [CMD] give me live feed
+2026-07-17 11:41:31.748 [BRAIN] {'steps': [{'action': 'feed', 'speech': 'Showing live camera feed.', 'target': None}]}
+2026-07-17 11:41:31.748 [STEP] feed target=None
+2026-07-17 11:42:47.619 [CMD] go to the person
+2026-07-17 11:42:48.313 [BRAIN] {'steps': [{'action': 'navigate', 'speech': 'Heading back to the person.', 'target': 'person'}]}
+2026-07-17 11:42:48.314 [STEP] navigate target='person'
+2026-07-17 11:42:48.314 [MEMORY] seeded person from remembered instance at (-14.22, 3.30)
+2026-07-17 11:42:48.811 [ROBOT] I can see the person now — it's where I remembered.
+2026-07-17 11:42:48.811 [SIGHT] memory-seeded person re-confirmed at (-14.83, 2.16), 28.35 m away
+2026-07-17 11:42:48.846 [GOAL] (-5.56, 0.34) yaw=169deg mode=navigate
+2026-07-17 11:42:49.835 [GOAL] (-3.83, 0.58) yaw=167deg mode=navigate
+2026-07-17 11:42:49.842 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-17 11:42:49.842 [WARN] nav goal (-3.83, 0.58) failed (status=6); trying another approach angle
+2026-07-17 11:42:50.811 [WARN] all approach goals for person refused; clearing the tried-list and retrying
+2026-07-17 11:42:50.836 [GOAL] (-3.42, 0.68) yaw=166deg mode=navigate
+2026-07-17 11:42:50.843 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-17 11:42:50.843 [WARN] nav goal (-3.42, 0.68) failed (status=6); trying another approach angle
+2026-07-17 11:42:51.810 [WARN] all approach goals for person refused; clearing the tried-list and retrying
+2026-07-17 11:42:51.837 [GOAL] (-3.14, 0.69) yaw=166deg mode=navigate
+2026-07-17 11:42:51.848 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-17 11:42:51.848 [WARN] nav goal (-3.14, 0.69) failed (status=6); trying another approach angle
+2026-07-17 11:42:52.823 [GOAL] (2.30, -0.57) yaw=166deg mode=navigate
+2026-07-17 11:42:52.830 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-17 11:42:52.830 [WARN] nav goal (2.30, -0.57) failed (status=6); trying another approach angle
+2026-07-17 11:42:53.938 [GOAL] (-3.10, 0.67) yaw=167deg mode=navigate
+2026-07-17 11:42:53.948 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-17 11:42:53.948 [WARN] nav goal (-3.10, 0.67) failed (status=6); trying another approach angle
+2026-07-17 11:42:54.835 [GOAL] (-3.31, 0.68) yaw=167deg mode=navigate
+2026-07-17 11:42:54.842 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-17 11:42:54.843 [WARN] nav goal (-3.31, 0.68) failed (status=6); trying another approach angle
+2026-07-17 11:42:55.808 [WARN] all approach goals for person refused; clearing the tried-list and retrying
+2026-07-17 11:42:55.831 [GOAL] (-3.41, 0.68) yaw=167deg mode=navigate
+2026-07-17 11:42:55.840 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-17 11:42:55.840 [WARN] nav goal (-3.41, 0.68) failed (status=6); trying another approach angle
+2026-07-17 11:42:56.816 [GOAL] (2.26, -0.60) yaw=168deg mode=navigate
+2026-07-17 11:42:56.823 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-17 11:42:56.823 [WARN] nav goal (2.26, -0.60) failed (status=6); trying another approach angle
+2026-07-17 11:42:57.841 [GOAL] (2.08, -0.95) yaw=143deg mode=navigate
+2026-07-17 11:42:57.851 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-17 11:42:57.851 [WARN] nav goal (2.08, -0.95) failed (status=6); trying another approach angle
+2026-07-17 11:42:58.830 [GOAL] (-3.70, 0.59) yaw=168deg mode=navigate
+2026-07-17 11:42:58.842 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-17 11:42:58.842 [WARN] nav goal (-3.70, 0.59) failed (status=6); trying another approach angle
+2026-07-17 11:42:59.810 [GOAL] (2.31, -0.62) yaw=169deg mode=navigate
+2026-07-17 11:42:59.820 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-17 11:42:59.820 [WARN] nav goal (2.31, -0.62) failed (status=6); trying another approach angle
+2026-07-17 11:43:00.831 [GOAL] (-3.48, 0.63) yaw=168deg mode=navigate
+2026-07-17 11:43:00.839 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-17 11:43:00.839 [WARN] nav goal (-3.48, 0.63) failed (status=6); trying another approach angle
+2026-07-17 11:43:01.817 [GOAL] (2.28, -0.58) yaw=169deg mode=navigate
+2026-07-17 11:43:01.828 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-17 11:43:01.828 [WARN] nav goal (2.28, -0.58) failed (status=6); trying another approach angle
+2026-07-17 11:43:02.819 [GOAL] (2.73, -1.48) yaw=175deg mode=navigate
+2026-07-17 11:43:02.829 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-17 11:43:02.829 [WARN] nav goal (2.73, -1.48) failed (status=6); trying another approach angle
+2026-07-17 11:43:03.814 [GOAL] (2.62, -1.97) yaw=152deg mode=navigate
+2026-07-17 11:43:03.822 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-17 11:43:03.822 [WARN] nav goal (2.62, -1.97) failed (status=6); trying another approach angle
+2026-07-17 11:43:04.821 [GOAL] (2.10, -1.03) yaw=173deg mode=navigate
+2026-07-17 11:43:04.833 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-17 11:43:04.833 [WARN] nav goal (2.10, -1.03) failed (status=6); trying another approach angle
+2026-07-17 11:43:05.830 [GOAL] (1.68, -1.07) yaw=174deg mode=navigate
+2026-07-17 11:43:05.839 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-17 11:43:05.839 [WARN] nav goal (1.68, -1.07) failed (status=6); trying another approach angle
+2026-07-17 11:43:06.812 [GOAL] (2.66, -1.70) yaw=178deg mode=navigate
+2026-07-17 11:43:06.821 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-17 11:43:06.821 [WARN] nav goal (2.66, -1.70) failed (status=6); trying another approach angle
+2026-07-17 11:43:07.841 [GOAL] (2.05, -0.86) yaw=172deg mode=navigate
+2026-07-17 11:43:07.851 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-17 11:43:07.851 [WARN] nav goal (2.05, -0.86) failed (status=6); trying another approach angle
+2026-07-17 11:43:08.821 [GOAL] (2.02, -1.43) yaw=148deg mode=navigate
+2026-07-17 11:43:08.831 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-17 11:43:08.831 [WARN] nav goal (2.02, -1.43) failed (status=6); trying another approach angle
+2026-07-17 11:43:09.814 [GOAL] (2.20, -0.39) yaw=-164deg mode=navigate
+2026-07-17 11:43:09.822 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-17 11:43:09.822 [WARN] nav goal (2.20, -0.39) failed (status=6); trying another approach angle
+2026-07-17 11:43:10.817 [GOAL] (1.66, -0.46) yaw=-137deg mode=navigate
+2026-07-17 11:43:10.828 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-17 11:43:10.828 [WARN] nav goal (1.66, -0.46) failed (status=6); trying another approach angle
+2026-07-17 11:43:11.810 [GOAL] (-6.24, 0.09) yaw=147deg mode=navigate
+2026-07-17 11:43:11.820 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-17 11:43:11.820 [WARN] nav goal (-6.24, 0.09) failed (status=6); trying another approach angle
+2026-07-17 11:43:12.816 [GOAL] (2.28, -0.75) yaw=171deg mode=navigate
+2026-07-17 11:43:12.826 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-17 11:43:12.826 [WARN] nav goal (2.28, -0.75) failed (status=6); trying another approach angle
+2026-07-17 11:43:13.811 [GOAL] (-6.19, 0.15) yaw=147deg mode=navigate
+2026-07-17 11:43:13.821 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-17 11:43:13.821 [WARN] nav goal (-6.19, 0.15) failed (status=6); trying another approach angle
+2026-07-17 11:43:14.806 [WARN] all approach goals for person refused; clearing the tried-list and retrying
+2026-07-17 11:43:14.807 [GOAL] (-6.24, 0.05) yaw=147deg mode=navigate
+2026-07-17 11:43:14.818 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-17 11:43:14.818 [WARN] nav goal (-6.24, 0.05) failed (status=6); trying another approach angle
+2026-07-17 11:43:15.814 [GOAL] (2.28, -0.75) yaw=172deg mode=navigate
+2026-07-17 11:43:15.821 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-17 11:43:15.821 [WARN] nav goal (2.28, -0.75) failed (status=6); trying another approach angle
+2026-07-17 11:43:16.810 [GOAL] (2.12, -1.13) yaw=148deg mode=navigate
+2026-07-17 11:43:16.820 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-17 11:43:16.820 [WARN] nav goal (2.12, -1.13) failed (status=6); trying another approach angle
+2026-07-17 11:43:17.823 [GOAL] (1.83, -0.66) yaw=-160deg mode=navigate
+2026-07-17 11:43:17.831 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-17 11:43:17.831 [WARN] nav goal (1.83, -0.66) failed (status=6); trying another approach angle
+2026-07-17 11:43:18.813 [ROBOT] Arrived at the person.

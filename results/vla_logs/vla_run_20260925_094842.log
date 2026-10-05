@@ -1,0 +1,64 @@
+2026-09-25 09:48:42.653 [RUN] vla_agent v28  (#63 headless-safe console output, #62 direction-aware collision guard, #61 nearest-cluster LiDAR ranging, #60 manual override teleop, #59 10 Hz collision guard, #58 smoother approach, #57 stand off far enough to keep the object in view, #56 step-and-stare scan, #55 LiDAR failure reasons reported, #54 LiDAR object ranging, #53 seeded depth intrinsics, #52 depth intrinsics rescaled to frame size, #51 compressedDepth transport, #50 compressed RGB transport, #49 annotated feed gated per topic, #47 TF at colour-frame stamp, #48 reject stale depth, #46 one subscription per camera stream, #43 longer cached action-server wait, #44 undock retry-loop breaker, #45 sync slop for 1 Hz depth, #37 /robot1 namespace, #38 stereo depth topic, #39 best-effort sensor QoS, #40 RGB->depth pixel mapping, #41 encoding-based mm/m, #42 explicit namespaced TF, #36 no patrol feed prompt, #35 cancel actually stops the robot, #34 feed publishes to any subscriber, #22 dock no-detect zone, #23 live-first memory, #24 forget, #25 typo-tolerant control words, #26 bare yes/no, #27 context expiry, #28 all-instance distances, #29 Create 3 backup ratchet, #30 sticky goals + range-scaled gate + ring-safe blacklist, #31 incremental off-map hop goals, #32 non-freezing live feed, #33 command/reply/status bridge)
+2026-09-25 09:48:42.653 [RUN] agent started (SIGHT_CONFIRM=2, SEARCH_TIMEOUT=120.0s, NO_PROGRESS_LIMIT=60.0s, ROBOT_CLEARANCE=0.25m)
+2026-09-25 09:49:18.970 [CMD] [remote] what do you see
+2026-09-25 09:49:18.970 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-25 09:49:20.468 [BRAIN] {'steps': [{'action': 'describe', 'speech': "I don't see anything right now.", 'target': None}]}
+2026-09-25 09:49:20.468 [STEP] describe target=None
+2026-09-25 09:49:21.028 [ROBOT] Stopped. The robot is idle.
+2026-09-25 09:49:21.028 [STOP] confirmed stopped by odometry after barrage
+2026-09-25 09:49:29.976 [CMD] [remote] what do you see
+2026-09-25 09:49:29.976 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-25 09:49:30.543 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a person.', 'target': None}]}
+2026-09-25 09:49:30.543 [STEP] describe target=None
+2026-09-25 09:49:32.028 [ROBOT] Stopped. The robot is idle.
+2026-09-25 09:49:32.028 [STOP] confirmed stopped by odometry after barrage
+2026-09-25 09:49:43.736 [CMD] [remote] what do you see]
+2026-09-25 09:49:43.736 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-25 09:49:44.378 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a chair and a person.', 'target': None}]}
+2026-09-25 09:49:44.379 [STEP] describe target=None
+2026-09-25 09:49:45.788 [ROBOT] Stopped. The robot is idle.
+2026-09-25 09:49:45.788 [STOP] confirmed stopped by odometry after barrage
+2026-09-25 09:50:00.088 [CMD] [remote] turn 360
+2026-09-25 09:50:00.088 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-25 09:50:00.717 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning around completely.', 'target': None, 'distance_m': 0.0, 'rotation_deg': 360.0}]}
+2026-09-25 09:50:00.717 [STEP] move target=None
+2026-09-25 09:50:02.148 [ROBOT] Stopped. The robot is idle.
+2026-09-25 09:50:02.149 [STOP] confirmed stopped by odometry after barrage
+2026-09-25 09:50:16.668 [ROBOT] Done with that move.
+2026-09-25 09:50:28.056 [CMD] [remote] what do you see
+2026-09-25 09:50:28.056 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-25 09:50:28.658 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a chair.', 'target': None}]}
+2026-09-25 09:50:28.659 [STEP] describe target=None
+2026-09-25 09:50:30.108 [ROBOT] Stopped. The robot is idle.
+2026-09-25 09:50:30.108 [STOP] confirmed stopped by odometry after barrage
+2026-09-25 09:50:43.961 [CMD] [remote] what do u see
+2026-09-25 09:50:43.962 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-25 09:50:44.541 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a person.', 'target': None}]}
+2026-09-25 09:50:44.541 [STEP] describe target=None
+2026-09-25 09:50:46.008 [ROBOT] Stopped. The robot is idle.
+2026-09-25 09:50:46.008 [STOP] confirmed stopped by odometry after barrage
+2026-09-25 09:58:47.072 [CMD] [remote] turn around
+2026-09-25 09:58:47.072 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-25 09:58:47.738 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning around.', 'target': None, 'distance_m': 0.0, 'rotation_deg': 180.0}]}
+2026-09-25 09:58:47.738 [STEP] move target=None
+2026-09-25 09:58:49.128 [ROBOT] Stopped. The robot is idle.
+2026-09-25 09:58:49.128 [STOP] confirmed stopped by odometry after barrage
+2026-09-25 09:58:54.570 [CMD] (cancel via remote) cancel
+2026-09-25 09:58:54.571 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-25 09:58:56.628 [ROBOT] Stopped. The robot is idle.
+2026-09-25 09:58:56.629 [STOP] confirmed stopped by odometry after barrage
+2026-09-25 09:58:56.953 [CMD] [remote] dock
+2026-09-25 09:58:56.954 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-25 09:58:56.954 [STEP] dock target=None
+2026-09-25 09:58:56.954 [ROBOT] Docking…
+2026-09-25 09:59:02.968 [ROBOT] I sent the stop but the robot is STILL MOVING (0.00 m/s, 0.52 rad/s). Take manual override now.
+2026-09-25 09:59:02.969 [ERROR] #35 robot still moving 6.0s after stop: lin=0.00 ang=0.52
+2026-09-25 09:59:24.804 [DOCK] dock position recorded at (0.04, -0.02); detections within 0.8 m are ignored
+2026-09-25 09:59:27.400 [DOCK] dock position recorded at (0.04, -0.02); detections within 0.8 m are ignored
+2026-09-25 09:59:27.400 [ROBOT] Docked successfully.
+2026-09-25 09:59:27.400 [DOCK] dock ok
+2026-09-25 09:59:31.382 [ROBOT] I've stopped receiving camera frames (none for over 5s). Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-09-25 09:59:31.383 [WARN] #32e camera stream stalled (>5s)
+2026-09-25 10:02:40.153 [WARN] #35 cancel-all failed: failed to check service availability: rcl node's context is invalid, at ./src/rcl/node.c:428
+2026-09-25 10:02:40.154 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-25 10:02:40.154 [RUN] agent shutting down

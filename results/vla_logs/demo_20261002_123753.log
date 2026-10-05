@@ -1,0 +1,54 @@
+
+[36m[12:37:53 +  0s][0m [1mVLA ground robot -- hardware demo bring-up[0m   (log: /home/danyalaziz/vla_logs/demo_20261002_123753.log)
+
+[36m[12:37:53 +  0s][0m STAGE 0/13  host, containers, robot reachable
+[33m[12:37:56 +  3s] WARNING:[0m OTHER DEVICE(S) ON THE HOTSPOT: 14:4f:8a:cf:f3:23  -- they share the robot's channel and can freeze the camera.
+[33m[12:37:56 +  3s] WARNING:[0m Disconnect them, or run once:  sudo bash /home/danyalaziz/vla_tools/hotspot_guard.sh install
+[36m[12:37:56 +  3s][0m STAGE 0/13  host OK, both containers OK, robot reachable   [32mOK[0m
+[36m[12:37:56 +  3s][0m STAGE 1/13  Pi gate (load, temperature, throttling, ROS nodes)
+[36m[12:37:58 +  5s][0m         Pi: load 1.00, 48.2 C, throttled=0x0, ROS nodes 7, up 305s
+[36m[12:37:58 +  5s][0m STAGE 1/13  Pi gate passed   [32mOK[0m
+[36m[12:37:58 +  5s][0m STAGE 2/13  ROS daemon in robot mode
+[36m[12:38:01 +  8s][0m         daemon OK; waiting 15 s for the Pi's node directory
+[33m[12:38:50 + 57s] WARNING:[0m no robot nodes visible -- restarting discovery.service + turtlebot4.service on the Pi (once), ~90 s
+[36m[12:40:31 +158s][0m STAGE 2/13  daemon sees the robot: 11 robot nodes   [32mOK[0m
+[36m[12:40:31 +158s][0m STAGE 3/13  base alive (odometry, battery, dock state)
+[36m[12:40:38 +165s][0m         odom 20.364 Hz, battery 100 %, docked=true
+[36m[12:40:38 +165s][0m STAGE 3/13  base alive   [32mOK[0m
+[36m[12:40:38 +165s][0m STAGE 4/13  YOLO server (vla-box, background)
+[36m[12:40:38 +165s][0m         (loading the model takes ~30 s; continuing with Ollama meanwhile)
+[36m[12:40:38 +165s][0m STAGE 5/13  Ollama serving, model pinned
+[36m[12:41:18 +205s][0m STAGE 5/13  Ollama answered in 39.8s, qwen2.5:7b pinned (keep_alive=-1)   [32mOK[0m
+[36m[12:41:38 +225s][0m STAGE 4/13  YOLO server answering on :5001 (classes: 'person', 'box', 'shelf', 'door', 'chair', 'pillar', 'docking station', 'chargi)   [32mOK[0m
+[36m[12:41:38 +225s][0m STAGE 6/13  SLAM (minimised window)
+[36m[12:41:45 +232s][0m STAGE 6/13  slam_toolbox publishing /robot1/map   [32mOK[0m
+[36m[12:41:45 +232s][0m STAGE 7/13  Nav2, composed (minimised window) -- ~60 s incl. the 20 s delayed STARTUP
+[36m[12:42:20 +267s][0m STAGE 7/13  Nav2 active: 7/7 bonds, velocity_smoother on /robot1/cmd_vel   [32mOK[0m
+[36m[12:42:20 +267s][0m STAGE 8/13  RViz (visible window -- the live map)
+[36m[12:42:25 +272s][0m STAGE 8/13  RViz window up (hardware layout, Nav2 Goal tool in /robot1)   [32mOK[0m
+[36m[12:42:25 +272s][0m STAGE 9/13  undock (the camera only runs off the dock)
+[36m[12:42:28 +275s][0m         robot is docked -- sending Undock (long-lived client, 30 s settle). ROBOT WILL MOVE.
+12:43:00 undock: goal accepted
+12:43:06 undock result status=4 (4=SUCCEEDED) is_docked=False
+[36m[12:43:09 +316s][0m STAGE 9/13  undocked   [32mOK[0m
+[36m[12:43:09 +316s][0m STAGE 10/13  camera colour frames
+[36m[12:43:13 +320s][0m STAGE 10/13  camera colour at 37.617 Hz (colour-only pipeline; LiDAR does the ranging)   [32mOK[0m
+[36m[12:43:13 +320s][0m         camera stream: 30 fps, JPEG 75, preview 512 px (camera restarts, ~50 s)
+[36m[12:44:00 +367s][0m STAGE 10/13  camera back at 30.670 Hz after the bandwidth change   [32mOK[0m
+[36m[12:44:00 +367s][0m STAGE 11/13  VLA agent (minimised window with a real tty; VLA_RGB_ONLY=1)
+[36m[12:44:09 +376s][0m STAGE 11/13  agent up: /vla/status camera:true   [32mOK[0m
+[36m[12:44:09 +376s][0m STAGE 12/13  voice (push-to-talk from the GUI's gold button)
+[33m[12:44:20 +387s] WARNING:[0m the default input is a SPEAKER MONITOR (alsa_output.pci-0000_00_1f.3.analog-stereo.monitor): voice will hear nothing. Switch the earbuds on (out of the case) and pick them as input in Sound settings.
+[36m[12:44:35 +402s][0m STAGE 12/13  voice node ready (Whisper small.en on the GPU)   [32mOK[0m
+[36m[12:44:35 +402s][0m STAGE 13/13  GUI (visible)
+[36m[12:44:40 +407s][0m STAGE 13/13  GUI up   [32mOK[0m
+
+[32m[1m=====================================================================[0m
+[32m[1m  STACK UP in 409 s.  Pi: temp=59.4'C 1.78 [0m
+[32m[1m=====================================================================[0m
+  Visible: the GUI (commands) and RViz (map).  Minimised: SLAM, Nav2, agent, voice.
+  First command:  "what do you see"      (moves nothing)
+  The demo:       "go to the chair"      (chair 2-3 m ahead, in view, clear floor)
+  Voice:          hold the GUI's gold HOLD-TO-TALK button while speaking.
+  Do NOT close the VLA AGENT window.  Do NOT press START ALL in the GUI.
+  When done:      ~/vla_demo_stop.sh    (re-docks the robot, stops everything)

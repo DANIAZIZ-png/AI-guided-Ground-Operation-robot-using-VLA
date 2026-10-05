@@ -1,0 +1,34 @@
+2026-08-12 12:08:07.540 [RUN] vla_agent v28  (#63 headless-safe console output, #62 direction-aware collision guard, #61 nearest-cluster LiDAR ranging, #60 manual override teleop, #59 10 Hz collision guard, #58 smoother approach, #57 stand off far enough to keep the object in view, #56 step-and-stare scan, #55 LiDAR failure reasons reported, #54 LiDAR object ranging, #53 seeded depth intrinsics, #52 depth intrinsics rescaled to frame size, #51 compressedDepth transport, #50 compressed RGB transport, #49 annotated feed gated per topic, #47 TF at colour-frame stamp, #48 reject stale depth, #46 one subscription per camera stream, #43 longer cached action-server wait, #44 undock retry-loop breaker, #45 sync slop for 1 Hz depth, #37 /robot1 namespace, #38 stereo depth topic, #39 best-effort sensor QoS, #40 RGB->depth pixel mapping, #41 encoding-based mm/m, #42 explicit namespaced TF, #36 no patrol feed prompt, #35 cancel actually stops the robot, #34 feed publishes to any subscriber, #22 dock no-detect zone, #23 live-first memory, #24 forget, #25 typo-tolerant control words, #26 bare yes/no, #27 context expiry, #28 all-instance distances, #29 Create 3 backup ratchet, #30 sticky goals + range-scaled gate + ring-safe blacklist, #31 incremental off-map hop goals, #32 non-freezing live feed, #33 command/reply/status bridge)
+2026-08-12 12:08:07.540 [RUN] agent started (SIGHT_CONFIRM=2, SEARCH_TIMEOUT=120.0s, NO_PROGRESS_LIMIT=60.0s, ROBOT_CLEARANCE=0.25m)
+2026-08-12 12:08:09.503 [INFO] live depth camera_info received 320x240
+2026-08-12 12:08:09.536 [DOCK] dock position recorded at (0.32, 0.00); detections within 0.8 m are ignored
+2026-08-12 12:08:14.770 [CMD] [keyboard] what do you see
+2026-08-12 12:08:14.770 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-12 12:08:15.480 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a chair.', 'target': None}]}
+2026-08-12 12:08:15.481 [STEP] describe target=None
+2026-08-12 12:08:15.540 [WARN] lidar ranging unavailable: only 0 valid beams within 1.4 deg of bearing -102.8 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-12 12:08:16.827 [ROBOT] Stopped. The robot is idle.
+2026-08-12 12:08:16.827 [STOP] confirmed stopped by odometry after barrage
+2026-08-12 12:09:44.610 [CMD] [remote] undock
+2026-08-12 12:09:44.610 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-12 12:09:44.612 [STEP] undock target=None
+2026-08-12 12:09:44.613 [ROBOT] Undocking…
+2026-08-12 12:09:44.614 [ROBOT] The robot rejected the undock request.
+2026-08-12 12:09:48.108 [ROBOT] Stopped. The robot is idle.
+2026-08-12 12:09:48.109 [STOP] confirmed stopped by odometry after barrage
+2026-08-12 12:09:58.102 [CMD] [remote] done right
+2026-08-12 12:09:58.103 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-12 12:09:58.881 [BRAIN] {'steps': [{'action': 'answer', 'speech': "Understood, I'll stay here for now.", 'target': None}]}
+2026-08-12 12:09:58.882 [STEP] answer target=None
+2026-08-12 12:10:00.147 [ROBOT] Stopped. The robot is idle.
+2026-08-12 12:10:00.147 [STOP] confirmed stopped by odometry after barrage
+2026-08-12 12:10:04.481 [CMD] [remote] turn right
+2026-08-12 12:10:04.482 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-12 12:10:05.837 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ninety degrees right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -90.0}]}
+2026-08-12 12:10:05.837 [STEP] move target=None
+2026-08-12 12:10:06.527 [ROBOT] Stopped. The robot is idle.
+2026-08-12 12:10:06.528 [STOP] confirmed stopped by odometry after barrage
+2026-08-12 12:10:11.607 [ROBOT] Done with that move.
+2026-08-12 12:12:48.290 [WARN] #35 cancel-all failed: failed to check service availability: rcl node's context is invalid, at ./src/rcl/node.c:428
+2026-08-12 12:12:48.290 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-12 12:12:48.291 [RUN] agent shutting down

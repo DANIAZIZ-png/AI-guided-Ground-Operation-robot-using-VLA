@@ -1,0 +1,83 @@
+2026-08-08 13:47:47.564 [RUN] vla_agent v13  (#37 /robot1 namespace, #38 stereo depth topic, #39 best-effort sensor QoS, #40 RGB->depth pixel mapping, #41 encoding-based mm/m, #42 explicit namespaced TF, #36 no patrol feed prompt, #35 cancel actually stops the robot, #34 feed publishes to any subscriber, #22 dock no-detect zone, #23 live-first memory, #24 forget, #25 typo-tolerant control words, #26 bare yes/no, #27 context expiry, #28 all-instance distances, #29 Create 3 backup ratchet, #30 sticky goals + range-scaled gate + ring-safe blacklist, #31 incremental off-map hop goals, #32 non-freezing live feed, #33 command/reply/status bridge)
+2026-08-08 13:47:47.564 [RUN] agent started (SIGHT_CONFIRM=2, SEARCH_TIMEOUT=45.0s, NO_PROGRESS_LIMIT=60.0s, ROBOT_CLEARANCE=0.25m)
+2026-08-08 13:47:51.102 [DOCK] dock position recorded at (-0.00, -0.00); detections within 0.8 m are ignored
+2026-08-08 13:47:51.950 [ROBOT] RGB and depth stopped lining up (1.6s since the last matched pair) — switching to the newest frame of each. Detections stay live; depth accuracy drops a little while they are out of step.
+2026-08-08 13:47:51.950 [WARN] #32a stale sync pair dropped after 1.6s
+2026-08-08 13:48:22.145 [CMD] [keyboard] what do you see
+2026-08-08 13:48:22.145 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 13:48:24.190 [ROBOT] Stopped. The robot is idle.
+2026-08-08 13:48:24.190 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 13:49:00.588 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a box.', 'target': None}]}
+2026-08-08 13:49:00.588 [STEP] describe target=None
+2026-08-08 13:49:00.636 [CMD] [keyboard] how far is the box
+2026-08-08 13:49:00.636 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 13:49:01.179 [BRAIN] {'steps': [{'action': 'locate', 'speech': 'Checking how far away the box is.', 'target': 'box'}]}
+2026-08-08 13:49:01.179 [STEP] locate target='box'
+2026-08-08 13:49:01.179 [ROBOT] I'm docked — undocking first, then I'll continue.
+2026-08-08 13:49:01.179 [ROBOT] Undocking…
+2026-08-08 13:49:01.180 [CMD] [keyboard] how far is the box
+2026-08-08 13:49:01.180 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 13:49:01.703 [BRAIN] {'steps': [{'action': 'locate', 'speech': 'The box is in front of me.', 'target': 'box'}]}
+2026-08-08 13:49:01.703 [STEP] locate target='box'
+2026-08-08 13:49:01.703 [ROBOT] I'm docked — undocking first, then I'll continue.
+2026-08-08 13:49:01.703 [ROBOT] Undocking…
+2026-08-08 13:49:03.230 [ROBOT] Stopped. The robot is idle.
+2026-08-08 13:49:03.230 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 13:49:13.136 [CMD] [keyboard] what do you see
+2026-08-08 13:49:13.136 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 13:49:13.637 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I can see a chair.', 'target': None}]}
+2026-08-08 13:49:13.638 [STEP] describe target=None
+2026-08-08 13:49:15.190 [ROBOT] Stopped. The robot is idle.
+2026-08-08 13:49:15.190 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 13:49:25.601 [CMD] [keyboard] go to the chair
+2026-08-08 13:49:25.601 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 13:49:26.167 [BRAIN] {'steps': [{'action': 'navigate', 'speech': 'Heading to the chair.', 'target': 'chair'}]}
+2026-08-08 13:49:26.167 [STEP] navigate target='chair'
+2026-08-08 13:49:26.167 [ROBOT] I'm docked — undocking first, then I'll continue.
+2026-08-08 13:49:27.650 [ROBOT] Stopped. The robot is idle.
+2026-08-08 13:49:27.650 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 13:49:29.173 [ROBOT] The 'undock' action server isn't up (is the Create 3 running?). Check: ros2 action list | grep -i dock
+2026-08-08 13:49:29.174 [STEP] navigate target='chair'
+2026-08-08 13:49:29.174 [ROBOT] I'm docked — undocking first, then I'll continue.
+2026-08-08 13:49:32.179 [ROBOT] The 'undock' action server isn't up (is the Create 3 running?). Check: ros2 action list | grep -i dock
+2026-08-08 13:49:32.179 [STEP] navigate target='chair'
+2026-08-08 13:49:32.179 [ROBOT] I'm docked — undocking first, then I'll continue.
+2026-08-08 13:49:35.183 [ROBOT] The 'undock' action server isn't up (is the Create 3 running?). Check: ros2 action list | grep -i dock
+2026-08-08 13:49:35.183 [STEP] navigate target='chair'
+2026-08-08 13:49:35.183 [ROBOT] I'm docked — undocking first, then I'll continue.
+2026-08-08 13:49:38.188 [ROBOT] The 'undock' action server isn't up (is the Create 3 running?). Check: ros2 action list | grep -i dock
+2026-08-08 13:49:38.188 [STEP] navigate target='chair'
+2026-08-08 13:49:38.188 [ROBOT] I'm docked — undocking first, then I'll continue.
+2026-08-08 13:49:40.240 [CMD] (cancel via keyboard) stop
+2026-08-08 13:49:40.241 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 13:49:41.192 [ROBOT] The 'undock' action server isn't up (is the Create 3 running?). Check: ros2 action list | grep -i dock
+2026-08-08 13:49:42.290 [ROBOT] Stopped. The robot is idle.
+2026-08-08 13:49:42.290 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 13:49:48.656 [CMD] [keyboard] what do you see
+2026-08-08 13:49:48.656 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 13:49:49.197 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a chair.', 'target': None}]}
+2026-08-08 13:49:49.197 [STEP] describe target=None
+2026-08-08 13:49:50.710 [ROBOT] Stopped. The robot is idle.
+2026-08-08 13:49:50.710 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 13:49:54.928 [CMD] [keyboard] how far
+2026-08-08 13:49:54.929 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 13:49:55.629 [BRAIN] {'steps': [{'action': 'reject', 'speech': "I can't measure distances, but I'm about 1 meter away from the chair.", 'target': None}]}
+2026-08-08 13:49:55.629 [STEP] reject target=None
+2026-08-08 13:49:56.970 [ROBOT] Stopped. The robot is idle.
+2026-08-08 13:49:56.970 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 13:50:06.336 [CMD] [keyboard] turn right
+2026-08-08 13:50:06.337 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 13:50:06.979 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ninety degrees to the right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -90.0}]}
+2026-08-08 13:50:06.979 [STEP] move target=None
+2026-08-08 13:50:06.979 [ROBOT] I'm docked — undocking first, then I'll continue.
+2026-08-08 13:50:08.390 [ROBOT] Stopped. The robot is idle.
+2026-08-08 13:50:08.390 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 13:50:09.985 [ROBOT] The 'undock' action server isn't up (is the Create 3 running?). Check: ros2 action list | grep -i dock
+2026-08-08 13:50:09.985 [STEP] move target=None
+2026-08-08 13:50:09.985 [ROBOT] I'm docked — undocking first, then I'll continue.
+2026-08-08 13:50:12.990 [ROBOT] The 'undock' action server isn't up (is the Create 3 running?). Check: ros2 action list | grep -i dock
+2026-08-08 13:50:12.990 [STEP] move target=None
+2026-08-08 13:50:12.990 [ROBOT] I'm docked — undocking first, then I'll continue.
+2026-08-08 13:50:13.105 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 13:50:13.105 [RUN] agent shutting down
+2026-08-08 13:50:13.343 [ERROR] command worker failed on 'turn right': Failed to check if action server is available: rcl node's context is invalid, at ./src/rcl/node.c:428

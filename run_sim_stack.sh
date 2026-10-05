@@ -28,7 +28,16 @@ pkill -f bt_navigator      2>/dev/null
 # after it came up. Always start from nothing.
 sleep 4
 
-rm -rf /dev/shm/fastrtps_* /dev/shm/sem.fastrtps_* 2>/dev/null
+# fastdds shm clean removes ONLY shared-memory segments whose owner process
+# is dead. The rm -rf that used to be here also deleted the segments of
+# RUNNING nodes, which cut them off from everything started afterwards on
+# this PC: RViz map 0x0, "Frame [map] does not exist", map_saver "Failed to
+# spin map subscription", save_map service hanging (2026-09-08).
+if command -v fastdds >/dev/null 2>&1; then
+    fastdds shm clean
+else
+    echo "  fastdds not on PATH -- stale shm not cleaned"
+fi
 # stale DDS shared memory reports nodes that are already dead
 
 ros2 daemon stop  >/dev/null 2>&1

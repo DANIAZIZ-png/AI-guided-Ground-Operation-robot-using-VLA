@@ -1,0 +1,72 @@
+2026-09-14 11:14:33.800 [RUN] vla_agent v28  (#63 headless-safe console output, #62 direction-aware collision guard, #61 nearest-cluster LiDAR ranging, #60 manual override teleop, #59 10 Hz collision guard, #58 smoother approach, #57 stand off far enough to keep the object in view, #56 step-and-stare scan, #55 LiDAR failure reasons reported, #54 LiDAR object ranging, #53 seeded depth intrinsics, #52 depth intrinsics rescaled to frame size, #51 compressedDepth transport, #50 compressed RGB transport, #49 annotated feed gated per topic, #47 TF at colour-frame stamp, #48 reject stale depth, #46 one subscription per camera stream, #43 longer cached action-server wait, #44 undock retry-loop breaker, #45 sync slop for 1 Hz depth, #37 /robot1 namespace, #38 stereo depth topic, #39 best-effort sensor QoS, #40 RGB->depth pixel mapping, #41 encoding-based mm/m, #42 explicit namespaced TF, #36 no patrol feed prompt, #35 cancel actually stops the robot, #34 feed publishes to any subscriber, #22 dock no-detect zone, #23 live-first memory, #24 forget, #25 typo-tolerant control words, #26 bare yes/no, #27 context expiry, #28 all-instance distances, #29 Create 3 backup ratchet, #30 sticky goals + range-scaled gate + ring-safe blacklist, #31 incremental off-map hop goals, #32 non-freezing live feed, #33 command/reply/status bridge)
+2026-09-14 11:14:33.800 [RUN] agent started (SIGHT_CONFIRM=2, SEARCH_TIMEOUT=120.0s, NO_PROGRESS_LIMIT=60.0s, ROBOT_CLEARANCE=0.25m)
+2026-09-14 11:15:17.317 [CMD] [remote] what do you see
+2026-09-14 11:15:17.317 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-14 11:15:17.995 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a chair.', 'target': None}]}
+2026-09-14 11:15:17.995 [STEP] describe target=None
+2026-09-14 11:15:19.376 [ROBOT] Stopped. The robot is idle.
+2026-09-14 11:15:19.376 [STOP] confirmed stopped by odometry after barrage
+2026-09-14 11:15:35.017 [CMD] [remote] go to the chair
+2026-09-14 11:15:35.017 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-14 11:15:35.572 [BRAIN] {'steps': [{'action': 'navigate', 'speech': 'Heading to the chair.', 'target': 'chair'}]}
+2026-09-14 11:15:35.572 [STEP] navigate target='chair'
+2026-09-14 11:15:36.864 [ROBOT] Found the chair — navigating to it.
+2026-09-14 11:15:36.864 [SIGHT] chair at (-2.40, -1.28), 2.15 m away
+2026-09-14 11:15:36.864 [ROBOT] The chair is about 2.2 m away, past the edge of what I've mapped. Moving up in short steps and mapping as I go.
+2026-09-14 11:15:36.864 [STEP] #31 hop mode engaged for chair: object (-2.40, -1.28) at 2.2 m, area_mapped=False
+2026-09-14 11:15:36.865 [GOAL] #31 hop 1: 1.50 m toward chair (still 2.2 m away)
+2026-09-14 11:15:36.865 [GOAL] (-1.82, -0.98) yaw=-153deg mode=navigate
+2026-09-14 11:15:37.075 [ROBOT] Stopped. The robot is idle.
+2026-09-14 11:15:37.076 [STOP] confirmed stopped by odometry after barrage
+2026-09-14 11:15:39.867 [STEP] chair area now mapped after 1 hop(s) — switching to a direct approach
+2026-09-14 11:15:39.868 [ROBOT] The area around the chair is mapped now — going straight to it.
+2026-09-14 11:15:39.868 [GOAL] (-1.69, -0.87) yaw=-149deg mode=navigate
+2026-09-14 11:15:39.877 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-14 11:15:39.877 [WARN] nav goal (-1.69, -0.87) failed (status=6); trying another approach angle
+2026-09-14 11:15:40.867 [GOAL] (-1.79, -0.62) yaw=-123deg mode=navigate
+2026-09-14 11:15:40.876 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-14 11:15:40.877 [WARN] nav goal (-1.79, -0.62) failed (status=6); trying another approach angle
+2026-09-14 11:15:41.866 [GOAL] (-1.50, -1.06) yaw=-170deg mode=navigate
+2026-09-14 11:15:41.877 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-14 11:15:41.877 [WARN] nav goal (-1.50, -1.06) failed (status=6); trying another approach angle
+2026-09-14 11:15:42.863 [GOAL] (-1.51, -1.32) yaw=167deg mode=navigate
+2026-09-14 11:15:42.866 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-14 11:15:42.867 [WARN] nav goal (-1.51, -1.32) failed (status=6); trying another approach angle
+2026-09-14 11:15:43.864 [GOAL] #31 hop 2: 0.61 m toward chair (still 1.5 m away)
+2026-09-14 11:15:43.865 [GOAL] (-1.61, -1.33) yaw=-157deg mode=navigate
+2026-09-14 11:15:43.866 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-14 11:15:43.867 [WARN] nav goal (-1.61, -1.33) failed (status=6); trying another approach angle
+2026-09-14 11:15:43.867 [STEP] #31 hop aborted — shortening to 0.75 m and re-aiming
+2026-09-14 11:15:44.864 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-09-14 11:15:44.864 [GOAL] #31 hop 3: 0.75 m toward chair (still 1.2 m away)
+2026-09-14 11:15:44.866 [GOAL] (-1.94, -1.52) yaw=-155deg mode=navigate
+2026-09-14 11:15:44.877 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-14 11:15:44.877 [WARN] nav goal (-1.94, -1.52) failed (status=6); trying another approach angle
+2026-09-14 11:15:44.877 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-09-14 11:15:45.860 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-09-14 11:15:45.861 [GOAL] #31 hop 4: 0.60 m toward chair (still 1.1 m away)
+2026-09-14 11:15:45.861 [GOAL] (-2.00, -1.54) yaw=-163deg mode=navigate
+2026-09-14 11:15:45.867 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-14 11:15:45.867 [WARN] nav goal (-2.00, -1.54) failed (status=6); trying another approach angle
+2026-09-14 11:15:45.867 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-09-14 11:15:46.862 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-09-14 11:15:46.863 [GOAL] (-2.11, -1.57) yaw=161deg mode=navigate
+2026-09-14 11:15:46.867 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-14 11:15:46.867 [WARN] nav goal (-2.11, -1.57) failed (status=6); trying another approach angle
+2026-09-14 11:15:47.869 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-09-14 11:15:47.870 [GOAL] (-2.14, -1.65) yaw=153deg mode=navigate
+2026-09-14 11:15:47.877 [RESULT] nav goal status=6 (not-succeeded)
+2026-09-14 11:15:47.877 [WARN] nav goal (-2.14, -1.65) failed (status=6); trying another approach angle
+2026-09-14 11:15:48.864 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-09-14 11:15:48.865 [ROBOT] I can't find a reachable path toward the chair from here — searching again.
+2026-09-14 11:15:48.865 [WARN] dropping unreachable sighting of chair at (-2.72, -1.35) after 5 attempts (hop_mode=False)
+2026-09-14 11:15:53.276 [RESULT] nav goal status=4 (ok)
+2026-09-14 11:16:48.864 [ROBOT] Can't see the chair here — moving to look elsewhere.
+2026-09-14 11:17:12.868 [ROBOT] Found the chair — navigating to it.
+2026-09-14 11:17:12.868 [SIGHT] chair at (-0.17, -3.58), 2.65 m away
+2026-09-14 11:17:12.869 [GOAL] (-0.80, -3.43) yaw=-14deg mode=navigate
+2026-09-14 11:17:13.816 [ROBOT] I know where the chair is but I can't get any closer — the way looks blocked. I've remembered its spot, so try again from somewhere else, or clear the path.
+2026-09-14 11:17:13.816 [WARN] no progress toward chair for 60s; best=0.78m
+2026-09-14 11:17:35.236 [WARN] #35 cancel-all failed: failed to check service availability: rcl node's context is invalid, at ./src/rcl/node.c:428
+2026-09-14 11:17:35.236 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-09-14 11:17:35.236 [RUN] agent shutting down

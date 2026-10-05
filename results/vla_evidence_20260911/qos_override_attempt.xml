@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dds xmlns="http://www.eprosima.com/XMLSchemas/fastRTPS_Profiles">
+  <profiles>
+    <publisher profile_name="default_pub" is_default_profile="true"><historyMemoryPolicy>PREALLOCATED_WITH_REALLOC</historyMemoryPolicy></publisher>
+    <subscriber profile_name="default_sub" is_default_profile="true"><historyMemoryPolicy>PREALLOCATED_WITH_REALLOC</historyMemoryPolicy></subscriber>
+    <publisher profile_name="rt/parameter_events"><historyMemoryPolicy>PREALLOCATED_WITH_REALLOC</historyMemoryPolicy><qos><reliability><kind>BEST_EFFORT</kind></reliability></qos></publisher>
+    <subscriber profile_name="rt/parameter_events"><historyMemoryPolicy>PREALLOCATED_WITH_REALLOC</historyMemoryPolicy><qos><reliability><kind>BEST_EFFORT</kind></reliability></qos></subscriber>
+    <publisher profile_name="rt/rosout"><historyMemoryPolicy>PREALLOCATED_WITH_REALLOC</historyMemoryPolicy><qos><reliability><kind>BEST_EFFORT</kind></reliability><durability><kind>VOLATILE</kind></durability></qos></publisher>
+  </profiles>
+</dds>

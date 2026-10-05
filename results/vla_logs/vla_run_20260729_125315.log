@@ -1,0 +1,59 @@
+2026-07-29 12:53:15.888 [RUN] vla_agent v8  (#22 dock no-detect zone, #23 live-first memory, #24 forget, #25 typo-tolerant control words, #26 bare yes/no, #27 context expiry, #28 all-instance distances, #29 Create 3 backup ratchet, #30 sticky goals + range-scaled gate + ring-safe blacklist)
+2026-07-29 12:53:15.888 [RUN] agent started (SIGHT_CONFIRM=2, SEARCH_TIMEOUT=45.0s, NO_PROGRESS_LIMIT=60.0s, ROBOT_CLEARANCE=0.25m)
+2026-07-29 12:53:17.756 [DOCK] dock position recorded at (0.01, 0.00); detections within 0.8 m are ignored
+2026-07-29 12:53:20.174 [CMD] wht do you see
+2026-07-29 12:53:21.005 [BRAIN] {'steps': [{'action': 'describe', 'speech': "I don't see anything right now.", 'target': None}]}
+2026-07-29 12:53:21.006 [STEP] describe target=None
+2026-07-29 12:53:26.559 [CMD] undock
+2026-07-29 12:53:26.560 [STEP] undock target=None
+2026-07-29 12:53:26.560 [ROBOT] Undocking…
+2026-07-29 12:53:36.386 [ROBOT] Undocked — ready to move.
+2026-07-29 12:53:36.386 [DOCK] undock ok
+2026-07-29 12:53:39.629 [CMD] turn around
+2026-07-29 12:53:40.471 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning around.', 'target': None, 'distance_m': 0.0, 'rotation_deg': 180.0}]}
+2026-07-29 12:53:40.471 [STEP] move target=None
+2026-07-29 12:53:49.083 [ROBOT] Done with that move.
+2026-07-29 12:53:57.325 [CMD] wh what do you see now
+2026-07-29 12:53:58.139 [BRAIN] {'steps': [{'action': 'describe', 'speech': "I don't see anything right now.", 'target': None}]}
+2026-07-29 12:53:58.139 [STEP] describe target=None
+2026-07-29 12:54:07.405 [CMD] move 3m to left
+2026-07-29 12:54:08.391 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Moving forward one and a half meters, then turning left.', 'target': None, 'distance_m': 1.5, 'rotation_deg': 90.0}]}
+2026-07-29 12:54:08.391 [STEP] move target=None
+2026-07-29 12:54:23.083 [ROBOT] Done with that move.
+2026-07-29 12:54:30.333 [CMD] turn right
+2026-07-29 12:54:31.203 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ninety degrees right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -90.0}]}
+2026-07-29 12:54:31.203 [STEP] move target=None
+2026-07-29 12:54:37.084 [ROBOT] Done with that move.
+2026-07-29 12:54:44.876 [CMD] riht 15
+2026-07-29 12:54:45.705 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning fifteen degrees right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': 15.0}]}
+2026-07-29 12:54:45.705 [STEP] move target=None
+2026-07-29 12:54:48.083 [ROBOT] Done with that move.
+2026-07-29 12:54:55.022 [CMD] right 15
+2026-07-29 12:54:55.841 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning fifteen degrees right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -15.0}]}
+2026-07-29 12:54:55.841 [STEP] move target=None
+2026-07-29 12:54:58.083 [ROBOT] Done with that move.
+2026-07-29 12:55:01.357 [CMD] right 15
+2026-07-29 12:55:02.144 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning fifteen degrees right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -15.0}]}
+2026-07-29 12:55:02.144 [STEP] move target=None
+2026-07-29 12:55:05.083 [ROBOT] Done with that move.
+2026-07-29 12:55:24.732 [CMD] what do you see
+2026-07-29 12:55:25.594 [BRAIN] {'steps': [{'action': 'describe', 'speech': "I don't see anything right now.", 'target': None}]}
+2026-07-29 12:55:25.594 [STEP] describe target=None
+2026-07-29 12:55:33.356 [CMD] give me live feed
+2026-07-29 12:55:34.189 [BRAIN] {'steps': [{'action': 'feed', 'speech': 'Showing you the current view from my camera.', 'target': None}]}
+2026-07-29 12:55:34.190 [STEP] feed target=None
+2026-07-29 12:56:10.749 [CMD] patrol the area and give live feed
+2026-07-29 12:56:11.747 [BRAIN] {'steps': [{'action': 'feed', 'speech': 'Showing live camera feed.', 'target': None}, {'action': 'explore', 'speech': 'Patrolling the area.', 'target': None}]}
+2026-07-29 12:56:11.748 [STEP] feed target=None
+2026-07-29 12:56:11.749 [STEP] explore target=None
+2026-07-29 12:56:12.089 [GOAL] (1.98, -0.09) yaw=-30deg mode=explore
+2026-07-29 12:56:25.087 [RESULT] nav goal status=4 (ok)
+2026-07-29 12:56:26.087 [GOAL] (2.85, -0.66) yaw=-34deg mode=explore
+2026-07-29 12:56:27.918 [CMD] (cancel) stop
+2026-07-29 12:56:32.411 [CMD] what do you see
+2026-07-29 12:56:33.267 [BRAIN] {'steps': [{'action': 'describe', 'speech': "I don't see anything right now.", 'target': None}]}
+2026-07-29 12:56:33.268 [STEP] describe target=None
+2026-07-29 12:57:12.813 [CMD] what do you see now
+2026-07-29 12:57:13.707 [BRAIN] {'steps': [{'action': 'describe', 'speech': "I don't see anything right now.", 'target': None}]}
+2026-07-29 12:57:13.707 [STEP] describe target=None
+2026-07-29 12:57:23.741 [RUN] agent shutting down

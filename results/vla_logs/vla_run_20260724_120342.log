@@ -1,0 +1,347 @@
+2026-07-24 12:03:42.969 [RUN] vla_agent v5  (#22 dock no-detect zone, #23 live-first memory, #24 forget)
+2026-07-24 12:03:42.969 [RUN] agent started (SIGHT_CONFIRM=2, SEARCH_TIMEOUT=45.0s, NO_PROGRESS_LIMIT=60.0s, ROBOT_CLEARANCE=0.25m)
+2026-07-24 12:03:45.442 [DOCK] dock position recorded at (0.29, 0.00); detections within 0.8 m are ignored
+2026-07-24 12:03:47.602 [CMD] hi
+2026-07-24 12:04:23.888 [BRAIN] {'steps': [{'action': 'answer', 'speech': 'Hello! How can I assist you today?', 'target': None}]}
+2026-07-24 12:04:23.888 [STEP] answer target=None
+2026-07-24 12:04:31.666 [CMD] undock
+2026-07-24 12:04:31.666 [STEP] undock target=None
+2026-07-24 12:04:31.667 [ROBOT] Undocking…
+2026-07-24 12:04:41.817 [ROBOT] Undocked — ready to move.
+2026-07-24 12:04:41.817 [DOCK] undock ok
+2026-07-24 12:04:46.066 [CMD] turn right
+2026-07-24 12:04:46.856 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ninety degrees right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -90.0}]}
+2026-07-24 12:04:46.856 [STEP] move target=None
+2026-07-24 12:04:52.373 [ROBOT] Done with that move.
+2026-07-24 12:04:56.994 [CMD] move 2 meter
+2026-07-24 12:04:57.747 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Moving forward two meters.', 'target': None, 'distance_m': 2.0, 'rotation_deg': 0.0}]}
+2026-07-24 12:04:57.748 [STEP] move target=None
+2026-07-24 12:05:10.373 [ROBOT] Done with that move.
+2026-07-24 12:05:10.610 [CMD] turn right and give me live feed
+2026-07-24 12:05:11.707 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ninety degrees right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -90.0}, {'action': 'feed', 'speech': 'Showing the live camera feed.', 'target': None}]}
+2026-07-24 12:05:11.707 [STEP] move target=None
+2026-07-24 12:05:17.374 [ROBOT] Done with that move.
+2026-07-24 12:05:17.374 [STEP] feed target=None
+2026-07-24 12:05:32.962 [CMD] (cancel) cancel
+2026-07-24 12:05:45.762 [CMD] what do you see
+2026-07-24 12:05:46.504 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a chair.', 'target': None}]}
+2026-07-24 12:05:46.504 [STEP] describe target=None
+2026-07-24 12:05:54.706 [CMD] can you find another chair
+2026-07-24 12:05:55.392 [BRAIN] {'steps': [{'action': 'find_another', 'speech': 'Looking for another chair.', 'target': 'chair'}]}
+2026-07-24 12:05:55.392 [STEP] find_another target='chair'
+2026-07-24 12:05:56.435 [ROBOT] I found another chair. I now count 1 chair. Waiting for further instructions.
+2026-07-24 12:06:04.562 [CMD] find another
+2026-07-24 12:06:05.242 [BRAIN] {'steps': [{'action': 'find_another', 'speech': 'Looking for another chair.', 'target': 'chair'}]}
+2026-07-24 12:06:05.242 [STEP] find_another target='chair'
+2026-07-24 12:06:06.435 [ROBOT] I found another chair. I now count 2 chairs. Waiting for further instructions.
+2026-07-24 12:06:14.610 [CMD] give live feed
+2026-07-24 12:06:15.354 [BRAIN] {'steps': [{'action': 'feed', 'speech': 'Showing you the current view from my camera.', 'target': None}]}
+2026-07-24 12:06:15.355 [STEP] feed target=None
+2026-07-24 12:06:27.330 [CMD] go to the chair
+2026-07-24 12:06:28.135 [BRAIN] {'steps': [{'action': 'navigate', 'speech': 'Heading to the last seen chair.', 'target': 'chair'}]}
+2026-07-24 12:06:28.136 [STEP] navigate target='chair'
+2026-07-24 12:06:28.206 [MEMORY] seeded chair from remembered instance at (14.69, -4.24)
+2026-07-24 12:06:28.443 [GOAL] (5.00, 0.12) yaw=-24deg mode=navigate
+2026-07-24 12:06:29.442 [ROBOT] I can see the chair now — it's where I remembered.
+2026-07-24 12:06:29.442 [SIGHT] memory-seeded chair re-confirmed at (15.04, -3.73), 15.28 m away
+2026-07-24 12:06:29.452 [GOAL] (5.62, 0.11) yaw=-22deg mode=navigate
+2026-07-24 12:06:29.460 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:06:29.460 [WARN] nav goal (5.62, 0.11) failed (status=6); trying another approach angle
+2026-07-24 12:06:30.444 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-07-24 12:06:30.452 [GOAL] (5.41, 0.09) yaw=-23deg mode=navigate
+2026-07-24 12:06:30.460 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:06:30.460 [WARN] nav goal (5.41, 0.09) failed (status=6); trying another approach angle
+2026-07-24 12:06:31.446 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-07-24 12:06:31.453 [GOAL] (5.25, 0.12) yaw=-24deg mode=navigate
+2026-07-24 12:06:31.460 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:06:31.460 [WARN] nav goal (5.25, 0.12) failed (status=6); trying another approach angle
+2026-07-24 12:06:32.454 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-07-24 12:06:32.460 [GOAL] (5.20, 0.12) yaw=-24deg mode=navigate
+2026-07-24 12:06:32.467 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:06:32.468 [WARN] nav goal (5.20, 0.12) failed (status=6); trying another approach angle
+2026-07-24 12:06:33.439 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-07-24 12:06:33.444 [GOAL] (5.14, 0.11) yaw=-24deg mode=navigate
+2026-07-24 12:06:33.455 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:06:33.455 [WARN] nav goal (5.14, 0.11) failed (status=6); trying another approach angle
+2026-07-24 12:06:34.441 [GOAL] (4.55, 0.13) yaw=-28deg mode=navigate
+2026-07-24 12:06:34.449 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:06:34.449 [WARN] nav goal (4.55, 0.13) failed (status=6); trying another approach angle
+2026-07-24 12:06:35.440 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-07-24 12:06:35.444 [GOAL] (4.59, 0.11) yaw=-28deg mode=navigate
+2026-07-24 12:06:35.455 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:06:35.455 [WARN] nav goal (4.59, 0.11) failed (status=6); trying another approach angle
+2026-07-24 12:06:36.447 [GOAL] (5.18, 0.08) yaw=-24deg mode=navigate
+2026-07-24 12:06:36.457 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:06:36.457 [WARN] nav goal (5.18, 0.08) failed (status=6); trying another approach angle
+2026-07-24 12:06:37.438 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-07-24 12:06:37.442 [GOAL] (5.13, 0.10) yaw=-23deg mode=navigate
+2026-07-24 12:06:37.450 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:06:37.450 [WARN] nav goal (5.13, 0.10) failed (status=6); trying another approach angle
+2026-07-24 12:06:38.435 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-07-24 12:06:38.439 [GOAL] (5.07, 0.12) yaw=-23deg mode=navigate
+2026-07-24 12:06:38.448 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:06:38.448 [WARN] nav goal (5.07, 0.12) failed (status=6); trying another approach angle
+2026-07-24 12:06:39.451 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-07-24 12:06:39.454 [GOAL] (5.05, 0.15) yaw=-23deg mode=navigate
+2026-07-24 12:06:39.467 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:06:39.467 [WARN] nav goal (5.05, 0.15) failed (status=6); trying another approach angle
+2026-07-24 12:06:40.441 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-07-24 12:06:40.444 [GOAL] (5.10, 0.13) yaw=-23deg mode=navigate
+2026-07-24 12:06:40.456 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:06:40.456 [WARN] nav goal (5.10, 0.13) failed (status=6); trying another approach angle
+2026-07-24 12:06:41.444 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-07-24 12:06:41.446 [GOAL] (5.14, 0.12) yaw=-23deg mode=navigate
+2026-07-24 12:06:41.456 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:06:41.456 [WARN] nav goal (5.14, 0.12) failed (status=6); trying another approach angle
+2026-07-24 12:06:42.436 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-07-24 12:06:42.439 [GOAL] (5.18, 0.10) yaw=-23deg mode=navigate
+2026-07-24 12:06:42.447 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:06:42.447 [WARN] nav goal (5.18, 0.10) failed (status=6); trying another approach angle
+2026-07-24 12:06:43.435 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-07-24 12:06:43.437 [GOAL] (5.23, 0.08) yaw=-23deg mode=navigate
+2026-07-24 12:06:43.449 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:06:43.449 [WARN] nav goal (5.23, 0.08) failed (status=6); trying another approach angle
+2026-07-24 12:06:44.436 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-07-24 12:06:44.438 [GOAL] (5.18, 0.10) yaw=-23deg mode=navigate
+2026-07-24 12:06:44.447 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:06:44.447 [WARN] nav goal (5.18, 0.10) failed (status=6); trying another approach angle
+2026-07-24 12:06:45.438 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-07-24 12:06:45.439 [GOAL] (5.12, 0.13) yaw=-23deg mode=navigate
+2026-07-24 12:06:45.449 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:06:45.449 [WARN] nav goal (5.12, 0.13) failed (status=6); trying another approach angle
+2026-07-24 12:06:46.445 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-07-24 12:06:46.446 [GOAL] (5.15, 0.11) yaw=-23deg mode=navigate
+2026-07-24 12:06:46.457 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:06:46.457 [WARN] nav goal (5.15, 0.11) failed (status=6); trying another approach angle
+2026-07-24 12:06:47.439 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-07-24 12:06:47.442 [GOAL] (10.33, -2.03) yaw=-23deg mode=navigate
+2026-07-24 12:06:47.450 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:06:47.450 [WARN] nav goal (10.33, -2.03) failed (status=6); trying another approach angle
+2026-07-24 12:06:47.755 [RESULT] nav goal status=4 (ok)
+2026-07-24 12:06:48.444 [GOAL] (14.32, -3.26) yaw=-47deg mode=navigate
+2026-07-24 12:06:52.440 [GOAL] (13.89, -3.72) yaw=-24deg mode=navigate
+2026-07-24 12:06:52.448 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:06:52.448 [WARN] nav goal (13.89, -3.72) failed (status=6); trying another approach angle
+2026-07-24 12:06:53.440 [GOAL] (13.87, -4.13) yaw=1deg mode=navigate
+2026-07-24 12:06:53.448 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:06:53.448 [WARN] nav goal (13.87, -4.13) failed (status=6); trying another approach angle
+2026-07-24 12:06:54.438 [GOAL] (14.25, -3.52) yaw=-49deg mode=navigate
+2026-07-24 12:06:54.449 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:06:54.449 [WARN] nav goal (14.25, -3.52) failed (status=6); trying another approach angle
+2026-07-24 12:06:55.442 [GOAL] (14.12, -4.81) yaw=51deg mode=navigate
+2026-07-24 12:06:55.452 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:06:55.452 [WARN] nav goal (14.12, -4.81) failed (status=6); trying another approach angle
+2026-07-24 12:06:56.448 [GOAL] (14.89, -3.28) yaw=-99deg mode=navigate
+2026-07-24 12:06:56.459 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:06:56.459 [WARN] nav goal (14.89, -3.28) failed (status=6); trying another approach angle
+2026-07-24 12:06:57.438 [GOAL] (14.45, -3.18) yaw=-73deg mode=navigate
+2026-07-24 12:06:57.447 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:06:57.447 [WARN] nav goal (14.45, -3.18) failed (status=6); trying another approach angle
+2026-07-24 12:06:58.441 [GOAL] (14.28, -4.31) yaw=27deg mode=navigate
+2026-07-24 12:06:58.449 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:06:58.449 [WARN] nav goal (14.28, -4.31) failed (status=6); trying another approach angle
+2026-07-24 12:06:59.447 [GOAL] (14.66, -4.66) yaw=77deg mode=navigate
+2026-07-24 12:06:59.459 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:06:59.459 [WARN] nav goal (14.66, -4.66) failed (status=6); trying another approach angle
+2026-07-24 12:07:00.440 [GOAL] (14.96, -4.98) yaw=107deg mode=navigate
+2026-07-24 12:07:00.448 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:07:00.448 [WARN] nav goal (14.96, -4.98) failed (status=6); trying another approach angle
+2026-07-24 12:07:01.438 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-07-24 12:07:01.440 [GOAL] (13.90, -3.82) yaw=-24deg mode=navigate
+2026-07-24 12:07:01.448 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:07:01.448 [WARN] nav goal (13.90, -3.82) failed (status=6); trying another approach angle
+2026-07-24 12:07:02.642 [GOAL] (14.13, -4.19) yaw=2deg mode=navigate
+2026-07-24 12:07:02.654 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:07:02.654 [WARN] nav goal (14.13, -4.19) failed (status=6); trying another approach angle
+2026-07-24 12:07:03.447 [GOAL] (14.14, -3.48) yaw=-48deg mode=navigate
+2026-07-24 12:07:03.458 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:07:03.458 [WARN] nav goal (14.14, -3.48) failed (status=6); trying another approach angle
+2026-07-24 12:07:04.459 [GOAL] (14.46, -3.23) yaw=-72deg mode=navigate
+2026-07-24 12:07:04.470 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:07:04.470 [WARN] nav goal (14.46, -3.23) failed (status=6); trying another approach angle
+2026-07-24 12:07:05.444 [GOAL] (14.32, -4.77) yaw=53deg mode=navigate
+2026-07-24 12:07:05.452 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:07:05.452 [WARN] nav goal (14.32, -4.77) failed (status=6); trying another approach angle
+2026-07-24 12:07:06.441 [GOAL] (15.01, -3.14) yaw=-96deg mode=navigate
+2026-07-24 12:07:06.450 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:07:06.450 [WARN] nav goal (15.01, -3.14) failed (status=6); trying another approach angle
+2026-07-24 12:07:07.453 [GOAL] (14.99, -4.57) yaw=108deg mode=navigate
+2026-07-24 12:07:07.460 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:07:07.461 [WARN] nav goal (14.99, -4.57) failed (status=6); trying another approach angle
+2026-07-24 12:07:08.437 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-07-24 12:07:08.440 [GOAL] (14.03, -3.56) yaw=-20deg mode=navigate
+2026-07-24 12:07:08.448 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:07:08.448 [WARN] nav goal (14.03, -3.56) failed (status=6); trying another approach angle
+2026-07-24 12:07:09.447 [GOAL] (13.91, -4.10) yaw=3deg mode=navigate
+2026-07-24 12:07:09.460 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:07:09.460 [WARN] nav goal (13.91, -4.10) failed (status=6); trying another approach angle
+2026-07-24 12:07:10.441 [GOAL] (13.99, -4.51) yaw=27deg mode=navigate
+2026-07-24 12:07:10.450 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:07:10.450 [WARN] nav goal (13.99, -4.51) failed (status=6); trying another approach angle
+2026-07-24 12:07:11.437 [GOAL] (14.47, -3.23) yaw=-73deg mode=navigate
+2026-07-24 12:07:11.447 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:07:11.447 [WARN] nav goal (14.47, -3.23) failed (status=6); trying another approach angle
+2026-07-24 12:07:12.450 [GOAL] (14.59, -4.66) yaw=78deg mode=navigate
+2026-07-24 12:07:12.458 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:07:12.458 [WARN] nav goal (14.59, -4.66) failed (status=6); trying another approach angle
+2026-07-24 12:07:13.440 [GOAL] (14.28, -3.93) yaw=5deg mode=navigate
+2026-07-24 12:07:13.451 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:07:13.451 [WARN] nav goal (14.28, -3.93) failed (status=6); trying another approach angle
+2026-07-24 12:07:14.439 [GOAL] (14.91, -3.20) yaw=-98deg mode=navigate
+2026-07-24 12:07:14.449 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:07:14.449 [WARN] nav goal (14.91, -3.20) failed (status=6); trying another approach angle
+2026-07-24 12:07:15.440 [GOAL] (15.04, -4.95) yaw=107deg mode=navigate
+2026-07-24 12:07:15.448 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:07:15.448 [WARN] nav goal (15.04, -4.95) failed (status=6); trying another approach angle
+2026-07-24 12:07:16.438 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-07-24 12:07:16.441 [GOAL] (14.03, -3.54) yaw=-19deg mode=navigate
+2026-07-24 12:07:16.450 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:07:16.450 [WARN] nav goal (14.03, -3.54) failed (status=6); trying another approach angle
+2026-07-24 12:07:17.447 [GOAL] (13.88, -4.08) yaw=2deg mode=navigate
+2026-07-24 12:07:17.459 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:07:17.459 [WARN] nav goal (13.88, -4.08) failed (status=6); trying another approach angle
+2026-07-24 12:07:18.443 [GOAL] (14.50, -3.17) yaw=-72deg mode=navigate
+2026-07-24 12:07:18.451 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:07:18.451 [WARN] nav goal (14.50, -3.17) failed (status=6); trying another approach angle
+2026-07-24 12:07:19.449 [GOAL] (14.20, -4.33) yaw=27deg mode=navigate
+2026-07-24 12:07:19.459 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:07:19.459 [WARN] nav goal (14.20, -4.33) failed (status=6); trying another approach angle
+2026-07-24 12:07:20.454 [GOAL] (14.94, -2.99) yaw=-95deg mode=navigate
+2026-07-24 12:07:20.470 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:07:20.470 [WARN] nav goal (14.94, -2.99) failed (status=6); trying another approach angle
+2026-07-24 12:07:21.441 [GOAL] (14.85, -3.40) yaw=-98deg mode=navigate
+2026-07-24 12:07:21.449 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:07:21.449 [WARN] nav goal (14.85, -3.40) failed (status=6); trying another approach angle
+2026-07-24 12:07:22.447 [GOAL] (14.74, -4.79) yaw=79deg mode=navigate
+2026-07-24 12:07:22.459 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:07:22.459 [WARN] nav goal (14.74, -4.79) failed (status=6); trying another approach angle
+2026-07-24 12:07:23.438 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-07-24 12:07:23.441 [GOAL] (14.17, -3.57) yaw=-21deg mode=navigate
+2026-07-24 12:07:23.450 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:07:23.450 [WARN] nav goal (14.17, -3.57) failed (status=6); trying another approach angle
+2026-07-24 12:07:24.448 [GOAL] (14.02, -3.99) yaw=1deg mode=navigate
+2026-07-24 12:07:24.459 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:07:24.459 [WARN] nav goal (14.02, -3.99) failed (status=6); trying another approach angle
+2026-07-24 12:07:25.439 [GOAL] (14.05, -4.45) yaw=23deg mode=navigate
+2026-07-24 12:07:25.450 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:07:25.450 [WARN] nav goal (14.05, -4.45) failed (status=6); trying another approach angle
+2026-07-24 12:07:26.447 [GOAL] (14.64, -3.28) yaw=-79deg mode=navigate
+2026-07-24 12:07:26.458 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:07:26.458 [WARN] nav goal (14.64, -3.28) failed (status=6); trying another approach angle
+2026-07-24 12:07:27.447 [GOAL] (14.59, -4.58) yaw=50deg mode=navigate
+2026-07-24 12:07:27.462 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:07:27.462 [WARN] nav goal (14.59, -4.58) failed (status=6); trying another approach angle
+2026-07-24 12:07:28.438 [GOAL] (15.06, -3.24) yaw=-102deg mode=navigate
+2026-07-24 12:07:28.451 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:07:28.451 [WARN] nav goal (15.06, -3.24) failed (status=6); trying another approach angle
+2026-07-24 12:07:29.439 [GOAL] (14.41, -4.14) yaw=1deg mode=navigate
+2026-07-24 12:07:29.449 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:07:29.450 [WARN] nav goal (14.41, -4.14) failed (status=6); trying another approach angle
+2026-07-24 12:07:30.445 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-07-24 12:07:30.447 [GOAL] (14.46, -4.65) yaw=25deg mode=navigate
+2026-07-24 12:07:30.458 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:07:30.458 [WARN] nav goal (14.46, -4.65) failed (status=6); trying another approach angle
+2026-07-24 12:07:31.446 [GOAL] (14.03, -3.75) yaw=-29deg mode=navigate
+2026-07-24 12:07:31.457 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:07:31.457 [WARN] nav goal (14.03, -3.75) failed (status=6); trying another approach angle
+2026-07-24 12:07:32.440 [GOAL] (13.84, -4.16) yaw=-2deg mode=navigate
+2026-07-24 12:07:32.449 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:07:32.449 [WARN] nav goal (13.84, -4.16) failed (status=6); trying another approach angle
+2026-07-24 12:07:32.655 [RESULT] nav goal status=4 (ok)
+2026-07-24 12:07:33.443 [GOAL] (14.74, -3.37) yaw=-73deg mode=navigate
+2026-07-24 12:07:34.441 [GOAL] (14.26, -4.11) yaw=9deg mode=navigate
+2026-07-24 12:07:34.450 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:07:34.450 [WARN] nav goal (14.26, -4.11) failed (status=6); trying another approach angle
+2026-07-24 12:07:35.442 [ROBOT] Arrived at the chair.
+2026-07-24 12:07:48.434 [CMD] turn right
+2026-07-24 12:07:49.274 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ninety degrees to the right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -90.0}]}
+2026-07-24 12:07:49.274 [STEP] move target=None
+2026-07-24 12:07:54.373 [ROBOT] Done with that move.
+2026-07-24 12:08:03.618 [CMD] what do you see
+2026-07-24 12:08:04.380 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I can see a chair and a shelf.', 'target': None}]}
+2026-07-24 12:08:04.380 [STEP] describe target=None
+2026-07-24 12:08:14.258 [CMD] patrol the area
+2026-07-24 12:08:14.965 [BRAIN] {'steps': [{'action': 'patrol', 'speech': 'Patrolling the area.', 'target': None}]}
+2026-07-24 12:08:14.965 [STEP] patrol target=None
+2026-07-24 12:08:14.965 [ROBOT] Do you want a live camera feed during the patrol? (yes / no)
+2026-07-24 12:08:18.376 [GOAL] (11.87, -7.58) yaw=-123deg mode=explore
+2026-07-24 12:08:36.288 [RESULT] nav goal status=4 (ok)
+2026-07-24 12:08:36.376 [GOAL] (11.69, -8.62) yaw=-105deg mode=explore
+2026-07-24 12:08:41.598 [RESULT] nav goal status=4 (ok)
+2026-07-24 12:08:42.377 [GOAL] (11.74, -10.00) yaw=-89deg mode=explore
+2026-07-24 12:08:48.488 [RESULT] nav goal status=4 (ok)
+2026-07-24 12:08:49.377 [GOAL] (11.72, -11.52) yaw=-90deg mode=explore
+2026-07-24 12:08:55.946 [RESULT] nav goal status=4 (ok)
+2026-07-24 12:08:56.376 [GOAL] (11.69, -13.00) yaw=-90deg mode=explore
+2026-07-24 12:09:02.688 [RESULT] nav goal status=4 (ok)
+2026-07-24 12:09:03.376 [GOAL] (11.64, -14.43) yaw=-92deg mode=explore
+2026-07-24 12:09:09.649 [RESULT] nav goal status=4 (ok)
+2026-07-24 12:09:10.376 [GOAL] (11.74, -15.56) yaw=-89deg mode=explore
+2026-07-24 12:09:25.838 [RESULT] nav goal status=4 (ok)
+2026-07-24 12:09:26.376 [GOAL] (12.58, -15.02) yaw=32deg mode=explore
+2026-07-24 12:09:35.454 [RESULT] nav goal status=4 (ok)
+2026-07-24 12:09:36.376 [GOAL] (14.03, -14.97) yaw=26deg mode=explore
+2026-07-24 12:09:52.374 [STUCK] mode=explore target=None
+2026-07-24 12:09:52.374 [ROBOT] I got stuck at a frontier — skipping it and trying another route.
+2026-07-24 12:09:52.378 [GOAL] (15.01, -15.03) yaw=15deg mode=explore
+2026-07-24 12:09:52.451 [RESULT] nav goal status=5 (not-succeeded)
+2026-07-24 12:09:52.453 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:09:53.378 [GOAL] (7.58, -14.90) yaw=171deg mode=explore
+2026-07-24 12:10:17.267 [CMD] (cancel) stop
+2026-07-24 12:10:22.770 [CMD] turn around
+2026-07-24 12:10:23.568 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning around.', 'target': None, 'distance_m': 0.0, 'rotation_deg': 180.0}]}
+2026-07-24 12:10:23.568 [STEP] move target=None
+2026-07-24 12:10:32.373 [ROBOT] Done with that move.
+2026-07-24 12:10:38.242 [CMD] give live feed
+2026-07-24 12:10:38.974 [BRAIN] {'steps': [{'action': 'feed', 'speech': 'Showing the current view from my camera.', 'target': None}]}
+2026-07-24 12:10:38.975 [STEP] feed target=None
+2026-07-24 12:10:47.026 [CMD] what do you see
+2026-07-24 12:10:47.771 [BRAIN] {'steps': [{'action': 'describe', 'speech': "I don't see anything right now.", 'target': None}]}
+2026-07-24 12:10:47.772 [STEP] describe target=None
+2026-07-24 12:10:56.354 [CMD] find shelf
+2026-07-24 12:10:57.055 [BRAIN] {'steps': [{'action': 'locate', 'speech': 'Looking for a shelf.', 'target': 'shelf'}]}
+2026-07-24 12:10:57.056 [STEP] locate target='shelf'
+2026-07-24 12:11:09.435 [MEMORY] remembered shelf at (14.98, -15.81)
+2026-07-24 12:11:09.435 [ROBOT] Yes — I can see a shelf about 7.3 m away. I'll remember where it is. (Locating only — not driving to it.)
+2026-07-24 12:11:17.922 [CMD] go to the shelf
+2026-07-24 12:11:18.732 [BRAIN] {'steps': [{'action': 'navigate', 'speech': 'Heading to the shelf.', 'target': 'shelf'}]}
+2026-07-24 12:11:18.732 [STEP] navigate target='shelf'
+2026-07-24 12:11:18.804 [MEMORY] seeded shelf from remembered instance at (14.98, -15.81)
+2026-07-24 12:11:19.447 [GOAL] (14.23, -16.31) yaw=34deg mode=navigate
+2026-07-24 12:11:28.447 [ROBOT] I can see the shelf now — it's where I remembered.
+2026-07-24 12:11:28.448 [SIGHT] memory-seeded shelf re-confirmed at (13.75, -15.14), 4.64 m away
+2026-07-24 12:11:28.451 [GOAL] (13.18, -15.83) yaw=50deg mode=navigate
+2026-07-24 12:11:28.463 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:11:28.463 [WARN] nav goal (13.18, -15.83) failed (status=6); trying another approach angle
+2026-07-24 12:11:29.439 [GOAL] (12.85, -14.23) yaw=-19deg mode=navigate
+2026-07-24 12:11:29.451 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:11:29.451 [WARN] nav goal (12.85, -14.23) failed (status=6); trying another approach angle
+2026-07-24 12:11:30.439 [GOAL] (13.27, -14.11) yaw=-43deg mode=navigate
+2026-07-24 12:11:30.455 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:11:30.455 [WARN] nav goal (13.27, -14.11) failed (status=6); trying another approach angle
+2026-07-24 12:11:31.441 [GOAL] (14.60, -14.43) yaw=-174deg mode=navigate
+2026-07-24 12:11:31.450 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:11:31.450 [WARN] nav goal (14.60, -14.43) failed (status=6); trying another approach angle
+2026-07-24 12:11:32.450 [GOAL] (13.49, -13.64) yaw=-76deg mode=navigate
+2026-07-24 12:11:32.462 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:11:32.462 [WARN] nav goal (13.49, -13.64) failed (status=6); trying another approach angle
+2026-07-24 12:11:33.442 [GOAL] (14.21, -14.20) yaw=-148deg mode=navigate
+2026-07-24 12:11:33.457 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-24 12:11:33.458 [WARN] nav goal (14.21, -14.20) failed (status=6); trying another approach angle
+2026-07-24 12:11:33.458 [WARN] every approach to the target failed — dropping sighting, rescanning
+2026-07-24 12:12:04.373 [ROBOT] I saw the shelf but lost track of it and couldn't find it again. Try asking me once more.
+2026-07-24 12:12:47.458 [CMD] no need forget about it
+2026-07-24 12:12:48.143 [BRAIN] {'steps': [{'action': 'forget', 'speech': 'Not forgetting anything then.', 'target': None}]}
+2026-07-24 12:12:48.143 [STEP] forget target=None
+2026-07-24 12:12:48.143 [MEMORY] cleared ALL remembered positions (5)
+2026-07-24 12:13:18.610 [CMD] move back a little and turn around
+2026-07-24 12:13:19.876 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Backing up a little.', 'target': None, 'distance_m': -0.3, 'rotation_deg': 0.0}, {'action': 'move', 'speech': 'Turning around.', 'target': None, 'distance_m': 0.0, 'rotation_deg': 180.0}]}
+2026-07-24 12:13:19.876 [STEP] move target=None
+2026-07-24 12:13:32.098 [CMD] cancle
+2026-07-24 12:13:33.110 [BRAIN] {'steps': [{'action': 'reject', 'speech': "I didn't receive a valid command, but I can stop trying to navigate if that's what you meant.", 'target': None}]}
+2026-07-24 12:13:33.110 [STEP] reject target=None
+2026-07-24 12:13:39.362 [CMD] yes
+2026-07-24 12:13:40.111 [BRAIN] {'steps': [{'action': 'locate', 'speech': 'Checking if the shelf is still there.', 'target': 'shelf'}]}
+2026-07-24 12:13:40.111 [STEP] locate target='shelf'
+2026-07-24 12:13:45.922 [CMD] (cancel) cancel
+2026-07-24 12:21:59.970 [RUN] agent shutting down

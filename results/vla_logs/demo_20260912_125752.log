@@ -1,0 +1,26 @@
+
+[36m[12:57:52 +  0s][0m [1mVLA ground robot -- hardware demo bring-up[0m   (log: /home/danyalaziz/vla_logs/demo_20260912_125752.log)
+
+[36m[12:57:52 +  0s][0m STAGE 0/13  host, containers, robot reachable
+[36m[12:57:54 +  2s][0m STAGE 0/13  host OK, both containers OK, robot reachable   [32mOK[0m
+[36m[12:57:54 +  2s][0m STAGE 1/13  Pi gate (load, temperature, throttling, ROS nodes)
+[36m[12:57:56 +  4s][0m         Pi: load 0.87, 56.0 C, throttled=0x0, ROS nodes 7, up 2247s
+[36m[12:57:56 +  4s][0m STAGE 1/13  Pi gate passed   [32mOK[0m
+[36m[12:57:56 +  4s][0m STAGE 2/13  ROS daemon in robot mode
+[36m[12:57:59 +  7s][0m         daemon OK; waiting 15 s for the Pi's node directory
+[36m[12:58:14 + 22s][0m STAGE 2/13  daemon sees the robot: 11 robot nodes   [32mOK[0m
+[36m[12:58:14 + 22s][0m STAGE 3/13  base alive (odometry, battery, dock state)
+[36m[12:58:21 + 29s][0m         odom 19.895 Hz, battery 95 %, docked=true
+[36m[12:58:21 + 29s][0m STAGE 3/13  base alive   [32mOK[0m
+[36m[12:58:21 + 29s][0m STAGE 4/13  YOLO server (vla-box, background)
+[36m[12:58:21 + 29s][0m         (loading the model takes ~30 s; continuing with Ollama meanwhile)
+[36m[12:58:21 + 29s][0m STAGE 5/13  Ollama serving, model pinned
+[36m[12:58:59 + 67s][0m STAGE 5/13  Ollama answered in 37.6s, qwen2.5:7b pinned (keep_alive=-1)   [32mOK[0m
+[36m[12:59:09 + 77s][0m STAGE 4/13  YOLO server answering on :5001 (classes: 'person', 'box', 'cardboard box', 'shelf', 'door', 'chair', 'pillar', 'docking )   [32mOK[0m
+[36m[12:59:09 + 77s][0m STAGE 6/13  SLAM (minimised window)
+[36m[12:59:16 + 84s][0m STAGE 6/13  slam_toolbox publishing /robot1/map   [32mOK[0m
+[36m[12:59:16 + 84s][0m STAGE 7/13  Nav2, composed (minimised window) -- ~60 s incl. the 20 s delayed STARTUP
+[36m[12:59:52 +120s][0m STAGE 7/13  Nav2 active: 7/7 bonds, velocity_smoother on /robot1/cmd_vel   [32mOK[0m
+[36m[12:59:52 +120s][0m STAGE 8/13  RViz (visible window -- the live map)
+[36m[12:59:57 +125s][0m STAGE 8/13  RViz window up (hardware layout, Nav2 Goal tool in /robot1)   [32mOK[0m
+[36m[12:59:57 +125s][0m VLA_DEMO_STOP_AFTER=8 reached -- stopping here (test mode)

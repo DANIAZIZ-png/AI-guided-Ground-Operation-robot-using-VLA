@@ -1,0 +1,32 @@
+2026-07-28 21:20:00.732 [RUN] vla_agent v7  (#22 dock no-detect zone, #23 live-first memory, #24 forget, #25 typo-tolerant control words, #26 bare yes/no, #27 context expiry, #28 all-instance distances, #29 Create 3 backup ratchet)
+2026-07-28 21:20:00.732 [RUN] agent started (SIGHT_CONFIRM=2, SEARCH_TIMEOUT=45.0s, NO_PROGRESS_LIMIT=60.0s, ROBOT_CLEARANCE=0.25m)
+2026-07-28 21:20:11.251 [CMD] turn left 15 and move 3m
+2026-07-28 21:20:12.148 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning left fifteen degrees and moving forward three meters.', 'target': None, 'distance_m': 3.0, 'rotation_deg': 15.0}]}
+2026-07-28 21:20:12.148 [STEP] move target=None
+2026-07-28 21:20:20.739 [CMD] (cancel) stop
+2026-07-28 21:20:29.763 [CMD] urn left 15 and move 3m
+2026-07-28 21:20:30.687 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning left fifteen degrees and moving forward three meters.', 'target': None, 'distance_m': 3.0, 'rotation_deg': 15.0}]}
+2026-07-28 21:20:30.687 [STEP] move target=None
+2026-07-28 21:20:41.636 [CMD] (cancel) stop
+2026-07-28 21:20:45.715 [CMD] turn left 30
+2026-07-28 21:20:46.515 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning thirty degrees left.', 'target': None, 'distance_m': 0.0, 'rotation_deg': 30.0}]}
+2026-07-28 21:20:46.515 [STEP] move target=None
+2026-07-28 21:20:49.773 [ROBOT] Done with that move.
+2026-07-28 21:20:50.196 [CMD] move 15
+2026-07-28 21:20:51.075 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Moving forward one and a half meters.', 'target': None, 'distance_m': 1.5, 'rotation_deg': 0.0}]}
+2026-07-28 21:20:51.075 [STEP] move target=None
+2026-07-28 21:21:01.773 [ROBOT] Done with that move.
+2026-07-28 21:21:05.427 [FUZZY] 'cacancel' -> 'cancel'
+2026-07-28 21:21:05.427 [CMD] (cancel) cacancel
+2026-07-28 21:21:10.643 [CMD] turn 40 right
+2026-07-28 21:21:11.487 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning forty degrees to the right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -40.0}]}
+2026-07-28 21:21:11.487 [STEP] move target=None
+2026-07-28 21:21:14.773 [ROBOT] Done with that move.
+2026-07-28 21:21:19.267 [CMD] turn 40 right
+2026-07-28 21:21:20.107 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning forty degrees to the right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -40.0}]}
+2026-07-28 21:21:20.107 [STEP] move target=None
+2026-07-28 21:21:23.773 [ROBOT] Done with that move.
+2026-07-28 21:21:35.013 [CMD] what do you see
+2026-07-28 21:21:35.782 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a chair.', 'target': None}]}
+2026-07-28 21:21:35.782 [STEP] describe target=None
+2026-07-28 21:21:43.236 [RUN] agent shutting down

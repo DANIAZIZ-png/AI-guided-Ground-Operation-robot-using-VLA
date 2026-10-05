@@ -7,28 +7,48 @@
 #                                     settings die when it exits)
 #
 #  WHY THIS FILE EXISTS
-#    ~/.bashrc sets the discovery-server variables for the REAL ROBOT in
-#    every new terminal. With the Pi switched off, every node then tries to
-#    register with a discovery server that is not there, discovers nothing,
-#    and NOTHING REPORTS AN ERROR: Gazebo loads the world, the robot never
-#    spawns, and the log just repeats "Waiting messages on topic
+#    ~/.bashrc USED TO set the discovery-server variables for the real robot
+#    in every new terminal. With the Pi switched off, every node then tried
+#    to register with a discovery server that was not there, discovered
+#    nothing, and NOTHING REPORTED AN ERROR: Gazebo loads the world, the
+#    robot never spawns, and the log just repeats "Waiting messages on topic
 #    [robot_description]" forever. That cost an hour to find.
+#    Since 19 Aug the .bashrc guard (lines 125-130) unsets both variables
+#    unless VLA_MODE=robot is exported first, so a FRESH shell is already
+#    simulation-safe. This file is still how you switch a terminal that has
+#    been put into robot mode.
 #
-#  THE ISOLATION GUARANTEE
-#    ROS_DOMAIN_ID is the important line below. Two ROS 2 systems on
-#    DIFFERENT domain IDs cannot see each other at all -- not their topics,
-#    not their nodes, not their TF. Domain 42 is the simulation; domain 0
-#    is the real robot. This is what makes the simulation a SAFE BACKUP
-#    DEMO: powering the robot on, or leaving stale hardware topics in the
-#    network, can no longer reach into the simulation and break it.
-#    Observed before this was added: /robot1/oakd/... topics from the
-#    morning's hardware session were still visible in the simulation and
-#    the agent bound to them instead of the simulated camera.
+#  ISOLATION -- HOW IT IS ACTUALLY ACHIEVED
+#    NOT by ROS_DOMAIN_ID. Domain 42 was tried and REJECTED (handout 5.1):
+#    gz_ros2_control runs INSIDE the Gazebo process and does not inherit the
+#    domain, so controller_manager came up on 0 while the spawner looked for
+#    it on 42 -- the robot spawned and could not move. The domain is left at
+#    the default, matching vla_sim.sh and run_agent_sim.sh.
+#    Isolation comes instead from: unsetting the two discovery-server
+#    variables below, the mode lock (/tmp/vla_mode.lock) that stops both
+#    modes running at once, and separate GUI configs.
+#    The problem this file solves is real and was observed: /robot1/oakd/...
+#    topics from the morning's hardware session were still visible in the
+#    simulation and the agent bound to them instead of the simulated camera.
 # ─────────────────────────────────────────────────────────────────
 
-export ROS_DOMAIN_ID=42
-# THE ISOLATION LINE. 42 is the simulation's own universe; the robot uses 0.
-# Any value 0-101 is safe; it only has to differ from the robot's.
+if [ -f /opt/ros/humble/setup.bash ]; then
+    source /opt/ros/humble/setup.bash
+else
+    echo "WARNING: /opt/ros/humble/setup.bash not found -- ros2 will NOT work" >&2
+    echo "         (are you on the host instead of inside ubuntu22-gpu?)" >&2
+fi
+# ROS itself, FIRST. Without this there is no ros2 on PATH, and the daemon
+# restart below fails silently -- the banner still prints, so nothing warns
+# you. Sourcing it twice is harmless.
+
+unset ROS_DOMAIN_ID
+# Domain 42 was tried and REJECTED -- handout §5.1. gz_ros2_control runs
+# INSIDE the Gazebo process and does not inherit the domain, so
+# controller_manager came up on 0 while the spawner looked for it on 42: the
+# robot spawned and could not move. vla_sim.sh (line 46) and run_agent_sim.sh
+# (line 22) both unset it; this file now matches them. Isolation comes from
+# the discovery-server unsets below, the mode lock and separate GUI configs.
 
 unset FASTRTPS_DEFAULT_PROFILES_FILE
 # the super-client XML points FastDDS at the Pi's discovery server
@@ -50,17 +70,29 @@ export VLA_RAW_DEPTH=1
 # same for compressedDepth (#51). Both transports exist only to survive the
 # Wi-Fi link, which simulation does not have.
 
-rm -rf /dev/shm/fastrtps_* /dev/shm/sem.fastrtps_* 2>/dev/null
+# fastdds shm clean removes ONLY shared-memory segments whose owner process
+# is dead. The rm -rf that used to be here also deleted the segments of
+# RUNNING nodes, which cut them off from everything started afterwards on
+# this PC: RViz map 0x0, "Frame [map] does not exist", map_saver "Failed to
+# spin map subscription", save_map service hanging (2026-09-08).
+if command -v fastdds >/dev/null 2>&1; then
+    fastdds shm clean
+else
+    echo "  fastdds not on PATH -- stale shm not cleaned"
+fi
 # stale DDS shared memory from a previous session reports nodes that are
 # already dead, which produces false health checks
 
-ros2 daemon stop >/dev/null 2>&1
+ros2 daemon stop
 sleep 2
-ros2 daemon start >/dev/null 2>&1
-# the daemon caches the node/topic graph PER DOMAIN and lies after a switch
+ros2 daemon start
+# the daemon caches the node/topic graph PER DOMAIN and lies after a switch.
+# NOT silenced: these used to be >/dev/null 2>&1, which hid "ros2: command
+# not found" completely. A daemon restart that did nothing looked identical
+# to one that worked.
 
 echo "──────────────────────────────────────────"
-echo " SIM MODE   domain=$ROS_DOMAIN_ID   namespace=(empty)"
+echo " SIM MODE   domain=(default, unset)   namespace=(empty)"
 echo "   discovery : multicast (no server)"
 echo "   transports: raw RGB + raw depth"
 echo "──────────────────────────────────────────"

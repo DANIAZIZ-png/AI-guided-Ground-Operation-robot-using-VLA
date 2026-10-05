@@ -1,0 +1,8 @@
+2026-07-28 13:09:11.969 [RUN] vla_agent v7  (#22 dock no-detect zone, #23 live-first memory, #24 forget, #25 typo-tolerant control words, #26 bare yes/no, #27 context expiry, #28 all-instance distances, #29 Create 3 backup ratchet)
+2026-07-28 13:09:11.969 [RUN] agent started (SIGHT_CONFIRM=2, SEARCH_TIMEOUT=45.0s, NO_PROGRESS_LIMIT=60.0s, ROBOT_CLEARANCE=0.25m)
+2026-07-28 13:09:13.028 [DOCK] dock position recorded at (3.00, 0.00); detections within 0.8 m are ignored
+2026-07-28 13:09:19.771 [CMD] dock
+2026-07-28 13:09:19.772 [STEP] dock target=None
+2026-07-28 13:09:19.772 [ROBOT] Docking…
+2026-07-28 13:09:19.773 [ROBOT] The robot rejected the dock request.
+2026-07-28 13:09:38.364 [RUN] agent shutting down

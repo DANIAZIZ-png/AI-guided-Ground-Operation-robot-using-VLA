@@ -1,0 +1,88 @@
+2026-08-04 14:11:10.206 [RUN] vla_agent v10  (#34 feed publishes to any subscriber, #22 dock no-detect zone, #23 live-first memory, #24 forget, #25 typo-tolerant control words, #26 bare yes/no, #27 context expiry, #28 all-instance distances, #29 Create 3 backup ratchet, #30 sticky goals + range-scaled gate + ring-safe blacklist, #31 incremental off-map hop goals, #32 non-freezing live feed, #33 command/reply/status bridge)
+2026-08-04 14:11:10.207 [RUN] agent started (SIGHT_CONFIRM=2, SEARCH_TIMEOUT=45.0s, NO_PROGRESS_LIMIT=60.0s, ROBOT_CLEARANCE=0.25m)
+2026-08-04 14:11:10.338 [RUN] headless mode (no tty)
+2026-08-04 14:11:14.335 [DOCK] dock position recorded at (-0.00, -0.00); detections within 0.8 m are ignored
+2026-08-04 14:11:23.347 [CMD] [remote] undock
+2026-08-04 14:11:23.348 [STEP] undock target=None
+2026-08-04 14:11:23.348 [ROBOT] Undocking…
+2026-08-04 14:11:33.324 [ROBOT] Undocked — ready to move.
+2026-08-04 14:11:33.325 [DOCK] undock ok
+2026-08-04 14:12:30.441 [CMD] [remote] turn around
+2026-08-04 14:12:31.252 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning around.', 'target': None, 'distance_m': 0.0, 'rotation_deg': 180.0}]}
+2026-08-04 14:12:31.252 [STEP] move target=None
+2026-08-04 14:12:39.329 [ROBOT] Done with that move.
+2026-08-04 14:12:42.268 [CMD] [remote] what do you see
+2026-08-04 14:12:43.097 [BRAIN] {'steps': [{'action': 'describe', 'speech': "I don't see anything right now.", 'target': None}]}
+2026-08-04 14:12:43.098 [STEP] describe target=None
+2026-08-04 14:12:54.216 [CMD] [remote] face towards left
+2026-08-04 14:12:55.021 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ninety degrees left.', 'target': None, 'distance_m': 0.0, 'rotation_deg': 90.0}]}
+2026-08-04 14:12:55.021 [STEP] move target=None
+2026-08-04 14:13:00.330 [ROBOT] Done with that move.
+2026-08-04 14:13:06.421 [CMD] [remote] move 1 meter and then turn right
+2026-08-04 14:13:07.303 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Moving forward one metre and turning right.', 'target': None, 'distance_m': 1.0, 'rotation_deg': -90.0}]}
+2026-08-04 14:13:07.304 [STEP] move target=None
+2026-08-04 14:13:16.776 [CMD] (cancel via remote) cancel
+2026-08-04 14:13:21.551 [CMD] [remote] turn left and move 1 meter
+2026-08-04 14:13:22.438 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning left and moving forward one metre.', 'target': None, 'distance_m': 1.0, 'rotation_deg': 90.0}]}
+2026-08-04 14:13:22.438 [STEP] move target=None
+2026-08-04 14:13:36.329 [ROBOT] Done with that move.
+2026-08-04 14:13:43.895 [CMD] [remote] turn right and move one meter
+2026-08-04 14:13:44.792 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning right and moving forward one meter.', 'target': None, 'distance_m': 1.0, 'rotation_deg': -90.0}]}
+2026-08-04 14:13:44.792 [STEP] move target=None
+2026-08-04 14:13:57.329 [ROBOT] Done with that move.
+2026-08-04 14:14:02.814 [CMD] [remote] what do you see
+2026-08-04 14:14:03.692 [BRAIN] {'steps': [{'action': 'describe', 'speech': "I don't see anything right now.", 'target': None}]}
+2026-08-04 14:14:03.692 [STEP] describe target=None
+2026-08-04 14:14:12.944 [CMD] [remote] move 2 meters ahead
+2026-08-04 14:14:13.750 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Moving forward two metres.', 'target': None, 'distance_m': 2.0, 'rotation_deg': 0.0}]}
+2026-08-04 14:14:13.750 [STEP] move target=None
+2026-08-04 14:14:27.329 [ROBOT] Done with that move.
+2026-08-04 14:14:31.837 [CMD] [remote] what do you see
+2026-08-04 14:14:32.626 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a chair.', 'target': None}]}
+2026-08-04 14:14:32.626 [STEP] describe target=None
+2026-08-04 14:14:36.231 [CMD] [remote] go to the chair
+2026-08-04 14:14:36.904 [BRAIN] {'steps': [{'action': 'navigate', 'speech': 'Heading to the chair.', 'target': 'chair'}]}
+2026-08-04 14:14:36.905 [STEP] navigate target='chair'
+2026-08-04 14:14:38.402 [ROBOT] Found the chair — navigating to it.
+2026-08-04 14:14:38.402 [SIGHT] chair at (14.36, -3.34), 12.18 m away
+2026-08-04 14:14:38.402 [ROBOT] The chair is about 12.2 m away, past the edge of what I've mapped. Moving up in short steps and mapping as I go.
+2026-08-04 14:14:38.402 [STEP] #31 hop mode engaged for chair: object (14.36, -3.34) at 12.2 m, area_mapped=False
+2026-08-04 14:14:38.402 [GOAL] #31 hop 1: 1.50 m toward chair (still 12.2 m away)
+2026-08-04 14:14:38.403 [GOAL] (4.31, 0.28) yaw=-20deg mode=navigate
+2026-08-04 14:14:43.398 [GOAL] #31 hop 2: 1.50 m toward chair (still 11.2 m away)
+2026-08-04 14:14:43.398 [GOAL] (5.31, -0.15) yaw=-23deg mode=navigate
+2026-08-04 14:14:43.405 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-04 14:14:43.405 [WARN] nav goal (5.31, -0.15) failed (status=6); trying another approach angle
+2026-08-04 14:14:43.405 [STEP] #31 hop aborted — shortening to 0.75 m and re-aiming
+2026-08-04 14:14:44.403 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-04 14:14:44.404 [GOAL] #31 hop 3: 0.75 m toward chair (still 11.1 m away)
+2026-08-04 14:14:44.405 [GOAL] (4.82, 0.06) yaw=-23deg mode=navigate
+2026-08-04 14:14:44.415 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-04 14:14:44.416 [WARN] nav goal (4.82, 0.06) failed (status=6); trying another approach angle
+2026-08-04 14:14:44.417 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-04 14:14:45.397 [STEP] chair area now mapped after 3 hop(s) — switching to a direct approach
+2026-08-04 14:14:45.398 [ROBOT] The area around the chair is mapped now — going straight to it.
+2026-08-04 14:14:45.398 [GOAL] (14.48, -3.10) yaw=-98deg mode=navigate
+2026-08-04 14:14:45.405 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-04 14:14:45.406 [WARN] nav goal (14.48, -3.10) failed (status=6); trying another approach angle
+2026-08-04 14:14:46.402 [GOAL] (14.03, -3.15) yaw=-73deg mode=navigate
+2026-08-04 14:14:46.407 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-04 14:14:46.407 [WARN] nav goal (14.03, -3.15) failed (status=6); trying another approach angle
+2026-08-04 14:14:47.392 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-04 14:14:47.394 [GOAL] (14.03, -3.15) yaw=-73deg mode=navigate
+2026-08-04 14:14:47.405 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-04 14:14:47.405 [WARN] nav goal (14.03, -3.15) failed (status=6); trying another approach angle
+2026-08-04 14:14:47.536 [CMD] (cancel via remote) cancel
+2026-08-04 14:14:51.543 [CMD] (cancel via remote) cancel
+2026-08-04 14:14:51.944 [CMD] (cancel via remote) cancel
+2026-08-04 14:14:52.152 [CMD] (cancel via remote) cancel
+2026-08-04 14:14:52.345 [CMD] (cancel via remote) cancel
+2026-08-04 14:16:36.450 [CMD] [remote] turn right
+2026-08-04 14:16:37.326 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ninety degrees to the right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -90.0}]}
+2026-08-04 14:16:37.327 [STEP] move target=None
+2026-08-04 14:16:38.799 [CMD] (cancel via remote) cancel
+2026-08-04 14:16:52.084 [CMD] [remote] turn 180 degree
+2026-08-04 14:16:52.920 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning around.', 'target': None, 'distance_m': 0.0, 'rotation_deg': 180.0}]}
+2026-08-04 14:16:52.920 [STEP] move target=None
+2026-08-04 14:16:56.693 [CMD] (cancel via remote) stop
+2026-08-04 14:21:30.420 [RUN] agent shutting down

@@ -1,0 +1,30 @@
+2026-08-10 11:44:10.758 [RUN] vla_agent v25  (#60 manual override teleop, #59 10 Hz collision guard, #58 smoother approach, #57 stand off far enough to keep the object in view, #56 step-and-stare scan, #55 LiDAR failure reasons reported, #54 LiDAR object ranging, #53 seeded depth intrinsics, #52 depth intrinsics rescaled to frame size, #51 compressedDepth transport, #50 compressed RGB transport, #49 annotated feed gated per topic, #47 TF at colour-frame stamp, #48 reject stale depth, #46 one subscription per camera stream, #43 longer cached action-server wait, #44 undock retry-loop breaker, #45 sync slop for 1 Hz depth, #37 /robot1 namespace, #38 stereo depth topic, #39 best-effort sensor QoS, #40 RGB->depth pixel mapping, #41 encoding-based mm/m, #42 explicit namespaced TF, #36 no patrol feed prompt, #35 cancel actually stops the robot, #34 feed publishes to any subscriber, #22 dock no-detect zone, #23 live-first memory, #24 forget, #25 typo-tolerant control words, #26 bare yes/no, #27 context expiry, #28 all-instance distances, #29 Create 3 backup ratchet, #30 sticky goals + range-scaled gate + ring-safe blacklist, #31 incremental off-map hop goals, #32 non-freezing live feed, #33 command/reply/status bridge)
+2026-08-10 11:44:10.758 [RUN] agent started (SIGHT_CONFIRM=2, SEARCH_TIMEOUT=120.0s, NO_PROGRESS_LIMIT=60.0s, ROBOT_CLEARANCE=0.25m)
+2026-08-10 11:44:23.525 [CMD] [keyboard] what do you see
+2026-08-10 11:44:23.525 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-10 11:44:24.048 [BRAIN] {'steps': [{'action': 'describe', 'speech': "I don't see anything right now.", 'target': None}]}
+2026-08-10 11:44:24.048 [STEP] describe target=None
+2026-08-10 11:44:25.573 [ROBOT] Stopped. The robot is idle.
+2026-08-10 11:44:25.574 [STOP] confirmed stopped by odometry after barrage
+2026-08-10 11:44:28.325 [CMD] [keyboard] show mee
+2026-08-10 11:44:28.325 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-10 11:44:28.814 [BRAIN] {'steps': [{'action': 'feed', 'speech': 'Showing you the live camera feed.', 'target': None}]}
+2026-08-10 11:44:28.815 [STEP] feed target=None
+2026-08-10 11:44:30.373 [ROBOT] Stopped. The robot is idle.
+2026-08-10 11:44:30.374 [STOP] confirmed stopped by odometry after barrage
+2026-08-10 11:44:36.173 [ROBOT] The live-feed window closed. Say 'show me the feed' to reopen it — the robot is otherwise unaffected.
+2026-08-10 11:44:36.174 [WARN] #32e rqt_image_view exited
+2026-08-10 11:44:40.533 [CMD] [keyboard] show me
+2026-08-10 11:44:40.533 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-10 11:44:41.097 [BRAIN] {'steps': [{'action': 'describe', 'speech': "Looking around, I don't see anything right now.", 'target': None}]}
+2026-08-10 11:44:41.097 [STEP] describe target=None
+2026-08-10 11:44:42.573 [ROBOT] Stopped. The robot is idle.
+2026-08-10 11:44:42.574 [STOP] confirmed stopped by odometry after barrage
+2026-08-10 11:44:46.565 [CMD] [keyboard] show me the feed
+2026-08-10 11:44:46.565 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-10 11:44:47.065 [BRAIN] {'steps': [{'action': 'feed', 'speech': 'Showing you the live camera feed.', 'target': None}]}
+2026-08-10 11:44:47.065 [STEP] feed target=None
+2026-08-10 11:44:48.613 [ROBOT] Stopped. The robot is idle.
+2026-08-10 11:44:48.613 [STOP] confirmed stopped by odometry after barrage
+2026-08-10 11:46:31.557 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-10 11:46:31.557 [RUN] agent shutting down

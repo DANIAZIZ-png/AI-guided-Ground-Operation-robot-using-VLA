@@ -1,0 +1,209 @@
+# VLA Ground Robot — FYDP context
+
+Read `PROJECT_HANDOUT_v5.md` in this folder before doing anything.
+It is the authoritative record of this project. If something I say
+conflicts with it, say so rather than guessing.
+**Then read `HANDOVER_TO_OPUS.md`** (8 Sep 2026): the self-contained state
+of the hardware work, the restart sequence, and the traps. Newer than the
+handout where they differ.
+
+## Where commands must run
+
+You are on the Ubuntu 24.04 HOST. `distrobox` works from here.
+Verify with: `[ -f /run/.containerenv ] && echo CONTAINER || echo HOST`
+
+**ROS / Gazebo / Nav2 / the agent** — inside `ubuntu22-gpu`. Each
+call is a FRESH shell, so the unsets and the ROS source must be
+repeated every single time:
+
+    distrobox enter ubuntu22-gpu -- bash -c \
+      "unset ROS_DISCOVERY_SERVER FASTRTPS_DEFAULT_PROFILES_FILE ROS_DOMAIN_ID; \
+       source /opt/ros/humble/setup.bash; <command>"
+
+Simulation and hardware use OPPOSITE settings, and both fail
+SILENTLY in the other's — no error, just nothing works. Never skip
+the unsets.
+
+**The same wrapper for HARDWARE** must SET the discovery variables
+instead. Source `~/robot_env.sh` (env only, no side effects):
+
+    distrobox enter ubuntu22-gpu -- bash -c \
+      "source ~/robot_env.sh; <command>"
+
+Do NOT source `~/robot_mode.sh` inside wrappers: it restarts the ROS
+daemon every time, which blinds every other terminal for ~10 s. Use
+`robot_mode.sh` only in a terminal you type into. Start SLAM, RViz and
+Nav2 from `xterm -e bash <script>` launchers whose script sources
+`~/robot_env.sh` first (pattern in `HANDOVER_TO_OPUS.md`).
+
+**YOLO** — inside `vla-box`:
+
+    distrobox enter vla-box -- bash -c "<command>"
+
+**Ollama and ssh to the robot** — directly on the host.
+
+**`~/vla_kill.sh`** — inside `ubuntu22-gpu`, from a terminal that has
+sourced `robot_mode.sh`, so the ROS daemon is restarted in robot mode.
+On the host it kills processes but cannot touch the daemon or shared
+memory, and says so (changelog 8 Sep §1).
+
+The home folder is SHARED between host and containers, so any file
+edit works from here with no wrapping at all.
+
+**`~/robot_mode.sh` and `~/sim_mode.sh` must be SOURCED, never executed.**
+Executed, they run in a child shell, print a success banner, and
+set nothing in the shell you are in. The banner is printed either
+way — it is NOT evidence. After every source, verify:
+
+    source ~/robot_mode.sh
+    env | grep -E "^(ROS_DISCOVERY|FASTRTPS|VLA_NS)"
+
+No output means the shell is not configured, whatever the banner said.
+Do this in every new shell before any ROS command.
+
+## Container gotchas
+
+- **`ping` does not work inside `ubuntu22-gpu`.** It exists at
+  `/usr/bin/ping` but exits 2 with ZERO output for every address —
+  containers are not granted the raw socket ICMP needs. It fails
+  identically whether the robot is up or unplugged, so it can never
+  be used as a reachability test. Test reachability with bash's
+  `/dev/tcp` instead — no privilege needed, and it tests a real
+  connection, which is what ROS actually depends on:
+
+      timeout 5 bash -c "cat < /dev/null > /dev/tcp/10.42.0.169/22"
+
+  Exit 0 = reachable.
+
+- **`/etc/turtlebot4_discovery/setup.bash` sets four variables:**
+  `RMW_IMPLEMENTATION`, `ROS_DOMAIN_ID=0`, `ROS_DISCOVERY_SERVER`, and
+  `ROS_SUPER_CLIENT` (True only when the shell has a terminal
+  attached, False in any `bash -c` wrapper). It does NOT set
+  `FASTRTPS_DEFAULT_PROFILES_FILE`. In a wrapper shell, sourcing it
+  alone makes a plain client that receives topic data but no
+  directory, which shows as an empty topic list. The XML profile
+  forces super-client mode regardless of the flag, so hardware needs
+  BOTH, together (corrected 8 Sep, changelog §6):
+
+      export FASTRTPS_DEFAULT_PROFILES_FILE=$HOME/.ros/fastdds_super_client.xml
+      export ROS_DISCOVERY_SERVER="10.42.0.169:11811;"
+
+- **`ros2 node list` / `node info` / `topic info` are answered by the
+  ROS daemon**, one shared background process. They are complete and
+  stable when the daemon was started from a robot-mode terminal
+  (verified repeatedly 8 Sep) and empty or partial when it was started
+  from a terminal without the discovery variables. Inconsistency
+  between runs means the daemon was restarted in between from a
+  different terminal. Check its environment before trusting or
+  distrusting it (changelog 8 Sep §5). A clean `node list` still says
+  nothing about the data path: `topic hz` and
+  `ros2 run tf2_ros tf2_echo <a> <b>` remain the ground truth, and
+  `pgrep -af <name>` for "is it running".
+
+- **A freshly started program takes up to ~20 s to be fully matched
+  through the discovery server** (measured 8 Sep, changelog §9.4).
+  `ros2 action send_goal`, `ros2 service call` and `ros2 param get`
+  from a new terminal may hang or get no reply while everything is
+  healthy: the reply is dropped if the caller's reply channel is not
+  matched within ~0.1 s. Long-lived clients (RViz, the agent, Nav2's
+  lifecycle manager after its delay) are unaffected. Never use one
+  hung CLI call as the only evidence of a fault, and never poll a
+  bring-up with CLI tools every few seconds: each poll is a new
+  program the Pi's discovery server has to serve.
+
+- **The Create 3 goes silent with no warning** (turtlebot4 #554):
+  `/robot1/odom` stops, `/robot1/battery_state` empties,
+  `odom->base_link` disappears — while `create3_republisher` is still
+  running, so every process check passes. NOT a low-battery symptom
+  (happened at 63%). Only fix is a physical power-cycle; tell me, do
+  not try to restart nodes.
+
+- **Check the Pi's load AND temperature first.**
+  `ssh ubuntu@10.42.0.169 'uptime; vcgencmd measure_temp; vcgencmd get_throttled'`.
+  Want load under 1.5, under 80 °C, and a `throttled=` value ending
+  in 0. unattended-upgrades used to hit load 9.4 on 4 cores and look
+  exactly like a network fault; the apt TIMERS are now masked (not
+  just the service), still check. On 8 Sep the Pi sat at 84.7 °C,
+  `throttled=0xe0008` (soft thermal limit active, clock capped to
+  1.5 GHz) and load 5–7 with apt clear; the discovery server slowed
+  down and Nav2's bring-up failed twice on timing (changelog §9).
+  The OAK-D alone adds ~1.5 to the load and a full core — keep the
+  camera stopped unless a step needs it.
+
+- **`pkill -f <pattern>` matches the whole command line of every
+  process, including the shell running it.** The `[n]ame` bracket
+  trick protects only the pkill line itself. If the pattern text
+  appears anywhere else in the same command (a heredoc, a comment, a
+  filename) the shell kills itself silently and nothing after that
+  line runs (happened 8 Sep, changelog §9.6). Find the PID with
+  `pgrep -f` in one command and `kill <pid>` in the next.
+  **`~/vla_kill.sh` has the same property**: it group-kills anything
+  whose command line contains `ros2 launch`, `ign gazebo`, `vla_agent`,
+  `voice_command`, `vla_gui` or `rviz2` — including a `bash -c` wrapper
+  that merely mentions one of those words. Run it from a plain terminal
+  or via a script file, never inline in a wrapper that names them.
+
+- **slam_toolbox `minimum_travel_distance` must stay at 0.0.** At 0.1
+  the `map->odom` transform goes stale while the robot is stationary
+  and the map frame vanishes.
+
+## Do not run these
+
+- `~/vla_sim.sh` — ends with the GUI in the foreground; it will hang
+  you forever. I run this one myself.
+- Anything that makes the physical robot MOVE. The stop command is
+  known to be unreliable (handout section 8.1). Propose the command,
+  let me run it.
+- Do NOT close the **VLA AGENT** xterm window. Both launch scripts
+  now start the agent in its own terminal so it has a real tty —
+  manual override (#60) is typed in THAT window and works nowhere
+  else. Closing it kills the agent. Never pipe or redirect the
+  agent's output either (`| tee`, `> log`): a pipe is not a tty, and
+  it silently puts the agent back in headless mode with override
+  dead. It writes its own log to `~/vla_logs/` regardless.
+
+## How I want you to work
+
+- One step at a time. Give the command, run it, tell me the result,
+  then stop and wait for me.
+- Say plainly whether each step passed or failed.
+- Short answers. I am a student, not a systems engineer — explain
+  terms I might not know.
+- Surgical edits only. Do not rewrite files that work.
+- Verify every script with `bash -n` and every Python file with
+  `python3 -m py_compile` before saying it is done.
+
+## Useful facts
+
+- Robot (Raspberry Pi): 10.42.0.169, user `ubuntu`. Key-based ssh works
+  from the host (re-installed 8 Sep). `iw` is not installed on the Pi.
+- Containers: `ubuntu22-gpu` (ROS), `vla-box` (YOLO)
+- Current agent: `vla_agent_v28.py`
+- Kill everything: `~/vla_kill.sh`, from a robot-mode terminal inside
+  the container.
+- **RViz on hardware** (robot-mode terminal in the container):
+  `ros2 run rviz2 rviz2 -d ~/vla_hardware.rviz --ros-args -r __ns:=/robot1 -r /tf:=/robot1/tf -r /tf_static:=/robot1/tf_static`
+  The `__ns` is what puts the Nav2 Goal tool in `/robot1`; the layout
+  file alone does not. Hardware only; the sim keeps the stock
+  `turtlebot4_viz/rviz/robot.rviz` via `vla_sim.sh`.
+- **Nav2 on hardware** (robot-mode terminal in the container):
+  `ros2 launch ~/nav2_hw.launch.py` — stock nodes and params plus
+  `bond_timeout` 30 s and a 20 s delayed STARTUP. Wait for
+  `Managed nodes are active`, then confirm
+  `ros2 topic info /robot1/cmd_vel -v | grep -c velocity_smoother`
+  prints 1. The stock `turtlebot4_navigation nav2.launch.py` aborts
+  on a bond timeout through the discovery server (changelog §9.2).
+  Send goals from RViz's "Nav2 Goal", not from a fresh CLI.
+  Verified 8 Sep: two goals, 3.3 m and 3.9 m, reached in 17 s and 18 s.
+- Nav2 logs: `~/vla_logs/nav2_hw_<date>.log` (tee from the launch).
+- `/opt` nav2.yaml and slam.yaml are back to STOCK (restored from
+  `~/nav2.yaml.pre_v25` and `~/slam.yaml.bak`). The tuned versions are
+  `~/nav2.yaml.today` and `~/slam.yaml.today`, not in use.
+  `nav2_hw.launch.py` uses the stock `/opt` nav2.yaml.
+- `~/slam_vla.yaml` (the live SLAM params) has
+  `minimum_travel_distance: 0.2`, which contradicts the 0.0 rule
+  above, yet the map frame stayed valid through 45+ min docked on
+  8 Sep. Not reconciled; do not change either without a test.
+- Never publish to `/robot1/cmd_vel` without warning me first.
+- OPEN, unsettled: whether starting SLAM triggers the Create 3 silence
+  or the base dies on its own. Do not assume either way.

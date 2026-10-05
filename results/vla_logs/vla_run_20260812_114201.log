@@ -1,0 +1,376 @@
+2026-08-12 11:42:01.408 [RUN] vla_agent v28  (#63 headless-safe console output, #62 direction-aware collision guard, #61 nearest-cluster LiDAR ranging, #60 manual override teleop, #59 10 Hz collision guard, #58 smoother approach, #57 stand off far enough to keep the object in view, #56 step-and-stare scan, #55 LiDAR failure reasons reported, #54 LiDAR object ranging, #53 seeded depth intrinsics, #52 depth intrinsics rescaled to frame size, #51 compressedDepth transport, #50 compressed RGB transport, #49 annotated feed gated per topic, #47 TF at colour-frame stamp, #48 reject stale depth, #46 one subscription per camera stream, #43 longer cached action-server wait, #44 undock retry-loop breaker, #45 sync slop for 1 Hz depth, #37 /robot1 namespace, #38 stereo depth topic, #39 best-effort sensor QoS, #40 RGB->depth pixel mapping, #41 encoding-based mm/m, #42 explicit namespaced TF, #36 no patrol feed prompt, #35 cancel actually stops the robot, #34 feed publishes to any subscriber, #22 dock no-detect zone, #23 live-first memory, #24 forget, #25 typo-tolerant control words, #26 bare yes/no, #27 context expiry, #28 all-instance distances, #29 Create 3 backup ratchet, #30 sticky goals + range-scaled gate + ring-safe blacklist, #31 incremental off-map hop goals, #32 non-freezing live feed, #33 command/reply/status bridge)
+2026-08-12 11:42:01.408 [RUN] agent started (SIGHT_CONFIRM=2, SEARCH_TIMEOUT=120.0s, NO_PROGRESS_LIMIT=60.0s, ROBOT_CLEARANCE=0.25m)
+2026-08-12 11:42:01.437 [RUN] headless mode (no tty)
+2026-08-12 11:42:01.531 [INFO] live depth camera_info received 320x240
+2026-08-12 11:42:04.567 [DOCK] dock position recorded at (1.39, 0.00); detections within 0.8 m are ignored
+2026-08-12 11:42:08.203 [CMD] [remote] undock
+2026-08-12 11:42:08.204 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-12 11:42:08.205 [STEP] undock target=None
+2026-08-12 11:42:08.205 [ROBOT] Undocking…
+2026-08-12 11:42:11.616 [ROBOT] Stopped. The robot is idle.
+2026-08-12 11:42:11.617 [STOP] confirmed stopped by odometry after barrage
+2026-08-12 11:42:18.412 [ROBOT] Undocked — ready to move.
+2026-08-12 11:42:18.413 [DOCK] undock ok
+2026-08-12 11:42:24.105 [CMD] [remote] turn right
+2026-08-12 11:42:24.105 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-12 11:42:24.985 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ninety degrees right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -90.0}]}
+2026-08-12 11:42:24.985 [STEP] move target=None
+2026-08-12 11:42:24.985 [CMD] [remote] turn right
+2026-08-12 11:42:24.985 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-12 11:42:25.782 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ninety degrees right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -90.0}]}
+2026-08-12 11:42:25.782 [STEP] move target=None
+2026-08-12 11:42:27.036 [ROBOT] Stopped. The robot is idle.
+2026-08-12 11:42:27.037 [STOP] confirmed stopped by odometry after barrage
+2026-08-12 11:42:31.436 [ROBOT] Done with that move.
+2026-08-12 11:42:35.051 [CMD] [remote] move one meter ahead
+2026-08-12 11:42:35.051 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-12 11:42:35.823 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Moving forward one metre.', 'target': None, 'distance_m': 1.0, 'rotation_deg': 0.0}]}
+2026-08-12 11:42:35.823 [STEP] move target=None
+2026-08-12 11:42:35.839 [CMD] [remote] move one meter ahead
+2026-08-12 11:42:35.840 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-12 11:42:36.552 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Moving forward one metre.', 'target': None, 'distance_m': 1.0, 'rotation_deg': 0.0}]}
+2026-08-12 11:42:36.552 [STEP] move target=None
+2026-08-12 11:42:37.896 [ROBOT] Stopped. The robot is idle.
+2026-08-12 11:42:37.897 [STOP] confirmed stopped by odometry after barrage
+2026-08-12 11:42:44.436 [ROBOT] Done with that move.
+2026-08-12 11:42:51.379 [CMD] [remote] turn right
+2026-08-12 11:42:51.380 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-12 11:42:52.325 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ninety degrees right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -90.0}]}
+2026-08-12 11:42:52.325 [STEP] move target=None
+2026-08-12 11:42:52.325 [CMD] [remote] turn right
+2026-08-12 11:42:52.326 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-12 11:42:53.111 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ninety degrees right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -90.0}]}
+2026-08-12 11:42:53.111 [STEP] move target=None
+2026-08-12 11:42:58.337 [ROBOT] I sent the stop but the robot is STILL MOVING (0.00 m/s, 0.50 rad/s). Take manual override now.
+2026-08-12 11:42:58.337 [ERROR] #35 robot still moving 6.0s after stop: lin=0.00 ang=0.50
+2026-08-12 11:42:59.437 [ROBOT] Done with that move.
+2026-08-12 11:43:03.663 [CMD] [remote] what do you see
+2026-08-12 11:43:03.664 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-12 11:43:04.433 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a chair and a person.', 'target': None}]}
+2026-08-12 11:43:04.433 [STEP] describe target=None
+2026-08-12 11:43:04.489 [WARN] lidar ranging unavailable: only 0 valid beams within 1.2 deg of bearing -89.7 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-12 11:43:04.490 [WARN] lidar ranging unavailable: only 0 valid beams within 1.0 deg of bearing -93.9 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-12 11:43:04.491 [CMD] [remote] what do you see
+2026-08-12 11:43:04.491 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-12 11:43:05.155 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a chair and a person.', 'target': None}]}
+2026-08-12 11:43:05.155 [STEP] describe target=None
+2026-08-12 11:43:06.536 [ROBOT] Stopped. The robot is idle.
+2026-08-12 11:43:06.537 [STOP] confirmed stopped by odometry after barrage
+2026-08-12 11:43:11.301 [CMD] [remote] go to the chair
+2026-08-12 11:43:11.302 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-12 11:43:12.019 [BRAIN] {'steps': [{'action': 'navigate', 'speech': 'Heading to the chair.', 'target': 'chair'}]}
+2026-08-12 11:43:12.020 [STEP] navigate target='chair'
+2026-08-12 11:43:12.095 [CMD] [remote] go to the chair
+2026-08-12 11:43:12.095 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-12 11:43:12.735 [BRAIN] {'steps': [{'action': 'navigate', 'speech': 'Heading back to the chair.', 'target': 'chair'}]}
+2026-08-12 11:43:12.736 [STEP] navigate target='chair'
+2026-08-12 11:43:14.137 [ROBOT] Stopped. The robot is idle.
+2026-08-12 11:43:14.137 [STOP] confirmed stopped by odometry after barrage
+2026-08-12 11:43:14.496 [ROBOT] Found the chair — navigating to it.
+2026-08-12 11:43:14.496 [SIGHT] chair at (16.08, -4.11), 15.72 m away
+2026-08-12 11:43:14.496 [ROBOT] The chair is about 15.7 m away, past the edge of what I've mapped. Moving up in short steps and mapping as I go.
+2026-08-12 11:43:14.496 [STEP] #31 hop mode engaged for chair: object (16.08, -4.11) at 15.7 m, area_mapped=False
+2026-08-12 11:43:14.496 [GOAL] #31 hop 1: 1.50 m toward chair (still 15.7 m away)
+2026-08-12 11:43:14.497 [GOAL] (2.68, 0.65) yaw=-20deg mode=navigate
+2026-08-12 11:43:15.495 [WARN] lidar ranging unavailable: only 0 valid beams within 1.2 deg of bearing -91.2 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-12 11:43:16.505 [WARN] lidar ranging unavailable: only 0 valid beams within 1.2 deg of bearing -91.1 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-12 11:43:17.497 [WARN] lidar ranging unavailable: only 0 valid beams within 1.1 deg of bearing -95.4 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-12 11:43:18.502 [WARN] lidar ranging unavailable: only 0 valid beams within 1.3 deg of bearing -90.3 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-12 11:43:18.503 [WARN] lidar ranging unavailable: only 0 valid beams within 1.1 deg of bearing -94.7 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-12 11:43:19.521 [WARN] lidar ranging unavailable: only 0 valid beams within 1.1 deg of bearing -94.3 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-12 11:43:19.523 [GOAL] #31 hop 2: 1.50 m toward chair (still 15.0 m away)
+2026-08-12 11:43:19.523 [GOAL] (3.73, 0.17) yaw=-24deg mode=navigate
+2026-08-12 11:43:19.529 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:43:19.529 [WARN] nav goal (3.73, 0.17) failed (status=6); trying another approach angle
+2026-08-12 11:43:19.530 [STEP] #31 hop aborted — shortening to 0.75 m and re-aiming
+2026-08-12 11:43:20.522 [WARN] lidar ranging unavailable: only 0 valid beams within 1.3 deg of bearing -89.5 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-12 11:43:20.524 [WARN] lidar ranging unavailable: only 0 valid beams within 1.2 deg of bearing -94.0 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-12 11:43:20.526 [GOAL] #31 hop 3: 0.75 m toward chair (still 14.4 m away)
+2026-08-12 11:43:20.527 [GOAL] (3.26, 0.46) yaw=-20deg mode=navigate
+2026-08-12 11:43:20.529 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:43:20.529 [WARN] nav goal (3.26, 0.46) failed (status=6); trying another approach angle
+2026-08-12 11:43:20.529 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-12 11:43:21.510 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-12 11:43:21.511 [GOAL] #31 hop 4: 0.60 m toward chair (still 14.2 m away)
+2026-08-12 11:43:21.511 [GOAL] (3.34, 0.43) yaw=-20deg mode=navigate
+2026-08-12 11:43:21.519 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:43:21.520 [WARN] nav goal (3.34, 0.43) failed (status=6); trying another approach angle
+2026-08-12 11:43:21.520 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-12 11:43:22.503 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-12 11:43:22.504 [GOAL] #31 hop 5: 0.60 m toward chair (still 14.0 m away)
+2026-08-12 11:43:22.504 [GOAL] (3.54, 0.35) yaw=-20deg mode=navigate
+2026-08-12 11:43:22.509 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:43:22.509 [WARN] nav goal (3.54, 0.35) failed (status=6); trying another approach angle
+2026-08-12 11:43:22.509 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-12 11:43:23.510 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-12 11:43:23.510 [GOAL] #31 hop 6: 0.60 m toward chair (still 13.8 m away)
+2026-08-12 11:43:23.511 [GOAL] (3.75, 0.28) yaw=-20deg mode=navigate
+2026-08-12 11:43:23.519 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:43:23.520 [WARN] nav goal (3.75, 0.28) failed (status=6); trying another approach angle
+2026-08-12 11:43:23.520 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-12 11:43:24.507 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-12 11:43:24.507 [GOAL] #31 hop 7: 0.60 m toward chair (still 13.6 m away)
+2026-08-12 11:43:24.508 [GOAL] (3.94, 0.21) yaw=-20deg mode=navigate
+2026-08-12 11:43:24.519 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:43:24.520 [WARN] nav goal (3.94, 0.21) failed (status=6); trying another approach angle
+2026-08-12 11:43:24.520 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-12 11:43:25.511 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-12 11:43:25.511 [GOAL] #31 hop 8: 0.60 m toward chair (still 13.4 m away)
+2026-08-12 11:43:25.512 [GOAL] (4.14, 0.15) yaw=-20deg mode=navigate
+2026-08-12 11:43:25.519 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:43:25.519 [WARN] nav goal (4.14, 0.15) failed (status=6); trying another approach angle
+2026-08-12 11:43:25.520 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-12 11:43:26.490 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-12 11:43:26.490 [GOAL] #31 hop 9: 0.60 m toward chair (still 13.1 m away)
+2026-08-12 11:43:26.490 [GOAL] (4.37, 0.07) yaw=-20deg mode=navigate
+2026-08-12 11:43:26.499 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:43:26.500 [WARN] nav goal (4.37, 0.07) failed (status=6); trying another approach angle
+2026-08-12 11:43:26.500 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-12 11:43:27.493 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-12 11:43:27.494 [GOAL] #31 hop 10: 0.60 m toward chair (still 13.1 m away)
+2026-08-12 11:43:27.494 [GOAL] (4.40, 0.00) yaw=-20deg mode=navigate
+2026-08-12 11:43:27.499 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:43:27.499 [WARN] nav goal (4.40, 0.00) failed (status=6); trying another approach angle
+2026-08-12 11:43:27.500 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-12 11:43:28.498 [WARN] lidar ranging unavailable: only 0 valid beams within 1.3 deg of bearing -93.6 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-12 11:43:28.500 [WARN] lidar ranging unavailable: only 0 valid beams within 1.3 deg of bearing -98.8 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-12 11:43:28.502 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-12 11:43:28.503 [GOAL] #31 hop 11: 0.60 m toward chair (still 12.4 m away)
+2026-08-12 11:43:28.503 [GOAL] (4.62, -0.05) yaw=-19deg mode=navigate
+2026-08-12 11:43:28.509 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:43:28.510 [WARN] nav goal (4.62, -0.05) failed (status=6); trying another approach angle
+2026-08-12 11:43:28.510 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-12 11:43:29.504 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-12 11:43:29.505 [GOAL] #31 hop 12: 0.60 m toward chair (still 12.2 m away)
+2026-08-12 11:43:29.505 [GOAL] (4.80, -0.11) yaw=-19deg mode=navigate
+2026-08-12 11:43:29.509 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:43:29.510 [WARN] nav goal (4.80, -0.11) failed (status=6); trying another approach angle
+2026-08-12 11:43:29.510 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-12 11:43:30.501 [WARN] lidar ranging unavailable: only 1 valid beams within 1.5 deg of bearing -90.8 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-12 11:43:30.502 [WARN] lidar ranging unavailable: only 0 valid beams within 1.3 deg of bearing -96.1 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-12 11:43:30.504 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-12 11:43:30.504 [GOAL] #31 hop 13: 0.60 m toward chair (still 12.0 m away)
+2026-08-12 11:43:30.506 [GOAL] (4.99, -0.18) yaw=-20deg mode=navigate
+2026-08-12 11:43:30.509 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:43:30.509 [WARN] nav goal (4.99, -0.18) failed (status=6); trying another approach angle
+2026-08-12 11:43:30.509 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-12 11:43:31.493 [WARN] lidar ranging unavailable: only 1 valid beams within 1.5 deg of bearing -90.9 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-12 11:43:31.494 [WARN] lidar ranging unavailable: only 0 valid beams within 1.4 deg of bearing -96.2 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-12 11:43:31.496 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-12 11:43:31.496 [GOAL] #31 hop 14: 0.60 m toward chair (still 11.9 m away)
+2026-08-12 11:43:31.496 [GOAL] (5.15, -0.24) yaw=-20deg mode=navigate
+2026-08-12 11:43:31.500 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:43:31.501 [WARN] nav goal (5.15, -0.24) failed (status=6); trying another approach angle
+2026-08-12 11:43:31.501 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-12 11:43:32.494 [WARN] lidar ranging unavailable: only 2 valid beams within 1.4 deg of bearing -91.0 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-12 11:43:32.495 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-12 11:43:32.495 [GOAL] #31 hop 15: 0.60 m toward chair (still 11.7 m away)
+2026-08-12 11:43:32.496 [GOAL] (5.31, -0.29) yaw=-20deg mode=navigate
+2026-08-12 11:43:32.499 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:43:32.500 [WARN] nav goal (5.31, -0.29) failed (status=6); trying another approach angle
+2026-08-12 11:43:32.500 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-12 11:43:33.503 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-12 11:43:33.503 [GOAL] #31 hop 16: 0.60 m toward chair (still 11.5 m away)
+2026-08-12 11:43:33.503 [GOAL] (5.48, -0.36) yaw=-20deg mode=navigate
+2026-08-12 11:43:33.508 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:43:33.509 [WARN] nav goal (5.48, -0.36) failed (status=6); trying another approach angle
+2026-08-12 11:43:33.509 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-12 11:43:34.519 [WARN] lidar ranging unavailable: only 0 valid beams within 1.4 deg of bearing -97.1 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-12 11:43:34.522 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-12 11:43:34.522 [GOAL] #31 hop 17: 0.60 m toward chair (still 11.5 m away)
+2026-08-12 11:43:34.524 [GOAL] (5.67, -0.42) yaw=-20deg mode=navigate
+2026-08-12 11:43:34.529 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:43:34.529 [WARN] nav goal (5.67, -0.42) failed (status=6); trying another approach angle
+2026-08-12 11:43:34.530 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-12 11:43:35.496 [WARN] lidar ranging unavailable: only 2 valid beams within 1.5 deg of bearing -97.4 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-12 11:43:35.497 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-12 11:43:35.498 [GOAL] #31 hop 18: 0.60 m toward chair (still 11.7 m away)
+2026-08-12 11:43:35.499 [GOAL] (5.85, -0.48) yaw=-20deg mode=navigate
+2026-08-12 11:43:35.509 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:43:35.510 [WARN] nav goal (5.85, -0.48) failed (status=6); trying another approach angle
+2026-08-12 11:43:35.510 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-12 11:43:36.501 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-12 11:43:36.502 [GOAL] #31 hop 19: 0.60 m toward chair (still 11.5 m away)
+2026-08-12 11:43:36.503 [GOAL] (6.03, -0.54) yaw=-20deg mode=navigate
+2026-08-12 11:43:36.508 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:43:36.509 [WARN] nav goal (6.03, -0.54) failed (status=6); trying another approach angle
+2026-08-12 11:43:36.509 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-12 11:43:37.498 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-12 11:43:37.499 [GOAL] #31 hop 20: 0.60 m toward chair (still 11.3 m away)
+2026-08-12 11:43:37.500 [GOAL] (6.20, -0.59) yaw=-20deg mode=navigate
+2026-08-12 11:43:37.509 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:43:37.509 [WARN] nav goal (6.20, -0.59) failed (status=6); trying another approach angle
+2026-08-12 11:43:37.510 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-12 11:43:38.507 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-12 11:43:38.507 [GOAL] #31 hop 21: 0.60 m toward chair (still 11.2 m away)
+2026-08-12 11:43:38.507 [GOAL] (6.37, -0.65) yaw=-20deg mode=navigate
+2026-08-12 11:43:38.520 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:43:38.520 [WARN] nav goal (6.37, -0.65) failed (status=6); trying another approach angle
+2026-08-12 11:43:38.521 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-12 11:43:39.504 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-12 11:43:39.506 [GOAL] #31 hop 22: 0.60 m toward chair (still 11.0 m away)
+2026-08-12 11:43:39.506 [GOAL] (6.51, -0.70) yaw=-21deg mode=navigate
+2026-08-12 11:43:39.510 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:43:39.510 [WARN] nav goal (6.51, -0.70) failed (status=6); trying another approach angle
+2026-08-12 11:43:39.510 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-12 11:43:40.503 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-12 11:43:40.504 [GOAL] #31 hop 23: 0.60 m toward chair (still 10.8 m away)
+2026-08-12 11:43:40.505 [GOAL] (6.68, -0.76) yaw=-21deg mode=navigate
+2026-08-12 11:43:40.509 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:43:40.510 [WARN] nav goal (6.68, -0.76) failed (status=6); trying another approach angle
+2026-08-12 11:43:40.510 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-12 11:43:41.503 [GOAL] #31 hop 24: 0.60 m toward chair (still 11.1 m away)
+2026-08-12 11:43:41.504 [GOAL] (6.83, -0.88) yaw=-27deg mode=navigate
+2026-08-12 11:43:41.510 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:43:41.510 [WARN] nav goal (6.83, -0.88) failed (status=6); trying another approach angle
+2026-08-12 11:43:41.510 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-12 11:43:42.504 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-12 11:43:42.505 [GOAL] #31 hop 25: 0.60 m toward chair (still 10.9 m away)
+2026-08-12 11:43:42.506 [GOAL] (7.00, -0.94) yaw=-27deg mode=navigate
+2026-08-12 11:43:42.510 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:43:42.510 [WARN] nav goal (7.00, -0.94) failed (status=6); trying another approach angle
+2026-08-12 11:43:42.511 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-12 11:43:43.510 [GOAL] #31 hop 26: 0.60 m toward chair (still 10.4 m away)
+2026-08-12 11:43:43.512 [GOAL] (7.18, -0.97) yaw=-22deg mode=navigate
+2026-08-12 11:43:43.519 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:43:43.520 [WARN] nav goal (7.18, -0.97) failed (status=6); trying another approach angle
+2026-08-12 11:43:43.521 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-12 11:43:44.532 [GOAL] #31 hop 27: 0.60 m toward chair (still 9.4 m away)
+2026-08-12 11:43:44.532 [GOAL] (7.34, -1.04) yaw=-22deg mode=navigate
+2026-08-12 11:43:44.540 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:43:44.540 [WARN] nav goal (7.34, -1.04) failed (status=6); trying another approach angle
+2026-08-12 11:43:44.541 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-12 11:43:45.510 [GOAL] #31 hop 28: 0.60 m toward chair (still 9.9 m away)
+2026-08-12 11:43:45.511 [GOAL] (7.50, -1.09) yaw=-20deg mode=navigate
+2026-08-12 11:43:45.520 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:43:45.520 [WARN] nav goal (7.50, -1.09) failed (status=6); trying another approach angle
+2026-08-12 11:43:45.520 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-12 11:43:46.533 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-12 11:43:46.533 [GOAL] #31 hop 29: 0.60 m toward chair (still 9.8 m away)
+2026-08-12 11:43:46.533 [GOAL] (7.64, -1.16) yaw=-21deg mode=navigate
+2026-08-12 11:43:46.539 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:43:46.540 [WARN] nav goal (7.64, -1.16) failed (status=6); trying another approach angle
+2026-08-12 11:43:46.540 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-12 11:43:47.511 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-12 11:43:47.512 [GOAL] #31 hop 30: 0.60 m toward chair (still 9.6 m away)
+2026-08-12 11:43:47.512 [GOAL] (7.79, -1.22) yaw=-21deg mode=navigate
+2026-08-12 11:43:47.519 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:43:47.520 [WARN] nav goal (7.79, -1.22) failed (status=6); trying another approach angle
+2026-08-12 11:43:47.521 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-12 11:43:48.522 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-12 11:43:48.523 [GOAL] #31 hop 31: 0.60 m toward chair (still 9.5 m away)
+2026-08-12 11:43:48.523 [GOAL] (7.93, -1.27) yaw=-21deg mode=navigate
+2026-08-12 11:43:48.530 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:43:48.531 [WARN] nav goal (7.93, -1.27) failed (status=6); trying another approach angle
+2026-08-12 11:43:48.531 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-12 11:43:49.511 [STEP] chair area now mapped after 31 hop(s) — switching to a direct approach
+2026-08-12 11:43:49.511 [ROBOT] The area around the chair is mapped now — going straight to it.
+2026-08-12 11:43:49.512 [GOAL] (15.04, -4.04) yaw=-21deg mode=navigate
+2026-08-12 11:43:49.519 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:43:49.520 [WARN] nav goal (15.04, -4.04) failed (status=6); trying another approach angle
+2026-08-12 11:43:50.513 [GOAL] (15.80, -3.27) yaw=-71deg mode=navigate
+2026-08-12 11:43:50.520 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:43:50.521 [WARN] nav goal (15.80, -3.27) failed (status=6); trying another approach angle
+2026-08-12 11:43:51.515 [GOAL] (14.94, -3.80) yaw=-20deg mode=navigate
+2026-08-12 11:43:51.520 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:43:51.521 [WARN] nav goal (14.94, -3.80) failed (status=6); trying another approach angle
+2026-08-12 11:43:52.516 [GOAL] (15.99, -3.52) yaw=-71deg mode=navigate
+2026-08-12 11:43:52.521 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:43:52.522 [WARN] nav goal (15.99, -3.52) failed (status=6); trying another approach angle
+2026-08-12 11:43:53.508 [GOAL] (14.88, -4.49) yaw=4deg mode=navigate
+2026-08-12 11:43:53.519 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:43:53.519 [WARN] nav goal (14.88, -4.49) failed (status=6); trying another approach angle
+2026-08-12 11:43:54.503 [GOAL] (14.37, -3.72) yaw=-21deg mode=navigate
+2026-08-12 11:43:54.509 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:43:54.510 [WARN] nav goal (14.37, -3.72) failed (status=6); trying another approach angle
+2026-08-12 11:43:55.498 [GOAL] (14.28, -4.34) yaw=4deg mode=navigate
+2026-08-12 11:43:55.508 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:43:55.509 [WARN] nav goal (14.28, -4.34) failed (status=6); trying another approach angle
+2026-08-12 11:43:56.498 [GOAL] (15.06, -4.13) yaw=-22deg mode=navigate
+2026-08-12 11:43:56.511 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:43:56.511 [WARN] nav goal (15.06, -4.13) failed (status=6); trying another approach angle
+2026-08-12 11:43:57.500 [GOAL] (14.96, -4.72) yaw=3deg mode=navigate
+2026-08-12 11:43:57.510 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:43:57.510 [WARN] nav goal (14.96, -4.72) failed (status=6); trying another approach angle
+2026-08-12 11:43:58.497 [GOAL] (15.23, -4.71) yaw=3deg mode=navigate
+2026-08-12 11:43:58.508 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:43:58.509 [WARN] nav goal (15.23, -4.71) failed (status=6); trying another approach angle
+2026-08-12 11:43:59.501 [GOAL] (14.30, -3.87) yaw=-22deg mode=navigate
+2026-08-12 11:43:59.509 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:43:59.510 [WARN] nav goal (14.30, -3.87) failed (status=6); trying another approach angle
+2026-08-12 11:44:00.502 [GOAL] (14.23, -4.41) yaw=4deg mode=navigate
+2026-08-12 11:44:00.510 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:44:00.510 [WARN] nav goal (14.23, -4.41) failed (status=6); trying another approach angle
+2026-08-12 11:44:01.525 [GOAL] (14.63, -3.39) yaw=-46deg mode=navigate
+2026-08-12 11:44:01.530 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:44:01.530 [WARN] nav goal (14.63, -3.39) failed (status=6); trying another approach angle
+2026-08-12 11:44:02.507 [GOAL] (14.95, -3.95) yaw=-19deg mode=navigate
+2026-08-12 11:44:02.519 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:44:02.521 [WARN] nav goal (14.95, -3.95) failed (status=6); trying another approach angle
+2026-08-12 11:44:03.502 [GOAL] (15.00, -4.39) yaw=7deg mode=navigate
+2026-08-12 11:44:03.511 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:44:03.511 [WARN] nav goal (15.00, -4.39) failed (status=6); trying another approach angle
+2026-08-12 11:44:04.503 [GOAL] (14.34, -3.75) yaw=-20deg mode=navigate
+2026-08-12 11:44:04.510 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:44:04.510 [WARN] nav goal (14.34, -3.75) failed (status=6); trying another approach angle
+2026-08-12 11:44:05.506 [GOAL] (14.24, -4.35) yaw=4deg mode=navigate
+2026-08-12 11:44:05.511 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:44:05.511 [WARN] nav goal (14.24, -4.35) failed (status=6); trying another approach angle
+2026-08-12 11:44:06.506 [GOAL] (14.11, -3.72) yaw=-21deg mode=navigate
+2026-08-12 11:44:06.511 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:44:06.511 [WARN] nav goal (14.11, -3.72) failed (status=6); trying another approach angle
+2026-08-12 11:44:07.524 [GOAL] (14.62, -3.37) yaw=-46deg mode=navigate
+2026-08-12 11:44:07.531 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:44:07.532 [WARN] nav goal (14.62, -3.37) failed (status=6); trying another approach angle
+2026-08-12 11:44:08.506 [GOAL] (14.95, -4.04) yaw=-20deg mode=navigate
+2026-08-12 11:44:08.512 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:44:08.512 [WARN] nav goal (14.95, -4.04) failed (status=6); trying another approach angle
+2026-08-12 11:44:09.522 [GOAL] (14.98, -4.40) yaw=8deg mode=navigate
+2026-08-12 11:44:09.531 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:44:09.531 [WARN] nav goal (14.98, -4.40) failed (status=6); trying another approach angle
+2026-08-12 11:44:10.516 [GOAL] (14.13, -3.65) yaw=-20deg mode=navigate
+2026-08-12 11:44:10.522 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:44:10.522 [WARN] nav goal (14.13, -3.65) failed (status=6); trying another approach angle
+2026-08-12 11:44:11.517 [GOAL] (14.40, -3.80) yaw=-20deg mode=navigate
+2026-08-12 11:44:11.531 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:44:11.531 [WARN] nav goal (14.40, -3.80) failed (status=6); trying another approach angle
+2026-08-12 11:44:12.512 [GOAL] (14.05, -4.24) yaw=5deg mode=navigate
+2026-08-12 11:44:12.521 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:44:12.522 [WARN] nav goal (14.05, -4.24) failed (status=6); trying another approach angle
+2026-08-12 11:44:13.517 [GOAL] (14.42, -3.21) yaw=-45deg mode=navigate
+2026-08-12 11:44:13.531 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:44:13.531 [WARN] nav goal (14.42, -3.21) failed (status=6); trying another approach angle
+2026-08-12 11:44:14.519 [GOAL] (14.60, -3.93) yaw=-21deg mode=navigate
+2026-08-12 11:44:14.530 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:44:14.530 [WARN] nav goal (14.60, -3.93) failed (status=6); trying another approach angle
+2026-08-12 11:44:15.511 [GOAL] (14.64, -3.35) yaw=-42deg mode=navigate
+2026-08-12 11:44:15.521 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:44:15.521 [WARN] nav goal (14.64, -3.35) failed (status=6); trying another approach angle
+2026-08-12 11:44:16.505 [GOAL] (14.38, -4.18) yaw=6deg mode=navigate
+2026-08-12 11:44:16.511 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:44:16.511 [WARN] nav goal (14.38, -4.18) failed (status=6); trying another approach angle
+2026-08-12 11:44:17.502 [GOAL] (14.89, -2.79) yaw=-67deg mode=navigate
+2026-08-12 11:44:17.509 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:44:17.510 [WARN] nav goal (14.89, -2.79) failed (status=6); trying another approach angle
+2026-08-12 11:44:18.495 [GOAL] (14.89, -3.49) yaw=-46deg mode=navigate
+2026-08-12 11:44:18.498 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:44:18.499 [WARN] nav goal (14.89, -3.49) failed (status=6); trying another approach angle
+2026-08-12 11:44:19.515 [GOAL] (14.27, -4.70) yaw=32deg mode=navigate
+2026-08-12 11:44:19.522 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:44:19.522 [WARN] nav goal (14.27, -4.70) failed (status=6); trying another approach angle
+2026-08-12 11:44:20.509 [GOAL] (14.54, -4.48) yaw=31deg mode=navigate
+2026-08-12 11:44:20.519 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:44:20.519 [WARN] nav goal (14.54, -4.48) failed (status=6); trying another approach angle
+2026-08-12 11:44:21.500 [GOAL] (14.61, -4.22) yaw=1deg mode=navigate
+2026-08-12 11:44:21.511 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:44:21.511 [WARN] nav goal (14.61, -4.22) failed (status=6); trying another approach angle
+2026-08-12 11:44:22.517 [GOAL] (15.33, -3.40) yaw=-79deg mode=navigate
+2026-08-12 11:44:22.531 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:44:22.531 [WARN] nav goal (15.33, -3.40) failed (status=6); trying another approach angle
+2026-08-12 11:44:23.506 [GOAL] (14.50, -4.83) yaw=20deg mode=navigate
+2026-08-12 11:44:23.511 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-12 11:44:23.511 [WARN] nav goal (14.50, -4.83) failed (status=6); trying another approach angle
+2026-08-12 11:44:24.500 [ROBOT] Arrived at the chair.
+2026-08-12 11:45:50.591 [WARN] #35 cancel-all failed: failed to check service availability: rcl node's context is invalid, at ./src/rcl/node.c:428
+2026-08-12 11:45:50.591 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-12 11:45:50.591 [RUN] agent shutting down

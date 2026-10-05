@@ -1,0 +1,91 @@
+2026-08-08 15:55:36.643 [RUN] vla_agent v23  (#55 LiDAR failure reasons reported, #54 LiDAR object ranging, #53 seeded depth intrinsics, #52 depth intrinsics rescaled to frame size, #51 compressedDepth transport, #50 compressed RGB transport, #49 annotated feed gated per topic, #47 TF at colour-frame stamp, #48 reject stale depth, #46 one subscription per camera stream, #43 longer cached action-server wait, #44 undock retry-loop breaker, #45 sync slop for 1 Hz depth, #37 /robot1 namespace, #38 stereo depth topic, #39 best-effort sensor QoS, #40 RGB->depth pixel mapping, #41 encoding-based mm/m, #42 explicit namespaced TF, #36 no patrol feed prompt, #35 cancel actually stops the robot, #34 feed publishes to any subscriber, #22 dock no-detect zone, #23 live-first memory, #24 forget, #25 typo-tolerant control words, #26 bare yes/no, #27 context expiry, #28 all-instance distances, #29 Create 3 backup ratchet, #30 sticky goals + range-scaled gate + ring-safe blacklist, #31 incremental off-map hop goals, #32 non-freezing live feed, #33 command/reply/status bridge)
+2026-08-08 15:55:36.643 [RUN] agent started (SIGHT_CONFIRM=2, SEARCH_TIMEOUT=45.0s, NO_PROGRESS_LIMIT=60.0s, ROBOT_CLEARANCE=0.25m)
+2026-08-08 15:55:43.425 [CMD] [keyboard] undock
+2026-08-08 15:55:43.425 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 15:55:43.425 [STEP] undock target=None
+2026-08-08 15:55:43.426 [ROBOT] Undocking…
+2026-08-08 15:55:47.278 [ROBOT] Stopped. The robot is idle.
+2026-08-08 15:55:47.279 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 15:55:49.095 [ROBOT] Undocked — ready to move.
+2026-08-08 15:55:49.096 [DOCK] undock ok
+2026-08-08 15:55:49.573 [INFO] depth frames 1280x720, intrinsics 1280x720 from seeded defaults (#53)
+2026-08-08 15:55:49.594 [INFO] live depth camera_info received 1280x720
+2026-08-08 15:55:52.658 [ROBOT] RGB and depth stopped lining up (1.9s since the last matched pair) — switching to the newest frame of each. Detections stay live; depth accuracy drops a little while they are out of step.
+2026-08-08 15:55:52.659 [WARN] #32a stale sync pair dropped after 1.9s
+2026-08-08 15:55:58.320 [CMD] [keyboard] whwhat do you see
+2026-08-08 15:55:58.320 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 15:55:58.966 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a chair and a shelf.', 'target': None}]}
+2026-08-08 15:55:58.966 [STEP] describe target=None
+2026-08-08 15:56:00.378 [ROBOT] Stopped. The robot is idle.
+2026-08-08 15:56:00.379 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 15:56:08.481 [CMD] [keyboard] turn right 20
+2026-08-08 15:56:08.481 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 15:56:09.116 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning twenty degrees to the right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -20.0}]}
+2026-08-08 15:56:09.116 [STEP] move target=None
+2026-08-08 15:56:10.539 [ROBOT] Stopped. The robot is idle.
+2026-08-08 15:56:10.539 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 15:56:12.659 [ROBOT] Done with that move.
+2026-08-08 15:56:24.736 [CMD] [keyboard] turn right 20
+2026-08-08 15:56:24.736 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 15:56:25.364 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning twenty degrees to the right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -20.0}]}
+2026-08-08 15:56:25.364 [STEP] move target=None
+2026-08-08 15:56:26.778 [ROBOT] Stopped. The robot is idle.
+2026-08-08 15:56:26.778 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 15:56:28.658 [ROBOT] Done with that move.
+2026-08-08 15:56:31.472 [CMD] [keyboard] what do you see
+2026-08-08 15:56:31.472 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 15:56:32.047 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a chair.', 'target': None}]}
+2026-08-08 15:56:32.047 [STEP] describe target=None
+2026-08-08 15:56:33.518 [ROBOT] Stopped. The robot is idle.
+2026-08-08 15:56:33.518 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 15:56:38.417 [CMD] [keyboard] go to the chair
+2026-08-08 15:56:38.417 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 15:56:38.914 [BRAIN] {'steps': [{'action': 'navigate', 'speech': 'Heading to the chair.', 'target': 'chair'}]}
+2026-08-08 15:56:38.914 [STEP] navigate target='chair'
+2026-08-08 15:56:40.458 [ROBOT] Stopped. The robot is idle.
+2026-08-08 15:56:40.459 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 15:56:46.945 [CMD] (cancel via keyboard) stop
+2026-08-08 15:56:46.945 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 15:56:48.999 [ROBOT] Stopped. The robot is idle.
+2026-08-08 15:56:48.999 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 15:56:50.864 [CMD] [keyboard] dock
+2026-08-08 15:56:50.865 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 15:56:50.865 [STEP] dock target=None
+2026-08-08 15:56:50.865 [ROBOT] Docking…
+2026-08-08 15:56:56.878 [ROBOT] I sent the stop but the robot is STILL MOVING (0.01 m/s, 0.66 rad/s). Take manual override now.
+2026-08-08 15:56:56.879 [ERROR] #35 robot still moving 6.0s after stop: lin=0.01 ang=0.66
+2026-08-08 15:57:03.752 [ROBOT] The dock action did not complete — please check the robot. (dock_status will keep me updated.)
+2026-08-08 15:57:03.752 [DOCK] dock FAILED
+2026-08-08 15:57:14.458 [ROBOT] I've stopped receiving camera frames. Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-08-08 15:57:14.459 [WARN] #32e camera stream stalled
+2026-08-08 15:57:21.905 [CMD] [keyboard] is the robot docked
+2026-08-08 15:57:21.905 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 15:57:22.469 [BRAIN] {'steps': [{'action': 'locate', 'speech': "Checking if I'm at the charging dock.", 'target': None}]}
+2026-08-08 15:57:22.469 [STEP] locate target=None
+2026-08-08 15:57:22.469 [ROBOT] I'm docked — undocking first, then I'll continue.
+2026-08-08 15:57:22.470 [ROBOT] Undocking…
+2026-08-08 15:57:26.318 [ROBOT] Stopped. The robot is idle.
+2026-08-08 15:57:26.319 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 15:57:27.889 [CMD] [keyboard] dock
+2026-08-08 15:57:27.889 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 15:57:27.889 [STEP] dock target=None
+2026-08-08 15:57:27.889 [ROBOT] Docking…
+2026-08-08 15:57:27.935 [ROBOT] The undock action did not complete — please check the robot. (dock_status will keep me updated.)
+2026-08-08 15:57:27.936 [DOCK] undock FAILED
+2026-08-08 15:57:29.938 [ROBOT] Stopped. The robot is idle.
+2026-08-08 15:57:29.939 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 15:57:35.617 [CMD] [keyboard] dock
+2026-08-08 15:57:35.617 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 15:57:35.617 [STEP] dock target=None
+2026-08-08 15:57:35.617 [ROBOT] Docking…
+2026-08-08 15:57:37.658 [ROBOT] Stopped. The robot is idle.
+2026-08-08 15:57:37.659 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 16:01:38.545 [CMD] [keyboard] undock
+2026-08-08 16:01:38.545 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 16:01:38.545 [STEP] undock target=None
+2026-08-08 16:01:40.598 [ROBOT] Stopped. The robot is idle.
+2026-08-08 16:01:40.598 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 16:01:44.545 [WARN] #35 cancel-all failed: failed to check service availability: rcl node's context is invalid, at ./src/rcl/node.c:428
+2026-08-08 16:01:44.545 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 16:01:44.545 [RUN] agent shutting down
+2026-08-08 16:01:44.638 [ERROR] command worker failed on 'undock': Failed to check if action server is available: rcl node's context is invalid, at ./src/rcl/node.c:428

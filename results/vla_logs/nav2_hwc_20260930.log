@@ -1,0 +1,894 @@
+[INFO] [launch]: All log files can be found below /home/danyalaziz/.ros/log/2026-09-30-12-49-35-641004-Precision-3660-31533
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [component_container_isolated-1]: process started with pid [31584]
+[component_container_isolated-1] [INFO] [1790754577.959363928] [robot1.nav2_container]: Load Library: /opt/ros/humble/lib/libcontroller_server_core.so
+[component_container_isolated-1] [INFO] [1790754578.120405689] [robot1.nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_controller::ControllerServer>
+[component_container_isolated-1] [INFO] [1790754578.120438795] [robot1.nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_controller::ControllerServer>
+[component_container_isolated-1] [INFO] [1790754578.162664139] [robot1.controller_server]: 
+[component_container_isolated-1] 	controller_server lifecycle node launched. 
+[component_container_isolated-1] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-1] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-1] [INFO] [1790754578.330138077] [robot1.controller_server]: Creating controller server
+[component_container_isolated-1] [INFO] [1790754578.371359108] [robot1.local_costmap.local_costmap]: 
+[component_container_isolated-1] 	local_costmap lifecycle node launched. 
+[component_container_isolated-1] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-1] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-1] [INFO] [1790754578.381999539] [robot1.local_costmap.local_costmap]: Creating Costmap
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/robot1/controller_server' in container '/robot1/nav2_container'
+[component_container_isolated-1] [INFO] [1790754578.390492432] [robot1.nav2_container]: Load Library: /opt/ros/humble/lib/libsmoother_server_core.so
+[component_container_isolated-1] [INFO] [1790754578.407700154] [robot1.nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_smoother::SmootherServer>
+[component_container_isolated-1] [INFO] [1790754578.407713909] [robot1.nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_smoother::SmootherServer>
+[component_container_isolated-1] [INFO] [1790754578.484169288] [robot1.smoother_server]: 
+[component_container_isolated-1] 	smoother_server lifecycle node launched. 
+[component_container_isolated-1] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-1] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-1] [INFO] [1790754578.484710465] [robot1.smoother_server]: Creating smoother server
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/robot1/smoother_server' in container '/robot1/nav2_container'
+[component_container_isolated-1] [INFO] [1790754578.504846249] [robot1.nav2_container]: Load Library: /opt/ros/humble/lib/libplanner_server_core.so
+[component_container_isolated-1] [INFO] [1790754578.510868660] [robot1.nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_planner::PlannerServer>
+[component_container_isolated-1] [INFO] [1790754578.510881007] [robot1.nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_planner::PlannerServer>
+[component_container_isolated-1] [INFO] [1790754578.598724929] [robot1.planner_server]: 
+[component_container_isolated-1] 	planner_server lifecycle node launched. 
+[component_container_isolated-1] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-1] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-1] [INFO] [1790754578.599241052] [robot1.planner_server]: Creating
+[component_container_isolated-1] [INFO] [1790754578.767065349] [robot1.global_costmap.global_costmap]: 
+[component_container_isolated-1] 	global_costmap lifecycle node launched. 
+[component_container_isolated-1] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-1] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-1] [INFO] [1790754578.767228536] [robot1.global_costmap.global_costmap]: Creating Costmap
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/robot1/planner_server' in container '/robot1/nav2_container'
+[component_container_isolated-1] [INFO] [1790754578.784497955] [robot1.nav2_container]: Load Library: /opt/ros/humble/lib/libbehavior_server_core.so
+[component_container_isolated-1] [INFO] [1790754578.816256849] [robot1.nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<behavior_server::BehaviorServer>
+[component_container_isolated-1] [INFO] [1790754578.816269283] [robot1.nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<behavior_server::BehaviorServer>
+[component_container_isolated-1] [INFO] [1790754578.953230639] [robot1.behavior_server]: 
+[component_container_isolated-1] 	behavior_server lifecycle node launched. 
+[component_container_isolated-1] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-1] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/robot1/behavior_server' in container '/robot1/nav2_container'
+[component_container_isolated-1] [INFO] [1790754578.976324148] [robot1.nav2_container]: Load Library: /opt/ros/humble/lib/libbt_navigator_core.so
+[component_container_isolated-1] [INFO] [1790754579.021704629] [robot1.nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_bt_navigator::BtNavigator>
+[component_container_isolated-1] [INFO] [1790754579.021749698] [robot1.nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_bt_navigator::BtNavigator>
+[component_container_isolated-1] [INFO] [1790754579.221733310] [robot1.bt_navigator]: 
+[component_container_isolated-1] 	bt_navigator lifecycle node launched. 
+[component_container_isolated-1] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-1] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-1] [INFO] [1790754579.221762629] [robot1.bt_navigator]: Creating
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/robot1/bt_navigator' in container '/robot1/nav2_container'
+[component_container_isolated-1] [INFO] [1790754579.223582753] [robot1.nav2_container]: Load Library: /opt/ros/humble/lib/libwaypoint_follower_core.so
+[component_container_isolated-1] [INFO] [1790754579.233234577] [robot1.nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_waypoint_follower::WaypointFollower>
+[component_container_isolated-1] [INFO] [1790754579.233249650] [robot1.nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_waypoint_follower::WaypointFollower>
+[component_container_isolated-1] [INFO] [1790754579.654967165] [robot1.waypoint_follower]: 
+[component_container_isolated-1] 	waypoint_follower lifecycle node launched. 
+[component_container_isolated-1] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-1] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-1] [INFO] [1790754579.655845277] [robot1.waypoint_follower]: Creating
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/robot1/waypoint_follower' in container '/robot1/nav2_container'
+[component_container_isolated-1] [INFO] [1790754579.657277756] [robot1.nav2_container]: Load Library: /opt/ros/humble/lib/libvelocity_smoother_core.so
+[component_container_isolated-1] [INFO] [1790754579.684080018] [robot1.nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_velocity_smoother::VelocitySmoother>
+[component_container_isolated-1] [INFO] [1790754579.684091696] [robot1.nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_velocity_smoother::VelocitySmoother>
+[component_container_isolated-1] [INFO] [1790754580.989732955] [robot1.velocity_smoother]: 
+[component_container_isolated-1] 	velocity_smoother lifecycle node launched. 
+[component_container_isolated-1] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-1] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/robot1/velocity_smoother' in container '/robot1/nav2_container'
+[component_container_isolated-1] [INFO] [1790754581.046456569] [robot1.nav2_container]: Load Library: /opt/ros/humble/lib/libnav2_lifecycle_manager_core.so
+[component_container_isolated-1] [INFO] [1790754581.079096751] [robot1.nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_lifecycle_manager::LifecycleManager>
+[component_container_isolated-1] [INFO] [1790754581.079143991] [robot1.nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_lifecycle_manager::LifecycleManager>
+[component_container_isolated-1] [INFO] [1790754582.878770347] [robot1.lifecycle_manager_navigation]: Creating
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/robot1/lifecycle_manager_navigation' in container '/robot1/nav2_container'
+[component_container_isolated-1] [INFO] [1790754583.042360954] [robot1.lifecycle_manager_navigation]: [34m[1mCreating and initializing lifecycle service clients[0m[0m
+[INFO] [nav2_startup-2]: process started with pid [31701]
+[nav2_startup-2] waiting for service to become available...
+[nav2_startup-2] requester: making request: nav2_msgs.srv.ManageLifecycleNodes_Request(command=0)
+[nav2_startup-2] 
+[component_container_isolated-1] [INFO] [1790754597.388005213] [robot1.lifecycle_manager_navigation]: [34m[1mStarting managed nodes bringup...[0m[0m
+[component_container_isolated-1] [INFO] [1790754597.388053583] [robot1.lifecycle_manager_navigation]: [34m[1mConfiguring controller_server[0m[0m
+[component_container_isolated-1] [INFO] [1790754597.388411289] [robot1.controller_server]: Configuring controller interface
+[component_container_isolated-1] [INFO] [1790754597.388518157] [robot1.controller_server]: getting goal checker plugins..
+[component_container_isolated-1] [INFO] [1790754597.388544966] [robot1.controller_server]: Controller frequency set to 20.0000Hz
+[component_container_isolated-1] [INFO] [1790754597.388558169] [robot1.local_costmap.local_costmap]: Configuring
+[component_container_isolated-1] [INFO] [1790754597.505974407] [robot1.local_costmap.local_costmap]: Using plugin "static_layer"
+[component_container_isolated-1] [INFO] [1790754597.543580614] [robot1.local_costmap.local_costmap]: Subscribing to the map topic (/robot1/map) with transient local durability
+[component_container_isolated-1] [INFO] [1790754597.544125460] [robot1.local_costmap.local_costmap]: Initialized plugin "static_layer"
+[component_container_isolated-1] [INFO] [1790754597.544135615] [robot1.local_costmap.local_costmap]: Using plugin "voxel_layer"
+[component_container_isolated-1] [INFO] [1790754597.544282522] [robot1.local_costmap.local_costmap]: Subscribed to Topics: scan
+[component_container_isolated-1] [INFO] [1790754597.637045217] [robot1.local_costmap.local_costmap]: Initialized plugin "voxel_layer"
+[component_container_isolated-1] [INFO] [1790754597.637058005] [robot1.local_costmap.local_costmap]: Using plugin "inflation_layer"
+[component_container_isolated-1] [INFO] [1790754597.637248212] [robot1.local_costmap.local_costmap]: Initialized plugin "inflation_layer"
+[component_container_isolated-1] [INFO] [1790754597.791329767] [robot1.local_costmap.local_costmap]: StaticLayer: Resizing static layer to 128 X 287 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790754597.791769818] [robot1.controller_server]: Created progress_checker : progress_checker of type nav2_controller::SimpleProgressChecker
+[component_container_isolated-1] [INFO] [1790754597.792653324] [robot1.controller_server]: Created goal checker : general_goal_checker of type nav2_controller::SimpleGoalChecker
+[component_container_isolated-1] [INFO] [1790754597.792874165] [robot1.controller_server]: Controller Server has general_goal_checker  goal checkers available.
+[component_container_isolated-1] [INFO] [1790754597.848105378] [robot1.controller_server]: Created controller : FollowPath of type dwb_core::DWBLocalPlanner
+[component_container_isolated-1] [INFO] [1790754597.848619502] [robot1.controller_server]: Setting transform_tolerance to 0.200000
+[component_container_isolated-1] [INFO] [1790754597.995233837] [robot1.controller_server]: Using critic "RotateToGoal" (dwb_critics::RotateToGoalCritic)
+[component_container_isolated-1] [INFO] [1790754597.995393440] [robot1.controller_server]: Critic plugin initialized
+[component_container_isolated-1] [INFO] [1790754597.995429035] [robot1.controller_server]: Using critic "Oscillation" (dwb_critics::OscillationCritic)
+[component_container_isolated-1] [INFO] [1790754597.995565540] [robot1.controller_server]: Critic plugin initialized
+[component_container_isolated-1] [INFO] [1790754597.995602163] [robot1.controller_server]: Using critic "BaseObstacle" (dwb_critics::BaseObstacleCritic)
+[component_container_isolated-1] [INFO] [1790754597.995654126] [robot1.controller_server]: Critic plugin initialized
+[component_container_isolated-1] [INFO] [1790754597.995681352] [robot1.controller_server]: Using critic "GoalAlign" (dwb_critics::GoalAlignCritic)
+[component_container_isolated-1] [INFO] [1790754597.995770385] [robot1.controller_server]: Critic plugin initialized
+[component_container_isolated-1] [INFO] [1790754597.995803910] [robot1.controller_server]: Using critic "PathAlign" (dwb_critics::PathAlignCritic)
+[component_container_isolated-1] [INFO] [1790754597.995895918] [robot1.controller_server]: Critic plugin initialized
+[component_container_isolated-1] [INFO] [1790754597.995930699] [robot1.controller_server]: Using critic "PathDist" (dwb_critics::PathDistCritic)
+[component_container_isolated-1] [INFO] [1790754597.995995230] [robot1.controller_server]: Critic plugin initialized
+[component_container_isolated-1] [INFO] [1790754597.996022482] [robot1.controller_server]: Using critic "GoalDist" (dwb_critics::GoalDistCritic)
+[component_container_isolated-1] [INFO] [1790754597.996081512] [robot1.controller_server]: Critic plugin initialized
+[component_container_isolated-1] [INFO] [1790754597.996086139] [robot1.controller_server]: Controller Server has FollowPath  controllers available.
+[component_container_isolated-1] [INFO] [1790754598.121469818] [robot1.lifecycle_manager_navigation]: [34m[1mConfiguring smoother_server[0m[0m
+[component_container_isolated-1] [INFO] [1790754598.121702828] [robot1.smoother_server]: Configuring smoother server
+[component_container_isolated-1] [INFO] [1790754598.250104366] [robot1.smoother_server]: Created smoother : simple_smoother of type nav2_smoother::SimpleSmoother
+[component_container_isolated-1] [INFO] [1790754598.250275874] [robot1.smoother_server]: Smoother Server has simple_smoother  smoothers available.
+[component_container_isolated-1] [INFO] [1790754598.351993109] [robot1.lifecycle_manager_navigation]: [34m[1mConfiguring planner_server[0m[0m
+[component_container_isolated-1] [INFO] [1790754598.352110967] [robot1.planner_server]: Configuring
+[component_container_isolated-1] [INFO] [1790754598.352158888] [robot1.global_costmap.global_costmap]: Configuring
+[component_container_isolated-1] [INFO] [1790754598.440588816] [robot1.global_costmap.global_costmap]: Using plugin "static_layer"
+[component_container_isolated-1] [INFO] [1790754598.440839095] [robot1.global_costmap.global_costmap]: Subscribing to the map topic (/robot1/map) with transient local durability
+[component_container_isolated-1] [INFO] [1790754598.457120451] [robot1.global_costmap.global_costmap]: Initialized plugin "static_layer"
+[component_container_isolated-1] [INFO] [1790754598.457131676] [robot1.global_costmap.global_costmap]: Using plugin "obstacle_layer"
+[component_container_isolated-1] [INFO] [1790754598.457349261] [robot1.global_costmap.global_costmap]: Subscribed to Topics: scan
+[component_container_isolated-1] [INFO] [1790754598.505453463] [robot1.global_costmap.global_costmap]: Initialized plugin "obstacle_layer"
+[component_container_isolated-1] [INFO] [1790754598.505469189] [robot1.global_costmap.global_costmap]: Using plugin "inflation_layer"
+[component_container_isolated-1] [INFO] [1790754598.505738198] [robot1.global_costmap.global_costmap]: Initialized plugin "inflation_layer"
+[component_container_isolated-1] [INFO] [1790754598.723583552] [robot1.global_costmap.global_costmap]: StaticLayer: Resizing costmap to 128 X 287 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790754598.743444009] [robot1.planner_server]: Created global planner plugin GridBased of type nav2_navfn_planner/NavfnPlanner
+[component_container_isolated-1] [INFO] [1790754598.743464775] [robot1.planner_server]: Configuring plugin GridBased of type NavfnPlanner
+[component_container_isolated-1] [INFO] [1790754598.743704064] [robot1.planner_server]: Planner Server has GridBased  planners available.
+[component_container_isolated-1] [INFO] [1790754598.964974240] [robot1.lifecycle_manager_navigation]: [34m[1mConfiguring behavior_server[0m[0m
+[component_container_isolated-1] [INFO] [1790754598.965117174] [robot1.behavior_server]: Configuring
+[component_container_isolated-1] [INFO] [1790754599.100652651] [robot1.behavior_server]: Creating behavior plugin spin of type nav2_behaviors/Spin
+[component_container_isolated-1] [INFO] [1790754599.124500331] [robot1.behavior_server]: Configuring spin
+[component_container_isolated-1] [INFO] [1790754599.223756818] [robot1.behavior_server]: Creating behavior plugin backup of type nav2_behaviors/BackUp
+[component_container_isolated-1] [INFO] [1790754599.244534335] [robot1.behavior_server]: Configuring backup
+[component_container_isolated-1] [INFO] [1790754599.377469397] [robot1.behavior_server]: Creating behavior plugin drive_on_heading of type nav2_behaviors/DriveOnHeading
+[component_container_isolated-1] [INFO] [1790754599.393240736] [robot1.behavior_server]: Configuring drive_on_heading
+[component_container_isolated-1] [INFO] [1790754599.513821671] [robot1.behavior_server]: Creating behavior plugin assisted_teleop of type nav2_behaviors/AssistedTeleop
+[component_container_isolated-1] [INFO] [1790754599.517320758] [robot1.behavior_server]: Configuring assisted_teleop
+[component_container_isolated-1] [INFO] [1790754599.684318238] [robot1.behavior_server]: Creating behavior plugin wait of type nav2_behaviors/Wait
+[component_container_isolated-1] [INFO] [1790754599.701538476] [robot1.behavior_server]: Configuring wait
+[component_container_isolated-1] [INFO] [1790754599.815311142] [robot1.lifecycle_manager_navigation]: [34m[1mConfiguring bt_navigator[0m[0m
+[component_container_isolated-1] [INFO] [1790754599.815398344] [robot1.bt_navigator]: Configuring
+[component_container_isolated-1] [INFO] [1790754601.280555673] [robot1.lifecycle_manager_navigation]: [34m[1mConfiguring waypoint_follower[0m[0m
+[component_container_isolated-1] [INFO] [1790754601.280741094] [robot1.waypoint_follower]: Configuring
+[component_container_isolated-1] [INFO] [1790754601.604775110] [robot1.waypoint_follower]: Created waypoint_task_executor : wait_at_waypoint of type nav2_waypoint_follower::WaitAtWaypoint
+[component_container_isolated-1] [INFO] [1790754601.605236407] [robot1.lifecycle_manager_navigation]: [34m[1mConfiguring velocity_smoother[0m[0m
+[component_container_isolated-1] [INFO] [1790754601.605451720] [robot1.velocity_smoother]: Configuring velocity smoother
+[component_container_isolated-1] [INFO] [1790754601.652453977] [robot1.lifecycle_manager_navigation]: [34m[1mActivating controller_server[0m[0m
+[component_container_isolated-1] [INFO] [1790754601.652596940] [robot1.controller_server]: Activating
+[component_container_isolated-1] [INFO] [1790754601.652615605] [robot1.local_costmap.local_costmap]: Activating
+[component_container_isolated-1] [INFO] [1790754601.652622394] [robot1.local_costmap.local_costmap]: Checking transform
+[component_container_isolated-1] [INFO] [1790754601.652673427] [robot1.local_costmap.local_costmap]: start
+[component_container_isolated-1] [INFO] [1790754601.866397822] [robot1.controller_server]: Creating bond (controller_server) to lifecycle manager.
+[component_container_isolated-1] [INFO] [1790754602.019380121] [robot1.lifecycle_manager_navigation]: Server controller_server connected with bond.
+[component_container_isolated-1] [INFO] [1790754602.019464649] [robot1.lifecycle_manager_navigation]: [34m[1mActivating smoother_server[0m[0m
+[component_container_isolated-1] [INFO] [1790754602.019762902] [robot1.smoother_server]: Activating
+[component_container_isolated-1] [INFO] [1790754602.019792969] [robot1.smoother_server]: Creating bond (smoother_server) to lifecycle manager.
+[component_container_isolated-1] [INFO] [1790754602.165601498] [robot1.lifecycle_manager_navigation]: Server smoother_server connected with bond.
+[component_container_isolated-1] [INFO] [1790754602.165617273] [robot1.lifecycle_manager_navigation]: [34m[1mActivating planner_server[0m[0m
+[component_container_isolated-1] [INFO] [1790754602.165828781] [robot1.planner_server]: Activating
+[component_container_isolated-1] [INFO] [1790754602.165865876] [robot1.global_costmap.global_costmap]: Activating
+[component_container_isolated-1] [INFO] [1790754602.165876146] [robot1.global_costmap.global_costmap]: Checking transform
+[component_container_isolated-1] [INFO] [1790754602.165941425] [robot1.global_costmap.global_costmap]: start
+[component_container_isolated-1] [INFO] [1790754603.179873945] [robot1.planner_server]: Activating plugin GridBased of type NavfnPlanner
+[component_container_isolated-1] [INFO] [1790754603.194140609] [robot1.planner_server]: Creating bond (planner_server) to lifecycle manager.
+[component_container_isolated-1] [INFO] [1790754603.353797168] [robot1.lifecycle_manager_navigation]: Server planner_server connected with bond.
+[component_container_isolated-1] [INFO] [1790754603.353888659] [robot1.lifecycle_manager_navigation]: [34m[1mActivating behavior_server[0m[0m
+[component_container_isolated-1] [INFO] [1790754603.354103089] [robot1.behavior_server]: Activating
+[component_container_isolated-1] [INFO] [1790754603.354114528] [robot1.behavior_server]: Activating spin
+[component_container_isolated-1] [INFO] [1790754603.354124470] [robot1.behavior_server]: Activating backup
+[component_container_isolated-1] [INFO] [1790754603.354129493] [robot1.behavior_server]: Activating drive_on_heading
+[component_container_isolated-1] [INFO] [1790754603.354134637] [robot1.behavior_server]: Activating assisted_teleop
+[component_container_isolated-1] [INFO] [1790754603.354139023] [robot1.behavior_server]: Activating wait
+[component_container_isolated-1] [INFO] [1790754603.354145022] [robot1.behavior_server]: Creating bond (behavior_server) to lifecycle manager.
+[component_container_isolated-1] [INFO] [1790754603.514689779] [robot1.lifecycle_manager_navigation]: Server behavior_server connected with bond.
+[component_container_isolated-1] [INFO] [1790754603.514759066] [robot1.lifecycle_manager_navigation]: [34m[1mActivating bt_navigator[0m[0m
+[component_container_isolated-1] [INFO] [1790754603.514994534] [robot1.bt_navigator]: Activating
+[component_container_isolated-1] [INFO] [1790754605.382415787] [robot1.bt_navigator]: Creating bond (bt_navigator) to lifecycle manager.
+[component_container_isolated-1] [INFO] [1790754605.575197619] [robot1.lifecycle_manager_navigation]: Server bt_navigator connected with bond.
+[component_container_isolated-1] [INFO] [1790754605.575276887] [robot1.lifecycle_manager_navigation]: [34m[1mActivating waypoint_follower[0m[0m
+[component_container_isolated-1] [INFO] [1790754605.575531341] [robot1.waypoint_follower]: Activating
+[component_container_isolated-1] [INFO] [1790754605.575554239] [robot1.waypoint_follower]: Creating bond (waypoint_follower) to lifecycle manager.
+[component_container_isolated-1] [INFO] [1790754605.735420929] [robot1.lifecycle_manager_navigation]: Server waypoint_follower connected with bond.
+[component_container_isolated-1] [INFO] [1790754605.735445899] [robot1.lifecycle_manager_navigation]: [34m[1mActivating velocity_smoother[0m[0m
+[component_container_isolated-1] [INFO] [1790754605.735646530] [robot1.velocity_smoother]: Activating
+[component_container_isolated-1] [INFO] [1790754605.735694471] [robot1.velocity_smoother]: Creating bond (velocity_smoother) to lifecycle manager.
+[component_container_isolated-1] [INFO] [1790754605.904333140] [robot1.lifecycle_manager_navigation]: Server velocity_smoother connected with bond.
+[component_container_isolated-1] [INFO] [1790754605.904430262] [robot1.lifecycle_manager_navigation]: [34m[1mManaged nodes are active[0m[0m
+[component_container_isolated-1] [INFO] [1790754605.904456728] [robot1.lifecycle_manager_navigation]: [34m[1mCreating bond timer...[0m[0m
+[nav2_startup-2] response:
+[nav2_startup-2] nav2_msgs.srv.ManageLifecycleNodes_Response(success=True)
+[nav2_startup-2] 
+[INFO] [nav2_startup-2]: process has finished cleanly [pid 31701]
+[component_container_isolated-1] [INFO] [1790754649.295789797] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1790754648.858 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[component_container_isolated-1] [INFO] [1790754851.647519554] [robot1.bt_navigator]: Begin navigating from current location (-0.13, -0.01) to (-0.90, 1.28)
+[component_container_isolated-1] [INFO] [1790754851.668052772] [robot1.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-1] [WARN] [1790754851.668101877] [robot1.controller_server]: No goal checker was specified in parameter 'current_goal_checker'. Server will use only plugin loaded general_goal_checker . This warning will appear once.
+[component_container_isolated-1] [INFO] [1790754852.452919789] [robot1.local_costmap.local_costmap]: StaticLayer: Resizing static layer to 140 X 291 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790754852.647701251] [robot1.bt_navigator]: Received goal preemption request
+[component_container_isolated-1] [INFO] [1790754852.647835484] [robot1.bt_navigator]: Begin navigating from current location (-0.26, 0.13) to (-1.43, 2.43)
+[component_container_isolated-1] [INFO] [1790754852.718268038] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790754853.166092675] [robot1.global_costmap.global_costmap]: StaticLayer: Resizing costmap to 140 X 291 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790754853.452945113] [robot1.local_costmap.local_costmap]: StaticLayer: Resizing static layer to 159 X 291 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790754853.647775899] [robot1.bt_navigator]: Received goal preemption request
+[component_container_isolated-1] [INFO] [1790754853.647868614] [robot1.bt_navigator]: Begin navigating from current location (-0.40, 0.32) to (-2.01, 2.03)
+[component_container_isolated-1] [INFO] [1790754853.768290916] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790754854.166090843] [robot1.global_costmap.global_costmap]: StaticLayer: Resizing costmap to 159 X 291 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790754854.647696022] [robot1.bt_navigator]: Received goal preemption request
+[component_container_isolated-1] [INFO] [1790754854.647781135] [robot1.bt_navigator]: Begin navigating from current location (-0.51, 0.56) to (-1.85, 2.37)
+[component_container_isolated-1] [INFO] [1790754854.768267656] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790754855.052990983] [robot1.local_costmap.local_costmap]: StaticLayer: Resizing static layer to 171 X 295 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790754855.166097093] [robot1.global_costmap.global_costmap]: StaticLayer: Resizing costmap to 171 X 295 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790754855.647698057] [robot1.bt_navigator]: Received goal preemption request
+[component_container_isolated-1] [INFO] [1790754855.647810769] [robot1.bt_navigator]: Begin navigating from current location (-0.66, 0.75) to (-1.65, 2.61)
+[component_container_isolated-1] [INFO] [1790754855.818267749] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790754856.452917294] [robot1.local_costmap.local_costmap]: StaticLayer: Resizing static layer to 175 X 295 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790754856.647720506] [robot1.bt_navigator]: Received goal preemption request
+[component_container_isolated-1] [INFO] [1790754856.647862605] [robot1.bt_navigator]: Begin navigating from current location (-0.81, 0.93) to (-2.05, 2.03)
+[component_container_isolated-1] [INFO] [1790754856.818290828] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790754857.166144757] [robot1.global_costmap.global_costmap]: StaticLayer: Resizing costmap to 175 X 295 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790754857.647719676] [robot1.bt_navigator]: Received goal preemption request
+[component_container_isolated-1] [INFO] [1790754857.647869552] [robot1.bt_navigator]: Begin navigating from current location (-0.91, 1.12) to (-1.85, 2.51)
+[component_container_isolated-1] [INFO] [1790754857.868268471] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790754858.452945190] [robot1.local_costmap.local_costmap]: StaticLayer: Resizing static layer to 192 X 295 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790754858.647692800] [robot1.bt_navigator]: Received goal preemption request
+[component_container_isolated-1] [INFO] [1790754858.647783317] [robot1.bt_navigator]: Begin navigating from current location (-1.01, 1.30) to (-1.66, 2.94)
+[component_container_isolated-1] [INFO] [1790754858.918269270] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790754859.166096201] [robot1.global_costmap.global_costmap]: StaticLayer: Resizing costmap to 192 X 295 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790754859.647692910] [robot1.bt_navigator]: Received goal preemption request
+[component_container_isolated-1] [INFO] [1790754859.647804309] [robot1.bt_navigator]: Begin navigating from current location (-1.11, 1.49) to (-1.97, 2.85)
+[component_container_isolated-1] [INFO] [1790754859.918289568] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790754860.452913694] [robot1.local_costmap.local_costmap]: StaticLayer: Resizing static layer to 192 X 296 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790754860.647704231] [robot1.bt_navigator]: Received goal preemption request
+[component_container_isolated-1] [INFO] [1790754860.647805711] [robot1.bt_navigator]: Begin navigating from current location (-1.21, 1.68) to (-1.94, 2.25)
+[component_container_isolated-1] [INFO] [1790754860.968285780] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790754861.166147411] [robot1.global_costmap.global_costmap]: StaticLayer: Resizing costmap to 192 X 296 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790754861.647735526] [robot1.bt_navigator]: Received goal preemption request
+[component_container_isolated-1] [INFO] [1790754861.647820646] [robot1.bt_navigator]: Begin navigating from current location (-1.28, 1.86) to (-1.70, 2.16)
+[component_container_isolated-1] [INFO] [1790754861.968283121] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790754862.052910762] [robot1.local_costmap.local_costmap]: StaticLayer: Resizing static layer to 192 X 296 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790754862.166094393] [robot1.global_costmap.global_costmap]: StaticLayer: Resizing costmap to 192 X 296 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790754862.647693847] [robot1.bt_navigator]: Received goal preemption request
+[component_container_isolated-1] [INFO] [1790754862.647777161] [robot1.bt_navigator]: Begin navigating from current location (-1.37, 1.99) to (-1.56, 2.52)
+[component_container_isolated-1] [INFO] [1790754863.018287385] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790754863.052962148] [robot1.local_costmap.local_costmap]: StaticLayer: Resizing static layer to 192 X 297 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790754863.166121111] [robot1.global_costmap.global_costmap]: StaticLayer: Resizing costmap to 192 X 297 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790754864.068284035] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790754864.452944085] [robot1.local_costmap.local_costmap]: StaticLayer: Resizing static layer to 193 X 298 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790754865.068282250] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790754865.166094448] [robot1.global_costmap.global_costmap]: StaticLayer: Resizing costmap to 193 X 298 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790754866.118289408] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790754867.118289043] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790754867.670088678] [robot1.controller_server]: Reached the goal!
+[component_container_isolated-1] [INFO] [1790754867.707756019] [robot1.bt_navigator]: Goal succeeded
+[component_container_isolated-1] [INFO] [1790755088.471826274] [robot1.bt_navigator]: Begin navigating from current location (-1.59, 2.29) to (2.93, -1.39)
+[component_container_isolated-1] [INFO] [1790755088.492477582] [robot1.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-1] [INFO] [1790755089.542677668] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755090.052939670] [robot1.local_costmap.local_costmap]: StaticLayer: Resizing static layer to 194 X 298 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790755090.166094146] [robot1.global_costmap.global_costmap]: StaticLayer: Resizing costmap to 194 X 298 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790755090.592698462] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755091.592701357] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755092.642698868] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755093.642699977] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755094.692705562] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755095.742678259] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755096.742680823] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755097.792680181] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755098.792690755] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755099.842717428] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755100.892680036] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755101.892692176] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755102.942728975] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755103.942701115] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755104.992698645] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755106.042683002] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755107.042680636] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755108.092679686] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755109.092678751] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755110.142679777] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755111.192695093] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755112.192683896] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755113.242678662] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755114.242679388] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755115.292697258] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755116.292684550] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755117.144500941] [robot1.controller_server]: Reached the goal!
+[component_container_isolated-1] [INFO] [1790755117.181996591] [robot1.bt_navigator]: Goal succeeded
+[component_container_isolated-1] [INFO] [1790755117.452948650] [robot1.local_costmap.local_costmap]: StaticLayer: Resizing static layer to 195 X 298 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790755118.166164608] [robot1.global_costmap.global_costmap]: StaticLayer: Resizing costmap to 195 X 298 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790755214.654740411] [robot1.bt_navigator]: Begin navigating from current location (3.22, -1.18) to (3.01, -2.54)
+[component_container_isolated-1] [INFO] [1790755214.675149535] [robot1.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-1] [INFO] [1790755215.725350438] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755216.775377383] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755217.775365248] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755218.452955192] [robot1.local_costmap.local_costmap]: StaticLayer: Resizing static layer to 205 X 298 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790755218.825352624] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755219.166081613] [robot1.global_costmap.global_costmap]: StaticLayer: Resizing costmap to 205 X 298 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790755219.825349647] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755220.875372753] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755221.654915600] [robot1.bt_navigator]: Received goal preemption request
+[component_container_isolated-1] [INFO] [1790755221.655011679] [robot1.bt_navigator]: Begin navigating from current location (3.30, -2.21) to (3.71, -5.00)
+[component_container_isolated-1] [INFO] [1790755221.925362272] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755222.654922056] [robot1.bt_navigator]: Received goal preemption request
+[component_container_isolated-1] [INFO] [1790755222.655022125] [robot1.bt_navigator]: Begin navigating from current location (3.20, -2.38) to (3.97, -5.19)
+[component_container_isolated-1] [INFO] [1790755222.925356073] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755223.644878020] [robot1.bt_navigator]: Received goal preemption request
+[component_container_isolated-1] [INFO] [1790755223.645024908] [robot1.bt_navigator]: Begin navigating from current location (3.17, -2.50) to (3.08, -3.26)
+[component_container_isolated-1] [INFO] [1790755223.975350436] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755224.654925210] [robot1.bt_navigator]: Received goal preemption request
+[component_container_isolated-1] [INFO] [1790755224.655050334] [robot1.bt_navigator]: Begin navigating from current location (3.19, -2.70) to (3.39, -3.40)
+[component_container_isolated-1] [INFO] [1790755224.975377265] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755225.452950192] [robot1.local_costmap.local_costmap]: StaticLayer: Resizing static layer to 208 X 298 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790755225.654915702] [robot1.bt_navigator]: Received goal preemption request
+[component_container_isolated-1] [INFO] [1790755225.655013862] [robot1.bt_navigator]: Begin navigating from current location (3.20, -2.82) to (3.63, -3.67)
+[component_container_isolated-1] [INFO] [1790755226.025353587] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755226.166073729] [robot1.global_costmap.global_costmap]: StaticLayer: Resizing costmap to 208 X 298 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790755226.654921731] [robot1.bt_navigator]: Received goal preemption request
+[component_container_isolated-1] [INFO] [1790755226.655010653] [robot1.bt_navigator]: Begin navigating from current location (3.21, -2.97) to (3.51, -4.04)
+[component_container_isolated-1] [INFO] [1790755227.075350255] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755228.075353991] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755229.125382728] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755230.125374401] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755231.175389148] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755232.225352627] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755233.225372680] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755233.827389459] [robot1.controller_server]: Reached the goal!
+[component_container_isolated-1] [INFO] [1790755233.864984013] [robot1.bt_navigator]: Goal succeeded
+[component_container_isolated-1] [INFO] [1790755263.653413206] [robot1.bt_navigator]: Begin navigating from current location (3.41, -3.84) to (2.88, -4.37)
+[component_container_isolated-1] [INFO] [1790755263.673793851] [robot1.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-1] [ERROR] [1790755264.663794345] [robot1.bt_navigator_navigate_to_pose_rclcpp_node]: Failed to get result for follow_path in node halt!
+[component_container_isolated-1] [INFO] [1790755264.663864640] [robot1.bt_navigator]: [navigate_to_pose] [ActionServer] Client requested to cancel the goal. Cancelling.
+[component_container_isolated-1] [INFO] [1790755264.663928663] [robot1.bt_navigator]: Goal canceled
+[component_container_isolated-1] [INFO] [1790755264.674000348] [robot1.controller_server]: Goal was canceled. Stopping the robot.
+[component_container_isolated-1] [INFO] [1790755264.674013089] [robot1.controller_server]: [follow_path] [ActionServer] Client requested to cancel the goal. Cancelling.
+[component_container_isolated-1] [INFO] [1790755299.966630633] [robot1.bt_navigator]: Begin navigating from current location (3.34, -4.01) to (-0.84, -0.18)
+[component_container_isolated-1] [INFO] [1790755299.987101323] [robot1.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-1] [INFO] [1790755301.037349675] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755302.087345074] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755303.087320688] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755304.137336080] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755305.137313122] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755306.187315613] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755307.237337751] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755308.237329145] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755309.287329016] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755310.287314914] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755311.337328701] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755312.387339104] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755313.387334789] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755314.437334628] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755315.437316498] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755316.487320809] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755317.487423002] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755318.537338238] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755319.587333814] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755320.587337495] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755321.637336756] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755322.637327086] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755323.687355015] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755324.737354378] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755325.737325849] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755326.787323359] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755327.787315753] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755328.837315644] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755329.837331981] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755330.887333039] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755331.937318154] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755332.937330097] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755333.987317925] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755334.452949431] [robot1.local_costmap.local_costmap]: StaticLayer: Resizing static layer to 208 X 299 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790755334.987313936] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755335.166066830] [robot1.global_costmap.global_costmap]: StaticLayer: Resizing costmap to 208 X 299 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790755336.037320186] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755337.052907732] [robot1.local_costmap.local_costmap]: StaticLayer: Resizing static layer to 208 X 303 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790755337.087328764] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755337.166117402] [robot1.global_costmap.global_costmap]: StaticLayer: Resizing costmap to 208 X 303 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790755338.087331081] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755339.137318964] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755340.137316148] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755341.187315022] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755342.187312637] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755342.739150741] [robot1.controller_server]: Reached the goal!
+[component_container_isolated-1] [INFO] [1790755342.776828953] [robot1.bt_navigator]: Goal succeeded
+[component_container_isolated-1] [INFO] [1790755463.652185885] [robot1.bt_navigator]: Begin navigating from current location (-0.68, -0.02) to (-0.46, 3.11)
+[component_container_isolated-1] [INFO] [1790755463.672525487] [robot1.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-1] [INFO] [1790755464.722745501] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755465.772727468] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755466.772724649] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755467.822725723] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755468.822724909] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755469.872725222] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755470.872722960] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755471.922739047] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755472.972723952] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755473.972740698] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755475.022722107] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755475.574004171] [robot1.controller_server]: Reached the goal!
+[component_container_isolated-1] [INFO] [1790755475.612408580] [robot1.bt_navigator]: Goal succeeded
+[component_container_isolated-1] [INFO] [1790755475.643101058] [robot1.bt_navigator]: Begin navigating from current location (-0.51, 2.88) to (-0.54, 3.27)
+[component_container_isolated-1] [INFO] [1790755475.663591513] [robot1.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-1] [INFO] [1790755476.564971552] [robot1.controller_server]: Reached the goal!
+[component_container_isolated-1] [INFO] [1790755476.603302763] [robot1.bt_navigator]: Goal succeeded
+[component_container_isolated-1] [INFO] [1790755527.052947539] [robot1.local_costmap.local_costmap]: StaticLayer: Resizing static layer to 208 X 306 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790755527.166098718] [robot1.global_costmap.global_costmap]: StaticLayer: Resizing costmap to 208 X 306 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790755570.650143499] [robot1.bt_navigator]: Begin navigating from current location (-1.31, -0.03) to (0.70, 5.90)
+[component_container_isolated-1] [INFO] [1790755570.670686122] [robot1.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-1] [INFO] [1790755571.720963202] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755572.650419938] [robot1.bt_navigator]: Received goal preemption request
+[component_container_isolated-1] [INFO] [1790755572.650531814] [robot1.bt_navigator]: Begin navigating from current location (-1.18, 0.38) to (-0.95, 3.25)
+[component_container_isolated-1] [INFO] [1790755572.770887710] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755573.650325444] [robot1.bt_navigator]: Received goal preemption request
+[component_container_isolated-1] [INFO] [1790755573.650427375] [robot1.bt_navigator]: Begin navigating from current location (-1.12, 0.58) to (-0.64, 3.24)
+[component_container_isolated-1] [INFO] [1790755573.770908959] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755574.650328332] [robot1.bt_navigator]: Received goal preemption request
+[component_container_isolated-1] [INFO] [1790755574.650455852] [robot1.bt_navigator]: Begin navigating from current location (-1.09, 0.80) to (-0.44, 3.40)
+[component_container_isolated-1] [INFO] [1790755574.820875132] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755575.660346462] [robot1.bt_navigator]: Received goal preemption request
+[component_container_isolated-1] [INFO] [1790755575.660439369] [robot1.bt_navigator]: Begin navigating from current location (-1.08, 0.99) to (-0.15, 3.21)
+[component_container_isolated-1] [INFO] [1790755575.820886834] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755576.650322463] [robot1.bt_navigator]: Received goal preemption request
+[component_container_isolated-1] [INFO] [1790755576.650428343] [robot1.bt_navigator]: Begin navigating from current location (-1.04, 1.18) to (-0.85, 3.52)
+[component_container_isolated-1] [INFO] [1790755576.870872488] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755577.650364201] [robot1.bt_navigator]: Received goal preemption request
+[component_container_isolated-1] [INFO] [1790755577.650467828] [robot1.bt_navigator]: Begin navigating from current location (-0.99, 1.36) to (0.04, 3.39)
+[component_container_isolated-1] [INFO] [1790755577.920892540] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755578.650337024] [robot1.bt_navigator]: Received goal preemption request
+[component_container_isolated-1] [INFO] [1790755578.650404361] [robot1.bt_navigator]: Begin navigating from current location (-0.97, 1.51) to (-1.12, 3.60)
+[component_container_isolated-1] [INFO] [1790755578.920892378] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755579.650324808] [robot1.bt_navigator]: Received goal preemption request
+[component_container_isolated-1] [INFO] [1790755579.650436749] [robot1.bt_navigator]: Begin navigating from current location (-0.94, 1.66) to (0.08, 3.70)
+[component_container_isolated-1] [INFO] [1790755579.970909175] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755580.650344999] [robot1.bt_navigator]: Received goal preemption request
+[component_container_isolated-1] [INFO] [1790755580.650434230] [robot1.bt_navigator]: Begin navigating from current location (-0.92, 1.85) to (-1.03, 3.97)
+[component_container_isolated-1] [INFO] [1790755580.970872603] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755581.650417548] [robot1.bt_navigator]: Received goal preemption request
+[component_container_isolated-1] [INFO] [1790755581.650520566] [robot1.bt_navigator]: Begin navigating from current location (-0.90, 2.03) to (-0.26, 3.60)
+[component_container_isolated-1] [INFO] [1790755582.020886862] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755582.650327483] [robot1.bt_navigator]: Received goal preemption request
+[component_container_isolated-1] [INFO] [1790755582.650426658] [robot1.bt_navigator]: Begin navigating from current location (-0.86, 2.24) to (-1.26, 4.01)
+[component_container_isolated-1] [INFO] [1790755583.070895133] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755583.650346272] [robot1.bt_navigator]: Received goal preemption request
+[component_container_isolated-1] [INFO] [1790755583.650450439] [robot1.bt_navigator]: Begin navigating from current location (-0.85, 2.45) to (-1.35, 3.61)
+[component_container_isolated-1] [INFO] [1790755584.070890429] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755584.650345690] [robot1.bt_navigator]: Received goal preemption request
+[component_container_isolated-1] [INFO] [1790755584.650422605] [robot1.bt_navigator]: Begin navigating from current location (-0.81, 2.61) to (0.15, 3.99)
+[component_container_isolated-1] [INFO] [1790755585.120883150] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755585.650312938] [robot1.bt_navigator]: Received goal preemption request
+[component_container_isolated-1] [INFO] [1790755585.650407432] [robot1.bt_navigator]: Begin navigating from current location (-0.85, 2.77) to (-0.98, 4.30)
+[component_container_isolated-1] [INFO] [1790755586.120872260] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755586.650329243] [robot1.bt_navigator]: Received goal preemption request
+[component_container_isolated-1] [INFO] [1790755586.650465850] [robot1.bt_navigator]: Begin navigating from current location (-0.89, 2.88) to (0.12, 4.23)
+[component_container_isolated-1] [INFO] [1790755587.170871282] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755587.650351398] [robot1.bt_navigator]: Received goal preemption request
+[component_container_isolated-1] [INFO] [1790755587.650508743] [robot1.bt_navigator]: Begin navigating from current location (-0.89, 2.98) to (0.33, 3.85)
+[component_container_isolated-1] [INFO] [1790755588.170874340] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755589.220876630] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755590.270897254] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755591.270892937] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755592.320893255] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755593.320896546] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755594.370892851] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755595.420969847] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755596.420889277] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755597.470885827] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755598.470885259] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755598.572753190] [robot1.controller_server]: Reached the goal!
+[component_container_isolated-1] [INFO] [1790755598.610436099] [robot1.bt_navigator]: Goal succeeded
+[component_container_isolated-1] [INFO] [1790755657.052981506] [robot1.local_costmap.local_costmap]: StaticLayer: Resizing static layer to 211 X 329 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790755657.166102613] [robot1.global_costmap.global_costmap]: StaticLayer: Resizing costmap to 211 X 329 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790755684.596790073] [robot1.bt_navigator]: Begin navigating from current location (-0.25, 1.17) to (0.50, -0.63)
+[component_container_isolated-1] [INFO] [1790755684.617381107] [robot1.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-1] [INFO] [1790755685.667605416] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755686.717621996] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755687.717607116] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755688.767564938] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755689.767606821] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755690.817610235] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755691.817607609] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755692.867624682] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755693.917632641] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755694.917626833] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755695.967607167] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755696.967620846] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755698.017623859] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755699.017607039] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755700.067611494] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755701.117606834] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755702.117609840] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755702.869688406] [robot1.controller_server]: Reached the goal!
+[component_container_isolated-1] [INFO] [1790755702.907011566] [robot1.bt_navigator]: Goal succeeded
+[component_container_isolated-1] [INFO] [1790755703.594797695] [robot1.bt_navigator]: Begin navigating from current location (0.30, -0.85) to (0.87, -1.99)
+[component_container_isolated-1] [INFO] [1790755703.615316670] [robot1.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-1] [INFO] [1790755704.665511451] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [ERROR] [1790755705.015283989] [robot1.bt_navigator_navigate_to_pose_rclcpp_node]: Failed to get result for follow_path in node halt!
+[component_container_isolated-1] [INFO] [1790755705.015352060] [robot1.bt_navigator]: [navigate_to_pose] [ActionServer] Client requested to cancel the goal. Cancelling.
+[component_container_isolated-1] [INFO] [1790755705.015419223] [robot1.bt_navigator]: Goal canceled
+[component_container_isolated-1] [INFO] [1790755705.015510618] [robot1.controller_server]: Goal was canceled. Stopping the robot.
+[component_container_isolated-1] [INFO] [1790755705.015528268] [robot1.controller_server]: [follow_path] [ActionServer] Client requested to cancel the goal. Cancelling.
+[component_container_isolated-1] [INFO] [1790755705.594589442] [robot1.bt_navigator]: Begin navigating from current location (0.29, -1.09) to (0.57, -2.99)
+[component_container_isolated-1] [INFO] [1790755705.615156152] [robot1.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-1] [INFO] [1790755705.652941704] [robot1.local_costmap.local_costmap]: StaticLayer: Resizing static layer to 211 X 330 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790755706.166066886] [robot1.global_costmap.global_costmap]: StaticLayer: Resizing costmap to 211 X 330 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790755706.665347642] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755707.715345677] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755708.715371507] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755709.765346923] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755710.765345543] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755711.815361698] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755712.865368809] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755713.865381935] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755714.915348859] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755715.915344563] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755716.965384748] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755717.965373652] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [ERROR] [1790755718.415056759] [robot1.bt_navigator_navigate_to_pose_rclcpp_node]: Failed to get result for follow_path in node halt!
+[component_container_isolated-1] [INFO] [1790755718.415125254] [robot1.bt_navigator]: [navigate_to_pose] [ActionServer] Client requested to cancel the goal. Cancelling.
+[component_container_isolated-1] [INFO] [1790755718.415198521] [robot1.bt_navigator]: Goal canceled
+[component_container_isolated-1] [INFO] [1790755718.415367829] [robot1.controller_server]: Goal was canceled. Stopping the robot.
+[component_container_isolated-1] [INFO] [1790755718.415415777] [robot1.controller_server]: [follow_path] [ActionServer] Client requested to cancel the goal. Cancelling.
+[component_container_isolated-1] [INFO] [1790755718.594485693] [robot1.bt_navigator]: Begin navigating from current location (0.13, -2.86) to (1.90, -0.10)
+[component_container_isolated-1] [INFO] [1790755718.615149478] [robot1.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-1] [INFO] [1790755719.665364721] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755720.665333742] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755721.715333488] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755722.765335336] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755723.765430152] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755724.815365254] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755725.815334436] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755726.865356608] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755727.915334574] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755728.915332847] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755729.965366085] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755730.965335675] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755732.015335065] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755733.015360173] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755734.065358676] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755735.065335709] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755736.115358221] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755737.165363739] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755738.165369043] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755739.215334151] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755740.215371415] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755741.265334239] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755742.265364490] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755743.315335638] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755744.365371175] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755745.365369903] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755746.415357839] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755747.415371829] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755748.465333842] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755749.465374990] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755750.515372849] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755751.515359061] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755752.565335967] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755753.565337150] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755754.615335148] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755755.615334271] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755756.665370109] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755757.017121270] [robot1.controller_server]: Reached the goal!
+[component_container_isolated-1] [INFO] [1790755757.054778341] [robot1.bt_navigator]: Goal succeeded
+[component_container_isolated-1] [INFO] [1790755757.594915457] [robot1.bt_navigator]: Begin navigating from current location (2.42, 0.07) to (3.11, 1.97)
+[component_container_isolated-1] [WARN] [1790755757.597029670] [robot1.planner_server]: GridBased: failed to create plan with tolerance 0.50.
+[component_container_isolated-1] [WARN] [1790755757.597069332] [robot1.planner_server]: Planning algorithm GridBased failed to generate a valid path to (3.11, 1.97)
+[component_container_isolated-1] [WARN] [1790755757.597081158] [robot1.planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[component_container_isolated-1] [INFO] [1790755757.615187968] [robot1.global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[component_container_isolated-1] [WARN] [1790755758.177275211] [robot1.planner_server]: GridBased: failed to create plan with tolerance 0.50.
+[component_container_isolated-1] [WARN] [1790755758.177310897] [robot1.planner_server]: Planning algorithm GridBased failed to generate a valid path to (3.11, 1.97)
+[component_container_isolated-1] [WARN] [1790755758.177317606] [robot1.planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[component_container_isolated-1] [INFO] [1790755758.195163017] [robot1.local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[component_container_isolated-1] [INFO] [1790755758.195352118] [robot1.global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[component_container_isolated-1] [WARN] [1790755759.176971062] [robot1.planner_server]: GridBased: failed to create plan with tolerance 0.50.
+[component_container_isolated-1] [WARN] [1790755759.177009806] [robot1.planner_server]: Planning algorithm GridBased failed to generate a valid path to (3.11, 1.97)
+[component_container_isolated-1] [WARN] [1790755759.177017809] [robot1.planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[component_container_isolated-1] [INFO] [1790755759.195132241] [robot1.global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[component_container_isolated-1] [WARN] [1790755760.177285519] [robot1.planner_server]: GridBased: failed to create plan with tolerance 0.50.
+[component_container_isolated-1] [WARN] [1790755760.177329858] [robot1.planner_server]: Planning algorithm GridBased failed to generate a valid path to (3.11, 1.97)
+[component_container_isolated-1] [WARN] [1790755760.177347984] [robot1.planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[component_container_isolated-1] [INFO] [1790755760.195328343] [robot1.behavior_server]: Running spin
+[component_container_isolated-1] [INFO] [1790755760.195402887] [robot1.behavior_server]: Turning 1.57 for spin behavior.
+[component_container_isolated-1] [INFO] [1790755761.995584438] [robot1.behavior_server]: spin completed successfully
+[component_container_isolated-1] [WARN] [1790755762.026988797] [robot1.planner_server]: GridBased: failed to create plan with tolerance 0.50.
+[component_container_isolated-1] [WARN] [1790755762.027032456] [robot1.planner_server]: Planning algorithm GridBased failed to generate a valid path to (3.11, 1.97)
+[component_container_isolated-1] [WARN] [1790755762.027044304] [robot1.planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[component_container_isolated-1] [INFO] [1790755762.045131302] [robot1.global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[component_container_isolated-1] [WARN] [1790755762.177242487] [robot1.planner_server]: GridBased: failed to create plan with tolerance 0.50.
+[component_container_isolated-1] [WARN] [1790755762.177282913] [robot1.planner_server]: Planning algorithm GridBased failed to generate a valid path to (3.11, 1.97)
+[component_container_isolated-1] [WARN] [1790755762.177296353] [robot1.planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[component_container_isolated-1] [INFO] [1790755762.195377968] [robot1.behavior_server]: Running wait
+[component_container_isolated-1] [INFO] [1790755767.195530210] [robot1.behavior_server]: wait completed successfully
+[component_container_isolated-1] [WARN] [1790755767.226611660] [robot1.planner_server]: GridBased: failed to create plan with tolerance 0.50.
+[component_container_isolated-1] [WARN] [1790755767.226653416] [robot1.planner_server]: Planning algorithm GridBased failed to generate a valid path to (3.11, 1.97)
+[component_container_isolated-1] [WARN] [1790755767.226662417] [robot1.planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[component_container_isolated-1] [INFO] [1790755767.245148015] [robot1.global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[component_container_isolated-1] [WARN] [1790755768.176915766] [robot1.planner_server]: GridBased: failed to create plan with tolerance 0.50.
+[component_container_isolated-1] [WARN] [1790755768.176948202] [robot1.planner_server]: Planning algorithm GridBased failed to generate a valid path to (3.11, 1.97)
+[component_container_isolated-1] [WARN] [1790755768.176955028] [robot1.planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[component_container_isolated-1] [INFO] [1790755768.195495717] [robot1.behavior_server]: Running backup
+[component_container_isolated-1] [INFO] [1790755768.195610873] [robot1.behavior_server]: DriveOnHeading: no acceleration or deceleration limits set
+[component_container_isolated-1] [WARN] [1790755778.195670273] [robot1.behavior_server]: Exceeded time allowance before reaching the DriveOnHeading goal - Exiting DriveOnHeading
+[component_container_isolated-1] [WARN] [1790755778.195706274] [robot1.behavior_server]: backup failed
+[component_container_isolated-1] [WARN] [1790755778.195720181] [robot1.behavior_server]: [backup] [ActionServer] Aborting handle.
+[component_container_isolated-1] [INFO] [1790755778.215131987] [robot1.local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[component_container_isolated-1] [INFO] [1790755778.215256007] [robot1.global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[component_container_isolated-1] [WARN] [1790755779.177199098] [robot1.planner_server]: GridBased: failed to create plan with tolerance 0.50.
+[component_container_isolated-1] [WARN] [1790755779.177246273] [robot1.planner_server]: Planning algorithm GridBased failed to generate a valid path to (3.11, 1.97)
+[component_container_isolated-1] [WARN] [1790755779.177259413] [robot1.planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[component_container_isolated-1] [INFO] [1790755779.195206423] [robot1.global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[component_container_isolated-1] [ERROR] [1790755779.235339352] [robot1.bt_navigator_navigate_to_pose_rclcpp_node]: Failed to get result for compute_path_to_pose in node halt!
+[component_container_isolated-1] [INFO] [1790755779.235407100] [robot1.bt_navigator]: [navigate_to_pose] [ActionServer] Client requested to cancel the goal. Cancelling.
+[component_container_isolated-1] [INFO] [1790755779.235491734] [robot1.bt_navigator]: Goal canceled
+[component_container_isolated-1] [WARN] [1790755780.177113197] [robot1.planner_server]: GridBased: failed to create plan with tolerance 0.50.
+[component_container_isolated-1] [WARN] [1790755780.177153866] [robot1.planner_server]: Planning algorithm GridBased failed to generate a valid path to (3.11, 1.97)
+[component_container_isolated-1] [INFO] [1790755780.177161341] [robot1.planner_server]: [compute_path_to_pose] [ActionServer] Client requested to cancel the goal. Cancelling.
+[component_container_isolated-1] [INFO] [1790755867.640255532] [robot1.bt_navigator]: Begin navigating from current location (2.57, -0.02) to (1.93, 0.66)
+[component_container_isolated-1] [INFO] [1790755867.660652804] [robot1.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-1] [INFO] [1790755868.710864309] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755869.710878431] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755870.760878079] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755871.810879405] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755872.212699300] [robot1.controller_server]: Reached the goal!
+[component_container_isolated-1] [INFO] [1790755872.250469226] [robot1.bt_navigator]: Goal succeeded
+[component_container_isolated-1] [INFO] [1790755933.595897849] [robot1.bt_navigator]: Begin navigating from current location (2.14, 0.59) to (1.90, -0.10)
+[component_container_isolated-1] [INFO] [1790755933.616369428] [robot1.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-1] [INFO] [1790755934.666545062] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [ERROR] [1790755934.816358577] [robot1.bt_navigator_navigate_to_pose_rclcpp_node]: Failed to get result for follow_path in node halt!
+[component_container_isolated-1] [INFO] [1790755934.816477042] [robot1.bt_navigator]: [navigate_to_pose] [ActionServer] Client requested to cancel the goal. Cancelling.
+[component_container_isolated-1] [INFO] [1790755934.816537983] [robot1.bt_navigator]: Goal canceled
+[component_container_isolated-1] [INFO] [1790755934.816635324] [robot1.controller_server]: Goal was canceled. Stopping the robot.
+[component_container_isolated-1] [INFO] [1790755934.816672980] [robot1.controller_server]: [follow_path] [ActionServer] Client requested to cancel the goal. Cancelling.
+[component_container_isolated-1] [INFO] [1790755935.594480751] [robot1.bt_navigator]: Begin navigating from current location (2.14, 0.53) to (4.47, -2.18)
+[component_container_isolated-1] [INFO] [1790755935.615243154] [robot1.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-1] [INFO] [1790755936.665443877] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755937.715443145] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755938.715443728] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755939.765444601] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755940.765446060] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755941.815447994] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755942.865446985] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755943.865442744] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755944.915444629] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755945.915446673] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755946.965444715] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755947.965449505] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755949.015448742] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755950.065444043] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [ERROR] [1790755950.854869936] [robot1.bt_navigator_navigate_to_pose_rclcpp_node]: Failed to get result for follow_path in node halt!
+[component_container_isolated-1] [INFO] [1790755950.854951487] [robot1.bt_navigator]: [navigate_to_pose] [ActionServer] Client requested to cancel the goal. Cancelling.
+[component_container_isolated-1] [INFO] [1790755950.855023475] [robot1.bt_navigator]: Goal canceled
+[component_container_isolated-1] [INFO] [1790755950.865445621] [robot1.controller_server]: Goal was canceled. Stopping the robot.
+[component_container_isolated-1] [INFO] [1790755950.865468303] [robot1.controller_server]: [follow_path] [ActionServer] Client requested to cancel the goal. Cancelling.
+[component_container_isolated-1] [INFO] [1790755958.169323732] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1790755957.739 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[component_container_isolated-1] [INFO] [1790755969.654519257] [robot1.bt_navigator]: Begin navigating from current location (3.51, -2.95) to (3.05, -4.24)
+[component_container_isolated-1] [INFO] [1790755969.675016709] [robot1.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-1] [INFO] [1790755970.725228018] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755971.644720146] [robot1.bt_navigator]: Received goal preemption request
+[component_container_isolated-1] [INFO] [1790755971.644865080] [robot1.bt_navigator]: Begin navigating from current location (3.49, -3.38) to (2.66, -5.27)
+[component_container_isolated-1] [INFO] [1790755971.775219112] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755972.644647508] [robot1.bt_navigator]: Received goal preemption request
+[component_container_isolated-1] [INFO] [1790755972.644749381] [robot1.bt_navigator]: Begin navigating from current location (3.46, -3.62) to (2.52, -5.52)
+[component_container_isolated-1] [INFO] [1790755972.775205150] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755973.654708055] [robot1.bt_navigator]: Received goal preemption request
+[component_container_isolated-1] [INFO] [1790755973.654817653] [robot1.bt_navigator]: Begin navigating from current location (3.44, -3.84) to (3.41, -6.28)
+[component_container_isolated-1] [INFO] [1790755973.825222365] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755974.654837868] [robot1.bt_navigator]: Received goal preemption request
+[component_container_isolated-1] [INFO] [1790755974.654979767] [robot1.bt_navigator]: Begin navigating from current location (3.40, -4.08) to (3.08, -4.99)
+[component_container_isolated-1] [INFO] [1790755974.825226616] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755975.644678249] [robot1.bt_navigator]: Received goal preemption request
+[component_container_isolated-1] [INFO] [1790755975.644755940] [robot1.bt_navigator]: Begin navigating from current location (3.39, -4.26) to (3.44, -5.14)
+[component_container_isolated-1] [INFO] [1790755975.875226377] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755976.644688603] [robot1.bt_navigator]: Received goal preemption request
+[component_container_isolated-1] [INFO] [1790755976.644767109] [robot1.bt_navigator]: Begin navigating from current location (3.33, -4.42) to (2.80, -4.92)
+[component_container_isolated-1] [INFO] [1790755976.875206743] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755977.644780779] [robot1.bt_navigator]: Received goal preemption request
+[component_container_isolated-1] [INFO] [1790755977.644937057] [robot1.bt_navigator]: Begin navigating from current location (3.26, -4.58) to (3.62, -5.42)
+[component_container_isolated-1] [INFO] [1790755977.925206514] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755978.925205992] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755979.975223604] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755981.025230037] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755982.025222007] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755983.075222731] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755984.075203745] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755985.125223510] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790755985.376969659] [robot1.controller_server]: Reached the goal!
+[component_container_isolated-1] [INFO] [1790755985.414741384] [robot1.bt_navigator]: Goal succeeded
+[component_container_isolated-1] [INFO] [1790756020.052944824] [robot1.local_costmap.local_costmap]: StaticLayer: Resizing static layer to 211 X 331 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790756020.166074186] [robot1.global_costmap.global_costmap]: StaticLayer: Resizing costmap to 211 X 331 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790756032.052999899] [robot1.local_costmap.local_costmap]: StaticLayer: Resizing static layer to 211 X 331 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790756032.166096174] [robot1.global_costmap.global_costmap]: StaticLayer: Resizing costmap to 211 X 331 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790756034.052955828] [robot1.local_costmap.local_costmap]: StaticLayer: Resizing static layer to 210 X 330 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790756034.166151685] [robot1.global_costmap.global_costmap]: StaticLayer: Resizing costmap to 210 X 330 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790756059.537952428] [robot1.bt_navigator]: Begin navigating from current location (-1.12, -1.49) to (-0.95, -5.41)
+[component_container_isolated-1] [INFO] [1790756059.558265292] [robot1.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-1] [INFO] [1790756060.608456220] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756061.658457884] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756062.658454552] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756063.708458431] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756064.708456352] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756065.758458037] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756066.758495476] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756067.808455441] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756068.808459467] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756069.858457959] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756070.858457064] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756071.908461428] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756072.958457410] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756073.958458115] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756075.008457039] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756076.008456398] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756077.058455022] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756078.108459159] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756079.108458081] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756079.260258736] [robot1.controller_server]: Reached the goal!
+[component_container_isolated-1] [INFO] [1790756079.298145297] [robot1.bt_navigator]: Goal succeeded
+[component_container_isolated-1] [INFO] [1790756080.649880795] [robot1.bt_navigator]: Begin navigating from current location (-0.97, -5.19) to (-0.15, -0.73)
+[component_container_isolated-1] [INFO] [1790756080.670330776] [robot1.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-1] [INFO] [1790756081.720527152] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756082.770537780] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756083.770525397] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756084.820524587] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756085.820524742] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756086.870549300] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756087.920525958] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756088.920527112] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756089.970536547] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756090.970522983] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756092.020523484] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756093.070528804] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756094.070523849] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756095.120523846] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756096.120525562] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756097.170524831] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756098.220526379] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756099.220555681] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756100.270525918] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756101.270523676] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756102.320524240] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756103.370524196] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756104.370525939] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756105.420641955] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756105.822336401] [robot1.controller_server]: Reached the goal!
+[component_container_isolated-1] [INFO] [1790756105.860024062] [robot1.bt_navigator]: Goal succeeded
+[component_container_isolated-1] [INFO] [1790756119.458031185] [robot1.bt_navigator]: Begin navigating from current location (-0.33, -0.54) to (-0.68, 1.33)
+[component_container_isolated-1] [INFO] [1790756119.478621002] [robot1.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-1] [INFO] [1790756120.528804770] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756121.578827320] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756122.578821345] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756123.628819900] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756124.628818636] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756125.678807557] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756126.728808058] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756127.230757316] [robot1.controller_server]: Reached the goal!
+[component_container_isolated-1] [INFO] [1790756127.268315265] [robot1.bt_navigator]: Goal succeeded
+[component_container_isolated-1] [INFO] [1790756152.636096118] [robot1.bt_navigator]: Begin navigating from current location (-0.58, 1.06) to (-0.04, -4.96)
+[component_container_isolated-1] [INFO] [1790756152.656560204] [robot1.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-1] [INFO] [1790756153.706752490] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756154.756754614] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756155.756756476] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756156.806755046] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756157.806755408] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756158.856753342] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756159.906766508] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756160.906796748] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756161.956756264] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756162.956766030] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756164.006754090] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756165.056752341] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756166.056775125] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756167.106768006] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756168.106752870] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756169.156765401] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756170.206756670] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756171.206768366] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756172.256754504] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756173.256750943] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756174.306773989] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756175.356767933] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756176.356768777] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756177.406756474] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756178.406776854] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756179.408542705] [robot1.controller_server]: Reached the goal!
+[component_container_isolated-1] [INFO] [1790756179.446303113] [robot1.bt_navigator]: Goal succeeded
+[component_container_isolated-1] [INFO] [1790756214.418245342] [robot1.bt_navigator]: Begin navigating from current location (-0.15, -5.46) to (-0.59, 0.05)
+[component_container_isolated-1] [INFO] [1790756214.438819919] [robot1.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-1] [INFO] [1790756214.438963079] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756215.489041802] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756216.539036133] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756217.539019290] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756218.589021548] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756219.589041506] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756220.639019161] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756221.639018289] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756222.689024383] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756223.689020455] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756224.739021131] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756225.789020477] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756226.789043395] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756227.839019131] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756228.839025094] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756229.889021853] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756230.109580655] [robot1.local_costmap.local_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1790756229.642 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[component_container_isolated-1] [INFO] [1790756230.889044997] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756231.939023553] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756232.939022392] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756233.673986937] [robot1.global_costmap.global_costmap]: Message Filter dropping message: frame 'rplidar_link' at time 1790756233.192 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[component_container_isolated-1] [INFO] [1790756233.989040029] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756234.989055768] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756236.039019978] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756237.089020010] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756238.089019780] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [ERROR] [1790756238.689085694] [robot1.controller_server]: Failed to make progress
+[component_container_isolated-1] [WARN] [1790756238.689133445] [robot1.controller_server]: [follow_path] [ActionServer] Aborting handle.
+[component_container_isolated-1] [INFO] [1790756238.708470137] [robot1.local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[component_container_isolated-1] [INFO] [1790756238.708798785] [robot1.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-1] [WARN] [1790756238.860624357] [robot1.controller_server]: Control loop missed its desired rate of 20.0000Hz
+[component_container_isolated-1] [INFO] [1790756239.117873674] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756240.148880923] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756241.210682581] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756242.210701785] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756243.260711514] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756244.260686407] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756245.310703867] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756246.360701371] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756247.360683553] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756248.410706161] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756249.410696825] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756250.460696057] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756251.510684062] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756252.510702654] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756253.560683314] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756254.560698476] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756254.712491057] [robot1.controller_server]: Reached the goal!
+[component_container_isolated-1] [INFO] [1790756254.748429681] [robot1.bt_navigator]: Goal succeeded
+[component_container_isolated-1] [INFO] [1790756258.428077314] [robot1.bt_navigator]: Begin navigating from current location (-0.57, -0.14) to (-1.40, 4.08)
+[component_container_isolated-1] [INFO] [1790756258.448545297] [robot1.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-1] [INFO] [1790756259.498733300] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756260.548744101] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756261.548751655] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756262.598733291] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756263.598756236] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756264.648758753] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756265.052942739] [robot1.local_costmap.local_costmap]: StaticLayer: Resizing static layer to 210 X 335 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790756265.166144677] [robot1.global_costmap.global_costmap]: StaticLayer: Resizing costmap to 210 X 335 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1790756265.698756972] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756266.698755429] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756267.748848042] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756268.748751651] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756269.798748053] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756270.848751327] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756271.848743910] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756272.898731234] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756273.898761620] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756274.948749612] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756275.998748893] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756276.451800501] [robot1.controller_server]: Reached the goal!
+[component_container_isolated-1] [INFO] [1790756276.488308827] [robot1.bt_navigator]: Goal succeeded
+[component_container_isolated-1] [INFO] [1790756291.714973562] [robot1.bt_navigator]: Begin navigating from current location (-1.43, 3.87) to (-0.65, 0.08)
+[component_container_isolated-1] [INFO] [1790756291.735505203] [robot1.controller_server]: Received a goal, begin computing control effort.
+[component_container_isolated-1] [INFO] [1790756292.785712583] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756293.835709962] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756294.835697317] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756295.885724691] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756296.885846729] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756297.935711117] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756298.985712622] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756299.985708987] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756301.035717736] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756302.035694420] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756303.085694617] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756304.135718636] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756305.135827468] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [ERROR] [1790756305.737590522] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[component_container_isolated-1] [ERROR] [1790756305.737636698] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[component_container_isolated-1] [WARN] [1790756305.737723241] [robot1.controller_server]: No valid trajectories out of 419! 
+[component_container_isolated-1] [ERROR] [1790756305.787882607] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[component_container_isolated-1] [ERROR] [1790756305.787911457] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[component_container_isolated-1] [WARN] [1790756305.788007332] [robot1.controller_server]: No valid trajectories out of 419! 
+[component_container_isolated-1] [INFO] [1790756306.185697090] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756307.185712138] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756308.235710150] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756309.285695726] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756310.285706879] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756311.335696850] [robot1.controller_server]: Passing new path to controller.
+[component_container_isolated-1] [INFO] [1790756312.237498683] [robot1.controller_server]: Reached the goal!
+[component_container_isolated-1] [INFO] [1790756312.275157037] [robot1.bt_navigator]: Goal succeeded

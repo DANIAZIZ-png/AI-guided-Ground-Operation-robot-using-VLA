@@ -1,0 +1,152 @@
+2026-08-08 14:56:20.539 [RUN] vla_agent v15  (#46 one subscription per camera stream, #43 longer cached action-server wait, #44 undock retry-loop breaker, #45 sync slop for 1 Hz depth, #37 /robot1 namespace, #38 stereo depth topic, #39 best-effort sensor QoS, #40 RGB->depth pixel mapping, #41 encoding-based mm/m, #42 explicit namespaced TF, #36 no patrol feed prompt, #35 cancel actually stops the robot, #34 feed publishes to any subscriber, #22 dock no-detect zone, #23 live-first memory, #24 forget, #25 typo-tolerant control words, #26 bare yes/no, #27 context expiry, #28 all-instance distances, #29 Create 3 backup ratchet, #30 sticky goals + range-scaled gate + ring-safe blacklist, #31 incremental off-map hop goals, #32 non-freezing live feed, #33 command/reply/status bridge)
+2026-08-08 14:56:20.539 [RUN] agent started (SIGHT_CONFIRM=2, SEARCH_TIMEOUT=45.0s, NO_PROGRESS_LIMIT=60.0s, ROBOT_CLEARANCE=0.25m)
+2026-08-08 14:56:25.144 [CMD] [keyboard] what do you see
+2026-08-08 14:56:25.144 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 14:56:26.555 [ROBOT] RGB and depth stopped lining up (1.9s since the last matched pair) — switching to the newest frame of each. Detections stay live; depth accuracy drops a little while they are out of step.
+2026-08-08 14:56:26.555 [WARN] #32a stale sync pair dropped after 1.9s
+2026-08-08 14:56:27.195 [ROBOT] Stopped. The robot is idle.
+2026-08-08 14:56:27.195 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 14:56:28.070 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a chair.', 'target': None}]}
+2026-08-08 14:56:28.070 [STEP] describe target=None
+2026-08-08 14:56:40.248 [CMD] [keyboard] go to the chair
+2026-08-08 14:56:40.248 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 14:56:40.732 [BRAIN] {'steps': [{'action': 'navigate', 'speech': 'Heading to the chair.', 'target': 'chair'}]}
+2026-08-08 14:56:40.732 [STEP] navigate target='chair'
+2026-08-08 14:56:42.295 [ROBOT] Stopped. The robot is idle.
+2026-08-08 14:56:42.295 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 14:56:42.803 [ROBOT] Found the chair — navigating to it.
+2026-08-08 14:56:42.803 [SIGHT] chair at (-5.54, -1.96), 5.78 m away
+2026-08-08 14:56:42.803 [ROBOT] The chair is about 5.8 m away, past the edge of what I've mapped. Moving up in short steps and mapping as I go.
+2026-08-08 14:56:42.803 [STEP] #31 hop mode engaged for chair: object (-5.54, -1.96) at 5.8 m, area_mapped=False
+2026-08-08 14:56:42.803 [GOAL] #31 hop 1: 1.50 m toward chair (still 5.8 m away)
+2026-08-08 14:56:42.803 [GOAL] (-1.51, -0.49) yaw=-160deg mode=navigate
+2026-08-08 14:56:48.355 [ROBOT] I've stopped receiving camera frames. Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-08-08 14:56:48.355 [WARN] #32e camera stream stalled
+2026-08-08 14:57:03.803 [WARN] suspicious chair jump of 8.7 m (occlusion/depth noise?) — waiting for a confirming look (agree radius 1.5 m)
+2026-08-08 14:57:04.806 [SIGHT] large chair jump (8.7 m) confirmed by a second look — accepting
+2026-08-08 14:57:04.806 [STEP] chair area now mapped after 1 hop(s) — switching to a direct approach
+2026-08-08 14:57:04.806 [ROBOT] The area around the chair is mapped now — going straight to it.
+2026-08-08 14:57:04.807 [GOAL] (3.55, -3.17) yaw=-35deg mode=navigate
+2026-08-08 14:57:04.814 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-08 14:57:04.814 [WARN] nav goal (3.55, -3.17) failed (status=6); trying another approach angle
+2026-08-08 14:57:05.804 [GOAL] (3.74, -2.99) yaw=-60deg mode=navigate
+2026-08-08 14:57:05.814 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-08 14:57:05.814 [WARN] nav goal (3.74, -2.99) failed (status=6); trying another approach angle
+2026-08-08 14:57:06.803 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-08 14:57:06.804 [GOAL] (3.55, -3.17) yaw=-35deg mode=navigate
+2026-08-08 14:57:06.814 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-08 14:57:06.814 [WARN] nav goal (3.55, -3.17) failed (status=6); trying another approach angle
+2026-08-08 14:57:07.802 [GOAL] (3.74, -2.99) yaw=-60deg mode=navigate
+2026-08-08 14:57:07.804 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-08 14:57:07.804 [WARN] nav goal (3.74, -2.99) failed (status=6); trying another approach angle
+2026-08-08 14:57:08.806 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-08 14:57:08.807 [GOAL] (3.55, -3.17) yaw=-35deg mode=navigate
+2026-08-08 14:57:08.814 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-08 14:57:08.815 [WARN] nav goal (3.55, -3.17) failed (status=6); trying another approach angle
+2026-08-08 14:57:09.804 [GOAL] (3.74, -2.99) yaw=-60deg mode=navigate
+2026-08-08 14:57:09.814 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-08 14:57:09.814 [WARN] nav goal (3.74, -2.99) failed (status=6); trying another approach angle
+2026-08-08 14:57:10.802 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-08 14:57:10.802 [GOAL] (3.49, -3.24) yaw=-64deg mode=navigate
+2026-08-08 14:57:10.804 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-08 14:57:10.804 [WARN] nav goal (3.49, -3.24) failed (status=6); trying another approach angle
+2026-08-08 14:57:11.602 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-08 14:57:11.602 [GOAL] (3.49, -3.24) yaw=-64deg mode=navigate
+2026-08-08 14:57:11.605 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-08 14:57:11.605 [WARN] nav goal (3.49, -3.24) failed (status=6); trying another approach angle
+2026-08-08 14:57:12.603 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-08 14:57:12.604 [GOAL] (3.49, -3.24) yaw=-64deg mode=navigate
+2026-08-08 14:57:12.614 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-08 14:57:12.614 [WARN] nav goal (3.49, -3.24) failed (status=6); trying another approach angle
+2026-08-08 14:57:13.601 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-08 14:57:13.602 [GOAL] (3.49, -3.24) yaw=-64deg mode=navigate
+2026-08-08 14:57:13.604 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-08 14:57:13.604 [WARN] nav goal (3.49, -3.24) failed (status=6); trying another approach angle
+2026-08-08 14:57:14.605 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-08 14:57:14.605 [GOAL] (3.49, -3.24) yaw=-64deg mode=navigate
+2026-08-08 14:57:14.614 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-08 14:57:14.614 [WARN] nav goal (3.49, -3.24) failed (status=6); trying another approach angle
+2026-08-08 14:57:14.614 [WARN] every approach to the target failed — dropping sighting, rescanning
+2026-08-08 14:57:26.555 [ROBOT] I saw the chair but lost track of it and couldn't find it again. Try asking me once more.
+2026-08-08 14:57:27.355 [ROBOT] I've stopped receiving camera frames. Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-08-08 14:57:27.355 [WARN] #32e camera stream stalled
+2026-08-08 14:57:35.048 [CMD] (cancel via keyboard) stop
+2026-08-08 14:57:35.048 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 14:57:37.095 [ROBOT] Stopped. The robot is idle.
+2026-08-08 14:57:37.095 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 14:57:48.155 [ROBOT] I've stopped receiving camera frames. Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-08-08 14:57:48.155 [WARN] #32e camera stream stalled
+2026-08-08 14:57:55.320 [CMD] [keyboard] what do you see
+2026-08-08 14:57:55.320 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 14:57:55.913 [BRAIN] {'steps': [{'action': 'describe', 'speech': "I don't see anything right now.", 'target': None}]}
+2026-08-08 14:57:55.913 [STEP] describe target=None
+2026-08-08 14:57:57.375 [ROBOT] Stopped. The robot is idle.
+2026-08-08 14:57:57.375 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 14:58:07.155 [ROBOT] I've stopped receiving camera frames. Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-08-08 14:58:07.155 [WARN] #32e camera stream stalled
+2026-08-08 14:58:14.473 [CMD] [keyboard] what do you see
+2026-08-08 14:58:14.473 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 14:58:15.030 [BRAIN] {'steps': [{'action': 'describe', 'speech': "I don't see anything right now.", 'target': None}]}
+2026-08-08 14:58:15.030 [STEP] describe target=None
+2026-08-08 14:58:16.515 [ROBOT] Stopped. The robot is idle.
+2026-08-08 14:58:16.515 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 14:58:33.064 [CMD] [keyboard] what do you see
+2026-08-08 14:58:33.064 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 14:58:33.580 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I can see a person.', 'target': None}]}
+2026-08-08 14:58:33.580 [STEP] describe target=None
+2026-08-08 14:58:35.115 [ROBOT] Stopped. The robot is idle.
+2026-08-08 14:58:35.115 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 14:58:37.955 [ROBOT] I've stopped receiving camera frames. Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-08-08 14:58:37.955 [WARN] #32e camera stream stalled
+2026-08-08 14:58:44.168 [CMD] [keyboard] go to the person
+2026-08-08 14:58:44.169 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 14:58:44.647 [BRAIN] {'steps': [{'action': 'navigate', 'speech': 'Heading to the person.', 'target': 'person'}]}
+2026-08-08 14:58:44.647 [STEP] navigate target='person'
+2026-08-08 14:58:46.215 [ROBOT] Stopped. The robot is idle.
+2026-08-08 14:58:46.215 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 14:58:46.701 [ROBOT] Found the person — navigating to it.
+2026-08-08 14:58:46.701 [SIGHT] person at (-2.13, 3.69), 5.44 m away
+2026-08-08 14:58:46.705 [GOAL] (-1.75, 2.87) yaw=115deg mode=navigate
+2026-08-08 14:58:54.355 [ROBOT] I've stopped receiving camera frames. Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-08-08 14:58:54.355 [WARN] #32e camera stream stalled
+2026-08-08 14:59:03.555 [STUCK] mode=navigate target='person'
+2026-08-08 14:59:03.556 [ROBOT] I'm stuck trying to reach the person. Please take MANUAL OVERRIDE or give me a new command.
+2026-08-08 14:59:03.556 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 14:59:05.615 [ROBOT] Stopped. The robot is idle.
+2026-08-08 14:59:05.615 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 14:59:10.155 [ROBOT] I've stopped receiving camera frames. Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-08-08 14:59:10.155 [WARN] #32e camera stream stalled
+2026-08-08 14:59:24.072 [CMD] [keyboard] go to the person
+2026-08-08 14:59:24.073 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 14:59:24.575 [BRAIN] {'steps': [{'action': 'navigate', 'speech': 'Heading back to the person.', 'target': 'person'}]}
+2026-08-08 14:59:24.576 [STEP] navigate target='person'
+2026-08-08 14:59:24.755 [ROBOT] I've stopped receiving camera frames. Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-08-08 14:59:24.755 [WARN] #32e camera stream stalled
+2026-08-08 14:59:26.115 [ROBOT] Stopped. The robot is idle.
+2026-08-08 14:59:26.115 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 14:59:26.810 [ROBOT] Found the person — navigating to it.
+2026-08-08 14:59:26.810 [SIGHT] person at (-5.04, -3.18), 5.45 m away
+2026-08-08 14:59:26.810 [ROBOT] The person is about 5.4 m away, past the edge of what I've mapped. Moving up in short steps and mapping as I go.
+2026-08-08 14:59:26.810 [STEP] #31 hop mode engaged for person: object (-5.04, -3.18) at 5.4 m, area_mapped=False
+2026-08-08 14:59:26.810 [GOAL] #31 hop 1: 1.50 m toward person (still 5.4 m away)
+2026-08-08 14:59:26.810 [GOAL] (-1.33, -1.83) yaw=-160deg mode=navigate
+2026-08-08 14:59:43.555 [STUCK] mode=navigate target='person'
+2026-08-08 14:59:43.555 [ROBOT] I'm stuck trying to reach the person. Please take MANUAL OVERRIDE or give me a new command.
+2026-08-08 14:59:43.556 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 14:59:45.464 [CMD] (cancel via keyboard) stop
+2026-08-08 14:59:45.465 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 14:59:47.515 [ROBOT] Stopped. The robot is idle.
+2026-08-08 14:59:47.515 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 15:01:49.352 [CMD] [keyboard] give me live feed
+2026-08-08 15:01:49.353 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 15:01:49.965 [BRAIN] {'steps': [{'action': 'feed', 'speech': 'Showing the current view.', 'target': None}]}
+2026-08-08 15:01:49.965 [STEP] feed target=None
+2026-08-08 15:01:51.395 [ROBOT] Stopped. The robot is idle.
+2026-08-08 15:01:51.395 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 15:02:12.955 [ROBOT] I've stopped receiving camera frames. Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-08-08 15:02:12.955 [WARN] #32e camera stream stalled
+2026-08-08 15:03:31.955 [ROBOT] The live-feed window closed. Say 'show me the feed' to reopen it — the robot is otherwise unaffected.
+2026-08-08 15:03:31.955 [WARN] #32e rqt_image_view exited
+2026-08-08 15:03:36.344 [WARN] #35 cancel-all failed: failed to check service availability: rcl node's context is invalid, at ./src/rcl/node.c:428
+2026-08-08 15:03:36.344 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 15:03:36.344 [RUN] agent shutting down

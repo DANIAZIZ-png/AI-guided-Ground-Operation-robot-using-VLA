@@ -1,0 +1,198 @@
+2026-07-08 21:57:41.443 [RUN] agent started (SIGHT_CONFIRM=2, NAVIGATE_TIMEOUT=60.0s)
+2026-07-08 21:57:45.603 [CMD] turn right
+2026-07-08 21:57:46.428 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ninety degrees to the right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -90.0}]}
+2026-07-08 21:57:46.428 [STEP] move target=None
+2026-07-08 21:57:46.428 [ROBOT] I'm docked — undocking first, then I'll continue.
+2026-07-08 21:57:46.429 [ROBOT] Undocking…
+2026-07-08 21:57:56.590 [ROBOT] Undocked — ready to move.
+2026-07-08 21:57:56.590 [DOCK] undock ok
+2026-07-08 21:57:56.590 [STEP] move target=None
+2026-07-08 21:58:02.516 [ROBOT] Done with that move.
+2026-07-08 21:58:08.115 [CMD] find a chair find a chair
+2026-07-08 21:58:08.726 [BRAIN] {'steps': [{'action': 'locate', 'speech': 'Looking for a chair.', 'target': 'chair'}]}
+2026-07-08 21:58:08.726 [STEP] locate target='chair'
+2026-07-08 21:58:19.685 [MEMORY] remembered chair at (14.35, -4.30)
+2026-07-08 21:58:19.685 [ROBOT] Yes — I can see a chair about 15.2 m away. I'll remember where it is. (Locating only — not driving to it.)
+2026-07-08 21:58:29.716 [CMD] go to the chair
+2026-07-08 21:58:30.388 [BRAIN] {'steps': [{'action': 'navigate', 'speech': 'Heading to the chair.', 'target': 'chair'}]}
+2026-07-08 21:58:30.388 [STEP] navigate target='chair'
+2026-07-08 21:58:30.388 [MEMORY] seeded chair from remembered instance at (14.35, -4.30)
+2026-07-08 21:58:30.584 [GOAL] (0.44, -0.20) yaw=-16deg mode=navigate
+2026-07-08 21:58:31.595 [ROBOT] I can see the chair now — it's where I remembered.
+2026-07-08 21:58:31.595 [SIGHT] memory-seeded chair re-confirmed at (14.50, -4.16), 15.15 m away
+2026-07-08 21:58:33.446 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:58:33.582 [GOAL] (0.60, -0.26) yaw=-16deg mode=navigate
+2026-07-08 21:58:36.583 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:58:37.583 [ROBOT] I can't find a reachable path toward the chair from here — searching again.
+2026-07-08 21:58:37.583 [WARN] dropping unreachable sighting of chair at (14.39, -4.56)
+2026-07-08 21:59:05.592 [ROBOT] Found the chair — navigating to it.
+2026-07-08 21:59:05.592 [SIGHT] chair at (14.19, -2.64), 14.24 m away
+2026-07-08 21:59:13.268 [CMD] (cancel) cancel
+2026-07-08 21:59:20.420 [CMD] move back .5 m
+2026-07-08 21:59:21.287 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Moving backward half a meter.', 'target': None, 'distance_m': -0.5, 'rotation_deg': 0.0}]}
+2026-07-08 21:59:21.287 [STEP] move target=None
+2026-07-08 21:59:30.356 [CMD] turn right 20
+2026-07-08 21:59:31.215 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning twenty degrees to the right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -20.0}]}
+2026-07-08 21:59:31.215 [STEP] move target=None
+2026-07-08 21:59:33.516 [ROBOT] Done with that move.
+2026-07-08 21:59:36.949 [CMD] momove .5
+2026-07-08 21:59:37.801 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Moving forward half a meter.', 'target': None, 'distance_m': 0.5, 'rotation_deg': 0.0}]}
+2026-07-08 21:59:37.801 [STEP] move target=None
+2026-07-08 21:59:42.516 [ROBOT] Done with that move.
+2026-07-08 21:59:49.013 [CMD] go to the chair
+2026-07-08 21:59:49.661 [BRAIN] {'steps': [{'action': 'navigate', 'speech': 'Heading to the chair.', 'target': 'chair'}]}
+2026-07-08 21:59:49.661 [STEP] navigate target='chair'
+2026-07-08 21:59:49.661 [MEMORY] seeded chair from remembered instance at (14.19, -2.64)
+2026-07-08 21:59:52.572 [ROBOT] I can't find a reachable path toward the chair from here — searching again.
+2026-07-08 21:59:52.573 [WARN] dropping unreachable sighting of chair at (14.19, -2.64)
+2026-07-08 22:00:09.582 [ROBOT] Can't see the chair here — moving to look elsewhere.
+2026-07-08 22:00:32.580 [ROBOT] Found the chair — navigating to it.
+2026-07-08 22:00:32.580 [SIGHT] chair at (13.64, -4.86), 12.50 m away
+2026-07-08 22:00:32.581 [GOAL] (3.55, -0.25) yaw=-25deg mode=navigate
+2026-07-08 22:00:37.583 [GOAL] (4.36, -0.52) yaw=-19deg mode=navigate
+2026-07-08 22:00:37.592 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:00:38.586 [GOAL] (5.08, -0.76) yaw=-19deg mode=navigate
+2026-07-08 22:00:38.593 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:00:39.586 [GOAL] (13.97, -3.72) yaw=-18deg mode=navigate
+2026-07-08 22:00:39.593 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:00:40.588 [GOAL] (10.92, -2.57) yaw=-18deg mode=navigate
+2026-07-08 22:00:40.596 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:00:41.580 [GOAL] (10.98, -2.54) yaw=-18deg mode=navigate
+2026-07-08 22:00:41.584 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:00:42.583 [GOAL] (11.05, -2.55) yaw=-18deg mode=navigate
+2026-07-08 22:00:42.592 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:00:43.593 [GOAL] (13.91, -3.63) yaw=-19deg mode=navigate
+2026-07-08 22:00:43.603 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:00:44.586 [GOAL] (13.90, -3.67) yaw=-19deg mode=navigate
+2026-07-08 22:00:44.592 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:00:45.585 [GOAL] (13.93, -3.83) yaw=-20deg mode=navigate
+2026-07-08 22:00:45.593 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:00:46.586 [GOAL] (13.92, -3.56) yaw=-18deg mode=navigate
+2026-07-08 22:00:46.593 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:00:47.583 [GOAL] (13.86, -3.78) yaw=-20deg mode=navigate
+2026-07-08 22:00:47.593 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:00:48.596 [GOAL] (13.90, -3.87) yaw=-20deg mode=navigate
+2026-07-08 22:00:48.603 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:00:49.582 [GOAL] (13.84, -3.95) yaw=-21deg mode=navigate
+2026-07-08 22:00:49.593 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:00:50.516 [ROBOT] I know where the chair is but couldn't reach it within my time limit — try 'go to the chair' again; I'll resume from what I remember.
+2026-07-08 22:06:25.629 [CMD] find a person
+2026-07-08 22:06:26.318 [BRAIN] {'steps': [{'action': 'locate', 'speech': 'Looking for a person.', 'target': 'person'}]}
+2026-07-08 22:06:26.319 [STEP] locate target='person'
+2026-07-08 22:06:32.582 [MEMORY] remembered person at (2.03, -0.02)
+2026-07-08 22:06:32.582 [ROBOT] Yes — I can see a person about 12.2 m away. I'll remember where it is. (Locating only — not driving to it.)
+2026-07-08 22:06:40.109 [CMD] go to the person
+2026-07-08 22:06:40.906 [BRAIN] {'steps': [{'action': 'navigate', 'speech': 'Heading back to the person.', 'target': 'person'}]}
+2026-07-08 22:06:40.906 [STEP] navigate target='person'
+2026-07-08 22:06:40.906 [MEMORY] seeded person from remembered instance at (2.03, -0.02)
+2026-07-08 22:06:41.586 [ROBOT] I can see the person now — it's where I remembered.
+2026-07-08 22:06:41.586 [SIGHT] memory-seeded person re-confirmed at (-13.92, 4.11), 28.67 m away
+2026-07-08 22:06:41.587 [GOAL] (-1.22, 0.40) yaw=164deg mode=navigate
+2026-07-08 22:06:46.585 [GOAL] (-1.74, 0.33) yaw=165deg mode=navigate
+2026-07-08 22:06:46.591 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:06:47.588 [GOAL] (-1.86, 0.30) yaw=166deg mode=navigate
+2026-07-08 22:06:47.598 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:06:48.585 [GOAL] (1.83, -0.61) yaw=166deg mode=navigate
+2026-07-08 22:06:48.590 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:06:49.601 [GOAL] (-2.08, 0.29) yaw=166deg mode=navigate
+2026-07-08 22:06:49.610 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:06:50.600 [GOAL] (-2.18, 0.28) yaw=167deg mode=navigate
+2026-07-08 22:06:50.610 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:06:51.581 [GOAL] (-2.24, 0.32) yaw=167deg mode=navigate
+2026-07-08 22:06:51.589 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:06:52.599 [GOAL] (-2.30, 0.35) yaw=167deg mode=navigate
+2026-07-08 22:06:52.609 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:06:53.597 [GOAL] (1.28, -0.46) yaw=167deg mode=navigate
+2026-07-08 22:06:53.601 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:06:54.586 [GOAL] (1.92, -0.66) yaw=167deg mode=navigate
+2026-07-08 22:06:54.590 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:06:55.594 [GOAL] (1.92, -0.66) yaw=168deg mode=navigate
+2026-07-08 22:06:55.600 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:06:56.585 [GOAL] (0.92, -0.43) yaw=168deg mode=navigate
+2026-07-08 22:06:56.590 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:06:57.602 [GOAL] (1.91, -0.66) yaw=168deg mode=navigate
+2026-07-08 22:06:57.610 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:06:58.584 [GOAL] (2.02, -0.68) yaw=168deg mode=navigate
+2026-07-08 22:06:58.591 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:06:59.582 [GOAL] (1.94, -0.66) yaw=169deg mode=navigate
+2026-07-08 22:06:59.589 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:07:00.597 [GOAL] (2.05, -0.66) yaw=169deg mode=navigate
+2026-07-08 22:07:00.608 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:07:01.582 [GOAL] (2.04, -0.61) yaw=169deg mode=navigate
+2026-07-08 22:07:01.588 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:07:02.603 [GOAL] (2.10, -0.60) yaw=169deg mode=navigate
+2026-07-08 22:07:02.610 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:07:03.589 [GOAL] (-1.43, 0.05) yaw=169deg mode=navigate
+2026-07-08 22:07:03.599 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:07:04.598 [GOAL] (2.07, -0.59) yaw=170deg mode=navigate
+2026-07-08 22:07:04.610 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:07:05.583 [GOAL] (-1.54, 0.06) yaw=170deg mode=navigate
+2026-07-08 22:07:05.589 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:07:06.587 [GOAL] (1.97, -0.69) yaw=171deg mode=navigate
+2026-07-08 22:07:06.593 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:07:07.584 [GOAL] (2.02, -0.66) yaw=172deg mode=navigate
+2026-07-08 22:07:07.589 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:07:08.585 [GOAL] (1.94, -0.75) yaw=173deg mode=navigate
+2026-07-08 22:07:08.592 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:07:09.588 [GOAL] (1.97, -0.71) yaw=173deg mode=navigate
+2026-07-08 22:07:09.600 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:07:10.602 [GOAL] (-4.12, 0.07) yaw=173deg mode=navigate
+2026-07-08 22:07:10.612 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:07:11.582 [GOAL] (1.95, -0.71) yaw=173deg mode=navigate
+2026-07-08 22:07:11.589 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:07:12.586 [GOAL] (1.96, -0.67) yaw=173deg mode=navigate
+2026-07-08 22:07:12.593 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:07:13.586 [GOAL] (1.92, -0.81) yaw=175deg mode=navigate
+2026-07-08 22:07:13.593 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:07:14.591 [GOAL] (1.86, -0.85) yaw=176deg mode=navigate
+2026-07-08 22:07:14.599 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:07:15.591 [GOAL] (1.88, -0.89) yaw=176deg mode=navigate
+2026-07-08 22:07:15.600 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:07:16.587 [GOAL] (1.89, -0.92) yaw=177deg mode=navigate
+2026-07-08 22:07:16.598 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:07:17.596 [GOAL] (-0.49, -0.80) yaw=177deg mode=navigate
+2026-07-08 22:07:17.601 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:07:18.583 [GOAL] (1.86, -0.84) yaw=176deg mode=navigate
+2026-07-08 22:07:18.588 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:07:19.589 [GOAL] (-6.90, -0.22) yaw=176deg mode=navigate
+2026-07-08 22:07:19.598 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:07:20.591 [GOAL] (1.88, -0.80) yaw=176deg mode=navigate
+2026-07-08 22:07:20.600 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:07:21.584 [GOAL] (1.87, -0.84) yaw=177deg mode=navigate
+2026-07-08 22:07:21.591 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:07:22.587 [GOAL] (1.85, -0.91) yaw=178deg mode=navigate
+2026-07-08 22:07:22.592 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:07:23.582 [GOAL] (1.85, -0.92) yaw=178deg mode=navigate
+2026-07-08 22:07:23.588 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:07:24.583 [GOAL] (1.84, -0.92) yaw=178deg mode=navigate
+2026-07-08 22:07:24.590 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:07:25.687 [GOAL] (1.79, -0.92) yaw=178deg mode=navigate
+2026-07-08 22:07:25.701 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:07:26.593 [GOAL] (0.19, -0.87) yaw=178deg mode=navigate
+2026-07-08 22:07:26.601 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:07:27.589 [GOAL] (0.04, -0.84) yaw=178deg mode=navigate
+2026-07-08 22:07:27.599 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:07:28.586 [GOAL] (-0.12, -0.82) yaw=178deg mode=navigate
+2026-07-08 22:07:28.592 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:07:29.588 [GOAL] (-0.29, -0.84) yaw=178deg mode=navigate
+2026-07-08 22:07:29.600 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:07:30.597 [GOAL] (-0.45, -0.81) yaw=178deg mode=navigate
+2026-07-08 22:07:30.609 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:07:31.584 [GOAL] (1.84, -0.89) yaw=179deg mode=navigate
+2026-07-08 22:07:31.591 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:07:32.591 [GOAL] (-0.79, -0.86) yaw=179deg mode=navigate
+2026-07-08 22:07:32.598 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:07:33.579 [GOAL] (-0.96, -0.89) yaw=180deg mode=navigate
+2026-07-08 22:07:33.590 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:07:34.588 [GOAL] (-1.12, -0.86) yaw=180deg mode=navigate
+2026-07-08 22:07:34.599 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:07:35.613 [GOAL] (1.88, -0.90) yaw=-179deg mode=navigate
+2026-07-08 22:07:35.622 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:07:36.587 [GOAL] (1.90, -0.90) yaw=-178deg mode=navigate
+2026-07-08 22:07:36.599 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:07:37.595 [GOAL] (1.90, -0.91) yaw=-176deg mode=navigate
+2026-07-08 22:07:37.602 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:07:38.596 [GOAL] (1.90, -0.90) yaw=-176deg mode=navigate
+2026-07-08 22:07:38.603 [RESULT] nav goal status=6 (not-succeeded)
+2026-07-08 22:07:39.579 [ROBOT] Arrived at the person.
+2026-07-08 22:13:38.696 [RUN] agent shutting down

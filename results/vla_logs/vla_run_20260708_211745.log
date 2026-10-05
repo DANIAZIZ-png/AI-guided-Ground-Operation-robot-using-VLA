@@ -1,0 +1,131 @@
+2026-07-08 21:17:45.487 [RUN] agent started (SIGHT_CONFIRM=2, NAVIGATE_TIMEOUT=60.0s)
+2026-07-08 21:17:50.050 [CMD] undock
+2026-07-08 21:17:50.051 [STEP] undock target=None
+2026-07-08 21:17:50.051 [ROBOT] Undocking…
+2026-07-08 21:18:00.037 [ROBOT] Undocked — ready to move.
+2026-07-08 21:18:00.037 [DOCK] undock ok
+2026-07-08 21:18:05.443 [CMD] turn 180 turn 180
+2026-07-08 21:18:06.231 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning around twice.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -360.0}]}
+2026-07-08 21:18:06.231 [STEP] move target=None
+2026-07-08 21:18:20.504 [ROBOT] Done with that move.
+2026-07-08 21:18:32.787 [CMD] face towards the back
+2026-07-08 21:18:33.605 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Facing towards the back.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -180.0}]}
+2026-07-08 21:18:33.606 [STEP] move target=None
+2026-07-08 21:18:42.505 [ROBOT] Done with that move.
+2026-07-08 21:18:47.282 [CMD] do you see an chair
+2026-07-08 21:18:48.004 [BRAIN] {'steps': [{'action': 'locate', 'speech': "I'm checking if there's a chair.", 'target': 'chair'}]}
+2026-07-08 21:18:48.005 [STEP] locate target='chair'
+2026-07-08 21:18:48.565 [ROBOT] Yes — I can see a chair about 14.8 m away. (Locating only — I'm not driving to it.)
+2026-07-08 21:18:56.915 [CMD] navigate to it
+2026-07-08 21:18:57.570 [BRAIN] {'steps': [{'action': 'navigate', 'speech': 'Navigating to the chair.', 'target': 'chair'}]}
+2026-07-08 21:18:57.570 [STEP] navigate target='chair'
+2026-07-08 21:19:10.566 [ROBOT] Found the chair — navigating to it.
+2026-07-08 21:19:10.566 [SIGHT] chair at (14.11, -4.73), 14.98 m away
+2026-07-08 21:19:52.570 [ROBOT] Arrived at the chair.
+2026-07-08 21:23:44.770 [CMD] patrol
+2026-07-08 21:23:45.497 [BRAIN] {'steps': [{'action': 'patrol', 'speech': 'Patrolling the area.', 'target': None}]}
+2026-07-08 21:23:45.497 [STEP] patrol target=None
+2026-07-08 21:23:45.497 [ROBOT] Do you want a live camera feed during the patrol? (yes / no)
+2026-07-08 21:23:47.508 [GOAL] (0.49, 0.00) yaw=1deg mode=explore
+2026-07-08 21:23:49.630 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:23:50.508 [GOAL] (1.98, 0.01) yaw=2deg mode=explore
+2026-07-08 21:23:59.922 [CMD] (cancel) cancel
+2026-07-08 21:24:06.226 [CMD] turn 90 left
+2026-07-08 21:24:07.108 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ninety degrees to the left.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -90.0}]}
+2026-07-08 21:24:07.108 [STEP] move target=None
+2026-07-08 21:24:14.505 [ROBOT] Done with that move.
+2026-07-08 21:24:21.811 [CMD] turn 180 left
+2026-07-08 21:24:22.702 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning left one hundred eighty degrees.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -180.0}]}
+2026-07-08 21:24:22.702 [STEP] move target=None
+2026-07-08 21:24:33.504 [ROBOT] Done with that move.
+2026-07-08 21:24:36.882 [CMD] move move 1m
+2026-07-08 21:24:37.712 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Moving forward one metre.', 'target': None, 'distance_m': 1.0, 'rotation_deg': 0.0}]}
+2026-07-08 21:24:37.712 [STEP] move target=None
+2026-07-08 21:24:45.506 [ROBOT] Done with that move.
+2026-07-08 21:24:53.794 [CMD] patrol
+2026-07-08 21:24:54.538 [BRAIN] {'steps': [{'action': 'patrol', 'speech': 'Starting patrol in this area.', 'target': None}]}
+2026-07-08 21:24:54.538 [STEP] patrol target=None
+2026-07-08 21:24:54.538 [ROBOT] Do you want a live camera feed during the patrol? (yes / no)
+2026-07-08 21:24:57.509 [GOAL] (2.88, 2.19) yaw=27deg mode=explore
+2026-07-08 21:25:08.670 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:25:09.507 [GOAL] (5.00, 3.39) yaw=29deg mode=explore
+2026-07-08 21:25:20.618 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:25:21.508 [GOAL] (8.03, 5.01) yaw=28deg mode=explore
+2026-07-08 21:25:42.870 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:25:43.508 [GOAL] (9.05, 4.41) yaw=-31deg mode=explore
+2026-07-08 21:26:03.619 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:26:04.509 [GOAL] (10.47, 4.54) yaw=27deg mode=explore
+2026-07-08 21:26:39.020 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:26:39.509 [GOAL] (11.50, 4.47) yaw=-28deg mode=explore
+2026-07-08 21:26:45.120 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:26:45.507 [GOAL] (12.98, 4.47) yaw=-19deg mode=explore
+2026-07-08 21:26:55.869 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:26:56.507 [GOAL] (14.36, 4.18) yaw=-31deg mode=explore
+2026-07-08 21:28:06.878 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:28:07.509 [GOAL] (12.97, 8.08) yaw=106deg mode=explore
+2026-07-08 21:29:15.971 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:29:16.509 [GOAL] (12.97, 9.51) yaw=98deg mode=explore
+2026-07-08 21:29:25.481 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:29:25.510 [GOAL] (12.61, 10.56) yaw=117deg mode=explore
+2026-07-08 21:29:32.921 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:29:33.509 [GOAL] (11.55, 11.11) yaw=153deg mode=explore
+2026-07-08 21:29:38.871 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:29:39.509 [GOAL] (10.40, 11.86) yaw=148deg mode=explore
+2026-07-08 21:29:45.572 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:29:46.510 [GOAL] (9.43, 12.36) yaw=153deg mode=explore
+2026-07-08 21:29:51.522 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:29:52.510 [GOAL] (8.40, 12.83) yaw=156deg mode=explore
+2026-07-08 21:29:57.472 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:29:57.509 [GOAL] (6.98, 13.41) yaw=157deg mode=explore
+2026-07-08 21:30:04.071 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:30:04.509 [GOAL] (5.83, 13.81) yaw=160deg mode=explore
+2026-07-08 21:30:09.871 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:30:10.510 [GOAL] (4.48, 14.19) yaw=163deg mode=explore
+2026-07-08 21:30:16.922 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:30:17.511 [GOAL] (3.48, 14.44) yaw=165deg mode=explore
+2026-07-08 21:30:22.622 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:30:23.512 [GOAL] (2.48, 14.58) yaw=170deg mode=explore
+2026-07-08 21:30:28.734 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:30:29.512 [GOAL] (1.48, 14.87) yaw=166deg mode=explore
+2026-07-08 21:30:34.924 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:30:35.513 [GOAL] (0.48, 14.34) yaw=-160deg mode=explore
+2026-07-08 21:30:41.125 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:30:41.510 [GOAL] (-0.52, 13.93) yaw=-155deg mode=explore
+2026-07-08 21:30:46.732 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:30:47.510 [GOAL] (-1.53, 13.02) yaw=-140deg mode=explore
+2026-07-08 21:30:54.021 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:30:54.512 [GOAL] (-2.40, 12.38) yaw=-142deg mode=explore
+2026-07-08 21:30:59.674 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:31:00.510 [GOAL] (-5.47, 9.89) yaw=-141deg mode=explore
+2026-07-08 21:31:24.322 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:31:24.511 [GOAL] (-6.52, 8.99) yaw=-130deg mode=explore
+2026-07-08 21:31:30.573 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:31:31.510 [GOAL] (-7.60, 8.12) yaw=-139deg mode=explore
+2026-07-08 21:31:38.321 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:31:38.509 [GOAL] (-8.45, 7.41) yaw=-138deg mode=explore
+2026-07-08 21:31:43.821 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:31:44.510 [GOAL] (-8.15, 6.36) yaw=-83deg mode=explore
+2026-07-08 21:31:50.621 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:31:51.510 [GOAL] (-6.98, 5.65) yaw=-35deg mode=explore
+2026-07-08 21:31:58.023 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:31:58.512 [GOAL] (-6.00, 5.11) yaw=-30deg mode=explore
+2026-07-08 21:32:04.324 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:32:04.510 [GOAL] (-4.98, 4.57) yaw=-27deg mode=explore
+2026-07-08 21:32:10.873 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:32:11.511 [GOAL] (-4.64, 6.65) yaw=75deg mode=explore
+2026-07-08 21:32:22.273 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:32:22.512 [GOAL] (-5.36, 7.86) yaw=115deg mode=explore
+2026-07-08 21:32:30.585 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:32:31.513 [GOAL] (-5.41, 8.87) yaw=91deg mode=explore
+2026-07-08 21:32:43.586 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:32:44.527 [GOAL] (-7.38, 7.03) yaw=-135deg mode=explore
+2026-07-08 21:33:05.349 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:33:05.510 [GOAL] (-9.91, 5.56) yaw=-157deg mode=explore
+2026-07-08 21:33:19.281 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:33:19.512 [GOAL] (-11.50, 4.38) yaw=-150deg mode=explore
+2026-07-08 21:33:47.724 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:33:48.511 [GOAL] (-13.01, 4.48) yaw=164deg mode=explore
+2026-07-08 21:33:55.832 [RESULT] nav goal status=4 (ok)
+2026-07-08 21:33:56.511 [GOAL] (-11.53, -0.47) yaw=-73deg mode=explore
+2026-07-08 21:34:00.144 [CMD] (cancel) cancel
+2026-07-08 21:34:03.936 [RUN] agent shutting down

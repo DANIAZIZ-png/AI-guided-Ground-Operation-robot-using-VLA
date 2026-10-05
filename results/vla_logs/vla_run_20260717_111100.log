@@ -1,0 +1,142 @@
+2026-07-17 11:11:00.726 [RUN] agent started (SIGHT_CONFIRM=2, SEARCH_TIMEOUT=45.0s, NO_PROGRESS_LIMIT=60.0s, ROBOT_CLEARANCE=0.25m)
+2026-07-17 11:11:17.364 [CMD] go to a chair
+2026-07-17 11:11:21.151 [BRAIN] {'steps': [{'action': 'locate', 'speech': 'Looking for a chair.', 'target': 'chair'}]}
+2026-07-17 11:11:21.151 [STEP] locate target='chair'
+2026-07-17 11:11:29.914 [MEMORY] remembered chair at (13.48, -4.23)
+2026-07-17 11:11:29.914 [ROBOT] Yes — I can see a chair about 9.4 m away. I'll remember where it is. (Locating only — not driving to it.)
+2026-07-17 11:17:43.956 [CMD] go to the chair
+2026-07-17 11:17:44.796 [BRAIN] {'steps': [{'action': 'navigate', 'speech': 'Heading back to the chair.', 'target': 'chair'}]}
+2026-07-17 11:17:44.797 [STEP] navigate target='chair'
+2026-07-17 11:17:44.797 [MEMORY] seeded chair from remembered instance at (13.48, -4.23)
+2026-07-17 11:17:44.919 [ROBOT] I can see the chair now — it's where I remembered.
+2026-07-17 11:17:44.919 [SIGHT] memory-seeded chair re-confirmed at (14.00, -4.14), 9.70 m away
+2026-07-17 11:17:44.922 [GOAL] (13.31, -3.57) yaw=-40deg mode=navigate
+2026-07-17 11:18:26.784 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:18:26.921 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:18:26.982 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:18:27.915 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:18:27.977 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:18:28.915 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:18:28.977 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:18:29.935 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:18:29.996 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:18:30.916 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:18:30.978 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:18:31.919 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:18:31.981 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:18:32.921 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:18:32.983 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:18:33.927 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:18:33.990 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:18:34.918 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:18:34.980 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:18:35.938 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:18:35.999 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:18:36.920 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:18:36.982 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:18:37.917 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:18:37.979 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:18:38.924 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:18:38.986 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:18:39.925 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:18:39.986 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:18:40.918 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:18:40.980 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:18:41.910 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:18:41.971 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:18:42.916 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:18:42.978 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:18:43.922 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:18:43.983 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:18:44.940 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:18:45.002 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:18:45.917 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:18:45.980 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:18:46.921 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:18:46.982 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:18:47.938 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:18:48.000 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:18:48.920 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:18:48.982 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:18:49.928 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:18:49.991 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:18:50.916 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:18:50.978 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:18:51.920 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:18:51.983 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:18:52.918 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:18:52.980 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:18:53.941 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:18:54.004 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:18:54.918 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:18:54.979 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:18:55.920 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:18:55.982 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:18:56.920 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:18:56.982 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:18:57.918 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:18:57.979 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:18:58.926 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:18:58.988 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:18:59.919 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:18:59.980 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:19:00.918 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:19:00.980 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:19:01.929 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:19:01.990 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:19:02.926 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:19:02.988 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:19:03.947 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:19:04.009 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:19:04.918 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:19:04.981 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:19:05.925 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:19:05.987 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:19:06.917 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:19:06.980 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:19:07.924 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:19:07.987 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:19:08.922 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:19:08.984 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:19:09.945 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:19:10.008 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:19:10.922 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:19:10.985 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:19:11.915 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:19:11.978 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:19:12.920 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:19:12.984 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:19:13.929 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:19:13.991 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:19:14.920 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:19:14.982 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:19:15.934 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:19:15.998 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:19:16.918 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:19:16.979 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:19:17.926 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:19:17.989 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:19:18.929 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:19:18.990 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:19:19.926 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:19:19.990 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:19:20.919 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:19:20.981 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:19:21.917 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:19:21.979 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:19:22.926 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:19:22.987 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:19:23.920 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:19:23.983 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:19:24.919 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:19:24.982 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:19:25.921 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:19:25.982 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:19:26.919 [GOAL] (13.29, -3.51) yaw=-27deg mode=navigate
+2026-07-17 11:19:26.982 [RESULT] nav goal status=4 (ok)
+2026-07-17 11:19:27.845 [ROBOT] I know where the chair is but I can't get any closer — the way looks blocked. I've remembered its spot, so try again from somewhere else, or clear the path.
+2026-07-17 11:19:27.845 [WARN] no progress toward chair for 60s; best=1.09m
+2026-07-17 11:40:07.075 [CMD] close
+2026-07-17 11:40:07.966 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Closing in on the chair a bit.', 'target': None, 'distance_m': -0.3, 'rotation_deg': 0.0}]}
+2026-07-17 11:40:07.966 [STEP] move target=None
+2026-07-17 11:40:15.539 [RUN] agent shutting down

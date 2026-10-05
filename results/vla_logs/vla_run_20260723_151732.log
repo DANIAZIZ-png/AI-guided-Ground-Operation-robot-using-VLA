@@ -1,0 +1,18 @@
+2026-07-23 15:17:32.930 [RUN] vla_agent v4  (#21: occlusion-proof depth + teleport gate)
+2026-07-23 15:17:32.930 [RUN] agent started (SIGHT_CONFIRM=2, SEARCH_TIMEOUT=45.0s, NO_PROGRESS_LIMIT=60.0s, ROBOT_CLEARANCE=0.25m)
+2026-07-23 15:17:37.695 [CMD] turn 180
+2026-07-23 15:17:38.587 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning 180 degrees to the left.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -180.0}]}
+2026-07-23 15:17:38.587 [STEP] move target=None
+2026-07-23 15:17:46.961 [ROBOT] Done with that move.
+2026-07-23 15:17:53.711 [CMD] 2 metforward 2meter
+2026-07-23 15:17:54.498 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Moving forward two meters.', 'target': None, 'distance_m': 2.0, 'rotation_deg': 0.0}]}
+2026-07-23 15:17:54.498 [STEP] move target=None
+2026-07-23 15:18:06.961 [ROBOT] Done with that move.
+2026-07-23 15:27:40.512 [CMD] live feed
+2026-07-23 15:27:41.296 [BRAIN] {'steps': [{'action': 'feed', 'speech': 'Showing live camera feed.', 'target': None}]}
+2026-07-23 15:27:41.296 [STEP] feed target=None
+2026-07-23 15:28:06.224 [CMD] rotate 90 and move 1m
+2026-07-23 15:28:07.134 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning right ninety degrees and moving forward one metre.', 'target': None, 'distance_m': 1.0, 'rotation_deg': 90.0}]}
+2026-07-23 15:28:07.134 [STEP] move target=None
+2026-07-23 15:28:19.961 [ROBOT] Done with that move.
+2026-07-23 20:13:29.757 [WARN] YOLO request failed: HTTPConnectionPool(host='127.0.0.1', port=5001): Read timed out. (read timeout=15)

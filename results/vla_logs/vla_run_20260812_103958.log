@@ -1,0 +1,28 @@
+2026-08-12 10:39:58.325 [RUN] vla_agent v27  (#62 direction-aware collision guard, #61 nearest-cluster LiDAR ranging, #60 manual override teleop, #59 10 Hz collision guard, #58 smoother approach, #57 stand off far enough to keep the object in view, #56 step-and-stare scan, #55 LiDAR failure reasons reported, #54 LiDAR object ranging, #53 seeded depth intrinsics, #52 depth intrinsics rescaled to frame size, #51 compressedDepth transport, #50 compressed RGB transport, #49 annotated feed gated per topic, #47 TF at colour-frame stamp, #48 reject stale depth, #46 one subscription per camera stream, #43 longer cached action-server wait, #44 undock retry-loop breaker, #45 sync slop for 1 Hz depth, #37 /robot1 namespace, #38 stereo depth topic, #39 best-effort sensor QoS, #40 RGB->depth pixel mapping, #41 encoding-based mm/m, #42 explicit namespaced TF, #36 no patrol feed prompt, #35 cancel actually stops the robot, #34 feed publishes to any subscriber, #22 dock no-detect zone, #23 live-first memory, #24 forget, #25 typo-tolerant control words, #26 bare yes/no, #27 context expiry, #28 all-instance distances, #29 Create 3 backup ratchet, #30 sticky goals + range-scaled gate + ring-safe blacklist, #31 incremental off-map hop goals, #32 non-freezing live feed, #33 command/reply/status bridge)
+2026-08-12 10:39:58.325 [RUN] agent started (SIGHT_CONFIRM=2, SEARCH_TIMEOUT=120.0s, NO_PROGRESS_LIMIT=60.0s, ROBOT_CLEARANCE=0.25m)
+2026-08-12 10:40:22.358 [CMD] [keyboard] what do you see
+2026-08-12 10:40:22.359 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-12 10:40:24.418 [ROBOT] Stopped. The robot is idle.
+2026-08-12 10:40:24.418 [STOP] confirmed stopped by odometry after barrage
+2026-08-12 10:41:00.296 [BRAIN] {'steps': [{'action': 'describe', 'speech': "I don't see anything right now.", 'target': None}]}
+2026-08-12 10:41:00.296 [STEP] describe target=None
+2026-08-12 10:41:00.296 [CMD] [keyboard] undock
+2026-08-12 10:41:00.297 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-12 10:41:00.297 [STEP] undock target=None
+2026-08-12 10:41:02.338 [ROBOT] Stopped. The robot is idle.
+2026-08-12 10:41:02.339 [STOP] confirmed stopped by odometry after barrage
+2026-08-12 10:41:15.322 [ROBOT] The 'undock' action server isn't up (is the Create 3 running?). Check: ros2 action list | grep -i dock
+2026-08-12 10:41:15.322 [CMD] [keyboard] undock
+2026-08-12 10:41:15.322 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-12 10:41:15.322 [STEP] undock target=None
+2026-08-12 10:41:17.378 [ROBOT] Stopped. The robot is idle.
+2026-08-12 10:41:17.379 [STOP] confirmed stopped by odometry after barrage
+2026-08-12 10:41:30.348 [ROBOT] The 'undock' action server isn't up (is the Create 3 running?). Check: ros2 action list | grep -i dock
+2026-08-12 10:42:27.078 [CMD] (manual override via keyboard) manual overrquit
+2026-08-12 10:42:27.080 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-12 10:42:27.080 [MANUAL] operator took manual control
+2026-08-12 10:42:29.138 [ROBOT] Stopped. The robot is idle.
+2026-08-12 10:42:29.139 [STOP] confirmed stopped by odometry after barrage
+2026-08-12 10:42:29.755 [MANUAL] control handed back to the robot
+2026-08-12 10:42:31.399 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-12 10:42:31.399 [RUN] agent shutting down

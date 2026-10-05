@@ -1,0 +1,62 @@
+2026-07-29 12:41:30.655 [RUN] vla_agent v8  (#22 dock no-detect zone, #23 live-first memory, #24 forget, #25 typo-tolerant control words, #26 bare yes/no, #27 context expiry, #28 all-instance distances, #29 Create 3 backup ratchet, #30 sticky goals + range-scaled gate + ring-safe blacklist)
+2026-07-29 12:41:30.656 [RUN] agent started (SIGHT_CONFIRM=2, SEARCH_TIMEOUT=45.0s, NO_PROGRESS_LIMIT=60.0s, ROBOT_CLEARANCE=0.25m)
+2026-07-29 12:43:43.861 [CMD] uddock
+2026-07-29 12:43:48.444 [BRAIN] {'steps': [{'action': 'undock', 'speech': 'Leaving the charging dock.', 'target': None}]}
+2026-07-29 12:43:48.444 [STEP] undock target=None
+2026-07-29 12:43:48.444 [ROBOT] Undocking…
+2026-07-29 12:43:59.424 [ROBOT] Undocked — ready to move.
+2026-07-29 12:43:59.424 [DOCK] undock ok
+2026-07-29 12:44:05.029 [CMD] turn turn back
+2026-07-29 12:44:05.952 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning around.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -180.0}]}
+2026-07-29 12:44:05.952 [STEP] move target=None
+2026-07-29 12:44:14.684 [ROBOT] Done with that move.
+2026-07-29 12:44:20.804 [CMD] what do you see
+2026-07-29 12:44:21.645 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a person.', 'target': None}]}
+2026-07-29 12:44:21.645 [STEP] describe target=None
+2026-07-29 12:44:30.853 [CMD] find  CHARI
+2026-07-29 12:44:31.645 [BRAIN] {'steps': [{'action': 'locate', 'speech': 'Looking for a chari.', 'target': 'chari'}]}
+2026-07-29 12:44:31.646 [STEP] locate target='chari'
+2026-07-29 12:44:35.908 [CMD] (cancel) STOP
+2026-07-29 12:44:39.157 [CMD] FIND CHAIR
+2026-07-29 12:44:39.963 [BRAIN] {'steps': [{'action': 'locate', 'speech': 'Looking for a chair.', 'target': 'chair'}]}
+2026-07-29 12:44:39.963 [STEP] locate target='chair'
+2026-07-29 12:44:56.596 [CMD] GIVE ME LIVE FEED
+2026-07-29 12:44:57.363 [BRAIN] {'steps': [{'action': 'feed', 'speech': 'Showing live camera feed.', 'target': None}]}
+2026-07-29 12:44:57.364 [STEP] feed target=None
+2026-07-29 12:45:04.836 [CMD] CHAIR
+2026-07-29 12:45:05.681 [BRAIN] {'steps': [{'action': 'locate', 'speech': 'Checking if the chair is here.', 'target': 'chair'}]}
+2026-07-29 12:45:05.681 [STEP] locate target='chair'
+2026-07-29 12:45:30.685 [ROBOT] I don't see any chair in this area.
+2026-07-29 12:46:00.389 [CMD] GO TO THE CHAIR
+2026-07-29 12:46:01.271 [BRAIN] {'steps': [{'action': 'navigate', 'speech': 'Heading to the chair.', 'target': 'chair'}]}
+2026-07-29 12:46:01.271 [STEP] navigate target='chair'
+2026-07-29 12:46:15.767 [ROBOT] Can't see the chair here — moving to look elsewhere.
+2026-07-29 12:46:40.770 [ROBOT] Can't see the chair here — moving to look elsewhere.
+2026-07-29 12:46:46.685 [ROBOT] Sorry, I couldn't find any chair in this area.
+2026-07-29 12:47:39.090 [CMD] turn right
+2026-07-29 12:47:40.060 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ninety degrees to the right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -90.0}]}
+2026-07-29 12:47:40.061 [STEP] move target=None
+2026-07-29 12:47:45.684 [ROBOT] Done with that move.
+2026-07-29 12:47:56.147 [CMD] whAT DO YOU SEE
+2026-07-29 12:47:56.948 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a chair.', 'target': None}]}
+2026-07-29 12:47:56.948 [STEP] describe target=None
+2026-07-29 12:48:09.025 [CMD] GO TO THE CLOSEST CAHIR
+2026-07-29 12:48:09.912 [BRAIN] {'steps': [{'action': 'navigate', 'speech': 'Heading to the nearest chair.', 'target': 'chair', 'qualifier': 'nearest'}]}
+2026-07-29 12:48:09.912 [STEP] navigate target='chair'
+2026-07-29 12:48:25.807 [ROBOT] Can't see the chair here — moving to look elsewhere.
+2026-07-29 12:48:51.773 [ROBOT] Can't see the chair here — moving to look elsewhere.
+2026-07-29 12:48:55.684 [ROBOT] Sorry, I couldn't find any chair in this area.
+2026-07-29 12:51:24.354 [CMD] FUCK YOU
+2026-07-29 12:51:24.507 [CTX] dropping stale context (navigate -> chair)
+2026-07-29 12:51:25.324 [BRAIN] {'steps': [{'action': 'answer', 'speech': "I'm here to help you, how can I assist?", 'target': None}]}
+2026-07-29 12:51:25.324 [STEP] answer target=None
+2026-07-29 12:51:33.583 [CMD] YOU CANT DO ANYTHING
+2026-07-29 12:51:34.731 [BRAIN] {'steps': [{'action': 'reject', 'speech': "I can't do that, but I can show you what I see — would you like to see the camera feed?", 'target': None}]}
+2026-07-29 12:51:34.731 [STEP] reject target=None
+2026-07-29 12:51:40.751 [CMD] FUCK YOU
+2026-07-29 12:51:41.813 [BRAIN] {'steps': [{'action': 'answer', 'speech': "I'm here to assist you, how can I help?", 'target': None}]}
+2026-07-29 12:51:41.813 [STEP] answer target=None
+2026-07-29 12:51:48.688 [CMD] HOW CAN U HELP
+2026-07-29 12:51:49.879 [BRAIN] {'steps': [{'action': 'answer', 'speech': 'I can drive around, map areas, or look for objects. What would you like me to do?', 'target': None}]}
+2026-07-29 12:51:49.879 [STEP] answer target=None
+2026-07-29 12:53:10.926 [RUN] agent shutting down

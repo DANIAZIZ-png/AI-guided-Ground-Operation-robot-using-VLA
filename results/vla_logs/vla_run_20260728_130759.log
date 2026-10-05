@@ -1,0 +1,28 @@
+2026-07-28 13:07:59.072 [RUN] vla_agent v7  (#22 dock no-detect zone, #23 live-first memory, #24 forget, #25 typo-tolerant control words, #26 bare yes/no, #27 context expiry, #28 all-instance distances, #29 Create 3 backup ratchet)
+2026-07-28 13:07:59.072 [RUN] agent started (SIGHT_CONFIRM=2, SEARCH_TIMEOUT=45.0s, NO_PROGRESS_LIMIT=60.0s, ROBOT_CLEARANCE=0.25m)
+2026-07-28 13:08:00.074 [DOCK] dock position recorded at (3.00, 0.00); detections within 0.8 m are ignored
+2026-07-28 13:08:06.091 [CMD] undock
+2026-07-28 13:08:06.092 [STEP] undock target=None
+2026-07-28 13:08:06.092 [ROBOT] Undocking…
+2026-07-28 13:08:17.223 [ROBOT] Undocked — ready to move.
+2026-07-28 13:08:17.223 [DOCK] undock ok
+2026-07-28 13:08:21.628 [CMD] turn righ
+2026-07-28 13:08:22.504 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ninety degrees right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': 90.0}]}
+2026-07-28 13:08:22.504 [STEP] move target=None
+2026-07-28 13:08:28.192 [ROBOT] Done with that move.
+2026-07-28 13:08:45.307 [CMD] dock
+2026-07-28 13:08:45.307 [STEP] dock target=None
+2026-07-28 13:08:45.308 [ROBOT] Docking…
+2026-07-28 13:08:49.723 [CMD] clear
+2026-07-28 13:08:49.740 [ROBOT] The dock action did not complete — please check the robot. (dock_status will keep me updated.)
+2026-07-28 13:08:49.740 [DOCK] dock FAILED
+2026-07-28 13:08:50.469 [BRAIN] {'steps': [{'action': 'forget', 'speech': 'Clearing all my remembered positions.', 'target': None}]}
+2026-07-28 13:08:50.470 [STEP] forget target=None
+2026-07-28 13:08:50.470 [MEMORY] cleared ALL remembered positions (0)
+2026-07-28 13:08:54.651 [CMD] dock
+2026-07-28 13:08:54.652 [STEP] dock target=None
+2026-07-28 13:08:54.653 [ROBOT] Docking…
+2026-07-28 13:09:01.667 [DOCK] dock position recorded at (3.00, 0.00); detections within 0.8 m are ignored
+2026-07-28 13:09:01.667 [ROBOT] Docked successfully.
+2026-07-28 13:09:01.667 [DOCK] dock ok
+2026-07-28 13:09:04.267 [RUN] agent shutting down

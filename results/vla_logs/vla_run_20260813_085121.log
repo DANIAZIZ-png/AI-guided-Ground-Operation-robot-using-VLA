@@ -1,0 +1,610 @@
+2026-08-13 08:51:21.028 [RUN] vla_agent v28  (#63 headless-safe console output, #62 direction-aware collision guard, #61 nearest-cluster LiDAR ranging, #60 manual override teleop, #59 10 Hz collision guard, #58 smoother approach, #57 stand off far enough to keep the object in view, #56 step-and-stare scan, #55 LiDAR failure reasons reported, #54 LiDAR object ranging, #53 seeded depth intrinsics, #52 depth intrinsics rescaled to frame size, #51 compressedDepth transport, #50 compressed RGB transport, #49 annotated feed gated per topic, #47 TF at colour-frame stamp, #48 reject stale depth, #46 one subscription per camera stream, #43 longer cached action-server wait, #44 undock retry-loop breaker, #45 sync slop for 1 Hz depth, #37 /robot1 namespace, #38 stereo depth topic, #39 best-effort sensor QoS, #40 RGB->depth pixel mapping, #41 encoding-based mm/m, #42 explicit namespaced TF, #36 no patrol feed prompt, #35 cancel actually stops the robot, #34 feed publishes to any subscriber, #22 dock no-detect zone, #23 live-first memory, #24 forget, #25 typo-tolerant control words, #26 bare yes/no, #27 context expiry, #28 all-instance distances, #29 Create 3 backup ratchet, #30 sticky goals + range-scaled gate + ring-safe blacklist, #31 incremental off-map hop goals, #32 non-freezing live feed, #33 command/reply/status bridge)
+2026-08-13 08:51:21.028 [RUN] agent started (SIGHT_CONFIRM=2, SEARCH_TIMEOUT=120.0s, NO_PROGRESS_LIMIT=60.0s, ROBOT_CLEARANCE=0.25m)
+2026-08-13 08:51:21.075 [RUN] headless mode (no tty)
+2026-08-13 08:51:22.119 [DOCK] dock position recorded at (-0.00, 0.00); detections within 0.8 m are ignored
+2026-08-13 08:51:23.005 [INFO] live depth camera_info received 320x240
+2026-08-13 09:00:12.054 [CMD] [remote] and all
+2026-08-13 09:00:12.055 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-13 09:00:14.115 [ROBOT] Stopped. The robot is idle.
+2026-08-13 09:00:14.116 [STOP] confirmed stopped by odometry after barrage
+2026-08-13 09:00:35.274 [CMD] (cancel via remote) cancel
+2026-08-13 09:00:35.274 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-13 09:00:37.315 [ROBOT] Stopped. The robot is idle.
+2026-08-13 09:00:37.315 [STOP] confirmed stopped by odometry after barrage
+2026-08-13 09:00:49.493 [BRAIN] {'steps': [{'action': 'locate', 'speech': 'Looking for any more chairs.', 'target': 'chair'}]}
+2026-08-13 09:00:49.493 [STEP] locate target='chair'
+2026-08-13 09:00:49.493 [ROBOT] I'm docked — undocking first, then I'll continue.
+2026-08-13 09:00:49.493 [ROBOT] Undocking…
+2026-08-13 09:00:49.494 [CMD] [remote] undock
+2026-08-13 09:00:49.494 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-13 09:00:49.495 [STEP] undock target=None
+2026-08-13 09:00:49.495 [ROBOT] Undocking…
+2026-08-13 09:00:49.497 [ROBOT] The robot rejected the undock request.
+2026-08-13 09:00:52.995 [ROBOT] Stopped. The robot is idle.
+2026-08-13 09:00:52.995 [STOP] confirmed stopped by odometry after barrage
+2026-08-13 09:00:59.797 [ROBOT] Undocked — ready to move.
+2026-08-13 09:00:59.798 [DOCK] undock ok
+2026-08-13 09:01:04.689 [CMD] [remote] turned right
+2026-08-13 09:01:04.690 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-13 09:01:05.577 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ninety degrees to the right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -90.0}]}
+2026-08-13 09:01:05.578 [STEP] move target=None
+2026-08-13 09:01:06.735 [ROBOT] Stopped. The robot is idle.
+2026-08-13 09:01:06.735 [STOP] confirmed stopped by odometry after barrage
+2026-08-13 09:01:11.075 [ROBOT] Done with that move.
+2026-08-13 09:01:17.047 [CMD] [remote] move one meter ahead
+2026-08-13 09:01:17.048 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-13 09:01:17.836 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Moving forward one metre.', 'target': None, 'distance_m': 1.0, 'rotation_deg': 0.0}]}
+2026-08-13 09:01:17.837 [STEP] move target=None
+2026-08-13 09:01:19.094 [ROBOT] Stopped. The robot is idle.
+2026-08-13 09:01:19.095 [STOP] confirmed stopped by odometry after barrage
+2026-08-13 09:01:25.075 [ROBOT] Done with that move.
+2026-08-13 09:01:38.265 [CMD] [remote] turn right saraswan jayar is here
+2026-08-13 09:01:38.266 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-13 09:01:39.125 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ninety degrees to the right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -90.0}]}
+2026-08-13 09:01:39.125 [STEP] move target=None
+2026-08-13 09:01:40.315 [ROBOT] Stopped. The robot is idle.
+2026-08-13 09:01:40.316 [STOP] confirmed stopped by odometry after barrage
+2026-08-13 09:01:45.074 [ROBOT] Done with that move.
+2026-08-13 09:01:53.306 [CMD] [remote] what do you see
+2026-08-13 09:01:53.307 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-13 09:01:54.017 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a chair.', 'target': None}]}
+2026-08-13 09:01:54.018 [STEP] describe target=None
+2026-08-13 09:01:54.127 [WARN] lidar ranging unavailable: only 0 valid beams within 1.2 deg of bearing -98.8 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:01:55.354 [ROBOT] Stopped. The robot is idle.
+2026-08-13 09:01:55.355 [STOP] confirmed stopped by odometry after barrage
+2026-08-13 09:02:00.508 [CMD] [remote] right go to the chair
+2026-08-13 09:02:00.509 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-13 09:02:01.329 [BRAIN] {'steps': [{'action': 'navigate', 'speech': 'Heading to the rightmost chair.', 'target': 'chair'}]}
+2026-08-13 09:02:01.329 [STEP] navigate target='chair'
+2026-08-13 09:02:02.555 [ROBOT] Stopped. The robot is idle.
+2026-08-13 09:02:02.556 [STOP] confirmed stopped by odometry after barrage
+2026-08-13 09:02:03.134 [ROBOT] Found the chair — navigating to it.
+2026-08-13 09:02:03.134 [SIGHT] chair at (15.78, -3.40), 15.59 m away
+2026-08-13 09:02:03.134 [ROBOT] The chair is about 15.6 m away, past the edge of what I've mapped. Moving up in short steps and mapping as I go.
+2026-08-13 09:02:03.134 [STEP] #31 hop mode engaged for chair: object (15.78, -3.40) at 15.6 m, area_mapped=False
+2026-08-13 09:02:03.134 [GOAL] #31 hop 1: 1.50 m toward chair (still 15.6 m away)
+2026-08-13 09:02:03.135 [GOAL] (2.29, 0.65) yaw=-17deg mode=navigate
+2026-08-13 09:02:04.136 [WARN] lidar ranging unavailable: only 0 valid beams within 1.2 deg of bearing -95.7 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:02:05.131 [WARN] lidar ranging unavailable: only 0 valid beams within 1.1 deg of bearing -93.0 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:02:06.133 [WARN] lidar ranging unavailable: only 0 valid beams within 1.0 deg of bearing -96.7 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:02:06.134 [WARN] lidar ranging unavailable: only 0 valid beams within 1.1 deg of bearing -92.4 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:02:07.146 [WARN] lidar ranging unavailable: only 0 valid beams within 1.0 deg of bearing -95.9 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:02:08.149 [WARN] lidar ranging unavailable: only 0 valid beams within 1.1 deg of bearing -90.0 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:02:08.151 [GOAL] #31 hop 2: 1.50 m toward chair (still 14.6 m away)
+2026-08-13 09:02:08.152 [GOAL] (3.37, 0.27) yaw=-19deg mode=navigate
+2026-08-13 09:02:08.157 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:02:08.157 [WARN] nav goal (3.37, 0.27) failed (status=6); trying another approach angle
+2026-08-13 09:02:08.158 [STEP] #31 hop aborted — shortening to 0.75 m and re-aiming
+2026-08-13 09:02:09.138 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-13 09:02:09.139 [GOAL] #31 hop 3: 0.75 m toward chair (still 14.4 m away)
+2026-08-13 09:02:09.139 [GOAL] (2.88, 0.46) yaw=-19deg mode=navigate
+2026-08-13 09:02:09.147 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:02:09.147 [WARN] nav goal (2.88, 0.46) failed (status=6); trying another approach angle
+2026-08-13 09:02:09.148 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-13 09:02:10.139 [WARN] lidar ranging unavailable: only 0 valid beams within 1.3 deg of bearing -92.3 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:02:10.140 [WARN] lidar ranging unavailable: only 0 valid beams within 1.1 deg of bearing -96.9 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:02:10.141 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-13 09:02:10.141 [GOAL] #31 hop 4: 0.60 m toward chair (still 14.5 m away)
+2026-08-13 09:02:10.142 [GOAL] (2.97, 0.44) yaw=-19deg mode=navigate
+2026-08-13 09:02:10.148 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:02:10.148 [WARN] nav goal (2.97, 0.44) failed (status=6); trying another approach angle
+2026-08-13 09:02:10.150 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-13 09:02:11.136 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-13 09:02:11.136 [GOAL] #31 hop 5: 0.60 m toward chair (still 14.3 m away)
+2026-08-13 09:02:11.136 [GOAL] (3.19, 0.37) yaw=-19deg mode=navigate
+2026-08-13 09:02:11.147 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:02:11.147 [WARN] nav goal (3.19, 0.37) failed (status=6); trying another approach angle
+2026-08-13 09:02:11.147 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-13 09:02:12.136 [WARN] lidar ranging unavailable: only 0 valid beams within 1.2 deg of bearing -96.4 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:02:12.137 [GOAL] #31 hop 6: 0.60 m toward chair (still 14.1 m away)
+2026-08-13 09:02:12.139 [GOAL] (3.37, 0.26) yaw=-23deg mode=navigate
+2026-08-13 09:02:12.147 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:02:12.147 [WARN] nav goal (3.37, 0.26) failed (status=6); trying another approach angle
+2026-08-13 09:02:12.148 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-13 09:02:13.141 [WARN] lidar ranging unavailable: only 0 valid beams within 1.4 deg of bearing -89.7 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:02:13.144 [WARN] lidar ranging unavailable: only 0 valid beams within 1.2 deg of bearing -94.4 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:02:13.144 [GOAL] #31 hop 7: 0.60 m toward chair (still 13.4 m away)
+2026-08-13 09:02:13.145 [GOAL] (3.59, 0.24) yaw=-19deg mode=navigate
+2026-08-13 09:02:13.158 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:02:13.158 [WARN] nav goal (3.59, 0.24) failed (status=6); trying another approach angle
+2026-08-13 09:02:13.159 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-13 09:02:14.141 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-13 09:02:14.141 [GOAL] #31 hop 8: 0.60 m toward chair (still 13.1 m away)
+2026-08-13 09:02:14.142 [GOAL] (3.81, 0.17) yaw=-19deg mode=navigate
+2026-08-13 09:02:14.147 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:02:14.148 [WARN] nav goal (3.81, 0.17) failed (status=6); trying another approach angle
+2026-08-13 09:02:14.148 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-13 09:02:15.148 [WARN] lidar ranging unavailable: only 0 valid beams within 1.4 deg of bearing -96.2 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:02:15.150 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-13 09:02:15.151 [GOAL] #31 hop 9: 0.60 m toward chair (still 12.8 m away)
+2026-08-13 09:02:15.151 [GOAL] (3.84, 0.13) yaw=-18deg mode=navigate
+2026-08-13 09:02:15.157 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:02:15.157 [WARN] nav goal (3.84, 0.13) failed (status=6); trying another approach angle
+2026-08-13 09:02:15.158 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-13 09:02:16.149 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-13 09:02:16.150 [GOAL] #31 hop 10: 0.60 m toward chair (still 12.6 m away)
+2026-08-13 09:02:16.150 [GOAL] (4.07, 0.08) yaw=-18deg mode=navigate
+2026-08-13 09:02:16.157 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:02:16.157 [WARN] nav goal (4.07, 0.08) failed (status=6); trying another approach angle
+2026-08-13 09:02:16.157 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-13 09:02:17.149 [WARN] lidar ranging unavailable: only 0 valid beams within 1.4 deg of bearing -96.3 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:02:17.151 [WARN] lidar ranging unavailable: only 0 valid beams within 1.4 deg of bearing -91.2 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:02:17.152 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-13 09:02:17.154 [GOAL] #31 hop 11: 0.60 m toward chair (still 12.5 m away)
+2026-08-13 09:02:17.154 [GOAL] (4.24, 0.01) yaw=-19deg mode=navigate
+2026-08-13 09:02:17.158 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:02:17.158 [WARN] nav goal (4.24, 0.01) failed (status=6); trying another approach angle
+2026-08-13 09:02:17.158 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-13 09:02:18.157 [WARN] lidar ranging unavailable: only 0 valid beams within 1.4 deg of bearing -90.2 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:02:18.160 [WARN] lidar ranging unavailable: only 0 valid beams within 1.3 deg of bearing -95.4 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:02:18.164 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-13 09:02:18.165 [GOAL] #31 hop 12: 0.60 m toward chair (still 12.2 m away)
+2026-08-13 09:02:18.165 [GOAL] (4.43, -0.06) yaw=-20deg mode=navigate
+2026-08-13 09:02:18.177 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:02:18.177 [WARN] nav goal (4.43, -0.06) failed (status=6); trying another approach angle
+2026-08-13 09:02:18.177 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-13 09:02:19.146 [WARN] lidar ranging unavailable: only 0 valid beams within 1.2 deg of bearing -95.6 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:02:19.151 [WARN] lidar ranging unavailable: only 1 valid beams within 1.4 deg of bearing -90.3 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:02:19.152 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-13 09:02:19.153 [GOAL] #31 hop 13: 0.60 m toward chair (still 12.1 m away)
+2026-08-13 09:02:19.154 [GOAL] (4.62, -0.14) yaw=-20deg mode=navigate
+2026-08-13 09:02:19.158 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:02:19.158 [WARN] nav goal (4.62, -0.14) failed (status=6); trying another approach angle
+2026-08-13 09:02:19.159 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-13 09:02:20.153 [WARN] lidar ranging unavailable: only 0 valid beams within 1.3 deg of bearing -95.9 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:02:20.154 [WARN] lidar ranging unavailable: only 1 valid beams within 1.5 deg of bearing -90.6 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:02:20.156 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-13 09:02:20.157 [GOAL] #31 hop 14: 0.60 m toward chair (still 11.9 m away)
+2026-08-13 09:02:20.157 [GOAL] (4.80, -0.20) yaw=-20deg mode=navigate
+2026-08-13 09:02:20.167 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:02:20.168 [WARN] nav goal (4.80, -0.20) failed (status=6); trying another approach angle
+2026-08-13 09:02:20.168 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-13 09:02:21.152 [WARN] lidar ranging unavailable: only 0 valid beams within 1.4 deg of bearing -96.1 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:02:21.154 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-13 09:02:21.155 [GOAL] #31 hop 15: 0.60 m toward chair (still 11.5 m away)
+2026-08-13 09:02:21.155 [GOAL] (4.98, -0.25) yaw=-19deg mode=navigate
+2026-08-13 09:02:21.167 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:02:21.168 [WARN] nav goal (4.98, -0.25) failed (status=6); trying another approach angle
+2026-08-13 09:02:21.168 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-13 09:02:22.146 [WARN] lidar ranging unavailable: only 0 valid beams within 1.4 deg of bearing -95.5 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:02:22.148 [GOAL] #31 hop 16: 0.60 m toward chair (still 12.0 m away)
+2026-08-13 09:02:22.149 [GOAL] (5.17, -0.32) yaw=-19deg mode=navigate
+2026-08-13 09:02:22.157 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:02:22.157 [WARN] nav goal (5.17, -0.32) failed (status=6); trying another approach angle
+2026-08-13 09:02:22.158 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-13 09:02:23.149 [WARN] lidar ranging unavailable: only 0 valid beams within 1.4 deg of bearing -98.3 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:02:23.152 [GOAL] #31 hop 17: 0.60 m toward chair (still 11.8 m away)
+2026-08-13 09:02:23.153 [GOAL] (5.33, -0.42) yaw=-24deg mode=navigate
+2026-08-13 09:02:23.158 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:02:23.159 [WARN] nav goal (5.33, -0.42) failed (status=6); trying another approach angle
+2026-08-13 09:02:23.159 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-13 09:02:24.148 [WARN] lidar ranging unavailable: only 0 valid beams within 1.3 deg of bearing -95.3 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:02:24.150 [GOAL] #31 hop 18: 0.60 m toward chair (still 11.7 m away)
+2026-08-13 09:02:24.152 [GOAL] (5.54, -0.44) yaw=-20deg mode=navigate
+2026-08-13 09:02:24.157 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:02:24.157 [WARN] nav goal (5.54, -0.44) failed (status=6); trying another approach angle
+2026-08-13 09:02:24.158 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-13 09:02:25.144 [WARN] all approach goals for chair refused; clearing the tried-list and retrying
+2026-08-13 09:02:25.145 [GOAL] #31 hop 19: 0.60 m toward chair (still 11.5 m away)
+2026-08-13 09:02:25.145 [GOAL] (5.69, -0.50) yaw=-20deg mode=navigate
+2026-08-13 09:02:25.157 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:02:25.158 [WARN] nav goal (5.69, -0.50) failed (status=6); trying another approach angle
+2026-08-13 09:02:25.158 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-13 09:02:26.165 [STEP] chair area now mapped after 19 hop(s) — switching to a direct approach
+2026-08-13 09:02:26.166 [ROBOT] The area around the chair is mapped now — going straight to it.
+2026-08-13 09:02:26.167 [GOAL] (14.99, -3.21) yaw=-44deg mode=navigate
+2026-08-13 09:02:26.176 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:02:26.177 [WARN] nav goal (14.99, -3.21) failed (status=6); trying another approach angle
+2026-08-13 09:02:27.163 [GOAL] (14.59, -3.57) yaw=-19deg mode=navigate
+2026-08-13 09:02:27.169 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:02:27.169 [WARN] nav goal (14.59, -3.57) failed (status=6); trying another approach angle
+2026-08-13 09:02:28.146 [GOAL] (14.82, -4.10) yaw=6deg mode=navigate
+2026-08-13 09:02:28.158 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:02:28.158 [WARN] nav goal (14.82, -4.10) failed (status=6); trying another approach angle
+2026-08-13 09:02:29.157 [GOAL] #31 hop 20: 0.60 m toward chair (still 11.1 m away)
+2026-08-13 09:02:29.158 [GOAL] (6.49, -0.82) yaw=-27deg mode=navigate
+2026-08-13 09:02:29.168 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:02:29.168 [WARN] nav goal (6.49, -0.82) failed (status=6); trying another approach angle
+2026-08-13 09:02:29.168 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-13 09:02:30.155 [STEP] chair area now mapped after 20 hop(s) — switching to a direct approach
+2026-08-13 09:02:30.155 [ROBOT] The area around the chair is mapped now — going straight to it.
+2026-08-13 09:02:30.157 [GOAL] (14.71, -4.05) yaw=-22deg mode=navigate
+2026-08-13 09:02:30.167 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:02:30.168 [WARN] nav goal (14.71, -4.05) failed (status=6); trying another approach angle
+2026-08-13 09:02:30.847 [RESULT] nav goal status=4 (ok)
+2026-08-13 09:02:31.150 [GOAL] (14.02, -3.60) yaw=-21deg mode=navigate
+2026-08-13 09:03:09.142 [ROBOT] Arrived at the chair.
+2026-08-13 09:03:18.642 [CMD] [remote] then around
+2026-08-13 09:03:18.643 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-13 09:03:19.513 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ninety degrees right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -90.0}]}
+2026-08-13 09:03:19.513 [STEP] move target=None
+2026-08-13 09:03:20.694 [ROBOT] Stopped. The robot is idle.
+2026-08-13 09:03:20.695 [STOP] confirmed stopped by odometry after barrage
+2026-08-13 09:03:25.075 [ROBOT] Done with that move.
+2026-08-13 09:03:28.054 [CMD] [remote] turn right
+2026-08-13 09:03:28.055 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-13 09:03:28.878 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ninety degrees to the right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -90.0}]}
+2026-08-13 09:03:28.883 [STEP] move target=None
+2026-08-13 09:03:30.115 [ROBOT] Stopped. The robot is idle.
+2026-08-13 09:03:30.115 [STOP] confirmed stopped by odometry after barrage
+2026-08-13 09:03:35.075 [ROBOT] Done with that move.
+2026-08-13 09:03:38.670 [CMD] [remote] what do you see
+2026-08-13 09:03:38.671 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-13 09:03:39.416 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I can see a person.', 'target': None}]}
+2026-08-13 09:03:39.417 [STEP] describe target=None
+2026-08-13 09:03:39.501 [WARN] lidar ranging unavailable: only 0 valid beams within 1.1 deg of bearing -76.2 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:03:40.714 [ROBOT] Stopped. The robot is idle.
+2026-08-13 09:03:40.715 [STOP] confirmed stopped by odometry after barrage
+2026-08-13 09:03:43.688 [CMD] [remote] go to the person
+2026-08-13 09:03:43.689 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-13 09:03:44.390 [BRAIN] {'steps': [{'action': 'navigate', 'speech': 'Heading to the person.', 'target': 'person'}]}
+2026-08-13 09:03:44.390 [STEP] navigate target='person'
+2026-08-13 09:03:45.735 [ROBOT] Stopped. The robot is idle.
+2026-08-13 09:03:45.736 [STOP] confirmed stopped by odometry after barrage
+2026-08-13 09:03:46.140 [ROBOT] Found the person — navigating to it.
+2026-08-13 09:03:46.140 [SIGHT] person at (-13.17, 4.15), 28.06 m away
+2026-08-13 09:03:46.140 [WARN] ignoring person sighting at 28.1 m (beyond STEP_MAX_RANGE 25.0 m — depth at that range is not trustworthy)
+2026-08-13 09:03:46.165 [GOAL] (-1.76, 0.91) yaw=164deg mode=navigate
+2026-08-13 09:03:47.152 [WARN] lidar ranging unavailable: only 0 valid beams within 1.0 deg of bearing -77.1 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:03:47.152 [WARN] suspicious person jump of 16.3 m (occlusion/depth noise?) — waiting for a confirming look (agree radius 2.9 m)
+2026-08-13 09:03:47.152 [WARN] ignoring person sighting at 27.9 m (beyond STEP_MAX_RANGE 25.0 m — depth at that range is not trustworthy)
+2026-08-13 09:03:48.145 [WARN] lidar ranging unavailable: only 0 valid beams within 1.0 deg of bearing -77.6 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:03:48.148 [WARN] ignoring person sighting at 27.8 m (beyond STEP_MAX_RANGE 25.0 m — depth at that range is not trustworthy)
+2026-08-13 09:03:49.163 [WARN] lidar ranging unavailable: only 0 valid beams within 1.0 deg of bearing -78.2 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:03:49.165 [WARN] suspicious person jump of 16.2 m (occlusion/depth noise?) — waiting for a confirming look (agree radius 2.8 m)
+2026-08-13 09:03:49.165 [WARN] ignoring person sighting at 27.6 m (beyond STEP_MAX_RANGE 25.0 m — depth at that range is not trustworthy)
+2026-08-13 09:03:50.150 [WARN] lidar ranging unavailable: only 0 valid beams within 1.1 deg of bearing -78.6 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:03:50.152 [WARN] ignoring person sighting at 27.4 m (beyond STEP_MAX_RANGE 25.0 m — depth at that range is not trustworthy)
+2026-08-13 09:03:51.158 [WARN] lidar ranging unavailable: only 0 valid beams within 1.0 deg of bearing -77.7 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:03:51.160 [WARN] suspicious person jump of 16.4 m (occlusion/depth noise?) — waiting for a confirming look (agree radius 2.7 m)
+2026-08-13 09:03:51.161 [WARN] ignoring person sighting at 27.2 m (beyond STEP_MAX_RANGE 25.0 m — depth at that range is not trustworthy)
+2026-08-13 09:03:52.141 [WARN] lidar ranging unavailable: only 0 valid beams within 1.1 deg of bearing -76.5 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:03:52.143 [WARN] ignoring person sighting at 26.9 m (beyond STEP_MAX_RANGE 25.0 m — depth at that range is not trustworthy)
+2026-08-13 09:03:53.144 [WARN] lidar ranging unavailable: only 0 valid beams within 1.2 deg of bearing -76.6 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:03:53.146 [WARN] ignoring person sighting at 26.7 m (beyond STEP_MAX_RANGE 25.0 m — depth at that range is not trustworthy)
+2026-08-13 09:03:54.159 [WARN] lidar ranging unavailable: only 0 valid beams within 1.1 deg of bearing -75.8 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:03:54.159 [WARN] ignoring person sighting at 26.4 m (beyond STEP_MAX_RANGE 25.0 m — depth at that range is not trustworthy)
+2026-08-13 09:03:55.157 [WARN] lidar ranging unavailable: only 0 valid beams within 1.1 deg of bearing -75.7 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:03:55.158 [WARN] suspicious person jump of 16.1 m (occlusion/depth noise?) — waiting for a confirming look (agree radius 2.5 m)
+2026-08-13 09:03:55.158 [WARN] ignoring person sighting at 26.2 m (beyond STEP_MAX_RANGE 25.0 m — depth at that range is not trustworthy)
+2026-08-13 09:03:56.149 [WARN] lidar ranging unavailable: only 0 valid beams within 1.2 deg of bearing -76.1 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:03:56.151 [WARN] ignoring person sighting at 25.9 m (beyond STEP_MAX_RANGE 25.0 m — depth at that range is not trustworthy)
+2026-08-13 09:03:57.142 [WARN] lidar ranging unavailable: only 0 valid beams within 1.2 deg of bearing -76.0 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:03:57.143 [WARN] ignoring person sighting at 25.7 m (beyond STEP_MAX_RANGE 25.0 m — depth at that range is not trustworthy)
+2026-08-13 09:03:58.149 [WARN] lidar ranging unavailable: only 0 valid beams within 1.1 deg of bearing -75.9 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:03:58.150 [WARN] suspicious person jump of 16.1 m (occlusion/depth noise?) — waiting for a confirming look (agree radius 2.3 m)
+2026-08-13 09:03:58.151 [WARN] ignoring person sighting at 25.5 m (beyond STEP_MAX_RANGE 25.0 m — depth at that range is not trustworthy)
+2026-08-13 09:03:59.147 [WARN] lidar ranging unavailable: only 0 valid beams within 1.2 deg of bearing -75.6 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:03:59.150 [WARN] ignoring person sighting at 25.3 m (beyond STEP_MAX_RANGE 25.0 m — depth at that range is not trustworthy)
+2026-08-13 09:04:00.156 [WARN] lidar ranging unavailable: only 0 valid beams within 1.2 deg of bearing -74.9 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:04:00.157 [WARN] ignoring person sighting at 25.0 m (beyond STEP_MAX_RANGE 25.0 m — depth at that range is not trustworthy)
+2026-08-13 09:04:01.144 [WARN] lidar ranging unavailable: only 0 valid beams within 1.3 deg of bearing -73.7 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:04:01.145 [ROBOT] The person is about 24.8 m away, past the edge of what I've mapped. Moving up in short steps and mapping as I go.
+2026-08-13 09:04:01.146 [STEP] #31 hop mode engaged for person: object (-13.14, 2.95) at 24.8 m, area_mapped=False
+2026-08-13 09:04:01.147 [GOAL] #31 hop 1: 1.50 m toward person (still 24.8 m away)
+2026-08-13 09:04:01.147 [GOAL] (9.63, -1.81) yaw=168deg mode=navigate
+2026-08-13 09:04:01.158 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:04:01.159 [WARN] nav goal (9.63, -1.81) failed (status=6); trying another approach angle
+2026-08-13 09:04:01.159 [STEP] #31 hop aborted — shortening to 0.75 m and re-aiming
+2026-08-13 09:04:02.144 [WARN] lidar ranging unavailable: only 0 valid beams within 1.2 deg of bearing -77.7 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:04:02.146 [WARN] suspicious person jump of 15.9 m (occlusion/depth noise?) — waiting for a confirming look (agree radius 2.2 m)
+2026-08-13 09:04:02.146 [WARN] all approach goals for person refused; clearing the tried-list and retrying
+2026-08-13 09:04:02.146 [GOAL] #31 hop 2: 0.75 m toward person (still 24.6 m away)
+2026-08-13 09:04:02.146 [GOAL] (10.18, -1.87) yaw=168deg mode=navigate
+2026-08-13 09:04:02.158 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:04:02.158 [WARN] nav goal (10.18, -1.87) failed (status=6); trying another approach angle
+2026-08-13 09:04:02.159 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-13 09:04:03.152 [WARN] lidar ranging unavailable: only 0 valid beams within 1.3 deg of bearing -86.1 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:04:03.153 [WARN] suspicious person jump of 7.5 m (occlusion/depth noise?) — waiting for a confirming look (agree radius 4.2 m)
+2026-08-13 09:04:03.154 [WARN] all approach goals for person refused; clearing the tried-list and retrying
+2026-08-13 09:04:03.156 [GOAL] #31 hop 3: 0.60 m toward person (still 24.4 m away)
+2026-08-13 09:04:03.156 [GOAL] (10.13, -1.85) yaw=168deg mode=navigate
+2026-08-13 09:04:03.168 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:04:03.168 [WARN] nav goal (10.13, -1.85) failed (status=6); trying another approach angle
+2026-08-13 09:04:03.170 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-13 09:04:04.144 [WARN] suspicious person jump of 15.8 m (occlusion/depth noise?) — waiting for a confirming look (agree radius 2.1 m)
+2026-08-13 09:04:04.144 [WARN] all approach goals for person refused; clearing the tried-list and retrying
+2026-08-13 09:04:04.144 [GOAL] #31 hop 4: 0.60 m toward person (still 24.2 m away)
+2026-08-13 09:04:04.145 [GOAL] (9.94, -1.81) yaw=168deg mode=navigate
+2026-08-13 09:04:04.150 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:04:04.150 [WARN] nav goal (9.94, -1.81) failed (status=6); trying another approach angle
+2026-08-13 09:04:04.150 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-13 09:04:05.145 [WARN] lidar ranging unavailable: only 0 valid beams within 1.3 deg of bearing -87.0 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:04:05.147 [GOAL] #31 hop 5: 0.60 m toward person (still 24.5 m away)
+2026-08-13 09:04:05.147 [GOAL] (9.78, -1.82) yaw=173deg mode=navigate
+2026-08-13 09:04:05.158 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:04:05.158 [WARN] nav goal (9.78, -1.82) failed (status=6); trying another approach angle
+2026-08-13 09:04:05.160 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-13 09:04:06.142 [WARN] suspicious person jump of 16.2 m (occlusion/depth noise?) — waiting for a confirming look (agree radius 2.0 m)
+2026-08-13 09:04:06.142 [WARN] all approach goals for person refused; clearing the tried-list and retrying
+2026-08-13 09:04:06.142 [GOAL] #31 hop 6: 0.60 m toward person (still 24.3 m away)
+2026-08-13 09:04:06.143 [GOAL] (9.60, -1.79) yaw=173deg mode=navigate
+2026-08-13 09:04:06.148 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:04:06.148 [WARN] nav goal (9.60, -1.79) failed (status=6); trying another approach angle
+2026-08-13 09:04:06.149 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-13 09:04:07.154 [WARN] lidar ranging unavailable: only 1 valid beams within 1.3 deg of bearing -89.8 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:04:07.156 [WARN] suspicious person jump of 7.8 m (occlusion/depth noise?) — waiting for a confirming look (agree radius 4.1 m)
+2026-08-13 09:04:07.156 [WARN] all approach goals for person refused; clearing the tried-list and retrying
+2026-08-13 09:04:07.157 [GOAL] #31 hop 7: 0.60 m toward person (still 24.2 m away)
+2026-08-13 09:04:07.157 [GOAL] (9.44, -1.76) yaw=173deg mode=navigate
+2026-08-13 09:04:07.169 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:04:07.169 [WARN] nav goal (9.44, -1.76) failed (status=6); trying another approach angle
+2026-08-13 09:04:07.170 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-13 09:04:08.145 [WARN] lidar ranging unavailable: only 1 valid beams within 1.4 deg of bearing -91.3 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:04:08.146 [SIGHT] large person jump (7.9 m) confirmed by a second look — accepting
+2026-08-13 09:04:08.146 [STEP] person area now mapped after 7 hop(s) — switching to a direct approach
+2026-08-13 09:04:08.146 [ROBOT] The area around the person is mapped now — going straight to it.
+2026-08-13 09:04:08.147 [GOAL] (-5.24, 0.20) yaw=-161deg mode=navigate
+2026-08-13 09:04:08.158 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:04:08.158 [WARN] nav goal (-5.24, 0.20) failed (status=6); trying another approach angle
+2026-08-13 09:04:09.144 [WARN] lidar ranging unavailable: only 0 valid beams within 1.4 deg of bearing -91.0 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:04:09.146 [WARN] suspicious person jump of 7.9 m (occlusion/depth noise?) — waiting for a confirming look (agree radius 6.0 m)
+2026-08-13 09:04:09.146 [WARN] all approach goals for person refused; clearing the tried-list and retrying
+2026-08-13 09:04:09.147 [GOAL] (-5.24, 0.20) yaw=-161deg mode=navigate
+2026-08-13 09:04:09.158 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:04:09.158 [WARN] nav goal (-5.24, 0.20) failed (status=6); trying another approach angle
+2026-08-13 09:04:10.148 [WARN] lidar ranging unavailable: only 0 valid beams within 1.5 deg of bearing -79.6 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:04:10.150 [SIGHT] large person jump (7.8 m) confirmed by a second look — accepting
+2026-08-13 09:04:10.151 [GOAL] #31 hop 8: 0.60 m toward person (still 23.5 m away)
+2026-08-13 09:04:10.152 [GOAL] (8.93, -1.67) yaw=170deg mode=navigate
+2026-08-13 09:04:10.159 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:04:10.160 [WARN] nav goal (8.93, -1.67) failed (status=6); trying another approach angle
+2026-08-13 09:04:10.160 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-13 09:04:11.145 [WARN] lidar ranging unavailable: only 0 valid beams within 1.5 deg of bearing -76.8 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:04:11.146 [WARN] suspicious person jump of 16.1 m (occlusion/depth noise?) — waiting for a confirming look (agree radius 1.8 m)
+2026-08-13 09:04:11.146 [WARN] all approach goals for person refused; clearing the tried-list and retrying
+2026-08-13 09:04:11.147 [GOAL] #31 hop 9: 0.60 m toward person (still 23.3 m away)
+2026-08-13 09:04:11.147 [GOAL] (8.74, -1.60) yaw=171deg mode=navigate
+2026-08-13 09:04:11.159 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:04:11.159 [WARN] nav goal (8.74, -1.60) failed (status=6); trying another approach angle
+2026-08-13 09:04:11.159 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-13 09:04:12.142 [WARN] lidar ranging unavailable: only 1 valid beams within 1.5 deg of bearing -86.3 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:04:12.143 [SIGHT] large person jump (15.9 m) confirmed by a second look — accepting
+2026-08-13 09:04:12.147 [STEP] person area now mapped after 9 hop(s) — switching to a direct approach
+2026-08-13 09:04:12.147 [ROBOT] The area around the person is mapped now — going straight to it.
+2026-08-13 09:04:12.148 [GOAL] (3.31, -0.90) yaw=173deg mode=navigate
+2026-08-13 09:04:12.158 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:04:12.158 [WARN] nav goal (3.31, -0.90) failed (status=6); trying another approach angle
+2026-08-13 09:04:13.165 [WARN] lidar ranging unavailable: only 0 valid beams within 1.5 deg of bearing -88.0 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:04:13.166 [WARN] suspicious person jump of 8.3 m (occlusion/depth noise?) — waiting for a confirming look (agree radius 3.8 m)
+2026-08-13 09:04:13.171 [GOAL] (3.26, -0.34) yaw=-162deg mode=navigate
+2026-08-13 09:04:13.179 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:04:13.179 [WARN] nav goal (3.26, -0.34) failed (status=6); trying another approach angle
+2026-08-13 09:04:14.140 [WARN] lidar ranging unavailable: only 0 valid beams within 1.5 deg of bearing -83.8 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:04:14.142 [SIGHT] large person jump (8.2 m) confirmed by a second look — accepting
+2026-08-13 09:04:14.142 [GOAL] #31 hop 10: 0.60 m toward person (still 15.1 m away)
+2026-08-13 09:04:14.143 [GOAL] (8.22, -1.50) yaw=172deg mode=navigate
+2026-08-13 09:04:14.149 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:04:14.150 [WARN] nav goal (8.22, -1.50) failed (status=6); trying another approach angle
+2026-08-13 09:04:14.151 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-13 09:04:15.148 [WARN] lidar ranging unavailable: only 0 valid beams within 1.7 deg of bearing -77.7 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:04:15.150 [STEP] person area now mapped after 10 hop(s) — switching to a direct approach
+2026-08-13 09:04:15.151 [ROBOT] The area around the person is mapped now — going straight to it.
+2026-08-13 09:04:15.152 [GOAL] (-4.92, 0.16) yaw=146deg mode=navigate
+2026-08-13 09:04:15.160 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:04:15.160 [WARN] nav goal (-4.92, 0.16) failed (status=6); trying another approach angle
+2026-08-13 09:04:16.149 [WARN] lidar ranging unavailable: only 1 valid beams within 1.6 deg of bearing -86.1 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:04:16.151 [WARN] suspicious person jump of 8.4 m (occlusion/depth noise?) — waiting for a confirming look (agree radius 1.6 m)
+2026-08-13 09:04:16.152 [GOAL] (-5.49, 0.03) yaw=121deg mode=navigate
+2026-08-13 09:04:16.159 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:04:16.159 [WARN] nav goal (-5.49, 0.03) failed (status=6); trying another approach angle
+2026-08-13 09:04:17.153 [WARN] lidar ranging unavailable: only 0 valid beams within 1.7 deg of bearing -81.9 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:04:17.156 [WARN] all approach goals for person refused; clearing the tried-list and retrying
+2026-08-13 09:04:17.157 [GOAL] #31 hop 11: 0.60 m toward person (still 14.5 m away)
+2026-08-13 09:04:17.157 [GOAL] (7.70, -1.36) yaw=172deg mode=navigate
+2026-08-13 09:04:17.169 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:04:17.170 [WARN] nav goal (7.70, -1.36) failed (status=6); trying another approach angle
+2026-08-13 09:04:17.170 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-13 09:04:18.146 [WARN] lidar ranging unavailable: only 0 valid beams within 1.8 deg of bearing -76.7 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:04:18.147 [STEP] person area now mapped after 11 hop(s) — switching to a direct approach
+2026-08-13 09:04:18.147 [ROBOT] The area around the person is mapped now — going straight to it.
+2026-08-13 09:04:18.148 [GOAL] (-4.78, 0.06) yaw=146deg mode=navigate
+2026-08-13 09:04:18.159 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:04:18.159 [WARN] nav goal (-4.78, 0.06) failed (status=6); trying another approach angle
+2026-08-13 09:04:19.151 [WARN] lidar ranging unavailable: only 1 valid beams within 1.7 deg of bearing -82.7 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:04:19.153 [GOAL] (-4.80, -0.00) yaw=174deg mode=navigate
+2026-08-13 09:04:19.158 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:04:19.159 [WARN] nav goal (-4.80, -0.00) failed (status=6); trying another approach angle
+2026-08-13 09:04:20.151 [WARN] lidar ranging unavailable: only 0 valid beams within 1.9 deg of bearing -78.0 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:04:20.153 [GOAL] (-4.76, 0.25) yaw=173deg mode=navigate
+2026-08-13 09:04:20.159 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:04:20.159 [WARN] nav goal (-4.76, 0.25) failed (status=6); trying another approach angle
+2026-08-13 09:04:21.145 [WARN] lidar ranging unavailable: only 0 valid beams within 2.0 deg of bearing -75.2 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:04:21.146 [WARN] all approach goals for person refused; clearing the tried-list and retrying
+2026-08-13 09:04:21.146 [GOAL] #31 hop 12: 0.60 m toward person (still 13.6 m away)
+2026-08-13 09:04:21.147 [GOAL] (7.00, -1.14) yaw=173deg mode=navigate
+2026-08-13 09:04:21.160 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:04:21.160 [WARN] nav goal (7.00, -1.14) failed (status=6); trying another approach angle
+2026-08-13 09:04:21.162 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-13 09:04:22.143 [WARN] lidar ranging unavailable: only 1 valid beams within 1.9 deg of bearing -80.4 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:04:22.145 [WARN] suspicious person jump of 8.2 m (occlusion/depth noise?) — waiting for a confirming look (agree radius 1.3 m)
+2026-08-13 09:04:22.145 [WARN] all approach goals for person refused; clearing the tried-list and retrying
+2026-08-13 09:04:22.146 [GOAL] #31 hop 13: 0.60 m toward person (still 13.4 m away)
+2026-08-13 09:04:22.146 [GOAL] (6.80, -1.07) yaw=173deg mode=navigate
+2026-08-13 09:04:22.158 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:04:22.159 [WARN] nav goal (6.80, -1.07) failed (status=6); trying another approach angle
+2026-08-13 09:04:22.160 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-13 09:04:23.155 [WARN] lidar ranging unavailable: only 0 valid beams within 2.0 deg of bearing -83.9 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:04:23.156 [STEP] person area now mapped after 13 hop(s) — switching to a direct approach
+2026-08-13 09:04:23.157 [ROBOT] The area around the person is mapped now — going straight to it.
+2026-08-13 09:04:23.157 [GOAL] (-4.96, 0.21) yaw=-159deg mode=navigate
+2026-08-13 09:04:23.170 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:04:23.170 [WARN] nav goal (-4.96, 0.21) failed (status=6); trying another approach angle
+2026-08-13 09:04:24.146 [WARN] lidar ranging unavailable: only 0 valid beams within 2.2 deg of bearing -77.8 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:04:24.150 [GOAL] (-5.22, 0.03) yaw=175deg mode=navigate
+2026-08-13 09:04:24.160 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:04:24.160 [WARN] nav goal (-5.22, 0.03) failed (status=6); trying another approach angle
+2026-08-13 09:04:25.157 [WARN] lidar ranging unavailable: only 0 valid beams within 2.3 deg of bearing -75.1 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:04:25.161 [WARN] suspicious person jump of 7.3 m (occlusion/depth noise?) — waiting for a confirming look (agree radius 5.1 m)
+2026-08-13 09:04:25.162 [WARN] all approach goals for person refused; clearing the tried-list and retrying
+2026-08-13 09:04:25.163 [GOAL] (-4.92, 0.00) yaw=175deg mode=navigate
+2026-08-13 09:04:25.169 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:04:25.169 [WARN] nav goal (-4.92, 0.00) failed (status=6); trying another approach angle
+2026-08-13 09:04:26.160 [WARN] lidar ranging unavailable: only 0 valid beams within 2.3 deg of bearing -80.4 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:04:26.162 [SIGHT] large person jump (7.5 m) confirmed by a second look — accepting
+2026-08-13 09:04:26.163 [GOAL] #31 hop 14: 0.60 m toward person (still 20.4 m away)
+2026-08-13 09:04:26.164 [GOAL] (6.04, -0.90) yaw=177deg mode=navigate
+2026-08-13 09:04:26.170 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:04:26.170 [WARN] nav goal (6.04, -0.90) failed (status=6); trying another approach angle
+2026-08-13 09:04:26.170 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-13 09:04:27.150 [WARN] lidar ranging unavailable: only 2 valid beams within 2.4 deg of bearing -86.5 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:04:27.151 [GOAL] #31 hop 15: 0.60 m toward person (still 20.3 m away)
+2026-08-13 09:04:27.152 [GOAL] (5.83, -0.90) yaw=179deg mode=navigate
+2026-08-13 09:04:27.158 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:04:27.160 [WARN] nav goal (5.83, -0.90) failed (status=6); trying another approach angle
+2026-08-13 09:04:27.160 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-13 09:04:28.148 [WARN] lidar ranging unavailable: only 2 valid beams within 2.6 deg of bearing -89.0 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:04:28.150 [WARN] all approach goals for person refused; clearing the tried-list and retrying
+2026-08-13 09:04:28.151 [GOAL] #31 hop 16: 0.60 m toward person (still 20.2 m away)
+2026-08-13 09:04:28.152 [GOAL] (5.64, -0.90) yaw=180deg mode=navigate
+2026-08-13 09:04:28.157 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:04:28.160 [WARN] nav goal (5.64, -0.90) failed (status=6); trying another approach angle
+2026-08-13 09:04:28.160 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-13 09:04:29.159 [WARN] lidar ranging unavailable: only 2 valid beams within 2.7 deg of bearing -89.4 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:04:29.160 [WARN] all approach goals for person refused; clearing the tried-list and retrying
+2026-08-13 09:04:29.161 [GOAL] #31 hop 17: 0.60 m toward person (still 20.0 m away)
+2026-08-13 09:04:29.161 [GOAL] (5.45, -0.90) yaw=180deg mode=navigate
+2026-08-13 09:04:29.168 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:04:29.168 [WARN] nav goal (5.45, -0.90) failed (status=6); trying another approach angle
+2026-08-13 09:04:29.169 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-13 09:04:30.169 [WARN] lidar ranging unavailable: only 2 valid beams within 2.9 deg of bearing -89.1 deg (scan frame turtlebot4/rplidar_link/rplidar, 640 beams total)
+2026-08-13 09:04:30.170 [WARN] all approach goals for person refused; clearing the tried-list and retrying
+2026-08-13 09:04:30.170 [GOAL] #31 hop 18: 0.60 m toward person (still 19.8 m away)
+2026-08-13 09:04:30.171 [GOAL] (5.26, -0.89) yaw=180deg mode=navigate
+2026-08-13 09:04:30.181 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:04:30.181 [WARN] nav goal (5.26, -0.89) failed (status=6); trying another approach angle
+2026-08-13 09:04:30.181 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-13 09:04:31.150 [WARN] suspicious person jump of 16.1 m (occlusion/depth noise?) — waiting for a confirming look (agree radius 1.0 m)
+2026-08-13 09:04:31.151 [WARN] all approach goals for person refused; clearing the tried-list and retrying
+2026-08-13 09:04:31.151 [GOAL] #31 hop 19: 0.60 m toward person (still 19.6 m away)
+2026-08-13 09:04:31.152 [GOAL] (5.07, -0.89) yaw=180deg mode=navigate
+2026-08-13 09:04:31.157 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:04:31.159 [WARN] nav goal (5.07, -0.89) failed (status=6); trying another approach angle
+2026-08-13 09:04:31.159 [STEP] #31 hop aborted — shortening to 0.60 m and re-aiming
+2026-08-13 09:04:32.155 [SIGHT] large person jump (16.1 m) confirmed by a second look — accepting
+2026-08-13 09:04:32.159 [STEP] person area now mapped after 19 hop(s) — switching to a direct approach
+2026-08-13 09:04:32.160 [ROBOT] The area around the person is mapped now — going straight to it.
+2026-08-13 09:04:32.161 [GOAL] (3.46, -0.89) yaw=180deg mode=navigate
+2026-08-13 09:04:32.170 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:04:32.170 [WARN] nav goal (3.46, -0.89) failed (status=6); trying another approach angle
+2026-08-13 09:04:33.164 [GOAL] (3.17, -0.88) yaw=180deg mode=navigate
+2026-08-13 09:04:33.170 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:04:33.171 [WARN] nav goal (3.17, -0.88) failed (status=6); trying another approach angle
+2026-08-13 09:04:34.157 [GOAL] (3.34, -0.33) yaw=-155deg mode=navigate
+2026-08-13 09:04:34.168 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:04:34.168 [WARN] nav goal (3.34, -0.33) failed (status=6); trying another approach angle
+2026-08-13 09:04:35.150 [WARN] suspicious person jump of 8.4 m (occlusion/depth noise?) — waiting for a confirming look (agree radius 2.8 m)
+2026-08-13 09:04:35.154 [GOAL] (3.33, -1.43) yaw=155deg mode=navigate
+2026-08-13 09:04:35.158 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:04:35.158 [WARN] nav goal (3.33, -1.43) failed (status=6); trying another approach angle
+2026-08-13 09:04:36.148 [GOAL] (3.05, -1.23) yaw=154deg mode=navigate
+2026-08-13 09:04:36.159 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:04:36.159 [WARN] nav goal (3.05, -1.23) failed (status=6); trying another approach angle
+2026-08-13 09:04:37.146 [GOAL] (2.95, -0.96) yaw=-176deg mode=navigate
+2026-08-13 09:04:37.151 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:04:37.151 [WARN] nav goal (2.95, -0.96) failed (status=6); trying another approach angle
+2026-08-13 09:04:38.157 [GOAL] (3.06, -0.52) yaw=-153deg mode=navigate
+2026-08-13 09:04:38.170 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:04:38.171 [WARN] nav goal (3.06, -0.52) failed (status=6); trying another approach angle
+2026-08-13 09:04:39.156 [GOAL] (2.79, 0.08) yaw=-130deg mode=navigate
+2026-08-13 09:04:39.168 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:04:39.169 [WARN] nav goal (2.79, 0.08) failed (status=6); trying another approach angle
+2026-08-13 09:04:40.157 [WARN] suspicious person jump of 8.2 m (occlusion/depth noise?) — waiting for a confirming look (agree radius 2.5 m)
+2026-08-13 09:04:40.161 [GOAL] (2.58, -0.14) yaw=-129deg mode=navigate
+2026-08-13 09:04:40.169 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:04:40.169 [WARN] nav goal (2.58, -0.14) failed (status=6); trying another approach angle
+2026-08-13 09:04:41.153 [GOAL] (3.08, -0.27) yaw=-150deg mode=navigate
+2026-08-13 09:04:41.162 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:04:41.162 [WARN] nav goal (3.08, -0.27) failed (status=6); trying another approach angle
+2026-08-13 09:04:42.145 [GOAL] (2.94, -0.73) yaw=-169deg mode=navigate
+2026-08-13 09:04:42.151 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:04:42.152 [WARN] nav goal (2.94, -0.73) failed (status=6); trying another approach angle
+2026-08-13 09:04:43.133 [ROBOT] Arrived at the person.
+2026-08-13 09:11:39.509 [CMD] [remote] find a person
+2026-08-13 09:11:39.510 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-13 09:11:39.606 [CTX] dropping stale context (navigate -> person)
+2026-08-13 09:11:40.298 [BRAIN] {'steps': [{'action': 'locate', 'speech': 'Looking for a person.', 'target': 'person'}]}
+2026-08-13 09:11:40.303 [STEP] locate target='person'
+2026-08-13 09:11:41.311 [MEMORY] remembered 1 person(s) at (2.08, -0.92) d=1.02m
+2026-08-13 09:11:41.311 [ROBOT] Yes — I can see a person about 1.0 m away. I'll remember where it is. (Locating only — not driving to it.)
+2026-08-13 09:11:41.555 [ROBOT] Stopped. The robot is idle.
+2026-08-13 09:11:41.555 [STOP] confirmed stopped by odometry after barrage
+2026-08-13 09:11:46.796 [CMD] [remote] patrol the area
+2026-08-13 09:11:46.796 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-13 09:11:47.627 [BRAIN] {'steps': [{'action': 'patrol', 'speech': 'Starting to patrol the area.', 'target': None}]}
+2026-08-13 09:11:47.627 [STEP] patrol target=None
+2026-08-13 09:11:48.082 [GOAL] (1.90, -2.02) yaw=-127deg mode=explore
+2026-08-13 09:11:48.855 [ROBOT] Stopped. The robot is idle.
+2026-08-13 09:11:48.855 [STOP] confirmed stopped by odometry after barrage
+2026-08-13 09:12:12.075 [STUCK] mode=explore target=None
+2026-08-13 09:12:12.076 [ROBOT] I got stuck at a frontier — skipping it and trying another route.
+2026-08-13 09:12:12.089 [GOAL] (1.37, -2.78) yaw=-161deg mode=explore
+2026-08-13 09:12:12.104 [RESULT] nav goal status=5 (not-succeeded)
+2026-08-13 09:12:13.090 [GOAL] (1.02, -2.04) yaw=175deg mode=explore
+2026-08-13 09:12:13.112 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:12:14.098 [GOAL] (0.49, -3.09) yaw=-165deg mode=explore
+2026-08-13 09:12:14.113 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:12:15.094 [GOAL] (0.17, -2.29) yaw=174deg mode=explore
+2026-08-13 09:12:15.113 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:12:16.082 [GOAL] (-0.51, -3.44) yaw=-167deg mode=explore
+2026-08-13 09:12:16.099 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:12:17.079 [GOAL] (-1.58, -3.86) yaw=-166deg mode=explore
+2026-08-13 09:12:17.104 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:12:18.080 [GOAL] (-1.06, -1.94) yaw=164deg mode=explore
+2026-08-13 09:12:18.097 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:12:19.088 [GOAL] (-1.99, -2.99) yaw=180deg mode=explore
+2026-08-13 09:12:19.107 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:12:20.080 [GOAL] (-2.67, -3.82) yaw=-171deg mode=explore
+2026-08-13 09:12:20.095 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:12:21.082 [GOAL] (-3.37, -4.60) yaw=-165deg mode=explore
+2026-08-13 09:12:21.095 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:12:22.080 [GOAL] (-4.08, -5.47) yaw=-159deg mode=explore
+2026-08-13 09:12:22.104 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:12:23.086 [GOAL] (-2.62, -0.54) yaw=146deg mode=explore
+2026-08-13 09:12:23.098 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:12:24.082 [GOAL] (-3.51, -1.09) yaw=154deg mode=explore
+2026-08-13 09:12:24.095 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:12:25.083 [GOAL] (-4.51, -1.61) yaw=162deg mode=explore
+2026-08-13 09:12:25.098 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:12:26.082 [GOAL] (-4.01, -0.41) yaw=148deg mode=explore
+2026-08-13 09:12:26.105 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:12:27.082 [GOAL] (-2.12, 0.84) yaw=123deg mode=explore
+2026-08-13 09:12:27.101 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:12:28.082 [GOAL] (-3.01, 0.68) yaw=132deg mode=explore
+2026-08-13 09:12:28.098 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:12:29.084 [GOAL] (-5.01, -0.35) yaw=152deg mode=explore
+2026-08-13 09:12:29.095 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:12:30.082 [GOAL] (-4.01, 0.57) yaw=139deg mode=explore
+2026-08-13 09:12:30.099 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:12:31.080 [GOAL] (-5.48, -2.12) yaw=171deg mode=explore
+2026-08-13 09:12:31.095 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:12:32.082 [GOAL] (-5.01, 0.46) yaw=145deg mode=explore
+2026-08-13 09:12:32.101 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:12:33.091 [GOAL] (-3.51, 1.47) yaw=126deg mode=explore
+2026-08-13 09:12:33.099 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:12:34.085 [GOAL] (-5.98, -0.30) yaw=156deg mode=explore
+2026-08-13 09:12:34.105 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:12:35.087 [GOAL] (-6.51, -2.60) yaw=180deg mode=explore
+2026-08-13 09:12:35.109 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:12:36.085 [GOAL] (-4.51, 1.88) yaw=129deg mode=explore
+2026-08-13 09:12:36.103 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:12:37.082 [GOAL] (-7.51, -3.00) yaw=-176deg mode=explore
+2026-08-13 09:12:37.110 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:12:38.082 [GOAL] (-5.36, 2.21) yaw=131deg mode=explore
+2026-08-13 09:12:38.099 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:12:39.082 [GOAL] (-5.00, -6.52) yaw=-131deg mode=explore
+2026-08-13 09:12:39.105 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:12:40.084 [GOAL] (-7.92, -4.49) yaw=-162deg mode=explore
+2026-08-13 09:12:40.110 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:12:41.092 [GOAL] (-8.51, -3.40) yaw=-172deg mode=explore
+2026-08-13 09:12:41.108 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:12:42.083 [GOAL] (-7.91, -5.51) yaw=-153deg mode=explore
+2026-08-13 09:12:42.106 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:12:43.081 [GOAL] (-5.66, -7.33) yaw=-126deg mode=explore
+2026-08-13 09:12:43.119 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:12:44.086 [GOAL] (-9.53, -3.83) yaw=-169deg mode=explore
+2026-08-13 09:12:44.108 [RESULT] nav goal status=6 (not-succeeded)
+2026-08-13 09:12:44.646 [CMD] (cancel via remote) cancel
+2026-08-13 09:12:44.647 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-13 09:12:46.695 [ROBOT] Stopped. The robot is idle.
+2026-08-13 09:12:46.696 [STOP] confirmed stopped by odometry after barrage

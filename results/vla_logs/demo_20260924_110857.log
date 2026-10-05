@@ -1,0 +1,21 @@
+
+[36m[11:08:57 +  0s][0m [1mVLA ground robot -- hardware demo bring-up[0m   (log: /home/danyalaziz/vla_logs/demo_20260924_110857.log)
+
+[36m[11:08:57 +  0s][0m STAGE 0/13  host, containers, robot reachable
+[36m[11:08:59 +  2s][0m STAGE 0/13  host OK, both containers OK, robot reachable   [32mOK[0m
+[36m[11:08:59 +  2s][0m STAGE 1/13  Pi gate (load, temperature, throttling, ROS nodes)
+[36m[11:09:01 +  4s][0m         Pi: load 1.50, 59.9 C, throttled=0x0, ROS nodes 7, up 127s
+[33m[11:09:01 +  4s] WARNING:[0m Pi load 1.50 is above the 1.5 guideline (fine right after a boot; suspicious otherwise).
+[36m[11:09:01 +  4s][0m STAGE 1/13  Pi gate passed   [32mOK[0m
+[36m[11:09:01 +  4s][0m STAGE 2/13  ROS daemon in robot mode
+[36m[11:09:04 +  7s][0m         daemon OK; waiting 15 s for the Pi's node directory
+[36m[11:09:20 + 23s][0m STAGE 2/13  daemon sees the robot: 11 robot nodes   [32mOK[0m
+[36m[11:09:20 + 23s][0m STAGE 3/13  base alive (odometry, battery, dock state)
+
+[31m[1m=====================================================================[0m
+[31m[1m  DEMO ABORTED at stage 3[0m
+[31m[1m  no /robot1/odom messages in 20 s -- the Create 3 base is silent. Only a physical power-cycle fixes that (CLAUDE.md).[0m
+[31m[1m  Nothing more was started. Log: /home/danyalaziz/vla_logs/demo_20260924_110857.log[0m
+[31m[1m  To clean up whatever did start:  ~/vla_demo_stop.sh[0m
+[31m[1m=====================================================================[0m
+

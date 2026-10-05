@@ -1,0 +1,93 @@
+13:27:24 REPLY : [robot] Found the chair — navigating to it.
+13:27:24 REPLY : [robot] The chair is about 3.1 m away, past the edge of what I've mapped. Moving up in short steps and mapping as I go.
+13:27:24 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'ROTATE', 'target_dist': None, 'busy': True, 'camera': True}
+13:27:24 REPLY : [robot] Stopped. The robot is idle.
+13:27:24 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'NAVIGATING', 'target_dist': 3.1, 'busy': True, 'camera': True}
+13:27:24 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'NAVIGATING', 'target_dist': 3.02, 'busy': True, 'camera': True}
+13:27:24 REPLY : [robot] The area around the chair is mapped now — going straight to it.
+13:27:24 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'ROTATE', 'target_dist': 2.32, 'busy': True, 'camera': True}
+13:27:25 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'ROTATE', 'target_dist': 2.21, 'busy': True, 'camera': True}
+13:27:25 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'ROTATE', 'target_dist': 2.14, 'busy': True, 'camera': True}
+13:27:26 SENT  : 'go to the chair'
+13:27:26 REPLY : [operator/remote] go to the chair
+13:27:26 STATUS: {'mode': 'idle', 'target': None, 'state': None, 'target_dist': None, 'busy': False, 'camera': True}
+13:27:26 REPLY : [navigate] Heading back to the chair.
+13:27:26 REPLY : Searching for the chair. (type 'cancel' to stop)
+13:27:26 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'ROTATE', 'target_dist': None, 'busy': True, 'camera': True}
+13:27:28 REPLY : [robot] Stopped. The robot is idle.
+13:27:28 REPLY : [robot] Found the chair — navigating to it.
+13:27:28 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'NAVIGATING', 'target_dist': 1.95, 'busy': True, 'camera': True}
+13:27:29 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'NAVIGATING', 'target_dist': 1.84, 'busy': True, 'camera': True}
+13:27:29 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'NAVIGATING', 'target_dist': 1.75, 'busy': True, 'camera': True}
+13:27:30 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'NAVIGATING', 'target_dist': 1.64, 'busy': True, 'camera': True}
+13:27:30 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'ROTATE', 'target_dist': 1.56, 'busy': True, 'camera': True}
+13:27:31 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'ROTATE', 'target_dist': 1.54, 'busy': True, 'camera': True}
+13:27:31 REPLY : [robot] Arrived at the chair.
+13:27:31 STATUS: {'mode': 'idle', 'target': None, 'state': None, 'target_dist': None, 'busy': False, 'camera': True}
+13:27:38 REPLY : [operator/remote] turn right
+13:27:39 REPLY : [brain-guard] command says RIGHT — forcing rotation_deg to -90 (negative = right/clockwise).
+13:27:39 REPLY : [move] Turning ninety degrees to the right.
+13:27:39 REPLY : Relative move: turn 90 deg right. (type 'cancel' to stop)
+13:27:39 STATUS: {'mode': 'move', 'target': None, 'state': None, 'target_dist': None, 'busy': True, 'camera': True}
+13:27:40 REPLY : [robot] Stopped. The robot is idle.
+13:27:44 REPLY : [operator/remote] cancel
+13:27:44 REPLY : Stopping...
+13:27:44 STATUS: {'mode': 'idle', 'target': None, 'state': None, 'target_dist': None, 'busy': False, 'camera': True}
+13:27:46 REPLY : [robot] Stopped. The robot is idle.
+13:27:46 REPLY : [operator/remote] what do you
+13:27:47 REPLY : [answer] I can see a chair and a person right now.
+13:27:48 REPLY : [robot] Stopped. The robot is idle.
+13:27:51 REPLY : [operator/remote] go after the chair
+13:27:51 REPLY : [navigate] Following the chair.
+13:27:51 REPLY : Searching for the chair. (type 'cancel' to stop)
+13:27:51 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'ROTATE', 'target_dist': None, 'busy': True, 'camera': True}
+13:27:53 REPLY : [robot] Stopped. The robot is idle.
+13:27:53 REPLY : [robot] Found the chair — navigating to it.
+13:27:53 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'NAVIGATING', 'target_dist': 3.6, 'busy': True, 'camera': True}
+13:27:54 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'NAVIGATING', 'target_dist': 3.48, 'busy': True, 'camera': True}
+13:27:54 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'NAVIGATING', 'target_dist': 3.35, 'busy': True, 'camera': True}
+13:27:55 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'NAVIGATING', 'target_dist': 3.23, 'busy': True, 'camera': True}
+13:27:55 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'NAVIGATING', 'target_dist': 3.13, 'busy': True, 'camera': True}
+13:27:56 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'NAVIGATING', 'target_dist': 3.01, 'busy': True, 'camera': True}
+13:27:56 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'NAVIGATING', 'target_dist': 2.87, 'busy': True, 'camera': True}
+13:27:57 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'NAVIGATING', 'target_dist': 2.75, 'busy': True, 'camera': True}
+13:27:57 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'NAVIGATING', 'target_dist': 2.63, 'busy': True, 'camera': True}
+13:27:58 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'NAVIGATING', 'target_dist': 2.5, 'busy': True, 'camera': True}
+13:27:58 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'NAVIGATING', 'target_dist': 2.34, 'busy': True, 'camera': True}
+13:27:59 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'NAVIGATING', 'target_dist': 2.22, 'busy': True, 'camera': True}
+13:27:59 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'NAVIGATING', 'target_dist': 2.11, 'busy': True, 'camera': True}
+13:28:00 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'NAVIGATING', 'target_dist': 1.99, 'busy': True, 'camera': True}
+13:28:00 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'NAVIGATING', 'target_dist': 1.82, 'busy': True, 'camera': True}
+13:28:01 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'NAVIGATING', 'target_dist': 1.69, 'busy': True, 'camera': True}
+13:28:01 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'NAVIGATING', 'target_dist': 1.6, 'busy': True, 'camera': True}
+13:28:02 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'ROTATE', 'target_dist': 1.55, 'busy': True, 'camera': True}
+13:28:02 REPLY : [robot] Arrived at the chair.
+13:28:02 STATUS: {'mode': 'idle', 'target': None, 'state': None, 'target_dist': None, 'busy': False, 'camera': True}
+13:28:38 REPLY : [operator/remote] go to the chair
+13:28:38 REPLY : [brain-guard] 'go to the chair' has a motion verb aimed at 'chair' — overriding locate -> navigate.
+13:28:38 REPLY : [navigate] Heading to the chair.
+13:28:38 REPLY : I remember seeing a chair about 6.6 m away — heading to that spot and I'll confirm it on the way. (type 'cancel' to stop)
+13:28:39 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'ROTATE', 'target_dist': 6.62, 'busy': True, 'camera': True}
+13:28:39 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'NAVIGATING', 'target_dist': 6.62, 'busy': True, 'camera': True}
+13:28:40 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'NAVIGATING', 'target_dist': 6.61, 'busy': True, 'camera': True}
+13:28:42 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'NAVIGATING', 'target_dist': 6.58, 'busy': True, 'camera': True}
+13:28:42 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'NAVIGATING', 'target_dist': 6.49, 'busy': True, 'camera': True}
+13:28:43 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'NAVIGATING', 'target_dist': 6.39, 'busy': True, 'camera': True}
+13:28:43 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'NAVIGATING', 'target_dist': 6.26, 'busy': True, 'camera': True}
+13:28:44 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'NAVIGATING', 'target_dist': 6.14, 'busy': True, 'camera': True}
+13:28:44 REPLY : [robot] I sent the stop but the robot is STILL MOVING (0.26 m/s, 0.06 rad/s). Take manual override now.
+13:28:44 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'NAVIGATING', 'target_dist': 6.01, 'busy': True, 'camera': True}
+13:28:45 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'NAVIGATING', 'target_dist': 5.84, 'busy': True, 'camera': True}
+13:28:45 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'NAVIGATING', 'target_dist': 5.73, 'busy': True, 'camera': True}
+13:28:46 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'NAVIGATING', 'target_dist': 5.61, 'busy': True, 'camera': True}
+13:28:46 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'NAVIGATING', 'target_dist': 5.49, 'busy': True, 'camera': True}
+13:28:47 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'NAVIGATING', 'target_dist': 5.36, 'busy': True, 'camera': True}
+13:28:47 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'NAVIGATING', 'target_dist': 5.23, 'busy': True, 'camera': True}
+13:28:48 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'NAVIGATING', 'target_dist': 5.1, 'busy': True, 'camera': True}
+13:28:48 REPLY : [robot] I can see the chair now — it's where I remembered.
+13:28:48 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'ROTATE', 'target_dist': 2.76, 'busy': True, 'camera': True}
+13:28:49 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'ROTATE', 'target_dist': 2.64, 'busy': True, 'camera': True}
+13:28:49 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'ROTATE', 'target_dist': 2.41, 'busy': True, 'camera': True}
+13:28:50 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'ROTATE', 'target_dist': 2.29, 'busy': True, 'camera': True}
+13:28:50 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'ROTATE', 'target_dist': 2.28, 'busy': True, 'camera': True}
+13:28:51 STATUS: {'mode': 'navigate', 'target': 'chair', 'state': 'ROTATE', 'target_dist': 2.14, 'busy': True, 'camera': True}

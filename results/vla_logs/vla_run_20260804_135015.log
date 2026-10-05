@@ -1,0 +1,11 @@
+2026-08-04 13:50:15.736 [RUN] vla_agent v10  (#34 feed publishes to any subscriber, #22 dock no-detect zone, #23 live-first memory, #24 forget, #25 typo-tolerant control words, #26 bare yes/no, #27 context expiry, #28 all-instance distances, #29 Create 3 backup ratchet, #30 sticky goals + range-scaled gate + ring-safe blacklist, #31 incremental off-map hop goals, #32 non-freezing live feed, #33 command/reply/status bridge)
+2026-08-04 13:50:15.737 [RUN] agent started (SIGHT_CONFIRM=2, SEARCH_TIMEOUT=45.0s, NO_PROGRESS_LIMIT=60.0s, ROBOT_CLEARANCE=0.25m)
+2026-08-04 13:50:16.177 [RUN] headless mode (no tty)
+2026-08-04 13:50:27.472 [CMD] [remote] what do you see
+2026-08-04 13:50:38.261 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a chair.', 'target': None}]}
+2026-08-04 13:50:38.261 [STEP] describe target=None
+2026-08-04 13:50:55.986 [CMD] (cancel via remote) cancel
+2026-08-04 13:57:36.293 [CMD] [remote] hello my testing hello my testing
+2026-08-04 13:57:37.062 [BRAIN] {'steps': [{'action': 'answer', 'speech': 'Hello! How can I assist you today?', 'target': None}]}
+2026-08-04 13:57:37.063 [STEP] answer target=None
+2026-08-04 13:58:25.695 [RUN] agent shutting down

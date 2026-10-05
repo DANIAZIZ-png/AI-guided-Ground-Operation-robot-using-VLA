@@ -1,0 +1,45 @@
+2026-08-13 09:13:31.103 [RUN] vla_agent v28  (#63 headless-safe console output, #62 direction-aware collision guard, #61 nearest-cluster LiDAR ranging, #60 manual override teleop, #59 10 Hz collision guard, #58 smoother approach, #57 stand off far enough to keep the object in view, #56 step-and-stare scan, #55 LiDAR failure reasons reported, #54 LiDAR object ranging, #53 seeded depth intrinsics, #52 depth intrinsics rescaled to frame size, #51 compressedDepth transport, #50 compressed RGB transport, #49 annotated feed gated per topic, #47 TF at colour-frame stamp, #48 reject stale depth, #46 one subscription per camera stream, #43 longer cached action-server wait, #44 undock retry-loop breaker, #45 sync slop for 1 Hz depth, #37 /robot1 namespace, #38 stereo depth topic, #39 best-effort sensor QoS, #40 RGB->depth pixel mapping, #41 encoding-based mm/m, #42 explicit namespaced TF, #36 no patrol feed prompt, #35 cancel actually stops the robot, #34 feed publishes to any subscriber, #22 dock no-detect zone, #23 live-first memory, #24 forget, #25 typo-tolerant control words, #26 bare yes/no, #27 context expiry, #28 all-instance distances, #29 Create 3 backup ratchet, #30 sticky goals + range-scaled gate + ring-safe blacklist, #31 incremental off-map hop goals, #32 non-freezing live feed, #33 command/reply/status bridge)
+2026-08-13 09:13:31.103 [RUN] agent started (SIGHT_CONFIRM=2, SEARCH_TIMEOUT=120.0s, NO_PROGRESS_LIMIT=60.0s, ROBOT_CLEARANCE=0.25m)
+2026-08-13 09:13:31.146 [RUN] headless mode (no tty)
+2026-08-13 09:13:31.168 [INFO] live depth camera_info received 320x240
+2026-08-13 09:13:38.871 [DOCK] dock position recorded at (-0.00, -0.00); detections within 0.8 m are ignored
+2026-08-13 09:34:21.107 [CMD] [remote] undock
+2026-08-13 09:34:21.108 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-13 09:34:21.108 [STEP] undock target=None
+2026-08-13 09:34:21.108 [ROBOT] Undocking…
+2026-08-13 09:34:24.986 [ROBOT] Stopped. The robot is idle.
+2026-08-13 09:34:24.987 [STOP] confirmed stopped by odometry after barrage
+2026-08-13 09:34:31.895 [ROBOT] Undocked — ready to move.
+2026-08-13 09:34:31.896 [DOCK] undock ok
+2026-08-13 09:35:03.638 [CMD] [remote] turn right
+2026-08-13 09:35:03.638 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-13 09:35:04.454 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Turning ninety degrees right.', 'target': None, 'distance_m': 0.0, 'rotation_deg': -90.0}]}
+2026-08-13 09:35:04.454 [STEP] move target=None
+2026-08-13 09:35:05.686 [ROBOT] Stopped. The robot is idle.
+2026-08-13 09:35:05.686 [STOP] confirmed stopped by odometry after barrage
+2026-08-13 09:35:10.146 [ROBOT] Done with that move.
+2026-08-13 09:35:12.406 [CMD] [remote] move 1m ahead
+2026-08-13 09:35:12.407 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-13 09:35:13.188 [BRAIN] {'steps': [{'action': 'move', 'speech': 'Moving forward one metre.', 'target': None, 'distance_m': 1.0, 'rotation_deg': 0.0}]}
+2026-08-13 09:35:13.189 [STEP] move target=None
+2026-08-13 09:35:14.465 [ROBOT] Stopped. The robot is idle.
+2026-08-13 09:35:14.466 [STOP] confirmed stopped by odometry after barrage
+2026-08-13 09:35:21.146 [ROBOT] Done with that move.
+2026-08-13 09:35:28.726 [CMD] [remote] patrol
+2026-08-13 09:35:28.727 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-13 09:35:29.445 [BRAIN] {'steps': [{'action': 'patrol', 'speech': 'Patrolling the area.', 'target': None}]}
+2026-08-13 09:35:29.446 [STEP] patrol target=None
+2026-08-13 09:35:30.785 [ROBOT] Stopped. The robot is idle.
+2026-08-13 09:35:30.786 [STOP] confirmed stopped by odometry after barrage
+2026-08-13 09:35:39.727 [CMD] [remote] patrol the area
+2026-08-13 09:35:39.727 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-13 09:35:40.464 [BRAIN] {'steps': [{'action': 'explore', 'speech': 'Exploring and mapping the area.', 'target': None}]}
+2026-08-13 09:35:40.465 [STEP] explore target=None
+2026-08-13 09:35:41.786 [ROBOT] Stopped. The robot is idle.
+2026-08-13 09:35:41.787 [STOP] confirmed stopped by odometry after barrage
+2026-08-13 09:35:48.407 [CMD] [remote] what do you see
+2026-08-13 09:35:48.407 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-13 09:35:49.253 [BRAIN] {'steps': [{'action': 'describe', 'speech': "I don't see anything right now.", 'target': None}]}
+2026-08-13 09:35:49.253 [STEP] describe target=None
+2026-08-13 09:35:50.466 [ROBOT] Stopped. The robot is idle.
+2026-08-13 09:35:50.466 [STOP] confirmed stopped by odometry after barrage

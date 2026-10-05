@@ -1,0 +1,49 @@
+2026-08-08 15:17:14.876 [RUN] vla_agent v18  (#50 compressed RGB transport, #49 annotated feed gated per topic, #47 TF at colour-frame stamp, #48 reject stale depth, #46 one subscription per camera stream, #43 longer cached action-server wait, #44 undock retry-loop breaker, #45 sync slop for 1 Hz depth, #37 /robot1 namespace, #38 stereo depth topic, #39 best-effort sensor QoS, #40 RGB->depth pixel mapping, #41 encoding-based mm/m, #42 explicit namespaced TF, #36 no patrol feed prompt, #35 cancel actually stops the robot, #34 feed publishes to any subscriber, #22 dock no-detect zone, #23 live-first memory, #24 forget, #25 typo-tolerant control words, #26 bare yes/no, #27 context expiry, #28 all-instance distances, #29 Create 3 backup ratchet, #30 sticky goals + range-scaled gate + ring-safe blacklist, #31 incremental off-map hop goals, #32 non-freezing live feed, #33 command/reply/status bridge)
+2026-08-08 15:17:14.876 [RUN] agent started (SIGHT_CONFIRM=2, SEARCH_TIMEOUT=45.0s, NO_PROGRESS_LIMIT=60.0s, ROBOT_CLEARANCE=0.25m)
+2026-08-08 15:17:19.547 [CMD] [keyboard] what do you see
+2026-08-08 15:17:19.547 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 15:17:20.246 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a chair, a person, and a shelf.', 'target': None}]}
+2026-08-08 15:17:20.246 [STEP] describe target=None
+2026-08-08 15:17:20.392 [ROBOT] RGB and depth stopped lining up (1.6s since the last matched pair) — switching to the newest frame of each. Detections stay live; depth accuracy drops a little while they are out of step.
+2026-08-08 15:17:20.392 [WARN] #32a stale sync pair dropped after 1.6s
+2026-08-08 15:17:21.592 [ROBOT] Stopped. The robot is idle.
+2026-08-08 15:17:21.592 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 15:17:38.843 [CMD] [keyboard] what do you see
+2026-08-08 15:17:38.843 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 15:17:39.420 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a chair.', 'target': None}]}
+2026-08-08 15:17:39.420 [STEP] describe target=None
+2026-08-08 15:17:40.892 [ROBOT] Stopped. The robot is idle.
+2026-08-08 15:17:40.893 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 15:18:04.892 [ROBOT] I've stopped receiving camera frames. Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-08-08 15:18:04.892 [WARN] #32e camera stream stalled
+2026-08-08 15:18:20.892 [ROBOT] I've stopped receiving camera frames. Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-08-08 15:18:20.892 [WARN] #32e camera stream stalled
+2026-08-08 15:18:37.835 [CMD] [keyboard] what do you see
+2026-08-08 15:18:37.835 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 15:18:38.416 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a chair.', 'target': None}]}
+2026-08-08 15:18:38.416 [STEP] describe target=None
+2026-08-08 15:18:39.892 [ROBOT] Stopped. The robot is idle.
+2026-08-08 15:18:39.892 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 15:18:44.939 [CMD] [keyboard] what do you see
+2026-08-08 15:18:44.939 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 15:18:45.487 [BRAIN] {'steps': [{'action': 'describe', 'speech': 'I see a chair.', 'target': None}]}
+2026-08-08 15:18:45.487 [STEP] describe target=None
+2026-08-08 15:18:46.992 [ROBOT] Stopped. The robot is idle.
+2026-08-08 15:18:46.992 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 15:18:52.476 [CMD] [keyboard] go to the chair
+2026-08-08 15:18:52.477 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 15:18:52.969 [BRAIN] {'steps': [{'action': 'navigate', 'speech': 'Heading to the chair.', 'target': 'chair'}]}
+2026-08-08 15:18:52.969 [STEP] navigate target='chair'
+2026-08-08 15:18:54.534 [ROBOT] Stopped. The robot is idle.
+2026-08-08 15:18:54.534 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 15:19:05.995 [CMD] (cancel via keyboard) stop
+2026-08-08 15:19:05.996 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 15:19:08.051 [ROBOT] Stopped. The robot is idle.
+2026-08-08 15:19:08.052 [STOP] confirmed stopped by odometry after barrage
+2026-08-08 15:19:29.892 [ROBOT] I've stopped receiving camera frames. Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-08-08 15:19:29.892 [WARN] #32e camera stream stalled
+2026-08-08 15:24:06.892 [ROBOT] I've stopped receiving camera frames. Check the OAK-D driver — I can still move, but I'm blind until it's back.
+2026-08-08 15:24:06.892 [WARN] #32e camera stream stalled
+2026-08-08 15:25:29.341 [WARN] #35 cancel-all failed: failed to check service availability: rcl node's context is invalid, at ./src/rcl/node.c:428
+2026-08-08 15:25:29.341 [STOP] hard stop requested (cancel-all + zero barrage)
+2026-08-08 15:25:29.341 [RUN] agent shutting down
