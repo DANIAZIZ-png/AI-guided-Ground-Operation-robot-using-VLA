@@ -66,21 +66,11 @@ vla-gui = "vla_gui.app:main"
 packages = ["vla_agent", "vla_brain", "vla_perception", "vla_voice", "vla_gui"]
 py-modules = ["vla_paths", "vla_agent_v28", "llm_brain", "yolo_server", "voice_command", "vla_gui_v2"]
 
-[tool.ruff]
-line-length = 100
-target-version = "py310"
-
-[tool.ruff.lint]
-# F403/F405 are the star imports that hold the package together: the mixins all
-# do `from .core import *` to see the 147 constants, which is what makes the
-# Phase 2 split a pure move rather than a rewrite of every reference.
-# A001 is the deliberate `print` shadow, agent fix #63.
-ignore = ["F403", "F405", "A001", "E501"]
-
-[tool.ruff.lint.per-file-ignores]
-"vla_agent_v28.py" = ["F401"]
-"llm_brain.py" = ["F401"]
-"yolo_server.py" = ["F401"]
-"voice_command.py" = ["F401"]
-"vla_gui_v2.py" = ["F401"]
-"*/__init__.py" = ["F401"]
+# Lint configuration lives in the REPOSITORY ROOT ruff.toml, not here.
+#
+# Ruff resolves config per file by walking up to the nearest pyproject.toml
+# containing a [tool.ruff] section. With one here, everything under src/ used
+# this file and silently ignored the root ruff.toml -- so `ruff check src` and
+# `ruff check tests` enforced different rules, and CI disagreed with a local
+# run. One config at the root avoids that, and avoids two rule lists drifting
+# apart.

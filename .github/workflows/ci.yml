@@ -1,0 +1,107 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+# WHAT CI CAN AND CANNOT CHECK HERE
+#   91 of the 133 tests need no ROS, no GPU and no robot, so they run on a
+#   plain runner: the refactor parity gate's own tests, the brain's JSON
+#   parsing and guards, the GUI launch-config checks, and the vla_bringup
+#   static checks.
+#
+#   The other 42 import rclpy and are skipped with a clear reason rather than
+#   failed. Running them would mean a ROS container in CI; the local
+#   `make test` covers them, and the parity gate is the thing that must pass
+#   before any agent change is committed.
+#
+#   The simulation smoke test is NOT run here: it needs Gazebo and a GPU.
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: ruff
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install ruff
+      - name: ruff check
+        run: ruff check src tests tools vla_bringup
+
+  tests:
+    name: tests (no ROS)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Only what the no-ROS tests actually import. Deliberately NOT the full
+      # perception stack: pulling torch and the CUDA wheels would add gigabytes
+      # and minutes to every push for tests that never touch them.
+      - name: install test dependencies
+        run: pip install pytest requests
+
+      - name: run the tests that need no ROS
+        run: pytest tests/ -q -rs
+
+      - name: the parity baseline must still be present and intact
+        run: |
+          python3 - <<'PY'
+          import json
+          b = json.load(open("tests/baseline_agent_api.json"))
+          assert len(b["constants"]) == 147, len(b["constants"])
+          assert len(b["functions"]) == 9
+          assert set(b["classes"]) == {"VLAAgent", "ReplyTee", "MissionLog", "_DecodedFilter"}
+          print("baseline intact:", sum(len(b[k]) for k in ("constants","functions","classes")), "names")
+          PY
+
+  shellcheck:
+    name: shell scripts parse
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: bash -n every shell script
+        run: |
+          fail=0
+          while IFS= read -r f; do
+            bash -n "$f" || { echo "SYNTAX FAIL: $f"; fail=1; }
+          done < <(git ls-files '*.sh' 'config/*.env')
+          exit $fail
+      - name: the smoke test must not use pkill or the kill-everything scripts
+        # tests/smoke_sim.sh must only ever kill processes it started itself, by
+        # PID. `pkill -f` matches the whole command line of every process
+        # including the shell running it, so a pattern appearing in a comment or
+        # a filename makes the shell kill itself and everything after that line
+        # silently does not run -- which has happened on this project.
+        run: |
+          if grep -nE '(^|[^#])(pkill|vla_kill\.sh|vla_sim\.sh)' tests/smoke_sim.sh; then
+            echo "tests/smoke_sim.sh must not call pkill, vla_kill.sh or vla_sim.sh"
+            exit 1
+          fi
+          echo "clean"
+
+  perception-image:
+    name: build the perception image
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - name: build (no push)
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: docker/perception.Dockerfile
+          push: false
+          # The image carries torch and the CUDA wheels, so the layer cache is
+          # what keeps this from dominating the run.
+          cache-from: type=gha
+          cache-to: type=gha,mode=max

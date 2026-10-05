@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+title: "AI-guided Ground Operation Robot using VLA"
+message: "If you use this software or its results, please cite it as below."
+type: software
+authors:
+  - family-names: Aziz
+    given-names: Danyal
+    alias: DANIAZIZ-png
+license: MIT
+version: 1.0.0
+date-released: "2026-10-05"
+repository-code: "https://github.com/DANIAZIZ-png/AI-guided-Ground-Operation-robot-using-VLA"
+keywords:
+  - robotics
+  - ROS 2
+  - vision-language-action
+  - TurtleBot 4
+  - Nav2
+  - large language models
+  - open-vocabulary detection
+abstract: >-
+  Natural-language control of a TurtleBot 4 ground robot, running entirely on
+  local hardware. Speech is transcribed with faster-whisper, a local Qwen2.5-7B
+  model turns the sentence into a plan, YOLOv8s-World locates the named object
+  in the camera image, a 2-D LiDAR gives its range, and Nav2 drives to a
+  stand-off pose. The language model only proposes: every motion passes
+  deterministic guards before it reaches the base. The repository includes the
+  packet captures and measurements behind the hardware findings, notably a Fast
+  DDS heartbeat storm that was misdiagnosed twice as a thermal problem and then
+  as a camera fault.

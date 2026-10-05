@@ -157,9 +157,13 @@ test-noros:
 	$(call in_ros,$(PYTEST) tests/test_parity_gate.py tests/test_gui_config.py tests/test_bringup_package.py -q)
 
 .PHONY: lint
-lint:
-	@echo "==> ruff"
-	$(call in_ros,python3 -m ruff check src tests tools scripts vla_bringup || true)
+lint: $(VENV)/bin/ruff
+	@echo "==> ruff (config: ruff.toml at the repository root)"
+	@$(VENV)/bin/ruff check src tests tools vla_bringup
+
+$(VENV)/bin/ruff: $(COMPOSE_BIN)
+	$(VENV)/bin/pip install --quiet ruff
+	@$(VENV)/bin/ruff --version
 
 .PHONY: smoke
 smoke:

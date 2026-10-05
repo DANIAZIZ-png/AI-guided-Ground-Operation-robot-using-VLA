@@ -1,0 +1,61 @@
+# pre-commit hooks. Install once:
+#
+#   .venv-tools/bin/pip install pre-commit
+#   .venv-tools/bin/pre-commit install
+#
+# The parity gate is deliberately NOT a hook: it needs rclpy, which is in the
+# ROS container, so a hook would fail for anyone whose shell has no ROS. Run it
+# with `make parity` before committing an agent change.
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+        # Logs and packet-capture summaries are kept exactly as recorded.
+        exclude: ^results/
+      - id: end-of-file-fixer
+        exclude: ^results/
+      - id: check-yaml
+        # compose.yaml uses YAML anchors and merge keys, which this hook reads
+        # fine, but the multi-document check does not apply here.
+        args: [--allow-multiple-documents]
+      - id: check-json
+      - id: check-added-large-files
+        # The weights are git-ignored; this is a backstop in case that changes.
+        args: [--maxkb=5000]
+      - id: check-merge-conflict
+      - id: mixed-line-ending
+        args: [--fix=lf]
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.8.4
+    hooks:
+      - id: ruff
+        args: [--fix]
+        files: ^(src|tests|tools|vla_bringup)/
+
+  - repo: local
+    hooks:
+      - id: shell-syntax
+        name: bash -n on shell scripts
+        entry: bash -c 'for f in "$@"; do bash -n "$f" || exit 1; done' --
+        language: system
+        files: \.(sh|env)$
+
+      - id: no-host-paths
+        name: no hard-coded /home/danyalaziz paths
+        # Phase 1 of the reorg removed these. results/ and archive/ keep theirs:
+        # the logs are historical records and must not be rewritten.
+        entry: bash -c 'if grep -l "/home/danyalaziz" "$@" 2>/dev/null; then echo "hard-coded host path -- use the VLA_* variables (config/paths.sh)"; exit 1; fi' --
+        language: system
+        files: ^(src|scripts|launch|config|tools|vla_bringup)/
+
+      - id: no-stock-nav2-in-configs
+        name: GUI configs must not name the stock Nav2/SLAM launch files
+        # The stock turtlebot4_navigation launch files have no
+        # /parameter_events or /rosout remap and a 4 s bond timeout. Launching
+        # them floods the robot's Wi-Fi at ~7,400 packets/s and aborts the
+        # bring-up. See docs/changelogs/CHANGELOG_2026-10-05.md.
+        entry: bash -c 'if grep -lE "turtlebot4_navigation (nav2|slam)\.launch\.py" "$@" 2>/dev/null; then echo "use launch/nav2_hw_composed.launch.py or launch/slam_hw.launch.py"; exit 1; fi' --
+        language: system
+        files: ^config/.*\.json$
