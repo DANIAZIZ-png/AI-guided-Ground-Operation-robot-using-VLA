@@ -78,6 +78,10 @@ def snapshot(modname: str) -> dict:
                     if not m.startswith("__")
                 ),
                 "bases": [b.__name__ for b in obj.__bases__],
+                # The MRO matters more than the immediate bases: the Phase 2
+                # split moves methods into mixins, which legitimately changes
+                # __bases__ while every original base must still be reachable.
+                "mro": [c.__name__ for c in obj.__mro__],
             }
         elif inspect.isfunction(obj):
             origin = getattr(obj, "__module__", "") or ""
@@ -100,15 +104,39 @@ def snapshot(modname: str) -> dict:
 
 
 def diff(base: dict, now: dict) -> list[str]:
-    """Human-readable differences. Additions are allowed; losses and changes are not."""
+    """Human-readable differences. Additions are allowed; losses and changes are not.
+
+    Classes are compared method by method rather than whole-object, for two
+    reasons. First, the Phase 2 split deliberately moves methods into mixins,
+    which changes __bases__ while keeping behaviour identical -- so what must
+    hold is that every original base is still somewhere in the MRO, not that
+    __bases__ is untouched. Second, dumping two 180-name method lists on any
+    mismatch buries the one name that actually changed.
+    """
     problems = []
-    for kind in ("constants", "functions", "classes"):
+
+    for kind in ("constants", "functions"):
         b, n = base.get(kind, {}), now.get(kind, {})
         for name in sorted(set(b) - set(n)):
             problems.append(f"LOST {kind[:-1]}: {name}")
         for name in sorted(set(b) & set(n)):
             if b[name] != n[name]:
-                problems.append(f"CHANGED {kind[:-1]}: {name}\n    was: {b[name]}\n    now: {n[name]}")
+                problems.append(
+                    f"CHANGED {kind[:-1]}: {name}\n    was: {b[name]}\n    now: {n[name]}"
+                )
+
+    b, n = base.get("classes", {}), now.get("classes", {})
+    for name in sorted(set(b) - set(n)):
+        problems.append(f"LOST class: {name}")
+    for name in sorted(set(b) & set(n)):
+        lost = sorted(set(b[name].get("methods", [])) - set(n[name].get("methods", [])))
+        if lost:
+            problems.append(f"LOST methods on {name}: {', '.join(lost)}")
+        # every base the class used to have must still be reachable
+        mro = set(n[name].get("mro", n[name].get("bases", [])))
+        gone = [x for x in b[name].get("bases", []) if x not in mro]
+        if gone:
+            problems.append(f"{name} no longer inherits from: {', '.join(gone)}")
     return problems
 
 
