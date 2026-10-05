@@ -488,7 +488,7 @@
     },
     "LOG_DIR": {
       "type": "str",
-      "value": "/home/danyalaziz/repos/AI-guided-Ground-Operation-robot-using-VLA/logs"
+      "value": "$VLA_ROOT/logs"
     },
     "MANUAL_ANG_MAX": {
       "type": "float",
@@ -711,7 +711,7 @@
     },
     "SAVE_MAP_PATH": {
       "type": "str",
-      "value": "/home/danyalaziz/repos/AI-guided-Ground-Operation-robot-using-VLA/maps/warehouse_map"
+      "value": "$VLA_ROOT/maps/warehouse_map"
     },
     "SCAN_DWELL_S": {
       "type": "float",

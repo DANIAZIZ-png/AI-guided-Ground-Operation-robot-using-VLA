@@ -82,24 +82,97 @@ for entry in "${MODELS[@]}"; do
 done
 
 # ---------------------------------------------------------------------------
-# faster-whisper models
+# faster-whisper, pinned to an exact HuggingFace revision
 # ---------------------------------------------------------------------------
-# These are pulled by faster-whisper into ~/.cache/huggingface on first use, as
-# repository snapshots rather than single files, so they are verified where they
-# land instead of being placed in VLA_MODEL_DIR.
+# A model TAG is not a pin. faster-whisper resolves
+# "Systran/faster-whisper-medium.en" to whatever main points at TODAY, so a
+# rebuild after this machine is wiped would silently fetch a different model and
+# every transcription measurement would stop being reproducible with nothing
+# appearing to be wrong.
+#
+# So the revisions below are the commits that were actually used, read from
+# ~/.cache/huggingface/hub/models--Systran--faster-whisper-*/refs/main, and every
+# file is fetched BY COMMIT and hash-checked against env/MANIFEST.md.
+#
+# Downloaded into $VLA_MODEL_DIR/whisper/<model>/ rather than the HuggingFace
+# cache, so the pin is visible and portable. Point VLA_WHISPER_DIR at it, or set
+# HF_HUB_OFFLINE=1 with a populated cache.
 echo
-echo "faster-whisper (HuggingFace cache):"
+echo "faster-whisper (pinned revisions):"
+
+WHISPER_DIR="${VLA_WHISPER_DIR:-$VLA_MODEL_DIR/whisper}"
+
+# model|revision|file:sha256|file:sha256...
+WHISPER=(
+  "medium.en|a29b04bd15381511a9af671baec01072039215e3|model.bin:11b220779aea4c6f3ce9d2549c8a95ea869ed84066864b999531ef53e594fe5b|config.json:4a1848ebabe7938d9797c15a2e8e4ce1d36e6fd4a43d096ae5955257c67c7962|tokenizer.json:929c5252409436dce1b38a75d1abbcb5e132d170d8e324e4e04ed915fa2d22df|vocabulary.txt:ff77588746d3a2595d32ab5b69ffd7b95ce2441ac57533cb66fc3eb575a115cf"
+  "small.en|d1d751a5f8271d482d14ca55d9e2deeebbae577f|model.bin:62b2a45b05ee59acb4a5341b33ee35e041395d378d418a18acfe4c9e768ee37a|config.json:666a9605530ac1f61fa8177f3702b4dacec9966749e42610839fcc32661d5fae|tokenizer.json:929c5252409436dce1b38a75d1abbcb5e132d170d8e324e4e04ed915fa2d22df|vocabulary.txt:ff77588746d3a2595d32ab5b69ffd7b95ce2441ac57533cb66fc3eb575a115cf"
+)
+
+for spec in "${WHISPER[@]}"; do
+    IFS='|' read -r -a parts <<< "$spec"
+    model="${parts[0]}"; rev="${parts[1]}"
+    dest="$WHISPER_DIR/$model"
+    mkdir -p "$dest"
+    printf '  %s  (revision %s)\n' "$model" "${rev:0:12}"
+
+    for fh in "${parts[@]:2}"; do
+        name="${fh%%:*}"; want="${fh#*:}"
+        out="$dest/$name"
+
+        if [ -f "$out" ] && [ "$MODE" != force ]; then
+            got=$(sha_of "$out")
+            if [ "$got" = "$want" ]; then
+                printf '    %sOK%s      %-16s sha256 verified\n' "$GRN" "$RST" "$name"
+                continue
+            fi
+            printf '    %sBAD%s     %-16s sha256 MISMATCH -- wrong revision?\n' "$RED" "$RST" "$name"
+            printf '              want %s\n              got  %s\n' "$want" "$got"
+            mv -f "$out" "$out.bad-$(date +%Y%m%d%H%M%S)"
+            fail=1
+            [ "$MODE" = verify ] && continue
+        fi
+
+        if [ "$MODE" = verify ]; then
+            [ -f "$out" ] || { printf '    %sMISSING%s %-16s (run without --verify)\n' "$YEL" "$RST" "$name"; fail=1; }
+            continue
+        fi
+
+        # resolve/<revision>/ pins the commit. resolve/main would not.
+        url="https://huggingface.co/Systran/faster-whisper-$model/resolve/$rev/$name"
+        printf '    fetching %s ...\n' "$name"
+        if ! curl -fL --retry 3 --retry-delay 2 -o "$out.part" "$url"; then
+            printf '    %sFAIL%s    %-16s download failed\n' "$RED" "$RST" "$name"
+            rm -f "$out.part"; fail=1; continue
+        fi
+        got=$(sha_of "$out.part")
+        if [ "$got" != "$want" ]; then
+            printf '    %sFAIL%s    %-16s sha256 mismatch after download\n' "$RED" "$RST" "$name"
+            printf '              want %s\n              got  %s\n' "$want" "$got"
+            mv -f "$out.part" "$out.bad-$(date +%Y%m%d%H%M%S)"; fail=1; continue
+        fi
+        mv -f "$out.part" "$out"
+        printf '    %sOK%s      %-16s downloaded and verified\n' "$GRN" "$RST" "$name"
+    done
+done
+
+# The HuggingFace cache, if faster-whisper has already populated it. Blobs there
+# are content-addressed, so a blob's filename IS its sha256 -- its presence under
+# the expected name is the verification.
 HF="${HF_HOME:-$HOME/.cache/huggingface}/hub"
-for spec in "medium.en|11b220779aea4c6f3ce9d2549c8a95ea869ed84066864b999531ef53e594fe5b" \
-            "small.en|62b2a45b05ee59acb4a5341b33ee35e041395d378d418a18acfe4c9e768ee37a"; do
-    IFS='|' read -r model want <<< "$spec"
-    blob="$HF/models--Systran--faster-whisper-$model/blobs/$want"
-    if [ -f "$blob" ]; then
-        printf '  %sOK%s      faster-whisper-%-10s present, content-addressed as its sha256\n' \
-               "$GRN" "$RST" "$model"
-    else
-        printf '  %s--%s      faster-whisper-%-10s not cached; it downloads on first transcription\n' \
-               "$YEL" "$RST" "$model"
+for spec in "medium.en|11b220779aea4c6f3ce9d2549c8a95ea869ed84066864b999531ef53e594fe5b|a29b04bd15381511a9af671baec01072039215e3" \
+            "small.en|62b2a45b05ee59acb4a5341b33ee35e041395d378d418a18acfe4c9e768ee37a|d1d751a5f8271d482d14ca55d9e2deeebbae577f"; do
+    IFS='|' read -r model blob rev <<< "$spec"
+    base="$HF/models--Systran--faster-whisper-$model"
+    if [ -f "$base/blobs/$blob" ]; then
+        cached_rev=$(cat "$base/refs/main" 2>/dev/null || echo "?")
+        if [ "$cached_rev" = "$rev" ]; then
+            printf '  %sOK%s      HF cache %-10s revision matches\n' "$GRN" "$RST" "$model"
+        else
+            printf '  %sWARN%s    HF cache %-10s is at revision %s, expected %s\n' \
+                   "$YEL" "$RST" "$model" "${cached_rev:0:12}" "${rev:0:12}"
+            printf '            The model.bin still hashes correctly, so the weights are\n'
+            printf '            right; only the ref moved. Not treated as a failure.\n'
+        fi
     fi
 done
 

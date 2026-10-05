@@ -18,6 +18,7 @@ has been modified at any point; the live `~/vla_sim.sh` demo is untouched.
 | 5 | Tests and CI | **DONE** — 133 tests, ruff clean, CI, pre-commit, MIT |
 | 6 | Prove portability (fresh clone) | **IN PROGRESS** |
 | 7 | Docs | mostly done — README and the corrections landed |
+| 8 | Pre-wipe audit | **not started** — do after Phase 6 |
 
 Report to the user after phases **1**, **3** and **6**. Phase 1 reported.
 
@@ -279,3 +280,80 @@ chain. A gate that cannot fail proves nothing.
   `sudo` commands go to the user — do not run them.
 - `scripts/download_models.sh`: fetch the four weights into `./models` and verify
   every sha256 in `env/MANIFEST.md`.
+
+
+---
+
+## Phase 8 — pre-wipe audit (after Phase 6)
+
+**This PC is being wiped and this repository is the only copy.** The point of
+this phase is a defensible YES/NO on whether that is safe yet.
+
+### Scope note — read this first
+
+The instruction was "exactly as I specified earlier". **I could not find an
+earlier specification.** I searched all 11 Claude transcripts for this project
+(`~/.claude/projects/-home-danyalaziz/*.jsonl`, ~43 MB) for `BACKUP_CHECKLIST`,
+"safe to wipe", "pre-wipe", "re-downloadable" and "release asset": the only
+match is the message that asked for this phase. So the requirements below are
+taken from **that** message, verbatim, and nothing is inferred beyond it. If
+there were extra criteria in a conversation that is not on this disk, they need
+restating.
+
+### What to do
+
+1. **Scan all of `~`** for anything project-related that is not in the
+   repository. Not just the obvious directories — the earlier inventory already
+   found project files loose in `~`, in `~/Documents`, in `~/Downloads`, in
+   `~/.cache`, in `~/.ros`, in `~/.config` and in the distrobox container
+   storage.
+2. **Sort every finding into exactly one of five buckets:**
+   | Bucket | Meaning |
+   |---|---|
+   | **git** | belongs in the repository — commit it |
+   | **re-downloadable** | recoverable from a public source, with the URL and hash recorded so it can be re-fetched identically |
+   | **release asset** | too big for git but must be kept — attach to a GitHub release |
+   | **USB** | cannot be committed or re-downloaded — copy off the machine |
+   | **secret** | must NOT be committed — keys, tokens, Wi-Fi PSKs; record only that it exists and where it must be recreated |
+3. **Write `docs/BACKUP_CHECKLIST.md`** with the full sorted inventory, sizes,
+   hashes where relevant, and the action required for each item.
+4. **End with an explicit YES/NO: "safe to wipe".** If NO, say exactly what is
+   outstanding.
+5. **Include an Ollama fallback.** `qwen2.5:7b` is pinned by digest
+   `845dbda0ea48` in `env/MANIFEST.md`, but a tag can be re-pointed upstream at
+   any time. Record a fallback that does not depend on the tag — the matching
+   **Q4_K_M GGUF** from HuggingFace, with its sha256 — so the exact model can be
+   recovered even if `ollama pull qwen2.5:7b` starts giving something else.
+
+### Known candidates already identified by earlier phases
+
+These came out of the Phase 1-5 work and should be in the checklist, each with
+its bucket:
+
+| Item | Size | Likely bucket |
+|---|---|---|
+| `~/yolov8s-world.pt` | 27 MB | re-downloadable (hash in `env/MANIFEST.md`) |
+| `~/weights/clip/ViT-B-32.pt` | 354 MB | re-downloadable (hash recorded) |
+| faster-whisper `medium.en` / `small.en` | 2.0 GB | re-downloadable, now **pinned by revision** |
+| Ollama `qwen2.5:7b` | 4.68 GB | re-downloadable by digest, **plus the GGUF fallback** |
+| `localhost/ubuntu22-snapshot:latest` | 9.88 GB | **superseded** — `docker/ros.Dockerfile` rebuilds it from the verified 2026-05-14 snapshot, so it does not need backing up. This was the project's biggest reproducibility hole and Phase 3 closed it. |
+| `~/.ssh/id_ed25519` | 419 B | **secret** — not committed; note that a new key must be added to GitHub after the rebuild |
+| `~/.bashrc` lines 118-130 | — | already in git as `env/bashrc_lines_118-130.txt` |
+| `~/Downloads/turtlebot4_humble_lite_1.0.5.zip` | 2.59 GB | re-downloadable (vendor image) |
+| `~/vla_logs/` (241 files) | 12 MB | already in git as `results/logs/` |
+| `~/vla_evidence_20260911/` | 9.3 MB | already in git as `results/evidence/` |
+| `~/report_pack/` | 18 MB | already in git, dissolved into `results/` |
+| `~/yolo-env/` | — | **superseded** by `docker/perception.Dockerfile`; the 64 pins are in `env/pip-freeze_yolo-env.txt` |
+| Robot-side files on the Pi (`10.42.0.169`) | — | **out of scope unless stated.** The Pi is a separate machine and is not being wiped. Worth one explicit line in the checklist either way. |
+
+### Things to check that are easy to forget
+
+- the two distrobox containers' own storage (`~/.local/share/containers`) for
+  anything written inside them that is not in `$HOME`
+- `~/.ros/` beyond the two DDS profiles already committed
+- `~/.vla_gui*.json` variants and backups (several exist)
+- any `*.bak-*` files in `~` that the repo's `archive/` does not already hold
+- Bluetooth pairings and the hotspot's NetworkManager connection profile —
+  these are configuration, not files to commit, but they have to be recreated
+- whether anything in `~/Documents` or `~/Videos` is demo footage that counts as
+  a result

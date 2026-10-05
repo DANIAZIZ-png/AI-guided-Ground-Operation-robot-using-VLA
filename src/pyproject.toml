@@ -27,7 +27,9 @@
 #   not from pip.
 
 [build-system]
-requires = ["setuptools>=61"]
+# >=64: PEP 660 `build_editable` landed in setuptools 64.0.0, and without it
+# `pip install -e` fails on a project that has no setup.py.
+requires = ["setuptools>=64", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]

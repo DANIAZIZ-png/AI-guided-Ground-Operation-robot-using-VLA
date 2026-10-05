@@ -147,3 +147,55 @@ def test_the_real_baseline_file_is_present_and_sane():
     assert len(base["functions"]) == 9
     assert set(base["classes"]) == {"VLAAgent", "ReplyTee", "MissionLog", "_DecodedFilter"}
     assert "Node" in base["classes"]["VLAAgent"]["bases"]
+
+
+# --------------------------------------------------------------------------
+# the baseline must be portable
+# --------------------------------------------------------------------------
+# Found by review on a second machine. Two constants (LOG_DIR, SAVE_MAP_PATH)
+# are absolute paths derived from VLA_ROOT, and the baseline recorded them
+# verbatim -- so on any clone at a different path the gate reported them as
+# CHANGED and `make test` failed for a reason unrelated to the code. Verified:
+# the pre-fix baseline does fail from a different path, naming exactly those two.
+
+def test_the_baseline_contains_no_machine_specific_paths():
+    import json
+    path = os.path.join(TESTS, "baseline_agent_api.json")
+    raw = open(path).read()
+    assert "/home/" not in raw, (
+        "the parity baseline records an absolute home path. It must store "
+        "$VLA_ROOT / $HOME placeholders, or the gate fails on every clone at a "
+        "different path."
+    )
+    b = json.load(open(path))
+    assert b["constants"]["LOG_DIR"]["value"].startswith("$VLA_ROOT")
+    assert b["constants"]["SAVE_MAP_PATH"]["value"].startswith("$VLA_ROOT")
+
+
+def test_portable_replaces_the_repo_root_with_a_placeholder():
+    from snapshot_agent_api import REPO, _portable
+    assert _portable(os.path.join(REPO, "logs")) == "$VLA_ROOT/logs"
+
+
+def test_portable_prefers_the_longer_prefix():
+    """VLA_ROOT normally sits inside HOME. Replacing HOME first would leave
+    "$HOME/repos/..." and the comparison would still be path-dependent."""
+    from snapshot_agent_api import REPO, _portable
+    got = _portable(os.path.join(REPO, "maps", "warehouse_map"))
+    assert got == "$VLA_ROOT/maps/warehouse_map"
+    assert "$HOME" not in got
+
+
+def test_portable_leaves_an_unrelated_absolute_path_alone():
+    """Paths outside the repo and home -- /opt/ros/humble, /dev/snd -- are the
+    same on every machine and must not be rewritten."""
+    from snapshot_agent_api import _portable
+    assert _portable("/opt/ros/humble/setup.bash") == "/opt/ros/humble/setup.bash"
+
+
+def test_portable_is_idempotent():
+    """It runs on both sides of the comparison, so applying it to an already
+    normalised value must not change it again."""
+    from snapshot_agent_api import _portable
+    once = _portable("$VLA_ROOT/logs")
+    assert once == "$VLA_ROOT/logs"

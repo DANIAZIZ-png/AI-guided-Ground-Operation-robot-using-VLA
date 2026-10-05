@@ -67,10 +67,18 @@ RUN echo "deb [trusted=yes] http://snapshots.ros.org/${ROS_DISTRO}/${ROS_SNAPSHO
 # exactly what drifts. The build FAILS if any pin cannot be satisfied, which is
 # the point -- a silent substitution would be worse than a broken build.
 COPY docker/ros-packages.txt /tmp/ros-packages.txt
+# The colcon build tooling, needed to build vla_bringup. It is in a SEPARATE
+# list because env/ros-humble-packages_ubuntu22-gpu.txt was generated with
+# `grep ros-humble`, so the python3-colcon-* packages were excluded by
+# construction -- a gap in the manifest, found when this image first failed with
+# "colcon: not found". All 24 are pinned and all 24 match the same 2026-05-14
+# snapshot exactly.
+COPY docker/ros-tooling-packages.txt /tmp/ros-tooling-packages.txt
 
 RUN apt-get update \
     && xargs -a /tmp/ros-packages.txt apt-get install -y --no-install-recommends \
-    && rm -rf /var/lib/apt/lists/* /tmp/ros-packages.txt
+    && xargs -a /tmp/ros-tooling-packages.txt apt-get install -y --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/* /tmp/ros-packages.txt /tmp/ros-tooling-packages.txt
 
 # ---------------------------------------------------------------------------
 # Non-ROS packages the project actually uses
@@ -104,7 +112,19 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Python packages that are not packaged for 22.04.
-RUN python3 -m pip install --no-cache-dir "setuptools<66" "pytest>=7,<9" ruff
+#
+# pip and setuptools are upgraded FIRST and deliberately. Ubuntu 22.04 ships
+# pip 22.0.2 with a setuptools too old to provide PEP 660's `build_editable`
+# hook, and `pip install -e` on a pyproject-only project then fails with
+# "build backend is missing the 'build_editable' hook". This is what broke the
+# first build of this image.
+#
+# setuptools is NOT capped. The usual reason to cap it below 66 on Humble is
+# `setup.py develop` breaking in ament_python packages -- vla_bringup is
+# ament_cmake and every ROS package here comes from apt, so nothing in this
+# image builds through setup.py.
+RUN python3 -m pip install --no-cache-dir --upgrade pip setuptools wheel \
+    && python3 -m pip install --no-cache-dir "pytest>=7,<9" ruff
 
 # ---------------------------------------------------------------------------
 # The project
@@ -132,7 +152,18 @@ RUN mkdir -p /opt/vla/logs /opt/vla/models
 
 # Install the five packages in editable mode so the mounted source wins at run
 # time while the entry points (vla-agent, vla-brain, ...) are on PATH.
-RUN python3 -m pip install --no-cache-dir -e /opt/vla/src
+#
+# --no-deps IS LOAD-BEARING. Without it pip resolves this project's declared
+# dependencies and replaced apt's numpy 1.21.5 with numpy 2.2.6 and installed
+# opencv-python 5.0.0.93 over python3-opencv. The ROS Humble Python extensions
+# are built against numpy 1.x, so a numpy 2 ABI underneath rclpy and cv_bridge
+# is a real hazard, and the recorded container ran numpy 1.26.4
+# (env/pip-freeze_ubuntu22-gpu.txt). numpy is therefore pinned to that exact
+# version and everything else comes from apt: python3-opencv provides cv2, and
+# apt's python3-requests is 2.25.1, which is what the manifest records.
+RUN python3 -m pip install --no-cache-dir "numpy==1.26.4" \
+    && python3 -m pip install --no-cache-dir --no-deps -e /opt/vla/src \
+    && python3 -c "import numpy, cv2; print('numpy', numpy.__version__, '/ cv2', cv2.__version__)"
 
 # Build vla_bringup so `ros2 launch vla_bringup robot.launch.py` works.
 # The symlink matters: CMakeLists resolves the repository root by realpath'ing

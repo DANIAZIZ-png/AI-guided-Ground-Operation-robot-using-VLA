@@ -42,7 +42,35 @@ SRC = os.path.join(REPO, "src")
 SCALARS = (bool, int, float, str, bytes, type(None))
 
 
+def _portable(s: str) -> str:
+    """Replace machine-specific prefixes with placeholders.
+
+    WHY THIS EXISTS
+        Some module-level constants are absolute paths derived from VLA_ROOT --
+        LOG_DIR and SAVE_MAP_PATH. Recording them verbatim makes the baseline
+        valid only on the machine that produced it: on any clone at a different
+        path the gate reports them as CHANGED and `make test` fails for a reason
+        that has nothing to do with the code. Found by review on a second
+        machine, which is exactly where it would bite.
+
+        Applied on BOTH sides -- when writing a snapshot and when comparing --
+        so an old baseline and a new snapshot normalise to the same text.
+
+        Longest prefix first: VLA_ROOT is usually inside HOME, and replacing
+        HOME first would leave "$HOME/repos/..." instead of "$VLA_ROOT".
+    """
+    for value, placeholder in (
+        (os.environ.get("VLA_ROOT") or REPO, "$VLA_ROOT"),
+        (os.path.expanduser("~"), "$HOME"),
+    ):
+        if value and value != "/" and value in s:
+            s = s.replace(value, placeholder)
+    return s
+
+
 def _value(v):
+    if isinstance(v, str):
+        return {"type": "str", "value": _portable(v)}
     if isinstance(v, SCALARS):
         return {"type": type(v).__name__, "value": v if not isinstance(v, bytes) else v.hex()}
     if isinstance(v, (list, tuple, set, frozenset)):
