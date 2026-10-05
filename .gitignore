@@ -43,3 +43,6 @@ Videos/
 *.swp
 *~
 .DS_Store
+
+# tool venv created by `make setup` (podman-compose); not part of the project
+.venv-tools/
