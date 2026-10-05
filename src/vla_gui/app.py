@@ -53,6 +53,33 @@ import threading
 import time
 # timestamps for the conversation log and timeouts for the health probes
 
+# ── make the repository's own paths available to every child process ────────
+# The launch steps in the config refer to $VLA_ROOT, $VLA_LAUNCH_DIR and
+# $VLA_TOOLS_DIR. Popen inherits this process's environment, so exporting them
+# here is what lets a step stand on its own.
+#
+# It is done defensively because the GUI can be started directly
+# (`python3 src/vla_gui_v2.py`) rather than through vla_demo.sh or vla_robot.sh,
+# which source config/paths.sh first. setdefault, so an explicit value from the
+# caller or from config/.env still wins.
+try:
+    import vla_paths as _vp
+
+    for _name, _value in (
+        ("VLA_ROOT", _vp.VLA_ROOT),
+        ("VLA_CONFIG_DIR", _vp.CONFIG_DIR),
+        ("VLA_SRC_DIR", _vp.SRC_DIR),
+        ("VLA_TOOLS_DIR", _vp.TOOLS_DIR),
+        ("VLA_LAUNCH_DIR", _vp.LAUNCH_DIR),
+        ("VLA_MAP_DIR", _vp.MAP_DIR),
+        ("VLA_LOG_DIR", _vp.LOG_DIR),
+        ("VLA_MODEL_DIR", _vp.MODEL_DIR),
+    ):
+        os.environ.setdefault(_name, _value)
+except Exception as _e:                                    # pragma: no cover
+    print(f"[warn] could not resolve the VLA_* paths ({_e}); "
+          "launch steps that use them will fail")
+
 # VLA_GUI_CONFIG overrides this. The default stays ~/.vla_gui.json so an
 # existing installation keeps the config it already has -- vla_demo.sh copies
 # config/vla_gui.robot.json over it when switching to hardware.
