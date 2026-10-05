@@ -1,6 +1,6 @@
 # redock.py -- dock the real robot from a LONG-LIVED action client (8 Sep 2026).
-# Run inside ubuntu22-gpu after: source ~/robot_env.sh
-#   python3 ~/redock.py
+# Run inside ubuntu22-gpu after: source config/robot.env
+#   python3 scripts/redock.py
 # Drives with Nav2 to a staging pose 0.6 m in front of the dock, then runs the
 # Dock action. Waits 30 s after creating its clients before the first call,
 # because a freshly started client gets its replies dropped for up to ~20 s on

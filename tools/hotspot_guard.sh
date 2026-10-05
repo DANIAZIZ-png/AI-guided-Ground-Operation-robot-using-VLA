@@ -8,12 +8,12 @@
 # vla_run_20260922_081537.log: five stalls 08:17:25-08:18:10, ~40 s in total,
 # with the Pi at 60 C and no DDS storm). The hotspot exists for the robot only.
 #
-#   bash ~/vla_tools/hotspot_guard.sh status       who is on the hotspot + 5 s throughput (no root)
-#   sudo bash ~/vla_tools/hotspot_guard.sh apply   block internet for every client except the robot
+#   bash tools/hotspot_guard.sh status       who is on the hotspot + 5 s throughput (no root)
+#   sudo bash tools/hotspot_guard.sh apply   block internet for every client except the robot
 #                                                  and kick the others off now (they may rejoin: harmless, no internet)
-#   sudo bash ~/vla_tools/hotspot_guard.sh install apply + re-apply automatically whenever the hotspot
+#   sudo bash tools/hotspot_guard.sh install apply + re-apply automatically whenever the hotspot
 #                                                  comes up (NetworkManager dispatcher; survives reboots)
-#   sudo bash ~/vla_tools/hotspot_guard.sh off     remove the block and the auto re-apply
+#   sudo bash tools/hotspot_guard.sh off     remove the block and the auto re-apply
 #
 # The block is an nftables table of its own (inet vla_hotspot) and leaves
 # NetworkManager's own sharing rules alone. Only the robot (10.42.0.169,

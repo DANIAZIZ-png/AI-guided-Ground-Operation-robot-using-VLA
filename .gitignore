@@ -1,3 +1,11 @@
+# --- runtime output directories (VLA_LOG_DIR / VLA_MODEL_DIR defaults) ---
+/logs/
+/models/
+/sim_objects/
+
+# --- local overrides ---
+config/.env
+
 # --- model weights: never commit (hashes are in README.md and env/MANIFEST.md) ---
 *.pt
 *.pth

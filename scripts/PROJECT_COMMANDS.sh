@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+# Reference sheet. Source it to get the VLA_* paths used in the snippets below:
+#   source scripts/PROJECT_COMMANDS.sh
+VLA_ROOT="${VLA_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")/.." && pwd)}"
+source "$VLA_ROOT/config/paths.sh"
+VLA_YOLO_ENV="${VLA_YOLO_ENV:-$HOME/yolo-env}"
 # =====================================================================
 #  PROJECT COMMAND CHEAT SHEET
 #  AI-Guided Ground Operations Robot (VLA)  -  Danyal Aziz
@@ -60,7 +65,7 @@ ros2 launch turtlebot4_ignition_bringup turtlebot4_ignition.launch.py \
 # (B) LOCALIZATION mode - uses a SAVED map (the reliable demo). After it
 #     loads, set the start pose with "2D Pose Estimate" in RViz:
 ros2 launch turtlebot4_ignition_bringup turtlebot4_ignition.launch.py \
-  model:=lite slam:=false localization:=true map:=$HOME/warehouse_map.yaml \
+  model:=lite slam:=false localization:=true map:=$VLA_MAP_DIR/warehouse_map.yaml \
   nav2:=true rviz:=true
 
 # See all valid launch arguments  (if an arg above is rejected):
@@ -70,8 +75,8 @@ ros2 launch turtlebot4_ignition_bringup turtlebot4_ignition.launch.py --show-arg
 # ---------------------------------------------------------------------
 #  4. START THE YOLO-WORLD DETECTION SERVER     [vla-box]
 # ---------------------------------------------------------------------
-source ~/yolo-env/bin/activate
-python ~/yolo_server.py          # serves detections on port 5001
+source $VLA_YOLO_ENV/bin/activate
+python $VLA_SRC_DIR/yolo_server.py          # serves detections on port 5001
 
 
 # ---------------------------------------------------------------------
@@ -80,48 +85,48 @@ python ~/yolo_server.py          # serves detections on port 5001
 # WARNING: OpenVLA uses ~15 GB and CANNOT run at the same time as
 # Gazebo. Use it only for the baseline test, then kill it (step 2)
 # BEFORE launching Gazebo.
-source ~/openvla-env/bin/activate
-python ~/vla_server.py           # serves on port 5000
+source $HOME/openvla-env/bin/activate   # archived baseline, host venv
+python $VLA_ROOT/archive/experiments/vla_server.py           # serves on port 5000
 
 
 # ---------------------------------------------------------------------
 #  6. GIVE A LANGUAGE COMMAND   [ubuntu22-gpu]  (Gazebo + YOLO must be up)
 # ---------------------------------------------------------------------
 # Drive to a named object (reliable, single-goal navigator):
-python3 ~/object_navigator.py go to the chair
+python3 $VLA_ROOT/archive/experiments/object_navigator.py go to the chair
 
 # Search + map + drive (active explorer that looks for the target):
-python3 ~/object_explorer.py go to the red box
+python3 $VLA_ROOT/archive/experiments/object_explorer.py go to the red box
 
 
 # ---------------------------------------------------------------------
 #  7. PUT OBJECTS IN THE WORLD   [ubuntu22-gpu]  (after Gazebo is up)
 # ---------------------------------------------------------------------
 # One-time: make the folder for the object models:
-mkdir -p ~/sim_objects
+mkdir -p "${VLA_SIM_OBJ_DIR:-$VLA_ROOT/sim_objects}"
 
 # Check the model files are present:
-ls ~/sim_objects
+ls "${VLA_SIM_OBJ_DIR:-$VLA_ROOT/sim_objects}"
 
 # Spawn the objects (cup, red box, door) into the running world:
-python3 ~/spawn_objects.py
+python3 $VLA_TOOLS_DIR/spawn_objects.py
 
 
 # ---------------------------------------------------------------------
 #  8. RESET / TELEPORT THE ROBOT   [ubuntu22-gpu]
 # ---------------------------------------------------------------------
 # Move robot to x, y, yaw(radians) in BOTH Gazebo and RViz:
-python3 ~/reset_robot.py 1.5 2.0 1.57
+python3 $VLA_TOOLS_DIR/reset_robot.py 1.5 2.0 1.57
 
 # Send it back to the origin:
-python3 ~/reset_robot.py
+python3 $VLA_TOOLS_DIR/reset_robot.py
 
 
 # ---------------------------------------------------------------------
 #  9. SAVE THE MAP   [ubuntu22-gpu]   (after exploring in SLAM mode)
 # ---------------------------------------------------------------------
 # Saves ~/warehouse_map.yaml + ~/warehouse_map.pgm :
-ros2 run nav2_map_server map_saver_cli -f ~/warehouse_map
+ros2 run nav2_map_server map_saver_cli -f $VLA_MAP_DIR/warehouse_map
 
 
 # ---------------------------------------------------------------------
@@ -160,17 +165,17 @@ sudo apt install ros-humble-tf2-geometry-msgs
 #     distrobox enter ubuntu22-gpu
 #     source /opt/ros/humble/setup.bash
 #     ros2 launch turtlebot4_ignition_bringup turtlebot4_ignition.launch.py \
-#       model:=lite slam:=false localization:=true map:=$HOME/warehouse_map.yaml \
+#       model:=lite slam:=false localization:=true map:=$VLA_MAP_DIR/warehouse_map.yaml \
 #       nav2:=true rviz:=true
 #
 #  TERMINAL 2  [vla-box]  - detection server
 #     distrobox enter vla-box
-#     source ~/yolo-env/bin/activate
-#     python ~/yolo_server.py
+#     source $VLA_YOLO_ENV/bin/activate
+#     python $VLA_SRC_DIR/yolo_server.py
 #
 #  TERMINAL 3  [ubuntu22-gpu]  - put objects in + give the command
 #     distrobox enter ubuntu22-gpu
 #     source /opt/ros/humble/setup.bash
-#     python3 ~/spawn_objects.py
-#     python3 ~/object_navigator.py go to the chair
+#     python3 $VLA_TOOLS_DIR/spawn_objects.py
+#     python3 $VLA_ROOT/archive/experiments/object_navigator.py go to the chair
 # =====================================================================

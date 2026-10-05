@@ -1,10 +1,10 @@
 {
   "_comment": [
     "SIMULATION launch config for vla_gui_v2.py.",
-    "Save as ~/.vla_gui.json  (keep ~/.vla_gui.json.robot for the real robot).",
+    "Lives at config/vla_gui.sim.json; vla_sim.sh copies it into place.",
     "",
     "WHY EVERY STEP RE-SETS ITS OWN ENV:",
-    "  The GUI passes its own environment to every child process. ~/.bashrc",
+    "  The GUI passes its own environment to every child process. The shell rc",
     "  sets the Pi's discovery-server vars in every new terminal, so if the",
     "  GUI was started from a terminal that had them, Gazebo inherits them,",
     "  registers with a server that is not there, and discovers NOTHING --",
@@ -19,7 +19,7 @@
     "STEPS 1 AND 2 ARE DISABLED:",
     "  distrobox-host-exec returns exit 127 from inside ubuntu22-gpu, so the",
     "  GUI cannot reach the host or vla-box. Start those two by hand:",
-    "    YOLO   (in vla-box): source ~/yolo-env/bin/activate && python ~/yolo_server.py",
+    "    YOLO   (in vla-box): source $VLA_YOLO_ENV/bin/activate && python $VLA_SRC_DIR/yolo_server.py",
     "    Ollama (on host)   : ollama serve",
     "",
     "where: here | host | box:<name>    probe: port:<n> | topic:<n> | none"
@@ -29,7 +29,7 @@
     {
       "name": "YOLO-World server (START BY HAND in vla-box)",
       "where": "box:vla-box",
-      "cmd": "source ~/yolo-env/bin/activate && python ~/yolo_server.py",
+      "cmd": "source $VLA_YOLO_ENV/bin/activate && python $VLA_SRC_DIR/yolo_server.py",
       "probe": "port:5001",
       "wait_s": 120,
       "enabled": false
@@ -45,7 +45,7 @@
     {
       "name": "Gazebo + SLAM + Nav2 (sim)",
       "where": "here",
-      "cmd": "bash ~/run_sim_stack.sh",
+      "cmd": "bash $VLA_ROOT/scripts/run_sim_stack.sh",
       "probe": "topic:/clock",
       "wait_s": 300,
       "enabled": true,
@@ -54,7 +54,7 @@
     {
       "name": "VLA agent (v28, sim)",
       "where": "here",
-      "cmd": "bash ~/run_agent_sim.sh",
+      "cmd": "bash $VLA_ROOT/scripts/run_agent_sim.sh",
       "probe": "topic:/vla/status",
       "wait_s": 120,
       "enabled": true,
@@ -63,7 +63,7 @@
     {
       "name": "Voice input (Whisper, push-to-talk)",
       "where": "here",
-      "cmd": "unset ROS_DOMAIN_ID FASTRTPS_DEFAULT_PROFILES_FILE ROS_DISCOVERY_SERVER && export VLA_NS='' && cd ~ && python3 voice_command.py --mode ptt --mic pulse --device cpu --compute int8",
+      "cmd": "unset ROS_DOMAIN_ID FASTRTPS_DEFAULT_PROFILES_FILE ROS_DISCOVERY_SERVER && export VLA_NS='' && cd $VLA_ROOT && python3 $VLA_SRC_DIR/voice_command.py --mode ptt --mic pulse --device cpu --compute int8",
       "probe": "topic:/vla/voice/state",
       "wait_s": 240,
       "enabled": true,

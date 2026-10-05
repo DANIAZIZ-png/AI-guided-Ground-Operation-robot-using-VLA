@@ -93,6 +93,8 @@ from PIL import Image                        # image decoding
 from flask import Flask, request, jsonify    # the HTTP server itself
 from ultralytics import YOLO                 # YOLO-World implementation
 
+import vla_paths                             # VLA_ROOT-derived paths
+
 # ── What the robot can recognise (open-vocabulary — edit freely) ──
 # #19: "docking station"/"charging dock" are IN the list so the dock stops
 # being forced into "chair". Keep them even if you never ask about the dock —
@@ -148,7 +150,10 @@ MIN_BOX_AREA = float(os.environ.get("YOLO_MIN_AREA", 100.0))  # px^2; drop tiny 
 
 # ── Load YOLO-World ONCE ──
 print("Loading YOLO-World model...")
-model = YOLO("yolov8s-world.pt")             # weights load onto the CPU here
+model = YOLO(vla_paths.model_path("yolov8s-world.pt"))   # weights load onto the CPU here
+# model_path() returns $VLA_MODEL_DIR/yolov8s-world.pt when that file exists and
+# the bare name otherwise, so a checkout without a models/ directory behaves
+# exactly as before (ultralytics resolves it against the working directory).
 model.set_classes(CLASSES)                   # works: nothing is on the GPU yet (#21)
 _model_lock = threading.Lock()               # the model is ONE shared GPU object
 
@@ -225,7 +230,7 @@ def set_classes():
             "error": "live vocabulary change is not supported on this build",
             "detail": err,
             "workaround": ('restart the server with the vocabulary you want: '
-                           'YOLO_CLASSES="person,box,chair" python ~/yolo_server.py'),
+                           'YOLO_CLASSES="person,box,chair" python src/yolo_server.py'),
             "classes": CLASSES,                # what is STILL in force
         }), 503                                # 503, not 500: server is healthy
 

@@ -1,7 +1,7 @@
 # Grab ONE live compressed frame from the OAK-D and POST it to yolo_server.
 # The compressed topic is already JPEG, so it goes straight to base64.
 # Sensor QoS is BEST_EFFORT (agent fix #39) -- a RELIABLE subscriber gets nothing.
-import base64, json, sys, time
+import base64, json, os, sys, time
 import rclpy
 from rclpy.node import Node
 from rclpy.qos import qos_profile_sensor_data
@@ -10,8 +10,14 @@ import requests
 
 def log(m): print(time.strftime("%H:%M:%S"), m, flush=True)
 
-TOPIC = '/robot1/oakd/rgb/preview/image_raw/compressed'
-OUT = '/home/danyalaziz/vla_logs/yolo_live_frame.jpg'
+# VLA_NS matches the namespace set by config/robot.env (/robot1) or config/sim.env
+# (empty). VLA_LOG_DIR defaults to <repo>/logs -- see config/paths.sh.
+NS = os.environ.get('VLA_NS', '/robot1')
+TOPIC = f'{NS}/oakd/rgb/preview/image_raw/compressed'
+LOG_DIR = os.environ.get('VLA_LOG_DIR') or os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'logs')
+os.makedirs(LOG_DIR, exist_ok=True)
+OUT = os.path.join(LOG_DIR, 'yolo_live_frame.jpg')
 
 rclpy.init()
 n = Node('vla_yolo_live_test')

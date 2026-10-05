@@ -302,6 +302,8 @@ import sys
 import threading
 import time
 
+import vla_paths              # VLA_ROOT-derived paths; see src/vla_paths.py
+
 # ── #63 HEADLESS-SAFE CONSOLE OUTPUT ───────────────────────────────
 # BUG THIS FIXES, observed through the operator console:
 #     ROBOT [undock] Undocking.
@@ -818,8 +820,9 @@ SYNC_WARN_S    = 6.0        # warn if raw frames flow but no synced pair after t
 # #15: don't spam "server down" more than once per this many seconds
 YOLO_ERR_PERIOD = 10.0
 
-# #14: mission logs (thesis evidence) live here, one file per run
-LOG_DIR = os.path.expanduser("~/vla_logs")
+# #14: mission logs (thesis evidence) live here, one file per run.
+# VLA_LOG_DIR (config/paths.sh) wins; otherwise <repo>/logs.
+LOG_DIR = vla_paths.LOG_DIR
 
 # #9 relative move
 BLOCK_SIZE   = 1.0          # metres per "block" (brain already converts; here for reference)
@@ -859,7 +862,7 @@ TURN_WEIGHT    = 1.5        # how strongly to prefer frontiers ahead (m of cost 
 BIN_SIZE         = 0.5
 MIN_FRONTIER     = 4
 BLACKLIST_RADIUS = 0.8
-SAVE_MAP_PATH    = os.path.expanduser("~/warehouse_map")
+SAVE_MAP_PATH    = os.path.join(vla_paths.MAP_DIR, "warehouse_map")
 
 STUCK_DIST = 0.10      # moved less than this...
 STUCK_TIME = 15.0      # ...for this many seconds while driving = stuck

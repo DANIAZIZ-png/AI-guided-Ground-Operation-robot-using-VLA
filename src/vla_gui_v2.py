@@ -37,7 +37,7 @@ import html
 import json
 # reads/writes the launch config file and parses the /vla/status JSON packet
 import os
-# used for expanding ~ into /home/danyalaziz and for killing process groups
+# used for expanding ~ into the home directory and for killing process groups
 import shutil
 # shutil.which() checks whether a program (distrobox-host-exec, gedit) exists
 import signal
@@ -53,7 +53,10 @@ import threading
 import time
 # timestamps for the conversation log and timeouts for the health probes
 
-CONFIG_PATH = os.path.expanduser("~/.vla_gui.json")
+# VLA_GUI_CONFIG overrides this. The default stays ~/.vla_gui.json so an
+# existing installation keeps the config it already has -- vla_demo.sh copies
+# config/vla_gui.robot.json over it when switching to hardware.
+CONFIG_PATH = os.environ.get("VLA_GUI_CONFIG") or os.path.expanduser("~/.vla_gui.json")
 # the launch config lives in your home folder, NOT inside this file, so you can edit it
 GUI_VERSION = "vla_gui v2"
 # printed in the window title so you can prove at a glance which version is running
@@ -82,7 +85,7 @@ VOICE_STATE    = "/vla/voice/state"
 
 
 # ─────────────────────────────────────────────────────────────────
-#  DEFAULT LAUNCH STEPS — only used if ~/.vla_gui.json does not exist
+#  DEFAULT LAUNCH STEPS — only used if the config file does not exist
 # ─────────────────────────────────────────────────────────────────
 DEFAULT_CONFIG = {
     "_comment": [
@@ -97,7 +100,7 @@ DEFAULT_CONFIG = {
         {
             "name": "YOLO-World server",
             "where": "box:vla-box",
-            "cmd": "source ~/yolo-env/bin/activate && python ~/yolo_server.py",
+            "cmd": "source $VLA_YOLO_ENV/bin/activate && python $VLA_SRC_DIR/yolo_server.py",
             "probe": "port:5001",
             "wait_s": 120,
             "enabled": True,
@@ -124,7 +127,7 @@ DEFAULT_CONFIG = {
         {
             "name": "Spawn demo objects",
             "where": "here",
-            "cmd": "python3 ~/spawn_objects.py",
+            "cmd": "python3 $VLA_TOOLS_DIR/spawn_objects.py",
             "probe": "none",
             "wait_s": 60,
             "enabled": True,
@@ -154,7 +157,7 @@ DEFAULT_CONFIG = {
 
 
 def load_config():
-    """Read ~/.vla_gui.json, creating it from the defaults on first run."""
+    """Read CONFIG_PATH, creating it from the defaults on first run."""
     if not os.path.exists(CONFIG_PATH):
         # nothing saved yet -> this is the very first launch on this machine
         with open(CONFIG_PATH, "w") as f:
@@ -558,7 +561,7 @@ def build_gui():
             self.resize(1500, 900)
 
             self.cfg = load_config()
-            # read ~/.vla_gui.json
+            # read CONFIG_PATH
             self.sim_mode = bool(self.cfg.get("sim_mode", True))
             # simulation or real robot - decides which steps are shown
             self.steps = []

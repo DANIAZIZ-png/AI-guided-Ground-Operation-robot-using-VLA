@@ -1,8 +1,14 @@
 #!/bin/bash
+# Resolve the repository root from this script's own location, so the script
+# works from any working directory and from a clone anywhere on disk.
+VLA_ROOT="${VLA_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")/.." && pwd)}"
+source "$VLA_ROOT/config/paths.sh"
+VLA_YOLO_ENV="${VLA_YOLO_ENV:-$HOME/yolo-env}"
+VLA_GUI_CONFIG="${VLA_GUI_CONFIG:-$HOME/.vla_gui.json}"
 # ─────────────────────────────────────────────────────────────────
 #  vla_sim.sh — ONE COMMAND to bring up the whole SIMULATION demo
 #
-#  RUN:  ~/vla_sim.sh          (in ubuntu22-gpu, from any terminal)
+#  RUN:  scripts/vla_sim.sh          (in ubuntu22-gpu, from any terminal)
 #
 #  This is the BACKUP DEMO. It must work when the robot is in pieces on
 #  the bench, so it owns its whole world and assumes nothing about the
@@ -60,10 +66,10 @@ export VLA_RAW_DEPTH=1
 # nothing and the agent reports "I see: nothing" while the camera is fine.
 
 # ── 2. clear everything, and PROVE it ────────────────────────────
-if [ -x ~/vla_kill.sh ]; then
-    ~/vla_kill.sh || { echo "STOP: old stack survived. Kill those PIDs first."; exit 1; }
+if [ -x "$VLA_ROOT/scripts/vla_kill.sh" ]; then
+    "$VLA_ROOT/scripts/vla_kill.sh" || { echo "STOP: old stack survived. Kill those PIDs first."; exit 1; }
 else
-    echo "STOP: ~/vla_kill.sh missing or not executable (chmod +x it)."; exit 1
+    echo "STOP: $VLA_ROOT/scripts/vla_kill.sh missing or not executable (chmod +x it)."; exit 1
 fi
 
 echo "sim" > "$LOCK"
@@ -76,7 +82,7 @@ if ! curl -s --max-time 3 http://localhost:5001/ >/dev/null 2>&1; then
     echo "  !! YOLO-World is NOT running — detection will not work."
     echo "     In a vla-box terminal:"
     echo "       distrobox enter vla-box"
-    echo "       source ~/yolo-env/bin/activate && python ~/yolo_server.py"
+    echo "       source $VLA_YOLO_ENV/bin/activate && python $VLA_SRC_DIR/yolo_server.py"
     echo ""
     read -p "  Press ENTER once YOLO is up (or Ctrl-C to abort)... " _
 fi
@@ -164,7 +170,7 @@ wait_for_topic /oakd/rgb/preview/image_raw 60 "the camera" || \
 # ── 5. the VLA agent ─────────────────────────────────────────────
 echo ""
 echo "[2/4] Starting the VLA agent  (log: $LOG/agent.log)"
-AGENT=~/vla_agent_v28.py                 # change this ONE line for a new version
+AGENT="$VLA_SRC_DIR/vla_agent_v28.py"                 # change this ONE line for a new version
 [ -f "$AGENT" ] || { echo "STOP: $AGENT not found."; rm -f "$LOCK"; exit 1; }
 
 # #60 MANUAL OVERRIDE NEEDS A REAL TTY -- see the long note in vla_robot.sh.
@@ -195,15 +201,15 @@ fi
 if ! wait_for_topic /vla/status 90 "the agent (/vla/status)"; then
     echo "  Agent did not come up. Errors are in the AGENT WINDOW."
     [ -s "$LOG/agent.log" ] && { echo "  (headless-fallback log:)"; tail -30 "$LOG/agent.log"; }
-    echo "  Mission log: ~/vla_logs/"
+    echo "  Mission log: $VLA_LOG_DIR/"
     rm -f "$LOCK"; exit 1
 fi
 
 # ── 6. voice ─────────────────────────────────────────────────────
 echo ""
 echo "[3/4] Starting voice input  (log: $LOG/voice.log)"
-if [ -f ~/voice_command.py ]; then
-    setsid python3 -u ~/voice_command.py --mode ptt --mic pulse \
+if [ -f "$VLA_SRC_DIR/voice_command.py" ]; then
+    setsid python3 -u "$VLA_SRC_DIR/voice_command.py" --mode ptt --mic pulse \
            --device cpu --compute int8 > "$LOG/voice.log" 2>&1 &
     # -u: without it Python buffers stdout into the log file and voice.log stays
     # EMPTY while it runs, so a hung step cannot be diagnosed (§8.6).
@@ -215,14 +221,14 @@ if [ -f ~/voice_command.py ]; then
     wait_for_publisher /vla/voice/state 60 "the voice node" || \
         echo "  (voice not ready — text commands still work)"
 else
-    echo "  ~/voice_command.py not found — skipping voice."
+    echo "  $VLA_SRC_DIR/voice_command.py not found — skipping voice."
 fi
 
 # ── 7. the GUI, last ─────────────────────────────────────────────
 echo ""
 echo "[4/4] Starting the operator console"
-[ -f ~/.vla_gui.sim.json ] && cp ~/.vla_gui.sim.json ~/.vla_gui.json
-# the GUI only reads ~/.vla_gui.json; the mode's config is copied in
+[ -f "$VLA_CONFIG_DIR/vla_gui.sim.json" ] && cp "$VLA_CONFIG_DIR/vla_gui.sim.json" "$VLA_GUI_CONFIG"
+# the GUI reads VLA_GUI_CONFIG (default ~/.vla_gui.json); the mode's config is copied in
 # ── 7b. RViz — the map view for the audience ─────────────────────
 RVIZ_CFG=/opt/ros/humble/share/turtlebot4_viz/rviz/robot.rviz
 # the stock TurtleBot 4 config: map, laser scan, robot model and TF are
@@ -258,16 +264,16 @@ echo "  Try:  what do you see  |  go to the chair"
 echo "  Feed: press 'Show feed'"
 echo "  Map:  the RViz window — the robot's live map of the room"
 echo "  Logs: $LOG/"
-echo "  Stop: ~/vla_kill.sh"
+echo "  Stop: $VLA_ROOT/scripts/vla_kill.sh"
 echo "═══════════════════════════════════════════════════"
 echo ""
 
-python3 ~/vla_gui_v2.py
+python3 "$VLA_SRC_DIR/vla_gui_v2.py"
 # runs in the foreground: closing the GUI returns you to this prompt.
 # The stack keeps running (each part is in its own session via setsid),
 # so you can reopen the GUI without rebuilding anything.
 
 echo ""
 echo "GUI closed. The simulation is STILL RUNNING."
-echo "  reopen the console:  python3 ~/vla_gui_v2.py"
-echo "  stop everything:     ~/vla_kill.sh"
+echo "  reopen the console:  python3 $VLA_SRC_DIR/vla_gui_v2.py"
+echo "  stop everything:     $VLA_ROOT/scripts/vla_kill.sh"

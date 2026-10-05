@@ -1,5 +1,5 @@
 # nav_goal.py X Y YAW_DEG -- send one Nav2 goal from a LONG-LIVED client.
-# Same settle pattern as ~/redock.py (fresh clients get their replies dropped).
+# Same settle pattern as scripts/redock.py (fresh clients get their replies dropped).
 # THE ROBOT MOVES.
 import sys, math, time
 import rclpy

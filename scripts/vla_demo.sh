@@ -37,11 +37,18 @@
 #     robot tools here are all long-lived clients (30 s settle)
 # =============================================================================
 set -u
-H=/home/danyalaziz
-T=$H/vla_tools
-LOGDIR=$H/vla_logs
+VLA_ROOT="${VLA_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")/.." && pwd)}"
+source "$VLA_ROOT/config/paths.sh"
+# Host venv for the detector. Phase 3 replaces it with a container image;
+# until then it is where it always was, and overridable.
+VLA_YOLO_ENV="${VLA_YOLO_ENV:-$HOME/yolo-env}"
+# The GUI reads this file at startup; the stage below copies the hardware
+# config over it. Default matches what vla_gui_v2.py expects.
+VLA_GUI_CONFIG="${VLA_GUI_CONFIG:-$HOME/.vla_gui.json}"
+T="$VLA_TOOLS_DIR"
+LOGDIR="$VLA_LOG_DIR"
 DAY=$(date +%Y%m%d)
-PI=10.42.0.169
+PI=${VLA_ROBOT_IP:-10.42.0.169}
 mkdir -p "$LOGDIR"
 DEMOLOG=$LOGDIR/demo_${DAY}_$(date +%H%M%S).log
 T0=$(date +%s)
@@ -70,13 +77,13 @@ die()  {
 # own pty and kills what was started inside (the ROS daemon!) when the call
 # returns -- the demo aborted at stage 2 every time it was run from a real
 # terminal (17 Sep). Without a tty the daemon survives.
-ros() { distrobox enter ubuntu22-gpu -- bash -c "source $H/robot_env.sh; $1" < /dev/null 2>&1; }
+ros() { distrobox enter ubuntu22-gpu -- bash -c "source $VLA_ROOT/config/robot.env; $1" < /dev/null 2>&1; }
 # open a launcher script in its own xterm inside ubuntu22-gpu.
 #   xwin TITLE SCRIPT [iconic|visible] [extra xterm args]
 xwin() {
   local title=$1 script=$2 mode=${3:-iconic}; shift 3 || true
   local icon=""; [ "$mode" = iconic ] && icon="-iconic"
-  ( cd "$H" && nohup distrobox enter ubuntu22-gpu -- setsid xterm $icon "$@" -T "$title" -e bash "$script" < /dev/null >/dev/null 2>&1 & )
+  ( cd "$VLA_ROOT" && nohup distrobox enter ubuntu22-gpu -- setsid xterm $icon "$@" -T "$title" -e bash "$script" < /dev/null >/dev/null 2>&1 & )
 }
 # wait_for SECONDS "description" command...   (command runs on the host; success = exit 0)
 wait_for() {
@@ -120,21 +127,21 @@ ok "STAGE 0/13  host OK, both containers OK, robot reachable"
 
 # =============================================================================
 say "STAGE 1/13  Pi gate (load, temperature, throttling, ROS nodes)"
-PIINFO=$(timeout 40 ssh -o ConnectTimeout=15 -o BatchMode=yes ubuntu@$PI \
+PIINFO=$(timeout 40 ssh -o ConnectTimeout=15 -o BatchMode=yes ${VLA_ROBOT_USER:-ubuntu}@$PI \
   'echo "LOAD=$(cut -d" " -f1 /proc/loadavg) TEMP=$(vcgencmd measure_temp | tr -dc 0-9.) THR=$(vcgencmd get_throttled | cut -d= -f2) NODES=$(pgrep -c -f __node:=) UP=$(cut -d. -f1 /proc/uptime)"' 2>/dev/null)
-[ -n "$PIINFO" ] || die 1 "ssh to ubuntu@$PI answered nothing (key-based ssh from the host is required)."
+[ -n "$PIINFO" ] || die 1 "ssh to ${VLA_ROBOT_USER:-ubuntu}@$PI answered nothing (key-based ssh from the host is required)."
 eval "$PIINFO"
 say "        Pi: load $LOAD, ${TEMP} C, throttled=$THR, ROS nodes $NODES, up ${UP}s"
 awk -v t="$TEMP" 'BEGIN{exit !(t < 80)}' || die 1 "Pi is at ${TEMP} C (limit 80). Let it cool; check nothing is flooding the link."
 case "$THR" in *0) ;; *) die 1 "Pi throttled=$THR (must end in 0): it is thermally or power limited RIGHT NOW." ;; esac
 if awk -v l="$LOAD" 'BEGIN{exit !(l >= 2.5)}'; then
-  die 1 "Pi load is $LOAD (limit 2.5). Something is already loading the Pi -- reboot it (ssh ubuntu@$PI sudo reboot) and retry."
+  die 1 "Pi load is $LOAD (limit 2.5). Something is already loading the Pi -- reboot it (ssh ${VLA_ROBOT_USER:-ubuntu}@$PI sudo reboot) and retry."
 elif awk -v l="$LOAD" 'BEGIN{exit !(l >= 1.5)}'; then
   warn "Pi load $LOAD is above the 1.5 guideline (fine right after a boot; suspicious otherwise)."
 fi
 if [ "$NODES" -lt 6 ]; then
   say "        only $NODES ROS nodes on the Pi yet -- waiting up to 120 s for its bring-up"
-  wait_for 120 "pi nodes" bash -c "[ \$(timeout 10 ssh -o BatchMode=yes ubuntu@$PI 'pgrep -c -f __node:=' 2>/dev/null || echo 0) -ge 6 ]" \
+  wait_for 120 "pi nodes" bash -c "[ \$(timeout 10 ssh -o BatchMode=yes ${VLA_ROBOT_USER:-ubuntu}@$PI 'pgrep -c -f __node:=' 2>/dev/null || echo 0) -ge 6 ]" \
     || die 1 "the Pi's ROS nodes did not come up (fewer than 6 after 2 min). Check turtlebot4.service on the Pi."
 fi
 ok "STAGE 1/13  Pi gate passed"
@@ -168,7 +175,7 @@ if ! see_robot; then
   # half-deaf to Wi-Fi clients (topics visible, no node names, no data; the Pi
   # itself sees everything). Restarting its two services fixed it in ~90 s.
   warn "no robot nodes visible -- restarting discovery.service + turtlebot4.service on the Pi (once), ~90 s"
-  timeout 60 ssh -o BatchMode=yes ubuntu@$PI 'sudo -n systemctl restart discovery.service turtlebot4.service' 2>/dev/null \
+  timeout 60 ssh -o BatchMode=yes ${VLA_ROBOT_USER:-ubuntu}@$PI 'sudo -n systemctl restart discovery.service turtlebot4.service' 2>/dev/null \
     || die 2 "could not restart the Pi's services over ssh (needs passwordless sudo on the Pi)."
   sleep 75
   ros "ros2 daemon stop >/dev/null 2>&1; sleep 2; ros2 daemon start >/dev/null 2>&1"
@@ -194,7 +201,7 @@ say "STAGE 4/13  YOLO server (vla-box, background)"
 if curl -s -m 3 -o /dev/null -w '%{http_code}' http://127.0.0.1:5001/detect 2>/dev/null | grep -q 405; then
   say "        already running"
 else
-  ( nohup distrobox enter vla-box -- bash -c "source $H/yolo-env/bin/activate && python -u $H/yolo_server.py" < /dev/null > "$LOGDIR/yolo_$DAY.log" 2>&1 & )
+  ( nohup distrobox enter vla-box -- bash -c "source $VLA_YOLO_ENV/bin/activate && python -u $VLA_SRC_DIR/yolo_server.py" < /dev/null > "$LOGDIR/yolo_$DAY.log" 2>&1 & )
 fi
 say "        (loading the model takes ~30 s; continuing with Ollama meanwhile)"
 
@@ -217,7 +224,7 @@ ok "STAGE 4/13  YOLO server answering on :5001 (classes: $(grep -o "Classes = \[
 # =============================================================================
 say "STAGE 6/13  SLAM (minimised window)"
 xwin "SLAM hw" "$T/slam_xterm.sh" iconic -geometry 110x30
-wait_for 60 "slam" bash -c "distrobox enter ubuntu22-gpu -- bash -c 'source $H/robot_env.sh; timeout 20 ros2 topic info /robot1/map -v' < /dev/null 2>/dev/null | grep -q slam_toolbox" \
+wait_for 60 "slam" bash -c "distrobox enter ubuntu22-gpu -- bash -c 'source $VLA_ROOT/config/robot.env; timeout 20 ros2 topic info /robot1/map -v' < /dev/null 2>/dev/null | grep -q slam_toolbox" \
   || die 6 "slam_toolbox is not publishing /robot1/map after 60 s. Open the SLAM hw window from the taskbar for its error."
 ok "STAGE 6/13  slam_toolbox publishing /robot1/map"
 
@@ -284,7 +291,7 @@ fi
 # =============================================================================
 say "STAGE 11/13  VLA agent (minimised window with a real tty; VLA_RGB_ONLY=1)"
 xwin "VLA AGENT" "$T/agent_xterm.sh" iconic -hold -geometry 120x40
-wait_for 90 "agent" bash -c "distrobox enter ubuntu22-gpu -- bash -c 'source $H/robot_env.sh; timeout 20 ros2 topic echo /vla/status --once --full-length' < /dev/null 2>/dev/null | grep -q '\"camera\": true'" \
+wait_for 90 "agent" bash -c "distrobox enter ubuntu22-gpu -- bash -c 'source $VLA_ROOT/config/robot.env; timeout 20 ros2 topic echo /vla/status --once --full-length' < /dev/null 2>/dev/null | grep -q '\"camera\": true'" \
   || die 11 "the agent's /vla/status never reported camera:true within 90 s. Open the VLA AGENT window from the taskbar."
 ok "STAGE 11/13  agent up: /vla/status camera:true"
 
@@ -307,14 +314,14 @@ wait_for 60 "voice" bash -c "tail -20 '$LOGDIR/voice_$DAY.log' 2>/dev/null | gre
 
 # =============================================================================
 say "STAGE 13/13  GUI (visible)"
-cp "$H/.vla_gui.robot.json" "$H/.vla_gui.json"
-( cd "$H" && nohup distrobox enter ubuntu22-gpu -- bash -c "source $H/robot_env.sh; cd $H; export VLA_GUI_FEED_MS=${VLA_GUI_FEED_MS:-33}; python3 $H/vla_gui_v2.py" < /dev/null > "$LOGDIR/gui_$DAY.log" 2>&1 & )
+cp "$VLA_CONFIG_DIR/vla_gui.robot.json" "$VLA_GUI_CONFIG"
+( cd "$VLA_ROOT" && nohup distrobox enter ubuntu22-gpu -- bash -c "source $VLA_ROOT/config/robot.env; cd $VLA_ROOT; export VLA_GUI_FEED_MS=${VLA_GUI_FEED_MS:-33}; python3 $VLA_SRC_DIR/vla_gui_v2.py" < /dev/null > "$LOGDIR/gui_$DAY.log" 2>&1 & )
 wait_for 40 "gui" bash -c "xwininfo -root -tree 2>/dev/null | grep -q 'Operator Console'" \
   || die 13 "the GUI window did not appear in 40 s. Log: $LOGDIR/gui_$DAY.log"
 ok "STAGE 13/13  GUI up"
 
 # =============================================================================
-PITEMP=$(timeout 15 ssh -o BatchMode=yes ubuntu@$PI 'vcgencmd measure_temp; cut -d" " -f1 /proc/loadavg' 2>/dev/null | tr '\n' ' ')
+PITEMP=$(timeout 15 ssh -o BatchMode=yes ${VLA_ROBOT_USER:-ubuntu}@$PI 'vcgencmd measure_temp; cut -d" " -f1 /proc/loadavg' 2>/dev/null | tr '\n' ' ')
 echo | tee -a "$DEMOLOG"
 printf '%s%s=====================================================================%s\n' "$GRN" "$BOLD" "$RST" | tee -a "$DEMOLOG"
 printf '%s%s  STACK UP in %d s.  Pi: %s%s\n' "$GRN" "$BOLD" "$(( $(date +%s) - T0 ))" "$PITEMP" "$RST" | tee -a "$DEMOLOG"

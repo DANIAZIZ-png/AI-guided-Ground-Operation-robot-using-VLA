@@ -1,5 +1,6 @@
 #!/bin/bash
-source /home/danyalaziz/robot_env.sh
+VLA_ROOT="${VLA_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")/.." && pwd)}"
+source "$VLA_ROOT/config/robot.env"
 # #64 (11 Sep, hardware only): open the agent's camera gate on colour alone.
 # The OAK-D runs colour-only on the robot (depth pipeline = +7 C on the Pi and
 # ~4 s frame lag); ranging comes from the LiDAR (#54). The sim never sets this.
@@ -35,5 +36,5 @@ export VLA_ANNOT_PERIOD=0.033   # 24 Sep: back to 30 Hz — the lag was the earb
 # ring goal outside Nav2's inflation; every goal was refused and the agent
 # rescanned instead of stopping. Default 0 (off) in the agent = the sim.
 export VLA_ARRIVE_IF_SEEN_M=1.2
-cd /home/danyalaziz
-exec python3 -u /home/danyalaziz/vla_agent_v28.py
+cd "$VLA_ROOT"
+exec python3 -u $VLA_SRC_DIR/vla_agent_v28.py

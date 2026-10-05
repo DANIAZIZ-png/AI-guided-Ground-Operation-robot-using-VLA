@@ -18,7 +18,9 @@ import subprocess
 #  Settings
 # ─────────────────────────────────────────────────────────────────
 WORLD_NAME = "warehouse"                       # change if your world differs
-OBJ_DIR    = os.path.expanduser("~/sim_objects")  # where the .sdf files live
+OBJ_DIR    = os.environ.get("VLA_SIM_OBJ_DIR") or os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "sim_objects")
+# where the .sdf files live; VLA_SIM_OBJ_DIR overrides
 
 # (sdf file, spawn name, x, y, z, yaw)   z = half the object's height (sits on floor)
 OBJECTS = [
